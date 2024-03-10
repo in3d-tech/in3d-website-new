@@ -1,0 +1,393 @@
+@font-face {
+  font-family: Gotham;
+  src: url("../src/fonts/GothamLight.ttf");
+}
+
+@font-face {
+  font-family: gotham-bold;
+  src: url("../src/fonts/GothamBold.otf");
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background: url("/assets/images/backgrounds/Astro_1_Background.webp");
+  overflow: scroll;
+}
+
+.container {
+}
+
+.main-content-divider {
+  display: flex;
+  height: 100%;
+}
+
+.main-content-title {
+  text-align: center;
+}
+
+.main-content-text {
+  padding: 1em;
+}
+
+.main-content-text-points {
+  margin-top: 2em;
+  color: rgb(255, 255, 255, 0.9);
+  width: 50%;
+  font-size: 2em;
+  transform: translateX(-200%);
+}
+
+.main-content-paragraph {
+  color: white;
+  padding: 5px;
+  font-size: 2em;
+  font-family: gotham;
+  width: 80%;
+}
+
+.main-section {
+  /* background: var(--color) no-repeat center; */
+  overflow: scroll;
+  /* background-size: cover; */
+}
+
+.nav-btn {
+  all: unset;
+  color: rgb(255, 255, 255, 0.6);
+  font-family: gotham;
+  font-size: 2em;
+}
+
+.nav-btn:hover {
+  color: rgb(255, 255, 255, 0.9);
+  cursor: pointer;
+}
+
+.selected {
+  color: rgb(255, 255, 255, 0.9);
+}
+
+.nav-btns-wrapper {
+  /* border: 1px solid white; */
+  display: flex;
+  justify-content: space-evenly;
+  padding: 2px;
+  margin-top: 2em;
+  width: 80%;
+}
+
+.nav-open-list-item {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.nav-open-list-item:hover {
+  color: rgba(0, 0, 0, 1);
+  cursor: pointer;
+}
+
+.section {
+  height: 300vh;
+  width: 100vw;
+  text-align: center;
+  line-height: 100vh;
+  font-size: 3em;
+  overflow-y: scroll;
+
+  opacity: 1;
+}
+
+/* .section-1 {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100vw;
+} */
+
+.background-image {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 1s ease;
+  opacity: 0;
+  z-index: -1;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-out {
+  animation: fadeOut 1s ease forwards;
+}
+
+.fade-in {
+  animation: fadeIn 1s ease forwards;
+}
+
+.viewable-section {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: rgba(50, 50, 50, 0.75);
+  background: var(--color);
+  transition: background-image 1s;
+  background-size: cover;
+}
+
+/* tests here for menu btn */
+
+header {
+  /* width: 100%;
+  height: 100%;
+  background: rgba(255, 134, 134, 0.5);
+  position: absolute;
+  overflow: auto; */
+}
+
+.icon-1,
+.icon-2,
+.icon-3 {
+  position: absolute;
+  left: 25%;
+  top: 50%;
+  width: 32px;
+  height: 3px;
+  background-color: black;
+  transition: all 400ms cubic-bezier(0.84, 0.06, 0.52, 1.8);
+}
+
+.icon-1 {
+  transform: translateY(-8px);
+  animation-delay: 100ms;
+}
+
+.icon-3 {
+  transform: translateY(8px);
+  animation-delay: 250ms;
+}
+
+.hamburger-icon {
+  position: absolute;
+  height: 60px;
+  width: 60px;
+  top: 3em;
+  right: 3%;
+  z-index: 1000;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+  background: rgba(255, 255, 255, 0.2);
+
+  &:hover {
+    transform: scale(1.2);
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.icon-1.a {
+  transform: rotate(40deg);
+}
+.icon-3.b {
+  transform: rotate(-40deg);
+}
+.icon-2.c {
+  opacity: 0;
+}
+
+.clear {
+  clear: both;
+}
+
+@keyframes slideIn {
+  0% {
+    width: 0%;
+    opacity: 0;
+  }
+
+  100% {
+    width: 50%;
+    opacity: 1;
+  }
+}
+
+nav {
+  background: rgb(255, 255, 255, 0.6);
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 0%;
+  z-index: 10;
+  opacity: 0;
+
+  transition: all 600ms cubic-bezier(0.62, 0.04, 0.3, 1.56);
+  transition-delay: 100ms;
+  ul {
+    margin: 0;
+    position: absolute;
+    top: 30%;
+    width: 90%;
+    /* left: 40%; */
+    li {
+      text-align: center;
+      list-style: none;
+      font-size: 24px;
+      color: #fff;
+      line-height: 2.2;
+      text-transform: uppercase;
+      letter-spacing: 1.7px;
+    }
+  }
+}
+
+nav.show {
+  width: 33%;
+  height: 100vh;
+  opacity: 1;
+}
+
+.dark-blue {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #64b5f6;
+  height: 100%;
+  width: 0%;
+  transition: all 500ms cubic-bezier(0.62, 0.04, 0.3, 1.8);
+  transition-delay: 50ms;
+  z-index: 5;
+  opacity: 1;
+}
+
+.dark-blue.slide {
+  width: 50%;
+  opacity: 1;
+}
+
+@keyframes shotup {
+  0% {
+    transform: translateY(300%);
+    opacity: 0;
+  }
+  90% {
+    transform: translateY(-50px);
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  h1 {
+    font-size: 70px;
+    animation: shotup 600ms ease-in-out;
+    animation-delay: 300ms;
+  }
+}
+
+/* nav things  */
+
+.icon-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex: 40px 0;
+  margin-right: 20px;
+}
+
+.text-placeholder {
+  border-radius: 5px;
+  width: 200px;
+  height: 20px;
+  flex: 1;
+}
+
+/* flipping text animation */
+
+.waviy {
+  position: relative;
+}
+.waviy span {
+  position: relative;
+  display: inline-block;
+  font-size: 1.4em;
+  font-family: gotham;
+  color: #fff;
+  text-transform: uppercase;
+  animation: flip 2s infinite;
+  animation-delay: calc(0.2s * var(--i));
+}
+@keyframes flip {
+  0%,
+  80% {
+    transform: rotateY(360deg);
+  }
+}
+
+/* main scolling component sections */
+
+section {
+  width: 100%;
+  height: 800vh;
+  position: relative;
+  /* border: 1px solid black; */
+}
+
+.section-one {
+  /* background-color: tomato; */
+  background: url("/assets/images/backgrounds/Astro_1_Background.webp");
+
+  background-size: cover;
+  opacity: 0.5;
+}
+
+.section-two {
+  background-color: steelblue;
+  /* height: 100vh; */
+  opacity: 0.5;
+}
+
+.section-three {
+  background-color: crimson;
+  opacity: 0.5;
+}
+
+.section-four {
+  background-color: lime;
+  /* background: url("/assets/images/another-med.jpg") no-repeat center; */
+  opacity: 0.5;
+}
+
+.section-five {
+  background-color: grey;
+  opacity: 0.5;
+}
