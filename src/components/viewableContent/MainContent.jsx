@@ -58,46 +58,6 @@ ScrollTrigger.defaults({
   ease: "power1.inOut",
 });
 
-function BoxComponent({ boxRef, sect2Ref, sect4Ref }) {
-  useEffect(() => {
-    if (!boxRef.current || !sect2Ref.current || !sect4Ref.current) return;
-    console.log("heyoooo");
-    gsap.to(boxRef.current.position, {
-      scrollTrigger: {
-        trigger: sect2Ref.current,
-        start: "top top", // When the top of the trigger hits the top of the viewport
-        end: "bottom bottom", // When the bottom of the trigger hits the bottom of the viewport
-        scrub: true, // Smooth scrubbing, takes 1 second to "catch up" to the scrollbar
-      },
-      x: 10, // Move box 2 units on x-axis
-    });
-
-    gsap.to(boxRef.current.position, {
-      scrollTrigger: {
-        trigger: sect4Ref.current,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: true,
-      },
-      x: 0, // Return to original x-position
-    });
-  }, [boxRef, sect2Ref, sect4Ref]);
-
-  // Move the box along the y-axis and rotate it
-  // useFrame(({ clock }) => {
-  //   boxRef.current.position.y = Math.sin(clock.getElapsedTime()) * 0.5;
-  //   boxRef.current.rotation.y = clock.getElapsedTime();
-  // });
-
-  // Change the color of the box
-  return (
-    <mesh ref={boxRef} position={[0, 0.2, 0]}>
-      <boxGeometry args={[1, 1, 1]} rotation={[0, Math.PI / 2, 0]} />
-      <meshStandardMaterial color="blue" />
-    </mesh>
-  );
-}
-
 export function MainContent({
   menuOpened,
   scrollArea,

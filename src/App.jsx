@@ -1,16 +1,18 @@
-import React, { useEffect, useRef, useState, useMemo } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Canvas, extend, useFrame, useThree } from "@react-three/fiber";
-
-import { useGLTF } from "@react-three/drei";
+import { Canvas, extend } from "@react-three/fiber";
+import { OrbitControls, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import { Camera } from "./components/scene/Camera";
-// import { MainContent } from "./components/viewableContent/MainContent";
 import { Nav } from "./components/navs/Nav";
 import { Header } from "./components/navs/Menu";
-import { ScrollingComponent } from "./components/viewableContent/ScrollingComponent";
+import {
+  ModelComponent,
+  ModelComponent2,
+  ModelComponent3,
+} from "./components/scene/ModelComponent";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -63,6 +65,34 @@ function App() {
 
   useEffect(() => {
     setMenuOpened(false);
+
+    let background;
+    switch (scrollArea.currentSection) {
+      case 1:
+        background =
+          'url("/assets/images/backgrounds/Astro_1_Background.webp")';
+        break;
+      case 2:
+        background = 'url("/assets/images/backgrounds/microsoft.jpg")';
+        break;
+      case 3:
+        background = 'url("/assets/images/backgrounds/taasiya.jpg")';
+        break;
+      case 4:
+        background = 'url("/assets/images/backgrounds/another-med.jpg")';
+        break;
+      default:
+        background = "black"; // default value
+    }
+
+    // Set the CSS variable value
+    document.documentElement.style.setProperty("--color", background);
+
+    // Cleanup function
+    return () => {
+      // Reset the CSS variable when component unmounts
+      document.documentElement.style.removeProperty("--color");
+    };
   }, [scrollArea]);
 
   return (
@@ -83,37 +113,36 @@ function App() {
           handleClickNav={handleClickNav}
         />
       </div>
+      <ViewableContent />
 
-      {/* <div className="viewable-section"> */}
-      <TestComponent textRef={textRef} />
-      {/* <MainContent
-          menuOpened={menuOpened}
-          scrollArea={scrollArea}
-          gsap={gsap}
-          ScrollTrigger={ScrollTrigger}
-          text1Ref={text1Ref}
-          text2Ref={text2Ref}
-          sect2Ref={sect2Ref}
-          sect4Ref={sect4Ref}
-          boxRef={boxRef}
-        /> */}
-      {/* </div> */}
-      {/* <ScrollingComponent
-        setScrollArea={setScrollArea}
+      <TestComponent
+        textRef={textRef}
         scrollArea={scrollArea}
-        text1Ref={text1Ref}
-        text2Ref={text2Ref}
-        sect2Ref={sect2Ref}
-        sect4Ref={sect4Ref}
-      /> */}
+        setScrollArea={setScrollArea}
+      />
     </>
   );
 }
 
 export default App;
-0;
 
-function TestComponent({ textRef }) {
+useGLTF.preload("/assets/models/astronaut_position (1).glb");
+useGLTF.preload("/assets/models/microsoft_large.glb");
+useGLTF.preload("/assets/models/engener (1).glb");
+
+function ViewableContent() {
+  return <div className="viewable-content-wrapper"></div>;
+}
+
+function TestComponent({ textRef, scrollArea, setScrollArea }) {
+  const [visibleModels, setVisibleModels] = useState([1]);
+  const model1Ref = useRef();
+  const model2Ref = useRef();
+  const astroRef = useRef();
+  const microsoftRef = useRef();
+  const taasiaRef = useRef();
+  const medicineRef = useRef();
+
   return (
     <div className="scene one">
       <div
@@ -128,12 +157,36 @@ function TestComponent({ textRef }) {
         {/* {hovered ? <div style={getbgImage()}></div> : null} */}
         {/* <Canvas className={`canvas-container ${fadeIn ? "fade-in" : ""}`}> */}
         <Canvas className={`canvas-container`}>
-          <ambientLight intensity={0.8} />
+          {/* <ambientLight intensity={0.8} /> */}
+          <directionalLight intensity={3} />
           <Camera />
-
+          <OrbitControls />
           <ModelComponent
             url={"/assets/models/astronaut_position (1).glb"}
             // textRef={textRef}
+            scrollArea={scrollArea}
+            setScrollArea={setScrollArea}
+            astroRef={astroRef}
+            visibleModels={visibleModels}
+            setVisibleModels={setVisibleModels}
+          />
+          <ModelComponent2
+            url={"/assets/models/microsoft_large.glb"}
+            astroRef={astroRef}
+            microsoftRef={microsoftRef}
+            scrollArea={scrollArea}
+            setScrollArea={setScrollArea}
+            visibleModels={visibleModels}
+            setVisibleModels={setVisibleModels}
+          />
+          <ModelComponent3
+            url={"/assets/models/engener (1).glb"}
+            microsoftRef={microsoftRef}
+            taasiaRef={taasiaRef}
+            scrollArea={scrollArea}
+            setScrollArea={setScrollArea}
+            visibleModels={visibleModels}
+            setVisibleModels={setVisibleModels}
           />
         </Canvas>
       </div>
@@ -158,110 +211,23 @@ function TestComponent({ textRef }) {
         </ul>
       </div>
       {/* <section className="section section-one"></section> */}
-      <section className="section section-two"></section>
+      <section className="section section-one"></section>
+      <section className="section section-two">
+        <div
+          style={{
+            height: "50%",
+            width: "50%",
+            border: "1px solid yellow",
+            position: "absolute",
+            bottom: 0,
+          }}
+          id="midSection2"
+        ></div>
+      </section>
       <section className="section section-three"></section>
       <section className="section section-four"></section>
       <section className="section section-five"></section>
+      <section className="section section-six"></section>
     </div>
   );
-}
-
-function ModelComponent({ url }) {
-  const { scene, animations } = useGLTF(url);
-  const mixer = useGLTFAnimations(scene, animations);
-
-  if (url == "/assets/models/astronaut_position (1).glb") {
-    scene.traverse((child) => {
-      // if (child.material) child.material.wireframe = true;
-      if (child.material) {
-        // child.material.transparent = true;
-        // child.material.opacity = 0.8;
-      }
-    });
-  }
-
-  const ref = useRef(null);
-
-  // gsap.set(".scene", { scale: 0.7 });
-
-  useEffect(() => {
-    let timeline = gsap.timeline({
-      defaults: { ease: "power1.out" },
-      scrollTrigger: {
-        trigger: ".section-two",
-        start: "top top",
-        endTrigger: ".section-three",
-        end: "bottom bottom",
-        scrub: 1,
-        markers: true,
-        onEnter: () => console.log("ENTERED THE THING!"),
-        onEnterBack: () => console.log("RUNNING IT BACK AGAIN"),
-      },
-    });
-
-    let timeline2 = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".section-three",
-        start: "top top",
-        endTrigger: ".section-four",
-        end: "bottom bottom",
-        onEnter: () => console.log("MINI THING 1 entered 3"),
-        onEnterBack: () => console.log("BIG THING TWO, entered back into 4/3"),
-      },
-    });
-
-    timeline
-      .to(ref.current.position, { x: -10, y: -20.2, z: 0 }, "simultaneously")
-      .to(
-        ref.current.rotation,
-        { x: 0.5, y: Math.PI + 0.3, z: -0 },
-        "simultaneously"
-      )
-      .from(
-        ".helper, .tester",
-        {
-          y: 260,
-          x: 200,
-          stagger: 0.1,
-          duration: 0.8,
-          ease: "back",
-        },
-        "simultaneously"
-      );
-    // .to(textRef.current, { xPercent: -20, yPercent: -30 }, "simultaneously");
-  }, [ref]);
-
-  return (
-    <group>
-      <primitive
-        ref={ref}
-        object={scene}
-        dispose={null}
-        // scale={[2, 2, 2]}
-        scale={[3, 3, 3]}
-        // position={[-10, -20.2, 0]}
-        // rotation={[0.5, Math.PI + 0.3, -0]}
-        position={[-9, -18.2, -7]}
-        rotation={[0, Math.PI / 2 + 0.5, 0]}
-      />
-    </group>
-  );
-}
-
-function useGLTFAnimations(scene, animations) {
-  const { invalidate } = useThree();
-  const mixer = useMemo(() => new THREE.AnimationMixer(scene), [scene]);
-
-  useEffect(() => {
-    if (!mixer || !animations) return;
-
-    animations.forEach((clip) => mixer.clipAction(clip).play());
-
-    const handler = setInterval(() => invalidate(), 1000 / 60);
-    return () => clearInterval(handler);
-  }, [animations, mixer, invalidate]);
-
-  useFrame((_state, delta) => mixer && mixer.update(delta));
-
-  return mixer;
 }

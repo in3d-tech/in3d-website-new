@@ -11,7 +11,7 @@
 body {
   padding: 0;
   margin: 0;
-  background: url("/assets/images/backgrounds/Astro_1_Background.webp");
+  /* background: url("/assets/images/backgrounds/Astro_1_Background.webp"); */
   overflow: scroll;
 }
 
@@ -363,31 +363,49 @@ section {
 }
 
 .section-one {
-  /* background-color: tomato; */
-  background: url("/assets/images/backgrounds/Astro_1_Background.webp");
-
-  background-size: cover;
-  opacity: 0.5;
+  /* opacity: 0.5; */
 }
 
 .section-two {
-  background-color: steelblue;
+  /* background-color: steelblue; */
   /* height: 100vh; */
-  opacity: 0.5;
+  /* opacity: 0.5; */
 }
 
 .section-three {
-  background-color: crimson;
-  opacity: 0.5;
+  /* background-color: crimson; */
+  /* opacity: 0.5; */
+  border: 3px solid cyan;
 }
 
 .section-four {
-  background-color: lime;
+  /* background-color: lime; */
   /* background: url("/assets/images/another-med.jpg") no-repeat center; */
-  opacity: 0.5;
+  /* opacity: 0.5; */
 }
 
 .section-five {
   background-color: grey;
-  opacity: 0.5;
+  opacity: 0.2;
+}
+
+.section-six {
+  background-color: green;
+  opacity: 0.2;
+}
+
+/* ----------- viewable content ------------ */
+
+.viewable-content-wrapper {
+  height: 100vh;
+  width: 100vw;
+  /* border: 1px solid yellow; */
+  /* z-index: 50000; */
+  /* background: url("/assets/images/backgrounds/Astro_1_Background.webp"); */
+  background: var(--color);
+  transition: background-image 1s;
+  /* background: black; */
+  /* opacity: 0.7; */
+  position: fixed;
+  /* z-index: 1233333333222; */
 }
