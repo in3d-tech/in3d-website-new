@@ -13,6 +13,7 @@ import {
   ModelComponent2,
   ModelComponent3,
   ModelComponent4,
+  ModelComponent5,
 } from "./components/scene/ModelComponent";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -76,6 +77,7 @@ function App() {
       2: 'url("/assets/images/backgrounds/microsoft.jpg")',
       3: 'url("/assets/images/backgrounds/taasiya.jpg")',
       4: 'url("/assets/images/backgrounds/another-med.jpg")',
+      5: 'url("/assets/images/backgrounds/customize/Costumize_Sky_Background_V01.png")',
     };
 
     document.documentElement.style.setProperty(
@@ -103,11 +105,10 @@ function App() {
         {/* <Nav
           setMenuOpened={setMenuOpened}
           scrollArea={scrollArea}
-          handleClickNav={handleClickNav}
+          // handleClickNav={handleClickNav}
         /> */}
       </div>
       <ViewableContent />
-
       <TestComponent
         textRef={textRef}
         scrollArea={scrollArea}
@@ -138,17 +139,68 @@ function TestComponent({
   setTextAnimation,
 }) {
   const [visibleModels, setVisibleModels] = useState([1]);
+  const [visibleText, setVisibleText] = useState(false);
+  const [shouldFadeIn, setShouldFadeIn] = useState(false);
 
+  const textContainerRef = useRef();
   const astroRef = useRef();
   const microsoftRef = useRef();
   const taasiaRef = useRef();
   const medicineRef = useRef();
+  const customizeRef = useRef();
+
+  const categoriesObj = {
+    2: "MICROSOFT",
+    3: "TAASIA",
+    4: "MEDICINE",
+    5: "CUSTOMIZATION",
+    6: "MILITARY",
+    7: "A.I.",
+  };
+
+  useEffect(() => {
+    let timeline = gsap.timeline({
+      defaults: { ease: "power1.out" },
+      scrollTrigger: {
+        trigger: ".section-three",
+        start: "top top",
+        endTrigger: ".section-three",
+        end: "bottom bottom",
+        scrub: 1,
+        markers: true,
+        onEnter: () => {
+          setVisibleText(true);
+          console.log("ON ENTER ");
+        },
+        onLeaveBack: () => {
+          setVisibleText(false);
+        },
+        onLeave: () => setVisibleText(false),
+        onEnterBack: () => setVisibleText(true),
+      },
+    });
+  }, [textContainerRef]);
+
+  useEffect(() => {
+    if (visibleText) {
+      // When visibleText becomes true, trigger fade in
+      setShouldFadeIn(true);
+
+      // After a delay, reset shouldFadeIn to trigger fade out
+      const timeout = setTimeout(() => {
+        setShouldFadeIn(false);
+      }, 2000); // Adjust this delay as needed
+      return () => clearTimeout(timeout);
+    }
+  }, [visibleText]);
+
+  const textClass = shouldFadeIn ? "fade-in" : "fade-out";
 
   return (
     <div className="scene one">
       <div
         className="h-nav-in3d-icon"
-        style={{ position: "absolute", top: "5em", border: "1px solid yellow" }}
+        style={{ position: "fixed", top: "5em", border: "1px solid yellow" }}
       >
         <img style={{ width: "10em" }} src="/assets/images/in3dlogo.png" />
       </div>
@@ -156,12 +208,40 @@ function TestComponent({
       <div
         style={{
           position: "fixed",
-          zIndex: 0,
+          // zIndex: 20000,
           // border: "1px solid black",
           height: "100vh",
           width: "100vw",
+          // backround:
+          // 'url("/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png")',
         }}
       >
+        {visibleText ? (
+          <div
+            className={`fader ${textClass}`}
+            style={{
+              height: "80vh",
+              width: "30%",
+              // border: "1px solid orange",
+              top: "10%",
+              left: "10%",
+              position: "absolute",
+              color: "white",
+              fontSize: "4em",
+              fontFamily: "gotham",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+            }}
+          >
+            <div>{categoriesObj[scrollArea.currentSection]}</div>
+            <div>
+              <div>sdfsdfdsdf</div>
+              <div>sdfdsfs</div>
+              <div>sdfdsfsfd</div>
+            </div>
+          </div>
+        ) : null}
         {/* {hovered ? <div style={getbgImage()}></div> : null} */}
         {/* <Canvas className={`canvas-container ${fadeIn ? "fade-in" : ""}`}> */}
         <Canvas className={`canvas-container`}>
@@ -179,35 +259,43 @@ function TestComponent({
               setVisibleModels={setVisibleModels}
               setTextAnimation={setTextAnimation}
             />
+            <ModelComponent2
+              url={"/assets/models/microsoft_large.glb"}
+              astroRef={astroRef}
+              microsoftRef={microsoftRef}
+              scrollArea={scrollArea}
+              setScrollArea={setScrollArea}
+              visibleModels={visibleModels}
+              setVisibleModels={setVisibleModels}
+            />
+            <ModelComponent3
+              url={"/assets/models/engener (1).glb"}
+              microsoftRef={microsoftRef}
+              taasiaRef={taasiaRef}
+              scrollArea={scrollArea}
+              setScrollArea={setScrollArea}
+              visibleModels={visibleModels}
+              setVisibleModels={setVisibleModels}
+            />
+            <ModelComponent4
+              url={"/assets/models/medical_statue_8 (4).glb"}
+              medicineRef={medicineRef}
+              taasiaRef={taasiaRef}
+              scrollArea={scrollArea}
+              setScrollArea={setScrollArea}
+              visibleModels={visibleModels}
+              setVisibleModels={setVisibleModels}
+            />
+            <ModelComponent5
+              url={"/assets/models/costimize_model_v02.glb"}
+              medicineRef={medicineRef}
+              customizeRef={customizeRef}
+              scrollArea={scrollArea}
+              setScrollArea={setScrollArea}
+              visibleModels={visibleModels}
+              setVisibleModels={setVisibleModels}
+            />
           </Suspense>
-
-          {/* <ModelComponent2
-            url={"/assets/models/microsoft_large.glb"}
-            astroRef={astroRef}
-            microsoftRef={microsoftRef}
-            scrollArea={scrollArea}
-            setScrollArea={setScrollArea}
-            visibleModels={visibleModels}
-            setVisibleModels={setVisibleModels}
-          />
-          <ModelComponent3
-            url={"/assets/models/engener (1).glb"}
-            microsoftRef={microsoftRef}
-            taasiaRef={taasiaRef}
-            scrollArea={scrollArea}
-            setScrollArea={setScrollArea}
-            visibleModels={visibleModels}
-            setVisibleModels={setVisibleModels}
-          />
-          <ModelComponent4
-            url={"/assets/models/medical_statue_8 (4).glb"}
-            medicineRef={medicineRef}
-            taasiaRef={taasiaRef}
-            scrollArea={scrollArea}
-            setScrollArea={setScrollArea}
-            visibleModels={visibleModels}
-            setVisibleModels={setVisibleModels}
-          /> */}
         </Canvas>
       </div>
 

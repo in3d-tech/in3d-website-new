@@ -22,11 +22,9 @@ export function ModelComponent({
       // if (child.material) child.material.wireframe = true;
       if (child.material) {
         if (child.name == "Meteor-M2_Material_#0_0") {
-          child.material.transparent = true;
-          child.material.opacity = 0.5;
+          // child.material.transparent = true;
+          // child.material.opacity = 0.5;
         }
-        // child.material.transparent = true;
-        // child.material.opacity = 0.8;
       }
     });
   }
@@ -134,10 +132,7 @@ export function ModelComponent({
         ref={astroRef}
         object={scene}
         dispose={null}
-        // scale={[2, 2, 2]}
         scale={[3, 3, 3]}
-        // position={[-10, -20.2, 0]}
-        // rotation={[0.5, Math.PI + 0.3, -0]}
         position={[-9, -18.2, -7]}
         rotation={[0, Math.PI / 2 + 0.5, 0]}
         // visible={visibleModels.includes(1) ? true : false}
@@ -370,6 +365,82 @@ export function ModelComponent4({
 }
 // ---------------------- MODEL 4 ----------------------------
 
+// ---------------------- MODEL 5 ----------------------------
+// ---------------------- MODEL 5 ----------------------------
+
+export function ModelComponent5({
+  url,
+  customizeRef,
+  medicineRef,
+  scrollArea,
+  setScrollArea,
+  visibleModels,
+  setVisibleModels,
+}) {
+  const { scene, animations } = useGLTF(url);
+  const mixer = useGLTFAnimations(scene, animations);
+
+  if (url == "/assets/models/microsoft_large.glb") {
+    scene.traverse((child) => {
+      // if (child.isMesh) console.log("heloo world!");
+      // if (child.material) child.material.wireframe = true;
+    });
+  }
+
+  useEffect(() => {
+    let timeline = gsap.timeline({
+      defaults: { ease: "power1.out" },
+      scrollTrigger: {
+        trigger: ".section-six",
+        start: "top bottom",
+        endTrigger: ".section-six",
+        end: "top top",
+        scrub: 1,
+        markers: true,
+        onEnter: () => {
+          const areaObj = { ...scrollArea };
+          areaObj.currentSection = 5;
+          areaObj.prevSection = 4;
+          setScrollArea(areaObj);
+        },
+        onLeaveBack: () => {
+          const areaObj = { ...scrollArea };
+          areaObj.currentSection = 4;
+          areaObj.prevSection = 5;
+          setScrollArea(areaObj);
+        },
+      },
+    });
+
+    timeline
+      .to(
+        customizeRef.current.position,
+        { y: -2.5, x: 3.5, z: 0.2 },
+        "simultaneously"
+      )
+      .to(customizeRef.current.rotation, { y: -1 }, "simultaneously")
+      .to(medicineRef.current.position, { y: -8, x: -12 }, "simultaneously")
+      .to(medicineRef.current.rotation, { y: -0.4 }, "simultaneously");
+  }, [customizeRef]);
+
+  return (
+    <group>
+      <primitive
+        ref={customizeRef}
+        object={scene}
+        dispose={null}
+        scale={[3, 3, 3]}
+        // position={[3.5, -2.5, 0]}
+        // rotation={[0, -1, 0]}
+
+        position={[12, -2, 0]}
+        // visible={visibleModels.includes(3)}
+        rotation={[0, -2.9, 0]}
+      />
+    </group>
+  );
+}
+// ---------------------- MODEL 5 ----------------------------
 // ANIMATE ALL
 
 function useGLTFAnimations(scene, animations) {

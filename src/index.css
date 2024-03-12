@@ -216,11 +216,15 @@ body {
 }
 
 .fade-out {
-  animation: fadeOut 1s ease forwards;
+  animation: fadeOut s ease forwards;
 }
 
 .fade-in {
   animation: fadeIn 1s ease forwards;
+}
+
+.fader {
+  animation: fadeIn 2s ease forwards;
 }
 
 .viewable-section {
@@ -454,7 +458,7 @@ section {
 .section-three {
   /* background-color: crimson; */
   /* opacity: 0.5; */
-  border: 3px solid cyan;
+  /* border: 3px solid cyan; */
 }
 
 .section-four {
@@ -464,13 +468,17 @@ section {
 }
 
 .section-five {
-  background-color: grey;
-  opacity: 0.2;
+  /* background-color: grey;
+  opacity: 0.2; */
 }
 
 .section-six {
-  background-color: green;
+  background-image: url("/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png");
+  background-repeat: no-repeat;
+  background-size: cover;
   opacity: 0.2;
+  /* position: fixeabsolud; */
+  /* z-index: 3333333334324; */
 }
 
 /* ----------- viewable content ------------ */

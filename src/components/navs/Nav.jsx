@@ -15,7 +15,7 @@ export function Nav({ scrollArea, handleClickNav }) {
         scrollArea.currentSection == idx + 1 ? "selected" : ""
       }`}
       key={`nav${idx}`}
-      onClick={handleClickNav}
+      // onClick={handleClickNav}
     >
       {topic}
     </button>
