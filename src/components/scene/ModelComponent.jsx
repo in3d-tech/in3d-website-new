@@ -11,6 +11,8 @@ export function ModelComponent({
   astroRef,
   visibleModels,
   setVisibleModels,
+  textRef,
+  setTextAnimation,
 }) {
   const { scene, animations } = useGLTF(url);
   const mixer = useGLTFAnimations(scene, animations);
@@ -42,14 +44,14 @@ export function ModelComponent({
         scrub: 1,
         markers: true,
         onEnter: () => {
-          console.log("entered 1 MODEL? ");
+          // console.log("entered 1 MODEL? ");
           const areaObj = { ...scrollArea };
           areaObj.currentSection = 1;
           areaObj.prevSection = 0;
           setScrollArea(areaObj);
         },
         onEnterBack: () => {
-          console.log("eneter back babbbyt");
+          // console.log("eneter back babbbyt");
           setVisibleModels([1]);
           // console.log(" this is enter back 1??");
           // const areaObj = { ...scrollArea };
@@ -112,26 +114,15 @@ export function ModelComponent({
 
     // .to(textRef.current, { xPercent: -20, yPercent: -30 }, "simultaneously");
 
-    let timeline4 = gsap.timeline({
+    let textTimeline = gsap.timeline({
       scrollTrigger: {
-        trigger: ".section-five",
-        start: "top bottom",
-        endTrigger: ".section-six",
-        end: "top bottom",
+        trigger: ".section-two",
+        start: "top top",
+        // endTrigger: textRef,
+        // end: "top top",
+        once: true,
         onEnter: () => {
-          // console.log("entered 1 MODEL? ");
-          const areaObj = { ...scrollArea };
-          areaObj.currentSection = 4;
-          areaObj.prevSection = 3;
-          setScrollArea(areaObj);
-        },
-        onLeaveBack: () => {
-          // console.log(" onLEAVE 3??");
-
-          const areaObj = { ...scrollArea };
-          areaObj.currentSection = 3;
-          areaObj.prevSection = 4;
-          setScrollArea(areaObj);
+          setTextAnimation("category-title");
         },
       },
     });
@@ -184,11 +175,11 @@ export function ModelComponent2({
         trigger: ".section-three",
         start: "top bottom",
         endTrigger: ".section-three",
-        end: "bottom bottom",
+        end: "top top",
         scrub: 1,
         markers: true,
         onEnter: () => {
-          console.log("entered section 2?");
+          // console.log("entered section 2?");
           setVisibleModels([2, 3]);
           const areaObj = { ...scrollArea };
           areaObj.currentSection = 2;
@@ -196,7 +187,7 @@ export function ModelComponent2({
           setScrollArea(areaObj);
         },
         onLeaveBack: () => {
-          console.log(" enter back 2??");
+          // console.log(" enter back 2??");
 
           const areaObj = { ...scrollArea };
           areaObj.currentSection = 1;
@@ -208,6 +199,7 @@ export function ModelComponent2({
 
     timeline
       .to(microsoftRef.current.position, { y: -4.5, x: 4 }, "simultaneously")
+      .to(microsoftRef.current.rotation, { y: -0.9 }, "simultaneously")
       .to(astroRef.current.position, { x: -22, y: -18 }, "simultaneously");
   }, [microsoftRef]);
 
@@ -219,8 +211,8 @@ export function ModelComponent2({
         dispose={null}
         // scale={[2, 2, 2]}
         scale={[3, 3, 3]}
-        position={[7, -9, 0]}
-        rotation={[0, -0.9, 0]}
+        position={[10, -9, 0]}
+        rotation={[0, 0.9, 0]}
         // visible={visibleModels.includes(2) ? true : false}
       />
     </group>
@@ -258,11 +250,11 @@ export function ModelComponent3({
         trigger: ".section-four",
         start: "top bottom",
         endTrigger: ".section-four",
-        end: "bottom bottom",
+        end: "top top",
         scrub: 1,
         markers: true,
         onEnter: () => {
-          console.log("entered 3 model? ");
+          // console.log("entered 3 model? ");
           const areaObj = { ...scrollArea };
           areaObj.currentSection = 3;
           areaObj.prevSection = 2;
@@ -281,8 +273,10 @@ export function ModelComponent3({
 
     timeline
       .to(taasiaRef.current.position, { y: -4, x: -4 }, "simultaneously")
-      .to(microsoftRef.current.position, { x: 8 }, "simultaneously");
-  }, [microsoftRef]);
+      .to(taasiaRef.current.rotation, { y: 0.2 }, "simultaneously")
+      .to(microsoftRef.current.position, { x: 10 }, "simultaneously")
+      .to(microsoftRef.current.rotation, { y: 0.9 }, "simultaneously");
+  }, [taasiaRef]);
 
   return (
     <group>
@@ -292,15 +286,89 @@ export function ModelComponent3({
         dispose={null}
         // scale={[2, 2, 2]}
         scale={[3, 3, 3]}
-        position={[-8, -8, -0.2]}
+        position={[-12, -8, -0.2]}
         // position={[-4, -4, -0.2]}
         // visible={visibleModels.includes(3)}
-        rotation={[0, 0.9, 0]}
+        rotation={[0, -0.4, 0]}
       />
     </group>
   );
 }
-// ---------------------- MODEL 3 ----------------------------
+
+// ---------------------- MODEL 4 ----------------------------
+// ---------------------- MODEL 4 ----------------------------
+
+export function ModelComponent4({
+  url,
+  taasiaRef,
+  medicineRef,
+  scrollArea,
+  setScrollArea,
+  visibleModels,
+  setVisibleModels,
+}) {
+  const { scene, animations } = useGLTF(url);
+  const mixer = useGLTFAnimations(scene, animations);
+
+  if (url == "/assets/models/microsoft_large.glb") {
+    scene.traverse((child) => {
+      // if (child.isMesh) console.log("heloo world!");
+      // if (child.material) child.material.wireframe = true;
+    });
+  }
+
+  useEffect(() => {
+    let timeline = gsap.timeline({
+      defaults: { ease: "power1.out" },
+      scrollTrigger: {
+        trigger: ".section-five",
+        start: "top bottom",
+        endTrigger: ".section-five",
+        end: "top top",
+        scrub: 1,
+        markers: true,
+        onEnter: () => {
+          // console.log("entered 3 model? ");
+          const areaObj = { ...scrollArea };
+          areaObj.currentSection = 4;
+          areaObj.prevSection = 3;
+          setScrollArea(areaObj);
+        },
+        onLeaveBack: () => {
+          // console.log(" onLEAVE 3??");
+
+          const areaObj = { ...scrollArea };
+          areaObj.currentSection = 3;
+          areaObj.prevSection = 4;
+          setScrollArea(areaObj);
+        },
+      },
+    });
+
+    timeline
+      .to(medicineRef.current.position, { y: -4.5, x: 4 }, "simultaneously")
+      .to(medicineRef.current.rotation, { y: -0.9 }, "simultaneously")
+      .to(taasiaRef.current.position, { y: -8, x: -12 }, "simultaneously")
+      .to(taasiaRef.current.rotation, { y: -0.4 }, "simultaneously");
+  }, [medicineRef]);
+
+  return (
+    <group>
+      <primitive
+        ref={medicineRef}
+        object={scene}
+        dispose={null}
+        // scale={[2, 2, 2]}
+        scale={[3, 3, 3]}
+        position={[-12, -8, -0.2]}
+        // position={[-4, -4, -0.2]}
+        // visible={visibleModels.includes(3)}
+        rotation={[0, -0.4, 0]}
+      />
+    </group>
+  );
+}
+// ---------------------- MODEL 4 ----------------------------
 
 // ANIMATE ALL
 
