@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import "./App.css";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Canvas, extend } from "@react-three/fiber";
-import { OrbitControls, useGLTF } from "@react-three/drei";
+import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import { Camera } from "./components/scene/Camera";
 // import { Nav } from "./components/navs/Nav";
@@ -168,18 +168,20 @@ function TestComponent({
           {/* <ambientLight intensity={0.8} /> */}
           <directionalLight intensity={3} />
           <Camera />
-          <OrbitControls />
-          <ModelComponent
-            url={"/assets/models/astronaut_position (1).glb"}
-            textRef={textRef}
-            scrollArea={scrollArea}
-            setScrollArea={setScrollArea}
-            astroRef={astroRef}
-            visibleModels={visibleModels}
-            setVisibleModels={setVisibleModels}
-            setTextAnimation={setTextAnimation}
-          />
-          <ModelComponent2
+          <Suspense fallback={null}>
+            <ModelComponent
+              url={"/assets/models/astronaut_position (1).glb"}
+              textRef={textRef}
+              scrollArea={scrollArea}
+              setScrollArea={setScrollArea}
+              astroRef={astroRef}
+              visibleModels={visibleModels}
+              setVisibleModels={setVisibleModels}
+              setTextAnimation={setTextAnimation}
+            />
+          </Suspense>
+
+          {/* <ModelComponent2
             url={"/assets/models/microsoft_large.glb"}
             astroRef={astroRef}
             microsoftRef={microsoftRef}
@@ -205,7 +207,7 @@ function TestComponent({
             setScrollArea={setScrollArea}
             visibleModels={visibleModels}
             setVisibleModels={setVisibleModels}
-          />
+          /> */}
         </Canvas>
       </div>
 
