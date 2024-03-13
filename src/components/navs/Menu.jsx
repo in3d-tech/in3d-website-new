@@ -1,15 +1,25 @@
-export const Header = ({ menuOpened, setMenuOpened }) => {
+export const Header = ({
+  menuOpened,
+  setMenuOpened,
+  setSelectedCategory,
+  selectedCategory,
+}) => {
   const toggleNav = () => {
     setMenuOpened(!menuOpened);
+
+    if (selectedCategory) {
+      setTimeout(() => setSelectedCategory(null), 300);
+    }
   };
 
   const topics = [
-    { key: 0, title: "Medicine" },
-    { key: 1, title: "Customization" },
-    { key: 2, title: "Artifical Intelligence" },
-    { key: 3, title: "Military" },
-    { key: 4, title: "Industry" },
-    { key: 5, title: "Security" },
+    { key: 1, title: "Industry" },
+    { key: 2, title: "Medicine" },
+    { key: 3, title: "Microsoft" },
+    { key: 4, title: "Military" },
+    { key: 5, title: "Artifical Intelligence" },
+    { key: 6, title: "Security" },
+    { key: 7, title: "Customization" },
   ];
 
   return (
@@ -23,8 +33,17 @@ export const Header = ({ menuOpened, setMenuOpened }) => {
 
       <nav id="nav" className={menuOpened ? "show" : ""}>
         <ul>
-          {topics.map((topic) => (
-            <li key={topic.key} className="nav-open-list-item">
+          {topics.map((topic, idx) => (
+            <li
+              onClick={() => {
+                console.log({ idx });
+                setSelectedCategory(topic.key);
+                // toggleNav();
+                // setTimeout(() => toggleNav(), 800);
+              }}
+              key={topic.key}
+              className="nav-open-list-item"
+            >
               {topic.title}
             </li>
           ))}

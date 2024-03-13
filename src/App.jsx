@@ -15,6 +15,7 @@ import {
   ModelComponent4,
   ModelComponent5,
 } from "./components/scene/ModelComponent";
+import { SelectedCategoryPage } from "./components/viewableContent/SelectedCategoryPage";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -45,6 +46,7 @@ function App() {
   const [textAnimation, setTextAnimation] = useState(
     "category-title-no-opacity"
   );
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
     if (!isShouldShowLandingPage) return;
@@ -101,7 +103,15 @@ function App() {
           zIndex: 5,
         }}
       >
-        <Header setMenuOpened={setMenuOpened} menuOpened={menuOpened} />
+        <Header
+          setMenuOpened={setMenuOpened}
+          menuOpened={menuOpened}
+          setSelectedCategory={setSelectedCategory}
+          selectedCategory={selectedCategory}
+        />
+
+        <SelectedCategoryPage selectedCategory={selectedCategory} />
+
         {/* <Nav
           setMenuOpened={setMenuOpened}
           scrollArea={scrollArea}
@@ -141,8 +151,11 @@ function TestComponent({
   const [visibleModels, setVisibleModels] = useState([1]);
   const [visibleText, setVisibleText] = useState(false);
   const [shouldFadeIn, setShouldFadeIn] = useState(false);
+  const [fixed, setFixed] = useState(false);
+  const [hovered, setHovered] = useState("");
 
   const textContainerRef = useRef();
+  const titlesContainerRef = useRef();
   const astroRef = useRef();
   const microsoftRef = useRef();
   const taasiaRef = useRef();
@@ -170,7 +183,6 @@ function TestComponent({
         markers: true,
         onEnter: () => {
           setVisibleText(true);
-          console.log("ON ENTER ");
         },
         onLeaveBack: () => {
           setVisibleText(false);
@@ -182,14 +194,42 @@ function TestComponent({
   }, [textContainerRef]);
 
   useEffect(() => {
+    const titlesContainer = titlesContainerRef.current;
+
+    // if (!titlesContainer) {
+    //   return;
+    // }
+
+    let titlesTimeline = gsap.timeline({
+      defaults: { ease: "power1.out" },
+      scrollTrigger: {
+        trigger: ".home-categories-wrapper",
+        start: "top top",
+        endTrigger: ".section-three",
+        end: "top bottom",
+        scrub: 1,
+        markers: true,
+        onEnter: () => {
+          console.log("YESSS");
+          setFixed(true);
+        },
+        onLeaveBack: () => {
+          setFixed(false);
+        },
+        onLeave: () => setFixed(false),
+        onEnterBack: () => setFixed(true),
+      },
+    });
+  }, [titlesContainerRef]);
+
+  useEffect(() => {
     if (visibleText) {
-      // When visibleText becomes true, trigger fade in
       setShouldFadeIn(true);
 
       // After a delay, reset shouldFadeIn to trigger fade out
       const timeout = setTimeout(() => {
         setShouldFadeIn(false);
-      }, 2000); // Adjust this delay as needed
+      }, 2000);
       return () => clearTimeout(timeout);
     }
   }, [visibleText]);
@@ -208,12 +248,8 @@ function TestComponent({
       <div
         style={{
           position: "fixed",
-          // zIndex: 20000,
-          // border: "1px solid black",
           height: "100vh",
           width: "100vw",
-          // backround:
-          // 'url("/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png")',
         }}
       >
         {visibleText ? (
@@ -236,22 +272,19 @@ function TestComponent({
           >
             <div>{categoriesObj[scrollArea.currentSection]}</div>
             <div>
-              <div>sdfsdfdsdf</div>
-              <div>sdfdsfs</div>
-              <div>sdfdsfsfd</div>
+              <div>line 1</div>
+              <div>and line 2</div>
+              <div>and and line 3</div>
             </div>
           </div>
         ) : null}
-        {/* {hovered ? <div style={getbgImage()}></div> : null} */}
-        {/* <Canvas className={`canvas-container ${fadeIn ? "fade-in" : ""}`}> */}
         <Canvas className={`canvas-container`}>
-          {/* <ambientLight intensity={0.8} /> */}
+          <ambientLight intensity={0.8} />
           <directionalLight intensity={3} />
           <Camera />
           <Suspense fallback={null}>
             <ModelComponent
               url={"/assets/models/astronaut_position (1).glb"}
-              textRef={textRef}
               scrollArea={scrollArea}
               setScrollArea={setScrollArea}
               astroRef={astroRef}
@@ -259,52 +292,88 @@ function TestComponent({
               setVisibleModels={setVisibleModels}
               setTextAnimation={setTextAnimation}
             />
-            <ModelComponent2
-              url={"/assets/models/microsoft_large.glb"}
-              astroRef={astroRef}
-              microsoftRef={microsoftRef}
-              scrollArea={scrollArea}
-              setScrollArea={setScrollArea}
-              visibleModels={visibleModels}
-              setVisibleModels={setVisibleModels}
-            />
-            <ModelComponent3
-              url={"/assets/models/engener (1).glb"}
-              microsoftRef={microsoftRef}
-              taasiaRef={taasiaRef}
-              scrollArea={scrollArea}
-              setScrollArea={setScrollArea}
-              visibleModels={visibleModels}
-              setVisibleModels={setVisibleModels}
-            />
-            <ModelComponent4
-              url={"/assets/models/medical_statue_8 (4).glb"}
-              medicineRef={medicineRef}
-              taasiaRef={taasiaRef}
-              scrollArea={scrollArea}
-              setScrollArea={setScrollArea}
-              visibleModels={visibleModels}
-              setVisibleModels={setVisibleModels}
-            />
-            <ModelComponent5
-              url={"/assets/models/costimize_model_v02.glb"}
-              medicineRef={medicineRef}
-              customizeRef={customizeRef}
-              scrollArea={scrollArea}
-              setScrollArea={setScrollArea}
-              visibleModels={visibleModels}
-              setVisibleModels={setVisibleModels}
-            />
+
+            {true ? (
+              <ModelComponent2
+                url={"/assets/models/microsoft_large.glb"}
+                astroRef={astroRef}
+                microsoftRef={microsoftRef}
+                scrollArea={scrollArea}
+                setScrollArea={setScrollArea}
+                visibleModels={visibleModels}
+                setVisibleModels={setVisibleModels}
+              />
+            ) : null}
+            {true ? (
+              <ModelComponent3
+                url={"/assets/models/engener (1).glb"}
+                microsoftRef={microsoftRef}
+                taasiaRef={taasiaRef}
+                scrollArea={scrollArea}
+                setScrollArea={setScrollArea}
+                visibleModels={visibleModels}
+                setVisibleModels={setVisibleModels}
+              />
+            ) : null}
+
+            {true ? (
+              <ModelComponent4
+                url={"/assets/models/medical_statue_8 (4).glb"}
+                medicineRef={medicineRef}
+                taasiaRef={taasiaRef}
+                scrollArea={scrollArea}
+                setScrollArea={setScrollArea}
+                visibleModels={visibleModels}
+                setVisibleModels={setVisibleModels}
+              />
+            ) : null}
+
+            {true ? (
+              <ModelComponent5
+                url={"/assets/models/costimize_model_v02.glb"}
+                medicineRef={medicineRef}
+                customizeRef={customizeRef}
+                scrollArea={scrollArea}
+                setScrollArea={setScrollArea}
+                visibleModels={visibleModels}
+                setVisibleModels={setVisibleModels}
+              />
+            ) : null}
           </Suspense>
         </Canvas>
       </div>
 
       {/* <section className="section section-one"></section> */}
-      <section className="section section-one"></section>
+      <section className="section section-one">
+        <div
+          style={{
+            position: "absolute",
+            top: "2em",
+            left: "5%",
+            display: "flex",
+            flexDirection: "column",
+            // border: "1px solid orange",
+            height: "500px",
+          }}
+        >
+          <h1
+            style={{
+              color: "white",
+
+              fontFamily: "gotham",
+              fontSize: "2em",
+            }}
+          >
+            in3D-Tech
+          </h1>
+          <img style={{ width: "10em" }} src="/assets/images/in3dlogo.png" />
+        </div>
+      </section>
       <section className="section section-two">
         <div
           ref={textRef}
           style={{
+            // border: "1px solid pink",
             height: "50%",
             width: "50%",
             // border: "1px solid yellow",
@@ -313,34 +382,41 @@ function TestComponent({
           }}
           id="midSection2"
         ></div>
-        <div className="home-categories-wrapper">
-          {categories.map((title, idx) => (
-            <div
-              onMouseOver={() => {
-                // getbgImage(title);
-                // setHovered(true);
-                document.documentElement.style.setProperty(
-                  "--color",
-                  backgrounds[title] || backgrounds[1]
-                );
-                // document.documentElement.style.setProperty(
-                //   "--color",
-                //   'url("/assets/images/backgrounds/taasiya.jpg")'
-                // );
-              }}
-              onMouseOut={() => {
-                document.documentElement.style.setProperty(
-                  "--color",
-                  backgrounds[1]
-                );
-              }}
-              key={idx}
-              className={textAnimation}
-              style={{ height: "0px" }}
-            >
-              {title}
-            </div>
-          ))}
+        <div
+          ref={titlesContainerRef}
+          style={
+            fixed
+              ? { position: "fixed", bottom: "100%", right: "14%" }
+              : { position: "absolute", right: "14%" }
+          }
+          className={`home-categories-wrapper ${hovered}`}
+        >
+          {fixed
+            ? categories.map((title, idx) => (
+                <div
+                  onMouseOver={() => {
+                    document.documentElement.style.setProperty(
+                      "--color",
+                      backgrounds[title] || backgrounds[1]
+                    );
+                    // setHovered("taasia");
+                    console.log("ye");
+                  }}
+                  onMouseOut={() => {
+                    document.documentElement.style.setProperty(
+                      "--color",
+                      backgrounds[1]
+                    );
+                    // setHovered("");
+                  }}
+                  key={idx}
+                  className={textAnimation}
+                  style={{ height: "0px" }}
+                >
+                  {title}
+                </div>
+              ))
+            : null}
         </div>
       </section>
       <section className="section section-three"></section>
@@ -359,3 +435,134 @@ const categories = [
   "MILITARY",
   "A.I.",
 ];
+
+// const MODELS_DATA = {
+//   in3d: {
+//     url: "/assets/models/astronaut_position (1).glb",
+//   },
+//   taasia: {
+//     url: "/assets/models/engener (1).glb",
+//   },
+//   medicine: {
+//     url: "/assets/models/medical_statue_8 (4).glb",
+//   },
+//   microsoft: {
+//     url: "/assets/models/microsoft_large.glb",
+//   },
+//   customize: {
+//     url: "/assets/models/costimize_model_v02.glb",
+//   },
+// };
+
+// const tempComponent = ({
+//   url,
+//   setScrollArea,
+//   scrollArea,
+//   astroRef,
+//   visibleModels,
+//   setVisibleModels,
+//   setTextAnimation,
+// }) => {
+//   const { scene, animations } = useGLTF(url);
+//   const mixer = useGLTFAnimations(scene, animations);
+
+//   if (url == "/assets/models/astronaut_position (1).glb") {
+//     scene.traverse((child) => {
+//       // if (child.material) child.material.wireframe = true;
+//       if (child.material) {
+//         if (child.name == "Meteor-M2_Material_#0_0") {
+//           // child.material.transparent = true;
+//           // child.material.opacity = 0.5;
+//         }
+//       }
+//     });
+//   }
+
+//   // gsap.set(".scene", { scale: 0.7 });
+
+//   useEffect(() => {
+//     let timeline = gsap.timeline({
+//       defaults: { ease: "power1.out" },
+//       scrollTrigger: {
+//         trigger: ".section-one",
+//         start: "top top",
+//         endTrigger: "#midSection2", //".section-two",
+//         end: "bottom bottom",
+//         scrub: 1,
+//         markers: true,
+//         onEnter: () => {
+//           // console.log("entered 1 MODEL? ");
+//           const areaObj = { ...scrollArea };
+//           areaObj.currentSection = 1;
+//           areaObj.prevSection = 0;
+//           setScrollArea(areaObj);
+//         },
+//         onEnterBack: () => {
+//           setVisibleModels([1]);
+//         },
+//       },
+//     });
+
+//     //third section
+
+//     let timeline3 = gsap.timeline({
+//       scrollTrigger: {
+//         trigger: ".section-four",
+//         start: "top bottom",
+//         endTrigger: ".section-five",
+//         end: "top bottom",
+//         onEnter: () => {
+//           const areaObj = { ...scrollArea };
+//           areaObj.currentSection = 3;
+//           areaObj.prevSection = 2;
+//           setScrollArea(areaObj);
+//         },
+//         onLeaveBack: () => {
+//           const areaObj = { ...scrollArea };
+//           areaObj.currentSection = 2;
+//           areaObj.prevSection = 3;
+//           setScrollArea(areaObj);
+//         },
+//       },
+//     });
+
+//     timeline
+//       .to(
+//         astroRef.current.position,
+//         { x: -10, y: -20.2, z: 0 },
+//         "simultaneously"
+//       )
+//       .to(
+//         astroRef.current.rotation,
+//         { x: 0.5, y: Math.PI + 0.3, z: -0 },
+//         "simultaneously"
+//       );
+
+//     let textTimeline = gsap.timeline({
+//       scrollTrigger: {
+//         trigger: ".section-two",
+//         start: "top top",
+//         // endTrigger: textRef,
+//         // end: "top top",
+//         once: true,
+//         onEnter: () => {
+//           setTextAnimation("category-title");
+//         },
+//       },
+//     });
+//   }, [astroRef]);
+
+//   return (
+//     <group>
+//       <primitive
+//         ref={astroRef}
+//         object={scene}
+//         dispose={null}
+//         scale={[3, 3, 3]}
+//         position={[-9, -18.2, -7]}
+//         rotation={[0, Math.PI / 2 + 0.5, 0]}
+//         // visible={visibleModels.includes(1) ? true : false}
+//       />
+//     </group>
+//   );
+// };

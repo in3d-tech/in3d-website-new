@@ -49,13 +49,7 @@ export function ModelComponent({
           setScrollArea(areaObj);
         },
         onEnterBack: () => {
-          // console.log("eneter back babbbyt");
           setVisibleModels([1]);
-          // console.log(" this is enter back 1??");
-          // const areaObj = { ...scrollArea };
-          // areaObj.currentSection = 1;
-          // areaObj.prevSection = 2;
-          // setScrollArea(areaObj);
         },
       },
     });

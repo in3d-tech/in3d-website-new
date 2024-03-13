@@ -11,7 +11,6 @@
 body {
   padding: 0;
   margin: 0;
-  /* background: url("/assets/images/backgrounds/Astro_1_Background.webp"); */
   overflow: scroll;
 }
 
@@ -40,14 +39,22 @@ body {
   height: 300px;
   width: 300px;
   /* border: 1px solid orange; */
-  position: absolute;
-  right: 14%;
+  /* position: absolute;
+  right: 14%; */
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   margin-top: 6em;
+  border: 1px solid orange;
+  position: fixed;
+  bottom: 100%;
+}
+
+.home-categories-wrapper-fixed {
+  position: fixed;
+  bottom: 100%;
 }
 
 .category-title {
@@ -177,13 +184,6 @@ body {
   opacity: 1;
 }
 
-/* .section-1 {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 100vw;
-} */
-
 .background-image {
   position: fixed;
   top: 0;
@@ -225,28 +225,6 @@ body {
 
 .fader {
   animation: fadeIn 2s ease forwards;
-}
-
-.viewable-section {
-  position: fixed;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-  background: rgba(50, 50, 50, 0.75);
-  background: var(--color);
-  transition: background-image 1s;
-  background-size: cover;
-}
-
-/* tests here for menu btn */
-
-header {
-  /* width: 100%;
-  height: 100%;
-  background: rgba(255, 134, 134, 0.5);
-  position: absolute;
-  overflow: auto; */
 }
 
 .icon-1,
@@ -316,7 +294,7 @@ header {
 }
 
 nav {
-  background: rgb(255, 255, 255, 0.6);
+  background: rgb(255, 255, 255, 1);
   position: absolute;
   top: 0;
   right: 0;
@@ -346,7 +324,7 @@ nav {
 }
 
 nav.show {
-  width: 33%;
+  width: 100%;
   height: 100vh;
   opacity: 1;
 }
@@ -495,4 +473,62 @@ section {
   /* opacity: 0.7; */
   position: fixed;
   /* z-index: 1233333333222; */
+}
+
+/* ------ titles ----  */
+
+.taasia:hover {
+  background: url("/assets/images/backgrounds/taasiya.jpg");
+  transition: background-image 0.8s;
+}
+
+.medicine:hover {
+  background: url("/assets/images/backgrounds/another-med.jpg");
+  transition: background-image 0.8s;
+}
+
+.microsoft:hover {
+  background: url("/assets/images/backgrounds/microsoft.jpg");
+  transition: background-image 0.8s;
+}
+
+.military:hover {
+  background: url("/assets/images/backgrounds/taasiya.jpg");
+  transition: background-image 0.8s;
+}
+
+.ai:hover {
+  background: url("/assets/images/backgrounds/taasiya.jpg");
+  transition: background-image 0.8s;
+}
+
+.taasia-bitachon:hover {
+  background: url("/assets/images/backgrounds/taasiya.jpg");
+  transition: background-image 0.8s;
+}
+
+.customization:hover {
+  background: url("/assets/images/backgrounds/taasiya.jpg");
+  transition: background-image 0.8s;
+}
+
+/* ------------- selected category page ------------ */
+
+.selected-category-wrapper {
+  background: black;
+  opacity: 1;
+  height: 100vh;
+  width: 0;
+  left: 0;
+  position: absolute;
+  transition: width 0.8s;
+  border-right: 1px solid rgba(255, 255, 255, 1);
+  z-index: 10;
+}
+
+.horizontal-nav-wrapper-open {
+  width: 100vw;
+}
+
+.selected-category-content-wrapper {
 }
