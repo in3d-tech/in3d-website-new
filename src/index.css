@@ -450,13 +450,20 @@ section {
   opacity: 0.2; */
 }
 
-.section-six {
-  background-image: url("/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png");
+.section-seven {
+  /* background-image: url("/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png");
   background-repeat: no-repeat;
   background-size: cover;
-  opacity: 0.2;
+  opacity: 1; */
   /* position: fixeabsolud; */
   /* z-index: 3333333334324; */
+}
+
+.section-six {
+  /* background-image: url("/assets/images/backgrounds/security/Millitary_Background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.9; */
 }
 
 /* ----------- viewable content ------------ */
@@ -531,4 +538,20 @@ section {
 }
 
 .selected-category-content-wrapper {
+}
+
+@keyframes flash {
+  0% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0.9;
+  }
+}
+
+.flashing-div {
+  animation: flash 1.5s infinite; /* Adjust duration as needed */
 }

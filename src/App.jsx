@@ -3,19 +3,23 @@ import "./App.css";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Canvas, extend } from "@react-three/fiber";
-import { useGLTF } from "@react-three/drei";
+import { Html, useGLTF, useProgress } from "@react-three/drei";
 import * as THREE from "three";
 import { Camera } from "./components/scene/Camera";
 // import { Nav } from "./components/navs/Nav";
 import { Header } from "./components/navs/Menu";
 import {
+  MappedModels,
   ModelComponent,
   ModelComponent2,
   ModelComponent3,
   ModelComponent4,
   ModelComponent5,
+  ModelComponent6,
 } from "./components/scene/ModelComponent";
 import { SelectedCategoryPage } from "./components/viewableContent/SelectedCategoryPage";
+import { LoadingScreen } from "./components/viewableContent/LoadingScreen";
+import { Model_Data } from "./components/common/modelData";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -42,17 +46,11 @@ function App() {
     prevSection: 0,
   });
 
-  const [isShouldShowLandingPage, setIsShouldShowLandingPage] = useState(true);
+  const [loadingScreen, setloadingScreen] = useState(true);
   const [textAnimation, setTextAnimation] = useState(
     "category-title-no-opacity"
   );
   const [selectedCategory, setSelectedCategory] = useState(null);
-
-  useEffect(() => {
-    if (!isShouldShowLandingPage) return;
-    const timerId = setTimeout(() => setIsShouldShowLandingPage(false), 5000);
-    return () => clearTimeout(timerId);
-  }, [isShouldShowLandingPage]);
 
   const [menuOpened, setMenuOpened] = useState(false);
 
@@ -76,15 +74,18 @@ function App() {
 
     const backgrounds = {
       1: 'url("/assets/images/backgrounds/Astro_1_Background.webp")',
-      2: 'url("/assets/images/backgrounds/microsoft.jpg")',
-      3: 'url("/assets/images/backgrounds/taasiya.jpg")',
-      4: 'url("/assets/images/backgrounds/another-med.jpg")',
-      5: 'url("/assets/images/backgrounds/customize/Costumize_Sky_Background_V01.png")',
+      2: 'url("/assets/images/backgrounds/taasia/taasia_bg.jpg")',
+      3: 'url("/assets/images/backgrounds//medicine/medicine_bg.jpg")',
+      4: 'url("/assets/images/backgrounds/microsoft/microsoft_bg.jpg")',
+      5: 'url("/assets/images/backgrounds/security/security.jpg")',
+      6: 'url("/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png")',
     };
+
+    // console.log(backgrounds[scrollArea.currentSection]);
 
     document.documentElement.style.setProperty(
       "--color",
-      backgrounds[scrollArea.currentSection] || "black"
+      backgrounds[scrollArea.currentSection] || backgrounds[1]
     );
 
     return () => {
@@ -94,38 +95,44 @@ function App() {
 
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          position: "fixed",
-          width: "100%",
-          justifyContent: "center",
-          zIndex: 5,
-        }}
-      >
-        <Header
-          setMenuOpened={setMenuOpened}
-          menuOpened={menuOpened}
-          setSelectedCategory={setSelectedCategory}
-          selectedCategory={selectedCategory}
-        />
+      {false ? (
+        <LoadingScreen setloadingScreen={setloadingScreen} />
+      ) : (
+        <>
+          <div
+            style={{
+              display: "flex",
+              position: "fixed",
+              width: "100%",
+              justifyContent: "center",
+              zIndex: 5,
+            }}
+          >
+            <Header
+              setMenuOpened={setMenuOpened}
+              menuOpened={menuOpened}
+              setSelectedCategory={setSelectedCategory}
+              selectedCategory={selectedCategory}
+            />
 
-        <SelectedCategoryPage selectedCategory={selectedCategory} />
+            <SelectedCategoryPage selectedCategory={selectedCategory} />
 
-        {/* <Nav
+            {/* <Nav
           setMenuOpened={setMenuOpened}
           scrollArea={scrollArea}
           // handleClickNav={handleClickNav}
         /> */}
-      </div>
-      <ViewableContent />
-      <TestComponent
-        textRef={textRef}
-        scrollArea={scrollArea}
-        setScrollArea={setScrollArea}
-        textAnimation={textAnimation}
-        setTextAnimation={setTextAnimation}
-      />
+          </div>
+          <ViewableContent />
+          <TestComponent
+            textRef={textRef}
+            scrollArea={scrollArea}
+            setScrollArea={setScrollArea}
+            textAnimation={textAnimation}
+            setTextAnimation={setTextAnimation}
+          />
+        </>
+      )}
     </>
   );
 }
@@ -135,8 +142,19 @@ export default App;
 useGLTF.preload("/assets/models/astronaut_position (1).glb");
 useGLTF.preload("/assets/models/microsoft_large.glb");
 useGLTF.preload("/assets/models/engener (1).glb");
-useGLTF.preload("/assets/models/medical_statue_8 (4).glb");
+useGLTF.preload("/assets/models/medical_model.glb");
 
+// export const LoaderComponent = () => {
+//   const { active, progress, errors } = useProgress();
+//   useEffect(() => console.log(progress), [progress]);
+//   return (
+//     <Html center>
+//       <span style={{ color: "black", fontSize: "3em" }}>{`${Math.trunc(
+//         progress
+//       )} % loaded`}</span>
+//     </Html>
+//   );
+// };
 function ViewableContent() {
   return <div className="viewable-content-wrapper"></div>;
 }
@@ -160,7 +178,20 @@ function TestComponent({
   const microsoftRef = useRef();
   const taasiaRef = useRef();
   const medicineRef = useRef();
+  const militaryRef = useRef();
   const customizeRef = useRef();
+  const securityRef = useRef();
+  const aiRef = useRef();
+
+  const refsObj = {
+    0: { currentRef: taasiaRef, prevRef: astroRef },
+    1: { currentRef: medicineRef, prevRef: taasiaRef },
+    2: { currentRef: microsoftRef, prevRef: medicineRef },
+    3: { currentRef: securityRef, prevRef: microsoftRef },
+    4: { currentRef: aiRef, prevRef: securityRef },
+    5: { currentRef: militaryRef, prevRef: aiRef },
+    6: { currentRef: customizeRef, prevRef: militaryRef },
+  };
 
   const categoriesObj = {
     2: "MICROSOFT",
@@ -210,7 +241,6 @@ function TestComponent({
         scrub: 1,
         markers: true,
         onEnter: () => {
-          console.log("YESSS");
           setFixed(true);
         },
         onLeaveBack: () => {
@@ -240,7 +270,7 @@ function TestComponent({
     <div className="scene one">
       <div
         className="h-nav-in3d-icon"
-        style={{ position: "fixed", top: "5em", border: "1px solid yellow" }}
+        style={{ position: "fixed", top: "5em" }}
       >
         <img style={{ width: "10em" }} src="/assets/images/in3dlogo.png" />
       </div>
@@ -279,6 +309,7 @@ function TestComponent({
           </div>
         ) : null}
         <Canvas className={`canvas-container`}>
+          {/* <LoaderComponent /> */}
           <ambientLight intensity={0.8} />
           <directionalLight intensity={3} />
           <Camera />
@@ -293,7 +324,7 @@ function TestComponent({
               setTextAnimation={setTextAnimation}
             />
 
-            {true ? (
+            {/* {true ? (
               <ModelComponent2
                 url={"/assets/models/microsoft_large.glb"}
                 astroRef={astroRef}
@@ -318,7 +349,7 @@ function TestComponent({
 
             {true ? (
               <ModelComponent4
-                url={"/assets/models/medical_statue_8 (4).glb"}
+                url={"/assets/models/medical_model.glb"}
                 medicineRef={medicineRef}
                 taasiaRef={taasiaRef}
                 scrollArea={scrollArea}
@@ -326,19 +357,46 @@ function TestComponent({
                 visibleModels={visibleModels}
                 setVisibleModels={setVisibleModels}
               />
-            ) : null}
+            ) : null} */}
 
-            {true ? (
+            {Model_Data.map((model, idx) => {
+              const { currentRef, prevRef } = refsObj[idx];
+
+              return (
+                <MappedModels
+                  idx={idx}
+                  prevRef={prevRef}
+                  currentRef={currentRef}
+                  scrollArea={scrollArea}
+                  setScrollArea={setScrollArea}
+                  visibleModels={visibleModels}
+                  setVisibleModels={setVisibleModels}
+                  model={model}
+                />
+              );
+            })}
+            {/* {true ? (
               <ModelComponent5
+                url={"/assets/models/millitary_model_for_web.glb"}
+                prevRef={medicineRef}
+                currentRef={securityRef}
+                scrollArea={scrollArea}
+                setScrollArea={setScrollArea}
+                visibleModels={visibleModels}
+                setVisibleModels={setVisibleModels}
+              />
+            ) : null} */}
+            {/* {true ? (
+              <ModelComponent6
                 url={"/assets/models/costimize_model_v02.glb"}
-                medicineRef={medicineRef}
+                securityRef={securityRef}
                 customizeRef={customizeRef}
                 scrollArea={scrollArea}
                 setScrollArea={setScrollArea}
                 visibleModels={visibleModels}
                 setVisibleModels={setVisibleModels}
               />
-            ) : null}
+            ) : null} */}
           </Suspense>
         </Canvas>
       </div>
@@ -423,6 +481,7 @@ function TestComponent({
       <section className="section section-four"></section>
       <section className="section section-five"></section>
       <section className="section section-six"></section>
+      <section className="section section-seven"></section>
     </div>
   );
 }
@@ -435,134 +494,3 @@ const categories = [
   "MILITARY",
   "A.I.",
 ];
-
-// const MODELS_DATA = {
-//   in3d: {
-//     url: "/assets/models/astronaut_position (1).glb",
-//   },
-//   taasia: {
-//     url: "/assets/models/engener (1).glb",
-//   },
-//   medicine: {
-//     url: "/assets/models/medical_statue_8 (4).glb",
-//   },
-//   microsoft: {
-//     url: "/assets/models/microsoft_large.glb",
-//   },
-//   customize: {
-//     url: "/assets/models/costimize_model_v02.glb",
-//   },
-// };
-
-// const tempComponent = ({
-//   url,
-//   setScrollArea,
-//   scrollArea,
-//   astroRef,
-//   visibleModels,
-//   setVisibleModels,
-//   setTextAnimation,
-// }) => {
-//   const { scene, animations } = useGLTF(url);
-//   const mixer = useGLTFAnimations(scene, animations);
-
-//   if (url == "/assets/models/astronaut_position (1).glb") {
-//     scene.traverse((child) => {
-//       // if (child.material) child.material.wireframe = true;
-//       if (child.material) {
-//         if (child.name == "Meteor-M2_Material_#0_0") {
-//           // child.material.transparent = true;
-//           // child.material.opacity = 0.5;
-//         }
-//       }
-//     });
-//   }
-
-//   // gsap.set(".scene", { scale: 0.7 });
-
-//   useEffect(() => {
-//     let timeline = gsap.timeline({
-//       defaults: { ease: "power1.out" },
-//       scrollTrigger: {
-//         trigger: ".section-one",
-//         start: "top top",
-//         endTrigger: "#midSection2", //".section-two",
-//         end: "bottom bottom",
-//         scrub: 1,
-//         markers: true,
-//         onEnter: () => {
-//           // console.log("entered 1 MODEL? ");
-//           const areaObj = { ...scrollArea };
-//           areaObj.currentSection = 1;
-//           areaObj.prevSection = 0;
-//           setScrollArea(areaObj);
-//         },
-//         onEnterBack: () => {
-//           setVisibleModels([1]);
-//         },
-//       },
-//     });
-
-//     //third section
-
-//     let timeline3 = gsap.timeline({
-//       scrollTrigger: {
-//         trigger: ".section-four",
-//         start: "top bottom",
-//         endTrigger: ".section-five",
-//         end: "top bottom",
-//         onEnter: () => {
-//           const areaObj = { ...scrollArea };
-//           areaObj.currentSection = 3;
-//           areaObj.prevSection = 2;
-//           setScrollArea(areaObj);
-//         },
-//         onLeaveBack: () => {
-//           const areaObj = { ...scrollArea };
-//           areaObj.currentSection = 2;
-//           areaObj.prevSection = 3;
-//           setScrollArea(areaObj);
-//         },
-//       },
-//     });
-
-//     timeline
-//       .to(
-//         astroRef.current.position,
-//         { x: -10, y: -20.2, z: 0 },
-//         "simultaneously"
-//       )
-//       .to(
-//         astroRef.current.rotation,
-//         { x: 0.5, y: Math.PI + 0.3, z: -0 },
-//         "simultaneously"
-//       );
-
-//     let textTimeline = gsap.timeline({
-//       scrollTrigger: {
-//         trigger: ".section-two",
-//         start: "top top",
-//         // endTrigger: textRef,
-//         // end: "top top",
-//         once: true,
-//         onEnter: () => {
-//           setTextAnimation("category-title");
-//         },
-//       },
-//     });
-//   }, [astroRef]);
-
-//   return (
-//     <group>
-//       <primitive
-//         ref={astroRef}
-//         object={scene}
-//         dispose={null}
-//         scale={[3, 3, 3]}
-//         position={[-9, -18.2, -7]}
-//         rotation={[0, Math.PI / 2 + 0.5, 0]}
-//         // visible={visibleModels.includes(1) ? true : false}
-//       />
-//     </group>
-//   );
-// };

@@ -36,7 +36,6 @@ export const Header = ({
           {topics.map((topic, idx) => (
             <li
               onClick={() => {
-                console.log({ idx });
                 setSelectedCategory(topic.key);
                 // toggleNav();
                 // setTimeout(() => toggleNav(), 800);
