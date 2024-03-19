@@ -17,6 +17,7 @@ import { LoadingScreen } from "./components/viewableContent/LoadingScreen";
 import { Model_Data } from "./components/common/modelData";
 import {
   AiText,
+  ContactUsText,
   CustomizationText,
   IndustryText,
   MedicineText,
@@ -70,6 +71,7 @@ function App() {
       6: 'url("/assets/images/backgrounds/ai/ai_bg.png',
       7: 'url("/assets/images/backgrounds/military/military_bg.jpg")',
       8: 'url("/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png")',
+      9: 'url("/assets/images/backgrounds/Astro_1_Background.webp")',
     };
 
     // console.log(backgrounds[scrollArea.currentSection]);
@@ -105,9 +107,7 @@ function App() {
               setSelectedCategory={setSelectedCategory}
               selectedCategory={selectedCategory}
             />
-
             <SelectedCategoryPage selectedCategory={selectedCategory} />
-
             {/* <Nav
           setMenuOpened={setMenuOpened}
           scrollArea={scrollArea}
@@ -265,6 +265,17 @@ function TestComponent({
         />
       ),
     },
+    7: {
+      currentRef: astroRef,
+      prevRef: customizeRef,
+      text: (
+        <ContactUsText
+          textClass={textClass}
+          scrollArea={scrollArea}
+          categoriesObj={categoriesObj}
+        />
+      ),
+    },
   };
 
   useEffect(() => {
@@ -387,10 +398,11 @@ function TestComponent({
               visibleModels={visibleModels}
               setVisibleModels={setVisibleModels}
               setTextAnimation={setTextAnimation}
+              customizeRef={customizeRef}
             />
 
             {Model_Data.map((model, idx) => {
-              const { currentRef, prevRef } = refsObj[idx];
+              const { currentRef, prevRef } = refsObj[idx] || refsObj[0];
 
               if (idx == 4) {
                 console.log(model.url);
@@ -509,6 +521,7 @@ function TestComponent({
       <section className="section section-seven"></section>
       <section className="section section-eight"></section>
       <section className="section section-nine"></section>
+      <section className="section section-ten"></section>
     </div>
   );
 }

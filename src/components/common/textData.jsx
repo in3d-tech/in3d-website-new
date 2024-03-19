@@ -275,3 +275,18 @@ export const CustomizationText = ({ textClass, scrollArea, categoriesObj }) => (
     </div>
   </div>
 );
+
+export const ContactUsText = () => (
+  <h1
+    style={{
+      color: "white",
+      fontSize: "6em",
+      position: "absolute",
+      fontFamily: "gotham",
+      top: "2em",
+      left: "1em",
+    }}
+  >
+    Contact us
+  </h1>
+);

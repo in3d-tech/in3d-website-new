@@ -14,6 +14,7 @@ export function ModelComponent({
   setVisibleModels,
   textRef,
   setTextAnimation,
+  customizeRef,
 }) {
   const { scene, animations } = useGLTF(url);
   const mixer = useGLTFAnimations(scene, animations);
@@ -42,29 +43,6 @@ export function ModelComponent({
       },
     });
 
-    //third section
-
-    // let timeline3 = gsap.timeline({
-    //   scrollTrigger: {
-    //     trigger: ".section-four",
-    //     start: "top bottom",
-    //     endTrigger: ".section-five",
-    //     end: "top bottom",
-    //     onEnter: () => {
-    //       const areaObj = { ...scrollArea };
-    //       areaObj.currentSection = 3;
-    //       areaObj.prevSection = 2;
-    //       setScrollArea(areaObj);
-    //     },
-    //     onLeaveBack: () => {
-    //       const areaObj = { ...scrollArea };
-    //       areaObj.currentSection = 2;
-    //       areaObj.prevSection = 3;
-    //       setScrollArea(areaObj);
-    //     },
-    //   },
-    // });
-
     timeline
       .to(
         astroRef.current.position,
@@ -89,6 +67,47 @@ export function ModelComponent({
         },
       },
     });
+
+    if (customizeRef.current) {
+      let contactUsTimeline = gsap.timeline({
+        defaults: { ease: "power1.out" },
+        scrollTrigger: {
+          trigger: ".section-ten",
+          start: "top top",
+          // endTrigger: "#midSection2", //".section-two",
+          // end: "bottom bottom",
+          scrub: 1,
+          markers: true,
+          onEnter: () => {
+            const areaObj = { ...scrollArea };
+            areaObj.currentSection = 9;
+            areaObj.prevSection = 8;
+            setScrollArea(areaObj);
+          },
+          onEnterBack: () => {
+            // setVisibleModels([1]);
+          },
+        },
+      });
+
+      contactUsTimeline
+        .to(
+          astroRef.current.position,
+          { x: -7, y: -18.2, z: -7 },
+          "simultaneously"
+        )
+        .to(
+          astroRef.current.rotation,
+          { x: 0.05, y: Math.PI / 2 + 0.5, z: 0 },
+          "simultaneously"
+        )
+        .to(
+          customizeRef.current.position,
+          { x: 12, y: -2, z: 0 },
+          "simultaneously"
+        )
+        .to(customizeRef.current.rotation, { y: -2.9 }, "simultaneously");
+    }
   }, [astroRef]);
 
   return (
@@ -118,6 +137,7 @@ export function MappedModels({
   setVisibleModels,
   model,
 }) {
+  if (idx == 7) return null;
   const { scene, animations } = useGLTF(model.url);
   const [isVisible, setIsVisible] = useState(false);
   const mixer = useGLTFAnimations(scene, animations);

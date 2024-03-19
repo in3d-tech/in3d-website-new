@@ -210,4 +210,32 @@ export const Model_Data = [
         )
         .to(prevRef.current.rotation, { y: -2.2 }, "simultaneously"),
   },
+
+  // CONTACT US
+  // {
+  //   section: "section-nine",
+  //   onEnter: {
+  //     currentSection: 9,
+  //     prevSection: 8,
+  //   },
+  //   onLeave: { currentSection: 8, prevSection: 9 },
+  //   scale: [3, 3, 3],
+  //   position: [12, -2, 0],
+  //   // visible={visibleModels.includes(3)}
+  //   rotation: [0, -2.9, 0],
+  //   timeline: (tl, currentRef, prevRef) =>
+  //     tl
+  //       .to(
+  //         currentRef.current.position,
+  //         { y: -2.5, x: 3.5, z: 0.2 },
+  //         "simultaneously"
+  //       )
+  //       .to(currentRef.current.rotation, { y: -1 }, "simultaneously")
+  //       .to(
+  //         prevRef.current.position,
+  //         { x: -0.2, y: -1.7, z: 6 },
+  //         "simultaneously"
+  //       )
+  //       .to(prevRef.current.rotation, { y: -2.2 }, "simultaneously"),
+  // },
 ];
