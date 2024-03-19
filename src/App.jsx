@@ -11,15 +11,19 @@ import { Header } from "./components/navs/Menu";
 import {
   MappedModels,
   ModelComponent,
-  ModelComponent2,
-  ModelComponent3,
-  ModelComponent4,
-  ModelComponent5,
-  ModelComponent6,
 } from "./components/scene/ModelComponent";
 import { SelectedCategoryPage } from "./components/viewableContent/SelectedCategoryPage";
 import { LoadingScreen } from "./components/viewableContent/LoadingScreen";
 import { Model_Data } from "./components/common/modelData";
+import {
+  AiText,
+  CustomizationText,
+  IndustryText,
+  MedicineText,
+  MicrosoftText,
+  MilitaryText,
+  SecurityText,
+} from "./components/common/textData";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -45,29 +49,14 @@ function App() {
     currentSection: 1,
     prevSection: 0,
   });
-
   const [loadingScreen, setloadingScreen] = useState(true);
   const [textAnimation, setTextAnimation] = useState(
     "category-title-no-opacity"
   );
   const [selectedCategory, setSelectedCategory] = useState(null);
-
   const [menuOpened, setMenuOpened] = useState(false);
 
   const textRef = useRef();
-  const text1Ref = useRef();
-  const text2Ref = useRef();
-  const sect2Ref = useRef();
-  const sect4Ref = useRef();
-
-  const categories = [
-    "MICROSOFT",
-    "TAASIA",
-    "MEDICINE",
-    "CUSTOMIZATION",
-    "MILITARY",
-    "A.I.",
-  ];
 
   useEffect(() => {
     setMenuOpened(false);
@@ -78,7 +67,9 @@ function App() {
       3: 'url("/assets/images/backgrounds//medicine/medicine_bg.jpg")',
       4: 'url("/assets/images/backgrounds/microsoft/microsoft_bg.jpg")',
       5: 'url("/assets/images/backgrounds/security/security.jpg")',
-      6: 'url("/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png")',
+      6: 'url("/assets/images/backgrounds/ai/ai_bg.png',
+      7: 'url("/assets/images/backgrounds/military/military_bg.jpg")',
+      8: 'url("/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png")',
     };
 
     // console.log(backgrounds[scrollArea.currentSection]);
@@ -141,7 +132,7 @@ export default App;
 
 useGLTF.preload("/assets/models/astronaut_position (1).glb");
 useGLTF.preload("/assets/models/microsoft_large.glb");
-useGLTF.preload("/assets/models/engener (1).glb");
+useGLTF.preload("/assets/models/engenir_model_new.glb");
 useGLTF.preload("/assets/models/medical_model.glb");
 
 // export const LoaderComponent = () => {
@@ -172,6 +163,7 @@ function TestComponent({
   const [fixed, setFixed] = useState(false);
   const [hovered, setHovered] = useState("");
 
+  const simplyExpandedRef = useRef();
   const textContainerRef = useRef();
   const titlesContainerRef = useRef();
   const astroRef = useRef();
@@ -183,24 +175,115 @@ function TestComponent({
   const securityRef = useRef();
   const aiRef = useRef();
 
-  const refsObj = {
-    0: { currentRef: taasiaRef, prevRef: astroRef },
-    1: { currentRef: medicineRef, prevRef: taasiaRef },
-    2: { currentRef: microsoftRef, prevRef: medicineRef },
-    3: { currentRef: securityRef, prevRef: microsoftRef },
-    4: { currentRef: aiRef, prevRef: securityRef },
-    5: { currentRef: militaryRef, prevRef: aiRef },
-    6: { currentRef: customizeRef, prevRef: militaryRef },
-  };
+  const textClass = shouldFadeIn ? "fade-in" : "fade-out";
 
   const categoriesObj = {
-    2: "MICROSOFT",
-    3: "TAASIA",
-    4: "MEDICINE",
-    5: "CUSTOMIZATION",
-    6: "MILITARY",
-    7: "A.I.",
+    2: "INDUSTRY",
+    3: "MEDICINE",
+    4: "MICROSOFT",
+    5: "SECURITY",
+    6: "A.I.",
+    7: "MILITARY",
+    8: "CUSTOMIZATION",
   };
+
+  const refsObj = {
+    0: {
+      currentRef: taasiaRef,
+      prevRef: astroRef,
+      text: (
+        <IndustryText
+          textClass={textClass}
+          scrollArea={scrollArea}
+          categoriesObj={categoriesObj}
+        />
+      ),
+    },
+    1: {
+      currentRef: medicineRef,
+      prevRef: taasiaRef,
+      text: (
+        <MedicineText
+          textClass={textClass}
+          scrollArea={scrollArea}
+          categoriesObj={categoriesObj}
+        />
+      ),
+    },
+    2: {
+      currentRef: microsoftRef,
+      prevRef: medicineRef,
+      text: (
+        <MicrosoftText
+          textClass={textClass}
+          scrollArea={scrollArea}
+          categoriesObj={categoriesObj}
+        />
+      ),
+    },
+    3: {
+      currentRef: securityRef,
+      prevRef: microsoftRef,
+      text: (
+        <SecurityText
+          textClass={textClass}
+          scrollArea={scrollArea}
+          categoriesObj={categoriesObj}
+        />
+      ),
+    },
+    4: {
+      currentRef: aiRef,
+      prevRef: securityRef,
+      text: (
+        <AiText
+          textClass={textClass}
+          scrollArea={scrollArea}
+          categoriesObj={categoriesObj}
+        />
+      ),
+    },
+    5: {
+      currentRef: militaryRef,
+      prevRef: aiRef,
+      text: (
+        <MilitaryText
+          textClass={textClass}
+          scrollArea={scrollArea}
+          categoriesObj={categoriesObj}
+        />
+      ),
+    },
+    6: {
+      currentRef: customizeRef,
+      prevRef: militaryRef,
+      text: (
+        <CustomizationText
+          textClass={textClass}
+          scrollArea={scrollArea}
+          categoriesObj={categoriesObj}
+        />
+      ),
+    },
+  };
+
+  useEffect(() => {
+    let simplyExpandedTimeline = gsap.timeline({
+      defaults: { ease: "power1.out" },
+      scrollTrigger: {
+        trigger: ".section-one",
+        start: "top top",
+        endTrigger: ".section-one",
+        end: "top center",
+        scrub: 1,
+        markers: true,
+      },
+    });
+  }, [simplyExpandedRef]);
+
+  // -----
+  // ----
+  // ----
 
   useEffect(() => {
     let timeline = gsap.timeline({
@@ -264,8 +347,6 @@ function TestComponent({
     }
   }, [visibleText]);
 
-  const textClass = shouldFadeIn ? "fade-in" : "fade-out";
-
   return (
     <div className="scene one">
       <div
@@ -282,32 +363,16 @@ function TestComponent({
           width: "100vw",
         }}
       >
-        {visibleText ? (
-          <div
-            className={`fader ${textClass}`}
-            style={{
-              height: "80vh",
-              width: "30%",
-              // border: "1px solid orange",
-              top: "10%",
-              left: "10%",
-              position: "absolute",
-              color: "white",
-              fontSize: "4em",
-              fontFamily: "gotham",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-            }}
-          >
-            <div>{categoriesObj[scrollArea.currentSection]}</div>
-            <div>
-              <div>line 1</div>
-              <div>and line 2</div>
-              <div>and and line 3</div>
-            </div>
-          </div>
-        ) : null}
+        {scrollArea.currentSection >= 2
+          ? refsObj[scrollArea.currentSection - 2].text
+          : null}
+        {/* {!visibleText ? ( */}
+        {/* <MedicineText
+            textClass={textClass}
+            scrollArea={scrollArea}
+            categoriesObj={categoriesObj}
+          /> */}
+        {/* ) : null} */}
         <Canvas className={`canvas-container`}>
           {/* <LoaderComponent /> */}
           <ambientLight intensity={0.8} />
@@ -324,46 +389,16 @@ function TestComponent({
               setTextAnimation={setTextAnimation}
             />
 
-            {/* {true ? (
-              <ModelComponent2
-                url={"/assets/models/microsoft_large.glb"}
-                astroRef={astroRef}
-                microsoftRef={microsoftRef}
-                scrollArea={scrollArea}
-                setScrollArea={setScrollArea}
-                visibleModels={visibleModels}
-                setVisibleModels={setVisibleModels}
-              />
-            ) : null}
-            {true ? (
-              <ModelComponent3
-                url={"/assets/models/engener (1).glb"}
-                microsoftRef={microsoftRef}
-                taasiaRef={taasiaRef}
-                scrollArea={scrollArea}
-                setScrollArea={setScrollArea}
-                visibleModels={visibleModels}
-                setVisibleModels={setVisibleModels}
-              />
-            ) : null}
-
-            {true ? (
-              <ModelComponent4
-                url={"/assets/models/medical_model.glb"}
-                medicineRef={medicineRef}
-                taasiaRef={taasiaRef}
-                scrollArea={scrollArea}
-                setScrollArea={setScrollArea}
-                visibleModels={visibleModels}
-                setVisibleModels={setVisibleModels}
-              />
-            ) : null} */}
-
             {Model_Data.map((model, idx) => {
               const { currentRef, prevRef } = refsObj[idx];
 
+              if (idx == 4) {
+                console.log(model.url);
+              }
+
               return (
                 <MappedModels
+                  key={`heyo${idx}`}
                   idx={idx}
                   prevRef={prevRef}
                   currentRef={currentRef}
@@ -375,28 +410,6 @@ function TestComponent({
                 />
               );
             })}
-            {/* {true ? (
-              <ModelComponent5
-                url={"/assets/models/millitary_model_for_web.glb"}
-                prevRef={medicineRef}
-                currentRef={securityRef}
-                scrollArea={scrollArea}
-                setScrollArea={setScrollArea}
-                visibleModels={visibleModels}
-                setVisibleModels={setVisibleModels}
-              />
-            ) : null} */}
-            {/* {true ? (
-              <ModelComponent6
-                url={"/assets/models/costimize_model_v02.glb"}
-                securityRef={securityRef}
-                customizeRef={customizeRef}
-                scrollArea={scrollArea}
-                setScrollArea={setScrollArea}
-                visibleModels={visibleModels}
-                setVisibleModels={setVisibleModels}
-              />
-            ) : null} */}
           </Suspense>
         </Canvas>
       </div>
@@ -406,35 +419,47 @@ function TestComponent({
         <div
           style={{
             position: "absolute",
-            top: "2em",
-            left: "5%",
+            top: "12em",
+            left: "3%",
             display: "flex",
             flexDirection: "column",
-            // border: "1px solid orange",
+            // justifyContent: "flex-end",
             height: "500px",
+            // border: "1px solid orange",
           }}
         >
-          <h1
-            style={{
-              color: "white",
+          <div style={{ lineHeight: "15vh" }}>
+            <h1
+              className="section-one-first-title"
+              style={{
+                fontSize: "2em",
+              }}
+            >
+              in3D-Tech
+            </h1>
+            <div ref={simplyExpandedRef}>
+              <span className="section-one-first-title">Simply</span>
+              <span
+                className="section-one-first-title"
+                style={{
+                  position: "relative",
+                  top: "1em",
+                }}
+              >
+                Expand
+              </span>
+            </div>
+          </div>
 
-              fontFamily: "gotham",
-              fontSize: "2em",
-            }}
-          >
-            in3D-Tech
-          </h1>
-          <img style={{ width: "10em" }} src="/assets/images/in3dlogo.png" />
+          {/* <img style={{ width: "10em" }} src="/assets/images/in3dlogo.png" /> */}
         </div>
       </section>
       <section className="section section-two">
         <div
           ref={textRef}
           style={{
-            // border: "1px solid pink",
             height: "50%",
             width: "50%",
-            // border: "1px solid yellow",
             position: "absolute",
             top: 0,
           }}
@@ -444,7 +469,7 @@ function TestComponent({
           ref={titlesContainerRef}
           style={
             fixed
-              ? { position: "fixed", bottom: "100%", right: "14%" }
+              ? { position: "fixed", bottom: "108%", right: "14%" }
               : { position: "absolute", right: "14%" }
           }
           className={`home-categories-wrapper ${hovered}`}
@@ -482,15 +507,18 @@ function TestComponent({
       <section className="section section-five"></section>
       <section className="section section-six"></section>
       <section className="section section-seven"></section>
+      <section className="section section-eight"></section>
+      <section className="section section-nine"></section>
     </div>
   );
 }
 
 const categories = [
-  "MICROSOFT",
-  "TAASIA",
+  "INDUSTRY",
   "MEDICINE",
-  "CUSTOMIZATION",
+  "MICROSOFT",
+  "SECURITY",
+  "ARTIFICALINTELLIGENCE",
   "MILITARY",
-  "A.I.",
+  "CUSTOMIZATION",
 ];

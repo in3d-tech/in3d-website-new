@@ -17,6 +17,13 @@ body {
 .container {
 }
 
+.section-one-first-title {
+  color: white;
+  font-family: gotham;
+  font-size: 1.5em;
+  opacity: 0.85;
+}
+
 .h-nav-in3d-icon {
   animation: slideUpIcon 1s ease-out forwards;
   animation-delay: 0.6s;
@@ -90,18 +97,22 @@ body {
 }
 
 .home-categories-wrapper .category-title:nth-child(3) {
-  animation-delay: 0.8s;
+  animation-delay: 0.7s;
 }
 .home-categories-wrapper .category-title:nth-child(4) {
-  animation-delay: 1.2s;
+  animation-delay: 1s;
 }
 
 .home-categories-wrapper .category-title:nth-child(5) {
-  animation-delay: 1.4s;
+  animation-delay: 1.3s;
 }
 
 .home-categories-wrapper .category-title:nth-child(6) {
-  animation-delay: 1.8s;
+  animation-delay: 1.6s;
+}
+
+.home-categories-wrapper .category-title:nth-child(7) {
+  animation-delay: 1.9s;
 }
 
 .main-content-divider {
@@ -216,7 +227,7 @@ body {
 }
 
 .fade-out {
-  animation: fadeOut s ease forwards;
+  animation: fadeOut 1s ease forwards;
 }
 
 .fade-in {
@@ -224,7 +235,7 @@ body {
 }
 
 .fader {
-  animation: fadeIn 2s ease forwards;
+  animation: fadeIn 3s ease forwards;
 }
 
 .icon-1,
@@ -517,6 +528,28 @@ section {
 .customization:hover {
   background: url("/assets/images/backgrounds/taasiya.jpg");
   transition: background-image 0.8s;
+}
+
+.scrolled-category-title {
+  font-size: 4em;
+  font-family: gotham-bold;
+}
+
+.scrolled-category-text-one {
+  margin-top: 3em;
+  font-size: 2em;
+  line-height: 1.2em;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+}
+
+.scrolled-category-text-two {
+  margin-top: 1em;
+  font-size: 1.5em;
+  line-height: 1.2em;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ------------- selected category page ------------ */

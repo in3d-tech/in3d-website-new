@@ -22,9 +22,14 @@ export const Model_Data = [
       tl
         ?.to(
           currentRef.current.position,
-          { y: -4, x: 3, z: 1 },
+          { y: -4, x: 3, z: 1.5 },
           "simultaneously"
         )
+        // ?.to(
+        //   currentRef.current.position,
+        //   { y: -4, x: 3, z: 1 },
+        //   "simultaneously"
+        // )
         .to(currentRef.current.rotation, { y: -2.7 }, "simultaneously")
         .to(prevRef.current.position, { x: -22, y: -18 }, "simultaneously"),
   },
@@ -47,11 +52,7 @@ export const Model_Data = [
 
     timeline: (tl, currentRef, prevRef) =>
       tl
-        ?.to(
-          currentRef.current.position,
-          { y: -3.5, x: 7, z: 0 },
-          "simultaneously"
-        )
+        ?.to(currentRef.current.position, { x: 7, z: 0 }, "simultaneously")
         .to(currentRef.current.rotation, { y: 0 }, "simultaneously")
         .to(prevRef.current.position, { y: -5, x: 13 }, "simultaneously")
         .to(prevRef.current.rotation, { y: -1.2 }, "simultaneously"),
@@ -75,7 +76,11 @@ export const Model_Data = [
     rotation: [0, 0.9, 0],
     timeline: (tl, currentRef, prevRef) =>
       tl
-        ?.to(currentRef.current.position, { y: -4.5, x: 4 }, "simultaneously")
+        ?.to(
+          currentRef.current.position,
+          { y: -4.5, x: 3.5, z: 0.2 },
+          "simultaneously"
+        )
         .to(currentRef.current.rotation, { y: -0.9 }, "simultaneously")
         .to(prevRef.current.position, { y: -8, x: -12 }, "simultaneously")
         .to(prevRef.current.rotation, { y: -0.4 }, "simultaneously"),
@@ -83,7 +88,7 @@ export const Model_Data = [
 
   // SECURITY
   {
-    url: "/assets/models/millitary_model_for_web.glb",
+    url: "/assets/models/security.glb",
     refs: ["security", "medicine"],
     section: "section-six",
     onEnter: {
@@ -93,70 +98,83 @@ export const Model_Data = [
     onLeave: { currentSection: 4, prevSection: 5 },
     scale: [3, 3, 3],
 
-    position: [-0.2, -1.7, 4.3],
+    position: [-5, -0.5, 3.5],
+    rotation: [0, Math.PI + 1, 0],
     // visible={visibleModels.includes(3)}
-    rotation: [0, -2.2, 0],
+
     timeline: (tl, currentRef, prevRef) =>
       tl
         ?.to(
           currentRef.current.position,
-          { y: -0.6, duration: 1.5 },
+          { y: -0.7, x: -1, z: 3, duration: 1.5 },
           "simultaneously"
         )
+        .to(currentRef.current.rotation, { y: Math.PI + 1.1 }, "simultaneously")
         .to(prevRef.current.position, { x: 10 }, "simultaneously")
         .to(prevRef.current.rotation, { y: 0.9 }, "simultaneously"),
     // .to(currentRef.current.position, { z: 2, x: -2, duration: 1.5 }, ">"),
   },
 
-  // ARTIFICIAL INTELLIGENCE
+  //   ARTIFICIAL INTELLIGENCE
   {
-    url: "/assets/models/millitary_model_for_web.glb",
-    refs: ["security", "medicine"],
+    url: "/assets/models/ai_model.glb",
+    refs: ["ai", "security"],
     section: "section-seven",
     onEnter: {
       currentSection: 6,
       prevSection: 5,
     },
     onLeave: { currentSection: 5, prevSection: 6 },
-    scale: [3, 3, 3],
-
-    position: [-0.2, -1.7, 4.3],
+    scale: [1, 1, 1],
+    // position: [1, -1.5, 3.4],
+    // rotation: [0, -0.9, 0],
+    position: [5, -5, 2],
+    rotation: [0, Math.PI, 0],
     // visible={visibleModels.includes(3)}
-    rotation: [0, -2.2, 0],
+
     timeline: (tl, currentRef, prevRef) =>
       tl
         ?.to(
           currentRef.current.position,
-          { y: -0.6, duration: 1.5 },
+          { y: -1.5, x: 1, z: 3.4 },
           "simultaneously"
         )
-        .to(prevRef.current.position, { x: 10 }, "simultaneously")
-        .to(prevRef.current.rotation, { y: 0.9 }, "simultaneously"),
+        .to(currentRef.current.rotation, { y: -0.9 }, "simultaneously")
+        .to(
+          prevRef.current.position,
+          { x: -5, y: -0.5, z: 3.5 },
+          "simultaneously"
+        )
+        .to(prevRef.current.rotation, { y: Math.PI + 1 }, "simultaneously"),
     // .to(currentRef.current.position, { z: 2, x: -2, duration: 1.5 }, ">"),
   },
 
   // MILITARY
   {
-    url: "/assets/models/millitary_model_for_web.glb",
-    refs: ["security", "medicine"],
+    url: "/assets/models/military.glb",
+    refs: ["military", "ai"],
     section: "section-eight",
     onEnter: {
       currentSection: 7,
       prevSection: 6,
     },
     onLeave: { currentSection: 6, prevSection: 7 },
-    scale: [3, 3, 3],
+    scale: [2, 2, 2],
 
-    position: [-0.2, -1.7, 4.3],
-    // visible={visibleModels.includes(3)}
+    // position: [-1.5, -1.2, 2.8],
+    // rotation: [0, 1, 0],
+
+    position: [-0.2, -1.7, 6],
     rotation: [0, -2.2, 0],
+    // visible={visibleModels.includes(3)}
     timeline: (tl, currentRef, prevRef) =>
       tl
         ?.to(
           currentRef.current.position,
-          { y: -0.6, duration: 1.5 },
+          { y: -1.2, x: -1.5, z: 2.8 },
           "simultaneously"
         )
+        .to(currentRef.current.rotation, { y: 1 }, "simultaneously")
         .to(prevRef.current.position, { x: 10 }, "simultaneously")
         .to(prevRef.current.rotation, { y: 0.9 }, "simultaneously"),
     // .to(currentRef.current.position, { z: 2, x: -2, duration: 1.5 }, ">"),
@@ -164,26 +182,32 @@ export const Model_Data = [
 
   // CUSTOMIZE
 
-  //   {
-  //     url: "/assets/models/costimize_model_v02.glb",
-  //     refs: ["security", "customize"],
-  //     section: "section-nine",
-  //     onEnter: {
-  //       currentSection: 6,
-  //       prevSection: 5,
-  //     },
-  //     onLeave: { currentSection: 5, prevSection: 6 },
-  //     scale: [3, 3, 3],
-  //     position: [12, -2, 0],
-  //     // visible={visibleModels.includes(3)}
-  //     rotation: [0, -2.9, 0],
-  //     timeline: (tl, currentRef) =>
-  //       tl
-  //         .to(
-  //           currentRef.current.position,
-  //           { y: -2.5, x: 3.5, z: 0.2 },
-  //           "simultaneously"
-  //         )
-  //         .to(currentRef.current.rotation, { y: -1 }, "simultaneously"),
-  //   },
+  {
+    url: "/assets/models/costimize_model_v02.glb",
+    refs: ["security", "customize"],
+    section: "section-nine",
+    onEnter: {
+      currentSection: 8,
+      prevSection: 7,
+    },
+    onLeave: { currentSection: 7, prevSection: 8 },
+    scale: [3, 3, 3],
+    position: [12, -2, 0],
+    // visible={visibleModels.includes(3)}
+    rotation: [0, -2.9, 0],
+    timeline: (tl, currentRef, prevRef) =>
+      tl
+        .to(
+          currentRef.current.position,
+          { y: -2.5, x: 3.5, z: 0.2 },
+          "simultaneously"
+        )
+        .to(currentRef.current.rotation, { y: -1 }, "simultaneously")
+        .to(
+          prevRef.current.position,
+          { x: -0.2, y: -1.7, z: 6 },
+          "simultaneously"
+        )
+        .to(prevRef.current.rotation, { y: -2.2 }, "simultaneously"),
+  },
 ];
