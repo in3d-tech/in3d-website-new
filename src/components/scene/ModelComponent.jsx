@@ -5,7 +5,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { Model_Data } from "../common/modelData";
 
-export function ModelComponent({
+export function AstroModel({
   url,
   setScrollArea,
   scrollArea,

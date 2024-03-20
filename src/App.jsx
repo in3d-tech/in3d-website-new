@@ -8,10 +8,7 @@ import * as THREE from "three";
 import { Camera } from "./components/scene/Camera";
 // import { Nav } from "./components/navs/Nav";
 import { Header } from "./components/navs/Menu";
-import {
-  MappedModels,
-  ModelComponent,
-} from "./components/scene/ModelComponent";
+import { MappedModels, AstroModel } from "./components/scene/ModelComponent";
 import { SelectedCategoryPage } from "./components/viewableContent/SelectedCategoryPage";
 import { LoadingScreen } from "./components/viewableContent/LoadingScreen";
 import { Model_Data } from "./components/common/modelData";
@@ -82,7 +79,8 @@ function App() {
     );
 
     return () => {
-      document.documentElement.style.removeProperty("--color");
+      // document.documentElement.style.removeProperty("--color");
+      null;
     };
   }, [scrollArea]);
 
@@ -358,6 +356,28 @@ function TestComponent({
     }
   }, [visibleText]);
 
+  const models = Model_Data.map((model, idx) => {
+    const { currentRef, prevRef } = refsObj[idx] || refsObj[0];
+
+    if (idx == 4) {
+      console.log(model.url);
+    }
+
+    return (
+      <MappedModels
+        key={`heyo${idx}`}
+        idx={idx}
+        prevRef={prevRef}
+        currentRef={currentRef}
+        scrollArea={scrollArea}
+        setScrollArea={setScrollArea}
+        visibleModels={visibleModels}
+        setVisibleModels={setVisibleModels}
+        model={model}
+      />
+    );
+  });
+
   return (
     <div className="scene one">
       <div
@@ -390,7 +410,7 @@ function TestComponent({
           <directionalLight intensity={3} />
           <Camera />
           <Suspense fallback={null}>
-            <ModelComponent
+            <AstroModel
               url={"/assets/models/astronaut_position (1).glb"}
               scrollArea={scrollArea}
               setScrollArea={setScrollArea}
@@ -400,28 +420,7 @@ function TestComponent({
               setTextAnimation={setTextAnimation}
               customizeRef={customizeRef}
             />
-
-            {Model_Data.map((model, idx) => {
-              const { currentRef, prevRef } = refsObj[idx] || refsObj[0];
-
-              if (idx == 4) {
-                console.log(model.url);
-              }
-
-              return (
-                <MappedModels
-                  key={`heyo${idx}`}
-                  idx={idx}
-                  prevRef={prevRef}
-                  currentRef={currentRef}
-                  scrollArea={scrollArea}
-                  setScrollArea={setScrollArea}
-                  visibleModels={visibleModels}
-                  setVisibleModels={setVisibleModels}
-                  model={model}
-                />
-              );
-            })}
+            {models}
           </Suspense>
         </Canvas>
       </div>
