@@ -93,12 +93,12 @@ export function AstroModel({
       contactUsTimeline
         .to(
           astroRef.current.position,
-          { x: -7, y: -18.2, z: -7 },
+          { x: -7, y: -16, z: -4 },
           "simultaneously"
         )
         .to(
           astroRef.current.rotation,
-          { x: 0.05, y: Math.PI / 2 + 0.5, z: 0 },
+          { x: 0.5, y: Math.PI - 0.3, z: 0 },
           "simultaneously"
         )
         .to(

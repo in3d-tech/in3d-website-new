@@ -48,6 +48,9 @@ function App() {
     prevSection: 0,
   });
   const [loadingScreen, setloadingScreen] = useState(true);
+  const [bgImage, setbgImage] = useState(
+    'url("/assets/images/backgrounds/Astro_1_Background.webp")'
+  );
   const [textAnimation, setTextAnimation] = useState(
     "category-title-no-opacity"
   );
@@ -71,12 +74,14 @@ function App() {
       9: 'url("/assets/images/backgrounds/Astro_1_Background.webp")',
     };
 
+    setbgImage(backgrounds[scrollArea.currentSection] || backgrounds[1]);
+
     // console.log(backgrounds[scrollArea.currentSection]);
 
-    document.documentElement.style.setProperty(
-      "--color",
-      backgrounds[scrollArea.currentSection] || backgrounds[1]
-    );
+    // document.documentElement.style.setProperty(
+    //   "--color",
+    //   backgrounds[scrollArea.currentSection] || backgrounds[1]
+    // );
 
     return () => {
       // document.documentElement.style.removeProperty("--color");
@@ -112,7 +117,7 @@ function App() {
           // handleClickNav={handleClickNav}
         /> */}
           </div>
-          <ViewableContent />
+          <ViewableContent bgImage={bgImage} />
           <TestComponent
             textRef={textRef}
             scrollArea={scrollArea}
@@ -144,8 +149,13 @@ useGLTF.preload("/assets/models/medical_model.glb");
 //     </Html>
 //   );
 // };
-function ViewableContent() {
-  return <div className="viewable-content-wrapper"></div>;
+function ViewableContent({ bgImage }) {
+  return (
+    <div
+      style={{ background: bgImage }}
+      className="viewable-content-wrapper"
+    ></div>
+  );
 }
 
 function TestComponent({
