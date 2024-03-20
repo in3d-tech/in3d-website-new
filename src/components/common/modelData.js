@@ -12,9 +12,6 @@ export const Model_Data = [
     },
     onLeave: { currentSection: 1, prevSection: 2 },
     scale: [3, 3, 3],
-
-    // position: [3, -4, 1],
-    // rotation: [0, -2.7, 0],
     position: [13, -5, -0.2],
     rotation: [0, -1.2, 0],
     // visible={visibleModels.includes(3)}
@@ -25,11 +22,6 @@ export const Model_Data = [
           { y: -4, x: 3, z: 1.5 },
           "simultaneously"
         )
-        // ?.to(
-        //   currentRef.current.position,
-        //   { y: -4, x: 3, z: 1 },
-        //   "simultaneously"
-        // )
         .to(currentRef.current.rotation, { y: -2.7 }, "simultaneously")
         .to(prevRef.current.position, { x: -22, y: -18 }, "simultaneously"),
   },
@@ -61,7 +53,7 @@ export const Model_Data = [
   // MICROSOFT
 
   {
-    url: "/assets/models/microsoft_large.glb",
+    url: "/assets/models/microsoft_model_new.glb",
     refs: ["medicine", "microsoft"],
     section: "section-five",
     onEnter: {
@@ -88,7 +80,7 @@ export const Model_Data = [
 
   // SECURITY
   {
-    url: "/assets/models/security.glb",
+    url: "/assets/models/millitary.glb",
     refs: ["security", "medicine"],
     section: "section-six",
     onEnter: {
@@ -109,7 +101,7 @@ export const Model_Data = [
           { y: -0.7, x: -1, z: 3, duration: 1.5 },
           "simultaneously"
         )
-        .to(currentRef.current.rotation, { y: Math.PI + 1.1 }, "simultaneously")
+        .to(currentRef.current.rotation, { y: Math.PI + 2 }, "simultaneously")
         .to(prevRef.current.position, { x: 10 }, "simultaneously")
         .to(prevRef.current.rotation, { y: 0.9 }, "simultaneously"),
     // .to(currentRef.current.position, { z: 2, x: -2, duration: 1.5 }, ">"),

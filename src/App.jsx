@@ -89,6 +89,15 @@ function App() {
     };
   }, [scrollArea]);
 
+  const scrollToElementById = (idx) => {
+    console.log(idx);
+    const sections = ["Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
+    const element = document.getElementById(`section${sections[idx]}`);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <>
       {false ? (
@@ -124,6 +133,7 @@ function App() {
             setScrollArea={setScrollArea}
             textAnimation={textAnimation}
             setTextAnimation={setTextAnimation}
+            scrollToElementById={scrollToElementById}
           />
         </>
       )}
@@ -164,6 +174,7 @@ function TestComponent({
   setScrollArea,
   textAnimation,
   setTextAnimation,
+  scrollToElementById,
 }) {
   const [visibleModels, setVisibleModels] = useState([1]);
   const [visibleText, setVisibleText] = useState(false);
@@ -499,20 +510,20 @@ function TestComponent({
             ? categories.map((title, idx) => (
                 <div
                   onMouseOver={() => {
-                    document.documentElement.style.setProperty(
-                      "--color",
-                      backgrounds[title] || backgrounds[1]
-                    );
+                    // document.documentElement.style.setProperty(
+                    //   "--color",
+                    //   backgrounds[title] || backgrounds[1]
+                    // );
                     // setHovered("taasia");
-                    console.log("ye");
                   }}
                   onMouseOut={() => {
-                    document.documentElement.style.setProperty(
-                      "--color",
-                      backgrounds[1]
-                    );
+                    // document.documentElement.style.setProperty(
+                    //   "--color",
+                    //   backgrounds[1]
+                    // );
                     // setHovered("");
                   }}
+                  onClick={() => scrollToElementById(idx)}
                   key={idx}
                   className={textAnimation}
                   style={{ height: "0px" }}
@@ -523,14 +534,14 @@ function TestComponent({
             : null}
         </div>
       </section>
-      <section className="section section-three"></section>
-      <section className="section section-four"></section>
-      <section className="section section-five"></section>
-      <section className="section section-six"></section>
-      <section className="section section-seven"></section>
-      <section className="section section-eight"></section>
-      <section className="section section-nine"></section>
-      <section className="section section-ten"></section>
+      <section id="sectionThree" className="section section-three"></section>
+      <section id="sectionFour" className="section section-four"></section>
+      <section id="sectionFive" className="section section-five"></section>
+      <section id="sectionSix" className="section section-six"></section>
+      <section id="sectionSeven" className="section section-seven"></section>
+      <section id="sectionEight" className="section section-eight"></section>
+      <section id="sectionNine" className="section section-nine"></section>
+      <section id="sectionTen" className="section section-ten"></section>
     </div>
   );
 }
