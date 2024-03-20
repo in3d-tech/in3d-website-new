@@ -12,6 +12,9 @@ body {
   padding: 0;
   margin: 0;
   overflow: scroll;
+  background: var(--color);
+  /* transition: background-image 1s; */
+  /* background: black; */
 }
 
 .container {
@@ -485,7 +488,7 @@ section {
   /* border: 1px solid yellow; */
   /* z-index: 50000; */
   /* background: url("/assets/images/backgrounds/Astro_1_Background.webp"); */
-  /* background: var(--color); */
+  background: var(--color);
   transition: background-image 1s;
   /* background: black; */
   /* opacity: 0.7; */

@@ -74,17 +74,17 @@ function App() {
       9: 'url("/assets/images/backgrounds/Astro_1_Background.webp")',
     };
 
-    setbgImage(backgrounds[scrollArea.currentSection] || backgrounds[1]);
+    // setbgImage(backgrounds[scrollArea.currentSection] || backgrounds[1]);
 
     // console.log(backgrounds[scrollArea.currentSection]);
 
-    // document.documentElement.style.setProperty(
-    //   "--color",
-    //   backgrounds[scrollArea.currentSection] || backgrounds[1]
-    // );
+    document.documentElement.style.setProperty(
+      "--color",
+      backgrounds[scrollArea.currentSection] || backgrounds[1]
+    );
 
     return () => {
-      // document.documentElement.style.removeProperty("--color");
+      document.documentElement.style.removeProperty("--color");
       null;
     };
   }, [scrollArea]);
@@ -152,7 +152,7 @@ useGLTF.preload("/assets/models/medical_model.glb");
 function ViewableContent({ bgImage }) {
   return (
     <div
-      style={{ background: bgImage }}
+      // style={{ background: bgImage }}
       className="viewable-content-wrapper"
     ></div>
   );
