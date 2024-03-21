@@ -57,6 +57,7 @@ body {
   border: 1px solid orange;
   position: fixed;
   bottom: 100%;
+  z-index: 5090000;
 }
 
 .home-categories-wrapper-fixed {
