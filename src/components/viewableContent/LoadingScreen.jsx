@@ -5,6 +5,7 @@ export function LoadingScreen({ setloadingScreen }) {
   const { active, progress, errors, total } = useProgress();
   const height = window.innerHeight * 0.3;
   useEffect(() => {
+    console.log("from loading screen: ", progress);
     if (progress < 100) {
       return;
     }

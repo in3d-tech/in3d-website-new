@@ -89,7 +89,7 @@ function App() {
 
   return (
     <>
-      {false ? (
+      {loadingScreen ? (
         <LoadingScreen setloadingScreen={setloadingScreen} />
       ) : (
         <>
