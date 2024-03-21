@@ -37,7 +37,7 @@ export function AstroModel({
         end: "bottom bottom",
         scrub: 1,
         preventOverlaps: isInstantScroll ? true : false,
-        fastScrollEnd: 2000,
+        // fastScrollEnd: true, // 2250,
         // markers: true,
         onEnter: () => {
           if (!visibleModels) setVisibleModels(true);
@@ -166,7 +166,7 @@ export function MappedModels({
         scrub: 1,
         // markers: true,
         preventOverlaps: isInstantScroll ? true : false,
-        fastScrollEnd: 2000,
+        // fastScrollEnd: true, //2500,
         onEnter: () => {
           const areaObj = { ...scrollArea };
           areaObj.currentSection = model.onEnter.currentSection;

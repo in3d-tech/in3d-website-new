@@ -221,8 +221,8 @@ export const MilitaryText = ({ textClass, scrollArea, categoriesObj }) => (
     </div>
     <div className="scrolled-category-text-two">
       <span>
-        Were here to let you know, in3D is your perfect go to for any AI
-        products.
+        Were here to let you know, in3D is your perfect
+        <span style={{ fontStyle: "italic" }}> go to</span> for any AI products.
       </span>
       <span>
         In3D and Artifical Intelligence share a strong connection and a combined
