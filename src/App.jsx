@@ -92,12 +92,13 @@ function App() {
   }, [scrollArea]);
 
   const scrollToElementById = (idx) => {
-    console.log(idx);
+    setIsInstandScroll(true);
     const sections = ["Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
     const element = document.getElementById(`section${sections[idx]}`);
     if (element) {
       element.scrollIntoView(); // { behavior: "smooth" }
     }
+    setTimeout(() => setIsInstandScroll(false), 200);
   };
 
   return (

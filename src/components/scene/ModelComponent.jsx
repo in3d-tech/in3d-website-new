@@ -40,7 +40,7 @@ export function AstroModel({
           setScrollArea(areaObj);
         },
         onEnterBack: () => {
-          setVisibleModels([1]);
+          // setVisibleModels([1]);
         },
       },
     });
@@ -148,7 +148,6 @@ export function MappedModels({
   const mixer = useGLTFAnimations(scene, animations);
 
   useEffect(() => {
-    if (isInstantScroll) return;
     console.log("UESSSSS");
     let timeline = gsap.timeline({
       defaults: { ease: "power1.out" },
@@ -160,7 +159,7 @@ export function MappedModels({
         end: "top top",
         scrub: 1,
         // markers: true,
-        preventOverlaps: true,
+        preventOverlaps: isInstantScroll ? true : null,
         fastScrollEnd: true,
         onEnter: () => {
           const areaObj = { ...scrollArea };
@@ -188,7 +187,7 @@ export function MappedModels({
         dispose={null}
         scale={model.scale}
         position={model.position}
-        // visible={visibleModels.includes(3)}
+        visible={visibleModels.includes(0)}
         rotation={model.rotation}
       />
     </group>
