@@ -14,6 +14,7 @@ export function AstroModel({
   textRef,
   setTextAnimation,
   customizeRef,
+  isInstantScroll,
 }) {
   const { scene, animations } = useGLTF(url);
   const mixer = useGLTFAnimations(scene, animations);
@@ -26,6 +27,7 @@ export function AstroModel({
   // gsap.set(".scene", { scale: 0.7 });
 
   useEffect(() => {
+    console.log("ASTRO REEFFFFF");
     let timeline = gsap.timeline({
       defaults: { ease: "power1.out" },
       scrollTrigger: {
@@ -34,8 +36,8 @@ export function AstroModel({
         endTrigger: "#midSection2", //".section-two",
         end: "bottom bottom",
         scrub: 1,
-        preventOverlaps: true,
-        fastScrollEnd: true,
+        preventOverlaps: isInstantScroll ? true : false,
+        fastScrollEnd: 2000,
         // markers: true,
         onEnter: () => {
           if (!visibleModels) setVisibleModels(true);
@@ -116,7 +118,7 @@ export function AstroModel({
         .to(customizeRef.current.rotation, { y: -2.9 }, "simultaneously");
       // .to(astroRef.current.rotation, { y: -Math.PI / 2 + 0.5 }, ">");
     }
-  }, [astroRef]);
+  }, [astroRef, isInstantScroll]);
 
   return (
     <group>
@@ -145,7 +147,6 @@ export function MappedModels({
   setVisibleModels,
   model,
   isInstantScroll,
-  setIsInstandScroll,
 }) {
   if (idx == 7) return null;
   const { scene, animations } = useGLTF(model.url);
@@ -153,7 +154,7 @@ export function MappedModels({
   const mixer = useGLTFAnimations(scene, animations);
 
   useEffect(() => {
-    console.log("UESSSSS");
+    console.log("OTHJER MODELS REFFFFF");
     let timeline = gsap.timeline({
       defaults: { ease: "power1.out" },
 
@@ -164,8 +165,8 @@ export function MappedModels({
         end: "top top",
         scrub: 1,
         // markers: true,
-        preventOverlaps: isInstantScroll ? true : null,
-        fastScrollEnd: true,
+        preventOverlaps: isInstantScroll ? true : false,
+        fastScrollEnd: 2000,
         onEnter: () => {
           const areaObj = { ...scrollArea };
           areaObj.currentSection = model.onEnter.currentSection;

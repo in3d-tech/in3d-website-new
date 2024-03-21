@@ -81,10 +81,13 @@ function App() {
     setIsInstandScroll(true);
     const sections = ["Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
     const element = document.getElementById(`section${sections[idx]}`);
-    if (element) {
-      element.scrollIntoView(); // { behavior: "smooth" }
-    }
-    setTimeout(() => setIsInstandScroll(false), 200);
+
+    setTimeout(() => {
+      if (element) {
+        element.scrollIntoView(); // { behavior: "smooth" }
+      }
+      setIsInstandScroll(false);
+    }, 200);
   };
 
   return (
@@ -129,7 +132,7 @@ function App() {
 
 export default App;
 
-useGLTF.preload("/assets/models/astronaut_new.glb");
+useGLTF.preload("/assets/models/astronaut_new23.glb");
 useGLTF.preload("/assets/models/engenir_model_new.glb");
 // useGLTF.preload("/assets/models/medical_model.glb");
 // useGLTF.preload("/assets/models/microsoft_model_new.glb");

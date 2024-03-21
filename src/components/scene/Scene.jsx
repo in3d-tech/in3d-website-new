@@ -249,7 +249,6 @@ export function Scene({
         setVisibleModels={setVisibleModels}
         model={model}
         isInstantScroll={isInstantScroll}
-        setIsInstandScroll={setIsInstandScroll}
       />
     );
   });
@@ -287,7 +286,7 @@ export function Scene({
           <Camera />
           <Suspense fallback={null}>
             <AstroModel
-              url={"/assets/models/astronaut_new.glb"}
+              url={"/assets/models/astronaut_new23.glb"}
               scrollArea={scrollArea}
               setScrollArea={setScrollArea}
               astroRef={astroRef}
@@ -295,6 +294,7 @@ export function Scene({
               setVisibleModels={setVisibleModels}
               setTextAnimation={setTextAnimation}
               customizeRef={customizeRef}
+              isInstantScroll={isInstantScroll}
             />
             {models}
           </Suspense>
