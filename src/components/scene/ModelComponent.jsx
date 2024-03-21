@@ -1,9 +1,8 @@
-import { useGLTF } from "@react-three/drei";
+import { useGLTF, useProgress } from "@react-three/drei";
 import { useEffect, useMemo, useState } from "react";
 import { gsap } from "gsap";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
-// import { Model_Data } from "../common/modelData";
 
 export function AstroModel({
   url,
@@ -19,6 +18,11 @@ export function AstroModel({
   const { scene, animations } = useGLTF(url);
   const mixer = useGLTFAnimations(scene, animations);
 
+  const { active, progress, errors, total } = useProgress();
+
+  useEffect(() => {
+    console.log(progress);
+  }, [progress]);
   // gsap.set(".scene", { scale: 0.7 });
 
   useEffect(() => {
@@ -34,6 +38,7 @@ export function AstroModel({
         fastScrollEnd: true,
         // markers: true,
         onEnter: () => {
+          if (!visibleModels) setVisibleModels(true);
           const areaObj = { ...scrollArea };
           areaObj.currentSection = 1;
           areaObj.prevSection = 0;
@@ -130,69 +135,69 @@ export function AstroModel({
 
 // ---------------------- All other models ----------------------------
 
-// export function MappedModels({
-//   idx,
-//   scrollArea,
-//   setScrollArea,
-//   currentRef,
-//   prevRef,
-//   visibleModels,
-//   setVisibleModels,
-//   model,
-//   isInstantScroll,
-//   setIsInstandScroll,
-// }) {
-//   if (idx == 7) return null;
-//   const { scene, animations } = useGLTF(model.url);
-//   const [isVisible, setIsVisible] = useState(false);
-//   const mixer = useGLTFAnimations(scene, animations);
+export function MappedModels({
+  idx,
+  scrollArea,
+  setScrollArea,
+  currentRef,
+  prevRef,
+  visibleModels,
+  setVisibleModels,
+  model,
+  isInstantScroll,
+  setIsInstandScroll,
+}) {
+  if (idx == 7) return null;
+  const { scene, animations } = useGLTF(model.url);
+  const [isVisible, setIsVisible] = useState(false);
+  const mixer = useGLTFAnimations(scene, animations);
 
-//   useEffect(() => {
-//     console.log("UESSSSS");
-//     let timeline = gsap.timeline({
-//       defaults: { ease: "power1.out" },
+  useEffect(() => {
+    console.log("UESSSSS");
+    let timeline = gsap.timeline({
+      defaults: { ease: "power1.out" },
 
-//       scrollTrigger: {
-//         trigger: `.${model.section}`,
-//         start: "top bottom",
-//         endTrigger: `.${model.section}`,
-//         end: "top top",
-//         scrub: 1,
-//         // markers: true,
-//         preventOverlaps: isInstantScroll ? true : null,
-//         fastScrollEnd: true,
-//         onEnter: () => {
-//           const areaObj = { ...scrollArea };
-//           areaObj.currentSection = model.onEnter.currentSection;
-//           areaObj.prevSection = model.onEnter.prevSection;
-//           setScrollArea(areaObj);
-//         },
-//         onLeaveBack: () => {
-//           const areaObj = { ...scrollArea };
-//           areaObj.currentSection = model.onLeave.currentSection;
-//           areaObj.prevSection = model.onLeave.prevSection;
-//           setScrollArea(areaObj);
-//         },
-//       },
-//     });
+      scrollTrigger: {
+        trigger: `.${model.section}`,
+        start: "top bottom",
+        endTrigger: `.${model.section}`,
+        end: "top top",
+        scrub: 1,
+        // markers: true,
+        preventOverlaps: isInstantScroll ? true : null,
+        fastScrollEnd: true,
+        onEnter: () => {
+          const areaObj = { ...scrollArea };
+          areaObj.currentSection = model.onEnter.currentSection;
+          areaObj.prevSection = model.onEnter.prevSection;
+          setScrollArea(areaObj);
+        },
+        onLeaveBack: () => {
+          const areaObj = { ...scrollArea };
+          areaObj.currentSection = model.onLeave.currentSection;
+          areaObj.prevSection = model.onLeave.prevSection;
+          setScrollArea(areaObj);
+        },
+      },
+    });
 
-//     model.timeline(timeline, currentRef, prevRef);
-//   }, [currentRef, isInstantScroll]);
+    model.timeline(timeline, currentRef, prevRef);
+  }, [currentRef, isInstantScroll]);
 
-//   return (
-//     <group key={`test${idx}`}>
-//       <primitive
-//         ref={currentRef}
-//         object={scene}
-//         dispose={null}
-//         scale={model.scale}
-//         position={model.position}
-//         visible={visibleModels.includes(0)}
-//         rotation={model.rotation}
-//       />
-//     </group>
-//   );
-// }
+  return (
+    <group key={`test${idx}`}>
+      <primitive
+        ref={currentRef}
+        object={scene}
+        dispose={null}
+        scale={model.scale}
+        position={model.position}
+        visible={visibleModels ? true : false}
+        rotation={model.rotation}
+      />
+    </group>
+  );
+}
 
 // ANIMATE ALL
 

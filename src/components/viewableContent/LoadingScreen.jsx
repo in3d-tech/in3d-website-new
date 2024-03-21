@@ -1,4 +1,4 @@
-import { Html, useProgress } from "@react-three/drei";
+import { useProgress } from "@react-three/drei";
 import { useEffect } from "react";
 
 export function LoadingScreen({ setloadingScreen }) {
