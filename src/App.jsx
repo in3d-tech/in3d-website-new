@@ -2,26 +2,12 @@ import React, { Suspense, useEffect, useRef, useState } from "react";
 import "./App.css";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Canvas, extend } from "@react-three/fiber";
-import { Html, useGLTF, useProgress } from "@react-three/drei";
+import { extend } from "@react-three/fiber";
+import { useGLTF, useProgress } from "@react-three/drei";
 import * as THREE from "three";
-import { Camera } from "./components/scene/Camera";
-// import { Nav } from "./components/navs/Nav";
 import { Header } from "./components/navs/Menu";
-import { MappedModels, AstroModel } from "./components/scene/ModelComponent";
 import { SelectedCategoryPage } from "./components/viewableContent/SelectedCategoryPage";
 import { LoadingScreen } from "./components/viewableContent/LoadingScreen";
-import { Model_Data } from "./components/common/modelData";
-import {
-  AiText,
-  ContactUsText,
-  CustomizationText,
-  IndustryText,
-  MedicineText,
-  MicrosoftText,
-  MilitaryText,
-  SecurityText,
-} from "./components/common/textData";
 import { Scene } from "./components/scene/Scene";
 
 gsap.registerPlugin(ScrollTrigger);

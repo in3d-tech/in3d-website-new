@@ -3,10 +3,10 @@ import { Canvas, extend } from "@react-three/fiber";
 import { Html, useGLTF, useProgress } from "@react-three/drei";
 import * as THREE from "three";
 import {
-  MappedModels,
+  // MappedModels,
   AstroModel,
 } from "../../components/scene/ModelComponent";
-import { Model_Data } from "../../components/common/modelData";
+// import { Model_Data } from "../../components/common/modelData";
 import {
   IndustryText,
   AiText,
@@ -232,29 +232,29 @@ export function Scene({
     }
   }, [visibleText]);
 
-  const models = Model_Data.map((model, idx) => {
-    const { currentRef, prevRef } = refsObj[idx] || refsObj[0];
+  // const models = Model_Data.map((model, idx) => {
+  //   const { currentRef, prevRef } = refsObj[idx] || refsObj[0];
 
-    // if (idx == 4) {
-    //   console.log(model.url);
-    // }
+  //   // if (idx == 4) {
+  //   //   console.log(model.url);
+  //   // }
 
-    return (
-      <MappedModels
-        key={`heyo${idx}`}
-        idx={idx}
-        prevRef={prevRef}
-        currentRef={currentRef}
-        scrollArea={scrollArea}
-        setScrollArea={setScrollArea}
-        visibleModels={visibleModels}
-        setVisibleModels={setVisibleModels}
-        model={model}
-        isInstantScroll={isInstantScroll}
-        setIsInstandScroll={setIsInstandScroll}
-      />
-    );
-  });
+  //   return (
+  //     <MappedModels
+  //       key={`heyo${idx}`}
+  //       idx={idx}
+  //       prevRef={prevRef}
+  //       currentRef={currentRef}
+  //       scrollArea={scrollArea}
+  //       setScrollArea={setScrollArea}
+  //       visibleModels={visibleModels}
+  //       setVisibleModels={setVisibleModels}
+  //       model={model}
+  //       isInstantScroll={isInstantScroll}
+  //       setIsInstandScroll={setIsInstandScroll}
+  //     />
+  //   );
+  // });
 
   return (
     <div className="scene one">
@@ -298,7 +298,7 @@ export function Scene({
               setTextAnimation={setTextAnimation}
               customizeRef={customizeRef}
             />
-            {models}
+            {/* {models} */}
           </Suspense>
         </Canvas>
       </div>
