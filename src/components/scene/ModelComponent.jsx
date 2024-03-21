@@ -30,7 +30,9 @@ export function AstroModel({
         endTrigger: "#midSection2", //".section-two",
         end: "bottom bottom",
         scrub: 1,
-        markers: true,
+        preventOverlaps: true,
+        fastScrollEnd: true,
+        // markers: true,
         onEnter: () => {
           const areaObj = { ...scrollArea };
           areaObj.currentSection = 1;
@@ -77,15 +79,19 @@ export function AstroModel({
           // endTrigger: "#midSection2", //".section-two",
           // end: "bottom bottom",
           scrub: 1,
-          markers: true,
+          // markers: true,
           onEnter: () => {
             const areaObj = { ...scrollArea };
             areaObj.currentSection = 9;
             areaObj.prevSection = 8;
             setScrollArea(areaObj);
           },
-          onEnterBack: () => {
+          onLeave: () => {
             // setVisibleModels([1]);
+            const areaObj = { ...scrollArea };
+            areaObj.currentSection = 8;
+            areaObj.prevSection = 9;
+            setScrollArea(areaObj);
           },
         },
       });
@@ -93,20 +99,17 @@ export function AstroModel({
       contactUsTimeline
         .to(
           astroRef.current.position,
-          { x: -7, y: -16, z: -4 },
+          { x: 6, y: -13, z: -22 },
           "simultaneously"
         )
-        .to(
-          astroRef.current.rotation,
-          { x: 0.5, y: Math.PI - 0.3, z: 0 },
-          "simultaneously"
-        )
+        .to(astroRef.current.rotation, { x: 0.5, y: 0, z: 0 }, "simultaneously")
         .to(
           customizeRef.current.position,
           { x: 12, y: -2, z: 0 },
           "simultaneously"
         )
         .to(customizeRef.current.rotation, { y: -2.9 }, "simultaneously");
+      // .to(astroRef.current.rotation, { y: -Math.PI / 2 + 0.5 }, ">");
     }
   }, [astroRef]);
 
@@ -125,7 +128,7 @@ export function AstroModel({
   );
 }
 
-// ---------------------- MODEL 6 ----------------------------
+// ---------------------- All other models ----------------------------
 
 export function MappedModels({
   idx,
@@ -136,6 +139,8 @@ export function MappedModels({
   visibleModels,
   setVisibleModels,
   model,
+  isInstantScroll,
+  setIsInstandScroll,
 }) {
   if (idx == 7) return null;
   const { scene, animations } = useGLTF(model.url);
@@ -143,15 +148,20 @@ export function MappedModels({
   const mixer = useGLTFAnimations(scene, animations);
 
   useEffect(() => {
+    if (isInstantScroll) return;
+    console.log("UESSSSS");
     let timeline = gsap.timeline({
       defaults: { ease: "power1.out" },
+
       scrollTrigger: {
         trigger: `.${model.section}`,
         start: "top bottom",
         endTrigger: `.${model.section}`,
         end: "top top",
         scrub: 1,
-        markers: true,
+        // markers: true,
+        preventOverlaps: true,
+        fastScrollEnd: true,
         onEnter: () => {
           const areaObj = { ...scrollArea };
           areaObj.currentSection = model.onEnter.currentSection;
@@ -168,18 +178,7 @@ export function MappedModels({
     });
 
     model.timeline(timeline, currentRef, prevRef);
-  }, [currentRef]);
-
-  if (idx == 99) {
-    scene.traverse((child) => {
-      // if (child.material) child.material.wireframe = true;
-      if (child?.material?.name == "AI_Body") {
-        console.log(child.material);
-        child.material.transparent = false;
-        // child.material.opacity = 0;
-      }
-    });
-  }
+  }, [currentRef, isInstantScroll]);
 
   return (
     <group key={`test${idx}`}>
@@ -188,9 +187,6 @@ export function MappedModels({
         object={scene}
         dispose={null}
         scale={model.scale}
-        // position={[3.5, -2.5, 0]}
-        // rotation={[0, -1, 0]}
-
         position={model.position}
         // visible={visibleModels.includes(3)}
         rotation={model.rotation}
@@ -222,7 +218,16 @@ function useGLTFAnimations(scene, animations) {
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
-
+// if (idx == 99) {
+//   scene.traverse((child) => {
+//     // if (child.material) child.material.wireframe = true;
+//     if (child?.material?.name == "AI_Body") {
+//       console.log(child.material);
+//       child.material.transparent = false;
+//       // child.material.opacity = 0;
+//     }
+//   });
+// }
 // ---------------------- MODEL 2 ----------------------------
 // ---------------------- MODEL 2 ----------------------------
 

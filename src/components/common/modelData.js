@@ -80,7 +80,7 @@ export const Model_Data = [
 
   // SECURITY
   {
-    url: "/assets/models/military.glb",
+    url: "/assets/models/millitary__model__for__web_01.glb",
     refs: ["security", "medicine"],
     section: "section-six",
     onEnter: {
