@@ -17,9 +17,6 @@ body {
   /* background: black; */
 }
 
-.container {
-}
-
 .section-one-first-title {
   color: white;
   font-family: gotham;
@@ -153,31 +150,6 @@ body {
   /* background-size: cover; */
 }
 
-.nav-btn {
-  all: unset;
-  color: rgb(255, 255, 255, 0.6);
-  font-family: gotham;
-  font-size: 2em;
-}
-
-.nav-btn:hover {
-  color: rgb(255, 255, 255, 0.9);
-  cursor: pointer;
-}
-
-.selected {
-  color: rgb(255, 255, 255, 0.9);
-}
-
-.nav-btns-wrapper {
-  /* border: 1px solid white; */
-  display: flex;
-  justify-content: space-evenly;
-  padding: 2px;
-  margin-top: 2em;
-  width: 80%;
-}
-
 .nav-open-list-item {
   color: rgba(0, 0, 0, 0.4);
 }
@@ -196,19 +168,6 @@ body {
   overflow-y: scroll;
 
   opacity: 1;
-}
-
-.background-image {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-size: cover;
-  background-position: center;
-  transition: opacity 1s ease;
-  opacity: 0;
-  z-index: -1;
 }
 
 @keyframes fadeOut {

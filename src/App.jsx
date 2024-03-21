@@ -123,11 +123,6 @@ function App() {
               selectedCategory={selectedCategory}
             />
             <SelectedCategoryPage selectedCategory={selectedCategory} />
-            {/* <Nav
-          setMenuOpened={setMenuOpened}
-          scrollArea={scrollArea}
-          // handleClickNav={handleClickNav}
-        /> */}
           </div>
           <ViewableContent bgImage={bgImage} />
           <Scene
@@ -149,9 +144,13 @@ function App() {
 export default App;
 
 useGLTF.preload("/assets/models/astronaut_position (1).glb");
-useGLTF.preload("/assets/models/microsoft_large.glb");
 useGLTF.preload("/assets/models/engenir_model_new.glb");
 useGLTF.preload("/assets/models/medical_model.glb");
+useGLTF.preload("/assets/models/microsoft_model_new.glb");
+useGLTF.preload("/assets/models/security.glb");
+useGLTF.preload("/assets/models/ai_model.glb");
+useGLTF.preload("/assets/models/military.glb");
+useGLTF.preload("/assets/models/costimize_model_v02.glb");
 
 // export const LoaderComponent = () => {
 //   const { active, progress, errors } = useProgress();
