@@ -89,17 +89,9 @@ export const Model_Data = [
     },
     onLeave: { currentSection: 4, prevSection: 5 },
     scale: [3, 3, 3],
-    // ---- starting position
     position: [-0.5, -0.5, 6],
     rotation: [0, Math.PI + 1, 0],
     // ------------
-
-    // position: [-1.3, -0.5, 3.2],
-    // rotation: [0, Math.PI + 1.3, 0],
-
-    // ----- old starting position
-    // position: [-5, -0.5, 3.5],
-    // rotation: [0, Math.PI + 1, 0],
     // visible={visibleModels.includes(3)}
 
     timeline: (tl, currentRef, prevRef) =>
@@ -132,8 +124,6 @@ export const Model_Data = [
     },
     onLeave: { currentSection: 5, prevSection: 6 },
     scale: [1, 1, 1],
-    // position: [1, -1.5, 3.4],
-    // rotation: [0, -0.9, 0],
     position: [5, -5, 2],
     rotation: [0, Math.PI, 0],
     // visible={visibleModels.includes(3)}
@@ -166,9 +156,6 @@ export const Model_Data = [
     },
     onLeave: { currentSection: 6, prevSection: 7 },
     scale: [2, 2, 2],
-
-    // position: [-1.5, -1.2, 2.8],
-    // rotation: [0, 1, 0],
 
     position: [-0.2, -1.7, 6],
     rotation: [0, -2.2, 0],

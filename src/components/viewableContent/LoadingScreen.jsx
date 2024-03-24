@@ -14,9 +14,6 @@ export function LoadingScreen({ setloadingScreen }) {
     }
   }, [progress]);
 
-  // useEffect(() => {
-  //   console.log(total);
-  // }, [total]);
   return (
     <div
       className="flashing-div"
@@ -25,14 +22,15 @@ export function LoadingScreen({ setloadingScreen }) {
         justifyContent: "center",
         flexDirection: "column",
         alignItems: "center",
-        marginTop: "18em",
+        height: "100vh",
       }}
     >
       <img
+        className="flashing-img"
         style={{
-          border: "1px solid black",
+          // border: "1px solid black",
           height: height,
-          width: height,
+          width: height + 300,
           borderRadius: "50%",
         }}
         src="/assets/images/in3dlogo.png"
@@ -46,10 +44,8 @@ export function LoadingScreen({ setloadingScreen }) {
 
 export const LoaderComponent = () => {
   return (
-    // <Html center>
-    <span style={{ color: "black", fontSize: "3em" }}>
+    <span style={{ color: "black", fontSize: "1.5em", fontFamily: "gotham" }}>
       {progress < 100 ? `${Math.trunc(progress)} % loaded` : null}
     </span>
-    // </Html>
   );
 };

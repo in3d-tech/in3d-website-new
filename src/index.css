@@ -549,5 +549,19 @@ section {
 }
 
 .flashing-div {
-  animation: flash 1.5s infinite; /* Adjust duration as needed */
+  background: url("/assets/images/backgrounds/medicine/medicine_bg.jpg");
+}
+
+.flashing-img {
+  animation: flash 2s infinite; /* Adjust duration as needed */
+}
+
+.contact-us-wrapper {
+  position: absolute;
+  top: 16%;
+  right: 6%;
+  /* border: 1px solid yellow; */
+  display: flex;
+  flex-direction: column;
+  font-family: gotham;
 }

@@ -29,7 +29,7 @@ export function Scene({
   isInstantScroll,
   setIsInstandScroll,
 }) {
-  const [visibleModels, setVisibleModels] = useState(false);
+  const [visibleModels, setVisibleModels] = useState([]);
   const [visibleText, setVisibleText] = useState(false);
   const [shouldFadeIn, setShouldFadeIn] = useState(false);
   const [fixed, setFixed] = useState(false);
@@ -59,95 +59,27 @@ export function Scene({
     8: "CUSTOMIZATION",
   };
 
+  const createTextComponent = (currentRef, prevRef, TextComponent) => ({
+    currentRef,
+    prevRef,
+    text: (
+      <TextComponent
+        textClass={textClass}
+        scrollArea={scrollArea}
+        categoriesObj={categoriesObj}
+      />
+    ),
+  });
+
   const refsObj = {
-    0: {
-      currentRef: taasiaRef,
-      prevRef: astroRef,
-      text: (
-        <IndustryText
-          textClass={textClass}
-          scrollArea={scrollArea}
-          categoriesObj={categoriesObj}
-        />
-      ),
-    },
-    1: {
-      currentRef: medicineRef,
-      prevRef: taasiaRef,
-      text: (
-        <MedicineText
-          textClass={textClass}
-          scrollArea={scrollArea}
-          categoriesObj={categoriesObj}
-        />
-      ),
-    },
-    2: {
-      currentRef: microsoftRef,
-      prevRef: medicineRef,
-      text: (
-        <MicrosoftText
-          textClass={textClass}
-          scrollArea={scrollArea}
-          categoriesObj={categoriesObj}
-        />
-      ),
-    },
-    3: {
-      currentRef: securityRef,
-      prevRef: microsoftRef,
-      text: (
-        <SecurityText
-          textClass={textClass}
-          scrollArea={scrollArea}
-          categoriesObj={categoriesObj}
-        />
-      ),
-    },
-    4: {
-      currentRef: aiRef,
-      prevRef: securityRef,
-      text: (
-        <AiText
-          textClass={textClass}
-          scrollArea={scrollArea}
-          categoriesObj={categoriesObj}
-        />
-      ),
-    },
-    5: {
-      currentRef: militaryRef,
-      prevRef: aiRef,
-      text: (
-        <MilitaryText
-          textClass={textClass}
-          scrollArea={scrollArea}
-          categoriesObj={categoriesObj}
-        />
-      ),
-    },
-    6: {
-      currentRef: customizeRef,
-      prevRef: militaryRef,
-      text: (
-        <CustomizationText
-          textClass={textClass}
-          scrollArea={scrollArea}
-          categoriesObj={categoriesObj}
-        />
-      ),
-    },
-    7: {
-      currentRef: astroRef,
-      prevRef: customizeRef,
-      text: (
-        <ContactUsText
-          textClass={textClass}
-          scrollArea={scrollArea}
-          categoriesObj={categoriesObj}
-        />
-      ),
-    },
+    0: createTextComponent(taasiaRef, astroRef, IndustryText),
+    1: createTextComponent(medicineRef, taasiaRef, MedicineText),
+    2: createTextComponent(microsoftRef, medicineRef, MicrosoftText),
+    3: createTextComponent(securityRef, microsoftRef, SecurityText),
+    4: createTextComponent(aiRef, securityRef, AiText),
+    5: createTextComponent(militaryRef, aiRef, MilitaryText),
+    6: createTextComponent(customizeRef, militaryRef, CustomizationText),
+    7: createTextComponent(astroRef, customizeRef, ContactUsText),
   };
 
   useEffect(() => {
@@ -230,6 +162,16 @@ export function Scene({
     }
   }, [visibleText]);
 
+  const allModelPositions = [
+    taasiaRef,
+    medicineRef,
+    microsoftRef,
+    securityRef,
+    aiRef,
+    militaryRef,
+    customizeRef,
+  ];
+
   const models = Model_Data.map((model, idx) => {
     const { currentRef, prevRef } = refsObj[idx] || refsObj[0];
 
@@ -239,6 +181,7 @@ export function Scene({
 
     return (
       <MappedModels
+        allModelPositions={allModelPositions}
         key={`heyo${idx}`}
         idx={idx}
         prevRef={prevRef}
@@ -314,3 +257,94 @@ export function Scene({
     </div>
   );
 }
+
+// const refsObj = {
+//   0: {
+//     currentRef: taasiaRef,
+//     prevRef: astroRef,
+//     text: (
+//       <IndustryText
+//         textClass={textClass}
+//         scrollArea={scrollArea}
+//         categoriesObj={categoriesObj}
+//       />
+//     ),
+//   },
+//   1: {
+//     currentRef: medicineRef,
+//     prevRef: taasiaRef,
+//     text: (
+//       <MedicineText
+//         textClass={textClass}
+//         scrollArea={scrollArea}
+//         categoriesObj={categoriesObj}
+//       />
+//     ),
+//   },
+//   2: {
+//     currentRef: microsoftRef,
+//     prevRef: medicineRef,
+//     text: (
+//       <MicrosoftText
+//         textClass={textClass}
+//         scrollArea={scrollArea}
+//         categoriesObj={categoriesObj}
+//       />
+//     ),
+//   },
+//   3: {
+//     currentRef: securityRef,
+//     prevRef: microsoftRef,
+//     text: (
+//       <SecurityText
+//         textClass={textClass}
+//         scrollArea={scrollArea}
+//         categoriesObj={categoriesObj}
+//       />
+//     ),
+//   },
+//   4: {
+//     currentRef: aiRef,
+//     prevRef: securityRef,
+//     text: (
+//       <AiText
+//         textClass={textClass}
+//         scrollArea={scrollArea}
+//         categoriesObj={categoriesObj}
+//       />
+//     ),
+//   },
+//   5: {
+//     currentRef: militaryRef,
+//     prevRef: aiRef,
+//     text: (
+//       <MilitaryText
+//         textClass={textClass}
+//         scrollArea={scrollArea}
+//         categoriesObj={categoriesObj}
+//       />
+//     ),
+//   },
+//   6: {
+//     currentRef: customizeRef,
+//     prevRef: militaryRef,
+//     text: (
+//       <CustomizationText
+//         textClass={textClass}
+//         scrollArea={scrollArea}
+//         categoriesObj={categoriesObj}
+//       />
+//     ),
+//   },
+//   7: {
+//     currentRef: astroRef,
+//     prevRef: customizeRef,
+//     text: (
+//       <ContactUsText
+//         textClass={textClass}
+//         scrollArea={scrollArea}
+//         categoriesObj={categoriesObj}
+//       />
+//     ),
+//   },
+// };

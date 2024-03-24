@@ -277,16 +277,42 @@ export const CustomizationText = ({ textClass, scrollArea, categoriesObj }) => (
 );
 
 export const ContactUsText = () => (
-  <h1
-    style={{
-      color: "white",
-      fontSize: "6em",
-      position: "absolute",
-      fontFamily: "gotham",
-      top: "2em",
-      left: "1em",
-    }}
-  >
-    Contact us
-  </h1>
+  <div className="contact-us-wrapper">
+    <span
+      style={{
+        color: "white",
+        fontSize: "6em",
+      }}
+    >
+      Contact us
+    </span>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        fontSize: "1.5em",
+        color: "rgb(255,255,255,0.9)",
+        marginTop: "4em",
+      }}
+    >
+      <span>Feel free to contact us via:</span>
+      <span style={{ marginTop: "0.5em" }}>
+        <span style={{ fontWeight: "bold" }}>Phone:</span>
+        <span>+972-54-218-5021 or +1(302)-219-4023</span>
+      </span>
+
+      <span>
+        <span style={{ fontWeight: "bold" }}>Email: </span>sales@in3d-tech.com
+      </span>
+      <span style={{ marginTop: "1em" }}>
+        We also invite you to meet us at 1 Shefa Tal street, Tel Aviv.
+      </span>
+      <span>
+        Or you can message us
+        <span style={{ fontSize: "1.2em", textDecoration: "underline" }}>
+          Here
+        </span>
+      </span>
+    </div>
+  </div>
 );

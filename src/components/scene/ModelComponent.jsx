@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { gsap } from "gsap";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
+import { checkModelPosition } from "../common/checkModelPositions";
 
 export function AstroModel({
   url,
@@ -27,7 +28,6 @@ export function AstroModel({
   // gsap.set(".scene", { scale: 0.7 });
 
   useEffect(() => {
-    console.log("ASTRO REEFFFFF");
     let timeline = gsap.timeline({
       defaults: { ease: "power1.out" },
       scrollTrigger: {
@@ -40,7 +40,7 @@ export function AstroModel({
         fastScrollEnd: true, // 2250,
         // markers: true,
         onEnter: () => {
-          if (!visibleModels) setVisibleModels(true);
+          // if (!visibleModels.length) setVisibleModels(true);
           const areaObj = { ...scrollArea };
           areaObj.currentSection = 1;
           areaObj.prevSection = 0;
@@ -73,6 +73,7 @@ export function AstroModel({
         once: true,
         onEnter: () => {
           setTextAnimation("category-title");
+          setVisibleModels([0]);
         },
       },
     });
@@ -93,8 +94,7 @@ export function AstroModel({
             areaObj.prevSection = 8;
             setScrollArea(areaObj);
           },
-          onLeave: () => {
-            // setVisibleModels([1]);
+          onLeaveBack: () => {
             const areaObj = { ...scrollArea };
             areaObj.currentSection = 8;
             areaObj.prevSection = 9;
@@ -106,19 +106,31 @@ export function AstroModel({
       contactUsTimeline
         .to(
           astroRef.current.position,
-          { x: 6, y: -13, z: -22 },
+          { x: -10, y: -20.2, z: -6 },
           "simultaneously"
         )
-        .to(astroRef.current.rotation, { x: 0.5, y: 0, z: 0 }, "simultaneously")
+        .to(
+          astroRef.current.rotation,
+          { x: 0.4, y: Math.PI + 0.3, z: -0 },
+          "simultaneously"
+        )
         .to(
           customizeRef.current.position,
           { x: 12, y: -2, z: 0 },
           "simultaneously"
         )
         .to(customizeRef.current.rotation, { y: -2.9 }, "simultaneously");
+      // .to(astroRef.current.rotation, { y: Math.PI }, ">");
       // .to(astroRef.current.rotation, { y: -Math.PI / 2 + 0.5 }, ">");
     }
   }, [astroRef, isInstantScroll]);
+
+  const isVisibile =
+    scrollArea.currentSection == 0 ||
+    scrollArea.currentSection == 1 ||
+    scrollArea.currentSection == 6 ||
+    scrollArea.currentSection == 8 ||
+    scrollArea.currentSection == 9;
 
   return (
     <group>
@@ -129,7 +141,7 @@ export function AstroModel({
         scale={[3, 3, 3]}
         position={[-9, -18.2, -7]}
         rotation={[0.05, Math.PI / 2 + 0.5, 0]}
-        // visible={visibleModels.includes(1) ? true : false}
+        visible={isVisibile}
       />
     </group>
   );
@@ -147,6 +159,7 @@ export function MappedModels({
   setVisibleModels,
   model,
   isInstantScroll,
+  allModelPositions,
 }) {
   if (idx == 7) return null;
   const { scene, animations } = useGLTF(model.url);
@@ -154,7 +167,6 @@ export function MappedModels({
   const mixer = useGLTFAnimations(scene, animations);
 
   useEffect(() => {
-    console.log("OTHJER MODELS REFFFFF");
     let timeline = gsap.timeline({
       defaults: { ease: "power1.out" },
 
@@ -166,14 +178,17 @@ export function MappedModels({
         scrub: 1,
         // markers: true,
         preventOverlaps: isInstantScroll ? true : false,
-        fastScrollEnd: true, //2500,
+        fastScrollEnd: true, // 2500 is default,
         onEnter: () => {
+          setVisibleModels([idx - 1, idx, idx + 1]);
           const areaObj = { ...scrollArea };
           areaObj.currentSection = model.onEnter.currentSection;
           areaObj.prevSection = model.onEnter.prevSection;
           setScrollArea(areaObj);
+          checkModelPosition({ modelByIdx: idx, refs: allModelPositions });
         },
         onLeaveBack: () => {
+          setVisibleModels([idx - 1, idx, idx + 1]);
           const areaObj = { ...scrollArea };
           areaObj.currentSection = model.onLeave.currentSection;
           areaObj.prevSection = model.onLeave.prevSection;
@@ -193,7 +208,7 @@ export function MappedModels({
         dispose={null}
         scale={model.scale}
         position={model.position}
-        visible={visibleModels ? true : false}
+        visible={visibleModels.includes(idx)}
         rotation={model.rotation}
       />
     </group>
