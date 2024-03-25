@@ -21,15 +21,15 @@ const categoriesObj = {
 export function SelectedCategoryPage({ selectedCategory }) {
   const [transitionToPage, setTransitionToPage] = useState(false);
 
-  useEffect(() => {
-    if (selectedCategory) {
-      setTransitionToPage(true);
-      document.body.style.overflow = "hidden";
-    } else {
-      setTransitionToPage(false);
-      document.body.style.overflow = "auto";
-    }
-  }, [selectedCategory]);
+  // useEffect(() => {
+  //   if (selectedCategory) {
+  //     setTransitionToPage(true);
+  //     document.body.style.overflow = "hidden";
+  //   } else {
+  //     setTransitionToPage(false);
+  //     document.body.style.overflow = "auto";
+  //   }
+  // }, [selectedCategory]);
 
   return (
     <div
@@ -59,10 +59,10 @@ function Content({ selectedCategory }) {
       >
         <h1>{categoriesObj[selectedCategory]}</h1>
       </div>
-      <div>
+      {/* <div>
         <div></div>
         <div></div>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -128,7 +128,7 @@ export function AstroModel({
   const isVisibile =
     scrollArea.currentSection == 0 ||
     scrollArea.currentSection == 1 ||
-    scrollArea.currentSection == 6 ||
+    scrollArea.currentSection == 2 ||
     scrollArea.currentSection == 8 ||
     scrollArea.currentSection == 9;
 

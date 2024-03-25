@@ -1,11 +1,17 @@
+import { useState, useEffect } from "react";
+import MagnifyingGlass from "./MagnifyingGlass";
+
 export const Header = ({
   menuOpened,
   setMenuOpened,
   setSelectedCategory,
   selectedCategory,
 }) => {
+  const [hovered, setIsHovered] = useState(false);
+
   const toggleNav = () => {
     setMenuOpened(!menuOpened);
+    setIsHovered(null);
 
     if (selectedCategory) {
       setTimeout(() => setSelectedCategory(null), 300);
@@ -16,14 +22,73 @@ export const Header = ({
     { key: 1, title: "Industry" },
     { key: 2, title: "Medicine" },
     { key: 3, title: "Microsoft" },
-    { key: 4, title: "Military" },
-    { key: 5, title: "Artifical Intelligence" },
-    { key: 6, title: "Security" },
+    { key: 4, title: "Security" },
     { key: 7, title: "Customization" },
+    { key: 6, title: "Military" },
+    { key: 8, title: "" },
+    { key: 5, title: "Artifical Intelligence" },
   ];
+
+  const getbgImage = () => {
+    if (!hovered)
+      return {
+        // background: "url(/assets/images/backgrounds/medicine/medicine_bg.jpg)",
+      }; //{ animation: "zoomInBack 0.6s ease-out forwards" };
+    const baseStyles = {
+      // animation: "zoomOut 0.6s ease-out forwards",
+      backgroundSize: "cover",
+      // backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+      transition: "background-image 0.8s ease",
+    };
+    let url;
+
+    switch (hovered) {
+      case "Customization":
+        url =
+          "/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png";
+        break;
+      case "Artifical Intelligence":
+        url = "/assets/images/backgrounds/ai/ai_bg.png";
+        break;
+      case "Microsoft":
+        url = "/assets/images/backgrounds/microsoft/microsoft_bg.jpg";
+        break;
+      case "Military":
+        url = "/assets/images/backgrounds/military/military_bg.jpg";
+        break;
+      case "Security":
+        url = "/assets/images/backgrounds/security/security.jpg";
+        break;
+      case "Industry":
+        url = "/assets/images/backgrounds/taasia/taasia_bg.jpg";
+        break;
+      case "Medicine":
+        url = "/assets/images/backgrounds/medicine/medicine_bg.jpg";
+        break;
+
+      default:
+        url = "";
+        break;
+    }
+
+    return {
+      ...baseStyles,
+      backgroundImage: `url(${url}`,
+    };
+  };
+
+  useEffect(() => {
+    if (menuOpened) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [menuOpened]);
 
   return (
     <header>
+      {/* <div style={hovered ? getbgImage() : null}> */}
       <div className="hamburger-icon" id="icon" onClick={toggleNav}>
         <div className={menuOpened ? "icon-1 a" : "icon-1"}></div>
         <div className={menuOpened ? "icon-2 c" : "icon-2"}></div>
@@ -31,30 +96,24 @@ export const Header = ({
         <div className="clear"></div>
       </div>
 
-      <nav id="nav" className={menuOpened ? "show" : ""}>
-        <ul>
+      <nav id="nav" className={menuOpened ? "show" : ""} style={getbgImage()}>
+        <div className="horizontal-nav-open-titles-container">
+          {/* <ul> */}
           {topics.map((topic, idx) => (
-            <li
-              onClick={() => {
-                setSelectedCategory(topic.key);
-                // toggleNav();
-                // setTimeout(() => toggleNav(), 800);
-              }}
-              key={topic.key}
-              className="nav-open-list-item"
-            >
-              {topic.title}
-            </li>
+            <MagnifyingGlass
+              title={topic.title}
+              key={`magnifying${idx}`}
+              setIsHovered={setIsHovered}
+              hovered={hovered}
+              // delay={idx == 0 ? 1.3 : idx * 0.5}
+            />
           ))}
-        </ul>
+          {/* </ul> */}
+        </div>
       </nav>
 
       <div className="dark-blue" id="blue"></div>
-
-      {/* <section className="content">
-          <h1>Hello We are animated!</h1>
-          <p className="small">Lorem ipsum dolor sit amet</p>
-        </section> */}
+      {/* </div> */}
     </header>
   );
 };

@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useRef, useState } from "react";
+import React, { Suspense, lazy, useEffect, useRef, useState } from "react";
 import "./App.css";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -9,6 +9,11 @@ import { Header } from "./components/navs/Menu";
 import { SelectedCategoryPage } from "./components/viewableContent/SelectedCategoryPage";
 import { LoadingScreen } from "./components/viewableContent/LoadingScreen";
 import { Scene } from "./components/scene/Scene";
+// import useCheckIsMobileScreen from "./components/common/useCheckIsMobile";
+
+const LazySelectedContent = lazy(() =>
+  import("./components/viewableContent/SelectedCategoryPage")
+);
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -111,7 +116,11 @@ function App() {
               setSelectedCategory={setSelectedCategory}
               selectedCategory={selectedCategory}
             />
-            <SelectedCategoryPage selectedCategory={selectedCategory} />
+            <Suspense fallback={null}>
+              {selectedCategory ? (
+                <LazySelectedContent selectedCategory={selectedCategory} />
+              ) : null}
+            </Suspense>
           </div>
           <ViewableContent bgImage={bgImage} />
           <Scene
