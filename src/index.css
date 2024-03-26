@@ -503,6 +503,23 @@ section {
 
 .flashing-div {
   background: url("/assets/images/backgrounds/medicine/medicine_bg.jpg");
+  position: absolute;
+  /* background: black; */
+  z-index: 4000000000000;
+  top: 0;
+  left: 0;
+  /* height: 100%; */
+  /* width: 100vw; */
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.flashing-fade-out {
+  animation: fadeOut 2s ease forwards;
 }
 
 .flashing-img {

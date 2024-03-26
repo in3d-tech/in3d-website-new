@@ -34,7 +34,8 @@ function App() {
   const [textAnimation, setTextAnimation] = useState(
     "category-title-no-opacity"
   );
-  const { setMenuOpened, selectedCategory, scrollArea } = useAppContext();
+  const { setMenuOpened, selectedCategory, scrollArea, isAstroModelDrawn } =
+    useAppContext();
 
   const textRef = useRef();
   const isMobileDimensions = useCheckIsMobileScreen();
@@ -84,41 +85,41 @@ function App() {
     <>
       {loadingScreen ? (
         <LoadingScreen setloadingScreen={setloadingScreen} />
-      ) : (
-        <>
-          <div
-            style={{
-              display: "flex",
-              position: "fixed",
-              width: "100%",
-              justifyContent: "center",
-              zIndex: 5,
-            }}
-          >
-            <Header />
+      ) : null}
+
+      <>
+        <div
+          style={{
+            display: "flex",
+            position: "fixed",
+            width: "100%",
+            justifyContent: "center",
+            zIndex: 5,
+          }}
+        >
+          <Header />
+          <Suspense fallback={null}>
+            {selectedCategory ? <LazySelectedContent /> : null}
+          </Suspense>
+        </div>
+        {isMobileDimensions ? (
+          <Suspense fallback={null}>
+            <LazyMobileView />
+          </Suspense>
+        ) : (
+          <>
+            <ViewableContent />
             <Suspense fallback={null}>
-              {selectedCategory ? <LazySelectedContent /> : null}
+              <LazyScene
+                textRef={textRef}
+                textAnimation={textAnimation}
+                setTextAnimation={setTextAnimation}
+                scrollToElementById={scrollToElementById}
+              />
             </Suspense>
-          </div>
-          {isMobileDimensions ? (
-            <Suspense fallback={null}>
-              <LazyMobileView />
-            </Suspense>
-          ) : (
-            <>
-              <ViewableContent />
-              <Suspense fallback={null}>
-                <LazyScene
-                  textRef={textRef}
-                  textAnimation={textAnimation}
-                  setTextAnimation={setTextAnimation}
-                  scrollToElementById={scrollToElementById}
-                />
-              </Suspense>
-            </>
-          )}
-        </>
-      )}
+          </>
+        )}
+      </>
     </>
   );
 }

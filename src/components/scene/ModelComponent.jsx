@@ -1,5 +1,5 @@
 import { useGLTF, useProgress } from "@react-three/drei";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
@@ -15,7 +15,13 @@ export function AstroModel({
   setTextAnimation,
   customizeRef,
 }) {
-  const { isInstantScroll, scrollArea, setScrollArea } = useAppContext();
+  const {
+    isInstantScroll,
+    scrollArea,
+    setScrollArea,
+    isAstroModelDrawn,
+    setIsAstroModelDrawn,
+  } = useAppContext();
 
   const { scene, animations } = useGLTF(url);
   const mixer = useGLTFAnimations(scene, animations);
@@ -26,6 +32,23 @@ export function AstroModel({
     console.log(progress);
   }, [progress]);
   // gsap.set(".scene", { scale: 0.7 });
+
+  const isFullyRenderedRef = useRef(false);
+
+  // Use useFrame to check if the object is fully rendered on every frame
+  useFrame(() => {
+    // Check if the object is visible in the scene and loaded
+    if (astroRef.current && scene && !isFullyRenderedRef.current) {
+      // Check if all objects in the scene have been rendered
+      const fullyRendered = scene.children.every((child) => child.visible);
+      if (fullyRendered && isAstroModelDrawn === false) {
+        // Object is fully rendered
+        isFullyRenderedRef.current = true;
+        setIsAstroModelDrawn(true);
+        console.log("Astro object is fully rendered!");
+      }
+    }
+  });
 
   useEffect(() => {
     let timeline = gsap.timeline({
