@@ -82,9 +82,7 @@ const MagnifyingGlass = (props) => {
           className={`magnifying-glass__text`}
           // style={{ animationDelay: `${props.delay}s` }}
           style={{
-            color: props.hovered
-              ? "rgba(255, 255, 255, 0.85)"
-              : "rgba(0, 0, 0, 0.85)",
+            color: "rgba(255, 255, 255, 0.85)",
             animation:
               props.hovered == props.title
                 ? "zoomOut 0.6s ease-out forwards"

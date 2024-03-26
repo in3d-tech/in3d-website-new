@@ -6,14 +6,18 @@ import { extend } from "@react-three/fiber";
 import { useGLTF, useProgress } from "@react-three/drei";
 import * as THREE from "three";
 import { Header } from "./components/navs/Menu";
-import { SelectedCategoryPage } from "./components/viewableContent/SelectedCategoryPage";
 import { LoadingScreen } from "./components/viewableContent/LoadingScreen";
-import { Scene } from "./components/scene/Scene";
-// import useCheckIsMobileScreen from "./components/common/useCheckIsMobile";
+// import { Scene } from "./components/scene/Scene";
+import { useAppContext } from "./context/appContext";
+import useCheckIsMobileScreen from "./components/common/useCheckIsMobile";
 
 const LazySelectedContent = lazy(() =>
   import("./components/viewableContent/SelectedCategoryPage")
 );
+const LazyMobileView = lazy(() =>
+  import("./components/viewableContent/mobile/HomeScreenMobile")
+);
+const LazyScene = lazy(() => import("./components/scene/Scene"));
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,33 +28,16 @@ ScrollTrigger.defaults({
 
 extend({ PerspectiveCamera: THREE.PerspectiveCamera });
 
-const backgrounds = {
-  1: 'url("/assets/images/backgrounds/Astro_1_Background.webp")',
-  MICROSOFT: 'url("/assets/images/backgrounds/microsoft.jpg")',
-  TAASIA: 'url("/assets/images/backgrounds/taasiya.jpg")',
-  MEDICINE: 'url("/assets/images/backgrounds/another-med.jpg")',
-  CUSTOMIZATION: "",
-  MILITARY: "",
-  "A.I.": "",
-};
-
 function App() {
-  const [scrollArea, setScrollArea] = useState({
-    currentSection: 1,
-    prevSection: 0,
-  });
+  const [isMobileViewOnly, setIsMobileViewOnly] = useState(null);
   const [loadingScreen, setloadingScreen] = useState(true);
-  const [bgImage, setbgImage] = useState(
-    'url("/assets/images/backgrounds/Astro_1_Background.webp")'
-  );
   const [textAnimation, setTextAnimation] = useState(
     "category-title-no-opacity"
   );
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [menuOpened, setMenuOpened] = useState(false);
-  const [isInstantScroll, setIsInstandScroll] = useState(false);
+  const { setMenuOpened, selectedCategory, scrollArea } = useAppContext();
 
   const textRef = useRef();
+  const isMobileDimensions = useCheckIsMobileScreen();
 
   useEffect(() => {
     setMenuOpened(false);
@@ -69,11 +56,9 @@ function App() {
 
     // setbgImage(backgrounds[scrollArea.currentSection] || backgrounds[1]);
 
-    // console.log(backgrounds[scrollArea.currentSection]);
-
     document.documentElement.style.setProperty(
       "--color",
-      backgrounds[scrollArea.currentSection] || backgrounds[1]
+      backgrounds[scrollArea.currentSection] || ""
     );
 
     return () => {
@@ -82,8 +67,8 @@ function App() {
     };
   }, [scrollArea]);
 
-  const scrollToElementById = (idx) => {
-    setIsInstandScroll(true);
+  const scrollToElementById = (idx, setIsInstantScroll) => {
+    setIsInstantScroll(true);
     const sections = ["Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
     const element = document.getElementById(`section${sections[idx]}`);
 
@@ -91,7 +76,7 @@ function App() {
       if (element) {
         element.scrollIntoView(); // { behavior: "smooth" }
       }
-      setIsInstandScroll(false);
+      setIsInstantScroll(false);
     }, 200);
   };
 
@@ -110,29 +95,28 @@ function App() {
               zIndex: 5,
             }}
           >
-            <Header
-              setMenuOpened={setMenuOpened}
-              menuOpened={menuOpened}
-              setSelectedCategory={setSelectedCategory}
-              selectedCategory={selectedCategory}
-            />
+            <Header />
             <Suspense fallback={null}>
-              {selectedCategory ? (
-                <LazySelectedContent selectedCategory={selectedCategory} />
-              ) : null}
+              {selectedCategory ? <LazySelectedContent /> : null}
             </Suspense>
           </div>
-          <ViewableContent bgImage={bgImage} />
-          <Scene
-            textRef={textRef}
-            scrollArea={scrollArea}
-            setScrollArea={setScrollArea}
-            textAnimation={textAnimation}
-            setTextAnimation={setTextAnimation}
-            scrollToElementById={scrollToElementById}
-            isInstantScroll={isInstantScroll}
-            setIsInstandScroll={setIsInstandScroll}
-          />
+          {isMobileDimensions ? (
+            <Suspense fallback={null}>
+              <LazyMobileView />
+            </Suspense>
+          ) : (
+            <>
+              <ViewableContent />
+              <Suspense fallback={null}>
+                <LazyScene
+                  textRef={textRef}
+                  textAnimation={textAnimation}
+                  setTextAnimation={setTextAnimation}
+                  scrollToElementById={scrollToElementById}
+                />
+              </Suspense>
+            </>
+          )}
         </>
       )}
     </>
@@ -142,7 +126,7 @@ function App() {
 export default App;
 
 useGLTF.preload("/assets/models/astronaut_new23.glb");
-useGLTF.preload("/assets/models/engenir_model_new.glb");
+// useGLTF.preload("/assets/models/engenir_model_new.glb");
 // useGLTF.preload("/assets/models/medical_model.glb");
 // useGLTF.preload("/assets/models/microsoft_model_new.glb");
 // useGLTF.preload("/assets/models/security.glb");
@@ -161,7 +145,7 @@ useGLTF.preload("/assets/models/engenir_model_new.glb");
 //     </Html>
 //   );
 // };
-function ViewableContent({ bgImage }) {
+function ViewableContent() {
   return (
     <div
       // style={{ background: bgImage }}

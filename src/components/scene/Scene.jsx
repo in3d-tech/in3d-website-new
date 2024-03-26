@@ -18,22 +18,21 @@ import {
 import { gsap } from "gsap";
 import { Camera } from "../../components/scene/Camera";
 import { BackgroundScroll } from "./BackgroundScroll";
+import { useAppContext } from "../../context/appContext";
 
-export function Scene({
+function Scene({
   textRef,
-  scrollArea,
-  setScrollArea,
   textAnimation,
   setTextAnimation,
   scrollToElementById,
-  isInstantScroll,
-  setIsInstandScroll,
 }) {
   const [visibleModels, setVisibleModels] = useState([]);
   const [visibleText, setVisibleText] = useState(false);
   const [shouldFadeIn, setShouldFadeIn] = useState(false);
   const [fixed, setFixed] = useState(false);
   const [hovered, setHovered] = useState("");
+
+  const { scrollArea, setScrollArea } = useAppContext();
 
   const simplyExpandedRef = useRef();
   const textContainerRef = useRef();
@@ -186,12 +185,9 @@ export function Scene({
         idx={idx}
         prevRef={prevRef}
         currentRef={currentRef}
-        scrollArea={scrollArea}
-        setScrollArea={setScrollArea}
         visibleModels={visibleModels}
         setVisibleModels={setVisibleModels}
         model={model}
-        isInstantScroll={isInstantScroll}
       />
     );
   });
@@ -230,14 +226,11 @@ export function Scene({
           <Suspense fallback={null}>
             <AstroModel
               url={"/assets/models/astronaut_new23.glb"}
-              scrollArea={scrollArea}
-              setScrollArea={setScrollArea}
               astroRef={astroRef}
               visibleModels={visibleModels}
               setVisibleModels={setVisibleModels}
               setTextAnimation={setTextAnimation}
               customizeRef={customizeRef}
-              isInstantScroll={isInstantScroll}
             />
             {models}
           </Suspense>
@@ -258,93 +251,4 @@ export function Scene({
   );
 }
 
-// const refsObj = {
-//   0: {
-//     currentRef: taasiaRef,
-//     prevRef: astroRef,
-//     text: (
-//       <IndustryText
-//         textClass={textClass}
-//         scrollArea={scrollArea}
-//         categoriesObj={categoriesObj}
-//       />
-//     ),
-//   },
-//   1: {
-//     currentRef: medicineRef,
-//     prevRef: taasiaRef,
-//     text: (
-//       <MedicineText
-//         textClass={textClass}
-//         scrollArea={scrollArea}
-//         categoriesObj={categoriesObj}
-//       />
-//     ),
-//   },
-//   2: {
-//     currentRef: microsoftRef,
-//     prevRef: medicineRef,
-//     text: (
-//       <MicrosoftText
-//         textClass={textClass}
-//         scrollArea={scrollArea}
-//         categoriesObj={categoriesObj}
-//       />
-//     ),
-//   },
-//   3: {
-//     currentRef: securityRef,
-//     prevRef: microsoftRef,
-//     text: (
-//       <SecurityText
-//         textClass={textClass}
-//         scrollArea={scrollArea}
-//         categoriesObj={categoriesObj}
-//       />
-//     ),
-//   },
-//   4: {
-//     currentRef: aiRef,
-//     prevRef: securityRef,
-//     text: (
-//       <AiText
-//         textClass={textClass}
-//         scrollArea={scrollArea}
-//         categoriesObj={categoriesObj}
-//       />
-//     ),
-//   },
-//   5: {
-//     currentRef: militaryRef,
-//     prevRef: aiRef,
-//     text: (
-//       <MilitaryText
-//         textClass={textClass}
-//         scrollArea={scrollArea}
-//         categoriesObj={categoriesObj}
-//       />
-//     ),
-//   },
-//   6: {
-//     currentRef: customizeRef,
-//     prevRef: militaryRef,
-//     text: (
-//       <CustomizationText
-//         textClass={textClass}
-//         scrollArea={scrollArea}
-//         categoriesObj={categoriesObj}
-//       />
-//     ),
-//   },
-//   7: {
-//     currentRef: astroRef,
-//     prevRef: customizeRef,
-//     text: (
-//       <ContactUsText
-//         textClass={textClass}
-//         scrollArea={scrollArea}
-//         categoriesObj={categoriesObj}
-//       />
-//     ),
-//   },
-// };
+export default Scene;

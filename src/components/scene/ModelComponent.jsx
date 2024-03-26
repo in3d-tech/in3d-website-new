@@ -4,19 +4,19 @@ import { gsap } from "gsap";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { checkModelPosition } from "../common/checkModelPositions";
+import { useAppContext } from "../../context/appContext";
 
 export function AstroModel({
   url,
-  setScrollArea,
-  scrollArea,
   astroRef,
   visibleModels,
   setVisibleModels,
   textRef,
   setTextAnimation,
   customizeRef,
-  isInstantScroll,
 }) {
+  const { isInstantScroll, scrollArea, setScrollArea } = useAppContext();
+
   const { scene, animations } = useGLTF(url);
   const mixer = useGLTFAnimations(scene, animations);
 
@@ -151,17 +151,19 @@ export function AstroModel({
 
 export function MappedModels({
   idx,
-  scrollArea,
-  setScrollArea,
+  // scrollArea,
+  // setScrollArea,
   currentRef,
   prevRef,
   visibleModels,
   setVisibleModels,
   model,
-  isInstantScroll,
   allModelPositions,
 }) {
   if (idx == 7) return null;
+
+  const { isInstantScroll, scrollArea, setScrollArea } = useAppContext();
+
   const { scene, animations } = useGLTF(model.url);
   const [isVisible, setIsVisible] = useState(false);
   const mixer = useGLTFAnimations(scene, animations);

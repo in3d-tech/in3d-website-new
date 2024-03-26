@@ -1,3 +1,5 @@
+import { useAppContext } from "../../context/appContext";
+
 export function BackgroundScroll({
   scrollToElementById,
   simplyExpandedRef,
@@ -7,6 +9,8 @@ export function BackgroundScroll({
   textAnimation,
   fixed,
 }) {
+  const { setIsInstantScroll } = useAppContext();
+
   return (
     <>
       <section className="section section-one">
@@ -85,7 +89,7 @@ export function BackgroundScroll({
                     // );
                     // setHovered("");
                   }}
-                  onClick={() => scrollToElementById(idx)}
+                  onClick={() => scrollToElementById(idx, setIsInstantScroll)}
                   key={idx}
                   className={textAnimation}
                   style={{ height: "0px" }}

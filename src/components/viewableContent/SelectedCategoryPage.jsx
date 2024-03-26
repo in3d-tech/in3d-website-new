@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useAppContext } from "../../context/appContext";
 
 const backgrounds = {
   1: 'url("/assets/images/backgrounds/taasiya.jpg")',
@@ -18,9 +19,9 @@ const categoriesObj = {
   5: "CUSTOMIZATION",
 };
 
-export function SelectedCategoryPage({ selectedCategory }) {
+function SelectedCategoryPage() {
   const [transitionToPage, setTransitionToPage] = useState(false);
-
+  const { selectedCategory } = useAppContext();
   // useEffect(() => {
   //   if (selectedCategory) {
   //     setTransitionToPage(true);
@@ -66,3 +67,5 @@ function Content({ selectedCategory }) {
     </div>
   );
 }
+
+export default SelectedCategoryPage;

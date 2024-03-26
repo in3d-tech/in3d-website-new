@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 import MagnifyingGlass from "./MagnifyingGlass";
+import { useAppContext } from "../../context/appContext";
 
-export const Header = ({
-  menuOpened,
-  setMenuOpened,
-  setSelectedCategory,
-  selectedCategory,
-}) => {
+export const Header = () => {
   const [hovered, setIsHovered] = useState(false);
+
+  const { menuOpened, setMenuOpened, setSelectedCategory, selectedCategory } =
+    useAppContext();
 
   const toggleNav = () => {
     setMenuOpened(!menuOpened);
@@ -32,14 +31,15 @@ export const Header = ({
   const getbgImage = () => {
     if (!hovered)
       return {
-        // background: "url(/assets/images/backgrounds/medicine/medicine_bg.jpg)",
+        background: "url(/assets/images/backgrounds/medicine/medicine_bg.jpg)",
       }; //{ animation: "zoomInBack 0.6s ease-out forwards" };
     const baseStyles = {
       // animation: "zoomOut 0.6s ease-out forwards",
       backgroundSize: "cover",
-      // backgroundPosition: "center",
+      backgroundPosition: "center",
       backgroundRepeat: "no-repeat",
       transition: "background-image 0.8s ease",
+      background: "black",
     };
     let url;
 
@@ -68,7 +68,7 @@ export const Header = ({
         break;
 
       default:
-        url = "";
+        url = "/assets/images/backgrounds/medicine/medicine_bg.jpg";
         break;
     }
 
