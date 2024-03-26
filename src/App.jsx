@@ -84,19 +84,14 @@ function App() {
   return (
     <>
       {loadingScreen ? (
-        <LoadingScreen setloadingScreen={setloadingScreen} />
+        <LoadingScreen
+          setloadingScreen={setloadingScreen}
+          isMobileDimensions={isMobileDimensions}
+        />
       ) : null}
 
       <>
-        <div
-          style={{
-            display: "flex",
-            position: "fixed",
-            width: "100%",
-            justifyContent: "center",
-            zIndex: 5,
-          }}
-        >
+        <div className="app-bg">
           <Header />
           <Suspense fallback={null}>
             {selectedCategory ? <LazySelectedContent /> : null}

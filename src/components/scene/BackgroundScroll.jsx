@@ -33,7 +33,7 @@ export function BackgroundScroll({
                 fontSize: "2em",
               }}
             >
-              in3D-Tech
+              {/* in3D-Tech */}
             </h1>
             <div ref={simplyExpandedRef}>
               <span className="section-one-first-title">Simply</span>

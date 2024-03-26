@@ -2,7 +2,7 @@ import { useProgress } from "@react-three/drei";
 import { useEffect, useState } from "react";
 import { useAppContext } from "../../context/appContext";
 
-export function LoadingScreen({ setloadingScreen }) {
+export function LoadingScreen({ setloadingScreen, isMobileDimensions }) {
   const [fadeOut, setFadeOut] = useState("");
   const { active, progress, errors, total } = useProgress();
   const { isAstroModelDrawn } = useAppContext();
@@ -17,9 +17,9 @@ export function LoadingScreen({ setloadingScreen }) {
   }, [progress]);
 
   useEffect(() => {
-    if (isAstroModelDrawn) {
-      setFadeOut("flashing-fade-out");
-      setTimeout(() => setloadingScreen(false), 3000);
+    if (isAstroModelDrawn || isMobileDimensions) {
+      setTimeout(() => setFadeOut("flashing-fade-out"), 1100);
+      setTimeout(() => setloadingScreen(false), 3200);
     }
   }, [isAstroModelDrawn]);
 

@@ -720,6 +720,21 @@ section {
   grid-area: title6;
 }
 
+.mobile-category-wrapper {
+  color: white;
+  border: 1px solid red;
+  background: rgb(207, 210, 164, 0.5);
+  padding: 3px;
+  margin-top: 1em;
+  /* width: 50%; */
+}
+
+.mobile-categories-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two categories per column */
+  gap: 10px; /* Adjust gap between categories */
+}
+
 /* med displays:  */
 @media screen and (max-width: 768px) {
 }
