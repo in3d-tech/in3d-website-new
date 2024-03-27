@@ -11,6 +11,7 @@ export default function AppContextProvider({ children }) {
   const [menuOpened, setMenuOpened] = useState(false);
   const [isInstantScroll, setIsInstantScroll] = useState(false);
   const [isAstroModelDrawn, setIsAstroModelDrawn] = useState(false);
+  const [renderModels, setRenderModels] = useState(false);
 
   return (
     <AppContext.Provider
@@ -25,6 +26,8 @@ export default function AppContextProvider({ children }) {
         setIsInstantScroll,
         isAstroModelDrawn,
         setIsAstroModelDrawn,
+        renderModels,
+        setRenderModels,
       }}
     >
       {children}
@@ -49,6 +52,8 @@ export function useAppContext() {
       setIsInstantScroll: () => {},
       isAstroModelDrawn: false,
       setIsAstroModelDrawn: () => {},
+      renderModels: false,
+      setRenderModels: () => {},
     };
   }
 

@@ -1,15 +1,35 @@
+import { useEffect } from "react";
 import { useAppContext } from "../../context/appContext";
+import gsap from "gsap";
 
 export function BackgroundScroll({
   scrollToElementById,
-  simplyExpandedRef,
   textRef,
   titlesContainerRef,
   hovered,
   textAnimation,
   fixed,
 }) {
-  const { setIsInstantScroll } = useAppContext();
+  const { setIsInstantScroll, renderModels } = useAppContext();
+
+  useEffect(() => {
+    if (!renderModels) return;
+    gsap.to(".section-one-first-title", {
+      x: 0,
+      duration: 6,
+      stagger: 0.2,
+      ease: "back",
+      // opacity: 0.2,
+    });
+    gsap.to(".section-one-second-title", {
+      x: 150,
+      y: 20,
+      duration: 6,
+      stagger: 0.2,
+      ease: "back",
+      // opacity: 0.2,
+    });
+  }, [renderModels]);
 
   return (
     <>
@@ -17,7 +37,7 @@ export function BackgroundScroll({
         <div
           style={{
             position: "absolute",
-            top: "12em",
+            top: "2em",
             left: "3%",
             display: "flex",
             flexDirection: "column",
@@ -26,28 +46,32 @@ export function BackgroundScroll({
             // border: "1px solid orange",
           }}
         >
-          <div style={{ lineHeight: "15vh" }}>
-            <h1
-              className="section-one-first-title"
-              style={{
-                fontSize: "2em",
-              }}
-            >
-              {/* in3D-Tech */}
-            </h1>
-            <div ref={simplyExpandedRef}>
-              <span className="section-one-first-title">Simply</span>
-              <span
-                className="section-one-first-title"
-                style={{
-                  position: "relative",
-                  top: "1em",
-                }}
-              >
-                Expand
-              </span>
-            </div>
-          </div>
+          {/* <div style={{ lineHeight: "15vh" }}>
+            <div> */}
+          <span
+            // ref={simplyRef}
+            className="section-one-first-title"
+            style={{
+              position: "absolute",
+              transform: "translateX(200px)",
+              // marginTop: "5em",
+            }}
+          >
+            Simply
+          </span>
+          <span
+            // ref={expandedRef}
+            className="section-one-second-title"
+            style={{
+              position: "relative",
+              top: "1em",
+              transform: "translateX(-200px)",
+            }}
+          >
+            Expand
+          </span>
+          {/* </div>
+          </div> */}
 
           {/* <img style={{ width: "10em" }} src="/assets/images/in3dlogo.png" /> */}
         </div>

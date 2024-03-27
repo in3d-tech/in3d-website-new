@@ -12,6 +12,14 @@ function HomeScreenMobile() {
   const textContainerRef = useRef();
   const [isShouldShowCategoryInformation, setIsShouldShowCategoryInformation] =
     useState(false);
+  const { selectedCategory } = useAppContext();
+
+  useEffect(() => {
+    console.log({ selectedCategory });
+    if (selectedCategory) {
+      scrollToElementById();
+    }
+  }, [selectedCategory]);
 
   useEffect(() => {
     // Animation using GSAPz
@@ -109,7 +117,11 @@ function HomeScreenMobile() {
             Expand
           </div>
         </div>
-        {isShouldShowCategoryInformation ? (
+        {selectedCategory ? (
+          <SelectedCategoryMobile titleKey={isShouldShowCategoryInformation} />
+        ) : null}
+
+        {/* {isShouldShowCategoryInformation ? (
           <SelectedCategoryMobile titleKey={isShouldShowCategoryInformation} />
         ) : (
           <div className="mobile-categories-wrapper">
@@ -125,7 +137,7 @@ function HomeScreenMobile() {
               />
             ))}
           </div>
-        )}
+        )} */}
         <div className="canvas-container-mobile">
           <Canvas>
             {/* <LoaderComponent /> */}

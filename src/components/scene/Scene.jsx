@@ -32,9 +32,10 @@ function Scene({
   const [fixed, setFixed] = useState(false);
   const [hovered, setHovered] = useState("");
 
-  const { scrollArea, setScrollArea, isAstroModelDrawn } = useAppContext();
+  const { scrollArea, renderModels } = useAppContext();
 
-  const simplyExpandedRef = useRef();
+  const simplyRef = useRef();
+  const expandedRef = useRef();
   const textContainerRef = useRef();
   const titlesContainerRef = useRef();
   const astroRef = useRef();
@@ -81,19 +82,15 @@ function Scene({
     7: createTextComponent(astroRef, customizeRef, ContactUsText),
   };
 
-  useEffect(() => {
-    let simplyExpandedTimeline = gsap.timeline({
-      defaults: { ease: "power1.out" },
-      scrollTrigger: {
-        trigger: ".section-one",
-        start: "top top",
-        endTrigger: ".section-one",
-        end: "top center",
-        scrub: 1,
-        // markers: true,
-      },
-    });
-  }, [simplyExpandedRef]);
+  // useEffect(() => {
+  //   gsap.to(".section-one-first-title", {
+  //     x: -300,
+  //     duration: 8,
+  //     stagger: 0.2,
+  //     ease: "back",
+  //     opacity: 0.2,
+  //   });
+  // }, []);
 
   // -----
   // ----
@@ -171,26 +168,26 @@ function Scene({
     customizeRef,
   ];
 
-  // const models = Model_Data.map((model, idx) => {
-  //   const { currentRef, prevRef } = refsObj[idx] || refsObj[0];
+  const models = Model_Data.map((model, idx) => {
+    const { currentRef, prevRef } = refsObj[idx] || refsObj[0];
 
-  //   // if (idx == 4) {
-  //   //   console.log(model.url);
-  //   // }
+    // if (idx == 4) {
+    //   console.log(model.url);
+    // }
 
-  //   return (
-  //     <MappedModels
-  //       allModelPositions={allModelPositions}
-  //       key={`heyo${idx}`}
-  //       idx={idx}
-  //       prevRef={prevRef}
-  //       currentRef={currentRef}
-  //       visibleModels={visibleModels}
-  //       setVisibleModels={setVisibleModels}
-  //       model={model}
-  //     />
-  //   );
-  // });
+    return (
+      <MappedModels
+        allModelPositions={allModelPositions}
+        key={`heyo${idx}`}
+        idx={idx}
+        prevRef={prevRef}
+        currentRef={currentRef}
+        visibleModels={visibleModels}
+        setVisibleModels={setVisibleModels}
+        model={model}
+      />
+    );
+  });
 
   return (
     <div className="scene one">
@@ -232,7 +229,7 @@ function Scene({
               setTextAnimation={setTextAnimation}
               customizeRef={customizeRef}
             />
-            {/* {isAstroModelDrawn ? models : null} */}
+            {renderModels ? models : null}
           </Suspense>
         </Canvas>
       </div>
@@ -240,7 +237,8 @@ function Scene({
       {/* <section className="section section-one"></section> */}
       <BackgroundScroll
         scrollToElementById={scrollToElementById}
-        simplyExpandedRef={simplyExpandedRef}
+        simplyRef={simplyRef}
+        expandedRef={expandedRef}
         textRef={textRef}
         titlesContainerRef={titlesContainerRef}
         hovered={hovered}

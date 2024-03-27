@@ -104,7 +104,9 @@ export const Header = () => {
               title={topic.title}
               key={`magnifying${idx}`}
               setIsHovered={setIsHovered}
+              toggleNav={toggleNav}
               hovered={hovered}
+              setSelectedCategory={setSelectedCategory}
               // delay={idx == 0 ? 1.3 : idx * 0.5}
             />
           ))}

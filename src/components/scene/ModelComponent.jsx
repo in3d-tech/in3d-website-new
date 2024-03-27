@@ -28,9 +28,6 @@ export function AstroModel({
 
   const { active, progress, errors, total } = useProgress();
 
-  useEffect(() => {
-    console.log(progress);
-  }, [progress]);
   // gsap.set(".scene", { scale: 0.7 });
 
   const isFullyRenderedRef = useRef(false);
@@ -164,7 +161,7 @@ export function AstroModel({
         scale={[3, 3, 3]}
         position={[-9, -18.2, -7]}
         rotation={[0.05, Math.PI / 2 + 0.5, 0]}
-        visible={isVisibile}
+        // visible={isVisibile}
       />
     </group>
   );

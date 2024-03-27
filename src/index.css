@@ -28,7 +28,14 @@ body {
 .section-one-first-title {
   color: white;
   font-family: gotham;
-  font-size: 1.5em;
+  font-size: 1.75em;
+  opacity: 0.85;
+}
+
+.section-one-second-title {
+  color: white;
+  font-family: gotham;
+  font-size: 1.75em;
   opacity: 0.85;
 }
 
@@ -206,7 +213,7 @@ body {
 }
 
 .fader {
-  animation: fadeIn 3s ease forwards;
+  animation: fadeIn 8s ease forwards;
 }
 
 .icon-1,
@@ -803,6 +810,19 @@ section {
 
   .contact-details-wrapper {
     font-size: 1.3em;
+  }
+
+  .horizontal-nav-open-titles-container {
+    width: 80%;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-items: center; /* Center the titles horizontally */
+    align-items: center; /* Center the titles vertically */
+    border-radius: 5px;
+    /* box-shadow: 1px -1px 26px 7px rgba(130, 49, 49, 0.75);
+    -webkit-box-shadow: 1px -1px 26px 7px rgba(130, 49, 49, 0.75);
+    -moz-box-shadow: 1px -1px 26px 7px rgba(130, 49, 49, 0.75); */
   }
 }
 /* small displays */

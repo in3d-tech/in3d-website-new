@@ -91,6 +91,8 @@ const MagnifyingGlass = (props) => {
           onClick={() => {
             // return;
             if (props.allowClick) props.setSelectedContent(props.title);
+            props.toggleNav();
+            props.setSelectedCategory(props.title);
           }}
         >
           {props.title}

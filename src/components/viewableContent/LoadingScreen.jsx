@@ -5,26 +5,20 @@ import { useAppContext } from "../../context/appContext";
 export function LoadingScreen({ setloadingScreen, isMobileDimensions }) {
   const [fadeOut, setFadeOut] = useState("");
   const { active, progress, errors, total } = useProgress();
-  const { isAstroModelDrawn } = useAppContext();
+  const { isAstroModelDrawn, setRenderModels } = useAppContext();
+
   const height = window.innerHeight * 0.3;
-  useEffect(() => {
-    if (progress < 100) {
-      return;
-    }
-    if (progress >= 100) {
-      // setTimeout(() => setloadingScreen(false), 3000);
-    }
-  }, [progress]);
 
   useEffect(() => {
-    if (isAstroModelDrawn || isMobileDimensions) {
+    if (isAstroModelDrawn) {
       setTimeout(() => setFadeOut("flashing-fade-out"), 1100);
       setTimeout(() => setloadingScreen(false), 3200);
+      setTimeout(() => setRenderModels(true), 800);
     }
   }, [isAstroModelDrawn]);
 
   return (
-    <div className={`flashing-div ${fadeOut}`} style={{}}>
+    <div className={`flashing-div ${fadeOut}`}>
       <img
         className="flashing-img"
         style={{
@@ -36,7 +30,9 @@ export function LoadingScreen({ setloadingScreen, isMobileDimensions }) {
         src="/assets/images/in3dlogo.png"
       />
       <span style={{ color: "black", fontSize: "3em" }}>
-        {progress < 100 ? `${Math.trunc(progress)} % loaded` : null}
+        {progress < 100 && !isAstroModelDrawn
+          ? `${Math.trunc(progress)} % loaded`
+          : null}
       </span>
     </div>
   );
@@ -45,7 +41,9 @@ export function LoadingScreen({ setloadingScreen, isMobileDimensions }) {
 export const LoaderComponent = () => {
   return (
     <span style={{ color: "black", fontSize: "1.5em", fontFamily: "gotham" }}>
-      {progress < 100 ? `${Math.trunc(progress)} % loaded` : null}
+      {progress < 100 && !isAstroModelDrawn
+        ? `${Math.trunc(progress)} % loaded`
+        : null}
     </span>
   );
 };
