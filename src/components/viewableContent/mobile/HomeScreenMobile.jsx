@@ -9,7 +9,15 @@ function HomeScreenMobile() {
   return (
     <>
       <div
-        style={{ background: backgrounds[1], height: "100vh", width: "100vw" }}
+        style={{
+          background: backgrounds[1],
+          height: "100vh",
+          width: "100vw",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-end",
+          alignItems: "center",
+        }}
       >
         {/* <h1 style={{ color: "green", fontFamily: "gotham" }}>
           Hello Wisoncsin!
@@ -22,18 +30,20 @@ function HomeScreenMobile() {
             <Category category={category} />
           ))}
         </div>
-        <Canvas className={`canvas-container`}>
-          {/* <LoaderComponent /> */}
-          <ambientLight intensity={0.8} />
-          <directionalLight intensity={3} />
-          <Camera />
-          <Suspense fallback={null}>
-            <AstroModel
-              url={"/assets/models/astronaut_new23.glb"}
-              astroRef={astroRef}
-            />
-          </Suspense>
-        </Canvas>
+        <div className="canvas-container-mobile">
+          <Canvas>
+            {/* <LoaderComponent /> */}
+            <ambientLight intensity={0.8} />
+            <directionalLight intensity={3} />
+            <Camera />
+            <Suspense fallback={null}>
+              <AstroModel
+                url={"/assets/models/astronaut_new23.glb"}
+                astroRef={astroRef}
+              />
+            </Suspense>
+          </Canvas>
+        </div>
       </div>
     </>
   );

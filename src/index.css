@@ -733,6 +733,8 @@ section {
   color: white;
   border: 1px solid rgb(255, 255, 255);
   background: rgba(57, 96, 141, 0.5);
+  border-radius: 20px;
+  width: 98%;
   padding: 3px;
   margin-top: 1em;
   height: 2em;
@@ -740,12 +742,23 @@ section {
   align-items: center;
   justify-content: center;
   /* width: 50%; */
+  z-index: 209090909;
 }
 
 .mobile-categories-wrapper {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Two categories per column */
   gap: 10px; /* Adjust gap between categories */
+  margin-bottom: 20%;
+}
+
+.canvas-container-mobile {
+  /* border: 20px solid pink; */
+  position: absolute;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 0;
 }
 
 /* med displays:  */
