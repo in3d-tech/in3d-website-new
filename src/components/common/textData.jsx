@@ -278,25 +278,10 @@ export const CustomizationText = ({ textClass, scrollArea, categoriesObj }) => (
 
 export const ContactUsText = () => (
   <div className="contact-us-wrapper">
-    <span
-      style={{
-        color: "white",
-        fontSize: "6em",
-      }}
-    >
-      Contact us
-    </span>
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        fontSize: "1.5em",
-        color: "rgb(255,255,255,0.9)",
-        marginTop: "4em",
-      }}
-    >
+    <span className="contact-title">Contact us</span>
+    <div className="contact-details-wrapper">
       <span>Feel free to contact us via:</span>
-      <span style={{ marginTop: "0.5em" }}>
+      <span style={{ marginTop: "0.5em", fontSize: "1em" }}>
         <span style={{ fontWeight: "bold" }}>Phone:</span>
         <span>+972-54-218-5021 or +1(302)-219-4023</span>
       </span>

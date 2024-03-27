@@ -9,6 +9,7 @@ import SelectedCategoryMobile from "./SelectedCategoryMobile";
 
 function HomeScreenMobile() {
   const astroRef = useRef();
+  const textContainerRef = useRef();
   const [isShouldShowCategoryInformation, setIsShouldShowCategoryInformation] =
     useState(false);
 
@@ -31,6 +32,16 @@ function HomeScreenMobile() {
       ease: "back", // Easing function
     });
   }, []); // Run once when component mounts
+
+  const scrollToElementById = () => {
+    const element = document.getElementById("testId");
+
+    setTimeout(() => {
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" }); // { behavior: "smooth" }
+      }
+    }, 200);
+  };
 
   return (
     <>
@@ -99,7 +110,7 @@ function HomeScreenMobile() {
           </div>
         </div>
         {isShouldShowCategoryInformation ? (
-          <SelectedCategoryMobile />
+          <SelectedCategoryMobile titleKey={isShouldShowCategoryInformation} />
         ) : (
           <div className="mobile-categories-wrapper">
             {categories.map((category, idx) => (
@@ -110,6 +121,7 @@ function HomeScreenMobile() {
                   setIsShouldShowCategoryInformation
                 }
                 idx={idx}
+                scrollToElementById={scrollToElementById}
               />
             ))}
           </div>
@@ -128,7 +140,7 @@ function HomeScreenMobile() {
             </Suspense>
           </Canvas>
         </div>
-        // {isShouldShowCategoryInformation ? <SelectedCategoryMobile /> : null}
+        {/* // {isShouldShowCategoryInformation ? <SelectedCategoryMobile /> : null} */}
       </div>
     </>
   );
@@ -136,13 +148,29 @@ function HomeScreenMobile() {
 
 export default HomeScreenMobile;
 
-const Category = ({ category, idx, setIsShouldShowCategoryInformation }) => {
+const Category = ({
+  category,
+  idx,
+  setIsShouldShowCategoryInformation,
+  scrollToElementById,
+}) => {
   return (
     <button
-      onClick={() => setIsShouldShowCategoryInformation(idx)}
+      onClick={() => {
+        setIsShouldShowCategoryInformation(idx);
+        setTimeout(() => {
+          scrollToElementById();
+        }, 200);
+      }}
       className="mobile-category-wrapper"
     >
-      <span style={{ fontSize: "0.9em" }}>{category}</span>
+      <span
+        style={{
+          fontSize: "0.9em",
+        }}
+      >
+        {category}
+      </span>
     </button>
   );
 };
