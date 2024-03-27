@@ -146,7 +146,7 @@ export function AstroModel({
       // .to(astroRef.current.rotation, { y: Math.PI }, ">");
       // .to(astroRef.current.rotation, { y: -Math.PI / 2 + 0.5 }, ">");
     }
-  }, [astroRef, isInstantScroll]);
+  }, [astroRef, isInstantScroll, customizeRef.current]);
 
   const isVisibile =
     scrollArea.currentSection == 0 ||
@@ -210,7 +210,7 @@ export function MappedModels({
           areaObj.currentSection = model.onEnter.currentSection;
           areaObj.prevSection = model.onEnter.prevSection;
           setScrollArea(areaObj);
-          checkModelPosition({ modelByIdx: idx, refs: allModelPositions });
+          // checkModelPosition({ modelByIdx: idx, refs: allModelPositions });
         },
         onLeaveBack: () => {
           setVisibleModels([idx - 1, idx, idx + 1]);

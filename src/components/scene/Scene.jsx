@@ -32,7 +32,7 @@ function Scene({
   const [fixed, setFixed] = useState(false);
   const [hovered, setHovered] = useState("");
 
-  const { scrollArea, setScrollArea } = useAppContext();
+  const { scrollArea, setScrollArea, isAstroModelDrawn } = useAppContext();
 
   const simplyExpandedRef = useRef();
   const textContainerRef = useRef();
@@ -171,26 +171,26 @@ function Scene({
     customizeRef,
   ];
 
-  // const models = Model_Data.map((model, idx) => {
-  //   const { currentRef, prevRef } = refsObj[idx] || refsObj[0];
+  const models = Model_Data.map((model, idx) => {
+    const { currentRef, prevRef } = refsObj[idx] || refsObj[0];
 
-  //   // if (idx == 4) {
-  //   //   console.log(model.url);
-  //   // }
+    // if (idx == 4) {
+    //   console.log(model.url);
+    // }
 
-  //   return (
-  //     <MappedModels
-  //       allModelPositions={allModelPositions}
-  //       key={`heyo${idx}`}
-  //       idx={idx}
-  //       prevRef={prevRef}
-  //       currentRef={currentRef}
-  //       visibleModels={visibleModels}
-  //       setVisibleModels={setVisibleModels}
-  //       model={model}
-  //     />
-  //   );
-  // });
+    return (
+      <MappedModels
+        allModelPositions={allModelPositions}
+        key={`heyo${idx}`}
+        idx={idx}
+        prevRef={prevRef}
+        currentRef={currentRef}
+        visibleModels={visibleModels}
+        setVisibleModels={setVisibleModels}
+        model={model}
+      />
+    );
+  });
 
   return (
     <div className="scene one">
@@ -232,7 +232,7 @@ function Scene({
               setTextAnimation={setTextAnimation}
               customizeRef={customizeRef}
             />
-            {/* {models} */}
+            {isAstroModelDrawn ? models : null}
           </Suspense>
         </Canvas>
       </div>

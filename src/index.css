@@ -17,6 +17,14 @@ body {
   /* background: black; */
 }
 
+.app-bg {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  justify-content: center;
+  z-index: 5;
+}
+
 .section-one-first-title {
   color: white;
   font-family: gotham;
