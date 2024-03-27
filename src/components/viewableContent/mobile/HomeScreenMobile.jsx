@@ -1,11 +1,37 @@
 import { useGLTF, useProgress } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Suspense, useEffect, useMemo, useReducer, useRef } from "react";
+import { Suspense, useEffect, useMemo, useState, useRef } from "react";
 import { useAppContext } from "../../../context/appContext";
 import { Camera } from "../../scene/Camera";
 import * as THREE from "three";
+import gsap from "gsap";
+import SelectedCategoryMobile from "./SelectedCategoryMobile";
+
 function HomeScreenMobile() {
   const astroRef = useRef();
+  const [isShouldShowCategoryInformation, setIsShouldShowCategoryInformation] =
+    useState(false);
+
+  useEffect(() => {
+    // Animation using GSAPz
+    gsap.to(".text-animation", {
+      x: 0, // Initial horizontal position for animation
+      // opacity: 0, // Initial opacity
+      duration: 4.5, // Duration of animation
+      stagger: 0.2, // Stagger the animation for each text element
+      ease: "back", // Easing function
+    });
+
+    // Animation using GSAP
+    gsap.to(".text-animation2", {
+      x: 0, // Initial horizontal position for animation
+      // opacity: 0, // Initial opacity
+      duration: 4.5, // Duration of animation
+      stagger: 0.2, // Stagger the animation for each text element
+      ease: "back", // Easing function
+    });
+  }, []); // Run once when component mounts
+
   return (
     <>
       <div
@@ -25,9 +51,43 @@ function HomeScreenMobile() {
         <div style={{ fontFamily: "gotham", color: "white" }}>
           Simply Expand
         </div> */}
+        <div style={{ position: "absolute", top: 0 }}>
+          <div
+            className="text-animation"
+            style={{
+              color: "white",
+              fontSize: "2.5em",
+              marginRight: "2em",
+              fontFamily: "gotham",
+              transform: "translateX(-100px)", // Initial horizontal position
+            }}
+          >
+            Simply
+          </div>
+          <div
+            className="text-animation2"
+            style={{
+              color: "white",
+              fontSize: "2.5em",
+              marginLeft: "2em",
+              fontFamily: "gotham",
+              marginTop: "0.3em",
+              transform: "translateX(100px)", // Initial horizontal position
+            }}
+          >
+            Expand
+          </div>
+        </div>
         <div className="mobile-categories-wrapper">
           {categories.map((category, idx) => (
-            <Category category={category} />
+            <Category
+              category={category}
+              key={`categoryMobile${idx}`}
+              setIsShouldShowCategoryInformation={
+                setIsShouldShowCategoryInformation
+              }
+              idx={idx}
+            />
           ))}
         </div>
         <div className="canvas-container-mobile">
@@ -44,6 +104,7 @@ function HomeScreenMobile() {
             </Suspense>
           </Canvas>
         </div>
+        {isShouldShowCategoryInformation ? <SelectedCategoryMobile /> : null}
       </div>
     </>
   );
@@ -51,9 +112,12 @@ function HomeScreenMobile() {
 
 export default HomeScreenMobile;
 
-const Category = ({ category }) => {
+const Category = ({ category, idx, setIsShouldShowCategoryInformation }) => {
   return (
-    <button className="mobile-category-wrapper">
+    <button
+      onClick={() => setIsShouldShowCategoryInformation(idx)}
+      className="mobile-category-wrapper"
+    >
       <span style={{ fontSize: "0.9em" }}>{category}</span>
     </button>
   );
