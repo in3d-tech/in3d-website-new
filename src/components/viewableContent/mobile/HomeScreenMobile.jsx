@@ -59,7 +59,7 @@ function HomeScreenMobile() {
         {isShouldShowCategoryInformation ? (
           <div
             style={{
-              position: "absolute",
+              position: "fixed",
               top: "1em",
               right: "1.5em",
               zIndex: 2,
