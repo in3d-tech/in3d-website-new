@@ -44,7 +44,7 @@ export function AstroModel({
       if (fullyRendered && isAstroModelDrawn === false) {
         // Object is fully rendered
         isFullyRenderedRef.current = true;
-        setIsAstroModelDrawn(true);
+        setTimeout(() => setIsAstroModelDrawn(true), 1000);
         console.log("Astro object is fully rendered!");
       }
     }

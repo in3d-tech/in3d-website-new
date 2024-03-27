@@ -52,7 +52,11 @@ function HomeScreenMobile() {
 export default HomeScreenMobile;
 
 const Category = ({ category }) => {
-  return <button className="mobile-category-wrapper">{category}</button>;
+  return (
+    <button className="mobile-category-wrapper">
+      <span style={{ fontSize: "0.9em" }}>{category}</span>
+    </button>
+  );
 };
 
 const backgrounds = {
@@ -72,7 +76,7 @@ const categories = [
   "MEDICINE",
   "MICROSOFT",
   "SECURITY",
-  "ARTIFICALINTELLIGENCE",
+  "ARTIFICAL INTELLIGENCE",
   "MILITARY",
   "CUSTOMIZATION",
 ];
@@ -128,8 +132,8 @@ export function AstroModel({
         object={scene}
         dispose={null}
         scale={[1, 1, 1]}
-        position={[-3, -5, 0]}
-        rotation={[0.5, Math.PI, 0]}
+        position={[-3.75, -5, -0.1]}
+        rotation={[0.54, Math.PI - 0.35, 0]}
       />
     </group>
   );
