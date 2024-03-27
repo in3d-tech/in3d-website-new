@@ -1,7 +1,7 @@
 function SelectedCategoryMobile() {
   return (
-    <div>
-      <h1>HELLO WORLD</h1>
+    <div style={{ height: "300vh", zIndex: 1 }}>
+      <h1 style={{ color: "white" }}>HELLO WORLD</h1>
     </div>
   );
 }

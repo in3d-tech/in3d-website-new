@@ -91,18 +91,18 @@ function App() {
       ) : null}
 
       <>
-        <div className="app-bg">
-          <Header />
-          <Suspense fallback={null}>
-            {selectedCategory ? <LazySelectedContent /> : null}
-          </Suspense>
-        </div>
         {isMobileDimensions ? (
           <Suspense fallback={null}>
             <LazyMobileView />
           </Suspense>
         ) : (
           <>
+            <div className="app-bg">
+              <Header />
+              <Suspense fallback={null}>
+                {selectedCategory ? <LazySelectedContent /> : null}
+              </Suspense>
+            </div>
             <ViewableContent />
             <Suspense fallback={null}>
               <LazyScene

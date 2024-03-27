@@ -45,13 +45,33 @@ function HomeScreenMobile() {
           alignItems: "center",
         }}
       >
-        {/* <h1 style={{ color: "green", fontFamily: "gotham" }}>
-          Hello Wisoncsin!
-        </h1>
-        <div style={{ fontFamily: "gotham", color: "white" }}>
-          Simply Expand
-        </div> */}
-        <div style={{ position: "absolute", top: 0 }}>
+        {isShouldShowCategoryInformation ? (
+          <div
+            style={{
+              position: "absolute",
+              top: "1em",
+              right: "1.5em",
+              zIndex: 2,
+            }}
+          >
+            <button
+              style={{
+                all: "unset",
+                color: "yellow",
+                border: "1px solid red",
+                borderRadius: "4px",
+                fontSize: "1.5em",
+                padding: "2px",
+                width: "120%",
+                textAlign: "center",
+              }}
+              onClick={() => setIsShouldShowCategoryInformation(false)}
+            >
+              Back
+            </button>
+          </div>
+        ) : null}
+        <div style={{ position: "absolute", top: "1em" }}>
           <div
             className="text-animation"
             style={{
@@ -78,18 +98,22 @@ function HomeScreenMobile() {
             Expand
           </div>
         </div>
-        <div className="mobile-categories-wrapper">
-          {categories.map((category, idx) => (
-            <Category
-              category={category}
-              key={`categoryMobile${idx}`}
-              setIsShouldShowCategoryInformation={
-                setIsShouldShowCategoryInformation
-              }
-              idx={idx}
-            />
-          ))}
-        </div>
+        {isShouldShowCategoryInformation ? (
+          <SelectedCategoryMobile />
+        ) : (
+          <div className="mobile-categories-wrapper">
+            {categories.map((category, idx) => (
+              <Category
+                category={category}
+                key={`categoryMobile${idx}`}
+                setIsShouldShowCategoryInformation={
+                  setIsShouldShowCategoryInformation
+                }
+                idx={idx}
+              />
+            ))}
+          </div>
+        )}
         <div className="canvas-container-mobile">
           <Canvas>
             {/* <LoaderComponent /> */}
@@ -104,7 +128,7 @@ function HomeScreenMobile() {
             </Suspense>
           </Canvas>
         </div>
-        {isShouldShowCategoryInformation ? <SelectedCategoryMobile /> : null}
+        // {isShouldShowCategoryInformation ? <SelectedCategoryMobile /> : null}
       </div>
     </>
   );
@@ -154,13 +178,7 @@ export function AstroModel({
   setTextAnimation,
   customizeRef,
 }) {
-  const {
-    isInstantScroll,
-    scrollArea,
-    setScrollArea,
-    isAstroModelDrawn,
-    setIsAstroModelDrawn,
-  } = useAppContext();
+  const { isAstroModelDrawn, setIsAstroModelDrawn } = useAppContext();
 
   const { scene, animations } = useGLTF("/assets/models/astronaut_new23.glb");
   const mixer = useGLTFAnimations(scene, animations);
