@@ -729,11 +729,16 @@ section {
 }
 
 .mobile-category-wrapper {
+  all: unset;
   color: white;
-  border: 1px solid red;
-  background: rgb(207, 210, 164, 0.5);
+  border: 1px solid rgb(255, 255, 255);
+  background: rgba(57, 96, 141, 0.5);
   padding: 3px;
   margin-top: 1em;
+  height: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   /* width: 50%; */
 }
 
