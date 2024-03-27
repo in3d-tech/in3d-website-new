@@ -176,7 +176,7 @@ body {
 }
 
 .section {
-  height: 300vh;
+  height: 150vh;
   width: 100vw;
   text-align: center;
   line-height: 100vh;
@@ -213,7 +213,7 @@ body {
 }
 
 .fader {
-  animation: fadeIn 8s ease forwards;
+  animation: fadeIn 3s ease forwards;
 }
 
 .icon-1,
@@ -406,6 +406,10 @@ section {
   background-repeat: no-repeat;
   background-size: cover;
   opacity: 0.9; */
+}
+
+.section-nine {
+  /* height: 100vh; */
 }
 
 /* ----------- viewable content ------------ */
