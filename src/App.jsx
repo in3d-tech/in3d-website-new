@@ -7,9 +7,9 @@ import { useGLTF, useProgress } from "@react-three/drei";
 import * as THREE from "three";
 import { Header } from "./components/navs/Menu";
 import { LoadingScreen } from "./components/viewableContent/LoadingScreen";
-// import { Scene } from "./components/scene/Scene";
 import { useAppContext } from "./context/appContext";
 import useCheckIsMobileScreen from "./components/common/useCheckIsMobile";
+import { AstroModel } from "./components/scene/ModelComponent";
 
 const LazySelectedContent = lazy(() =>
   import("./components/viewableContent/SelectedCategoryPage")
@@ -34,8 +34,7 @@ function App() {
   const [textAnimation, setTextAnimation] = useState(
     "category-title-no-opacity"
   );
-  const { setMenuOpened, selectedCategory, scrollArea, isAstroModelDrawn } =
-    useAppContext();
+  const { setMenuOpened, selectedCategory, scrollArea } = useAppContext();
 
   const textRef = useRef();
   const isMobileDimensions = useCheckIsMobileScreen();
@@ -81,6 +80,19 @@ function App() {
     }, 200);
   };
 
+  // useEffect(() => {
+  //   if (renderModels) return;
+  //   // console.log("inside the renderrred modles");
+  //   function handleScroll() {
+  //     setRenderModels(true);
+  //   }
+
+  //   window.addEventListener("scroll", handleScroll);
+
+  //   // Remove event listener on component unmount
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, [isAstroModelDrawn]);
+
   return (
     <>
       {loadingScreen ? (
@@ -89,7 +101,12 @@ function App() {
           isMobileDimensions={isMobileDimensions}
         />
       ) : null}
-
+      <div className="app-bg">
+        <Header />
+        <Suspense fallback={null}>
+          {selectedCategory ? <LazySelectedContent /> : null}
+        </Suspense>
+      </div>
       <>
         {isMobileDimensions ? (
           <Suspense fallback={null}>
@@ -97,12 +114,6 @@ function App() {
           </Suspense>
         ) : (
           <>
-            <div className="app-bg">
-              <Header />
-              <Suspense fallback={null}>
-                {selectedCategory ? <LazySelectedContent /> : null}
-              </Suspense>
-            </div>
             <ViewableContent />
             <Suspense fallback={null}>
               <LazyScene
@@ -130,17 +141,6 @@ useGLTF.preload("/assets/models/astronaut_new23.glb");
 // useGLTF.preload("/assets/models/military.glb");
 // useGLTF.preload("/assets/models/costimize_model_v02.glb");
 
-// export const LoaderComponent = () => {
-//   const { active, progress, errors } = useProgress();
-//   useEffect(() => console.log(progress), [progress]);
-//   return (
-//     <Html center>
-//       <span style={{ color: "black", fontSize: "3em" }}>{`${Math.trunc(
-//         progress
-//       )} % loaded`}</span>
-//     </Html>
-//   );
-// };
 function ViewableContent() {
   return (
     <div
