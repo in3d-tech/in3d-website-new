@@ -22,8 +22,15 @@ export const Model_Data = [
           { y: -4, x: 3, z: 1.5 },
           "simultaneously"
         )
-        .to(currentRef.current.rotation, { y: -2.7 }, "simultaneously")
-        .to(prevRef.current.position, { x: -22, y: -18 }, "simultaneously"),
+        .to(currentRef.current.rotation, { y: -2.9 }, "simultaneously")
+        // .to(prevRef.current.position, { y: -35 }, "simultaneously"),
+        .to(
+          prevRef.current.position,
+          { x: -18, y: -25, z: -3 },
+          "simultaneously"
+        )
+
+        .to(prevRef.current.rotation, { y: 5.2 }, "simultaneously"),
   },
 
   // MEDICINE
@@ -185,7 +192,9 @@ export const Model_Data = [
     },
     onLeave: { currentSection: 7, prevSection: 8 },
     scale: [3, 3, 3],
-    position: [13, -2, 0],
+    position: [11, -2, 0],
+    // position: [13, -2, 0],
+
     // visible={visibleModels.includes(3)}
     rotation: [0, -2.9, 0],
     timeline: (tl, currentRef, prevRef) =>

@@ -128,8 +128,8 @@ function Scene({
     let titlesTimeline = gsap.timeline({
       defaults: { ease: "power1.out" },
       scrollTrigger: {
-        trigger: ".home-categories-wrapper",
-        start: "top top",
+        trigger: ".section-two",
+        start: "top bottom",
         endTrigger: ".section-three",
         end: "top bottom",
         scrub: 1,
@@ -170,6 +170,10 @@ function Scene({
 
   const models = Model_Data.map((model, idx) => {
     const { currentRef, prevRef } = refsObj[idx] || refsObj[0];
+    let nextRef;
+    if (idx == 6) {
+      nextRef = astroRef;
+    }
 
     // if (idx == 4) {
     //   console.log(model.url);
@@ -185,6 +189,7 @@ function Scene({
         visibleModels={visibleModels}
         setVisibleModels={setVisibleModels}
         model={model}
+        isAstro={nextRef}
       />
     );
   });

@@ -58,30 +58,31 @@ body {
 }
 
 .home-categories-wrapper {
-  height: 300px;
-  width: 300px;
-  /* border: 1px solid orange; */
+  height: 100vh;
+  width: 35%;
   /* position: absolute;
   right: 14%; */
   color: white;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-evenly;
   align-items: flex-start;
-  margin-top: 6em;
-  border: 1px solid orange;
+  /* margin-top: 6em; */
+  /* border: 1px solid orange; */
   position: fixed;
-  bottom: 100%;
-  z-index: 5090000;
+  top: 0;
+  right: 0;
+  /* bottom: 100%; */
+  z-index: 1;
 }
 
-.home-categories-wrapper-fixed {
+/* .home-categories-wrapper-fixed {
   position: fixed;
   bottom: 100%;
-}
+} */
 
 .category-title {
-  margin-top: 2em;
+  /* margin-top: 1em; */
 }
 
 .category-title-no-opacity {
@@ -92,7 +93,7 @@ body {
   opacity: 0;
   animation: fadeIn 1s forwards;
   font-family: gotham;
-  /* line-height: 1.2; */
+  line-height: 0;
 }
 
 .category-title:hover {
@@ -109,26 +110,26 @@ body {
 }
 
 .home-categories-wrapper .category-title:nth-child(2) {
-  animation-delay: 0.4s;
+  animation-delay: 0.2s;
 }
 
 .home-categories-wrapper .category-title:nth-child(3) {
-  animation-delay: 0.7s;
+  animation-delay: 0.3s;
 }
 .home-categories-wrapper .category-title:nth-child(4) {
-  animation-delay: 1s;
+  animation-delay: 0.4s;
 }
 
 .home-categories-wrapper .category-title:nth-child(5) {
-  animation-delay: 1.3s;
+  animation-delay: 0.5s;
 }
 
 .home-categories-wrapper .category-title:nth-child(6) {
-  animation-delay: 1.6s;
+  animation-delay: 0.6s;
 }
 
 .home-categories-wrapper .category-title:nth-child(7) {
-  animation-delay: 1.9s;
+  animation-delay: 0.7s;
 }
 
 .main-content-divider {
@@ -162,8 +163,12 @@ body {
 
 .main-section {
   /* background: var(--color) no-repeat center; */
-  overflow: scroll;
+  /* overflow: scroll; */
   /* background-size: cover; */
+}
+
+.language-flag:hover {
+  cursor: pointer;
 }
 
 .nav-open-list-item {
@@ -181,7 +186,7 @@ body {
   text-align: center;
   line-height: 100vh;
   font-size: 3em;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 
   opacity: 1;
 }
@@ -367,12 +372,20 @@ section {
 
 .section-one {
   /* opacity: 0.5; */
+  /* border: 2px solid red; */
 }
 
 .section-two {
   /* background-color: steelblue; */
   /* height: 100vh; */
   /* opacity: 0.5; */
+  /* border: 2px solid yellow; */
+  /* height: 300vh; */
+}
+
+.section-two-half {
+  /* background: black; */
+  opacity: 0;
 }
 
 .section-three {
@@ -408,8 +421,8 @@ section {
   opacity: 0.9; */
 }
 
-.section-nine {
-  /* height: 100vh; */
+.section-ten {
+  height: 90vh;
 }
 
 /* ----------- viewable content ------------ */
@@ -522,7 +535,7 @@ section {
 
 .flashing-div {
   background: url("/assets/images/backgrounds/medicine/medicine_bg.jpg");
-  position: absolute;
+  position: fixed;
   /* background: black; */
   z-index: 4000000000000;
   top: 0;

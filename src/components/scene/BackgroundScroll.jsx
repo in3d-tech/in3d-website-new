@@ -34,47 +34,49 @@ export function BackgroundScroll({
   return (
     <>
       <section className="section section-one">
-        <div
-          style={{
-            position: "absolute",
-            top: "2em",
-            left: "3%",
-            display: "flex",
-            flexDirection: "column",
-            // justifyContent: "flex-end",
-            height: "500px",
-            // border: "1px solid orange",
-          }}
-        >
-          {/* <div style={{ lineHeight: "15vh" }}>
-            <div> */}
-          <span
-            // ref={simplyRef}
-            className="section-one-first-title"
+        {renderModels ? (
+          <div
             style={{
               position: "absolute",
-              transform: "translateX(200px)",
-              // marginTop: "5em",
+              top: "2em",
+              left: "3%",
+              display: "flex",
+              flexDirection: "column",
+              // justifyContent: "flex-end",
+              height: "500px",
+              // border: "1px solid orange",
             }}
           >
-            Simply
-          </span>
-          <span
-            // ref={expandedRef}
-            className="section-one-second-title"
-            style={{
-              position: "relative",
-              top: "1em",
-              transform: "translateX(-200px)",
-            }}
-          >
-            Expand
-          </span>
-          {/* </div>
+            {/* <div style={{ lineHeight: "15vh" }}>
+            <div> */}
+            <span
+              // ref={simplyRef}
+              className="section-one-first-title"
+              style={{
+                position: "absolute",
+                transform: "translateX(200px)",
+                // marginTop: "5em",
+              }}
+            >
+              Simply
+            </span>
+            <span
+              // ref={expandedRef}
+              className="section-one-second-title"
+              style={{
+                position: "relative",
+                top: "1em",
+                transform: "translateX(-200px)",
+              }}
+            >
+              Expand
+            </span>
+            {/* </div>
           </div> */}
 
-          {/* <img style={{ width: "10em" }} src="/assets/images/in3dlogo.png" /> */}
-        </div>
+            {/* <img style={{ width: "10em" }} src="/assets/images/in3dlogo.png" /> */}
+          </div>
+        ) : null}
       </section>
       <section className="section section-two">
         <div
@@ -89,11 +91,16 @@ export function BackgroundScroll({
         ></div>
         <div
           ref={titlesContainerRef}
-          style={
-            fixed
-              ? { position: "fixed", bottom: "108%", right: "14%" }
-              : { position: "absolute", right: "14%" }
-          }
+          // style={
+          //   fixed
+          //     ? {
+          //         position: "fixed",
+          //         bottom: "108%",
+          //         right: "14%",
+          //         border: "1px solid yellow",
+          //       }
+          //     : { position: "absolute", right: "14%", border: "1px solid red" }
+          // }
           className={`home-categories-wrapper ${hovered}`}
         >
           {fixed
@@ -116,7 +123,6 @@ export function BackgroundScroll({
                   onClick={() => scrollToElementById(idx, setIsInstantScroll)}
                   key={idx}
                   className={textAnimation}
-                  style={{ height: "0px" }}
                 >
                   {title}
                 </div>
@@ -124,6 +130,18 @@ export function BackgroundScroll({
             : null}
         </div>
       </section>
+      {/* <div
+        style={{
+          height: "100vh",
+          width: "100vw",
+          background: "cyan",
+          border: "4px solid pink",
+        }}
+      ></div> */}
+      <section
+        id="sectionTwoHalf"
+        className="section section-two-half"
+      ></section>
       <section id="sectionThree" className="section section-three"></section>
       <section id="sectionFour" className="section section-four"></section>
       <section id="sectionFive" className="section section-five"></section>

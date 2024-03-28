@@ -9,7 +9,8 @@ import { Header } from "./components/navs/Menu";
 import { LoadingScreen } from "./components/viewableContent/LoadingScreen";
 import { useAppContext } from "./context/appContext";
 import useCheckIsMobileScreen from "./components/common/useCheckIsMobile";
-import { AstroModel } from "./components/scene/ModelComponent";
+import { useTranslation } from "react-i18next";
+import { ChangeLanguage } from "./components/navs/ChangeLanguage";
 
 const LazySelectedContent = lazy(() =>
   import("./components/viewableContent/SelectedCategoryPage")
@@ -29,6 +30,10 @@ ScrollTrigger.defaults({
 extend({ PerspectiveCamera: THREE.PerspectiveCamera });
 
 function App() {
+  const {
+    i18n: { changeLanguage, language },
+  } = useTranslation();
+  const [currentLanguage, setCurrentLanguage] = useState(language);
   const [isMobileViewOnly, setIsMobileViewOnly] = useState(null);
   const [loadingScreen, setloadingScreen] = useState(true);
   const [textAnimation, setTextAnimation] = useState(
@@ -80,19 +85,6 @@ function App() {
     }, 200);
   };
 
-  // useEffect(() => {
-  //   if (renderModels) return;
-  //   // console.log("inside the renderrred modles");
-  //   function handleScroll() {
-  //     setRenderModels(true);
-  //   }
-
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   // Remove event listener on component unmount
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, [isAstroModelDrawn]);
-
   return (
     <>
       {loadingScreen ? (
@@ -101,6 +93,11 @@ function App() {
           isMobileDimensions={isMobileDimensions}
         />
       ) : null}
+      <ChangeLanguage
+        setCurrentLanguage={setCurrentLanguage}
+        changeLanguage={changeLanguage}
+        currentLanguage={currentLanguage}
+      />
       <div className="app-bg">
         <Header />
         <Suspense fallback={null}>
@@ -142,10 +139,5 @@ useGLTF.preload("/assets/models/astronaut_new23.glb");
 // useGLTF.preload("/assets/models/costimize_model_v02.glb");
 
 function ViewableContent() {
-  return (
-    <div
-      // style={{ background: bgImage }}
-      className="viewable-content-wrapper"
-    ></div>
-  );
+  return <div className="viewable-content-wrapper"></div>;
 }

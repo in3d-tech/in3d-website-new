@@ -1,0 +1,11 @@
+{
+  "translations": {
+    "industry": "Industry",
+    "medicine": "Medicine",
+    "microsoft": "Microsoft",
+    "security": "Security",
+    "artificialIntelligence": "Artifical Intelligence",
+    "military": "Military",
+    "Customization": "Customization"
+  }
+}

@@ -25,7 +25,6 @@ export function AstroModel({
 
   const { scene, animations } = useGLTF(url);
   const mixer = useGLTFAnimations(scene, animations);
-
   const { active, progress, errors, total } = useProgress();
 
   // gsap.set(".scene", { scale: 0.7 });
@@ -53,12 +52,12 @@ export function AstroModel({
       scrollTrigger: {
         trigger: ".section-one",
         start: "top top",
-        endTrigger: "#midSection2", //".section-two",
+        endTrigger: ".section-two", //"#midSection2", //".section-two",
         end: "bottom bottom",
         scrub: 1,
         preventOverlaps: isInstantScroll ? true : false,
         fastScrollEnd: true, // 2250,
-        // markers: true,
+        markers: true,
         onEnter: () => {
           // if (!visibleModels.length) setVisibleModels(true);
           const areaObj = { ...scrollArea };
@@ -66,9 +65,16 @@ export function AstroModel({
           areaObj.prevSection = 0;
           setScrollArea(areaObj);
         },
-        onEnterBack: () => {
-          // setVisibleModels([1]);
-        },
+        // onEnterBack: () => {
+        //   console.log("eneterd back");
+        //   // setVisibleModels([1]);
+        // },
+        // onLeave: () => {
+        //   console.log("on leaving function");
+        // },
+        // onEnterBack: () => {
+        //   console.log("we entered back");
+        // },
       },
     });
 
@@ -83,67 +89,71 @@ export function AstroModel({
         { x: 0.5, y: Math.PI + 0.3, z: -0 },
         "simultaneously"
       );
+    // .add(
+    //   () => console.log("maybe we can add a functinoality like this"),
+    //   ">"
+    // );
 
     let textTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: ".section-two",
-        start: "top top",
+        start: "top bottom",
         // endTrigger: textRef,
         // end: "top top",
+        markers: true,
         once: true,
         onEnter: () => {
           setTextAnimation("category-title");
-          setVisibleModels([0]);
+          setVisibleModels([]);
         },
       },
     });
 
-    if (customizeRef.current) {
-      let contactUsTimeline = gsap.timeline({
-        defaults: { ease: "power1.out" },
-        scrollTrigger: {
-          trigger: ".section-ten",
-          start: "top top",
-          // endTrigger: "#midSection2", //".section-two",
-          // end: "bottom bottom",
-          scrub: 1,
-          // markers: true,
-          onEnter: () => {
-            const areaObj = { ...scrollArea };
-            areaObj.currentSection = 9;
-            areaObj.prevSection = 8;
-            setScrollArea(areaObj);
-          },
-          onLeaveBack: () => {
-            const areaObj = { ...scrollArea };
-            areaObj.currentSection = 8;
-            areaObj.prevSection = 9;
-            setScrollArea(areaObj);
-          },
-        },
-      });
+    // if (customizeRef.current) {
+    //   let contactUsTimeline = gsap.timeline({
+    //     defaults: { ease: "power1.out" },
+    //     scrollTrigger: {
+    //       trigger: ".section-ten",
+    //       start: "top top",
+    //       // endTrigger: "#midSection2", //".section-two",
+    //       // end: "bottom bottom",
+    //       scrub: 1,
+    //       onEnter: () => {
+    //         const areaObj = { ...scrollArea };
+    //         areaObj.currentSection = 9;
+    //         areaObj.prevSection = 8;
+    //         setScrollArea(areaObj);
+    //       },
+    //       onLeaveBack: () => {
+    //         const areaObj = { ...scrollArea };
+    //         areaObj.currentSection = 8;
+    //         areaObj.prevSection = 9;
+    //         setScrollArea(areaObj);
+    //       },
+    //     },
+    //   });
 
-      contactUsTimeline
-        .to(
-          astroRef.current.position,
-          { x: -10, y: -20.2, z: -6 },
-          "simultaneously"
-        )
-        .to(
-          astroRef.current.rotation,
-          { x: 0.4, y: Math.PI + 0.3, z: -0 },
-          "simultaneously"
-        )
-        .to(
-          customizeRef.current.position,
-          { x: 12, y: -2, z: 0 },
-          "simultaneously"
-        )
-        .to(customizeRef.current.rotation, { y: -2.9 }, "simultaneously");
-      // .to(astroRef.current.rotation, { y: Math.PI }, ">");
-      // .to(astroRef.current.rotation, { y: -Math.PI / 2 + 0.5 }, ">");
-    }
-  }, [astroRef, isInstantScroll, customizeRef.current]);
+    //   contactUsTimeline
+    //     .to(
+    //       astroRef.current.position,
+    //       { x: -10, y: -20.2, z: -6 },
+    //       "simultaneously"
+    //     )
+    //     .to(
+    //       astroRef.current.rotation,
+    //       { x: 0.4, y: Math.PI + 0.3, z: -0 },
+    //       "simultaneously"
+    //     )
+    //     .to(
+    //       customizeRef.current.position,
+    //       { x: 12, y: -2, z: 0 },
+    //       "simultaneously"
+    //     )
+    //     .to(customizeRef.current.rotation, { y: -2.9 }, "simultaneously");
+    //   // .to(astroRef.current.rotation, { y: Math.PI }, ">");
+    //   // .to(astroRef.current.rotation, { y: -Math.PI / 2 + 0.5 }, ">");
+    // }
+  }, [astroRef, isInstantScroll]); // , customizeRef.current
 
   const isVisibile =
     scrollArea.currentSection == 0 ||
@@ -151,6 +161,17 @@ export function AstroModel({
     scrollArea.currentSection == 2 ||
     scrollArea.currentSection == 8 ||
     scrollArea.currentSection == 9;
+
+  // .to(
+  //   astroRef.current.position,
+  //   { x: -10, y: -20.2, z: 0 },
+  //   "simultaneously"
+  // )
+  // .to(
+  //   astroRef.current.rotation,
+  //   { x: 0.5, y: Math.PI + 0.3, z: -0 },
+  //   "simultaneously"
+  // );
 
   return (
     <group>
@@ -161,7 +182,7 @@ export function AstroModel({
         scale={[3, 3, 3]}
         position={[-9, -18.2, -7]}
         rotation={[0.05, Math.PI / 2 + 0.5, 0]}
-        // visible={isVisibile}
+        visible={isVisibile}
       />
     </group>
   );
@@ -187,6 +208,7 @@ export function MappedModels({
   const { scene, animations } = useGLTF(model.url);
   const [isVisible, setIsVisible] = useState(false);
   const mixer = useGLTFAnimations(scene, animations);
+  const industryModel = 0;
 
   useEffect(() => {
     let timeline = gsap.timeline({
@@ -202,7 +224,8 @@ export function MappedModels({
         preventOverlaps: isInstantScroll ? true : false,
         fastScrollEnd: true, // 2500 is default,
         onEnter: () => {
-          setVisibleModels([idx - 1, idx, idx + 1]);
+          console.log("just entered section of idx: ", idx);
+          setVisibleModels([idx - 1, idx]);
           const areaObj = { ...scrollArea };
           areaObj.currentSection = model.onEnter.currentSection;
           areaObj.prevSection = model.onEnter.prevSection;
@@ -210,16 +233,24 @@ export function MappedModels({
           // checkModelPosition({ modelByIdx: idx, refs: allModelPositions });
         },
         onLeaveBack: () => {
-          setVisibleModels([idx - 1, idx, idx + 1]);
+          console.log("just Leave Back section of idx: ", idx, "and", [
+            idx - 1,
+            idx,
+            idx + 1,
+          ]);
+          setVisibleModels(idx == industryModel ? [] : [idx, idx - 1]);
           const areaObj = { ...scrollArea };
           areaObj.currentSection = model.onLeave.currentSection;
           areaObj.prevSection = model.onLeave.prevSection;
           setScrollArea(areaObj);
         },
       },
+      // onLeave: () => console.log("just onLeave section of idx: ", idx),
+      // onEnterBack: () => console.log("just onEnterBack section of idx: ", idx),
     });
 
     model.timeline(timeline, currentRef, prevRef);
+    // .add(() => checkModelPosition(idx, currentRef), ">");
   }, [currentRef, isInstantScroll]);
 
   return (

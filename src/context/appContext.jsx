@@ -38,9 +38,7 @@ export default function AppContextProvider({ children }) {
 export function useAppContext() {
   const context = useContext(AppContext);
   if (!context) {
-    console.log(
-      "Error with a Context - likely that must be used within AppContextProvider"
-    );
+    console.log("Error with a Context");
     return {
       scrollArea: {},
       setScrollArea: () => {},
