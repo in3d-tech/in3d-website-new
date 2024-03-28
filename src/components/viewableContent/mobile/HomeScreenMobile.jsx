@@ -12,7 +12,8 @@ function HomeScreenMobile() {
   const textContainerRef = useRef();
   const [isShouldShowCategoryInformation, setIsShouldShowCategoryInformation] =
     useState(false);
-  const { selectedCategory } = useAppContext();
+  const { selectedCategory, mobileBackground, setMobileBackground } =
+    useAppContext();
 
   useEffect(() => {
     console.log({ selectedCategory });
@@ -22,11 +23,13 @@ function HomeScreenMobile() {
   }, [selectedCategory]);
 
   useEffect(() => {
+    document.body.style.overflowX = "hidden";
+
     // Animation using GSAPz
     gsap.to(".text-animation", {
       x: 0, // Initial horizontal position for animation
       // opacity: 0, // Initial opacity
-      duration: 4.5, // Duration of animation
+      duration: 6, // Duration of animation
       stagger: 0.2, // Stagger the animation for each text element
       ease: "back", // Easing function
     });
@@ -35,7 +38,7 @@ function HomeScreenMobile() {
     gsap.to(".text-animation2", {
       x: 0, // Initial horizontal position for animation
       // opacity: 0, // Initial opacity
-      duration: 4.5, // Duration of animation
+      duration: 6, // Duration of animation
       stagger: 0.2, // Stagger the animation for each text element
       ease: "back", // Easing function
     });
@@ -55,13 +58,23 @@ function HomeScreenMobile() {
     <>
       <div
         style={{
-          background: backgrounds[1],
+          width: "100vw",
+          height: "100vh",
+          position: "fixed",
+          top: 0,
+          background: backgrounds[mobileBackground],
+          // opacity: 0.4,
+        }}
+      ></div>
+      <div
+        style={{
           height: "100vh",
           width: "100vw",
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-end",
           alignItems: "center",
+          transition: "background-image 0.8s",
         }}
       >
         {isShouldShowCategoryInformation ? (
@@ -117,8 +130,13 @@ function HomeScreenMobile() {
             Expand
           </div>
         </div>
-        {selectedCategory ? (
-          <SelectedCategoryMobile titleKey={isShouldShowCategoryInformation} />
+
+        {true ? (
+          <SelectedCategoryMobile
+            titleKey={isShouldShowCategoryInformation}
+            astroRef={astroRef}
+            setMobileBackground={setMobileBackground}
+          />
         ) : null}
 
         {/* {isShouldShowCategoryInformation ? (
@@ -233,19 +251,19 @@ export function AstroModel({
   const isFullyRenderedRef = useRef(false);
 
   // Use useFrame to check if the object is fully rendered on every frame
-  // useFrame(() => {
-  //   // Check if the object is visible in the scene and loaded
-  //   if (astroRef.current && scene && !isFullyRenderedRef.current) {
-  //     // Check if all objects in the scene have been rendered
-  //     const fullyRendered = scene.children.every((child) => child.visible);
-  //     if (fullyRendered && isAstroModelDrawn === false) {
-  //       // Object is fully rendered
-  //       isFullyRenderedRef.current = true;
-  //       setIsAstroModelDrawn(true);
-  //       console.log("Astro object is fully rendered!");
-  //     }
-  //   }
-  // });
+  useFrame(() => {
+    // Check if the object is visible in the scene and loaded
+    if (astroRef.current && scene && !isFullyRenderedRef.current) {
+      // Check if all objects in the scene have been rendered
+      const fullyRendered = scene.children.every((child) => child.visible);
+      if (fullyRendered && isAstroModelDrawn === false) {
+        // Object is fully rendered
+        isFullyRenderedRef.current = true;
+        setIsAstroModelDrawn(true);
+        console.log("Astro object is fully rendered!");
+      }
+    }
+  });
 
   return (
     <group>

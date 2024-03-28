@@ -30,7 +30,7 @@ export const Model_Data = [
           "simultaneously"
         )
 
-        .to(prevRef.current.rotation, { y: 5.2 }, "simultaneously"),
+        .to(prevRef.current.rotation, { y: 5.5 }, "simultaneously"),
   },
 
   // MEDICINE

@@ -17,6 +17,12 @@ export function LoadingScreen({ setloadingScreen, isMobileDimensions }) {
     }
   }, [isAstroModelDrawn]);
 
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    // document.body.style.overflow = "auto";
+  }, []);
+
   return (
     <div className={`flashing-div ${fadeOut}`}>
       <img

@@ -770,7 +770,7 @@ section {
 
 .canvas-container-mobile {
   /* border: 20px solid pink; */
-  position: absolute;
+  position: fixed;
   top: 0;
   height: 100vh;
   width: 100vw;

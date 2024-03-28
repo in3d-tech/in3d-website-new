@@ -224,7 +224,7 @@ export function MappedModels({
         preventOverlaps: isInstantScroll ? true : false,
         fastScrollEnd: true, // 2500 is default,
         onEnter: () => {
-          console.log("just entered section of idx: ", idx);
+          // console.log("just entered section of idx: ", idx);
           setVisibleModels([idx - 1, idx]);
           const areaObj = { ...scrollArea };
           areaObj.currentSection = model.onEnter.currentSection;
@@ -233,11 +233,11 @@ export function MappedModels({
           // checkModelPosition({ modelByIdx: idx, refs: allModelPositions });
         },
         onLeaveBack: () => {
-          console.log("just Leave Back section of idx: ", idx, "and", [
-            idx - 1,
-            idx,
-            idx + 1,
-          ]);
+          // console.log("just Leave Back section of idx: ", idx, "and", [
+          //   idx - 1,
+          //   idx,
+          //   idx + 1,
+          // ]);
           setVisibleModels(idx == industryModel ? [] : [idx, idx - 1]);
           const areaObj = { ...scrollArea };
           areaObj.currentSection = model.onLeave.currentSection;
@@ -249,8 +249,9 @@ export function MappedModels({
       // onEnterBack: () => console.log("just onEnterBack section of idx: ", idx),
     });
 
-    model.timeline(timeline, currentRef, prevRef);
-    // .add(() => checkModelPosition(idx, currentRef), ">");
+    model
+      .timeline(timeline, currentRef, prevRef)
+      .add(() => checkModelPosition(idx, currentRef));
   }, [currentRef, isInstantScroll]);
 
   return (

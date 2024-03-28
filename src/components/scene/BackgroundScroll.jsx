@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useAppContext } from "../../context/appContext";
 import gsap from "gsap";
+import { t } from "../common/t";
 
 export function BackgroundScroll({
   scrollToElementById,
@@ -10,7 +11,7 @@ export function BackgroundScroll({
   textAnimation,
   fixed,
 }) {
-  const { setIsInstantScroll, renderModels } = useAppContext();
+  const { renderModels } = useAppContext();
 
   useEffect(() => {
     if (!renderModels) return;
@@ -30,6 +31,16 @@ export function BackgroundScroll({
       // opacity: 0.2,
     });
   }, [renderModels]);
+
+  const categories = [
+    "industry",
+    "medicine",
+    "microsoft",
+    "security",
+    "artificalIntelligence",
+    "military",
+    "customization",
+  ];
 
   return (
     <>
@@ -120,11 +131,12 @@ export function BackgroundScroll({
                     // );
                     // setHovered("");
                   }}
-                  onClick={() => scrollToElementById(idx, setIsInstantScroll)}
+                  onClick={() => scrollToElementById(idx)}
                   key={idx}
                   className={textAnimation}
                 >
-                  {title}
+                  {/* {t(title).toUpperCase()} */}
+                  {title.toUpperCase()}
                 </div>
               ))
             : null}
@@ -153,13 +165,3 @@ export function BackgroundScroll({
     </>
   );
 }
-
-const categories = [
-  "INDUSTRY",
-  "MEDICINE",
-  "MICROSOFT",
-  "SECURITY",
-  "ARTIFICALINTELLIGENCE",
-  "MILITARY",
-  "CUSTOMIZATION",
-];
