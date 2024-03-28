@@ -14,7 +14,7 @@ function SelectedCategoryMobile({ titleKey, astroRef, setMobileBackground }) {
           end: "top bottom",
           scrub: 1,
           // fastScrollEnd: true, // 2250,
-          markers: true,
+          // markers: true,
           onEnter: () => {
             console.log("entered medicla section on mobile");
             setMobileBackground([2]);
@@ -48,7 +48,7 @@ function SelectedCategoryMobile({ titleKey, astroRef, setMobileBackground }) {
           end: "top center",
           scrub: 1,
           // fastScrollEnd: true, // 2250,
-          markers: true,
+          // markers: true,
           onEnter: () => {
             setMobileBackground([3]);
           },
@@ -70,7 +70,7 @@ function SelectedCategoryMobile({ titleKey, astroRef, setMobileBackground }) {
           end: "top center",
           scrub: 1,
           // fastScrollEnd: true, // 2250,
-          markers: true,
+          // markers: true,
           onEnter: () => {
             setMobileBackground([4]);
           },
@@ -104,11 +104,11 @@ function SelectedCategoryMobile({ titleKey, astroRef, setMobileBackground }) {
       <IndustryText title={"Industry"} />
       <MedicineText title={"Medicine"} />
       <MicrosoftText title={"Microsoft"} />
-      <SecurityText title={"Security"} />
-      <AiText title={"Ai"} />
-      <MilitaryText title={"Military"} />
-      <CustomizationText title={"Customization"} />
-      <ContactUsText title={"ContactUs"} />
+      {/* <SecurityText title={"Security"} /> */}
+      {/* <AiText title={"Ai"} /> */}
+      {/* <MilitaryText title={"Military"} /> */}
+      {/* <CustomizationText title={"Customization"} />
+      <ContactUsText title={"ContactUs"} /> */}
     </div>
   );
 }
@@ -120,8 +120,8 @@ const IndustryText = ({ title }) => (
     className={`industry-test fader`}
     style={{
       //   background: "rgb(255,0,0,0.4)",
-      height: "180vh",
-      //   width: "80%",
+      height: "200vh",
+      // width: "100%",
       //   left: "14%",
       top: 0,
       position: "absolute",
@@ -167,7 +167,7 @@ const MedicineText = ({ title }) => (
     className={`medical-test fader`}
     style={{
       height: "80vh",
-      width: "34%",
+      // width: "34%",
       top: "200%",
       left: "9%",
       position: "absolute",
@@ -197,7 +197,7 @@ const MicrosoftText = ({ title }) => (
     className={`micro-test fader`}
     style={{
       height: "80vh",
-      width: "34%",
+      // width: "34%",
       top: "300%",
       left: "14%",
       position: "absolute",
@@ -233,7 +233,7 @@ export const SecurityText = ({ title }) => (
     className={`security-test fader`}
     style={{
       height: "80vh",
-      width: "34%",
+      // width: "34%",
       top: "400%",
       position: "absolute",
       color: "white",
@@ -246,19 +246,18 @@ export const SecurityText = ({ title }) => (
   >
     <div className="scrolled-category-title">{title}</div>
     <div className="scrolled-category-text-one">
-      <span>
+      {/* <span>
         Thanks to years of collaboration with defense industries, we gained the
       </span>
       <span>
         needed experience, knowledge and tools to provide quick and out of the
         box solutions that are tailored to the industries unique requirements
       </span>
-      {/* <span>of Microsoft Israel</span> */}
     </div>
     <div className="scrolled-category-text-two">
       <span>
         As partners, in3D is your perfect go to for any Microsoft MR products.
-      </span>
+      </span> */}
 
       {/* <span>efficiency for clinics and hospitals</span> */}
     </div>
@@ -270,7 +269,7 @@ export const AiText = ({ title }) => (
     className={`ai-test fader`}
     style={{
       height: "80vh",
-      width: "34%",
+      // width: "34%",
       top: "500%",
       left: "10%",
       position: "absolute",
@@ -307,7 +306,7 @@ export const MilitaryText = ({ title }) => (
     className={`fader`}
     style={{
       height: "80vh",
-      width: "34%",
+      // width: "34%",
       top: "600%",
       right: "9%",
       position: "absolute",
@@ -344,7 +343,7 @@ export const CustomizationText = ({ title }) => (
     className={`fader`}
     style={{
       height: "80vh",
-      width: "34%",
+      // width: "34%",
       top: "700%",
       left: "12%",
       position: "absolute",

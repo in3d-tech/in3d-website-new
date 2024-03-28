@@ -58,10 +58,13 @@ function HomeScreenMobile() {
     <>
       <div
         style={{
-          width: "100vw",
+          // minWidth: "100%",
+          width: "100%",
           height: "100vh",
           position: "fixed",
+          overflow: "hidden",
           top: 0,
+          left: 0,
           background: backgrounds[mobileBackground],
           // opacity: 0.4,
         }}
@@ -69,7 +72,8 @@ function HomeScreenMobile() {
       <div
         style={{
           height: "100vh",
-          width: "100vw",
+          maxWidth: "100%",
+          // width: "100vw",
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-end",
@@ -90,7 +94,6 @@ function HomeScreenMobile() {
               style={{
                 all: "unset",
                 color: "yellow",
-                border: "1px solid red",
                 borderRadius: "4px",
                 fontSize: "1.5em",
                 padding: "2px",
@@ -170,7 +173,6 @@ function HomeScreenMobile() {
             </Suspense>
           </Canvas>
         </div>
-        {/* // {isShouldShowCategoryInformation ? <SelectedCategoryMobile /> : null} */}
       </div>
     </>
   );
