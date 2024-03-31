@@ -57,7 +57,7 @@ export function AstroModel({
         scrub: 1,
         preventOverlaps: isInstantScroll ? true : false,
         fastScrollEnd: true, // 2250,
-        markers: true,
+        // markers: true,
         onEnter: () => {
           // if (!visibleModels.length) setVisibleModels(true);
           const areaObj = { ...scrollArea };
@@ -100,7 +100,7 @@ export function AstroModel({
         start: "top bottom",
         // endTrigger: textRef,
         // end: "top top",
-        markers: true,
+        // markers: true,
         once: true,
         onEnter: () => {
           setTextAnimation("category-title");
