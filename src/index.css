@@ -1,6 +1,6 @@
 @font-face {
   font-family: Gotham;
-  src: url("../src/fonts/GothamLight.ttf");
+  src: url("../src/fonts/Swiss 721 Black.otf");
 }
 
 @font-face {
@@ -59,7 +59,7 @@ body {
 
 .home-categories-wrapper {
   height: 100vh;
-  width: 35%;
+  width: 36%;
   /* position: absolute;
   right: 14%; */
   color: white;
@@ -83,6 +83,7 @@ body {
 
 .category-title {
   /* margin-top: 1em; */
+  font-size: 1em;
 }
 
 .category-title-no-opacity {
@@ -114,22 +115,22 @@ body {
 }
 
 .home-categories-wrapper .category-title:nth-child(3) {
-  animation-delay: 0.3s;
-}
-.home-categories-wrapper .category-title:nth-child(4) {
   animation-delay: 0.4s;
 }
-
-.home-categories-wrapper .category-title:nth-child(5) {
-  animation-delay: 0.5s;
-}
-
-.home-categories-wrapper .category-title:nth-child(6) {
+.home-categories-wrapper .category-title:nth-child(4) {
   animation-delay: 0.6s;
 }
 
+.home-categories-wrapper .category-title:nth-child(5) {
+  animation-delay: 0.8s;
+}
+
+.home-categories-wrapper .category-title:nth-child(6) {
+  animation-delay: 1s;
+}
+
 .home-categories-wrapper .category-title:nth-child(7) {
-  animation-delay: 0.7s;
+  animation-delay: 1.2s;
 }
 
 .main-content-divider {
@@ -184,7 +185,7 @@ body {
   height: 150vh;
   width: 100vw;
   text-align: center;
-  line-height: 100vh;
+  /* line-height: 100vh; */
   font-size: 3em;
   /* overflow-y: scroll; */
 
@@ -422,7 +423,8 @@ section {
 }
 
 .section-ten {
-  height: 90vh;
+  height: 100vh;
+  /* border: 5px solid red; */
 }
 
 /* ----------- viewable content ------------ */
@@ -479,8 +481,9 @@ section {
 }
 
 .scrolled-category-title {
-  font-size: 4em;
-  font-family: gotham-bold;
+  font-size: 5em;
+  font-family: gotham;
+  color: #d8f3f6;
 }
 
 .scrolled-category-text-one {
@@ -494,7 +497,7 @@ section {
 
 .scrolled-category-text-two {
   margin-top: 1em;
-  font-size: 1.5em;
+  font-size: 1.8em;
   line-height: 1.2em;
   display: flex;
   flex-direction: column;
@@ -803,10 +806,218 @@ section {
   margin-top: 4em;
 }
 
+.overlay-test {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 30vh;
+  z-index: 4;
+
+  /* background: rgb(255, 255, 255);
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.4) 75%,
+    rgba(255, 255, 255, 0.3) 80%,
+    rgba(255, 255, 255, 0.35) 95%,
+    rgba(255, 255, 255, 0) 100%
+  ); */
+}
+
+.text-test {
+  font-family: "Yanone Kaffeesatz";
+  font-size: 2em;
+  /* border: 1px solid red; */
+  display: flex;
+  position: absolute;
+  /* left: 60%; */
+  /* transform: translateX(50%); */
+  user-select: none;
+  .wrapper-test {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    line-height: 1.5em;
+    .letter {
+      transition: ease-out 1s;
+      transform: translateY(40%);
+      color: rgba(0, 0, 0, 0.8);
+    }
+    .shadow {
+      transform: scale(1, -1);
+      color: #000103;
+      transition: ease-in 5s, ease-out 5s;
+    }
+    &:hover {
+      .letter {
+        transform: translateY(-20%);
+      }
+      .shadow {
+        opacity: 0;
+        transform: translateY(200%);
+      }
+    }
+  }
+}
+
+.text-test-mobile {
+  font-family: "Yanone Kaffeesatz";
+  font-size: 2em;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  user-select: none;
+  .wrapper-test {
+    padding-left: 5px;
+    padding-right: 20px;
+    padding-top: 5px;
+    .letter {
+      transition: ease-out 1s;
+      transform: translateY(40%);
+    }
+    .shadow {
+      transform: scale(1, -1);
+      color: #999;
+      transition: ease-in 5s, ease-out 5s;
+    }
+    &:hover {
+      .letter {
+        transform: translateY(-200%);
+      }
+      .shadow {
+        opacity: 0;
+        transform: translateY(200%);
+      }
+    }
+  }
+}
+
+.simply-expanded-container {
+  /* padding: 100px 20px 0;
+  max-width: 960px;
+  margin: 0 auto; */
+}
+
+.simply-outer {
+  margin: 0;
+  text-align: center;
+  font-size: 2em;
+  overflow: hidden;
+  line-height: 1;
+  color: white;
+}
+
+.simply-outer .simply-text {
+  display: block;
+  animation: reveal 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  animation-delay: 10s; /* Delayed by 3s */
+  font-family: gotham;
+}
+
+@keyframes reveal {
+  0% {
+    transform: translate(0, 100%);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.contact-us-here-btn {
+  font-size: 1.1;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.contact-us-here-btn:hover {
+  cursor: pointer;
+  z-index: 48787878;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 200px; */
+  /* left: 1em; */
+  overflow: hidden;
+  position: relative;
+}
+
+.text-animate {
+  font-family: gotham;
+  color: white;
+  position: relative;
+  font-size: 1.25em;
+  opacity: 0;
+  animation: text-reveal 2s ease-in-out forwards;
+  animation-delay: 2s; /* Same as the duration of the reveal animation */
+  transform: translateY(-100%);
+}
+
+.border-animate {
+  position: relative;
+  left: 1em;
+}
+
+.border-animate::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-bottom: 3px solid white; /* Specify your border here */
+  animation-name: reveal;
+  animation-duration: 1s;
+  /* animation-timing-function: ease-in-out; */
+  animation-fill-mode: forwards;
+}
+
+@keyframes text-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+/* -------------------------------
+-----------------------------------------
+-----------------------------------------
+-----------------------------------------
+-------------------------------------
+--------------------------------------- */
+
+@media screen and (max-width: 1900px) {
+  .category-title {
+    font-size: 0.8em;
+  }
+}
 /* med displays:  */
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1540px) {
   .scrolled-category-title {
     font-size: 3.5em;
+  }
+
+  .category-title {
+    font-size: 0.5em;
   }
 
   .scrolled-category-text-one {

@@ -10,7 +10,7 @@ export function Camera() {
       ref={camera}
       position-z={5}
       aspect={size.width / size.height}
-      fov={42}
+      fov={70}
       near={0.9}
       far={1000}
     />

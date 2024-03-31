@@ -10,7 +10,7 @@ import { LoadingScreen } from "./components/viewableContent/LoadingScreen";
 import { useAppContext } from "./context/appContext";
 import useCheckIsMobileScreen from "./components/common/useCheckIsMobile";
 import { useTranslation } from "react-i18next";
-import { ChangeLanguage } from "./components/navs/ChangeLanguage";
+// import { ChangeLanguage } from "./components/navs/ChangeLanguage";
 
 const LazySelectedContent = lazy(() =>
   import("./components/viewableContent/SelectedCategoryPage")
@@ -30,15 +30,13 @@ ScrollTrigger.defaults({
 extend({ PerspectiveCamera: THREE.PerspectiveCamera });
 
 function App() {
-  const {
-    i18n: { changeLanguage, language },
-  } = useTranslation();
-  const [currentLanguage, setCurrentLanguage] = useState(language);
+  // const {
+  //   i18n: { changeLanguage, language },
+  // } = useTranslation();
+  // const [currentLanguage, setCurrentLanguage] = useState(language);
   const [isMobileViewOnly, setIsMobileViewOnly] = useState(null);
   const [loadingScreen, setloadingScreen] = useState(true);
-  const [textAnimation, setTextAnimation] = useState(
-    "category-title-no-opacity"
-  );
+
   const { selectedCategory, setIsInstantScroll } = useAppContext();
 
   const textRef = useRef();
@@ -65,11 +63,11 @@ function App() {
           isMobileDimensions={isMobileDimensions}
         />
       ) : null}
-      <ChangeLanguage
+      {/* <ChangeLanguage
         setCurrentLanguage={setCurrentLanguage}
         changeLanguage={changeLanguage}
         currentLanguage={currentLanguage}
-      />
+      /> */}
       <div className="app-bg">
         <Header />
         <Suspense fallback={null}>
@@ -77,23 +75,21 @@ function App() {
         </Suspense>
       </div>
       <>
-        {isMobileDimensions ? (
-          <Suspense fallback={null}>
+        <Suspense fallback={null}>
+          {isMobileDimensions ? (
             <LazyMobileView />
-          </Suspense>
-        ) : (
-          <>
-            <ViewableContent />
-            <Suspense fallback={null}>
+          ) : (
+            <>
+              <ViewableContent />
               <LazyScene
                 textRef={textRef}
-                textAnimation={textAnimation}
-                setTextAnimation={setTextAnimation}
+                // textAnimation={textAnimation}
+                // setTextAnimation={setTextAnimation}
                 scrollToElementById={scrollToElementById}
               />
-            </Suspense>
-          </>
-        )}
+            </>
+          )}
+        </Suspense>
       </>
     </>
   );
@@ -101,7 +97,7 @@ function App() {
 
 export default App;
 
-useGLTF.preload("/assets/models/astronaut_new23.glb");
+useGLTF.preload("/assets/models/astronaut_new4.glb");
 // useGLTF.preload("/assets/models/engenir_model_new.glb");
 // useGLTF.preload("/assets/models/medical_model.glb");
 // useGLTF.preload("/assets/models/microsoft_model_new.glb");

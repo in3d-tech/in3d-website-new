@@ -109,69 +109,58 @@ export function AstroModel({
       },
     });
 
-    // if (customizeRef.current) {
-    //   let contactUsTimeline = gsap.timeline({
-    //     defaults: { ease: "power1.out" },
-    //     scrollTrigger: {
-    //       trigger: ".section-ten",
-    //       start: "top top",
-    //       // endTrigger: "#midSection2", //".section-two",
-    //       // end: "bottom bottom",
-    //       scrub: 1,
-    //       onEnter: () => {
-    //         const areaObj = { ...scrollArea };
-    //         areaObj.currentSection = 9;
-    //         areaObj.prevSection = 8;
-    //         setScrollArea(areaObj);
-    //       },
-    //       onLeaveBack: () => {
-    //         const areaObj = { ...scrollArea };
-    //         areaObj.currentSection = 8;
-    //         areaObj.prevSection = 9;
-    //         setScrollArea(areaObj);
-    //       },
-    //     },
-    //   });
+    if (customizeRef.current) {
+      let contactUsTimeline = gsap.timeline({
+        defaults: { ease: "power1.out" },
+        scrollTrigger: {
+          trigger: ".section-ten",
+          start: "top bottom",
+          // endTrigger: "#midSection2", //".section-two",
+          // end: "bottom bottom",
+          scrub: 1,
+          onEnter: () => {
+            const areaObj = { ...scrollArea };
+            areaObj.currentSection = 9;
+            areaObj.prevSection = 8;
+            setScrollArea(areaObj);
+          },
+          onLeaveBack: () => {
+            const areaObj = { ...scrollArea };
+            areaObj.currentSection = 8;
+            areaObj.prevSection = 9;
+            setScrollArea(areaObj);
+          },
+        },
+      });
 
-    //   contactUsTimeline
-    //     .to(
-    //       astroRef.current.position,
-    //       { x: -10, y: -20.2, z: -6 },
-    //       "simultaneously"
-    //     )
-    //     .to(
-    //       astroRef.current.rotation,
-    //       { x: 0.4, y: Math.PI + 0.3, z: -0 },
-    //       "simultaneously"
-    //     )
-    //     .to(
-    //       customizeRef.current.position,
-    //       { x: 12, y: -2, z: 0 },
-    //       "simultaneously"
-    //     )
-    //     .to(customizeRef.current.rotation, { y: -2.9 }, "simultaneously");
-    //   // .to(astroRef.current.rotation, { y: Math.PI }, ">");
-    //   // .to(astroRef.current.rotation, { y: -Math.PI / 2 + 0.5 }, ">");
-    // }
-  }, [astroRef, isInstantScroll]); // , customizeRef.current
+      contactUsTimeline
+        .to(
+          astroRef.current.position,
+          { x: -10, y: -24.2, z: -2 },
+          "simultaneously"
+        )
+        .to(
+          astroRef.current.rotation,
+          { x: 0.4, y: Math.PI + 0.3, z: -0 },
+          "simultaneously"
+        )
+        .to(
+          customizeRef.current.position,
+          { x: 14, y: -2, z: 0 },
+          "simultaneously"
+        )
+        .to(customizeRef.current.rotation, { y: -2.9 }, "simultaneously");
+      // .to(astroRef.current.rotation, { y: Math.PI }, ">")
+      // .to(astroRef.current.rotation, { y: -Math.PI / 2 + 0.5 }, ">");
+    }
+  }, [astroRef, isInstantScroll, customizeRef.current]); // , customizeRef.current
 
   const isVisibile =
-    scrollArea.currentSection == 0 ||
+    scrollArea.currentSection === 0 ||
     scrollArea.currentSection == 1 ||
     scrollArea.currentSection == 2 ||
     scrollArea.currentSection == 8 ||
     scrollArea.currentSection == 9;
-
-  // .to(
-  //   astroRef.current.position,
-  //   { x: -10, y: -20.2, z: 0 },
-  //   "simultaneously"
-  // )
-  // .to(
-  //   astroRef.current.rotation,
-  //   { x: 0.5, y: Math.PI + 0.3, z: -0 },
-  //   "simultaneously"
-  // );
 
   return (
     <group>
@@ -180,8 +169,8 @@ export function AstroModel({
         object={scene}
         dispose={null}
         scale={[3, 3, 3]}
-        position={[-9, -18.2, -7]}
-        rotation={[0.05, Math.PI / 2 + 0.5, 0]}
+        position={[-5, -18.2, -10]}
+        rotation={[0.05, Math.PI / 2 + 0, 0]}
         visible={isVisibile}
       />
     </group>
@@ -192,8 +181,6 @@ export function AstroModel({
 
 export function MappedModels({
   idx,
-  // scrollArea,
-  // setScrollArea,
   currentRef,
   prevRef,
   visibleModels,

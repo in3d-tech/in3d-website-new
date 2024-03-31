@@ -22,8 +22,8 @@ import { useAppContext } from "../../context/appContext";
 
 function Scene({
   textRef,
-  textAnimation,
-  setTextAnimation,
+  // textAnimation,
+  // setTextAnimation,
   scrollToElementById,
 }) {
   const [visibleModels, setVisibleModels] = useState([]);
@@ -31,6 +31,9 @@ function Scene({
   const [shouldFadeIn, setShouldFadeIn] = useState(false);
   const [fixed, setFixed] = useState(false);
   const [hovered, setHovered] = useState("");
+  const [textAnimation, setTextAnimation] = useState(
+    "category-title-no-opacity"
+  );
 
   const { scrollArea, renderModels, setMenuOpened } = useAppContext();
 
@@ -250,12 +253,21 @@ function Scene({
         {/* ) : null} */}
         <Canvas className={`canvas-container`}>
           {/* <LoaderComponent /> */}
-          <ambientLight intensity={0.8} />
-          <directionalLight intensity={3} />
+          {<ambientLight intensity={0.2} />}
+          <directionalLight
+            color={"rgb(200,255,255)"}
+            intensity={5}
+            position={[-25, 50, 10]}
+          />
+          <directionalLight
+            intensity={1}
+            position={[20, 0, -1]}
+            color={"rgb(254,200,255)"}
+          />
           <Camera />
           <Suspense fallback={null}>
             <AstroModel
-              url={"/assets/models/astronaut_new23.glb"}
+              url={"/assets/models/astronaut_new4.glb"}
               astroRef={astroRef}
               visibleModels={visibleModels}
               setVisibleModels={setVisibleModels}

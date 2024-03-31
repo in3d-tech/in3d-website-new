@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppContext } from "../../context/appContext";
 import gsap from "gsap";
 import { t } from "../common/t";
@@ -13,23 +13,26 @@ export function BackgroundScroll({
 }) {
   const { renderModels } = useAppContext();
 
+  const [startExpandedAnimation, setStartExpandedAnimation] = useState(false);
+
   useEffect(() => {
     if (!renderModels) return;
-    gsap.to(".section-one-first-title", {
-      x: 0,
-      duration: 6,
-      stagger: 0.2,
-      ease: "back",
-      // opacity: 0.2,
-    });
-    gsap.to(".section-one-second-title", {
-      x: 150,
-      y: 20,
-      duration: 6,
-      stagger: 0.2,
-      ease: "back",
-      // opacity: 0.2,
-    });
+
+    // gsap.from(".text-test", {
+    //   x: 400,
+    //   duration: 8,
+    //   // stagger: 0.2,
+    //   ease: "back",
+    // });
+
+    // gsap.to(".section-one-first-title", {
+    //   x: 0,
+    //   duration: 7,
+    //   stagger: 0.2,
+    //   ease: "back",
+    //   // opacity: 0.2,
+    // });
+    if (!startExpandedAnimation) setStartExpandedAnimation(true);
   }, [renderModels]);
 
   const categories = [
@@ -42,52 +45,90 @@ export function BackgroundScroll({
     "customization",
   ];
 
+  // const Text = ({ selectedCategory = 6, isExpanded }) => {
+  //   // console.log({ selectedModel });
+
+  //   const letters = getLettersByModel(selectedCategory, isExpanded);
+
+  //   if (!letters) return null;
+  //   //       color: #af3737; medicine red?
+  //   const shadowColor = {
+  //     1: { color: "#af3737" },
+  //     2: { color: "#999" },
+  //     3: { color: "#999" },
+  //     4: { color: "#00A4EF" },
+  //     5: { color: "#2B5317" },
+  //     6: { color: "#999" },
+  //     7: { color: "#999" },
+  //   };
+  //   return (
+  //     <>
+  //       {/* <div className="overlay-test"></div> */}
+
+  //       <div
+  //         className="text-test"
+  //         style={isExpanded ? { marginTop: "2em" } : null}
+  //       >
+  //         {letters.map((letter, index) => (
+  //           <div className="wrapper-test" key={index}>
+  //             <div className="letter">{letter}</div>
+  //             <div className="shadow" style={shadowColor[selectedCategory]}>
+  //               {letter}
+  //             </div>
+  //           </div>
+  //         ))}
+  //       </div>
+  //     </>
+  //   );
+  // };
+
   return (
     <>
       <section className="section section-one">
-        {renderModels ? (
-          <div
-            style={{
-              position: "absolute",
-              top: "2em",
-              left: "3%",
-              display: "flex",
-              flexDirection: "column",
-              // justifyContent: "flex-end",
-              height: "500px",
-              // border: "1px solid orange",
-            }}
+        {/* {startExpandedAnimation ? ( */}
+        <div
+          style={{
+            position: "absolute",
+            top: "20%",
+            left: "10%",
+            display: "flex",
+            flexDirection: "column",
+            // height: "500px",
+            // border: "1px solid red",
+            // width: "80vw",
+          }}
+        >
+          {/* <button
+            style={{ position: "absolute" }}
+            onClick={() => setStartExpandedAnimation(true)}
           >
-            {/* <div style={{ lineHeight: "15vh" }}>
-            <div> */}
-            <span
-              // ref={simplyRef}
-              className="section-one-first-title"
-              style={{
-                position: "absolute",
-                transform: "translateX(200px)",
-                // marginTop: "5em",
-              }}
-            >
-              Simply
-            </span>
-            <span
-              // ref={expandedRef}
-              className="section-one-second-title"
-              style={{
-                position: "relative",
-                top: "1em",
-                transform: "translateX(-200px)",
-              }}
-            >
-              Expand
-            </span>
-            {/* </div>
-          </div> */}
+            cilkck me
+          </button> */}
+          {/* <TextTwo /> */}
+          {startExpandedAnimation ? (
+            <>
+              <div className="text-animate border-animate">
+                <div className="container">
+                  <span className="text-animate">SIMPLY EXPAND</span>
+                </div>
+              </div>
+            </>
+          ) : null}
 
-            {/* <img style={{ width: "10em" }} src="/assets/images/in3dlogo.png" /> */}
-          </div>
-        ) : null}
+          {/* <span
+                className="section-one-first-title"
+                style={{
+                  position: "absolute",
+                  transform: "translateX(200px)",
+                  // border: "1px solid yellow",
+                  width: "40vw",
+                  borderBottom: "1px solid white",
+                }}
+              >
+                SIMPLY EXPAND
+              </span> */}
+        </div>
+        {/* ) : null} */}
       </section>
       <section className="section section-two">
         <div
@@ -100,56 +141,40 @@ export function BackgroundScroll({
           }}
           id="midSection2"
         ></div>
-        <div
-          ref={titlesContainerRef}
-          // style={
-          //   fixed
-          //     ? {
-          //         position: "fixed",
-          //         bottom: "108%",
-          //         right: "14%",
-          //         border: "1px solid yellow",
-          //       }
-          //     : { position: "absolute", right: "14%", border: "1px solid red" }
-          // }
-          className={`home-categories-wrapper ${hovered}`}
-        >
-          {fixed
-            ? categories.map((title, idx) => (
-                <div
-                  onMouseOver={() => {
-                    // document.documentElement.style.setProperty(
-                    //   "--color",
-                    //   backgrounds[title] || backgrounds[1]
-                    // );
-                    // setHovered("taasia");
-                  }}
-                  onMouseOut={() => {
-                    // document.documentElement.style.setProperty(
-                    //   "--color",
-                    //   backgrounds[1]
-                    // );
-                    // setHovered("");
-                  }}
-                  onClick={() => scrollToElementById(idx)}
-                  key={idx}
-                  className={textAnimation}
-                >
-                  {/* {t(title).toUpperCase()} */}
-                  {title.toUpperCase()}
-                </div>
-              ))
-            : null}
-        </div>
+        {fixed ? (
+          <div
+            ref={titlesContainerRef}
+            className={`home-categories-wrapper ${hovered}`}
+          >
+            {categories.map((title, idx) => (
+              <div
+                onMouseOver={() => {
+                  // document.documentElement.style.setProperty(
+                  //   "--color",
+                  //   backgrounds[title] || backgrounds[1]
+                  // );
+                  // setHovered("taasia");
+                }}
+                onMouseOut={() => {
+                  // document.documentElement.style.setProperty(
+                  //   "--color",
+                  //   backgrounds[1]
+                  // );
+                  // setHovered("");
+                }}
+                onClick={() => scrollToElementById(idx)}
+                key={idx}
+                className={textAnimation}
+              >
+                {/* {t(title).toUpperCase()} */}
+                {title == "artificalIntelligence"
+                  ? "ARTIFICAL INTELLIGENCE"
+                  : title.toUpperCase()}
+              </div>
+            ))}
+          </div>
+        ) : null}
       </section>
-      {/* <div
-        style={{
-          height: "100vh",
-          width: "100vw",
-          background: "cyan",
-          border: "4px solid pink",
-        }}
-      ></div> */}
       <section
         id="sectionTwoHalf"
         className="section section-two-half"
@@ -165,3 +190,37 @@ export function BackgroundScroll({
     </>
   );
 }
+
+const TextTwo = () => {
+  return (
+    <div className="simply-expanded-container">
+      <div className="simply-outer">
+        <span className="simply-text">SIMPLY EXPAND</span>
+      </div>
+    </div>
+  );
+};
+
+const getLettersByModel = (modelIdx = 1, isExpanded) => {
+  if (!modelIdx || typeof modelIdx !== "number" || modelIdx == 0) {
+    console.log("why we in here", typeof modelIdx);
+    return;
+  }
+  //   console.log({ modelIdx });
+  const modelByIndex = {
+    0: "platform",
+    1: "MEDICINE",
+    2: "INDUSTRY",
+    3: "ARTIFICAL INTELLIGENCE",
+    4: "MICROSOFT",
+    5: "MILITARY",
+    6: "CUSTOMIZATION",
+    7: "SECURITY",
+  };
+
+  if (isExpanded) {
+    return "EXPANDED".split("");
+  }
+
+  return "IN3D-TECH".split("");
+};
