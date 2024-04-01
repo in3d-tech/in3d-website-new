@@ -184,86 +184,86 @@ export function AstroModel({
 
 // ---------------------- All other models ----------------------------
 
-// export function MappedModels({
-//   idx,
-//   currentRef,
-//   prevRef,
-//   visibleModels,
-//   setVisibleModels,
-//   model,
-//   allModelPositions,
-// }) {
-//   if (idx == 7) return null;
+export function MappedModels({
+  idx,
+  currentRef,
+  prevRef,
+  visibleModels,
+  setVisibleModels,
+  model,
+  allModelPositions,
+}) {
+  if (idx == 7) return null;
 
-//   const { isInstantScroll, scrollArea, setScrollArea } = useAppContext();
+  const { isInstantScroll, scrollArea, setScrollArea } = useAppContext();
 
-//   const { scene, animations } = useGLTF(model.url);
-//   const [isVisible, setIsVisible] = useState(false);
-//   const mixer = useGLTFAnimations(scene, animations);
-//   const industryModel = 0;
+  const { scene, animations } = useGLTF(model.url);
+  const [isVisible, setIsVisible] = useState(false);
+  const mixer = useGLTFAnimations(scene, animations);
+  const industryModel = 0;
 
-//   useEffect(() => {
-//     let timeline = gsap.timeline({
-//       defaults: { ease: "power1.out" },
+  useEffect(() => {
+    let timeline = gsap.timeline({
+      defaults: { ease: "power1.out" },
 
-//       scrollTrigger: {
-//         trigger: `.${model.section}`,
-//         start: "top bottom",
-//         endTrigger: `.${model.section}`,
-//         end: "top top",
-//         scrub: 1,
-//         // markers: true,
-//         preventOverlaps: isInstantScroll ? true : false,
-//         fastScrollEnd: true, // 2500 is default,
-//         onEnter: () => {
-//           // console.log("just entered section of idx: ", idx);
-//           setVisibleModels([idx - 1, idx]);
-//           const areaObj = { ...scrollArea };
-//           areaObj.currentSection = model.onEnter.currentSection;
-//           areaObj.prevSection = model.onEnter.prevSection;
-//           setScrollArea(areaObj);
-//           // checkModelPosition({ modelByIdx: idx, refs: allModelPositions });
-//         },
-//         onLeaveBack: () => {
-//           // console.log("just Leave Back section of idx: ", idx, "and", [
-//           //   idx - 1,
-//           //   idx,
-//           //   idx + 1,
-//           // ]);
-//           setVisibleModels(idx == industryModel ? [] : [idx, idx - 1]);
-//           const areaObj = { ...scrollArea };
-//           areaObj.currentSection = model.onLeave.currentSection;
-//           areaObj.prevSection = model.onLeave.prevSection;
-//           setScrollArea(areaObj);
-//         },
-//       },
-//       // onLeave: () => console.log("just onLeave section of idx: ", idx),
-//       // onEnterBack: () => console.log("just onEnterBack section of idx: ", idx),
-//     });
+      scrollTrigger: {
+        trigger: `.${model.section}`,
+        start: "top bottom",
+        endTrigger: `.${model.section}`,
+        end: "top top",
+        scrub: 1,
+        // markers: true,
+        preventOverlaps: isInstantScroll ? true : false,
+        fastScrollEnd: true, // 2500 is default,
+        onEnter: () => {
+          // console.log("just entered section of idx: ", idx);
+          setVisibleModels([idx - 1, idx]);
+          const areaObj = { ...scrollArea };
+          areaObj.currentSection = model.onEnter.currentSection;
+          areaObj.prevSection = model.onEnter.prevSection;
+          setScrollArea(areaObj);
+          // checkModelPosition({ modelByIdx: idx, refs: allModelPositions });
+        },
+        onLeaveBack: () => {
+          // console.log("just Leave Back section of idx: ", idx, "and", [
+          //   idx - 1,
+          //   idx,
+          //   idx + 1,
+          // ]);
+          setVisibleModels(idx == industryModel ? [] : [idx, idx - 1]);
+          const areaObj = { ...scrollArea };
+          areaObj.currentSection = model.onLeave.currentSection;
+          areaObj.prevSection = model.onLeave.prevSection;
+          setScrollArea(areaObj);
+        },
+      },
+      // onLeave: () => console.log("just onLeave section of idx: ", idx),
+      // onEnterBack: () => console.log("just onEnterBack section of idx: ", idx),
+    });
 
-//     model
-//       .timeline(timeline, currentRef, prevRef)
-//       .add(() => checkModelPosition(idx, currentRef));
-//   }, [currentRef, isInstantScroll]);
+    model
+      .timeline(timeline, currentRef, prevRef)
+      .add(() => checkModelPosition(idx, currentRef));
+  }, [currentRef, isInstantScroll]);
 
-//   return (
-//     <group key={`test${idx}`}>
-//       <primitive
-//         ref={currentRef}
-//         object={scene}
-//         dispose={null}
-//         scale={model.scale}
-//         position={model.position}
-//         visible={visibleModels.includes(idx)}
-//         rotation={model.rotation}
-//       />
-//     </group>
-//   );
-// }
+  return (
+    <group key={`test${idx}`}>
+      <primitive
+        ref={currentRef}
+        object={scene}
+        dispose={null}
+        scale={model.scale}
+        position={model.position}
+        visible={visibleModels.includes(idx)}
+        rotation={model.rotation}
+      />
+    </group>
+  );
+}
 
 // ANIMATE ALL
 
-export function useGLTFAnimations(scene, animations) {
+function useGLTFAnimations(scene, animations) {
   const { invalidate } = useThree();
   const mixer = useMemo(() => new THREE.AnimationMixer(scene), [scene]);
 

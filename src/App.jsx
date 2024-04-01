@@ -59,7 +59,8 @@ function App() {
       setIsMobileViewOnly(true);
     }
     Object.values(backgrounds).forEach((image) => {
-      new Image().src = image;
+      const img = new Image();
+      img.src = image;
     });
   }, []);
 
