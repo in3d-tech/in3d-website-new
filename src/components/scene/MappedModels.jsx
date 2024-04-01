@@ -63,10 +63,11 @@ function MappedModels({
       // onLeave: () => console.log("just onLeave section of idx: ", idx),
       // onEnterBack: () => console.log("just onEnterBack section of idx: ", idx),
     });
-
-    model
-      .timeline(timeline, currentRef, prevRef)
-      .add(() => checkModelPosition(idx, currentRef));
+    if (currentRef.current) {
+      model
+        .timeline(timeline, currentRef, prevRef)
+        .add(() => checkModelPosition(idx, currentRef));
+    }
   }, [currentRef, isInstantScroll]);
 
   return (
