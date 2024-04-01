@@ -56,7 +56,7 @@ export function AstroModel({
       const fullyRendered = scene.children.every((child) => child.visible);
 
       if (fullyRendered && isAstroModelDrawn === false) {
-        setTimeout(() => setIsAstroModelDrawn(true), 3000);
+        setTimeout(() => setIsAstroModelDrawn(true), 1500);
         console.log("Astro object is fully rendered!");
       }
     }
