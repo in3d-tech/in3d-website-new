@@ -545,32 +545,32 @@ section {
 
 /* taaasia */
 .industry-title-ani {
-  animation: move-drop-title 1s ease-in forwards;
+  animation: move-drop-title 0.8s ease-in forwards;
 }
 
 .industry-text-one-ani {
-  animation: move-reveal-text 1s ease-in forwards;
+  animation: move-reveal-text 0.8s ease-in forwards;
 }
 .industry-text-two-ani {
-  animation: move-slide-text-two 1s ease-in forwards;
+  animation: move-slide-text-two 0.8s ease-in forwards;
 }
 /* artifical intelligence */
 .ai-title-ani {
-  animation: text-reveal-title 1s ease-in forwards;
+  animation: text-reveal-title 0.8s ease-in forwards;
 }
 
 .ai-text-one-ani {
-  animation: text-drop-title 1s ease-in forwards;
+  animation: text-drop-title 0.8s ease-in forwards;
 }
 .ai-text-two-ani {
-  animation: text-reveal-title 1s ease-in forwards;
+  animation: text-reveal-title 0.8s ease-in forwards;
 }
 /* SECURITY */
 .security-title-ani {
-  animation: rise-reveal-title 1s ease-in forwards;
+  animation: rise-reveal-title 0.8s ease-in forwards;
 }
 .security-text-ani {
-  animation: drop-drop-title 1s ease-in forwards;
+  animation: drop-drop-title 0.8s ease-in forwards;
 }
 /* MILITARY */
 
@@ -1306,7 +1306,6 @@ section {
     right: 3%;
     /* border: 1px solid yellow; */
     width: 40%;
-    border: 1px solid red !important;
   }
 
   .contact-details-wrapper {

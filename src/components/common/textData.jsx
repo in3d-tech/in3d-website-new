@@ -4,7 +4,7 @@ export const IndustryText = ({ textClass, scrollArea, categoriesObj }) => (
     style={{
       height: "80vh",
       width: "34%",
-      top: "18%",
+      top: "22%",
       left: "14%",
       position: "absolute",
       color: "white",
@@ -52,7 +52,7 @@ export const MedicineText = ({ textClass, scrollArea, categoriesObj }) => (
     style={{
       height: "80vh",
       width: "34%",
-      top: "14%",
+      top: "16%",
       left: "9%",
       position: "absolute",
       color: "white",
@@ -95,7 +95,7 @@ export const MicrosoftText = ({ textClass, scrollArea, categoriesObj }) => (
     style={{
       height: "80vh",
       width: "34%",
-      top: "16%",
+      top: "22%",
       left: "14%",
       position: "absolute",
       color: "white",
@@ -142,7 +142,7 @@ export const SecurityText = ({ textClass, scrollArea, categoriesObj }) => (
     style={{
       height: "80vh",
       width: "34%",
-      top: "16%",
+      top: "18%",
       right: "4%",
       position: "absolute",
       color: "white",
@@ -156,7 +156,10 @@ export const SecurityText = ({ textClass, scrollArea, categoriesObj }) => (
     <div className="scrolled-category-title security-title-ani">
       {categoriesObj[scrollArea.currentSection]}
     </div>
-    <div className="scrolled-category-text-one security-text-ani">
+    <div
+      style={{ marginTop: "4em" }}
+      className="scrolled-category-text-one security-text-ani"
+    >
       <span>
         Thanks to years of collaboration with defense industries, we gained the
         needed experience, knowledge and tools to provide quick and out of the
@@ -172,7 +175,7 @@ export const AiText = ({ textClass, scrollArea, categoriesObj }) => (
     style={{
       height: "80vh",
       width: "34%",
-      top: "16%",
+      top: "18%",
       left: "10%",
       position: "absolute",
       color: "white",
@@ -212,7 +215,7 @@ export const MilitaryText = ({ textClass, scrollArea, categoriesObj }) => (
     style={{
       height: "80vh",
       width: "34%",
-      top: "16%",
+      top: "20%",
       right: "9%",
       position: "absolute",
       color: "white",
@@ -252,7 +255,7 @@ export const CustomizationText = ({ textClass, scrollArea, categoriesObj }) => (
     style={{
       height: "80vh",
       width: "34%",
-      top: "16%",
+      top: "18%",
       left: "12%",
       position: "absolute",
       color: "white",
@@ -266,7 +269,7 @@ export const CustomizationText = ({ textClass, scrollArea, categoriesObj }) => (
       {categoriesObj[scrollArea.currentSection]}
     </div>
     <div className="scrolled-category-text-one">
-      <span style={{ marginTop: "2em" }}>
+      <span style={{ marginTop: "3em" }}>
         We specialize in 3D and Extended Reality (EX).
       </span>
     </div>

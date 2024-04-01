@@ -37,10 +37,15 @@ export function AstroModel({
     if (astroRef.current && scene && !isFullyRenderedRef.current) {
       // Check if all objects in the scene have been rendered
       const fullyRendered = scene.children.every((child) => child.visible);
-      if (fullyRendered && isAstroModelDrawn === false && active === false) {
+      if (
+        fullyRendered &&
+        isAstroModelDrawn === false &&
+        active === false &&
+        scene
+      ) {
         // Object is fully rendered
         isFullyRenderedRef.current = true;
-        setTimeout(() => setIsAstroModelDrawn(true), 1000);
+        setIsAstroModelDrawn(true);
         console.log("Astro object is fully rendered!");
       }
     }
@@ -163,17 +168,17 @@ export function AstroModel({
     scrollArea.currentSection == 9;
 
   return (
-    <group>
-      <primitive
-        ref={astroRef}
-        object={scene}
-        dispose={null}
-        scale={[3, 3, 3]}
-        position={[-5, -18.2, -10]}
-        rotation={[0.05, Math.PI / 2 + 0, 0]}
-        visible={isVisibile}
-      />
-    </group>
+    // <group>
+    <primitive
+      ref={astroRef}
+      object={scene}
+      dispose={null}
+      scale={[3, 3, 3]}
+      position={[-5, -18.2, -10]}
+      rotation={[0.05, Math.PI / 2 + 0, 0]}
+      visible={isVisibile}
+    />
+    // </group>
   );
 }
 
