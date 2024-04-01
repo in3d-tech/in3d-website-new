@@ -244,15 +244,7 @@ function Scene({
         {scrollArea.currentSection >= 2
           ? refsObj[scrollArea.currentSection - 2].text
           : null}
-        {/* {!visibleText ? ( */}
-        {/* <MedicineText
-                  textClass={textClass}
-                  scrollArea={scrollArea}
-                  categoriesObj={categoriesObj}
-                /> */}
-        {/* ) : null} */}
         <Canvas className={`canvas-container`}>
-          {/* <LoaderComponent /> */}
           {<ambientLight intensity={0.2} />}
           <directionalLight
             color={"rgb(200,255,255)"}
@@ -278,8 +270,6 @@ function Scene({
           </Suspense>
         </Canvas>
       </div>
-
-      {/* <section className="section section-one"></section> */}
       <BackgroundScroll
         scrollToElementById={scrollToElementById}
         simplyRef={simplyRef}

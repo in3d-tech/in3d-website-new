@@ -85,7 +85,6 @@ export function BackgroundScroll({
   return (
     <>
       <section className="section section-one">
-        {/* {startExpandedAnimation ? ( */}
         <div
           style={{
             position: "absolute",
@@ -93,40 +92,22 @@ export function BackgroundScroll({
             left: "10%",
             display: "flex",
             flexDirection: "column",
-            // height: "500px",
-            // border: "1px solid red",
-            // width: "80vw",
           }}
         >
-          {/* <button
-            style={{ position: "absolute" }}
-            onClick={() => setStartExpandedAnimation(true)}
-          >
-            cilkck me
-          </button> */}
-          {/* <TextTwo /> */}
+          {/* <Text /> */}
+          {/* <div>
+            <a href="#" className="button-ani">
+              Contact Us Today!
+            </a>
+          </div> */}
           {startExpandedAnimation ? (
             <>
               <div className="container">
-                <span className="text-animate">SIMPLY EXPAND</span>
+                <span className="text-animate button-ani">SIMPLY EXPAND</span>
               </div>
             </>
           ) : null}
-
-          {/* <span
-                className="section-one-first-title"
-                style={{
-                  position: "absolute",
-                  transform: "translateX(200px)",
-                  // border: "1px solid yellow",
-                  width: "40vw",
-                  borderBottom: "1px solid white",
-                }}
-              >
-                SIMPLY EXPAND
-              </span> */}
         </div>
-        {/* ) : null} */}
       </section>
       <section className="section section-two">
         <div
@@ -164,10 +145,11 @@ export function BackgroundScroll({
                 key={idx}
                 className={textAnimation}
               >
-                {/* {t(title).toUpperCase()} */}
-                {title == "artificalIntelligence"
-                  ? "ARTIFICAL INTELLIGENCE"
-                  : title.toUpperCase()}
+                <span className={"button-ani"}>
+                  {title == "artificalIntelligence"
+                    ? "ARTIFICAL INTELLIGENCE"
+                    : title.toUpperCase()}
+                </span>
               </div>
             ))}
           </div>
@@ -188,16 +170,6 @@ export function BackgroundScroll({
     </>
   );
 }
-
-const TextTwo = () => {
-  return (
-    <div className="simply-expanded-container">
-      <div className="simply-outer">
-        <span className="simply-text">SIMPLY EXPAND</span>
-      </div>
-    </div>
-  );
-};
 
 const getLettersByModel = (modelIdx = 1, isExpanded) => {
   if (!modelIdx || typeof modelIdx !== "number" || modelIdx == 0) {

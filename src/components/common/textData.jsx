@@ -15,10 +15,10 @@ export const IndustryText = ({ textClass, scrollArea, categoriesObj }) => (
       // justifyContent: "space-between",
     }}
   >
-    <div className="scrolled-category-title">
+    <div className="scrolled-category-title industry-title-ani">
       {categoriesObj[scrollArea.currentSection]}
     </div>
-    <div className="scrolled-category-text-one">
+    <div className="scrolled-category-text-one industry-text-one-ani">
       {/* <span>The world was recently</span>
       <span>introduced to the wonders of</span>
       <span>the industry 4.0 revolution</span> */}
@@ -28,7 +28,7 @@ export const IndustryText = ({ textClass, scrollArea, categoriesObj }) => (
       </span>
       <br />
     </div>
-    <div className="scrolled-category-text-two">
+    <div className="scrolled-category-text-two industry-text-two-ani">
       <span>
         Together with our clients we map out the challenges they face and
         develop tailor made solutions using XR and 3D technology that creates an
@@ -63,10 +63,10 @@ export const MedicineText = ({ textClass, scrollArea, categoriesObj }) => (
       // justifyContent: "space-between",
     }}
   >
-    <div className="scrolled-category-title">
+    <div className="scrolled-category-title ai-title-ani">
       {categoriesObj[scrollArea.currentSection]}
     </div>
-    <div className="scrolled-category-text-one">
+    <div className="scrolled-category-text-one ai-text-one-ani">
       <span>
         The world of medicine is one of the most innovative sectors in the
         world.
@@ -75,7 +75,7 @@ export const MedicineText = ({ textClass, scrollArea, categoriesObj }) => (
       <span>of the most innovative sectors</span>
       <span>in the world</span> */}
     </div>
-    <div className="scrolled-category-text-two">
+    <div className="scrolled-category-text-two ai-text-two-ani">
       <span>
         Using Extended Reality (XR) we at in3D became pioneers in development of
         XR products for medical organizations, collaborating together to empower
@@ -103,6 +103,7 @@ export const MicrosoftText = ({ textClass, scrollArea, categoriesObj }) => (
       fontFamily: "gotham",
       display: "flex",
       flexDirection: "column",
+      animation: "text-reveal 1.2s ease-in-out forwards",
       // justifyContent: "space-between",
     }}
   >
@@ -152,10 +153,10 @@ export const SecurityText = ({ textClass, scrollArea, categoriesObj }) => (
       // justifyContent: "space-between",
     }}
   >
-    <div className="scrolled-category-title">
+    <div className="scrolled-category-title security-title-ani">
       {categoriesObj[scrollArea.currentSection]}
     </div>
-    <div className="scrolled-category-text-one">
+    <div className="scrolled-category-text-one security-text-ani">
       <span>
         Thanks to years of collaboration with defense industries, we gained the
         needed experience, knowledge and tools to provide quick and out of the
@@ -182,10 +183,10 @@ export const AiText = ({ textClass, scrollArea, categoriesObj }) => (
       // justifyContent: "space-between",
     }}
   >
-    <div className="scrolled-category-title">
+    <div className="scrolled-category-title ai-title-ani">
       {categoriesObj[scrollArea.currentSection]}
     </div>
-    <div className="scrolled-category-text-one">
+    <div className="scrolled-category-text-one ai-text-one-ani">
       <span>
         XR + AI = E<span className="ai-highlight">X</span>T
         <span className="ai-highlight">R</span>A{" "}
@@ -193,7 +194,7 @@ export const AiText = ({ textClass, scrollArea, categoriesObj }) => (
         <span className="ai-highlight">I</span>NG
       </span>
     </div>
-    <div className="scrolled-category-text-two">
+    <div className="scrolled-category-text-two ai-text-two-ani">
       <span>
         The combination of a 3D XR software environment with A.I creates not
         only an advanced and innovative hardware and software operation but a
@@ -222,16 +223,19 @@ export const MilitaryText = ({ textClass, scrollArea, categoriesObj }) => (
       // justifyContent: "space-between",
     }}
   >
-    <div className="scrolled-category-title">
+    <div className="scrolled-category-title industry-title-ani">
       {categoriesObj[scrollArea.currentSection]}
     </div>
-    <div className="scrolled-category-text-one">
+    <div className="scrolled-category-text-one industry-text-one-ani">
       <span>
         Part of our vision is to promote innovation, which is a big part of what
         Israel stands for.
       </span>
     </div>
-    <div className="scrolled-category-text-two">
+    <div
+      style={{ marginTop: "2em" }}
+      className="scrolled-category-text-two industry-text-two-ani"
+    >
       <span>
         We succeeded in delivering top-of-the-line technology to all of our
         important industries, through development of complex simulators, XR
@@ -253,34 +257,27 @@ export const CustomizationText = ({ textClass, scrollArea, categoriesObj }) => (
       position: "absolute",
       color: "white",
       // fontSize: "3em",
-      fontFamily: "gotham",
       display: "flex",
       flexDirection: "column",
       // justifyContent: "space-between",
     }}
   >
-    <div className="scrolled-category-title">
+    <div className="scrolled-category-title security-title-ani">
       {categoriesObj[scrollArea.currentSection]}
     </div>
     <div className="scrolled-category-text-one">
-      <span>
-        We specialize in 3D and Extended Reality (EX), and as specialists we
-        keep an amazing team of developers, 3D generalists, interface and
-        graphics artists, and product designers just so we can provide our
-        clients with the flexibility and abilities needed to deliver the best
-        product
+      <span style={{ marginTop: "2em" }}>
+        We specialize in 3D and Extended Reality (EX).
       </span>
     </div>
-    {/* <div className="scrolled-category-text-two">
-      <span>
-        Were here to let you know, in3D is your perfect go to for any AI
-        products.
+    <div className="scrolled-category-text-two security-title-ani">
+      <span style={{ marginBottom: "-3em" }}>
+        As specialists we keep an amazing team of developers, 3D generalists,
+        interface and graphics artists, and product designers just so we can
+        provide our clients with the flexibility and abilities needed to deliver
+        the best product
       </span>
-      <span>
-        In3D and Artifical Intelligence share a strong connection and a combined
-        vison on the important roles of MR technology
-      </span>
-    </div> */}
+    </div>
   </div>
 );
 

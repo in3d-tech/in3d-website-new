@@ -13,7 +13,7 @@ export const Model_Data = [
     onLeave: { currentSection: 1, prevSection: 2 },
     scale: [3, 3, 3],
     position: [13.5, -5, -0.2],
-    rotation: [0, -1.2, 0],
+    rotation: [0, 1, 0],
     // visible={visibleModels.includes(3)}
     timeline: (tl, currentRef, prevRef) =>
       tl
