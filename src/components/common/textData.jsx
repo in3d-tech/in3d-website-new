@@ -95,7 +95,7 @@ export const MicrosoftText = ({ textClass, scrollArea, categoriesObj }) => (
     style={{
       height: "80vh",
       width: "34%",
-      top: "22%",
+      top: "30%",
       left: "14%",
       position: "absolute",
       color: "white",
@@ -175,7 +175,7 @@ export const AiText = ({ textClass, scrollArea, categoriesObj }) => (
     style={{
       height: "80vh",
       width: "34%",
-      top: "18%",
+      top: "24%",
       left: "10%",
       position: "absolute",
       color: "white",
@@ -215,7 +215,7 @@ export const MilitaryText = ({ textClass, scrollArea, categoriesObj }) => (
     style={{
       height: "80vh",
       width: "34%",
-      top: "20%",
+      top: "25%",
       right: "9%",
       position: "absolute",
       color: "white",
@@ -284,35 +284,35 @@ export const CustomizationText = ({ textClass, scrollArea, categoriesObj }) => (
   </div>
 );
 
-export const ContactUsText = () => (
-  <div className="contact-us-wrapper">
-    <span className="contact-title">Contact us</span>
-    <div className="contact-details-wrapper">
-      <span>Feel free to contact us via:</span>
-      <span style={{ marginTop: "0.5em", fontSize: "1em" }}>
-        <span style={{ fontWeight: "bold" }}>Phone:</span>
-        <span>+972-54-218-5021 or +1(302)-219-4023</span>
-      </span>
-
-      <span>
-        <span style={{ fontWeight: "bold" }}>Email: </span>sales@in3d-tech.com
-      </span>
-      <span style={{ marginTop: "1em" }}>
-        We also invite you to meet us at 1 Shefa Tal street, Tel Aviv.
-      </span>
-      <span>
-        Or you can message us{" "}
-        <span
-          className="contact-us-here-btn"
-          style={{
-            fontSize: "1.1em",
-            textDecoration: "underline",
-            fontWeight: "600",
-          }}
-        >
-          here
+export const ContactUsText = ({ test }) =>
+  !test ? null : (
+    <div className="contact-us-wrapper">
+      <span className="contact-title">Contact us</span>
+      <div className="contact-details-wrapper">
+        <span>Feel free to contact us via:</span>
+        <span style={{ marginTop: "0.5em" }}>
+          <span style={{ fontWeight: "bold" }}>Phone:</span>
+          <span>+972-54-218-5021 or +1(302)-219-4023</span>
         </span>
-      </span>
+
+        <span>
+          <span style={{ fontWeight: "bold" }}>Email: </span>sales@in3d-tech.com
+        </span>
+        <span style={{ marginTop: "1em" }}>
+          We also invite you to meet us at 1 Shefa Tal street, Tel Aviv.
+        </span>
+        <span>
+          Or you can message us{" "}
+          <span
+            className="contact-us-here-btn"
+            style={{
+              textDecoration: "underline",
+              fontWeight: "600",
+            }}
+          >
+            here
+          </span>
+        </span>
+      </div>
     </div>
-  </div>
-);
+  );

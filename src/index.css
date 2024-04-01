@@ -944,17 +944,23 @@ section {
 /* contact us styles */
 
 .contact-us-wrapper {
+  /* position: absolute;
+  top: 16%;
+  right: 6%;
+  display: flex;
+  flex-direction: column;
+  font-family: gotham; */
   position: absolute;
   top: 16%;
   right: 6%;
-  /* border: 1px solid yellow; */
   display: flex;
   flex-direction: column;
   font-family: gotham;
+  width: 50%;
 }
 
 .contact-title {
-  font-size: 6em;
+  font-size: 1.5em;
   color: white;
 }
 
@@ -962,9 +968,9 @@ section {
   display: flex;
   flex-direction: column;
 
-  font-size: 1.5em;
+  font-size: 0.7em;
   color: rgb(255, 255, 255, 0.9);
-  margin-top: 4em;
+  margin-top: 3em;
 }
 
 .overlay-test {
@@ -1333,15 +1339,16 @@ section {
     line-height: 1.3em;
   }
 
-  .contact-us-wrapper {
+  /* .contact-us-wrapper {
     right: 3%;
-    /* border: 1px solid yellow; */
     width: 40%;
+    position: absolute;
+    z-index: 43334343242432;
   }
 
   .contact-details-wrapper {
     font-size: 1.3em;
-  }
+  } */
 
   .category-title:hover {
     cursor: pointer !important;

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAppContext } from "../../context/appContext";
+import { ContactUsText } from "../common/textData";
 
 export function BackgroundScroll({
   scrollToElementById,
@@ -160,7 +161,9 @@ export function BackgroundScroll({
       <section id="sectionSeven" className="section section-seven"></section>
       <section id="sectionEight" className="section section-eight"></section>
       <section id="sectionNine" className="section section-nine"></section>
-      <section id="sectionTen" className="section section-ten"></section>
+      <section id="sectionTen" className="section section-ten">
+        {<ContactUsText test={true} />}
+      </section>
     </>
   );
 }

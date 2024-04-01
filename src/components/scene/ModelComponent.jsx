@@ -150,7 +150,7 @@ export function AstroModel({
         )
         .to(
           customizeRef.current.position,
-          { x: 14, y: -2, z: 0 },
+          { x: 16, y: -2, z: 0 },
           "simultaneously"
         )
         .to(customizeRef.current.rotation, { y: -2.9 }, "simultaneously");
