@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import {
   AstroModel,
@@ -20,7 +20,7 @@ import { Camera } from "../../components/scene/Camera";
 import { BackgroundScroll } from "./BackgroundScroll";
 import { useAppContext } from "../../context/appContext";
 
-function Scene({ textRef, scrollToElementById, backgrounds }) {
+function Scene({ textRef, scrollToElementById }) {
   const [visibleModels, setVisibleModels] = useState([]);
   const [visibleText, setVisibleText] = useState(false);
   const [shouldFadeIn, setShouldFadeIn] = useState(false);
@@ -97,6 +97,18 @@ function Scene({ textRef, scrollToElementById, backgrounds }) {
   useEffect(() => {
     setMenuOpened(false);
     // setbgImage(backgrounds[scrollArea.currentSection] || backgrounds[1]);
+
+    const backgrounds = {
+      1: 'url("/assets/images/backgrounds/Astro_1_Background.webp")',
+      2: 'url("/assets/images/backgrounds/taasia/taasia_bg.jpg")',
+      3: 'url("/assets/images/backgrounds/medicine/medicine_bg.jpg")',
+      4: 'url("/assets/images/backgrounds/microsoft/microsoft_bg.jpg")',
+      5: 'url("/assets/images/backgrounds/security/security.jpg")',
+      6: 'url("/assets/images/backgrounds/ai/ai_bg.png',
+      7: 'url("/assets/images/backgrounds/military/military_bg.jpg")',
+      8: 'url("/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png")',
+      9: 'url("/assets/images/backgrounds/Astro_1_Background.webp")',
+    };
 
     document.documentElement.style.setProperty(
       "--color",
