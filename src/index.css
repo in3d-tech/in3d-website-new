@@ -1294,6 +1294,11 @@ section {
   }
 }
 
+.category-title:hover {
+  cursor: pointer !important;
+  font-size: 0.85em;
+}
+
 @media screen and (max-width: 1690px) {
   .category-title {
     font-size: 0.7em;
@@ -1301,6 +1306,11 @@ section {
 
   .text-animate {
     font-size: 1em;
+  }
+
+  .category-title:hover {
+    cursor: pointer !important;
+    font-size: 0.75em;
   }
 }
 /* med displays:  */
@@ -1331,6 +1341,11 @@ section {
 
   .contact-details-wrapper {
     font-size: 1.3em;
+  }
+
+  .category-title:hover {
+    cursor: pointer !important;
+    font-size: 0.55em;
   }
 
   .horizontal-nav-open-titles-container {
