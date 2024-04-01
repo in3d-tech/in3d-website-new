@@ -1,9 +1,6 @@
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Suspense, lazy, useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import {
-  MappedModels,
-  AstroModel,
-} from "../../components/scene/ModelComponent";
+import { AstroModel } from "../../components/scene/ModelComponent";
 import { Model_Data } from "../../components/common/modelData";
 import {
   IndustryText,
@@ -19,6 +16,8 @@ import { gsap } from "gsap";
 import { Camera } from "../../components/scene/Camera";
 import { BackgroundScroll } from "./BackgroundScroll";
 import { useAppContext } from "../../context/appContext";
+
+const MappedModels = lazy(() => import("./MappedModels"));
 
 function Scene({ textRef, scrollToElementById, backgrounds }) {
   const [visibleModels, setVisibleModels] = useState([]);
@@ -248,7 +247,7 @@ function Scene({ textRef, scrollToElementById, backgrounds }) {
               setTextAnimation={setTextAnimation}
               customizeRef={customizeRef}
             />
-            {renderModels ? models : null}
+            <Suspense fallback={null}>{renderModels ? models : null}</Suspense>
           </Suspense>
         </Canvas>
       </div>

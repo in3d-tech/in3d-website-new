@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { useAppContext } from "../../context/appContext";
-import gsap from "gsap";
-import { t } from "../common/t";
 
 export function BackgroundScroll({
   scrollToElementById,
