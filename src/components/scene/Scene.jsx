@@ -242,16 +242,20 @@ function Scene({ textRef, scrollToElementById }) {
           : null}
         <Canvas className={`canvas-container`}>
           {<ambientLight intensity={0.2} />}
-          <directionalLight
-            color={"rgb(200,255,255)"}
-            intensity={5}
-            position={[-25, 50, 10]}
-          />
-          <directionalLight
-            intensity={1}
-            position={[20, 0, -1]}
-            color={"rgb(254,200,255)"}
-          />
+          {renderModels ? (
+            <>
+              <directionalLight
+                color={"rgb(200,255,255)"}
+                intensity={5}
+                position={[-25, 50, 10]}
+              />
+              <directionalLight
+                intensity={1}
+                position={[20, 0, -1]}
+                color={"rgb(254,200,255)"}
+              />
+            </>
+          ) : null}
           <Camera />
           <Suspense fallback={null}>
             <AstroModel
