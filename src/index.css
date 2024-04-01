@@ -956,7 +956,7 @@ section {
   display: flex;
   flex-direction: column;
   font-family: gotham;
-  width: 50%;
+  width: 40%;
 }
 
 .contact-title {
@@ -968,7 +968,7 @@ section {
   display: flex;
   flex-direction: column;
 
-  font-size: 0.7em;
+  font-size: 0.5em;
   color: rgb(255, 255, 255, 0.9);
   margin-top: 3em;
 }
