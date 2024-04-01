@@ -126,5 +126,20 @@ useGLTF.preload("/assets/models/astronaut_new4.glb");
 // useGLTF.preload("/assets/models/costimize_model_v02.glb");
 
 function ViewableContent() {
-  return <div className="viewable-content-wrapper"></div>;
+  return (
+    <div className="viewable-content-wrapper">
+      <div
+        className="scaleEffect"
+        style={{
+          background: "url(/public/assets/images/backgrounds/Main_BG02.jpg)",
+          opacity: 0.5,
+          // height: "100vw",
+          // width: "100vw",
+          height: "100%",
+          width: "100%",
+          position: "absolute",
+        }}
+      ></div>
+    </div>
+  );
 }
