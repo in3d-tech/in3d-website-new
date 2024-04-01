@@ -3,7 +3,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
-import { checkModelPosition } from "../common/checkModelPositions";
 import { useAppContext } from "../../context/appContext";
 
 export function AstroModel({
@@ -241,9 +240,7 @@ export function MappedModels({
       // onEnterBack: () => console.log("just onEnterBack section of idx: ", idx),
     });
 
-    model
-      .timeline(timeline, currentRef, prevRef)
-      .add(() => checkModelPosition(idx, currentRef));
+    model.timeline(timeline, currentRef, prevRef);
   }, [currentRef, isInstantScroll]);
 
   return (
