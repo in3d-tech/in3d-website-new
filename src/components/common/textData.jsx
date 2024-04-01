@@ -161,24 +161,7 @@ export const SecurityText = ({ textClass, scrollArea, categoriesObj }) => (
         needed experience, knowledge and tools to provide quick and out of the
         box solutions that are tailored to the industries unique requirements.
       </span>
-      {/* <span>
-        Thanks to years of collaboration with defense industries, we gained the
-      </span>
-      <span>
-        needed experience, knowledge and tools to provide quick and out of the
-        box solutions that are tailored to the industries unique requirements
-      </span> */}
-      {/* <span>of Microsoft Israel</span> */}
     </div>
-    {/* <div className="scrolled-category-text-two">
-      <span>
-        As partners, in3D is your perfect go to for any Microsoft MR products.
-      </span>
-      <span>
-        In3D and Microsoft's teams share a strong connection and a combined
-        vison on the important roles of MR technology
-      </span>
-    </div> */}
   </div>
 );
 
@@ -203,22 +186,20 @@ export const AiText = ({ textClass, scrollArea, categoriesObj }) => (
       {categoriesObj[scrollArea.currentSection]}
     </div>
     <div className="scrolled-category-text-one">
-      <span>Here is some basic information about our work with AI.</span>
       <span>
-        needed experience, knowledge and tools to provide quick and out of the
-        box
+        XR + AI = E<span className="ai-highlight">X</span>T
+        <span className="ai-highlight">R</span>A{" "}
+        <span className="ai-highlight">A</span>MAZ
+        <span className="ai-highlight">I</span>NG
       </span>
-      {/* <span>of Microsoft Israel</span> */}
     </div>
     <div className="scrolled-category-text-two">
       <span>
-        Were here to let you know, in3D is your perfect go to for any AI
-        products.
+        The combination of a 3D XR software environment with A.I creates not
+        only an advanced and innovative hardware and software operation but a
+        genuine cooperation between man and machine
       </span>
-      <span>
-        In3D and Artifical Intelligence share a strong connection and a combined
-        vison on the important roles of MR technology
-      </span>
+
       {/* <span>efficiency for clinics and hospitals</span> */}
     </div>
   </div>

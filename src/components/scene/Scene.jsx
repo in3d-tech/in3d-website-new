@@ -229,7 +229,7 @@ function Scene({
     <div className="scene one">
       <div
         className="h-nav-in3d-icon"
-        style={{ position: "fixed", top: "5em" }}
+        style={{ position: "fixed", top: "4em" }}
       >
         <img style={{ width: "10em" }} src="/assets/images/in3dlogo.png" />
       </div>

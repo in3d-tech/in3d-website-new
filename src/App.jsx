@@ -42,6 +42,13 @@ function App() {
   const textRef = useRef();
   const isMobileDimensions = useCheckIsMobileScreen();
 
+  useEffect(() => {
+    console.log("app-rendered");
+    if (isMobileDimensions) {
+      setIsMobileViewOnly(true);
+    }
+  }, []);
+
   const scrollToElementById = (idx) => {
     setIsInstantScroll(true);
     const sections = ["Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
@@ -61,6 +68,7 @@ function App() {
         <LoadingScreen
           setloadingScreen={setloadingScreen}
           isMobileDimensions={isMobileDimensions}
+          setIsMobileViewOnly={setIsMobileViewOnly}
         />
       ) : null}
       {/* <ChangeLanguage

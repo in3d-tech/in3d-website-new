@@ -2,44 +2,91 @@ import { useProgress } from "@react-three/drei";
 import { useEffect, useState } from "react";
 import { useAppContext } from "../../context/appContext";
 
-export function LoadingScreen({ setloadingScreen, isMobileDimensions }) {
+export function LoadingScreen({ setloadingScreen }) {
   const [fadeOut, setFadeOut] = useState("");
   const { active, progress, errors, total } = useProgress();
   const { isAstroModelDrawn, setRenderModels } = useAppContext();
+  const [animationActive, setAnimationActive] = useState(true);
 
   const height = window.innerHeight * 0.3;
 
   useEffect(() => {
     if (isAstroModelDrawn) {
-      setTimeout(() => setFadeOut("flashing-fade-out"), 1100);
-      setTimeout(() => setloadingScreen(false), 3200);
-      setTimeout(() => setRenderModels(true), 800);
+      const loadingText = setTimeout(() => setAnimationActive(false), 2000);
+      const fadeOut = setTimeout(() => setFadeOut("flashing-fade-out"), 1100);
+      const closeLoadingScreen = setTimeout(
+        () => setloadingScreen(false),
+        3200
+      );
+      const renderModels = setTimeout(() => setRenderModels(true), 800);
+
+      return () => {
+        clearTimeout(loadingText);
+        clearTimeout(fadeOut);
+        clearTimeout(closeLoadingScreen);
+        clearTimeout(renderModels);
+      };
     }
   }, [isAstroModelDrawn]);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
+    // const timer = setTimeout(() => {
+    //   setAnimationActive(false); // Stop the current animation after 5 seconds
+    // }, 5000);
 
-    // document.body.style.overflow = "auto";
+    // return () => clearTimeout(timer);
+    // // document.body.style.overflow = "auto";
   }, []);
 
   return (
     <div className={`flashing-div ${fadeOut}`}>
-      <img
-        className="flashing-img"
+      <div
         style={{
-          // border: "1px solid black",
-          height: height,
-          width: height + 300,
+          // border: "1px solid cyan",
           borderRadius: "50%",
+          height: "400px",
+          width: "400px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
         }}
-        src="/assets/images/in3dlogo.png"
-      />
-      <span style={{ color: "black", fontSize: "3em" }}>
+      >
+        <img
+          className="flashing-img"
+          style={{
+            // border: "1px solid black",
+            height: height,
+            // width: height + 300,
+            borderRadius: "50%",
+            // border: "1px solid yellow",
+          }}
+          src="/assets/images/in3dlogo.png"
+        />
+
+        <h1 className="loading-header">
+          {["l", "o", "a", "d", "i", "n", "g"].map((letter, index) => (
+            <span
+              key={index}
+              className={`loading-span let${animationActive ? index + 1 : ""}`}
+              // className={
+              //   fadeOut == "flashing-fade-out"
+              //     ? "tester"
+              //     : `loading-span let${index + 1}`
+              // }
+            >
+              {letter}
+            </span>
+          ))}
+        </h1>
+      </div>
+
+      {/* <span style={{ color: "black", fontSize: "3em" }}>
         {progress < 100 && !isAstroModelDrawn
           ? `${Math.trunc(progress)} % loaded`
           : null}
-      </span>
+      </span> */}
     </div>
   );
 }

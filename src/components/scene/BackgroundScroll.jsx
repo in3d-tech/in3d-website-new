@@ -107,10 +107,8 @@ export function BackgroundScroll({
           {/* <TextTwo /> */}
           {startExpandedAnimation ? (
             <>
-              <div className="text-animate border-animate">
-                <div className="container">
-                  <span className="text-animate">SIMPLY EXPAND</span>
-                </div>
+              <div className="container">
+                <span className="text-animate">SIMPLY EXPAND</span>
               </div>
             </>
           ) : null}
