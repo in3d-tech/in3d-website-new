@@ -31,24 +31,36 @@ export function AstroModel({
   const isFullyRenderedRef = useRef(false);
 
   // Use useFrame to check if the object is fully rendered on every frame
-  useFrame(() => {
-    // Check if the object is visible in the scene and loaded
-    if (astroRef.current && scene && !isFullyRenderedRef.current) {
+  // useFrame(() => {
+  //   // Check if the object is visible in the scene and loaded
+  //   if (astroRef.current && scene && !isFullyRenderedRef.current) {
+  //     // Check if all objects in the scene have been rendered
+  //     const fullyRendered = scene.children.every((child) => child.visible);
+  //     if (
+  //       fullyRendered &&
+  //       isAstroModelDrawn === false &&
+  //       active === false &&
+  //       scene
+  //     ) {
+  //       // Object is fully rendered
+  //       isFullyRenderedRef.current = true;
+  //       setTimeout(() => setIsAstroModelDrawn(true), 1000);
+  //       console.log("Astro object is fully rendered!");
+  //     }
+  //   }
+  // });
+
+  useEffect(() => {
+    if (scene && astroRef.current && !isFullyRenderedRef.current) {
       // Check if all objects in the scene have been rendered
       const fullyRendered = scene.children.every((child) => child.visible);
-      if (
-        fullyRendered &&
-        isAstroModelDrawn === false &&
-        active === false &&
-        scene
-      ) {
-        // Object is fully rendered
-        isFullyRenderedRef.current = true;
+
+      if (fullyRendered && isAstroModelDrawn === false) {
         setTimeout(() => setIsAstroModelDrawn(true), 1000);
         console.log("Astro object is fully rendered!");
       }
     }
-  });
+  }, [scene, setIsAstroModelDrawn]);
 
   useEffect(() => {
     let timeline = gsap.timeline({
