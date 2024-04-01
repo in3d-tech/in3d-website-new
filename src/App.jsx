@@ -55,10 +55,12 @@ function App() {
   const isMobileDimensions = useCheckIsMobileScreen();
 
   useEffect(() => {
-    console.log("app-rendered");
     if (isMobileDimensions) {
       setIsMobileViewOnly(true);
     }
+    Object.values(backgrounds).forEach((image) => {
+      new Image().src = image;
+    });
   }, []);
 
   const scrollToElementById = (idx) => {

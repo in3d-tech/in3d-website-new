@@ -95,11 +95,7 @@ export function BackgroundScroll({
           }}
         >
           {/* <Text /> */}
-          {/* <div>
-            <a href="#" className="button-ani">
-              Contact Us Today!
-            </a>
-          </div> */}
+
           {startExpandedAnimation ? (
             <>
               <div className="container">
