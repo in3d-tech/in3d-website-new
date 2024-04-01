@@ -25,7 +25,7 @@ export function AstroModel({
 
   const { scene, animations } = useGLTF(url);
   const mixer = useGLTFAnimations(scene, animations);
-  const { active, progress, errors, total } = useProgress();
+  const { active } = useProgress();
 
   // gsap.set(".scene", { scale: 0.7 });
 
@@ -37,7 +37,7 @@ export function AstroModel({
     if (astroRef.current && scene && !isFullyRenderedRef.current) {
       // Check if all objects in the scene have been rendered
       const fullyRendered = scene.children.every((child) => child.visible);
-      if (fullyRendered && isAstroModelDrawn === false) {
+      if (fullyRendered && isAstroModelDrawn === false && active === false) {
         // Object is fully rendered
         isFullyRenderedRef.current = true;
         setTimeout(() => setIsAstroModelDrawn(true), 1000);
