@@ -262,7 +262,7 @@ function Scene({ textRef, scrollToElementById }) {
               setTextAnimation={setTextAnimation}
               customizeRef={customizeRef}
             />
-            <Suspense fallback={null}>{renderModels ? models : null}</Suspense>
+            {renderModels ? models : null}
           </Suspense>
         </Canvas>
       </div>
