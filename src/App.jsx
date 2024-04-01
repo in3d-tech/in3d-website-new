@@ -58,10 +58,10 @@ function App() {
     if (isMobileDimensions) {
       setIsMobileViewOnly(true);
     }
-    Object.values(backgrounds).forEach((image) => {
-      const img = new Image();
-      img.src = image;
-    });
+    // Object.values(backgrounds).forEach((image) => {
+    //   const img = new Image();
+    //   img.src = image;
+    // });
   }, []);
 
   const scrollToElementById = (idx) => {
