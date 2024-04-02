@@ -73,8 +73,7 @@ function MappedModels({
         dispose={null}
         scale={model.scale}
         position={model.position}
-        // visible={visibleModels.includes(idx)}
-        visible={false}
+        visible={visibleModels.includes(idx)}
         rotation={model.rotation}
       />
     </group>
