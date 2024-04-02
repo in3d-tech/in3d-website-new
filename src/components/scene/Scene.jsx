@@ -34,6 +34,7 @@ function Scene({ textRef, scrollToElementById }) {
 
   const { scrollArea, renderModels, setMenuOpened } = useAppContext();
 
+  const containerRef = useRef(null);
   const simplyRef = useRef();
   const expandedRef = useRef();
   const textContainerRef = useRef();
@@ -54,7 +55,7 @@ function Scene({ textRef, scrollToElementById }) {
     3: "MEDICINE",
     4: "MICROSOFT",
     5: "SECURITY",
-    6: "A.I.",
+    6: "ARTIFICAL INTELLIGENCE",
     7: "MILITARY",
     8: "CUSTOMIZATION",
   };
@@ -221,8 +222,42 @@ function Scene({ textRef, scrollToElementById }) {
     );
   });
 
+  const handleWheel = (e) => {
+    console.log("DeltaY:", e.deltaY);
+
+    const container = containerRef.current;
+
+    const maxDeltaY = 10;
+    const scrollDirection = Math.sign(e.deltaY);
+    let deltaY = Math.min(Math.abs(e.deltaY), maxDeltaY);
+
+    if (container) {
+      console.log("mmaybe firedoff");
+      const maxScrollTop = container.scrollHeight - container.clientHeight;
+
+      const newScrollTop = container.scrollTop + deltaY * scrollDirection;
+
+      // Allow default behavior if scrolling exceeds container bounds
+      if (newScrollTop <= maxScrollTop && newScrollTop >= 0) {
+        container.scrollTop = newScrollTop;
+        e.preventDefault();
+      }
+    }
+  };
+
+  useEffect(() => {
+    const container = containerRef.current;
+
+    if (container) {
+      container.addEventListener("wheel", handleWheel, { passive: false });
+      return () => {
+        container.removeEventListener("wheel", handleWheel);
+      };
+    }
+  }, []);
+
   return (
-    <div className="scene one">
+    <div className="scene one" style={{}} ref={containerRef}>
       <div
         className="h-nav-in3d-icon"
         style={{ position: "fixed", top: "4em" }}
@@ -259,7 +294,7 @@ function Scene({ textRef, scrollToElementById }) {
           <Camera />
           <Suspense fallback={null}>
             <AstroModel
-              url={"/assets/models/astronaut_new4.glb"}
+              url={"/assets/models/astronaut_new5.glb"}
               astroRef={astroRef}
               visibleModels={visibleModels}
               setVisibleModels={setVisibleModels}

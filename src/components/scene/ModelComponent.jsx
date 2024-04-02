@@ -49,7 +49,6 @@ export function AstroModel({
     //   }
     // }
     if (astroRef.current) {
-      console.log("ye?");
       astroRef.current.rotation.y += 0.004;
       // astroRef.current.rotation.z += 0.01;
     }
