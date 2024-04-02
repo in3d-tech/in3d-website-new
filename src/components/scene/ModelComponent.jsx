@@ -70,7 +70,7 @@ export function AstroModel({
         start: "top top",
         endTrigger: ".section-two", //"#midSection2", //".section-two",
         end: "bottom bottom",
-        scrub: true,
+        scrub: 1,
         preventOverlaps: isInstantScroll ? true : false,
         // fastScrollEnd: true, // 2250,
         // markers: true,
@@ -133,7 +133,7 @@ export function AstroModel({
           start: "top bottom",
           // endTrigger: "#midSection2", //".section-two",
           // end: "bottom bottom",
-          scrub: true,
+          scrub: 1,
           onEnter: () => {
             const areaObj = { ...scrollArea };
             areaObj.currentSection = 9;

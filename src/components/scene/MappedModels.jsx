@@ -33,7 +33,7 @@ function MappedModels({
         start: "top bottom",
         endTrigger: `.${model.section}`,
         end: "top top",
-        scrub: true,
+        scrub: 1,
         // markers: true,
         preventOverlaps: isInstantScroll ? true : false,
         // fastScrollEnd: true, // 2500 is default,
