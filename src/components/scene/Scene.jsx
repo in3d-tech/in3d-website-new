@@ -223,19 +223,18 @@ function Scene({ textRef, scrollToElementById }) {
   });
 
   const handleWheel = (e) => {
-    console.log("DeltaY:", e.deltaY);
-
+    console.log("deltaY: ", e.deltaY);
     const container = containerRef.current;
 
-    const maxDeltaY = 10;
-    const scrollDirection = Math.sign(e.deltaY);
-    let deltaY = Math.min(Math.abs(e.deltaY), maxDeltaY);
+    const maxDeltaY = 10; // As per your previous code
+    const scrollDirection = Math.sign(e.deltaY); // Getting the direction of scroll
+    const normalizedDeltaY = Math.min(Math.abs(e.deltaY), maxDeltaY); // Getting the normalized deltaY
+    let deltaY = normalizedDeltaY * scrollDirection; // Getting the new deltaY after normalization
 
     if (container) {
-      console.log("mmaybe firedoff");
       const maxScrollTop = container.scrollHeight - container.clientHeight;
 
-      const newScrollTop = container.scrollTop + deltaY * scrollDirection;
+      const newScrollTop = container.scrollTop + deltaY; // Now using normalized deltaY value
 
       // Allow default behavior if scrolling exceeds container bounds
       if (newScrollTop <= maxScrollTop && newScrollTop >= 0) {
