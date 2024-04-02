@@ -5,15 +5,16 @@ export const IndustryText = ({ textClass, scrollArea, categoriesObj }) => (
     className={`fader ${textClass}`}
     style={{
       height: "80vh",
-      width: "34%",
-      top: "22%",
-      left: "14%",
+      width: "100%",
+      // top: "22%",
+      // left: "14%",
       position: "absolute",
       color: "white",
       // fontSize: "3em",
       fontFamily: "gotham",
       display: "flex",
       flexDirection: "column",
+      zIndex: 1,
       // justifyContent: "space-between",
     }}
   >
@@ -22,36 +23,61 @@ export const IndustryText = ({ textClass, scrollArea, categoriesObj }) => (
         {categoriesObj[scrollArea.currentSection]}
       </span>
     </div> */}
-    <div className="title-container">
+    <div
+      className="title-container"
+      style={{ marginTop: "2.5em", marginLeft: "3em" }}
+    >
       <span className="scroll-text-animate">
         {categoriesObj[scrollArea.currentSection]}
       </span>
     </div>
-    <div className="scrolled-category-text-one">
-      {/* <span>The world was recently</span>
+
+    <div
+      style={{
+        display: "flex",
+        height: "100%",
+        flexDirection: "row-reverse",
+      }}
+    >
+      <div style={{ flex: 1 }}>
+        <div
+          className="scrolled-category-text-one"
+          style={{
+            width: "80%",
+            textAlign: "center",
+            marginLeft: "6em",
+          }}
+        >
+          {/* <span>The world was recently</span>
       <span>introduced to the wonders of</span>
       <span>the industry 4.0 revolution</span> */}
-      <span className="scroll-text-animate-one">
-        The world was recently introduced to the wonders of the industry 4.0
-        revolution.
-      </span>
-      <br />
+          <span className="scroll-text-animate-one">
+            The world was recently introduced to the wonders of the industry 4.0
+            revolution.
+          </span>
+          <br />
+        </div>
+      </div>
+      {/* // break */}
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          alignItems: "flex-end",
+        }}
+      >
+        <div
+          className="scrolled-category-text-two"
+          style={{ width: "80%", marginLeft: "1em" }}
+        >
+          <span className="scroll-text-animate-two">
+            Together with our clients we map out the challenges they face and
+            develop tailor made solutions using XR and 3D technology that
+            creates an innovative visual interface between men and machine.
+          </span>
+        </div>
+      </div>
     </div>
-    <div className="scrolled-category-text-two">
-      <span className="scroll-text-animate-two">
-        Together with our clients we map out the challenges they face and
-        develop tailor made solutions using XR and 3D technology that creates an
-        innovative visual interface between men and machine.
-      </span>
-    </div>
-    {/* <div className="scrolled-category-text-two">
-      <span>Together with our clients we map out the</span>
-      <span>challenges they face and develop tailor-made</span>
-      <span>solutions using XR and 3D technology that</span>
-      <span>
-        creates an innovative visual interface between people and machine.
-      </span>
-    </div> */}
   </div>
 );
 
@@ -183,7 +209,7 @@ export const AiText = ({ textClass, scrollArea, categoriesObj }) => (
     className={`fader ${textClass}`}
     style={{
       height: "80vh",
-      width: "34%",
+      width: "50%",
       top: "24%",
       left: "10%",
       position: "absolute",
@@ -192,7 +218,7 @@ export const AiText = ({ textClass, scrollArea, categoriesObj }) => (
       fontFamily: "gotham",
       display: "flex",
       flexDirection: "column",
-      // justifyContent: "space-between",
+      // justifyContent: "space-between",\
     }}
   >
     <div className="scrolled-category-title ai-title-ani">
