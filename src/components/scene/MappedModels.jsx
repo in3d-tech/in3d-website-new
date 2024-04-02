@@ -33,10 +33,10 @@ function MappedModels({
         start: "top bottom",
         endTrigger: `.${model.section}`,
         end: "top top",
-        scrub: 1,
+        scrub: true,
         // markers: true,
         preventOverlaps: isInstantScroll ? true : false,
-        fastScrollEnd: true, // 2500 is default,
+        // fastScrollEnd: true, // 2500 is default,
         onEnter: () => {
           // console.log("just entered section of idx: ", idx);
           setVisibleModels([idx - 1, idx]);
