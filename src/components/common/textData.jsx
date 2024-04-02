@@ -23,10 +23,7 @@ export const IndustryText = ({ textClass, scrollArea, categoriesObj }) => (
         {categoriesObj[scrollArea.currentSection]}
       </span>
     </div> */}
-    <div
-      className="title-container"
-      style={{ marginTop: "2.5em", marginLeft: "3em" }}
-    >
+    <div className="title-container" style={{ marginTop: "1.5em" }}>
       <span className="scroll-text-animate">
         {categoriesObj[scrollArea.currentSection]}
       </span>
@@ -63,12 +60,12 @@ export const IndustryText = ({ textClass, scrollArea, categoriesObj }) => (
         style={{
           flex: 1,
           display: "flex",
-          alignItems: "flex-end",
+          alignItems: "center",
         }}
       >
         <div
           className="scrolled-category-text-two"
-          style={{ width: "80%", marginLeft: "1em" }}
+          style={{ width: "80%", marginLeft: "1em", marginTop: "1em" }}
         >
           <span className="scroll-text-animate-two">
             Together with our clients we map out the challenges they face and
@@ -209,8 +206,8 @@ export const AiText = ({ textClass, scrollArea, categoriesObj }) => (
     className={`fader ${textClass}`}
     style={{
       height: "80vh",
-      width: "50%",
-      top: "24%",
+      width: "40%",
+      top: "14%",
       left: "10%",
       position: "absolute",
       color: "white",
@@ -224,12 +221,19 @@ export const AiText = ({ textClass, scrollArea, categoriesObj }) => (
     <div className="scrolled-category-title ai-title-ani">
       {categoriesObj[scrollArea.currentSection]}
     </div>
-    <div className="scrolled-category-text-one ai-text-one-ani">
+    <div
+      className="scrolled-category-text-one ai-text-one-ani"
+      style={{ marginTop: "6em" }}
+    >
       <span>
-        XR + AI = E<span className="ai-highlight">X</span>T
+        E<span className="animated-letter">X</span>hanced{" "}
+        <span className="animated-letter">R</span>e
+        <span className="animated-letter">A</span>lit
+        <span className="animated-letter">i</span>es
+        {/* <span className="ai-highlight">X</span>T
         <span className="ai-highlight">R</span>A{" "}
         <span className="ai-highlight">A</span>MAZ
-        <span className="ai-highlight">I</span>NG
+        <span className="ai-highlight">I</span>NG */}
       </span>
     </div>
     <div className="scrolled-category-text-two ai-text-two-ani">
@@ -289,7 +293,7 @@ export const CustomizationText = ({ textClass, scrollArea, categoriesObj }) => (
     className={`fader ${textClass}`}
     style={{
       height: "80vh",
-      width: "34%",
+      width: "40%",
       top: "18%",
       left: "12%",
       position: "absolute",
@@ -304,12 +308,12 @@ export const CustomizationText = ({ textClass, scrollArea, categoriesObj }) => (
       {categoriesObj[scrollArea.currentSection]}
     </div>
     <div className="scrolled-category-text-one">
-      <span style={{ marginTop: "3em" }}>
+      <span style={{ marginTop: "4em", marginLeft: "6em" }}>
         We specialize in 3D and Extended Reality (EX).
       </span>
     </div>
     <div className="scrolled-category-text-two security-title-ani">
-      <span style={{ marginBottom: "-3em" }}>
+      <span style={{ marginRight: "2em", border: "1px solid yellow" }}>
         As specialists we keep an amazing team of developers, 3D generalists,
         interface and graphics artists, and product designers just so we can
         provide our clients with the flexibility and abilities needed to deliver

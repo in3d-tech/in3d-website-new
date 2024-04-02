@@ -39,7 +39,6 @@ function App() {
   const [loadingScreen, setloadingScreen] = useState(true);
 
   const { selectedCategory, setIsInstantScroll } = useAppContext();
-
   const textRef = useRef();
   const isMobileDimensions = useCheckIsMobileScreen();
 

@@ -16,10 +16,10 @@
 body {
   padding: 0;
   margin: 0;
-  overflow: scroll;
   background: black;
   /* transition: background-image 1s; */
   /* background: black; */
+  /* overflow: hidden; */
 }
 
 .button-ani {
@@ -45,11 +45,6 @@ body {
   color: inherit;
   background-position: 0 0;
   cursor: pointer;
-}
-
-.ai-highlight {
-  color: #64b5f6;
-  font-size: 1.15em;
 }
 
 .app-bg {
@@ -220,6 +215,7 @@ body {
 
 .section {
   height: 150vh;
+  /* height: 600vh; */
   width: 100vw;
   text-align: center;
   /* line-height: 100vh; */
@@ -558,9 +554,7 @@ section {
 
 .scrolled-category-text-two {
   font-size: 1.5em;
-  line-height: 1.2em;
-  display: flex;
-  flex-direction: column;
+  /* line-height: 1.2em; */
   font-family: swiss-medium;
 }
 
@@ -1356,6 +1350,33 @@ section {
   }
 }
 
+.ai-highlight {
+  color: #64b5f6;
+  font-size: 1.15em;
+}
+
+.animated-letter {
+  font-size: 1em;
+  text-transform: lowercase;
+  animation: transformCase 1.2s forwards;
+  animation-delay: 0.75s;
+  transition: font-size 1s ease, color 1.3s ease forwards;
+  transition-delay: 1s;
+}
+
+@keyframes transformCase {
+  from {
+    text-transform: lowercase;
+    font-size: 1em;
+    color: rgb(255, 255, 255);
+  }
+  to {
+    text-transform: uppercase;
+    font-size: 1.15em;
+    color: #6ad5db;
+  }
+}
+
 /* -------------------------------
 -----------------------------------------
 -----------------------------------------
@@ -1376,6 +1397,15 @@ section {
 .category-title:hover {
   cursor: pointer !important;
   font-size: 0.85em;
+}
+
+.scrolled-category-text-one {
+  font-size: 1.6em;
+}
+
+.scrolled-category-text-two {
+  font-size: 1.4em;
+  line-height: 1.3em;
 }
 
 @media screen and (max-width: 1690px) {
@@ -1404,11 +1434,11 @@ section {
 
   .scrolled-category-text-one {
     margin-top: 1em;
-    font-size: 1.6em;
+    font-size: 1.3em;
   }
 
   .scrolled-category-text-two {
-    font-size: 1.2em;
+    font-size: 1em;
     line-height: 1.3em;
   }
 

@@ -1,9 +1,6 @@
 import { Suspense, lazy, useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import {
-  AstroModel,
-  // MappedModels,
-} from "../../components/scene/ModelComponent";
+import { AstroModel } from "../../components/scene/ModelComponent";
 import { Model_Data } from "../../components/common/modelData";
 import {
   IndustryText,
@@ -222,38 +219,37 @@ function Scene({ textRef, scrollToElementById }) {
     );
   });
 
-  const handleWheel = (e) => {
-    console.log("deltaY: ", e.deltaY);
-    const container = containerRef.current;
+  // const handleWheel = (e) => {
+  //   console.log("deltaY2  : ", e.deltaY);
+  //   const container = containerRef.current;
 
-    const maxDeltaY = 10; // As per your previous code
-    const scrollDirection = Math.sign(e.deltaY); // Getting the direction of scroll
-    const normalizedDeltaY = Math.min(Math.abs(e.deltaY), maxDeltaY); // Getting the normalized deltaY
-    let deltaY = normalizedDeltaY * scrollDirection; // Getting the new deltaY after normalization
+  //   const maxDeltaY = 100;
+  //   let normalizedDeltaY =
+  //     Math.sign(e.deltaY) * Math.min(Math.abs(e.deltaY), maxDeltaY);
 
-    if (container) {
-      const maxScrollTop = container.scrollHeight - container.clientHeight;
+  //   if (container) {
+  //     const maxScrollTop = container.scrollHeight - container.clientHeight;
 
-      const newScrollTop = container.scrollTop + deltaY; // Now using normalized deltaY value
+  //     const newScrollTop = container.scrollTop + normalizedDeltaY;
 
-      // Allow default behavior if scrolling exceeds container bounds
-      if (newScrollTop <= maxScrollTop && newScrollTop >= 0) {
-        container.scrollTop = newScrollTop;
-        e.preventDefault();
-      }
-    }
-  };
+  //     // Allow default behavior if scrolling exceeds container bounds
+  //     if (newScrollTop <= maxScrollTop && newScrollTop >= 0) {
+  //       container.scrollTop = newScrollTop;
+  //       e.preventDefault();
+  //     }
+  //   }
+  // };
 
-  useEffect(() => {
-    const container = containerRef.current;
+  // useEffect(() => {
+  //   const container = containerRef.current;
 
-    if (container) {
-      container.addEventListener("wheel", handleWheel, { passive: false });
-      return () => {
-        container.removeEventListener("wheel", handleWheel);
-      };
-    }
-  }, []);
+  //   if (container) {
+  //     container.addEventListener("wheel", handleWheel, { passive: false });
+  //     return () => {
+  //       container.removeEventListener("wheel", handleWheel);
+  //     };
+  //   }
+  // }, []);
 
   return (
     <div className="scene one" style={{}} ref={containerRef}>

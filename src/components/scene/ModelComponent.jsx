@@ -33,24 +33,20 @@ export function AstroModel({
   // Use useFrame to check if the object is fully rendered on every frame
   useFrame(() => {
     // Check if the object is visible in the scene and loaded
-    // if (astroRef.current && scene && !isFullyRenderedRef.current) {
-    //   // Check if all objects in the scene have been rendered
-    //   const fullyRendered = scene.children.every((child) => child.visible);
-    //   if (
-    //     fullyRendered &&
-    //     isAstroModelDrawn === false &&
-    //     active === false &&
-    //     scene
-    //   ) {
-    //     // Object is fully rendered
-    //     isFullyRenderedRef.current = true;
-    //     setTimeout(() => setIsAstroModelDrawn(true), 1000);
-    //     console.log("Astro object is fully rendered!");
-    //   }
-    // }
-    if (astroRef.current) {
-      astroRef.current.rotation.y += 0.004;
-      // astroRef.current.rotation.z += 0.01;
+    if (astroRef.current && scene && !isFullyRenderedRef.current) {
+      // Check if all objects in the scene have been rendered
+      const fullyRendered = scene.children.every((child) => child.visible);
+      if (
+        fullyRendered &&
+        isAstroModelDrawn === false &&
+        active === false &&
+        scene
+      ) {
+        // Object is fully rendered
+        isFullyRenderedRef.current = true;
+        setTimeout(() => setIsAstroModelDrawn(true), 1000);
+        console.log("Astro object is fully rendered!");
+      }
     }
   });
 
@@ -189,10 +185,10 @@ export function AstroModel({
       object={scene}
       dispose={null}
       scale={[3, 3, 3]}
-      position={[0, -18.2, -13]}
-      rotation={[0, 0, 0]}
-      // position={[-5, -18.2, -10]}
-      // rotation={[0.05, Math.PI / 2 + 0, 0]}
+      // position={[0, -18.2, -13]}
+      // rotation={[0, 0, 0]}
+      position={[-5, -18.2, -10]}
+      rotation={[0.05, Math.PI / 2 + 0, 0]}
       visible={isVisibile}
     />
     // </group>

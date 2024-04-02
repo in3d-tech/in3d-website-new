@@ -28,16 +28,14 @@ export function LoadingScreen({ setloadingScreen }) {
       };
     }
   }, [isAstroModelDrawn]);
-
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    // const timer = setTimeout(() => {
-    //   setAnimationActive(false); // Stop the current animation after 5 seconds
-    // }, 5000);
-
-    // return () => clearTimeout(timer);
-    // // document.body.style.overflow = "auto";
-  }, []);
+  // useEffect(() => {
+  //   // document.body.style.overflow = "hidden";
+  //   // const timer = setTimeout(() => {
+  //   //   setAnimationActive(false); // Stop the current animation after 5 seconds
+  //   // }, 5000);
+  //   // return () => clearTimeout(timer);
+  //   // // document.body.style.overflow = "auto";
+  // }, []);
 
   return (
     <div className={`flashing-div ${fadeOut}`}>
