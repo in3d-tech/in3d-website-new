@@ -10,6 +10,7 @@ import { LoadingScreen } from "./components/viewableContent/LoadingScreen";
 import { useAppContext } from "./context/appContext";
 import useCheckIsMobileScreen from "./components/common/useCheckIsMobile";
 import { useTranslation } from "react-i18next";
+
 // import { ChangeLanguage } from "./components/navs/ChangeLanguage";
 
 const LazySelectedContent = lazy(() =>
@@ -106,7 +107,7 @@ function App() {
 
 export default App;
 
-useGLTF.preload("/assets/models/astronaut_new4.glb");
+useGLTF.preload("/assets/models/astronaut_new5.glb");
 // useGLTF.preload("/assets/models/engenir_model_new.glb");
 // useGLTF.preload("/assets/models/medical_model.glb");
 // useGLTF.preload("/assets/models/microsoft_model_new.glb");

@@ -12,17 +12,15 @@ export const Model_Data = [
     },
     onLeave: { currentSection: 1, prevSection: 2 },
     scale: [3, 3, 3],
-    position: [13.5, -5, -0.2],
-    rotation: [0, 1, 0],
+    position: [-1, -4, -1],
+    // position: [13.5, -5, -0.2],
+
+    rotation: [0, 0.2, 0],
     // visible={visibleModels.includes(3)}
     timeline: (tl, currentRef, prevRef) =>
       tl
-        ?.to(
-          currentRef.current.position,
-          { y: -4, x: 3, z: 1.5 },
-          "simultaneously"
-        )
-        .to(currentRef.current.rotation, { y: -2.9 }, "simultaneously")
+        ?.to(currentRef.current.position, { y: -4, x: 1 }, "simultaneously")
+        // .to(currentRef.current.rotation, { y: -2.9 }, "simultaneously")
         // .to(prevRef.current.position, { y: -35 }, "simultaneously"),
         .to(
           prevRef.current.position,
