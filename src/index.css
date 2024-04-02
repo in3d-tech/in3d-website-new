@@ -23,6 +23,7 @@ body {
 }
 
 .button-ani {
+  /* font-size: 3em; */
   color: rgb(255, 255, 255);
   font-weight: 700;
   background-clip: text;
@@ -540,14 +541,14 @@ section {
 }
 
 .scrolled-category-title {
-  font-size: 5em;
+  font-size: 4em;
   font-family: gotham;
   color: #d8f3f6;
 }
 
 .scrolled-category-text-one {
   margin-top: 3em;
-  font-size: 2em;
+  font-size: 1.8em;
   line-height: 1.2em;
   font-weight: bold;
   display: flex;
@@ -556,7 +557,6 @@ section {
 }
 
 .scrolled-category-text-two {
-  margin-top: 1em;
   font-size: 1.5em;
   line-height: 1.2em;
   display: flex;
@@ -951,7 +951,7 @@ section {
   flex-direction: column;
   font-family: gotham; */
   position: absolute;
-  top: 24%;
+  top: 30%;
   right: 6%;
   display: flex;
   flex-direction: column;
@@ -962,6 +962,24 @@ section {
 .contact-title {
   font-size: 1.5em;
   color: white;
+}
+
+.contact-message-input {
+  resize: vertical;
+}
+
+.contact-us-send-text-btn {
+  margin-top: 1em;
+  width: 10em;
+  height: 2em;
+  border-radius: 20px;
+  opacity: 0.8;
+  transition: background-color 1s ease-in-out;
+}
+
+.contact-us-send-text-btn:hover {
+  cursor: pointer;
+  background-color: #95c8de83;
 }
 
 .contact-details-wrapper {
@@ -1093,14 +1111,69 @@ section {
 }
 
 .contact-us-here-btn {
-  font-size: 1.1;
-  text-decoration: underline;
-  font-weight: 600;
+  all: unset;
+  font-size: 1.1em;
+  /* text-decoration: underline;
+  font-weight: 600; */
 }
 
 .contact-us-here-btn:hover {
   cursor: pointer;
   z-index: 48787878;
+}
+
+.title-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  /* padding: 1em; */
+  text-align: center;
+  margin: 0 auto;
+  /* left: 2em; */
+  font-size: 5em;
+}
+
+.title-container::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 5px;
+  /* background-color: white;
+  animation-name: reveal;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-delay: 1.5s; */
+}
+
+.scroll-text-animate {
+  font-family: gotham;
+  position: relative;
+  opacity: 0;
+  animation: text-reveal 0.6s ease-in-out forwards;
+  animation-delay: 0.4s;
+  transform: translateY(-100%);
+}
+
+.scroll-text-animate-one {
+  font-family: gotham;
+  position: relative;
+  opacity: 0;
+  animation: text-reveal 0.6s ease-in-out forwards;
+  animation-delay: 0.7s;
+  transform: translateY(-100%);
+}
+
+.scroll-text-animate-two {
+  font-family: gotham;
+  position: relative;
+  opacity: 0;
+  animation: text-reveal 0.6s ease-in-out forwards;
+  animation-delay: 1s;
+  transform: translateY(-100%);
 }
 
 .container {

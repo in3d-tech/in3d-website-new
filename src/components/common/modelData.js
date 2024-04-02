@@ -132,7 +132,7 @@ export const Model_Data = [
     onLeave: { currentSection: 5, prevSection: 6 },
     scale: [1, 1, 1],
     position: [5, -5, 2],
-    rotation: [0, Math.PI, 0],
+    rotation: [0, 0, 0],
     // visible={visibleModels.includes(3)}
 
     timeline: (tl, currentRef, prevRef) =>
@@ -142,7 +142,7 @@ export const Model_Data = [
           { y: -1.5, x: 1, z: 3.4 },
           "simultaneously"
         )
-        .to(currentRef.current.rotation, { y: -0.9 }, "simultaneously")
+        .to(currentRef.current.rotation, { y: -3 }, "simultaneously")
         .to(
           prevRef.current.position,
           { x: -5, y: -0.5, z: 3.5 },

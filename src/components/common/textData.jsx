@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 export const IndustryText = ({ textClass, scrollArea, categoriesObj }) => (
   <div
     className={`fader ${textClass}`}
@@ -15,21 +17,28 @@ export const IndustryText = ({ textClass, scrollArea, categoriesObj }) => (
       // justifyContent: "space-between",
     }}
   >
-    <div className="scrolled-category-title industry-title-ani">
-      {categoriesObj[scrollArea.currentSection]}
+    {/* <div className="scrolled-category-title industry-title-ani">
+      <span className="text-animate button-ani">
+        {categoriesObj[scrollArea.currentSection]}
+      </span>
+    </div> */}
+    <div className="title-container">
+      <span className="scroll-text-animate">
+        {categoriesObj[scrollArea.currentSection]}
+      </span>
     </div>
-    <div className="scrolled-category-text-one industry-text-one-ani">
+    <div className="scrolled-category-text-one">
       {/* <span>The world was recently</span>
       <span>introduced to the wonders of</span>
       <span>the industry 4.0 revolution</span> */}
-      <span>
+      <span className="scroll-text-animate-one">
         The world was recently introduced to the wonders of the industry 4.0
         revolution.
       </span>
       <br />
     </div>
-    <div className="scrolled-category-text-two industry-text-two-ani">
-      <span>
+    <div className="scrolled-category-text-two">
+      <span className="scroll-text-animate-two">
         Together with our clients we map out the challenges they face and
         develop tailor made solutions using XR and 3D technology that creates an
         innovative visual interface between men and machine.
@@ -284,35 +293,71 @@ export const CustomizationText = ({ textClass, scrollArea, categoriesObj }) => (
   </div>
 );
 
-export const ContactUsText = ({ test }) =>
-  !test ? null : (
-    <div className="contact-us-wrapper">
-      <span className="contact-title">Contact us</span>
-      <div className="contact-details-wrapper">
-        <span>Feel free to contact us via:</span>
-        <span style={{ marginTop: "0.5em" }}>
-          <span>Phone:</span>
-          <span>+972-54-218-5021 or +1(302)-219-4023</span>
-        </span>
+export const ContactUsText = ({ test }) => {
+  const [showTextBox, setShowTextBox] = useState(false);
 
-        <span>
-          <span>Email: </span>sales@in3d-tech.com
-        </span>
-        <span style={{ marginTop: "1em" }}>
-          We also invite you to meet us at 1 Shefa Tal street, Tel Aviv.
-        </span>
-        <span style={{ marginTop: "0.6em" }}>
-          Or you can message us{" "}
-          <span
-            className="contact-us-here-btn"
-            style={{
-              textDecoration: "underline",
-              fontWeight: "600",
-            }}
-          >
-            here
-          </span>
-        </span>
-      </div>
-    </div>
+  const toggleTextBox = () => {
+    setShowTextBox(!showTextBox);
+  };
+  return (
+    <>
+      {!test ? null : (
+        <div className="contact-us-wrapper">
+          {/* <span className="contact-title">Contact us</span> */}
+          <div className="contact-details-wrapper">
+            <span>Feel free to contact us via:</span>
+            <span style={{ marginTop: "0.5em" }}>
+              <span>Phone: </span>
+              <span>+972-54-218-5021 or +1(302)-219-4023</span>
+            </span>
+
+            <span>
+              <span>Email: </span>sales@in3d-tech.com
+            </span>
+            <span style={{ marginTop: "1em" }}>
+              We also invite you to meet us at 1 Shefa Tal street, Tel Aviv.
+            </span>
+            <span style={{ marginTop: "0.6em" }}>
+              Or you can message us{" "}
+              <button
+                onClick={toggleTextBox}
+                className="contact-us-here-btn"
+                style={{
+                  textDecoration: "underline",
+                  fontWeight: "600",
+                }}
+              >
+                here
+              </button>
+              {showTextBox && (
+                <div
+                  style={{
+                    marginTop: "1em",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <textarea
+                    placeholder="Type your message here..."
+                    type="text"
+                    maxLength={300}
+                    style={{
+                      width: "80%",
+                      height: "8em",
+                      borderRadius: "12px",
+                      opacity: "0.8",
+                      padding: "15px",
+                      fontSize: "1em",
+                    }}
+                  />
+                  <button className="contact-us-send-text-btn">Send</button>
+                </div>
+              )}
+            </span>
+          </div>
+        </div>
+      )}
+    </>
   );
+};
