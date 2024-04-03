@@ -293,7 +293,7 @@ function Scene({ textRef, scrollToElementById }) {
           <Camera />
           <Suspense fallback={null}>
             <AstroModel
-              url={"/assets/models/astronaut_new5.glb"}
+              url={"/assets/models/astronaut_new5 (1).glb"}
               astroRef={astroRef}
               visibleModels={visibleModels}
               setVisibleModels={setVisibleModels}

@@ -3,7 +3,7 @@ export const Model_Data = [
   // TAASIA
 
   {
-    url: "/assets/models/engenir_model_new.glb",
+    url: "/assets/models/engenir_model.glb",
     refs: ["taasia", "astro"],
     section: "section-three",
     onEnter: {
@@ -36,7 +36,7 @@ export const Model_Data = [
 
   // MEDICINE
   {
-    url: "/assets/models/medical_model.glb",
+    url: "/assets/models/medical_model1 (1).glb",
     refs: ["medicine", "microsoft"],
     section: "section-four",
     onEnter: {

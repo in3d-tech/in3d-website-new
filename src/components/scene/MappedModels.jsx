@@ -20,7 +20,6 @@ function MappedModels({
   const { isInstantScroll, scrollArea, setScrollArea } = useAppContext();
 
   const { scene, animations } = useGLTF(model.url);
-  const [isVisible, setIsVisible] = useState(false);
   const mixer = useGLTFAnimations(scene, animations);
   const industryModel = 0;
 
@@ -38,7 +37,6 @@ function MappedModels({
         preventOverlaps: isInstantScroll ? true : false,
         // fastScrollEnd: true, // 2500 is default,
         onEnter: () => {
-          // console.log("just entered section of idx: ", idx);
           setVisibleModels([idx - 1, idx]);
           const areaObj = { ...scrollArea };
           areaObj.currentSection = model.onEnter.currentSection;
@@ -46,11 +44,6 @@ function MappedModels({
           setScrollArea(areaObj);
         },
         onLeaveBack: () => {
-          // console.log("just Leave Back section of idx: ", idx, "and", [
-          //   idx - 1,
-          //   idx,
-          //   idx + 1,
-          // ]);
           setVisibleModels(idx == industryModel ? [] : [idx, idx - 1]);
           const areaObj = { ...scrollArea };
           areaObj.currentSection = model.onLeave.currentSection;
@@ -58,12 +51,36 @@ function MappedModels({
           setScrollArea(areaObj);
         },
       },
-      // onLeave: () => console.log("just onLeave section of idx: ", idx),
-      // onEnterBack: () => console.log("just onEnterBack section of idx: ", idx),
     });
 
+    let halfwayReached = false;
+
     model.timeline(timeline, currentRef, prevRef);
+
+    timeline.eventCallback("onUpdate", () => {
+      // Calculate the current progress of the animation
+      const currentProgress = timeline.progress();
+
+      // Check if the halfway point has not been reached and if we are past halfway
+      if (!halfwayReached && currentProgress >= 0.5) {
+        // Set the flag to true to indicate that halfway point has been reached
+        halfwayReached = true;
+
+        // Call your function to set state or perform any other action
+        handleHalfwayPoint();
+      }
+    });
+    return () => {
+      // Dispose the timeline
+      timeline.kill();
+    };
   }, [currentRef, isInstantScroll]);
+
+  function handleHalfwayPoint() {
+    // Perform actions you want to do at halfway point
+    // For example, set state or trigger some other functionality
+    console.log("Halfway point reached!");
+  }
 
   return (
     <group key={`test${idx}`}>
@@ -79,21 +96,5 @@ function MappedModels({
     </group>
   );
 }
-
-// // ANIMATE ALL
-
-// // ----------------------------------------------------------------
-// // ----------------------------------------------------------------
-// // ----------------------------------------------------------------
-// // if (idx == 99) {
-// //   scene.traverse((child) => {
-// //     // if (child.material) child.material.wireframe = true;
-// //     if (child?.material?.name == "AI_Body") {
-// //       console.log(child.material);
-// //       child.material.transparent = false;
-// //       // child.material.opacity = 0;
-// //     }
-// //   });
-// // }
 
 export default MappedModels;

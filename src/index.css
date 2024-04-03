@@ -19,7 +19,7 @@ body {
   background: black;
   /* transition: background-image 1s; */
   /* background: black; */
-  /* overflow: hidden; */
+  overflow-x: hidden;
 }
 
 .button-ani {
