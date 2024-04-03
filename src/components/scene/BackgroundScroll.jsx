@@ -100,6 +100,18 @@ export function BackgroundScroll({
               <div className="container">
                 <span className="text-animate button-ani">SIMPLY EXPAND</span>
               </div>
+              <div
+                style={{
+                  marginTop: "7em",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <div className="icon-scroll"></div>
+                <div className="down-indicator"></div>
+              </div>
             </>
           ) : null}
         </div>

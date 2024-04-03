@@ -135,7 +135,7 @@ export const MicrosoftText = ({ textClass, scrollArea, categoriesObj }) => (
       fontFamily: "gotham",
       display: "flex",
       flexDirection: "column",
-      animation: "text-reveal 1.2s ease-in-out forwards",
+      animation: "text-reveal 0.9s ease-in-out forwards",
       // justifyContent: "space-between",
     }}
   >
@@ -221,9 +221,22 @@ export const AiText = ({ textClass, scrollArea, categoriesObj }) => (
     <div className="scrolled-category-title ai-title-ani">
       {categoriesObj[scrollArea.currentSection]}
     </div>
+
+    <div
+      style={{ marginTop: "6em" }}
+      className="scrolled-category-text-two ai-text-two-ani"
+    >
+      <span>
+        The combination of a 3D XR software environment with A.I creates not
+        only an advanced and innovative hardware and software operation but a
+        genuine cooperation between man and machine.
+      </span>
+
+      {/* <span>efficiency for clinics and hospitals</span> */}
+    </div>
     <div
       className="scrolled-category-text-one ai-text-one-ani"
-      style={{ marginTop: "6em" }}
+      style={{ marginTop: "8em", marginLeft: "18em" }}
     >
       <span>
         E<span className="animated-letter">X</span>hanced{" "}
@@ -235,15 +248,6 @@ export const AiText = ({ textClass, scrollArea, categoriesObj }) => (
         <span className="ai-highlight">A</span>MAZ
         <span className="ai-highlight">I</span>NG */}
       </span>
-    </div>
-    <div className="scrolled-category-text-two ai-text-two-ani">
-      <span>
-        The combination of a 3D XR software environment with A.I creates not
-        only an advanced and innovative hardware and software operation but a
-        genuine cooperation between man and machine
-      </span>
-
-      {/* <span>efficiency for clinics and hospitals</span> */}
     </div>
   </div>
 );
@@ -275,14 +279,14 @@ export const MilitaryText = ({ textClass, scrollArea, categoriesObj }) => (
       </span>
     </div>
     <div
-      style={{ marginTop: "2em" }}
+      style={{ marginTop: "5em" }}
       className="scrolled-category-text-two industry-text-two-ani"
     >
       <span>
         We succeeded in delivering top-of-the-line technology to all of our
         important industries, through development of complex simulators, XR
         platforms, and tailored applications that are now in the service of this
-        significant sector
+        significant sector.
       </span>
     </div>
   </div>
@@ -293,9 +297,9 @@ export const CustomizationText = ({ textClass, scrollArea, categoriesObj }) => (
     className={`fader ${textClass}`}
     style={{
       height: "80vh",
-      width: "40%",
+      width: "48%",
       top: "18%",
-      left: "12%",
+      left: "8%",
       position: "absolute",
       color: "white",
       // fontSize: "3em",
@@ -308,16 +312,16 @@ export const CustomizationText = ({ textClass, scrollArea, categoriesObj }) => (
       {categoriesObj[scrollArea.currentSection]}
     </div>
     <div className="scrolled-category-text-one">
-      <span style={{ marginTop: "4em", marginLeft: "6em" }}>
+      <span style={{ marginTop: "4em", marginLeft: "5em" }}>
         We specialize in 3D and Extended Reality (EX).
       </span>
     </div>
     <div className="scrolled-category-text-two security-title-ani">
-      <span style={{ marginRight: "2em", border: "1px solid yellow" }}>
+      <span style={{ marginRight: "2em" }}>
         As specialists we keep an amazing team of developers, 3D generalists,
         interface and graphics artists, and product designers just so we can
         provide our clients with the flexibility and abilities needed to deliver
-        the best product
+        the best product.
       </span>
     </div>
   </div>
