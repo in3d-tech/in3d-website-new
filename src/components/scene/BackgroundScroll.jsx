@@ -98,7 +98,9 @@ export function BackgroundScroll({
           {startExpandedAnimation ? (
             <>
               <div className="container">
-                <span className="text-animate button-ani">SIMPLY EXPAND</span>
+                <span className="text-animate simply-header">
+                  SIMPLY EXPAND
+                </span>
               </div>
               <div
                 style={{

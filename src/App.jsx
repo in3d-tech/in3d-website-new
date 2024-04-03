@@ -3,13 +3,13 @@ import "./App.css";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { extend } from "@react-three/fiber";
-import { useGLTF, useProgress } from "@react-three/drei";
+import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
-import { Header } from "./components/navs/Menu";
+// import { Header } from "./components/navs/Menu";
 import { LoadingScreen } from "./components/viewableContent/LoadingScreen";
 import { useAppContext } from "./context/appContext";
 import useCheckIsMobileScreen from "./components/common/useCheckIsMobile";
-import { useTranslation } from "react-i18next";
+// import { useTranslation } from "react-i18next";
 
 // import { ChangeLanguage } from "./components/navs/ChangeLanguage";
 
@@ -80,14 +80,14 @@ function App() {
         currentLanguage={currentLanguage}
       /> */}
       <div className="app-bg">
-        <Header />
+        {/* <Header /> */}
         <Suspense fallback={null}>
           {selectedCategory ? <LazySelectedContent /> : null}
         </Suspense>
       </div>
       <>
         <Suspense fallback={null}>
-          {isMobileDimensions ? (
+          {isMobileViewOnly ? (
             <LazyMobileView />
           ) : (
             <>
@@ -107,13 +107,6 @@ function App() {
 export default App;
 
 useGLTF.preload("/assets/models/astronaut_new5.glb");
-// useGLTF.preload("/assets/models/engenir_model_new.glb");
-// useGLTF.preload("/assets/models/medical_model.glb");
-// useGLTF.preload("/assets/models/microsoft_model_new.glb");
-// useGLTF.preload("/assets/models/security.glb");
-// useGLTF.preload("/assets/models/ai_model.glb");
-// useGLTF.preload("/assets/models/military.glb");
-// useGLTF.preload("/assets/models/costimize_model_v02.glb");
 
 function ViewableContent() {
   return (

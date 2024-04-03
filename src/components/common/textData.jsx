@@ -318,10 +318,18 @@ export const CustomizationText = ({ textClass, scrollArea, categoriesObj }) => (
 
 export const ContactUsText = ({ test }) => {
   const [showTextBox, setShowTextBox] = useState(false);
+  const [showSentStatus, setShowSentStatus] = useState(null);
 
   const toggleTextBox = () => {
     setShowTextBox(!showTextBox);
   };
+
+  const handleSendMessage = (e) => {
+    setTimeout(() => setShowTextBox(false), 200);
+    setTimeout(() => setShowSentStatus(true), 200);
+    setTimeout(() => setShowSentStatus(null), 3000);
+  };
+
   return (
     <>
       {!test ? null : (
@@ -374,9 +382,26 @@ export const ContactUsText = ({ test }) => {
                       fontSize: "1em",
                     }}
                   />
-                  <button className="contact-us-send-text-btn">Send</button>
+                  <button
+                    onClick={handleSendMessage}
+                    className="contact-us-send-text-btn"
+                  >
+                    Send
+                  </button>
                 </div>
               )}
+              {showSentStatus ? (
+                <div
+                  style={{
+                    marginTop: "4em",
+                    animation: "fadeIn 0.8s ease-in-out",
+                    fontSize: "0.8em",
+                    color: "#6ad5db",
+                  }}
+                >
+                  Sent! Thank you for reaching out!
+                </div>
+              ) : null}
             </span>
           </div>
         </div>
