@@ -54,8 +54,8 @@ export const Model_Data = [
       tl
         ?.to(currentRef.current.position, { x: 7, z: 0 }, "simultaneously")
         .to(currentRef.current.rotation, { y: 0 }, "simultaneously")
-        .to(prevRef.current.position, { y: -5, x: 13 }, "simultaneously")
-        .to(prevRef.current.rotation, { y: -1.2 }, "simultaneously"),
+        .to(prevRef.current.position, { y: -5, x: 13.5 }, "simultaneously")
+        .to(prevRef.current.rotation, { y: 0.2 }, "simultaneously"),
   },
 
   // MICROSOFT

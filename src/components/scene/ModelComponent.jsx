@@ -12,6 +12,10 @@ export function AstroModel({
   setTextAnimation,
   customizeRef,
 }) {
+  const { camera } = useThree();
+  const box = new THREE.Box3();
+  const frustum = new THREE.Frustum();
+
   const {
     isInstantScroll,
     scrollArea,
@@ -32,6 +36,20 @@ export function AstroModel({
   useFrame(() => {
     // Check if the object is visible in the scene and loaded
     if (astroRef.current && scene && !isFullyRenderedRef.current) {
+      box.setFromObject(astroRef.current);
+
+      frustum.setFromProjectionMatrix(
+        new THREE.Matrix4().multiplyMatrices(
+          camera.projectionMatrix,
+          camera.matrixWorldInverse
+        )
+      );
+
+      if (frustum.intersectsBox(box)) {
+        console.log("The model is in the camera view.");
+      } else {
+        console.log("The model is not in the camera view.");
+      }
       // Check if all objects in the scene have been rendered
       const fullyRendered = scene.children.every((child) => child.visible);
       if (
