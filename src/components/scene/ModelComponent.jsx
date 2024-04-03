@@ -8,9 +8,7 @@ import { useAppContext } from "../../context/appContext";
 export function AstroModel({
   url,
   astroRef,
-  visibleModels,
   setVisibleModels,
-  textRef,
   setTextAnimation,
   customizeRef,
 }) {
@@ -185,8 +183,6 @@ export function AstroModel({
       object={scene}
       dispose={null}
       scale={[3, 3, 3]}
-      // position={[0, -18.2, -13]}
-      // rotation={[0, 0, 0]}
       position={[-5, -18.2, -10]}
       rotation={[0.05, Math.PI / 2 + 0, 0]}
       visible={isVisibile}

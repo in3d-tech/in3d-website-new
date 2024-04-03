@@ -102,11 +102,16 @@ export function BackgroundScroll({
               </div>
               <div
                 style={{
-                  marginTop: "7em",
+                  marginTop: "1.5em",
+                  marginLeft: "2em",
                   display: "flex",
-                  flexDirection: "column",
                   justifyContent: "center",
                   alignItems: "center",
+
+                  position: "absolute",
+
+                  height: "300px",
+                  width: "300px",
                 }}
               >
                 <div className="icon-scroll"></div>

@@ -251,13 +251,17 @@ function Scene({ textRef, scrollToElementById }) {
   //   }
   // }, []);
 
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      // Optional: adds smooth scrolling behavior
+    });
+  }
+
   return (
     <div className="scene one" style={{}} ref={containerRef}>
-      <div
-        className="h-nav-in3d-icon"
-        style={{ position: "fixed", top: "4em" }}
-      >
-        <img style={{ width: "10em" }} src="/assets/images/in3dlogo.png" />
+      <div className="h-nav-in3d-icon" onClick={scrollToTop}>
+        <img className="in3d-fixed-logo" src="/assets/images/in3dlogo.png" />
       </div>
 
       <div

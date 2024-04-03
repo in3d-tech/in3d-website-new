@@ -37,17 +37,7 @@ export const IndustryText = ({ textClass, scrollArea, categoriesObj }) => (
       }}
     >
       <div style={{ flex: 1 }}>
-        <div
-          className="scrolled-category-text-one"
-          style={{
-            width: "80%",
-            textAlign: "center",
-            marginLeft: "6em",
-          }}
-        >
-          {/* <span>The world was recently</span>
-      <span>introduced to the wonders of</span>
-      <span>the industry 4.0 revolution</span> */}
+        <div className="scrolled-category-text-one">
           <span className="scroll-text-animate-one">
             The world was recently introduced to the wonders of the industry 4.0
             revolution.
@@ -63,15 +53,14 @@ export const IndustryText = ({ textClass, scrollArea, categoriesObj }) => (
           alignItems: "center",
         }}
       >
-        <div
-          className="scrolled-category-text-two"
-          style={{ width: "80%", marginLeft: "1em", marginTop: "1em" }}
-        >
-          <span className="scroll-text-animate-two">
-            Together with our clients we map out the challenges they face and
-            develop tailor made solutions using XR and 3D technology that
-            creates an innovative visual interface between men and machine.
-          </span>
+        <div className="scrolled-category-text-two">
+          <div className="industry-text-two-wrapper">
+            <span className="scroll-text-animate-two">
+              Together with our clients we map out the challenges they face and
+              develop tailor made solutions using XR and 3D technology that
+              creates an innovative visual interface between men and machine.
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -135,7 +124,7 @@ export const MicrosoftText = ({ textClass, scrollArea, categoriesObj }) => (
       fontFamily: "gotham",
       display: "flex",
       flexDirection: "column",
-      animation: "text-reveal 0.9s ease-in-out forwards",
+      animation: "text-reveal 0.6s ease-in-out forwards",
       // justifyContent: "space-between",
     }}
   >
@@ -174,7 +163,7 @@ export const SecurityText = ({ textClass, scrollArea, categoriesObj }) => (
     style={{
       height: "80vh",
       width: "34%",
-      top: "18%",
+      top: "16%",
       right: "4%",
       position: "absolute",
       color: "white",
@@ -189,7 +178,7 @@ export const SecurityText = ({ textClass, scrollArea, categoriesObj }) => (
       {categoriesObj[scrollArea.currentSection]}
     </div>
     <div
-      style={{ marginTop: "4em" }}
+      style={{ marginTop: "8em" }}
       className="scrolled-category-text-one security-text-ani"
     >
       <span>
