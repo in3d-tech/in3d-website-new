@@ -13,6 +13,7 @@ export default function AppContextProvider({ children }) {
   const [isAstroModelDrawn, setIsAstroModelDrawn] = useState(false);
   const [renderModels, setRenderModels] = useState(false);
   const [mobileBackground, setMobileBackground] = useState(1);
+  const [titleOnMainPageHovered, setTitleOnMainPageHovered] = useState("");
 
   return (
     <AppContext.Provider
@@ -31,6 +32,8 @@ export default function AppContextProvider({ children }) {
         setRenderModels,
         mobileBackground,
         setMobileBackground,
+        titleOnMainPageHovered,
+        setTitleOnMainPageHovered,
       }}
     >
       {children}
@@ -57,6 +60,8 @@ export function useAppContext() {
       setRenderModels: () => {},
       mobileBackground: null,
       setMobileBackground: () => {},
+      titleOnMainPageHovered: null,
+      setTitleOnMainPageHovered: () => {},
     };
   }
 

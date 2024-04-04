@@ -1,11 +1,49 @@
 {
   "translations": {
-    "industry": "Industry",
-    "medicine": "Medicine",
-    "microsoft": "Microsoft",
-    "security": "Security",
-    "artificialIntelligence": "Artifical Intelligence",
-    "military": "Military",
-    "Customization": "Customization"
+    "industry": {
+      "title": "Industry",
+      "text1": "The world was recently introduced to the wonders of the industry 4.0 revolution.",
+      "text2": "Together with our clients we map out the challenges they face and develop tailor made solutions using XR and 3D technology that creates an innovative visual interface between men and machine."
+    },
+    "medicine": {
+      "title": "Medicine",
+      "text1": "The world of medicine is one of the most innovative sectors in the world.",
+      "text2": "Using Extended Reality (XR) we at in3D became pioneers in development of XR products for medical organizations, collaborating together to empower innovation and efficiency for clinics and hospitals."
+    },
+    "microsoft": {
+      "title": "Microsoft",
+      "text1": "In3D is the official and the inclusive Mixed Reality (MR) partner of Microsoft Israel",
+      "text2": "In3D and Microsoft&#39;s teams share a strong connection and a combined vison on the important roles of MR technology."
+    },
+    "security": {
+      "title": "Security",
+      "text1": "Thanks to years of collaboration with defense industries, we gained the needed experience, knowledge and tools to provide quick and out of the box solutions that are tailored to the industries unique requirements."
+    },
+    "artificialIntelligence": {
+      "title": "Artifical Intelligence",
+      "text1": "The combination of a 3D XR software environment with A.I creates not only an advanced and innovative hardware and software operation but a genuine cooperation between man and machine."
+    },
+    "military": {
+      "title": "Military",
+      "text1": "Part of our vision is to promote innovation, which is a big part of what Israel stands for.",
+      "text2": "We succeeded in delivering top-of-the-line technology to all of our important industries, through development of complex simulators, XR platforms, and tailored applications that are now in the service of this significant sector."
+    },
+    "Customization": {
+      "title": "Customization",
+      "text1": "We specialize in 3D and Extended Reality (EX).",
+      "text2": "As specialists we keep an amazing team of developers, 3D generalists, interface and graphics artists, and product designers just so we can provide our clients with the flexibility and abilities needed to deliver the best product."
+    },
+    "contactUs": {
+      "feelFree": "Feel free to contact us via:",
+      "phone": "Phone: ",
+      "number": "+972-54-218-5021 or +1(302)-219-4023",
+      "email": "Email: ",
+      "contactEmail": ">sales@in3d-tech.com",
+      "address": "We also invite you to meet us at 1 Shefa Tal street, Tel Aviv.",
+      "messageUs": "Or you can message us ",
+      "here": "here",
+      "send": "Send",
+      "sentMessageThanks": "Sent! Thank you for reaching out!"
+    }
   }
 }

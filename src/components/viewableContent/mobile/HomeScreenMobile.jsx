@@ -12,8 +12,14 @@ function HomeScreenMobile() {
   const textContainerRef = useRef();
   const [isShouldShowCategoryInformation, setIsShouldShowCategoryInformation] =
     useState(false);
-  const { selectedCategory, mobileBackground, setMobileBackground } =
-    useAppContext();
+  const [startExpandedAnimation, setStartExpandedAnimation] = useState(false);
+
+  const {
+    selectedCategory,
+    mobileBackground,
+    setMobileBackground,
+    renderModels,
+  } = useAppContext();
 
   useEffect(() => {
     console.log({ selectedCategory });
@@ -21,28 +27,6 @@ function HomeScreenMobile() {
       scrollToElementById();
     }
   }, [selectedCategory]);
-
-  useEffect(() => {
-    document.body.style.overflowX = "hidden";
-
-    // Animation using GSAPz
-    gsap.to(".text-animation", {
-      x: 0, // Initial horizontal position for animation
-      // opacity: 0, // Initial opacity
-      duration: 6, // Duration of animation
-      stagger: 0.2, // Stagger the animation for each text element
-      ease: "back", // Easing function
-    });
-
-    // Animation using GSAP
-    gsap.to(".text-animation2", {
-      x: 0, // Initial horizontal position for animation
-      // opacity: 0, // Initial opacity
-      duration: 6, // Duration of animation
-      stagger: 0.2, // Stagger the animation for each text element
-      ease: "back", // Easing function
-    });
-  }, []); // Run once when component mounts
 
   const scrollToElementById = () => {
     const element = document.getElementById("testId");
@@ -53,6 +37,12 @@ function HomeScreenMobile() {
       }
     }, 200);
   };
+
+  useEffect(() => {
+    if (!renderModels) return;
+
+    if (!startExpandedAnimation) setStartExpandedAnimation(true);
+  }, [renderModels]);
 
   return (
     <>
@@ -71,9 +61,7 @@ function HomeScreenMobile() {
       ></div>
       <div
         style={{
-          height: "100vh",
           maxWidth: "100%",
-          // width: "100vw",
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-end",
@@ -106,7 +94,7 @@ function HomeScreenMobile() {
             </button>
           </div>
         ) : null}
-        <div style={{ position: "absolute", top: "1em" }}>
+        {/* <div style={{ position: "absolute", top: "1em" }}>
           <div
             className="text-animation"
             style={{
@@ -132,7 +120,29 @@ function HomeScreenMobile() {
           >
             Expand
           </div>
-        </div>
+        </div> */}
+        {startExpandedAnimation ? (
+          <>
+            <div
+              style={{
+                bottom: "3em",
+                left: "1em",
+                height: "15em",
+                zIndex: 1,
+                position: "absolute",
+                width: "70%",
+              }}
+              className="container"
+            >
+              <span
+                style={{ fontSize: "2em", marginTop: "5em" }}
+                className="text-animate simply-header"
+              >
+                SIMPLY EXPAND
+              </span>
+            </div>
+          </>
+        ) : null}
 
         {true ? (
           <SelectedCategoryMobile
@@ -167,7 +177,7 @@ function HomeScreenMobile() {
             <Camera />
             <Suspense fallback={null}>
               <AstroModel
-                url={"/assets/models/astronaut_new23.glb"}
+                url={"/assets/models/astronaut_new5 (1).glb"}
                 astroRef={astroRef}
               />
             </Suspense>
@@ -240,7 +250,7 @@ export function AstroModel({
 }) {
   const { isAstroModelDrawn, setIsAstroModelDrawn } = useAppContext();
 
-  const { scene, animations } = useGLTF("/assets/models/astronaut_new23.glb");
+  const { scene, animations } = useGLTF(url);
   const mixer = useGLTFAnimations(scene, animations);
 
   const { active, progress, errors, total } = useProgress();
@@ -258,14 +268,31 @@ export function AstroModel({
     if (astroRef.current && scene && !isFullyRenderedRef.current) {
       // Check if all objects in the scene have been rendered
       const fullyRendered = scene.children.every((child) => child.visible);
-      if (fullyRendered && isAstroModelDrawn === false) {
+      if (
+        fullyRendered &&
+        isAstroModelDrawn === false &&
+        active === false &&
+        scene
+      ) {
         // Object is fully rendered
         isFullyRenderedRef.current = true;
-        setIsAstroModelDrawn(true);
+        setTimeout(() => setIsAstroModelDrawn(true), 1000);
         console.log("Astro object is fully rendered!");
       }
     }
   });
+
+  useEffect(() => {
+    if (scene && astroRef.current && !isFullyRenderedRef.current) {
+      // Check if all objects in the scene have been rendered
+      const fullyRendered = scene.children.every((child) => child.visible);
+
+      if (fullyRendered && isAstroModelDrawn === false) {
+        setTimeout(() => setIsAstroModelDrawn(true), 1500);
+        console.log("Astro object is fully rendered!");
+      }
+    }
+  }, [scene, setIsAstroModelDrawn]);
 
   return (
     <group>

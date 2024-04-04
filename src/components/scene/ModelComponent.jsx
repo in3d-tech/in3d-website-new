@@ -123,50 +123,10 @@ export function AstroModel({
       },
     });
 
-    // if (customizeRef.current) {
-    //   let contactUsTimeline = gsap.timeline({
-    //     defaults: { ease: "power1.out" },
-    //     scrollTrigger: {
-    //       trigger: ".section-ten",
-    //       start: "top bottom",
-    //       // endTrigger: "#midSection2", //".section-two",
-    //       // end: "bottom bottom",
-    //       scrub: 1,
-    //       onEnter: () => {
-    //         const areaObj = { ...scrollArea };
-    //         areaObj.currentSection = 9;
-    //         areaObj.prevSection = 8;
-    //         setScrollArea(areaObj);
-    //       },
-    //       onLeaveBack: () => {
-    //         const areaObj = { ...scrollArea };
-    //         areaObj.currentSection = 8;
-    //         areaObj.prevSection = 9;
-    //         setScrollArea(areaObj);
-    //       },
-    //     },
-    //   });
-
-    //   contactUsTimeline
-    //     .to(
-    //       astroRef.current.position,
-    //       { x: -10, y: -24.2, z: -2 },
-    //       "simultaneously"
-    //     )
-    //     .to(
-    //       astroRef.current.rotation,
-    //       { x: 0.4, y: Math.PI + 0.3, z: -0 },
-    //       "simultaneously"
-    //     )
-    //     .to(
-    //       customizeRef.current.position,
-    //       { x: 16, y: -2, z: 0 },
-    //       "simultaneously"
-    //     )
-    //     .to(customizeRef.current.rotation, { y: -2.9 }, "simultaneously");
-    //   // .to(astroRef.current.rotation, { y: Math.PI }, ">")
-    //   // .to(astroRef.current.rotation, { y: -Math.PI / 2 + 0.5 }, ">");
-    // }
+    return () => {
+      timeline.kill();
+      textTimeline.kill();
+    };
   }, [astroRef, isInstantScroll]); // , customizeRef.current
 
   useEffect(() => {

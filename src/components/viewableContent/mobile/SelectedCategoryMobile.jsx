@@ -9,12 +9,12 @@ function SelectedCategoryMobile({ titleKey, astroRef, setMobileBackground }) {
         defaults: { ease: "power1.out" },
         scrollTrigger: {
           trigger: ".industry-test",
-          start: "center center",
+          start: "top bottom",
           endTrigger: ".medical-test",
           end: "top bottom",
           scrub: 1,
           // fastScrollEnd: true, // 2250,
-          // markers: true,
+          markers: true,
           onEnter: () => {
             console.log("entered medicla section on mobile");
             setMobileBackground([2]);
@@ -55,17 +55,17 @@ function SelectedCategoryMobile({ titleKey, astroRef, setMobileBackground }) {
         },
       });
 
-      medicalTimeline.to(
-        astroRef.current.position,
-        { y: -4 },
-        "simultaneously"
-      );
+      // medicalTimeline.to(
+      //   astroRef.current.position,
+      //   { y: -4 },
+      //   "simultaneously"
+      // );
 
       let securityTimeline = gsap.timeline({
         defaults: { ease: "power1.out" },
         scrollTrigger: {
           trigger: ".security-test",
-          start: "center center",
+          start: "center bottom",
           endTrigger: ".ai-test",
           end: "top center",
           scrub: 1,
@@ -77,38 +77,44 @@ function SelectedCategoryMobile({ titleKey, astroRef, setMobileBackground }) {
         },
       });
 
-      securityTimeline
-        .to(
-          astroRef.current.position,
-          { z: 3, x: 0, y: -6.5 },
-          "simultaneously"
-        )
-        .to(
-          astroRef.current.rotation,
-          { x: 0.5, y: 4.2, z: 0 },
-          "simultaneously"
-        );
+      // securityTimeline
+      //   .to(
+      //     astroRef.current.position,
+      //     { z: 3, x: 0, y: -6.5 },
+      //     "simultaneously"
+      //   )
+      //   .to(
+      //     astroRef.current.rotation,
+      //     { x: 0.5, y: 4.2, z: 0 },
+      //     "simultaneously"
+      //   );
     }
   }, [astroRef.current]);
 
   return (
     <div
       style={{
-        height: "300vh",
+        // height: "360vh",
         zIndex: 1,
         display: "flex",
         flexDirection: "column",
       }}
     >
-      {/* <h1 style={{ color: "white" }}>HELLO WORLD</h1> */}
+      <div style={{ height: "96vh" }}></div>
+      <div
+        style={{
+          borderTop: "1px solid rgba(255,255,255, 0.6)",
+          height: "20vh",
+          marginTop: "2em",
+        }}
+      ></div>
       <IndustryText title={"Industry"} />
       <MedicineText title={"Medicine"} />
       <MicrosoftText title={"Microsoft"} />
-      {/* <SecurityText title={"Security"} /> */}
-      {/* <AiText title={"Ai"} /> */}
-      {/* <MilitaryText title={"Military"} /> */}
-      {/* <CustomizationText title={"Customization"} />
-      <ContactUsText title={"ContactUs"} /> */}
+      <SecurityText title={"Security"} />
+      <AiText title={"Artifical Intelligence"} />
+      <MilitaryText title={"Military"} />
+      <CustomizationText title={"Customization"} />
     </div>
   );
 }
@@ -117,43 +123,39 @@ export default SelectedCategoryMobile;
 
 const IndustryText = ({ title }) => (
   <div
-    className={`industry-test fader`}
+    className={`industry-test`}
     style={{
-      //   background: "rgb(255,0,0,0.4)",
-      height: "200vh",
-      // width: "100%",
-      //   left: "14%",
-      top: 0,
-      position: "absolute",
-      left: 0,
       color: "white",
-      // fontSize: "3em",
       fontFamily: "gotham",
       display: "flex",
       flexDirection: "column",
-      // justifyContent: "space-between",
+      border: "1px solid rgba(255,255,255, 0.6)",
+      height: "80vh",
     }}
   >
-    <div style={{ flex: 1 }}></div>
     <div
       style={{
         flex: 1,
         display: "flex",
         // background: "green",
-        background: 'url("/assets/images/backgrounds/taasia/taasia_bg.jpg")',
-        opacity: 0.3,
+        // background: 'url("/assets/images/backgrounds/taasia/taasia_bg.jpg")',
         flexDirection: "column",
         padding: "4px",
         textAlign: "center",
       }}
     >
-      <div className="scrolled-category-title">{title}</div>
-      <div className="scrolled-category-text-one">
+      <div className="scrolled-category-title" style={{ marginTop: "1em" }}>
+        {title}
+      </div>
+      <div className="scrolled-category-text-one" style={{ marginTop: "2em" }}>
         <span>The world was recently</span>
         <span>introduced to the wonders of</span>
         <span>the industry 4.0 revolution</span>
       </div>
-      <div className="scrolled-category-text-two">
+      <div
+        className="scrolled-category-text-two"
+        style={{ marginTop: "5em", fontSize: "1.2em" }}
+      >
         <span>Together with our clients we map out the</span>
         <span>challenges they face and develop tailor-made</span>
         <span>solutions using XR and 3D technology that</span>
@@ -167,25 +169,29 @@ const MedicineText = ({ title }) => (
     className={`medical-test fader`}
     style={{
       height: "80vh",
-      // width: "34%",
       top: "200%",
-      left: "9%",
-      position: "absolute",
       color: "white",
       // fontSize: "3em",
       fontFamily: "gotham",
       display: "flex",
       flexDirection: "column",
       // justifyContent: "space-between",
+      border: "1px solid rgba(255,255,255, 0.6)",
+      padding: "4px",
     }}
   >
-    <div className="scrolled-category-title">{title}</div>
-    <div className="scrolled-category-text-one">
+    <div className="scrolled-category-title" style={{ marginTop: "1em" }}>
+      {title}
+    </div>
+    <div className="scrolled-category-text-one" style={{ marginTop: "2em" }}>
       <span>The world of medicine is one</span>
       <span>of the most innovative sectors</span>
       <span>in the world</span>
     </div>
-    <div className="scrolled-category-text-two">
+    <div
+      className="scrolled-category-text-two"
+      style={{ marginTop: "4em", fontSize: "1.2em" }}
+    >
       <span>Using Extended Reality (XR) we at in3D became pioneers in</span>
       <span>development of XR products for medical organizations</span>
     </div>
@@ -197,16 +203,13 @@ const MicrosoftText = ({ title }) => (
     className={`micro-test fader`}
     style={{
       height: "80vh",
-      // width: "34%",
-      top: "300%",
-      left: "14%",
-      position: "absolute",
       color: "white",
       // fontSize: "3em",
       fontFamily: "gotham",
       display: "flex",
       flexDirection: "column",
       // justifyContent: "space-between",
+      border: "1px solid rgba(255,255,255, 0.6)",
     }}
   >
     <div className="scrolled-category-title">{title}</div>
@@ -232,16 +235,13 @@ export const SecurityText = ({ title }) => (
   <div
     className={`security-test fader`}
     style={{
-      height: "80vh",
-      // width: "34%",
-      top: "400%",
-      position: "absolute",
       color: "white",
       // fontSize: "3em",
       fontFamily: "gotham",
       display: "flex",
       flexDirection: "column",
       // justifyContent: "space-between",
+      height: "80vh",
     }}
   >
     <div className="scrolled-category-title">{title}</div>
@@ -268,17 +268,15 @@ export const AiText = ({ title }) => (
   <div
     className={`ai-test fader`}
     style={{
-      height: "80vh",
       // width: "34%",
-      top: "500%",
-      left: "10%",
-      position: "absolute",
+
       color: "white",
       // fontSize: "3em",
       fontFamily: "gotham",
       display: "flex",
       flexDirection: "column",
       // justifyContent: "space-between",
+      height: "80vh",
     }}
   >
     <div className="scrolled-category-title">{title}</div>
@@ -305,17 +303,15 @@ export const MilitaryText = ({ title }) => (
   <div
     className={`fader`}
     style={{
-      height: "80vh",
       // width: "34%",
-      top: "600%",
-      right: "9%",
-      position: "absolute",
+
       color: "white",
       // fontSize: "3em",
       fontFamily: "gotham",
       display: "flex",
       flexDirection: "column",
       // justifyContent: "space-between",
+      height: "80vh",
     }}
   >
     <div className="scrolled-category-title">{title}</div>
@@ -342,17 +338,14 @@ export const CustomizationText = ({ title }) => (
   <div
     className={`fader`}
     style={{
-      height: "80vh",
       // width: "34%",
-      top: "700%",
-      left: "12%",
-      position: "absolute",
       color: "white",
       // fontSize: "3em",
       fontFamily: "gotham",
       display: "flex",
       flexDirection: "column",
       // justifyContent: "space-between",
+      height: "80vh",
     }}
   >
     <div className="scrolled-category-title">{title}</div>

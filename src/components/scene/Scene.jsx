@@ -1,6 +1,9 @@
 import { Suspense, lazy, useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import { AstroModel } from "../../components/scene/ModelComponent";
+import {
+  AstroModel,
+  useGLTFAnimations,
+} from "../../components/scene/ModelComponent";
 import { Model_Data } from "../../components/common/modelData";
 import {
   IndustryText,
@@ -16,8 +19,19 @@ import { gsap } from "gsap";
 import { Camera } from "../../components/scene/Camera";
 import { BackgroundScroll } from "./BackgroundScroll";
 import { useAppContext } from "../../context/appContext";
+import { useGLTF } from "@react-three/drei";
 
 const MappedModels = lazy(() => import("./MappedModels.jsx"));
+
+const hoveredTitleLight = {
+  industry: "",
+  medicine: "",
+  microsoft: "",
+  security: "",
+  artificalIntelligence: "",
+  military: "",
+  customization: "",
+};
 
 function Scene({ textRef, scrollToElementById }) {
   const [visibleModels, setVisibleModels] = useState([]);
@@ -28,8 +42,8 @@ function Scene({ textRef, scrollToElementById }) {
   const [textAnimation, setTextAnimation] = useState(
     "category-title-no-opacity"
   );
-
-  const { scrollArea, renderModels, setMenuOpened } = useAppContext();
+  const { scrollArea, renderModels, setMenuOpened, titleOnMainPageHovered } =
+    useAppContext();
 
   const containerRef = useRef(null);
   const simplyRef = useRef();
@@ -48,13 +62,13 @@ function Scene({ textRef, scrollToElementById }) {
   const textClass = shouldFadeIn ? "fade-in" : "fade-out";
 
   const categoriesObj = {
-    2: "INDUSTRY",
-    3: "MEDICINE",
-    4: "MICROSOFT",
-    5: "SECURITY",
-    6: "ARTIFICAL INTELLIGENCE",
-    7: "MILITARY",
-    8: "CUSTOMIZATION",
+    2: "Industry",
+    3: "Medicine",
+    4: "Microsoft",
+    5: "Security",
+    6: "Artificial intelligence",
+    7: "Military",
+    8: "Customization",
   };
 
   const createTextComponent = (currentRef, prevRef, TextComponent) => ({
@@ -219,38 +233,6 @@ function Scene({ textRef, scrollToElementById }) {
     );
   });
 
-  // const handleWheel = (e) => {
-  //   console.log("deltaY2  : ", e.deltaY);
-  //   const container = containerRef.current;
-
-  //   const maxDeltaY = 100;
-  //   let normalizedDeltaY =
-  //     Math.sign(e.deltaY) * Math.min(Math.abs(e.deltaY), maxDeltaY);
-
-  //   if (container) {
-  //     const maxScrollTop = container.scrollHeight - container.clientHeight;
-
-  //     const newScrollTop = container.scrollTop + normalizedDeltaY;
-
-  //     // Allow default behavior if scrolling exceeds container bounds
-  //     if (newScrollTop <= maxScrollTop && newScrollTop >= 0) {
-  //       container.scrollTop = newScrollTop;
-  //       e.preventDefault();
-  //     }
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   const container = containerRef.current;
-
-  //   if (container) {
-  //     container.addEventListener("wheel", handleWheel, { passive: false });
-  //     return () => {
-  //       container.removeEventListener("wheel", handleWheel);
-  //     };
-  //   }
-  // }, []);
-
   function scrollToTop() {
     window.scrollTo({
       top: 0,
@@ -258,11 +240,39 @@ function Scene({ textRef, scrollToElementById }) {
     });
   }
 
+  const moveRef = useRef();
+  const MoveModel = () => {
+    const { scene, animation } = useGLTF(
+      "/assets/models/movement/movement_check.glb"
+    );
+    const mixer = useGLTFAnimations(scene, animation);
+
+    console.log({ mixer });
+    console.log({ animation });
+
+    return (
+      <primitive
+        ref={moveRef}
+        object={scene}
+        dispose={null}
+        scale={[4, 4, 4]}
+        position={[0, 0, 0]}
+        rotation={[0.05, Math.PI / 2 + 0, 0]}
+        visible={true}
+      />
+    );
+  };
+
   return (
     <div className="scene one" style={{}} ref={containerRef}>
-      <div className="h-nav-in3d-icon" onClick={scrollToTop}>
-        <img className="in3d-fixed-logo" src="/assets/images/in3dlogo.png" />
-      </div>
+      {renderModels ? (
+        <div className="h-nav-in3d-icon" onClick={scrollToTop}>
+          <img
+            className="in3d-fixed-logo"
+            src="/assets/images/in3d-logo-white.png"
+          />
+        </div>
+      ) : null}
 
       <div
         style={{
@@ -279,19 +289,29 @@ function Scene({ textRef, scrollToElementById }) {
           {renderModels ? (
             <>
               <directionalLight
-                color={"rgb(200,255,255)"}
+                color={
+                  titleOnMainPageHovered
+                    ? hoveredTitleLight
+                    : "rgb(200,255,255)"
+                }
                 intensity={5}
                 position={[-25, 50, 10]}
               />
               <directionalLight
                 intensity={1}
                 position={[20, 0, -1]}
-                color={"rgb(254,200,255)"}
+                color={
+                  titleOnMainPageHovered
+                    ? hoveredTitleLight
+                    : "rgb(254,200,255)"
+                }
               />
             </>
           ) : null}
+
           <Camera />
           <Suspense fallback={null}>
+            {/* <MoveModel /> */}
             <AstroModel
               url={"/assets/models/astronaut_new5 (1).glb"}
               astroRef={astroRef}

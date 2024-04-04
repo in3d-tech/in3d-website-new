@@ -71,10 +71,11 @@ body {
 
 .h-nav-in3d-icon {
   animation: slideUpIcon 1s ease-out forwards;
-  animation-delay: 0.6s;
+  animation-delay: 2.8s;
   opacity: 0;
   position: fixed;
   top: 4em;
+  left: 0.5em;
   z-index: 1;
 }
 
@@ -83,13 +84,13 @@ body {
 }
 
 .in3d-fixed-logo {
-  width: 10em;
+  width: 7em;
   /* transition: box-shadow 0.5s ease-in-out; */
   transition: width 0.5s ease-in-out;
 }
 
 .in3d-fixed-logo:hover {
-  width: 10.5em;
+  width: 7.4em;
   /* box-shadow: 3px 3px 32px 8px rgba(255, 255, 255, 0.05);
   -webkit-box-shadow: 3px 3px 32px 8px rgba(255, 255, 255, 0.05);
   -moz-box-shadow: 3px 3px 32px 8px rgba(255, 255, 255, 0.05); */
@@ -435,13 +436,15 @@ section {
   /* opacity: 0.5; */
   /* border: 2px solid yellow; */
   /* height: 300vh; */
-  height: 50vh;
+  height: 30vh;
+  /* border: 2px solid red; */
 }
 
 .section-two-half {
   /* background: black; */
-  opacity: 0;
-  height: 60vh;
+  opacity: 1;
+  height: 40vh;
+  /* border: 5px solid orange; */
 }
 
 .section-three {
@@ -491,7 +494,9 @@ section {
   /* z-index: 50000; */
   /* background: url("/assets/images/backgrounds/Astro_1_Background.webp"); */
   background: var(--color);
+  background-size: cover;
   transition: background-image 0.8s;
+  top: 0em;
   /* background: black; */
   /* opacity: 0.7; */
   position: fixed;
@@ -1001,7 +1006,6 @@ section {
 .contact-details-wrapper {
   display: flex;
   flex-direction: column;
-
   font-size: 0.5em;
   color: rgb(255, 255, 255, 0.9);
   margin-top: 3em;
@@ -1026,6 +1030,7 @@ section {
 }
 
 .text-test {
+  z-index: 20000090909;
   font-family: "Yanone Kaffeesatz";
   font-size: 2em;
   /* border: 1px solid red; */
@@ -1146,9 +1151,11 @@ section {
   position: relative;
   /* padding: 1em; */
   text-align: center;
+  width: 100%;
   margin: 0 auto;
   /* left: 2em; */
-  font-size: 5em;
+  font-size: 10em;
+  height: 2em;
 }
 
 .title-container::after {
@@ -1163,6 +1170,20 @@ section {
   animation-duration: 1s;
   animation-fill-mode: forwards;
   animation-delay: 1.5s; */
+}
+
+.see-more-btn {
+  all: unset;
+  width: 12em;
+  border: 1px solid rgb(255, 255, 255, 0.8);
+  border-radius: 12px;
+  text-align: center;
+  height: 2.5em;
+  margin-top: 1em;
+}
+
+.see-more-btn:hover {
+  cursor: pointer;
 }
 
 .scroll-text-animate {
@@ -1466,6 +1487,10 @@ section {
   50% {
     transform: translateY(-50%);
   }
+}
+
+.simply-header {
+  font-size: 1.9em;
 }
 
 .simply-header:hover {

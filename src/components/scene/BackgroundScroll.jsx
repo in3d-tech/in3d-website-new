@@ -10,27 +10,13 @@ export function BackgroundScroll({
   textAnimation,
   fixed,
 }) {
-  const { renderModels } = useAppContext();
+  const { renderModels, titleOnMainPageHovered, setTitleOnMainPageHovered } =
+    useAppContext();
 
   const [startExpandedAnimation, setStartExpandedAnimation] = useState(false);
 
   useEffect(() => {
     if (!renderModels) return;
-
-    // gsap.from(".text-test", {
-    //   x: 400,
-    //   duration: 8,
-    //   // stagger: 0.2,
-    //   ease: "back",
-    // });
-
-    // gsap.to(".section-one-first-title", {
-    //   x: 0,
-    //   duration: 7,
-    //   stagger: 0.2,
-    //   ease: "back",
-    //   // opacity: 0.2,
-    // });
     if (!startExpandedAnimation) setStartExpandedAnimation(true);
   }, [renderModels]);
 
@@ -147,13 +133,11 @@ export function BackgroundScroll({
                   //   backgrounds[title] || backgrounds[1]
                   // );
                   // setHovered("taasia");
+                  console.log({ title });
+                  setTitleOnMainPageHovered(title);
                 }}
                 onMouseOut={() => {
-                  // document.documentElement.style.setProperty(
-                  //   "--color",
-                  //   backgrounds[1]
-                  // );
-                  // setHovered("");
+                  setTitleOnMainPageHovered("");
                 }}
                 onClick={() => scrollToElementById(idx)}
                 key={idx}
