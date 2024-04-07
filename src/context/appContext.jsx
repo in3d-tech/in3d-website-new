@@ -15,6 +15,7 @@ export default function AppContextProvider({ children }) {
   const [mobileBackground, setMobileBackground] = useState(1);
   const [titleOnMainPageHovered, setTitleOnMainPageHovered] = useState("");
   const [justEnteredSection, setJustEnteredSection] = useState(null);
+  const [customizeHasRendered, setCustomizeHasRendered] = useState(false);
 
   return (
     <AppContext.Provider
@@ -37,6 +38,8 @@ export default function AppContextProvider({ children }) {
         setTitleOnMainPageHovered,
         justEnteredSection,
         setJustEnteredSection,
+        customizeHasRendered,
+        setCustomizeHasRendered,
       }}
     >
       {children}
@@ -67,6 +70,8 @@ export function useAppContext() {
       setTitleOnMainPageHovered: () => {},
       justEnteredSection: null,
       setJustEnteredSection: () => {},
+      customizeHasRendered: null,
+      setCustomizeHasRendered: () => {},
     };
   }
 

@@ -5,29 +5,36 @@ import { useAppContext } from "../../context/appContext";
 export function LoadingScreen({ setloadingScreen }) {
   const [fadeOut, setFadeOut] = useState("");
   const { active, progress, errors, total } = useProgress();
-  const { isAstroModelDrawn, setRenderModels } = useAppContext();
+  const { isAstroModelDrawn, setRenderModels, customizeHasRendered } =
+    useAppContext();
   const [animationActive, setAnimationActive] = useState(true);
 
   const height = window.innerHeight * 0.3;
 
   useEffect(() => {
     if (isAstroModelDrawn) {
-      const loadingText = setTimeout(() => setAnimationActive(false), 2000);
-      const fadeOut = setTimeout(() => setFadeOut("flashing-fade-out"), 1100);
-      const closeLoadingScreen = setTimeout(
-        () => setloadingScreen(false),
-        3200
-      );
       const renderModels = setTimeout(() => setRenderModels(true), 800);
 
+      if (customizeHasRendered) {
+        console.log("we got in here!");
+        const loadingText = setTimeout(() => setAnimationActive(false), 2000);
+        const fadeOut = setTimeout(() => setFadeOut("flashing-fade-out"), 1100);
+        const closeLoadingScreen = setTimeout(
+          () => setloadingScreen(false),
+          3200
+        );
+        return () => {
+          clearTimeout(loadingText);
+          clearTimeout(fadeOut);
+          clearTimeout(closeLoadingScreen);
+        };
+      }
+
       return () => {
-        clearTimeout(loadingText);
-        clearTimeout(fadeOut);
-        clearTimeout(closeLoadingScreen);
         clearTimeout(renderModels);
       };
     }
-  }, [isAstroModelDrawn]);
+  }, [isAstroModelDrawn, customizeHasRendered]);
   // useEffect(() => {
   //   // document.body.style.overflow = "hidden";
   //   // const timer = setTimeout(() => {

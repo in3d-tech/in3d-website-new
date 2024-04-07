@@ -18,8 +18,13 @@ function MappedModels({
 }) {
   if (idx == 7) return null;
 
-  const { isInstantScroll, scrollArea, setScrollArea, setJustEnteredSection } =
-    useAppContext();
+  const {
+    isInstantScroll,
+    scrollArea,
+    setScrollArea,
+    setJustEnteredSection,
+    setCustomizeHasRendered,
+  } = useAppContext();
 
   const { scene, animations } = useGLTF(model.url);
   const mixer = useGLTFAnimations(scene, animations);
@@ -37,6 +42,7 @@ function MappedModels({
         if (fullyRendered && active === false && scene) {
           // Object is fully rendered
           isCustomizedRendered.current = true;
+          setCustomizeHasRendered(true);
           // setTimeout(() => setIsAstroModelDrawn(true), 1000);
           console.log("customize object is fully rendered!");
         }
