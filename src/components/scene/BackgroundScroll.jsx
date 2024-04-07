@@ -10,15 +10,19 @@ export function BackgroundScroll({
   textAnimation,
   fixed,
 }) {
-  const { renderModels, titleOnMainPageHovered, setTitleOnMainPageHovered } =
-    useAppContext();
+  const {
+    renderModels,
+    titleOnMainPageHovered,
+    setTitleOnMainPageHovered,
+    customizeHasRendered,
+  } = useAppContext();
 
   const [startExpandedAnimation, setStartExpandedAnimation] = useState(false);
 
   useEffect(() => {
-    if (!renderModels) return;
+    if (!customizeHasRendered) return;
     if (!startExpandedAnimation) setStartExpandedAnimation(true);
-  }, [renderModels]);
+  }, [customizeHasRendered]);
 
   const categories = [
     "industry",
