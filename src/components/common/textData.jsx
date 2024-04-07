@@ -26,7 +26,7 @@ export const IndustryText = ({ textClass, scrollArea, categoriesObj }) => (
     <div
       style={{
         position: "absolute",
-        zIndex: 13423453453423,
+        zIndex: 13423,
         right: "7em",
         bottom: "1em",
         display: "flex",
@@ -106,41 +106,99 @@ export const MedicineText = ({ textClass, scrollArea, categoriesObj }) => (
     className={`fader ${textClass}`}
     style={{
       height: "80vh",
-      width: "34%",
-      top: "16%",
-      left: "9%",
+      // top: "16%",
+      // left: "9%",
       position: "absolute",
+      width: "100vw",
       color: "white",
       // fontSize: "3em",
       fontFamily: "gotham",
       display: "flex",
       flexDirection: "column",
+      border: "1px solid white",
       // justifyContent: "space-between",
+      zIndex: 1,
     }}
   >
-    <div className="scrolled-category-title ai-title-ani">
-      {categoriesObj[scrollArea.currentSection]}
+    <div
+      style={{
+        fontSize: "12em",
+        border: "1px solid black",
+        textAlign: "center",
+      }}
+      className="scrolled-category-title ai-title-ani"
+    >
+      <span style={{ color: "#750414" }}>M</span>
+      {categoriesObj[scrollArea.currentSection].substring(1)}
     </div>
-    <div className="scrolled-category-text-one ai-text-one-ani">
-      <span>
-        The world of medicine is one of the most innovative sectors in the
-        world.
-      </span>
-      {/* <span>The world of medicine is one</span>
+
+    <div
+      style={{
+        border: "1px solid red",
+        display: "flex",
+        height: "100%",
+        zIndex: 1,
+        position: "absolute",
+        justifyContent: "space-evenly",
+        zIndex: 343,
+      }}
+    >
+      <div
+        className="scrolled-category-text-one-new ai-text-one-ani"
+        style={{
+          border: "2px solid orange",
+          width: "40%",
+          height: "50%",
+        }}
+      >
+        <span style={{ color: "#3abce2" }}>
+          The world of medicine is one of the most innovative sectors in the
+          world.
+        </span>
+        {/* <span>The world of medicine is one</span>
       <span>of the most innovative sectors</span>
       <span>in the world</span> */}
-    </div>
-    <div className="scrolled-category-text-two ai-text-two-ani">
-      <span>
-        Using Extended Reality (XR) we at in3D became pioneers in development of
-        XR products for medical organizations, collaborating together to empower
-        innovation and efficiency for clinics and hospitals.
-      </span>
-      {/* <span>Using Extended Reality (XR) we at in3D became pioneers in</span>
+      </div>
+      <div
+        className="scrolled-category-text-two ai-text-two-ani"
+        style={{
+          border: "2px solid yellow",
+          height: "60%",
+          zIndex: 1,
+          width: "40%",
+        }}
+      >
+        <span>
+          Using Extended Reality (XR) we at in3D became pioneers in development
+          of XR products for medical organizations, collaborating together to
+          empower innovation and efficiency for clinics and hospitals.
+        </span>
+        {/* <span>Using Extended Reality (XR) we at in3D became pioneers in</span>
       <span>development of XR products for medical organizations</span>
       <span>collaborating together to empower innovation and</span>
       <span>efficiency for clinics and hospitals</span> */}
+      </div>
     </div>
+    <div
+      style={{
+        position: "absolute",
+        zIndex: 13423,
+        right: "7em",
+        bottom: "1em",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <span style={{ fontSize: "2em" }}>
+        <span style={{ color: "#750414" }}>M</span>edicine
+      </span>
+      <button className="see-more-btn">See More</button>
+    </div>
+    {/* <div>
+      <div>Medicine</div>
+      <button>Learn More</button>
+    </div> */}
   </div>
 );
 

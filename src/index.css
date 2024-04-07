@@ -74,8 +74,8 @@ body {
   animation-delay: 2.8s;
   opacity: 0;
   position: fixed;
-  top: 4em;
-  left: 0.5em;
+  top: 3.5em;
+  left: 0.8em;
   z-index: 1;
 }
 
@@ -84,7 +84,7 @@ body {
 }
 
 .in3d-fixed-logo {
-  width: 7em;
+  width: 5.75em;
   /* transition: box-shadow 0.5s ease-in-out; */
   transition: width 0.5s ease-in-out;
 }
@@ -569,6 +569,16 @@ section {
 
 .scrolled-category-text-one {
   margin-top: 3em;
+  font-size: 1.8em;
+  line-height: 1.2em;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  font-family: swiss-medium;
+}
+
+.scrolled-category-text-one-new {
+  margin-top: em;
   font-size: 1.8em;
   line-height: 1.2em;
   font-weight: bold;

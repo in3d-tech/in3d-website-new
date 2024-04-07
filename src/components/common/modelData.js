@@ -42,13 +42,16 @@ export const Model_Data = [
     onLeave: { currentSection: 2, prevSection: 3 },
 
     scale: [3, 3, 3],
-    position: [-10, -4, -0.2],
+    // position: [-10, -4, -0.2],
+    position: [-10, -4, 3],
     rotation: [0, 0.2, 0],
 
     timeline: (tl, currentRef, prevRef) =>
       tl
-        ?.to(currentRef.current.position, { x: 7, z: 0 }, "simultaneously")
+        ?.to(currentRef.current.position, { x: 4.5, z: -1.5 }, "simultaneously")
         .to(currentRef.current.rotation, { y: 0 }, "simultaneously")
+        // ?.to(currentRef.current.position, { x: 7, z: 0 }, "simultaneously")
+        // .to(currentRef.current.rotation, { y: 0 }, "simultaneously")
         .to(prevRef.current.position, { y: -5, x: 13.5 }, "simultaneously")
         .to(prevRef.current.rotation, { y: 0.2 }, "simultaneously"),
   },
