@@ -45,6 +45,7 @@ function Scene({ textRef, scrollToElementById }) {
     titleOnMainPageHovered,
     setIsInstantScroll,
     justEnteredSection,
+    customizeHasRendered,
   } = useAppContext();
 
   const containerRef = useRef(null);
@@ -237,7 +238,7 @@ function Scene({ textRef, scrollToElementById }) {
 
   return (
     <div className="scene one" style={{}} ref={containerRef}>
-      {renderModels ? (
+      {customizeHasRendered ? (
         <div className="h-nav-in3d-icon" onClick={scrollToTop}>
           <img
             className="in3d-fixed-logo"
@@ -262,7 +263,7 @@ function Scene({ textRef, scrollToElementById }) {
           : null}
         <Canvas className={`canvas-container`}>
           {<ambientLight intensity={0.2} />}
-          {renderModels ? (
+          {customizeHasRendered ? (
             <>
               <directionalLight
                 color={
