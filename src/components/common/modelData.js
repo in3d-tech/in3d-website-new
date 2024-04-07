@@ -15,10 +15,6 @@ export const Model_Data = [
     position: [13.5, -5, -0.2],
 
     rotation: [0, 0.2, 0],
-    // position: [14, -5, -0.2],
-
-    // rotation: [0, -2.5, 0],
-    // visible={visibleModels.includes(3)}
     timeline: (tl, currentRef, prevRef) =>
       tl
         ?.to(
@@ -27,19 +23,11 @@ export const Model_Data = [
           "simultaneously"
         )
         .to(currentRef.current.rotation, { y: Math.PI + 0.3 }, "simultaneously")
-        // ?.to(
-        //   currentRef.current.position,
-        //   { y: -4, x: 0, z: -1 },
-        //   "simultaneously"
-        // )
-        // .to(currentRef.current.rotation, { y: 0.2 }, "simultaneously")
         .to(
           prevRef.current.position,
           { x: -18, y: 0, z: -5 },
           "simultaneously"
         ),
-
-    // .to(prevRef.current.rotation, { y: 5.5 }, "simultaneously"),
   },
 
   // MEDICINE
@@ -56,7 +44,6 @@ export const Model_Data = [
     scale: [3, 3, 3],
     position: [-10, -4, -0.2],
     rotation: [0, 0.2, 0],
-    // visible={visibleModels.includes(3)}
 
     timeline: (tl, currentRef, prevRef) =>
       tl
@@ -80,7 +67,6 @@ export const Model_Data = [
     scale: [3, 3, 3],
 
     position: [10, -9, -0.2],
-    // visible={visibleModels.includes(3)}
     rotation: [0, 0.9, 0],
     timeline: (tl, currentRef, prevRef) =>
       tl
@@ -107,9 +93,6 @@ export const Model_Data = [
     scale: [3, 3, 3],
     position: [-0.5, -0.5, 6],
     rotation: [0, Math.PI + 1, 0],
-    // ------------
-    // visible={visibleModels.includes(3)}
-
     timeline: (tl, currentRef, prevRef) =>
       tl
         ?.to(
@@ -118,15 +101,8 @@ export const Model_Data = [
           "simultaneously"
         )
         .to(currentRef.current.rotation, { y: Math.PI + 1.3 }, "simultaneously")
-        // ?.to(
-        //   currentRef.current.position,
-        //   { y: -0.7, x: -1, z: 3, duration: 1.5 },
-        //   "simultaneously"
-        // )
-        // .to(currentRef.current.rotation, { y: Math.PI + 2 }, "simultaneously")
         .to(prevRef.current.position, { x: 10 }, "simultaneously")
         .to(prevRef.current.rotation, { y: 0.9 }, "simultaneously"),
-    // .to(currentRef.current.position, { z: 2, x: -2, duration: 1.5 }, ">"),
   },
 
   //   ARTIFICIAL INTELLIGENCE
@@ -142,8 +118,6 @@ export const Model_Data = [
     scale: [1, 1, 1],
     position: [5, -5, 2],
     rotation: [0, 0, 0],
-    // visible={visibleModels.includes(3)}
-
     timeline: (tl, currentRef, prevRef) =>
       tl
         ?.to(
@@ -158,7 +132,6 @@ export const Model_Data = [
           "simultaneously"
         )
         .to(prevRef.current.rotation, { y: Math.PI + 1 }, "simultaneously"),
-    // .to(currentRef.current.position, { z: 2, x: -2, duration: 1.5 }, ">"),
   },
 
   // MILITARY
@@ -175,7 +148,6 @@ export const Model_Data = [
 
     position: [-0.2, -1.7, 6],
     rotation: [0, -2.2, 0],
-    // visible={visibleModels.includes(3)}
     timeline: (tl, currentRef, prevRef) =>
       tl
         ?.to(
@@ -186,7 +158,6 @@ export const Model_Data = [
         .to(currentRef.current.rotation, { y: 1 }, "simultaneously")
         .to(prevRef.current.position, { x: 10 }, "simultaneously")
         .to(prevRef.current.rotation, { y: 0.9 }, "simultaneously"),
-    // .to(currentRef.current.position, { z: 2, x: -2, duration: 1.5 }, ">"),
   },
 
   // CUSTOMIZE
@@ -202,9 +173,6 @@ export const Model_Data = [
     onLeave: { currentSection: 7, prevSection: 8 },
     scale: [3, 3, 3],
     position: [13, -2, 0],
-    // position: [13, -2, 0],
-
-    // visible={visibleModels.includes(3)}
     rotation: [0, -2.9, 0],
     timeline: (tl, currentRef, prevRef) =>
       tl

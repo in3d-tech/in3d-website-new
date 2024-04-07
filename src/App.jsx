@@ -107,7 +107,6 @@ function App() {
 export default App;
 
 useGLTF.preload("/assets/models/astronaut_new5 (1).glb");
-useGLTF.preload("/assets/models/movement/movement_check.glb");
 
 function ViewableContent() {
   return (

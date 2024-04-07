@@ -130,13 +130,17 @@ export function BackgroundScroll({
                 onMouseOver={() => {
                   // document.documentElement.style.setProperty(
                   //   "--color",
-                  //   backgrounds[title] || backgrounds[1]
+                  //   'url("/assets/images/backgrounds/taasia/taasia_bg.jpg")'
                   // );
                   // setHovered("taasia");
                   console.log({ title });
                   setTitleOnMainPageHovered(title);
                 }}
                 onMouseOut={() => {
+                  // document.documentElement.style.setProperty(
+                  //   "--color",
+                  //   'url("/assets/images/backgrounds/Astro_1_Background.webp")'
+                  // );
                   setTitleOnMainPageHovered("");
                 }}
                 onClick={() => scrollToElementById(idx)}

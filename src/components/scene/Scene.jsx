@@ -1,9 +1,6 @@
 import { Suspense, lazy, useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import {
-  AstroModel,
-  useGLTFAnimations,
-} from "../../components/scene/ModelComponent";
+import { AstroModel } from "../../components/scene/ModelComponent";
 import { Model_Data } from "../../components/common/modelData";
 import {
   IndustryText,
@@ -19,7 +16,6 @@ import { gsap } from "gsap";
 import { Camera } from "../../components/scene/Camera";
 import { BackgroundScroll } from "./BackgroundScroll";
 import { useAppContext } from "../../context/appContext";
-import { useGLTF } from "@react-three/drei";
 
 const MappedModels = lazy(() => import("./MappedModels.jsx"));
 
@@ -42,8 +38,14 @@ function Scene({ textRef, scrollToElementById }) {
   const [textAnimation, setTextAnimation] = useState(
     "category-title-no-opacity"
   );
-  const { scrollArea, renderModels, setMenuOpened, titleOnMainPageHovered } =
-    useAppContext();
+  const {
+    scrollArea,
+    renderModels,
+    setMenuOpened,
+    titleOnMainPageHovered,
+    setIsInstantScroll,
+    justEnteredSection,
+  } = useAppContext();
 
   const containerRef = useRef(null);
   const simplyRef = useRef();
@@ -94,23 +96,12 @@ function Scene({ textRef, scrollToElementById }) {
     7: createTextComponent(astroRef, customizeRef, ContactUsText),
   };
 
-  // useEffect(() => {
-  //   gsap.to(".section-one-first-title", {
-  //     x: -300,
-  //     duration: 8,
-  //     stagger: 0.2,
-  //     ease: "back",
-  //     opacity: 0.2,
-  //   });
-  // }, []);
-
   // -----
   // ----
   // ----
 
   useEffect(() => {
     setMenuOpened(false);
-    // setbgImage(backgrounds[scrollArea.currentSection] || backgrounds[1]);
 
     const backgrounds = {
       1: 'url("/assets/images/backgrounds/Astro_1_Background.webp")',
@@ -159,10 +150,6 @@ function Scene({ textRef, scrollToElementById }) {
 
   useEffect(() => {
     const titlesContainer = titlesContainerRef.current;
-
-    // if (!titlesContainer) {
-    //   return;
-    // }
 
     let titlesTimeline = gsap.timeline({
       defaults: { ease: "power1.out" },
@@ -214,10 +201,6 @@ function Scene({ textRef, scrollToElementById }) {
       nextRef = astroRef;
     }
 
-    // if (idx == 4) {
-    //   console.log(model.url);
-    // }
-
     return (
       <MappedModels
         allModelPositions={allModelPositions}
@@ -236,32 +219,21 @@ function Scene({ textRef, scrollToElementById }) {
   function scrollToTop() {
     window.scrollTo({
       top: 0,
-      // Optional: adds smooth scrolling behavior
     });
   }
 
-  const moveRef = useRef();
-  const MoveModel = () => {
-    const { scene, animation } = useGLTF(
-      "/assets/models/movement/movement_check.glb"
-    );
-    const mixer = useGLTFAnimations(scene, animation);
+  // useEffect(() => {
+  //   console.log("we just entered", justEnteredSection);
+  //   console.log("and just so we know the scroll-section: ", scrollArea);
+  // }, [justEnteredSection]);
 
-    console.log({ mixer });
-    console.log({ animation });
-
-    return (
-      <primitive
-        ref={moveRef}
-        object={scene}
-        dispose={null}
-        scale={[4, 4, 4]}
-        position={[0, 0, 0]}
-        rotation={[0.05, Math.PI / 2 + 0, 0]}
-        visible={true}
-      />
-    );
-  };
+  console.log(
+    "checking text starter: ",
+    scrollArea.currentSection > scrollArea.prevSection,
+    Number(scrollArea.currentSection) === Number(justEnteredSection),
+    scrollArea.currentSection,
+    justEnteredSection
+  );
 
   return (
     <div className="scene one" style={{}} ref={containerRef}>
@@ -282,7 +254,11 @@ function Scene({ textRef, scrollToElementById }) {
         }}
       >
         {scrollArea.currentSection >= 2
-          ? refsObj[scrollArea.currentSection - 2].text
+          ? scrollArea.currentSection > scrollArea.prevSection
+            ? scrollArea.currentSection == justEnteredSection
+              ? refsObj[scrollArea.currentSection - 2].text
+              : null
+            : refsObj[scrollArea.currentSection - 2].text
           : null}
         <Canvas className={`canvas-container`}>
           {<ambientLight intensity={0.2} />}
@@ -311,7 +287,6 @@ function Scene({ textRef, scrollToElementById }) {
 
           <Camera />
           <Suspense fallback={null}>
-            {/* <MoveModel /> */}
             <AstroModel
               url={"/assets/models/astronaut_new5 (1).glb"}
               astroRef={astroRef}

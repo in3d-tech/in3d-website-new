@@ -29,9 +29,9 @@ body {
   background-clip: text;
   background-image: linear-gradient(
     to right,
-    rgba(227, 123, 123, 0.6),
-    rgba(106, 34, 34, 0.6) 50%,
-    rgb(255, 255, 255) 50%
+    rgba(255, 255, 255),
+    rgba(255, 255, 255) 50%,
+    rgb(255, 255, 255, 0.5) 50%
   );
   background-position-x: 100%;
   background-position-y: 0;
