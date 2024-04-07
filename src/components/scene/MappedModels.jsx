@@ -106,7 +106,7 @@ function MappedModels({
         trigger: `.${model.section}`,
         start: "top 50%",
         scrub: 1,
-        markers: true,
+        // markers: true,
 
         onEnter: () => {
           console.log("onEnter animation");

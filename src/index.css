@@ -84,13 +84,13 @@ body {
 }
 
 .in3d-fixed-logo {
-  width: 5.75em;
+  width: 4.8em;
   /* transition: box-shadow 0.5s ease-in-out; */
   transition: width 0.5s ease-in-out;
 }
 
 .in3d-fixed-logo:hover {
-  width: 7.4em;
+  width: 6em;
   /* box-shadow: 3px 3px 32px 8px rgba(255, 255, 255, 0.05);
   -webkit-box-shadow: 3px 3px 32px 8px rgba(255, 255, 255, 0.05);
   -moz-box-shadow: 3px 3px 32px 8px rgba(255, 255, 255, 0.05); */
@@ -1190,6 +1190,14 @@ section {
   text-align: center;
   height: 2.5em;
   margin-top: 1em;
+}
+
+.testy {
+  border: 1px solid yellow;
+}
+
+.testy:hover {
+  cursor: pointer;
 }
 
 .see-more-btn:hover {

@@ -26,13 +26,14 @@ export const IndustryText = ({ textClass, scrollArea, categoriesObj }) => (
     <div
       style={{
         position: "absolute",
-        zIndex: 13423,
+        zIndex: 24,
         right: "7em",
         bottom: "1em",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
       }}
+      className="testy"
     >
       <span style={{ fontSize: "2em" }}>
         Industry <span style={{ color: "#750414" }}>4.0</span>
@@ -123,7 +124,6 @@ export const MedicineText = ({ textClass, scrollArea, categoriesObj }) => (
     <div
       style={{
         fontSize: "12em",
-        border: "1px solid black",
         textAlign: "center",
       }}
       className="scrolled-category-title ai-title-ani"
@@ -134,19 +134,18 @@ export const MedicineText = ({ textClass, scrollArea, categoriesObj }) => (
 
     <div
       style={{
-        border: "1px solid red",
         display: "flex",
         height: "100%",
         zIndex: 1,
         position: "absolute",
         justifyContent: "space-evenly",
+        alignItems: "flex-end",
         zIndex: 343,
       }}
     >
       <div
         className="scrolled-category-text-one-new ai-text-one-ani"
         style={{
-          border: "2px solid orange",
           width: "40%",
           height: "50%",
         }}
@@ -162,7 +161,6 @@ export const MedicineText = ({ textClass, scrollArea, categoriesObj }) => (
       <div
         className="scrolled-category-text-two ai-text-two-ani"
         style={{
-          border: "2px solid yellow",
           height: "60%",
           zIndex: 1,
           width: "40%",
@@ -254,30 +252,60 @@ export const SecurityText = ({ textClass, scrollArea, categoriesObj }) => (
     className={`fader ${textClass}`}
     style={{
       height: "80vh",
-      width: "34%",
-      top: "16%",
-      right: "4%",
+      // width: "34%",
+      // right: "4%",
       position: "absolute",
       color: "white",
       // fontSize: "3em",
       fontFamily: "gotham",
       display: "flex",
       flexDirection: "column",
+      border: "1px solid red",
+      justifyContent: "flex-start",
+
       // justifyContent: "space-between",
     }}
   >
-    <div className="scrolled-category-title security-title-ani">
-      {categoriesObj[scrollArea.currentSection]}
+    <div
+      className="scrolled-category-title security-title-ani"
+      style={{
+        fontSize: "10em",
+        textAlign: "center",
+      }}
+    >
+      <span style={{ color: "#750414" }}>S</span>
+      {categoriesObj[scrollArea.currentSection].substring(1)}
+    </div>
+
+    <div style={{ display: "flex" }}>
+      <div style={{ flex: 1.5 }}></div>
+      <div
+        style={{ marginTop: "8em", flex: 1 }}
+        className="scrolled-category-text-one security-text-ani"
+      >
+        <span>
+          Thanks to years of collaboration with defense industries, we gained
+          the needed experience, knowledge and tools to provide quick and out of
+          the box solutions that are tailored to the industries unique
+          requirements.
+        </span>
+      </div>
     </div>
     <div
-      style={{ marginTop: "8em" }}
-      className="scrolled-category-text-one security-text-ani"
+      style={{
+        position: "absolute",
+        zIndex: 13423,
+        left: "7em",
+        bottom: "1em",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
     >
-      <span>
-        Thanks to years of collaboration with defense industries, we gained the
-        needed experience, knowledge and tools to provide quick and out of the
-        box solutions that are tailored to the industries unique requirements.
+      <span style={{ fontSize: "2em" }}>
+        <span style={{ color: "#750414" }}>S</span>ecurity
       </span>
+      <button className="see-more-btn">See More</button>
     </div>
   </div>
 );
@@ -381,7 +409,6 @@ export const CustomizationText = ({ textClass, scrollArea, categoriesObj }) => (
     className={`fader ${textClass}`}
     style={{
       height: "100vh",
-      width: "50%",
       // top: "6%",
       // left: "8%",
       position: "absolute",
@@ -396,11 +423,13 @@ export const CustomizationText = ({ textClass, scrollArea, categoriesObj }) => (
     <div
       style={{
         textAlign: "center",
-        marginLeft: "10em",
+        // marginLeft: "10em",
+        fontSize: "7em",
       }}
       className="scrolled-category-title security-title-ani"
     >
-      {categoriesObj[scrollArea.currentSection]}
+      <span style={{ color: "#750414" }}>C</span>
+      {categoriesObj[scrollArea.currentSection].substring(1)}
     </div>
 
     <div
