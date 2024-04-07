@@ -34,7 +34,7 @@ function MappedModels({
   const isCustomizedRendered = useRef(false);
 
   useFrame(() => {
-    if (idx == 6) {
+    if (idx == 1) {
       // Check if the object is visible in the scene and loaded - not working
       if (currentRef.current && scene && !isCustomizedRendered.current) {
         // Check if all objects in the scene have been rendered - not working

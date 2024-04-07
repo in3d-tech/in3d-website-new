@@ -17,14 +17,14 @@ export function LoadingScreen({ setloadingScreen }) {
 
       if (customizeHasRendered) {
         console.log("we got in here!");
-        const loadingText = setTimeout(() => setAnimationActive(false), 2000);
-        const fadeOut = setTimeout(() => setFadeOut("flashing-fade-out"), 1100);
+        // const loadingText = setTimeout(() => setAnimationActive(false), 5000);
+        const fadeOut = setTimeout(() => setFadeOut("flashing-fade-out"), 100);
         const closeLoadingScreen = setTimeout(
           () => setloadingScreen(false),
-          3200
+          2200
         );
         return () => {
-          clearTimeout(loadingText);
+          // clearTimeout(loadingText);
           clearTimeout(fadeOut);
           clearTimeout(closeLoadingScreen);
         };
