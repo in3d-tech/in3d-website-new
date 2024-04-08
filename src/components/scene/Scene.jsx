@@ -1,7 +1,7 @@
 import { Suspense, lazy, useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { AstroModel } from "../../components/scene/ModelComponent";
-import { Model_Data } from "../../components/common/modelData";
+import { CUSTOMIZATION, Model_Data } from "../../components/common/modelData";
 
 import {
   IndustryText,
@@ -269,7 +269,11 @@ function Scene({ textRef, scrollToElementById }) {
           {/* <Stars intensity={0.5} count={2000} /> */}
           <Sparkles count={300} scale={10} size={2} color={"#CF9FFF"} />
 
-          {<ambientLight intensity={0.2} />}
+          {
+            <ambientLight
+              intensity={scrollArea?.currentSection == CUSTOMIZATION ? 2 : 0.2}
+            />
+          }
           {customizeHasRendered ? (
             <>
               <directionalLight

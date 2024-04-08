@@ -416,38 +416,32 @@ export const CustomizationText = ({ textClass, scrollArea, categoriesObj }) => (
         height: "100%",
         width: "100vw",
         display: "flex",
+        flexDirection: "column",
         justifyContent: "space-between",
       }}
     >
       <div
-        className="scrolled-category-text-one"
-        style={{ width: "50%", height: "50%" }}
-      >
-        <span style={{ marginLeft: "5em", marginTop: "6em" }}>
-          We specialize in 3D and Extended Reality (EX).
-        </span>
-        <div style={{ marginTop: "5em", marginLeft: "3em" }}>
-          <img
-            style={{ height: "13em", opacity: "0.8" }}
-            src="/assets/images/custom.webp"
-          />
-        </div>
-      </div>
-
-      <div
         style={{
-          marginRight: "2em",
-          width: "34%",
+          width: "38%",
           height: "50%",
-          marginTop: "20em",
+          marginTop: "10em",
+          display: "flex",
         }}
         className="scrolled-category-text-two"
       >
-        <span style={{}}>
+        <span style={{ marginLeft: "9em", fontSize: "1.1em" }}>
           As specialists we keep an amazing team of developers, 3D generalists,
           interface and graphics artists, and product designers just so we can
           provide our clients with the flexibility and abilities needed to
           deliver the best product.
+        </span>
+      </div>
+      <div
+        className="scrolled-category-text-one"
+        style={{ width: "50%", height: "50%" }}
+      >
+        <span style={{ marginLeft: "8em", color: "#3abce2" }}>
+          We specialize in 3D and Extended Reality (EX).
         </span>
       </div>
     </div>

@@ -180,7 +180,7 @@ export const Model_Data = [
     onLeave: { currentSection: 7, prevSection: 8 },
     scale: [3, 3, 3],
     position: [13, -2, 0],
-    rotation: [0, -2.9, 0],
+    rotation: [0, 0, 0],
     timeline: (tl, currentRef, prevRef) =>
       tl
         .to(
