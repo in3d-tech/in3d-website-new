@@ -1182,7 +1182,8 @@ section {
 }
 
 .learn-more-btn-wrapper {
-  animation: fadeIn 1.5s ease-in-out;
+  /* opacity: 0; */
+  animation: fadeIn 1.5s ease;
 }
 
 .see-more-btn {

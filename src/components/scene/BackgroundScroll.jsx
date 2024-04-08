@@ -16,6 +16,8 @@ export function BackgroundScroll({
     titleOnMainPageHovered,
     setTitleOnMainPageHovered,
     customizeHasRendered,
+    scrollArea,
+    modelAnimationIsHalfWay,
   } = useAppContext();
 
   const [startExpandedAnimation, setStartExpandedAnimation] = useState(false);
@@ -176,7 +178,13 @@ export function BackgroundScroll({
       <section id="sectionTen" className="section section-ten">
         {<ContactUsText test={true} />}
       </section>
-      <SeeMoreBtn />
+      {scrollArea.currentSection > scrollArea.prevSection ? (
+        scrollArea.currentSection == modelAnimationIsHalfWay ? (
+          <SeeMoreBtn />
+        ) : null
+      ) : (
+        <SeeMoreBtn />
+      )}
     </>
   );
 }

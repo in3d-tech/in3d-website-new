@@ -59,6 +59,11 @@ export const SeeMoreBtn = () => {
         left: "7em",
         bottom: "3em",
       };
+      text = (
+        <>
+          <span style={{ color: "#750414" }}>S</span>ecurity
+        </>
+      );
       break;
     case AI:
       styles = {
@@ -79,6 +84,11 @@ export const SeeMoreBtn = () => {
         right: "7em",
         bottom: "3em",
       };
+      text = (
+        <>
+          <span style={{ color: "#750414" }}>C</span>ustomization
+        </>
+      );
       break;
 
     default:
