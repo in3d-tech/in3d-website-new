@@ -1,7 +1,16 @@
 import { Suspense, lazy, useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { AstroModel } from "../../components/scene/ModelComponent";
-import { CUSTOMIZATION, Model_Data } from "../../components/common/modelData";
+import {
+  AI,
+  CUSTOMIZATION,
+  INDUSTRY,
+  MEDICINE,
+  MICROSOFT,
+  MILITARY,
+  Model_Data,
+  SECURITY,
+} from "../../components/common/modelData";
 
 import {
   IndustryText,
@@ -42,15 +51,12 @@ function Scene({ textRef, scrollToElementById }) {
   );
   const {
     scrollArea,
-    renderModels,
     setMenuOpened,
     titleOnMainPageHovered,
     setIsInstantScroll,
     modelAnimationIsHalfWay,
     customizeHasRendered,
   } = useAppContext();
-
-  console.log(scrollArea);
 
   const containerRef = useRef(null);
   const simplyRef = useRef();
@@ -227,18 +233,19 @@ function Scene({ textRef, scrollToElementById }) {
     });
   }
 
-  // useEffect(() => {
-  //   console.log("we just entered", modelAnimationIsHalfWay);
-  //   console.log("and just so we know the scroll-section: ", scrollArea);
-  // }, [modelAnimationIsHalfWay]);
+  const getSparkleColour = (section) => {
+    const sparklesColour = {
+      [INDUSTRY]: "#CF9FFF",
+      [MEDICINE]: "#3DE9D9",
+      [MICROSOFT]: "#CF9FFF",
+      [SECURITY]: "#995812",
+      [AI]: "#3DE7E9",
+      [MILITARY]: "#467B3F",
+      [CUSTOMIZATION]: "#F0CF5E",
+    };
 
-  console.log(
-    "checking text starter: ",
-    scrollArea.currentSection > scrollArea.prevSection,
-    Number(scrollArea.currentSection) === Number(modelAnimationIsHalfWay),
-    scrollArea.currentSection,
-    modelAnimationIsHalfWay
-  );
+    return sparklesColour[section] || "#CF9FFF";
+  };
 
   return (
     <div className="scene one" style={{}} ref={containerRef}>
@@ -267,7 +274,12 @@ function Scene({ textRef, scrollToElementById }) {
           : null}
         <Canvas className={`canvas-container`}>
           {/* <Stars intensity={0.5} count={2000} /> */}
-          <Sparkles count={300} scale={10} size={2} color={"#CF9FFF"} />
+          <Sparkles
+            count={300}
+            scale={10}
+            size={2}
+            color={getSparkleColour(scrollArea.currentSection)}
+          />
 
           {
             <ambientLight

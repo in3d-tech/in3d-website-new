@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import emailjs from "@emailjs/browser";
 
 export const IndustryText = ({ textClass, scrollArea, categoriesObj }) => (
   <>
@@ -453,6 +454,8 @@ export const ContactUsText = ({ test }) => {
   const [showSentStatus, setShowSentStatus] = useState(null);
   const [textAreaInput, setTextAreaInput] = useState("");
 
+  useEffect(() => emailjs.init("YOUR-PUBLIC-KEY-HERE"), []);
+
   const toggleTextBox = () => {
     setShowTextBox(!showTextBox);
   };
@@ -461,6 +464,28 @@ export const ContactUsText = ({ test }) => {
     setTimeout(() => setShowTextBox(false), 200);
     setTimeout(() => setShowSentStatus(true), 200);
     setTimeout(() => setShowSentStatus(null), 3000);
+  };
+
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault(); // prevents the page from reloading when you hit “Send”
+
+    emailjs
+      .sendForm(
+        "service_tv1wlgo",
+        "template_evr30vn",
+        form.current,
+        "HorIaM2iMYpuvqSef"
+      )
+      .then(
+        (result) => {
+          // show the user a success message
+        },
+        (error) => {
+          // show the user an error
+        }
+      );
   };
 
   return (
@@ -502,35 +527,38 @@ export const ContactUsText = ({ test }) => {
                     alignItems: "center",
                   }}
                 >
-                  <textarea
-                    placeholder="Type your message here..."
-                    type="text"
-                    maxLength={300}
-                    style={{
-                      width: "80%",
-                      height: "8em",
-                      borderRadius: "12px",
-                      opacity: "0.8",
-                      padding: "15px",
-                      fontSize: "1em",
-                    }}
-                    onChange={(e) => {
-                      let inputValue = e.target.value;
-                      if (inputValue.length > 0) {
-                        inputValue =
-                          inputValue.charAt(0).toUpperCase() +
-                          inputValue.slice(1);
-                      }
-                      setTextAreaInput(inputValue);
-                    }}
-                    value={textAreaInput}
-                  />
-                  <button
-                    onClick={handleSendMessage}
-                    className="contact-us-send-text-btn"
-                  >
-                    Send
-                  </button>
+                  <form ref={form} onSubmit={sendEmail}>
+                    <textarea
+                      name="message"
+                      placeholder="Type your message here..."
+                      type="text"
+                      maxLength={300}
+                      style={{
+                        width: "80%",
+                        height: "8em",
+                        borderRadius: "12px",
+                        opacity: "0.8",
+                        padding: "15px",
+                        fontSize: "1em",
+                      }}
+                      onChange={(e) => {
+                        let inputValue = e.target.value;
+                        if (inputValue.length > 0) {
+                          inputValue =
+                            inputValue.charAt(0).toUpperCase() +
+                            inputValue.slice(1);
+                        }
+                        setTextAreaInput(inputValue);
+                      }}
+                      value={textAreaInput}
+                    />
+                    <button
+                      onClick={handleSendMessage}
+                      className="contact-us-send-text-btn"
+                    >
+                      Send
+                    </button>
+                  </form>
                 </div>
               )}
               {showSentStatus ? (

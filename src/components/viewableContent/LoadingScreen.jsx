@@ -16,7 +16,6 @@ export function LoadingScreen({ setloadingScreen }) {
       const renderModels = setTimeout(() => setRenderModels(true), 800);
 
       if (customizeHasRendered) {
-        console.log("we got in here!");
         // const loadingText = setTimeout(() => setAnimationActive(false), 5000);
         const fadeOut = setTimeout(() => setFadeOut("flashing-fade-out"), 100);
         const closeLoadingScreen = setTimeout(

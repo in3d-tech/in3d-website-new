@@ -15,18 +15,10 @@ export const SeeMoreBtn = () => {
   let styles;
   let text;
 
-  console.log(
-    "inside see-more-btn",
-    scrollArea.currentSection != modelAnimationIsHalfWay
-  );
-
   // if (scrollArea.currentSection != modelAnimationIsHalfWay) return null;
-
   switch (scrollArea.currentSection) {
     case INDUSTRY:
       styles = {
-        position: "fixed",
-        zIndex: 2,
         right: "7em",
         bottom: "2em",
         display: "flex",
@@ -42,8 +34,7 @@ export const SeeMoreBtn = () => {
     case MEDICINE:
       styles = {
         width: "100vw",
-        position: "fixed",
-        zIndex: 3,
+
         bottom: "2em",
         display: "flex",
         flexDirection: "column",
@@ -58,59 +49,35 @@ export const SeeMoreBtn = () => {
 
     case MICROSOFT:
       styles = {
-        position: "fixed",
-        zIndex: 3,
         left: "7em",
         bottom: "1em",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
       };
       break;
 
     case SECURITY:
       styles = {
-        position: "fixed",
-        zIndex: 2,
-        right: "7em",
-        bottom: "1em",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
+        left: "7em",
+        bottom: "3em",
       };
       break;
     case AI:
       styles = {
         width: "100vw",
-        position: "fixed",
-        zIndex: 3,
+
         bottom: "2em",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
       };
       break;
     case MILITARY:
       styles = {
-        position: "fixed",
-        zIndex: 3,
         left: "7em",
         bottom: "1em",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
       };
       break;
 
     case CUSTOMIZATION:
       styles = {
-        position: "fixed",
-        zIndex: 3,
-        left: "7em",
-        bottom: "1em",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
+        right: "7em",
+        bottom: "3em",
       };
       break;
 
@@ -131,7 +98,14 @@ export const SeeMoreBtn = () => {
       //   alignItems: "center",
       // }}
       className="learn-more-btn-wrapper"
-      style={styles}
+      style={{
+        ...styles,
+        position: "fixed",
+        zIndex: 1,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
     >
       <span style={{ fontSize: "2em", color: "white" }}>
         {/* <span style={{ color: "#750414" }}>M</span>edicine */}
