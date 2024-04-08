@@ -2,6 +2,7 @@ import { Suspense, lazy, useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { AstroModel } from "../../components/scene/ModelComponent";
 import { Model_Data } from "../../components/common/modelData";
+
 import {
   IndustryText,
   AiText,
@@ -16,6 +17,7 @@ import { gsap } from "gsap";
 import { Camera } from "../../components/scene/Camera";
 import { BackgroundScroll } from "./BackgroundScroll";
 import { useAppContext } from "../../context/appContext";
+import { Sparkles } from "@react-three/drei";
 
 const MappedModels = lazy(() => import("./MappedModels.jsx"));
 
@@ -44,9 +46,11 @@ function Scene({ textRef, scrollToElementById }) {
     setMenuOpened,
     titleOnMainPageHovered,
     setIsInstantScroll,
-    justEnteredSection,
+    modelAnimationIsHalfWay,
     customizeHasRendered,
   } = useAppContext();
+
+  console.log(scrollArea);
 
   const containerRef = useRef(null);
   const simplyRef = useRef();
@@ -224,16 +228,16 @@ function Scene({ textRef, scrollToElementById }) {
   }
 
   // useEffect(() => {
-  //   console.log("we just entered", justEnteredSection);
+  //   console.log("we just entered", modelAnimationIsHalfWay);
   //   console.log("and just so we know the scroll-section: ", scrollArea);
-  // }, [justEnteredSection]);
+  // }, [modelAnimationIsHalfWay]);
 
   console.log(
     "checking text starter: ",
     scrollArea.currentSection > scrollArea.prevSection,
-    Number(scrollArea.currentSection) === Number(justEnteredSection),
+    Number(scrollArea.currentSection) === Number(modelAnimationIsHalfWay),
     scrollArea.currentSection,
-    justEnteredSection
+    modelAnimationIsHalfWay
   );
 
   return (
@@ -256,12 +260,15 @@ function Scene({ textRef, scrollToElementById }) {
       >
         {scrollArea.currentSection >= 2
           ? scrollArea.currentSection > scrollArea.prevSection
-            ? scrollArea.currentSection == justEnteredSection
+            ? scrollArea.currentSection == modelAnimationIsHalfWay
               ? refsObj[scrollArea.currentSection - 2].text
               : null
             : refsObj[scrollArea.currentSection - 2].text
           : null}
         <Canvas className={`canvas-container`}>
+          {/* <Stars intensity={0.5} count={2000} /> */}
+          <Sparkles count={300} scale={10} size={2} color={"#CF9FFF"} />
+
           {<ambientLight intensity={0.2} />}
           {customizeHasRendered ? (
             <>

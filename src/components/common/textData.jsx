@@ -1,32 +1,95 @@
 import { useState } from "react";
 
 export const IndustryText = ({ textClass, scrollArea, categoriesObj }) => (
-  <div
-    className={`fader ${textClass}`}
-    style={{
-      height: "80vh",
-      width: "100%",
-      // top: "22%",
-      // left: "14%",
-      position: "absolute",
-      color: "white",
-      // fontSize: "3em",
-      fontFamily: "gotham",
-      display: "flex",
-      flexDirection: "column",
-      // zIndex: 1,
-      // justifyContent: "space-between",
-    }}
-  >
-    {/* <div className="scrolled-category-title industry-title-ani">
+  <>
+    <div
+      className={`fader ${textClass}`}
+      style={{
+        height: "80vh",
+        width: "100%",
+        // top: "22%",
+        // left: "14%",
+        position: "absolute",
+        color: "white",
+        // fontSize: "3em",
+        fontFamily: "gotham",
+        display: "flex",
+        flexDirection: "column",
+        // zIndex: 1,
+        // justifyContent: "space-between",
+      }}
+    >
+      {/* <div className="scrolled-category-title industry-title-ani">
       <span className="text-animate button-ani">
         {categoriesObj[scrollArea.currentSection]}
       </span>
     </div> */}
-    <div
+
+      <div className="title-container" style={{ marginTop: "0.7em" }}>
+        <span
+          className="scroll-text-animate"
+          style={{ borderBottom: "8px solid white" }}
+        >
+          {categoriesObj[scrollArea.currentSection]}{" "}
+          <span style={{ color: "#750414" }}>4.0</span>
+        </span>
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          // height: "100%",
+          flexDirection: "row-reverse",
+        }}
+      >
+        <div style={{ flex: 1 }}></div>
+        {/* // break */}
+        <div
+          style={{
+            flex: 3,
+            display: "flex",
+            alignItems: "flex-start",
+            justifyContent: "flex-start",
+            flexDirection: "column",
+          }}
+        >
+          <div
+            className="scrolled-category-text-one"
+            style={{ width: "100%", marginTop: 0 }}
+          >
+            <span
+              className="scroll-text-animate-one"
+              style={{
+                fontSize: "0.7em",
+                textAlign: "initial",
+                color: "#3abce2",
+                fontStyle: "italic",
+              }}
+            >
+              The world was recently introduced to the wonders of the industry
+              4.0 revolution.
+            </span>
+          </div>
+          <div className="scrolled-category-text-two">
+            <div
+              className="industry-text-two-wrapper"
+              style={{ width: "40%", marginTop: "4em", marginLeft: "6.5em" }}
+            >
+              <span className="scroll-text-animate-two">
+                Together with our clients we map out the challenges they face
+                and develop tailor made solutions using XR and 3D technology
+                that creates an innovative visual interface between men and
+                machine.
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {/* <div
       style={{
         position: "absolute",
-        zIndex: 24,
+        zIndex: 2234234234,
         right: "7em",
         bottom: "1em",
         display: "flex",
@@ -39,163 +102,95 @@ export const IndustryText = ({ textClass, scrollArea, categoriesObj }) => (
         Industry <span style={{ color: "#750414" }}>4.0</span>
       </span>
       <button className="see-more-btn">See More</button>
-    </div>
-    <div className="title-container" style={{ marginTop: "0.7em" }}>
-      <span
-        className="scroll-text-animate"
-        style={{ borderBottom: "8px solid white" }}
-      >
-        {categoriesObj[scrollArea.currentSection]}{" "}
-        <span style={{ color: "#750414" }}>4.0</span>
-      </span>
-    </div>
-
-    <div
-      style={{
-        display: "flex",
-        // height: "100%",
-        flexDirection: "row-reverse",
-      }}
-    >
-      <div style={{ flex: 1 }}></div>
-      {/* // break */}
-      <div
-        style={{
-          flex: 3,
-          display: "flex",
-          alignItems: "flex-start",
-          justifyContent: "flex-start",
-          flexDirection: "column",
-        }}
-      >
-        <div
-          className="scrolled-category-text-one"
-          style={{ width: "100%", marginTop: 0 }}
-        >
-          <span
-            className="scroll-text-animate-one"
-            style={{
-              fontSize: "0.7em",
-              textAlign: "initial",
-              color: "#3abce2",
-              fontStyle: "italic",
-            }}
-          >
-            The world was recently introduced to the wonders of the industry 4.0
-            revolution.
-          </span>
-        </div>
-        <div className="scrolled-category-text-two">
-          <div
-            className="industry-text-two-wrapper"
-            style={{ width: "40%", marginTop: "4em", marginLeft: "6.5em" }}
-          >
-            <span className="scroll-text-animate-two">
-              Together with our clients we map out the challenges they face and
-              develop tailor made solutions using XR and 3D technology that
-              creates an innovative visual interface between men and machine.
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    </div> */}
+  </>
 );
 
 export const MedicineText = ({ textClass, scrollArea, categoriesObj }) => (
-  <div
-    className={`fader ${textClass}`}
-    style={{
-      height: "80vh",
-      // top: "16%",
-      // left: "9%",
-      position: "absolute",
-      width: "100vw",
-      color: "white",
-      // fontSize: "3em",
-      fontFamily: "gotham",
-      display: "flex",
-      flexDirection: "column",
-      border: "1px solid white",
-      // justifyContent: "space-between",
-      zIndex: 1,
-    }}
-  >
+  <div>
     <div
+      className={`fader ${textClass}`}
       style={{
-        fontSize: "12em",
-        textAlign: "center",
+        height: "80vh",
+        // top: "16%",
+        // left: "9%",
+        position: "absolute",
+        width: "100vw",
+        color: "white",
+        // fontSize: "3em",
+        fontFamily: "gotham",
+        display: "flex",
+        flexDirection: "column",
+        // justifyContent: "space-between",
       }}
-      className="scrolled-category-title ai-title-ani"
     >
-      <span style={{ color: "#750414" }}>M</span>
-      {categoriesObj[scrollArea.currentSection].substring(1)}
+      <div
+        style={{
+          fontSize: "12em",
+          textAlign: "center",
+        }}
+        className="scrolled-category-title ai-title-ani"
+      >
+        <span style={{ color: "#750414" }}>M</span>
+        {categoriesObj[scrollArea.currentSection].substring(1)}
+      </div>
     </div>
 
     <div
       style={{
         display: "flex",
-        height: "100%",
+        height: "65%",
         zIndex: 1,
         position: "absolute",
         justifyContent: "space-evenly",
         alignItems: "flex-end",
-        zIndex: 343,
       }}
     >
       <div
         className="scrolled-category-text-one-new ai-text-one-ani"
         style={{
-          width: "40%",
-          height: "50%",
+          width: "25%",
         }}
       >
-        <span style={{ color: "#3abce2" }}>
+        <span style={{ color: "#3abce2", width: "40%" }}>
           The world of medicine is one of the most innovative sectors in the
           world.
         </span>
-        {/* <span>The world of medicine is one</span>
-      <span>of the most innovative sectors</span>
-      <span>in the world</span> */}
       </div>
       <div
         className="scrolled-category-text-two ai-text-two-ani"
         style={{
-          height: "60%",
-          zIndex: 1,
+          height: "10%",
+          zIndex: 5,
           width: "40%",
+          marginLeft: "19em",
+          textAlign: "right",
+          display: "flex",
         }}
       >
-        <span>
+        <span style={{ marginTop: "4em" }}>
           Using Extended Reality (XR) we at in3D became pioneers in development
           of XR products for medical organizations, collaborating together to
           empower innovation and efficiency for clinics and hospitals.
         </span>
-        {/* <span>Using Extended Reality (XR) we at in3D became pioneers in</span>
-      <span>development of XR products for medical organizations</span>
-      <span>collaborating together to empower innovation and</span>
-      <span>efficiency for clinics and hospitals</span> */}
       </div>
     </div>
-    <div
+
+    {/* <div
       style={{
+        width: "100vw",
         position: "absolute",
-        zIndex: 13423,
-        right: "7em",
-        bottom: "1em",
+        zIndex: 3,
+        bottom: "2em",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
       }}
     >
-      <span style={{ fontSize: "2em" }}>
+      <span style={{ fontSize: "2em", color: "white" }}>
         <span style={{ color: "#750414" }}>M</span>edicine
       </span>
       <button className="see-more-btn">See More</button>
-    </div>
-    {/* <div>
-      <div>Medicine</div>
-      <button>Learn More</button>
     </div> */}
   </div>
 );
@@ -226,23 +221,12 @@ export const MicrosoftText = ({ textClass, scrollArea, categoriesObj }) => (
         In3D is the official and the inclusive Mixed Reality (MR) partner of
         Microsoft Israel
       </span>
-      {/* <span>In3D is the official and inclusive</span>
-      <span>Mixed Reality (MR) partner</span>
-      <span>of Microsoft Israel</span> */}
     </div>
     <div className="scrolled-category-text-two">
       <span>
         In3D and Microsoft&#39;s teams share a strong connection and a combined
         vison on the important roles of MR technology.
       </span>
-      {/* <span>
-        As partners, in3D is your perfect go to for any Microsoft MR products.
-      </span>
-      <span>
-        In3D and Microsoft's teams share a strong connection and a combined
-        vison on the important roles of MR technology
-      </span> */}
-      {/* <span>efficiency for clinics and hospitals</span> */}
     </div>
   </div>
 );
@@ -258,18 +242,14 @@ export const SecurityText = ({ textClass, scrollArea, categoriesObj }) => (
       color: "white",
       // fontSize: "3em",
       fontFamily: "gotham",
-      display: "flex",
-      flexDirection: "column",
-      border: "1px solid red",
-      justifyContent: "flex-start",
-
-      // justifyContent: "space-between",
+      // display: "flex",
+      // flexDirection: "column",
     }}
   >
     <div
       className="scrolled-category-title security-title-ani"
       style={{
-        fontSize: "10em",
+        fontSize: "12em",
         textAlign: "center",
       }}
     >
@@ -283,7 +263,7 @@ export const SecurityText = ({ textClass, scrollArea, categoriesObj }) => (
         style={{ marginTop: "8em", flex: 1 }}
         className="scrolled-category-text-one security-text-ani"
       >
-        <span>
+        <span style={{ width: "80%" }}>
           Thanks to years of collaboration with defense industries, we gained
           the needed experience, knowledge and tools to provide quick and out of
           the box solutions that are tailored to the industries unique
@@ -291,7 +271,7 @@ export const SecurityText = ({ textClass, scrollArea, categoriesObj }) => (
         </span>
       </div>
     </div>
-    <div
+    {/* <div
       style={{
         position: "absolute",
         zIndex: 13423,
@@ -306,7 +286,7 @@ export const SecurityText = ({ textClass, scrollArea, categoriesObj }) => (
         <span style={{ color: "#750414" }}>S</span>ecurity
       </span>
       <button className="see-more-btn">See More</button>
-    </div>
+    </div> */}
   </div>
 );
 
@@ -416,7 +396,6 @@ export const CustomizationText = ({ textClass, scrollArea, categoriesObj }) => (
       // fontSize: "3em",
       display: "flex",
       flexDirection: "column",
-      zIndex: 1,
       // justifyContent: "space-between",
     }}
   >
@@ -424,7 +403,7 @@ export const CustomizationText = ({ textClass, scrollArea, categoriesObj }) => (
       style={{
         textAlign: "center",
         // marginLeft: "10em",
-        fontSize: "7em",
+        fontSize: "10em",
       }}
       className="scrolled-category-title security-title-ani"
     >

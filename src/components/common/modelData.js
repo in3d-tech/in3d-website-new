@@ -1,4 +1,3 @@
-// export const getModelData = (idx, tl) => {
 export const Model_Data = [
   // TAASIA
 
@@ -48,10 +47,15 @@ export const Model_Data = [
 
     timeline: (tl, currentRef, prevRef) =>
       tl
-        ?.to(currentRef.current.position, { x: 4.5, z: -1.5 }, "simultaneously")
+        ?.to(
+          currentRef.current.position,
+          { x: 4.55, z: -1, y: -3 },
+          "simultaneously"
+        )
         .to(currentRef.current.rotation, { y: 0 }, "simultaneously")
-        // ?.to(currentRef.current.position, { x: 7, z: 0 }, "simultaneously")
+        // ?.to(currentRef.current.position, { x: 4.5, z: -1.5 }, "simultaneously")
         // .to(currentRef.current.rotation, { y: 0 }, "simultaneously")
+
         .to(prevRef.current.position, { y: -5, x: 13.5 }, "simultaneously")
         .to(prevRef.current.rotation, { y: 0.2 }, "simultaneously"),
   },
@@ -181,10 +185,16 @@ export const Model_Data = [
       tl
         .to(
           currentRef.current.position,
-          { y: -2.5, x: 0, z: 0.5 },
+          { y: -3, x: 1.5, z: 3 },
           "simultaneously"
         )
-        .to(currentRef.current.rotation, { y: 0.5 }, "simultaneously")
+        .to(currentRef.current.rotation, { y: -2.2 }, "simultaneously")
+        // .to(
+        //   currentRef.current.position,
+        //   { y: -2.5, x: 0, z: 0.5 },
+        //   "simultaneously"
+        // )
+        // .to(currentRef.current.rotation, { y: 0.5 }, "simultaneously")
         .to(
           prevRef.current.position,
           { x: -0.2, y: -1.7, z: 6 },
@@ -193,3 +203,11 @@ export const Model_Data = [
         .to(prevRef.current.rotation, { y: -2.2 }, "simultaneously"),
   },
 ];
+
+export const INDUSTRY = 2;
+export const MEDICINE = 3;
+export const MICROSOFT = 4;
+export const SECURITY = 5;
+export const AI = 6;
+export const MILITARY = 7;
+export const CUSTOMIZATION = 8;

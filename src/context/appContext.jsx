@@ -14,7 +14,7 @@ export default function AppContextProvider({ children }) {
   const [renderModels, setRenderModels] = useState(false);
   const [mobileBackground, setMobileBackground] = useState(1);
   const [titleOnMainPageHovered, setTitleOnMainPageHovered] = useState("");
-  const [justEnteredSection, setJustEnteredSection] = useState(null);
+  const [modelAnimationIsHalfWay, setModelAnimationIsHalfWay] = useState(null);
   const [customizeHasRendered, setCustomizeHasRendered] = useState(false);
 
   return (
@@ -36,8 +36,8 @@ export default function AppContextProvider({ children }) {
         setMobileBackground,
         titleOnMainPageHovered,
         setTitleOnMainPageHovered,
-        justEnteredSection,
-        setJustEnteredSection,
+        modelAnimationIsHalfWay,
+        setModelAnimationIsHalfWay,
         customizeHasRendered,
         setCustomizeHasRendered,
       }}
@@ -68,8 +68,8 @@ export function useAppContext() {
       setMobileBackground: () => {},
       titleOnMainPageHovered: null,
       setTitleOnMainPageHovered: () => {},
-      justEnteredSection: null,
-      setJustEnteredSection: () => {},
+      modelAnimationIsHalfWay: null,
+      setModelAnimationIsHalfWay: () => {},
       customizeHasRendered: null,
       setCustomizeHasRendered: () => {},
     };

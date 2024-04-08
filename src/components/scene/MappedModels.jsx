@@ -22,7 +22,7 @@ function MappedModels({
     isInstantScroll,
     scrollArea,
     setScrollArea,
-    setJustEnteredSection,
+    setModelAnimationIsHalfWay,
     setCustomizeHasRendered,
   } = useAppContext();
 
@@ -110,7 +110,7 @@ function MappedModels({
 
         onEnter: () => {
           console.log("onEnter animation");
-          setJustEnteredSection(idx + 2); // (+ 1 because only starts effect scrollSection 1)
+          setModelAnimationIsHalfWay(idx + 2); // (+ 1 because only starts effect scrollSection 1)
         },
       },
     });
