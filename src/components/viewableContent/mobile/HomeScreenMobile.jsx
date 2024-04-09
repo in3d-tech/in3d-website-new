@@ -177,7 +177,7 @@ function HomeScreenMobile() {
             <Camera />
             <Suspense fallback={null}>
               <AstroModel
-                url={"/assets/models/astronaut_new5 (1).glb"}
+                url={"/assets/models/astronaut_new5 (3).glb"}
                 astroRef={astroRef}
               />
             </Suspense>
@@ -239,15 +239,7 @@ const categories = [
   "CUSTOMIZATION",
 ];
 
-export function AstroModel({
-  url,
-  astroRef,
-  visibleModels,
-  setVisibleModels,
-  textRef,
-  setTextAnimation,
-  customizeRef,
-}) {
+export function AstroModel({ url, astroRef, setTextAnimation }) {
   const { isAstroModelDrawn, setIsAstroModelDrawn } = useAppContext();
 
   const { scene, animations } = useGLTF(url);
