@@ -49,9 +49,15 @@ export const SeeMoreBtn = () => {
 
     case MICROSOFT:
       styles = {
-        left: "7em",
+        right: "7em",
         bottom: "1em",
       };
+
+      text = (
+        <>
+          <span style={{ color: "#750414" }}>M</span>icrosoft
+        </>
+      );
       break;
 
     case SECURITY:
@@ -67,16 +73,27 @@ export const SeeMoreBtn = () => {
       break;
     case AI:
       styles = {
-        width: "100vw",
-
+        right: "10em",
         bottom: "2em",
       };
+      text = (
+        <>
+          <span style={{ color: "#750414" }}>A</span>I
+          {/* <span style={{ color: "#750414" }}>.</span> */}
+        </>
+      );
       break;
     case MILITARY:
       styles = {
         left: "7em",
         bottom: "1em",
       };
+      text = (
+        <>
+          <span style={{ color: "#750414" }}>M</span>ilitary
+          {/* <span style={{ color: "#750414" }}>.</span> */}
+        </>
+      );
       break;
 
     case CUSTOMIZATION:

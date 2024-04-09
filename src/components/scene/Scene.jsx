@@ -1,16 +1,7 @@
 import { Suspense, lazy, useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { AstroModel } from "../../components/scene/ModelComponent";
-import {
-  AI,
-  CUSTOMIZATION,
-  INDUSTRY,
-  MEDICINE,
-  MICROSOFT,
-  MILITARY,
-  Model_Data,
-  SECURITY,
-} from "../../components/common/modelData";
+import { CUSTOMIZATION, Model_Data } from "../../components/common/modelData";
 
 import {
   IndustryText,
@@ -27,6 +18,7 @@ import { Camera } from "../../components/scene/Camera";
 import { BackgroundScroll } from "./BackgroundScroll";
 import { useAppContext } from "../../context/appContext";
 import { Sparkles } from "@react-three/drei";
+import { getSparkleColour } from "./ornaments/getSparkleColour.js";
 
 const MappedModels = lazy(() => import("./MappedModels.jsx"));
 
@@ -40,7 +32,7 @@ const hoveredTitleLight = {
   customization: "",
 };
 
-function Scene({ textRef, scrollToElementById }) {
+function Scene({ scrollToElementById }) {
   const [visibleModels, setVisibleModels] = useState([]);
   const [visibleText, setVisibleText] = useState(false);
   const [shouldFadeIn, setShouldFadeIn] = useState(false);
@@ -59,8 +51,7 @@ function Scene({ textRef, scrollToElementById }) {
   } = useAppContext();
 
   const containerRef = useRef(null);
-  const simplyRef = useRef();
-  const expandedRef = useRef();
+  const section1MenuRef = useRef(null);
   const textContainerRef = useRef();
   const titlesContainerRef = useRef();
   const astroRef = useRef();
@@ -233,19 +224,16 @@ function Scene({ textRef, scrollToElementById }) {
     });
   }
 
-  const getSparkleColour = (section) => {
-    const sparklesColour = {
-      [INDUSTRY]: "#CF9FFF",
-      [MEDICINE]: "#3DE9D9",
-      [MICROSOFT]: "#CF9FFF",
-      [SECURITY]: "#995812",
-      [AI]: "#3DE7E9",
-      [MILITARY]: "#467B3F",
-      [CUSTOMIZATION]: "#F0CF5E",
-    };
-
-    return sparklesColour[section] || "#CF9FFF";
-  };
+  // const scrollToElement = () => {
+  //   if (section1MenuRef.current) {
+  //     const elementPosition =
+  //       section1MenuRef.current.getBoundingClientRect().top;
+  //     window.scrollTo({
+  //       top: elementPosition,
+  //     });
+  //   }
+  // };
+  // midSection2
 
   return (
     <div className="scene one" style={{}} ref={containerRef}>
@@ -324,10 +312,8 @@ function Scene({ textRef, scrollToElementById }) {
         </Canvas>
       </div>
       <BackgroundScroll
+        section1MenuRef={section1MenuRef}
         scrollToElementById={scrollToElementById}
-        simplyRef={simplyRef}
-        expandedRef={expandedRef}
-        textRef={textRef}
         titlesContainerRef={titlesContainerRef}
         hovered={hovered}
         textAnimation={textAnimation}

@@ -19,6 +19,7 @@ body {
   background: black;
   /* transition: background-image 1s; */
   /* background: black; */
+  overflow-y: hidden;
   overflow-x: hidden;
 }
 
@@ -75,7 +76,7 @@ body {
   opacity: 0;
   position: fixed;
   top: 3.5em;
-  left: 0.8em;
+  left: 3em;
   z-index: 1;
 }
 
@@ -90,7 +91,7 @@ body {
 }
 
 .in3d-fixed-logo:hover {
-  width: 6em;
+  width: 5.4em;
   /* box-shadow: 3px 3px 32px 8px rgba(255, 255, 255, 0.05);
   -webkit-box-shadow: 3px 3px 32px 8px rgba(255, 255, 255, 0.05);
   -moz-box-shadow: 3px 3px 32px 8px rgba(255, 255, 255, 0.05); */
@@ -522,6 +523,7 @@ section {
   position: absolute;
   opacity: 0.5;
   animation: scaleUpDown 20s infinite ease-in-out;
+  background-size: cover;
 }
 
 /* ------ titles ----  */
@@ -562,7 +564,6 @@ section {
 }
 
 .scrolled-category-title {
-  font-size: 4em;
   font-family: gotham;
   color: #d8f3f6;
 }
@@ -590,6 +591,17 @@ section {
   /* line-height: 1.2em; */
   font-family: swiss-medium;
   color: rgb(255, 255, 255);
+}
+
+.ai-title {
+  font-size: 8em;
+  text-align: left;
+  border-bottom: 5px solid white;
+}
+
+.military-title {
+  font-size: 14em;
+  text-align: left;
 }
 
 /* taaasia */
@@ -727,6 +739,7 @@ section {
 
 .flashing-div {
   background: url("/assets/images/backgrounds/medicine/medicine_bg.jpg");
+  /* no-repeat center; */
   position: fixed;
   /* background: black; */
   z-index: 4000000000000;
@@ -740,6 +753,7 @@ section {
   align-items: center;
   height: 100vh;
   width: 100vw;
+  background-size: cover;
 }
 
 .flashing-fade-out {
@@ -1547,6 +1561,10 @@ section {
   line-height: 1.3em;
 }
 
+.military-title {
+  font-size: 13em;
+}
+
 .scroll-text-animate-one {
   width: 70%;
   margin-left: 8em;
@@ -1561,8 +1579,16 @@ section {
     font-size: 0.7em;
   }
 
+  .ai-title {
+    font-size: 7em;
+  }
+
   .text-animate {
     font-size: 1.4em;
+  }
+
+  .military-title {
+    font-size: 12em;
   }
 
   .category-title:hover {
@@ -1580,6 +1606,14 @@ section {
     font-size: 3.5em;
   }
 
+  .ai-title {
+    font-size: 6em;
+  }
+
+  .military-title {
+    font-size: 10em;
+  }
+
   .category-title {
     font-size: 0.5em;
   }
@@ -1590,7 +1624,7 @@ section {
   }
 
   .scrolled-category-text-two {
-    font-size: 1em;
+    font-size: 1.2em;
     line-height: 1.3em;
   }
 

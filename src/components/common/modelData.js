@@ -129,10 +129,16 @@ export const Model_Data = [
       tl
         ?.to(
           currentRef.current.position,
-          { y: -1.5, x: 1, z: 3.4 },
+          { y: -1.6, x: 0.5, z: 4.2 },
           "simultaneously"
         )
         .to(currentRef.current.rotation, { y: -3 }, "simultaneously")
+        // ?.to(
+        //   currentRef.current.position,
+        //   { y: -1.5, x: 1, z: 3.4 },
+        //   "simultaneously"
+        // )
+        // .to(currentRef.current.rotation, { y: -3 }, "simultaneously")
         .to(
           prevRef.current.position,
           { x: -5, y: -0.5, z: 3.5 },

@@ -8,16 +8,11 @@ export const IndustryText = ({ textClass, scrollArea, categoriesObj }) => (
       style={{
         height: "80vh",
         width: "100%",
-        // top: "22%",
-        // left: "14%",
         position: "absolute",
         color: "white",
-        // fontSize: "3em",
         fontFamily: "gotham",
         display: "flex",
         flexDirection: "column",
-        // zIndex: 1,
-        // justifyContent: "space-between",
       }}
     >
       {/* <div className="scrolled-category-title industry-title-ani">
@@ -87,23 +82,6 @@ export const IndustryText = ({ textClass, scrollArea, categoriesObj }) => (
         </div>
       </div>
     </div>
-    {/* <div
-      style={{
-        position: "absolute",
-        zIndex: 2234234234,
-        right: "7em",
-        bottom: "1em",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-      className="testy"
-    >
-      <span style={{ fontSize: "2em" }}>
-        Industry <span style={{ color: "#750414" }}>4.0</span>
-      </span>
-      <button className="see-more-btn">See More</button>
-    </div> */}
   </>
 );
 
@@ -176,23 +154,6 @@ export const MedicineText = ({ textClass, scrollArea, categoriesObj }) => (
         </span>
       </div>
     </div>
-
-    {/* <div
-      style={{
-        width: "100vw",
-        position: "absolute",
-        zIndex: 3,
-        bottom: "2em",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      <span style={{ fontSize: "2em", color: "white" }}>
-        <span style={{ color: "#750414" }}>M</span>edicine
-      </span>
-      <button className="see-more-btn">See More</button>
-    </div> */}
   </div>
 );
 
@@ -202,7 +163,7 @@ export const MicrosoftText = ({ textClass, scrollArea, categoriesObj }) => (
     style={{
       height: "80vh",
       width: "34%",
-      top: "30%",
+      top: "20%",
       left: "14%",
       position: "absolute",
       color: "white",
@@ -214,10 +175,17 @@ export const MicrosoftText = ({ textClass, scrollArea, categoriesObj }) => (
       // justifyContent: "space-between",
     }}
   >
-    <div className="scrolled-category-title">
-      {categoriesObj[scrollArea.currentSection]}
+    <div
+      style={{
+        fontSize: "10em",
+        textAlign: "center",
+      }}
+      className="scrolled-category-title ai-title-ani"
+    >
+      <span style={{ color: "#750414" }}>M</span>
+      {categoriesObj[scrollArea.currentSection].substring(1)}
     </div>
-    <div className="scrolled-category-text-one">
+    <div style={{ marginTop: "5em" }} className="scrolled-category-text-one">
       <span>
         In3D is the official and the inclusive Mixed Reality (MR) partner of
         Microsoft Israel
@@ -305,15 +273,26 @@ export const AiText = ({ textClass, scrollArea, categoriesObj }) => (
       fontFamily: "gotham",
       display: "flex",
       flexDirection: "column",
+      zIndex: -1232,
       // justifyContent: "space-between",\
     }}
   >
-    <div className="scrolled-category-title ai-title-ani">
+    {/* <div className="scrolled-category-title ai-title-ani">
       {categoriesObj[scrollArea.currentSection]}
+    </div> */}
+
+    <div className="ai-title ai-title-ani">
+      <div>
+        <span style={{ color: "#750414" }}>A</span>rtificial
+      </div>
+      <div>
+        <span style={{ color: "#750414" }}>I</span>ntelligence
+      </div>
+      {/* {categoriesObj[scrollArea.currentSection].substring(1)} */}
     </div>
 
     <div
-      style={{ marginTop: "6em" }}
+      style={{ marginTop: "8em" }}
       className="scrolled-category-text-two ai-text-two-ani"
     >
       <span>
@@ -324,7 +303,7 @@ export const AiText = ({ textClass, scrollArea, categoriesObj }) => (
 
       {/* <span>efficiency for clinics and hospitals</span> */}
     </div>
-    <div
+    {/* <div
       className="scrolled-category-text-one ai-text-one-ani"
       style={{ marginTop: "8em", marginLeft: "18em" }}
     >
@@ -333,12 +312,8 @@ export const AiText = ({ textClass, scrollArea, categoriesObj }) => (
         <span className="animated-letter">R</span>e
         <span className="animated-letter">A</span>lit
         <span className="animated-letter">i</span>es
-        {/* <span className="ai-highlight">X</span>T
-        <span className="ai-highlight">R</span>A{" "}
-        <span className="ai-highlight">A</span>MAZ
-        <span className="ai-highlight">I</span>NG */}
       </span>
-    </div>
+    </div> */}
   </div>
 );
 
@@ -347,9 +322,9 @@ export const MilitaryText = ({ textClass, scrollArea, categoriesObj }) => (
     className={`fader ${textClass}`}
     style={{
       height: "80vh",
-      width: "34%",
-      top: "20%",
-      right: "9%",
+      width: "50%",
+      top: "14%",
+      right: "17%",
       position: "absolute",
       color: "white",
       // fontSize: "3em",
@@ -359,20 +334,31 @@ export const MilitaryText = ({ textClass, scrollArea, categoriesObj }) => (
       // justifyContent: "space-between",
     }}
   >
-    <div className="scrolled-category-title industry-title-ani">
-      {categoriesObj[scrollArea.currentSection]}
+    <div style={{}} className="military-title ai-title-ani">
+      <span style={{ color: "#750414" }}>M</span>
+      {categoriesObj[scrollArea.currentSection].substring(1)}
     </div>
+
     <div
-      style={{ marginTop: "5em" }}
+      style={{
+        marginTop: "5em",
+        width: "70%",
+        marginLeft: "5em",
+      }}
       className="scrolled-category-text-one industry-text-one-ani"
     >
-      <span>
+      <span style={{ color: "#3abce2" }}>
         Part of our vision is to promote innovation, which is a big part of what
         Israel stands for.
       </span>
     </div>
+
     <div
-      style={{ marginTop: "2em" }}
+      style={{
+        marginTop: "4em",
+        width: "50%",
+        marginLeft: "5em",
+      }}
       className="scrolled-category-text-two industry-text-two-ani"
     >
       <span>
@@ -390,62 +376,68 @@ export const CustomizationText = ({ textClass, scrollArea, categoriesObj }) => (
     className={`fader ${textClass}`}
     style={{
       height: "100vh",
+      width: "100%",
       // top: "6%",
       // left: "8%",
       position: "absolute",
       color: "white",
       // fontSize: "3em",
       display: "flex",
-      flexDirection: "column",
-      // justifyContent: "space-between",
+      // flexDirection: "column",
     }}
   >
-    <div
-      style={{
-        textAlign: "center",
-        // marginLeft: "10em",
-        fontSize: "10em",
-      }}
-      className="scrolled-category-title security-title-ani"
-    >
-      <span style={{ color: "#750414" }}>C</span>
-      {categoriesObj[scrollArea.currentSection].substring(1)}
-    </div>
+    <div style={{ flex: 1, width: "300px" }}></div>
 
-    <div
-      style={{
-        height: "100%",
-        width: "100vw",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-      }}
-    >
+    <div style={{ flex: 6 }}>
       <div
         style={{
-          width: "38%",
-          height: "50%",
-          marginTop: "10em",
-          display: "flex",
+          textAlign: "center",
+          // marginLeft: "10em",
+          fontSize: "calc(5vw + 5vh + 5vmin)",
         }}
-        className="scrolled-category-text-two"
+        className="scrolled-category-title security-title-ani"
       >
-        <span style={{ marginLeft: "9em", fontSize: "1.1em" }}>
-          As specialists we keep an amazing team of developers, 3D generalists,
-          interface and graphics artists, and product designers just so we can
-          provide our clients with the flexibility and abilities needed to
-          deliver the best product.
-        </span>
+        <span style={{ color: "#750414" }}>C</span>
+        {categoriesObj[scrollArea.currentSection].substring(1)}
       </div>
+
       <div
-        className="scrolled-category-text-one"
-        style={{ width: "50%", height: "50%" }}
+        style={{
+          height: "100%",
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+        }}
       >
-        <span style={{ marginLeft: "8em", color: "#3abce2" }}>
-          We specialize in 3D and Extended Reality (EX).
-        </span>
+        <div
+          style={{
+            width: "38%",
+            height: "30%",
+            marginTop: "10em",
+            display: "flex",
+          }}
+          className="scrolled-category-text-two"
+        >
+          <span style={{ fontSize: "1.1em" }}>
+            As specialists we keep an amazing team of developers, 3D
+            generalists, interface and graphics artists, and product designers
+            just so we can provide our clients with the flexibility and
+            abilities needed to deliver the best product.
+          </span>
+        </div>
+
+        <div
+          className="scrolled-category-text-one"
+          style={{ width: "50%", height: "50%" }}
+        >
+          <span style={{ color: "#3abce2", marginLeft: "3em" }}>
+            We specialize in 3D and Extended Reality (EX).
+          </span>
+        </div>
       </div>
     </div>
+
+    <div style={{ flex: 1, width: "300px" }}></div>
   </div>
 );
 

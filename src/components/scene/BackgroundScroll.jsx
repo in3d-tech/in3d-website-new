@@ -4,8 +4,8 @@ import { ContactUsText } from "../common/textData";
 import { SeeMoreBtn } from "../common/SeeMoreBtn";
 
 export function BackgroundScroll({
+  section1MenuRef,
   scrollToElementById,
-  textRef,
   titlesContainerRef,
   hovered,
   textAnimation,
@@ -116,8 +116,8 @@ export function BackgroundScroll({
           ) : null}
         </div>
       </section>
-      <section className="section section-two">
-        <div
+      <section className="section section-two" ref={section1MenuRef}>
+        {/* <div
           ref={textRef}
           style={{
             height: "50%",
@@ -126,7 +126,7 @@ export function BackgroundScroll({
             top: 0,
           }}
           id="midSection2"
-        ></div>
+        ></div> */}
         {fixed ? (
           <div
             ref={titlesContainerRef}

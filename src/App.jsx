@@ -28,6 +28,8 @@ ScrollTrigger.defaults({
   ease: "power1.inOut",
 });
 
+// in3D works according to international quality policies in development and production, information security and privacy security – ISO9001, ISO27001, ISO27701. The company undertakes and complies with legal and privacy requirements, engraves on its banner a high standard of service assembly,  while maintaining accuracy, confidentiality and information security.
+
 extend({ PerspectiveCamera: THREE.PerspectiveCamera });
 
 function App() {
@@ -39,7 +41,6 @@ function App() {
   const [loadingScreen, setloadingScreen] = useState(true);
 
   const { selectedCategory, setIsInstantScroll } = useAppContext();
-  const textRef = useRef();
   const isMobileDimensions = useCheckIsMobileScreen();
 
   useEffect(() => {
@@ -92,10 +93,7 @@ function App() {
           ) : (
             <>
               <ViewableContent />
-              <LazyScene
-                textRef={textRef}
-                scrollToElementById={scrollToElementById}
-              />
+              <LazyScene scrollToElementById={scrollToElementById} />
             </>
           )}
         </Suspense>

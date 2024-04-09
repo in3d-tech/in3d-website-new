@@ -16,8 +16,10 @@ export function LoadingScreen({ setloadingScreen }) {
       const renderModels = setTimeout(() => setRenderModels(true), 800);
 
       if (customizeHasRendered) {
-        // const loadingText = setTimeout(() => setAnimationActive(false), 5000);
-        const fadeOut = setTimeout(() => setFadeOut("flashing-fade-out"), 100);
+        const fadeOut = setTimeout(() => {
+          setFadeOut("flashing-fade-out");
+          document.body.style.overflowY = "auto";
+        }, 100);
         const closeLoadingScreen = setTimeout(
           () => setloadingScreen(false),
           2200
@@ -34,14 +36,6 @@ export function LoadingScreen({ setloadingScreen }) {
       };
     }
   }, [isAstroModelDrawn, customizeHasRendered]);
-  // useEffect(() => {
-  //   // document.body.style.overflow = "hidden";
-  //   // const timer = setTimeout(() => {
-  //   //   setAnimationActive(false); // Stop the current animation after 5 seconds
-  //   // }, 5000);
-  //   // return () => clearTimeout(timer);
-  //   // // document.body.style.overflow = "auto";
-  // }, []);
 
   return (
     <div className={`flashing-div ${fadeOut}`}>
@@ -60,7 +54,6 @@ export function LoadingScreen({ setloadingScreen }) {
         <img
           className="flashing-img"
           style={{
-            // border: "1px solid black",
             height: height,
             // width: height + 300,
             borderRadius: "50%",
