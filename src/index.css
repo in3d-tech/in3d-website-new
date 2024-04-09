@@ -1600,6 +1600,10 @@ section {
     font-size: 1.6em;
   }
 }
+
+.contact-details-wrapper {
+  margin-top: 1em;
+}
 /* med displays:  */
 @media screen and (max-width: 1540px) {
   .scrolled-category-title {

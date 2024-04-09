@@ -515,18 +515,25 @@ export const ContactUsText = ({ test }) => {
                   style={{
                     marginTop: "1em",
                     display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
                   }}
                 >
-                  <form ref={form} onSubmit={sendEmail}>
+                  <form
+                    ref={form}
+                    onSubmit={sendEmail}
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
                     <textarea
                       name="message"
                       placeholder="Type your message here..."
                       type="text"
                       maxLength={300}
                       style={{
-                        width: "80%",
+                        width: "60%",
                         height: "8em",
                         borderRadius: "12px",
                         opacity: "0.8",
