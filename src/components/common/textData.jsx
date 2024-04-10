@@ -6,81 +6,92 @@ export const IndustryText = ({ textClass, scrollArea, categoriesObj }) => (
     <div
       className={`fader ${textClass}`}
       style={{
-        height: "80vh",
         width: "100%",
         position: "absolute",
         color: "white",
         fontFamily: "gotham",
         display: "flex",
+        alignItems: "center",
         flexDirection: "column",
       }}
     >
+      <div
+        style={{
+          width: "80%",
+          position: "absolute",
+          color: "white",
+          fontFamily: "gotham",
+          // display: "flex",
+          // alignItems: "center",
+          // flexDirection: "column",
+        }}
+      >
+        <div className="title-container">
+          <span
+            className="scroll-text-animate"
+            style={{
+              borderBottom: "8px solid white",
+            }}
+          >
+            {categoriesObj[scrollArea.currentSection]}{" "}
+            <span style={{ color: "#750414" }}>4.0</span>
+          </span>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            // height: "100%",
+            flexDirection: "row-reverse",
+            // width: "80%",
+          }}
+        >
+          <div style={{ flex: 1 }}></div>
+          {/* // break */}
+          <div
+            style={{
+              flex: 3,
+              display: "flex",
+              alignItems: "flex-start",
+              justifyContent: "flex-start",
+              flexDirection: "column",
+            }}
+          >
+            <div
+              className="scrolled-category-text-one"
+              style={{ width: "100%", marginTop: 0 }}
+            >
+              <span
+                className="scroll-text-animate-one"
+                style={{
+                  fontSize: "0.7em",
+                  textAlign: "initial",
+                  color: "#3abce2",
+                  fontStyle: "italic",
+                }}
+              >
+                The world was recently introduced to the wonders of the industry
+                4.0 revolution.
+              </span>
+            </div>
+            <div className="scrolled-category-text-two">
+              <div className="industry-text-two-wrapper">
+                <span className="scroll-text-animate-two">
+                  Together with our clients we map out the challenges they face
+                  and develop tailor made solutions using XR and 3D technology
+                  that creates an innovative visual interface between men and
+                  machine.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       {/* <div className="scrolled-category-title industry-title-ani">
       <span className="text-animate button-ani">
         {categoriesObj[scrollArea.currentSection]}
       </span>
     </div> */}
-
-      <div className="title-container" style={{ marginTop: "0.7em" }}>
-        <span
-          className="scroll-text-animate"
-          style={{ borderBottom: "8px solid white" }}
-        >
-          {categoriesObj[scrollArea.currentSection]}{" "}
-          <span style={{ color: "#750414" }}>4.0</span>
-        </span>
-      </div>
-
-      <div
-        style={{
-          display: "flex",
-          // height: "100%",
-          flexDirection: "row-reverse",
-        }}
-      >
-        <div style={{ flex: 1 }}></div>
-        {/* // break */}
-        <div
-          style={{
-            flex: 3,
-            display: "flex",
-            alignItems: "flex-start",
-            justifyContent: "flex-start",
-            flexDirection: "column",
-          }}
-        >
-          <div
-            className="scrolled-category-text-one"
-            style={{ width: "100%", marginTop: 0 }}
-          >
-            <span
-              className="scroll-text-animate-one"
-              style={{
-                fontSize: "0.7em",
-                textAlign: "initial",
-                color: "#3abce2",
-                fontStyle: "italic",
-              }}
-            >
-              The world was recently introduced to the wonders of the industry
-              4.0 revolution.
-            </span>
-          </div>
-          <div className="scrolled-category-text-two">
-            <div
-              className="industry-text-two-wrapper"
-              style={{ width: "40%", marginTop: "4em", marginLeft: "6.5em" }}
-            >
-              <span className="scroll-text-animate-two">
-                Together with our clients we map out the challenges they face
-                and develop tailor made solutions using XR and 3D technology
-                that creates an innovative visual interface between men and
-                machine.
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </>
 );

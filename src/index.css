@@ -1177,8 +1177,9 @@ section {
   width: 100%;
   margin: 0 auto;
   /* left: 2em; */
-  font-size: 10em;
+  font-size: 12em;
   height: 2em;
+  margin-top: 0.4em;
 }
 
 .title-container::after {
@@ -1253,9 +1254,9 @@ section {
 }
 
 .industry-text-two-wrapper {
-  width: 80%;
-  margin-left: 1.5em;
-  margin-top: 1em;
+  width: 45%;
+  margin-left: 6.5em;
+  margin-top: 3.5em;
 }
 
 .container {
@@ -1465,9 +1466,21 @@ section {
   }
 }
 
+.down-indicator-wrapper {
+  margin-top: 1.5em;
+  margin-left: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  height: 300px;
+  width: 300px;
+}
+
 .icon-scroll,
 .icon-scroll:before {
   position: absolute;
+
   /* left: 50%; */
 }
 
@@ -1492,6 +1505,7 @@ section {
   animation-duration: 1.5s;
   animation-iteration-count: infinite;
   animation-name: scroll;
+  border: 1px solid yellow;
 }
 
 @keyframes scroll {
@@ -1604,6 +1618,7 @@ section {
 .contact-details-wrapper {
   margin-top: 1em;
 }
+
 /* med displays:  */
 @media screen and (max-width: 1540px) {
   .scrolled-category-title {
@@ -1671,6 +1686,41 @@ section {
     -moz-box-shadow: 1px -1px 26px 7px rgba(130, 49, 49, 0.75); */
   }
 }
+
+@media (max-width: 1690px) and (max-height: 850px) {
+  .title-container {
+    margin-top: 0.2em;
+  }
+  .industry-text-two-wrapper {
+    margin-left: 6.5em;
+    margin-top: 1.5em;
+  }
+  .category-title {
+    font-size: 0.7em;
+  }
+
+  .ai-title {
+    font-size: 7em;
+  }
+
+  .text-animate {
+    font-size: 1.4em;
+  }
+
+  .military-title {
+    font-size: 12em;
+  }
+
+  .category-title:hover {
+    cursor: pointer !important;
+    font-size: 0.75em;
+  }
+
+  .scrolled-category-text-one-new {
+    font-size: 1.6em;
+  }
+}
+
 /* small displays */
 @media screen and (max-width: 768px) {
 }

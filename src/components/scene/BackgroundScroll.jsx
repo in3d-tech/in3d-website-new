@@ -96,27 +96,39 @@ export function BackgroundScroll({
                 </span>
               </div>
               <div
-                style={{
-                  marginTop: "1.5em",
-                  marginLeft: "2em",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
+                className="down-indicator-wrapper"
+                // style={{
+                //   marginTop: "1.5em",
+                //   marginLeft: "2em",
+                //   display: "flex",
+                //   justifyContent: "center",
+                //   alignItems: "center",
 
-                  position: "absolute",
+                //   position: "absolute",
 
-                  height: "300px",
-                  width: "300px",
-                }}
+                //   height: "300px",
+                //   width: "300px",
+                //   border: "1px solid red",
+                // }}
               >
                 <div className="icon-scroll"></div>
                 <div className="down-indicator"></div>
+                <div
+                  style={{
+                    position: "relative",
+                    marginLeft: "3.5em",
+                    color: "rgb(255,255,255,0.3)",
+                  }}
+                >
+                  <div style={{ fontSize: "0.6em" }}>Scroll</div>
+                  <div style={{ fontSize: "0.6em" }}>down</div>
+                </div>
               </div>
             </>
           ) : null}
         </div>
       </section>
-      <section className="section section-two" ref={section1MenuRef}>
+      <section className="section section-two">
         {/* <div
           ref={textRef}
           style={{
@@ -167,6 +179,7 @@ export function BackgroundScroll({
       <section
         id="sectionTwoHalf"
         className="section section-two-half"
+        ref={section1MenuRef}
       ></section>
       <section id="sectionThree" className="section section-three"></section>
       <section id="sectionFour" className="section section-four"></section>
