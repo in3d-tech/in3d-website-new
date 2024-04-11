@@ -108,7 +108,7 @@ export const Model_Data = [
           "simultaneously"
         )
         .to(currentRef.current.rotation, { y: Math.PI + 1.3 }, "simultaneously")
-        .to(prevRef.current.position, { x: 10 }, "simultaneously")
+        .to(prevRef.current.position, { x: 10.5 }, "simultaneously")
         .to(prevRef.current.rotation, { y: 0.9 }, "simultaneously"),
   },
 
@@ -169,6 +169,8 @@ export const Model_Data = [
           "simultaneously"
         )
         .to(currentRef.current.rotation, { y: 1 }, "simultaneously")
+        // .to(prevRef.current.position, { z: 6.5 }, "simultaneously"),
+        // .to(prevRef.current.rotation, { y: 0.9 }, "simultaneously"),
         .to(prevRef.current.position, { x: 10 }, "simultaneously")
         .to(prevRef.current.rotation, { y: 0.9 }, "simultaneously"),
   },

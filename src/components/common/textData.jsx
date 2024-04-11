@@ -399,12 +399,12 @@ export const CustomizationText = ({ textClass, scrollArea, categoriesObj }) => (
   >
     <div style={{ flex: 1, width: "300px" }}></div>
 
-    <div style={{ flex: 6 }}>
+    <div style={{ flex: 1 }}>
       <div
         style={{
           textAlign: "center",
           // marginLeft: "10em",
-          fontSize: "calc(5vw + 5vh + 5vmin)",
+          fontSize: "calc(4.5vw + 4.5vh + 4.5vmin)",
         }}
         className="scrolled-category-title security-title-ani"
       >

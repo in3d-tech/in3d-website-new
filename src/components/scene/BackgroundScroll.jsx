@@ -116,8 +116,8 @@ export function BackgroundScroll({
                 <div
                   style={{
                     position: "relative",
-                    marginLeft: "3.5em",
-                    color: "rgb(255,255,255,0.3)",
+                    marginRight: "3.5em",
+                    color: "rgb(255,255,255,0.5)",
                   }}
                 >
                   <div style={{ fontSize: "0.6em" }}>Scroll</div>

@@ -1215,7 +1215,6 @@ section {
 
 .see-more-btn:hover {
   cursor: pointer;
-  color: black;
   border: 1px solid rgb(0, 0, 0, 0.8);
   /* font-family: gotham; */
 }
