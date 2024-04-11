@@ -378,6 +378,7 @@ export const CustomizationText = ({ textClass, scrollArea, categoriesObj }) => (
           textAlign: "center",
           // marginLeft: "10em",
           fontSize: "calc(4.5vw + 4.5vh + 4.5vmin)",
+          borderBottom: "5px solid white",
         }}
         className="scrolled-category-title security-title-ani"
       >

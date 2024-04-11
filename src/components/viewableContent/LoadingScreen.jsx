@@ -80,7 +80,11 @@ export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
       </div>
       {isMobileViewOnly ? (
         <div
-          style={{ color: "white", width: "50%", fontFamily: "swiss-medium" }}
+          style={{
+            color: "rgb(255,255,255,0.9)",
+            width: "70%",
+            fontFamily: "swiss-medium",
+          }}
         >
           Our mobile view is currently under maintenance, but you can access our
           website via desktop or tablet!
