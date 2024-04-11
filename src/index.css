@@ -772,7 +772,8 @@ section {
 }
 
 .flashing-img {
-  animation: flash 2s infinite; /* Adjust duration as needed */
+  /* animation: flash 2s infinite; Adjust duration as needed */
+  opacity: 0.85;
 }
 
 .magnifying-glass {

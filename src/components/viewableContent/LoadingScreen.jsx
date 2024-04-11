@@ -62,23 +62,41 @@ export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
           src="/assets/images/in3dlogo.png"
         />
 
-        <h1 className="loading-header">
-          {["l", "o", "a", "d", "i", "n", "g"].map((letter, index) => (
-            <span
-              key={index}
-              className={`loading-span let${animationActive ? index + 1 : ""}`}
-              // className={
-              //   fadeOut == "flashing-fade-out"
-              //     ? "tester"
-              //     : `loading-span let${index + 1}`
-              // }
-            >
-              {letter}
-            </span>
-          ))}
-        </h1>
+        {isMobileViewOnly ? (
+          <div
+            style={{
+              color: "rgb(255,255,255,0.9)",
+              width: "70%",
+              marginLeft: "2em",
+              fontFamily: "swiss-medium",
+              marginTop: "18em",
+              position: "absolute",
+            }}
+          >
+            Our mobile view is currently under maintenance, but you can access
+            our website via desktop or tablet!
+          </div>
+        ) : (
+          <h1 className="loading-header">
+            {["l", "o", "a", "d", "i", "n", "g"].map((letter, index) => (
+              <span
+                key={index}
+                className={`loading-span let${
+                  animationActive ? index + 1 : ""
+                }`}
+                // className={
+                //   fadeOut == "flashing-fade-out"
+                //     ? "tester"
+                //     : `loading-span let${index + 1}`
+                // }
+              >
+                {letter}
+              </span>
+            ))}
+          </h1>
+        )}
       </div>
-      {isMobileViewOnly ? (
+      {/* {isMobileViewOnly ? (
         <div
           style={{
             color: "rgb(255,255,255,0.9)",
@@ -89,7 +107,7 @@ export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
           Our mobile view is currently under maintenance, but you can access our
           website via desktop or tablet!
         </div>
-      ) : null}
+      ) : null} */}
       {/* <span style={{ color: "black", fontSize: "3em" }}>
         {progress < 100 && !isAstroModelDrawn
           ? `${Math.trunc(progress)} % loaded`
