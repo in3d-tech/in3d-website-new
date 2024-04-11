@@ -71,8 +71,7 @@ function App() {
       {showLoadingScreen ? (
         <LoadingScreen
           setShowloadingScreen={setShowloadingScreen}
-          isMobileDimensions={isMobileDimensions}
-          setIsMobileViewOnly={setIsMobileViewOnly}
+          isMobileViewOnly={isMobileViewOnly}
         />
       ) : null}
       {/* <ChangeLanguage

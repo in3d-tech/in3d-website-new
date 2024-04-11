@@ -1,5 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
+import PhoneIcon from "@mui/icons-material/Phone";
+import EmailIcon from "@mui/icons-material/Email";
 
 export const IndustryText = ({ textClass, scrollArea, categoriesObj }) => (
   <>
@@ -15,17 +17,7 @@ export const IndustryText = ({ textClass, scrollArea, categoriesObj }) => (
         flexDirection: "column",
       }}
     >
-      <div
-        style={{
-          width: "80%",
-          position: "absolute",
-          color: "white",
-          fontFamily: "gotham",
-          // display: "flex",
-          // alignItems: "center",
-          // flexDirection: "column",
-        }}
-      >
+      <div className="industy-content-wrapper">
         <div className="title-container">
           <span
             className="scroll-text-animate"
@@ -101,26 +93,15 @@ export const MedicineText = ({ textClass, scrollArea, categoriesObj }) => (
     <div
       className={`fader ${textClass}`}
       style={{
-        height: "80vh",
-        // top: "16%",
-        // left: "9%",
         position: "absolute",
         width: "100vw",
         color: "white",
-        // fontSize: "3em",
         fontFamily: "gotham",
         display: "flex",
         flexDirection: "column",
-        // justifyContent: "space-between",
       }}
     >
-      <div
-        style={{
-          fontSize: "12em",
-          textAlign: "center",
-        }}
-        className="scrolled-category-title ai-title-ani"
-      >
+      <div className="medicine-title ai-title-ani">
         <span style={{ color: "#750414" }}>M</span>
         {categoriesObj[scrollArea.currentSection].substring(1)}
       </div>
@@ -215,8 +196,6 @@ export const SecurityText = ({ textClass, scrollArea, categoriesObj }) => (
   <div
     className={`fader ${textClass}`}
     style={{
-      height: "80vh",
-      // width: "34%",
       // right: "4%",
       position: "absolute",
       color: "white",
@@ -226,13 +205,7 @@ export const SecurityText = ({ textClass, scrollArea, categoriesObj }) => (
       // flexDirection: "column",
     }}
   >
-    <div
-      className="scrolled-category-title security-title-ani"
-      style={{
-        fontSize: "12em",
-        textAlign: "center",
-      }}
-    >
+    <div className="security-title security-title-ani">
       <span style={{ color: "#750414" }}>S</span>
       {categoriesObj[scrollArea.currentSection].substring(1)}
     </div>
@@ -498,19 +471,41 @@ export const ContactUsText = ({ test }) => {
           {/* <span className="contact-title">Contact us</span> */}
           <div className="contact-details-wrapper">
             <span>Feel free to contact us via:</span>
-            <span style={{ marginTop: "0.5em" }}>
-              <span>Phone: </span>
-              <span>+972-54-218-5021 or +1(302)-219-4023</span>
-            </span>
 
-            <span>
-              <span>Email: </span>sales@in3d-tech.com
-            </span>
-            <span style={{ marginTop: "1em" }}>
-              We also invite you to meet us at 1 Shefa Tal street, Tel Aviv.
-            </span>
+            <div>
+              <div
+                style={{
+                  marginTop: "0.5em",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-evenly",
+                  alignItems: "flex-start",
+                  height: "6em",
+                }}
+              >
+                <div>
+                  <span>
+                    <PhoneIcon fontSize="small" />
+                  </span>
+                  : +972-54-218-5021
+                </div>
+                <div>
+                  <PhoneIcon fontSize="small" />: +1(302)-219-4023
+                </div>
+                <div className="flex-center">
+                  <div
+                    style={{
+                      display: "flex",
+                    }}
+                  >
+                    <EmailIcon />
+                  </div>
+                  <div>: sales@in3d-tech.com</div>
+                </div>
+              </div>
+            </div>
             <span style={{ marginTop: "0.6em" }}>
-              Or you can message us{" "}
+              Or you can send us a message{" "}
               <button
                 onClick={toggleTextBox}
                 className="contact-us-here-btn"

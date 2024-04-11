@@ -34,7 +34,7 @@ function MappedModels({
   const isCustomizedRendered = useRef(false);
 
   useFrame(() => {
-    if (idx == 1) {
+    if (idx == 0) {
       // Check if the object is visible in the scene and loaded - not working
       if (currentRef.current && scene && !isCustomizedRendered.current) {
         // Check if all objects in the scene have been rendered - not working
@@ -44,7 +44,7 @@ function MappedModels({
           isCustomizedRendered.current = true;
           setCustomizeHasRendered(true);
           // setTimeout(() => setIsAstroModelDrawn(true), 1000);
-          console.log("customize object is fully rendered!");
+          console.log("industry object is fully rendered!");
         }
       }
     }

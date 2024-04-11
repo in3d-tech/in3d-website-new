@@ -23,6 +23,12 @@ body {
   overflow-x: hidden;
 }
 
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
 .button-ani {
   /* font-size: 3em; */
   color: rgb(255, 255, 255);
@@ -599,6 +605,11 @@ section {
   border-bottom: 5px solid white;
 }
 
+.medicine-title {
+  font-size: 12em;
+  text-align: center;
+}
+
 .military-title {
   font-size: 14em;
   text-align: left;
@@ -998,7 +1009,7 @@ section {
   display: flex;
   flex-direction: column;
   font-family: gotham;
-  width: 40%;
+  width: 30%;
 }
 
 .contact-title {
@@ -1029,6 +1040,7 @@ section {
 .contact-details-wrapper {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   font-size: 0.5em;
   color: rgb(255, 255, 255, 0.9);
   margin-top: 3em;
@@ -1166,6 +1178,13 @@ section {
   z-index: 48787878;
 }
 
+.industy-content-wrapper {
+  width: 80%;
+  position: absolute;
+  color: white;
+  font-family: gotham;
+}
+
 .title-container {
   display: flex;
   justify-content: center;
@@ -1194,6 +1213,11 @@ section {
   animation-duration: 1s;
   animation-fill-mode: forwards;
   animation-delay: 1.5s; */
+}
+
+.security-title {
+  font-size: 12em;
+  text-align: center;
 }
 
 .learn-more-btn-wrapper {
@@ -1587,6 +1611,9 @@ section {
 }
 
 @media screen and (max-width: 1690px) {
+  .security-title {
+    font-size: 11em;
+  }
   .category-title {
     font-size: 0.7em;
   }
@@ -1611,6 +1638,19 @@ section {
   .scrolled-category-text-one-new {
     font-size: 1.6em;
   }
+  @keyframes text-reveal-title {
+    0% {
+      opacity: 0;
+      transform: translateY(200%);
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(30%);
+    }
+  }
 }
 
 .contact-details-wrapper {
@@ -1619,6 +1659,14 @@ section {
 
 /* med displays:  */
 @media screen and (max-width: 1560px) {
+  .security-title {
+    font-size: 10em;
+  }
+
+  .industy-content-wrapper {
+    width: 90%;
+  }
+
   .title-container {
     font-size: 10em;
   }
@@ -1724,12 +1772,31 @@ section {
   .container {
     left: 1em;
   }
+  @keyframes rise-reveal-title {
+    0% {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(40%);
+    }
+  }
 }
 
 @media (max-width: 1330px) and (max-height: 865px) {
   .title-container {
     margin-top: 0.2em;
     font-size: 8em;
+  }
+}
+
+@media screen and (max-height: 675px) {
+  .industry-text-two-wrapper {
+    font-size: 0.8em;
   }
 }
 

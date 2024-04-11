@@ -2,7 +2,7 @@ import { useProgress } from "@react-three/drei";
 import { useEffect, useState } from "react";
 import { useAppContext } from "../../context/appContext";
 
-export function LoadingScreen({ setShowloadingScreen }) {
+export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
   const [fadeOut, setFadeOut] = useState("");
   const { active, progress, errors, total } = useProgress();
   const { isAstroModelDrawn, setRenderModels, customizeHasRendered } =
@@ -12,7 +12,7 @@ export function LoadingScreen({ setShowloadingScreen }) {
   const height = window.innerHeight * 0.3;
 
   useEffect(() => {
-    if (isAstroModelDrawn) {
+    if (isAstroModelDrawn && !isMobileViewOnly) {
       const renderModels = setTimeout(() => setRenderModels(true), 800);
 
       if (customizeHasRendered) {
@@ -78,7 +78,14 @@ export function LoadingScreen({ setShowloadingScreen }) {
           ))}
         </h1>
       </div>
-
+      {isMobileViewOnly ? (
+        <div
+          style={{ color: "white", width: "50%", fontFamily: "swiss-medium" }}
+        >
+          Our mobile view is currently under maintenance, but you can access our
+          website via desktop or tablet!
+        </div>
+      ) : null}
       {/* <span style={{ color: "black", fontSize: "3em" }}>
         {progress < 100 && !isAstroModelDrawn
           ? `${Math.trunc(progress)} % loaded`
