@@ -2,7 +2,7 @@ import { useProgress } from "@react-three/drei";
 import { useEffect, useState } from "react";
 import { useAppContext } from "../../context/appContext";
 
-export function LoadingScreen({ setloadingScreen }) {
+export function LoadingScreen({ setShowloadingScreen }) {
   const [fadeOut, setFadeOut] = useState("");
   const { active, progress, errors, total } = useProgress();
   const { isAstroModelDrawn, setRenderModels, customizeHasRendered } =
@@ -21,7 +21,7 @@ export function LoadingScreen({ setloadingScreen }) {
           document.body.style.overflowY = "auto";
         }, 100);
         const closeLoadingScreen = setTimeout(
-          () => setloadingScreen(false),
+          () => setShowloadingScreen(false),
           2200
         );
         return () => {

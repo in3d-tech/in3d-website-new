@@ -103,7 +103,7 @@ function SelectedCategoryMobile({ titleKey, astroRef, setMobileBackground }) {
       <div style={{ height: "96vh" }}></div>
       <div
         style={{
-          borderTop: "1px solid rgba(255,255,255, 0.6)",
+          // borderTop: "1px solid rgba(255,255,255, 0.6)",
           height: "20vh",
           marginTop: "2em",
         }}
@@ -145,7 +145,7 @@ const IndustryText = ({ title }) => (
       }}
     >
       <div className="scrolled-category-title" style={{ marginTop: "1em" }}>
-        {title}
+        {title} <span style={{ color: "#750414" }}>4.0</span>
       </div>
       <div className="scrolled-category-text-one" style={{ marginTop: "2em" }}>
         <span>The world was recently</span>
@@ -181,7 +181,8 @@ const MedicineText = ({ title }) => (
     }}
   >
     <div className="scrolled-category-title" style={{ marginTop: "1em" }}>
-      {title}
+      <span style={{ color: "#750414" }}>M</span>
+      {title.substring(1)}
     </div>
     <div className="scrolled-category-text-one" style={{ marginTop: "2em" }}>
       <span>The world of medicine is one</span>
@@ -212,7 +213,10 @@ const MicrosoftText = ({ title }) => (
       border: "1px solid rgba(255,255,255, 0.6)",
     }}
   >
-    <div className="scrolled-category-title">{title}</div>
+    <div className="scrolled-category-title">
+      <span style={{ color: "#750414" }}>M</span>
+      {title.substring(1)}
+    </div>
     <div className="scrolled-category-text-one">
       <span>In3D is the official and inclusive</span>
       <span>Mixed Reality (MR) partner</span>
@@ -244,7 +248,10 @@ export const SecurityText = ({ title }) => (
       height: "80vh",
     }}
   >
-    <div className="scrolled-category-title">{title}</div>
+    <div className="scrolled-category-title">
+      <span style={{ color: "#750414" }}>S</span>
+      {title.substring(1)}
+    </div>
     <div className="scrolled-category-text-one">
       {/* <span>
         Thanks to years of collaboration with defense industries, we gained the
@@ -279,7 +286,10 @@ export const AiText = ({ title }) => (
       height: "80vh",
     }}
   >
-    <div className="scrolled-category-title">{title}</div>
+    <div className="scrolled-category-title">
+      <span style={{ color: "#750414" }}>A</span>
+      {title.substring(1)}
+    </div>
     <div className="scrolled-category-text-one">
       <span>Here is some basic information about our work with AI.</span>
       <span>
@@ -314,7 +324,10 @@ export const MilitaryText = ({ title }) => (
       height: "80vh",
     }}
   >
-    <div className="scrolled-category-title">{title}</div>
+    <div className="scrolled-category-title">
+      <span style={{ color: "#750414" }}>M</span>
+      {title.substring(1)}
+    </div>
     <div className="scrolled-category-text-one">
       <span>Thanks to years of collaboration with defense industries, s</span>
       <span>we gained the needed experience, knowledge and</span>
@@ -348,7 +361,10 @@ export const CustomizationText = ({ title }) => (
       height: "80vh",
     }}
   >
-    <div className="scrolled-category-title">{title}</div>
+    <div className="scrolled-category-title">
+      <span style={{ color: "#750414" }}>C</span>
+      {title.substring(1)}
+    </div>
     <div className="scrolled-category-text-one">
       <span>We specialize in 3D and Extended Reality (EX),</span>
       <span>and as specialists we keep an amazing team of developers,</span>

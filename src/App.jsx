@@ -38,7 +38,7 @@ function App() {
   // } = useTranslation();
   // const [currentLanguage, setCurrentLanguage] = useState(language);
   const [isMobileViewOnly, setIsMobileViewOnly] = useState(null);
-  const [loadingScreen, setloadingScreen] = useState(true);
+  const [showLoadingScreen, setShowloadingScreen] = useState(true);
 
   const { selectedCategory, setIsInstantScroll } = useAppContext();
   const isMobileDimensions = useCheckIsMobileScreen();
@@ -68,9 +68,9 @@ function App() {
 
   return (
     <>
-      {loadingScreen ? (
+      {showLoadingScreen ? (
         <LoadingScreen
-          setloadingScreen={setloadingScreen}
+          setShowloadingScreen={setShowloadingScreen}
           isMobileDimensions={isMobileDimensions}
           setIsMobileViewOnly={setIsMobileViewOnly}
         />

@@ -19,6 +19,8 @@ function HomeScreenMobile() {
     mobileBackground,
     setMobileBackground,
     renderModels,
+    isAstroModelDrawn,
+    setCustomizeHasRendered,
   } = useAppContext();
 
   useEffect(() => {
@@ -39,10 +41,14 @@ function HomeScreenMobile() {
   };
 
   useEffect(() => {
-    if (!renderModels) return;
-
-    if (!startExpandedAnimation) setStartExpandedAnimation(true);
-  }, [renderModels]);
+    if (!isAstroModelDrawn) return;
+    if (!startExpandedAnimation) {
+      setTimeout(() => {
+        setCustomizeHasRendered(true);
+        setStartExpandedAnimation(true);
+      });
+    }
+  }, [isAstroModelDrawn]);
 
   return (
     <>
