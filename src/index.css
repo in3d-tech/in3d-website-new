@@ -1612,6 +1612,9 @@ section {
 }
 
 @media screen and (max-width: 1690px) {
+  .button-ani {
+    font-size: 0.8em;
+  }
   .security-title {
     font-size: 11em;
   }

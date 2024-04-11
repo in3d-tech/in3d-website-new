@@ -371,7 +371,6 @@ export const CustomizationText = ({ textClass, scrollArea, categoriesObj }) => (
     }}
   >
     <div style={{ flex: 1, width: "300px" }}></div>
-
     <div style={{ flex: 1 }}>
       <div
         style={{
