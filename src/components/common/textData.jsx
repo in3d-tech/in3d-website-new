@@ -539,7 +539,7 @@ export const ContactUsText = ({ test }) => {
                       type="text"
                       maxLength={300}
                       style={{
-                        width: "60%",
+                        width: "100%",
                         height: "8em",
                         borderRadius: "12px",
                         opacity: "0.8",
