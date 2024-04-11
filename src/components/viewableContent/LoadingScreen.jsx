@@ -8,10 +8,16 @@ export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
   const { isAstroModelDrawn, setRenderModels, customizeHasRendered } =
     useAppContext();
   const [animationActive, setAnimationActive] = useState(true);
+  const [showLoading, setShowLoading] = useState(true);
 
   const height = window.innerHeight * 0.3;
 
   useEffect(() => {
+    if (isMobileViewOnly && showLoading) {
+      console.log("wassssup");
+      setTimeout(() => setShowLoading(false), 2000);
+    }
+
     if (isAstroModelDrawn && !isMobileViewOnly) {
       const renderModels = setTimeout(() => setRenderModels(true), 800);
 
@@ -62,7 +68,7 @@ export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
           src="/assets/images/in3dlogo.png"
         />
 
-        {isMobileViewOnly ? (
+        {!showLoading ? (
           <div
             style={{
               color: "rgb(255,255,255,0.9)",
@@ -71,6 +77,7 @@ export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
               fontFamily: "swiss-medium",
               marginTop: "18em",
               position: "absolute",
+              animation: "text-reveal 2s ease-in-out forwards",
             }}
           >
             Our mobile view is currently under maintenance, but you can access
