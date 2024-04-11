@@ -190,6 +190,27 @@ export function BackgroundScroll({
       <section id="sectionNine" className="section section-nine"></section>
       <section id="sectionTen" className="section section-ten">
         {<ContactUsText test={true} />}
+        <div
+          style={{
+            color: "white",
+            position: "absolute",
+            fontSize: "0.3em",
+            // width: "80%",
+            fontFamily: "gotham",
+            bottom: "1em",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <div style={{ width: "80%" }}>
+            in3D works according to international quality policies in
+            development and production, information security and privacy
+            security – ISO9001, ISO27001, ISO27701. The company undertakes and
+            complies with legal and privacy requirements, engraves on its banner
+            a high standard of service assembly, while maintaining accuracy,
+            confidentiality and information security.
+          </div>
+        </div>
       </section>
       {scrollArea.currentSection > scrollArea.prevSection ? (
         scrollArea.currentSection == modelAnimationIsHalfWay ? (
