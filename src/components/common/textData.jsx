@@ -19,15 +19,16 @@ export const IndustryText = ({ textClass, scrollArea, categoriesObj }) => (
     >
       <div className="industy-content-wrapper">
         <div className="title-container">
-          <span
-            className="scroll-text-animate"
+          <div
+            className="industry-title scroll-text-animate"
             style={{
               borderBottom: "8px solid white",
+              // fontSize: "1em",
             }}
           >
             {categoriesObj[scrollArea.currentSection]}{" "}
             <span style={{ color: "#750414" }}>4.0</span>
-          </span>
+          </div>
         </div>
 
         <div
@@ -167,13 +168,7 @@ export const MicrosoftText = ({ textClass, scrollArea, categoriesObj }) => (
       // justifyContent: "space-between",
     }}
   >
-    <div
-      style={{
-        fontSize: "10em",
-        textAlign: "center",
-      }}
-      className="scrolled-category-title ai-title-ani"
-    >
+    <div className="microsoft-title scrolled-category-title ai-title-ani">
       <span style={{ color: "#750414" }}>M</span>
       {categoriesObj[scrollArea.currentSection].substring(1)}
     </div>
@@ -307,7 +302,7 @@ export const MilitaryText = ({ textClass, scrollArea, categoriesObj }) => (
     style={{
       height: "80vh",
       width: "50%",
-      top: "14%",
+      top: "10%",
       right: "17%",
       position: "absolute",
       color: "white",
@@ -323,29 +318,15 @@ export const MilitaryText = ({ textClass, scrollArea, categoriesObj }) => (
       {categoriesObj[scrollArea.currentSection].substring(1)}
     </div>
 
-    <div
-      style={{
-        marginTop: "5em",
-        width: "70%",
-        marginLeft: "5em",
-      }}
-      className="scrolled-category-text-one industry-text-one-ani"
-    >
+    <div className="military-text-one-wrapper scrolled-category-text-one industry-text-one-ani">
       <span style={{ color: "#3abce2" }}>
         Part of our vision is to promote innovation, which is a big part of what
         Israel stands for.
       </span>
     </div>
 
-    <div
-      style={{
-        marginTop: "4em",
-        width: "50%",
-        marginLeft: "5em",
-      }}
-      className="scrolled-category-text-two industry-text-two-ani"
-    >
-      <span>
+    <div className="military-text-two-wrapper scrolled-category-text-two industry-text-two-ani">
+      <span className="military-text-two">
         We succeeded in delivering top-of-the-line technology to all of our
         important industries, through development of complex simulators, XR
         platforms, and tailored applications that are now in the service of this

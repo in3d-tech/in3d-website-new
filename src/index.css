@@ -615,6 +615,23 @@ section {
   text-align: left;
 }
 
+.microsoft-title {
+  font-size: 10em;
+  text-align: center;
+}
+
+.military-text-one-wrapper {
+  margin-top: 5em;
+  width: 70%;
+  margin-left: 5em;
+}
+
+.military-text-two-wrapper {
+  margin-top: 4em;
+  width: 60%;
+  margin-left: 5em;
+}
+
 /* taaasia */
 .industry-title-ani {
   animation: move-drop-title 0.8s ease-in forwards;
@@ -1599,7 +1616,11 @@ section {
 }
 
 .military-title {
-  font-size: 13em;
+  font-size: 12em;
+}
+
+.industry-title {
+  font-size: 1em;
 }
 
 .scroll-text-animate-one {
@@ -1618,8 +1639,14 @@ section {
   .security-title {
     font-size: 11em;
   }
+
   .category-title {
     font-size: 0.7em;
+  }
+
+  .scroll-text-animate-one {
+    width: 70%;
+    margin-left: 6em;
   }
 
   .ai-title {
@@ -1631,7 +1658,7 @@ section {
   }
 
   .military-title {
-    font-size: 12em;
+    font-size: 10em;
   }
 
   .category-title:hover {
@@ -1675,7 +1702,7 @@ section {
     font-size: 10em;
   }
   .scrolled-category-title {
-    font-size: 3.5em;
+    font-size: 8.5em;
   }
 
   .ai-title {
@@ -1683,7 +1710,7 @@ section {
   }
 
   .military-title {
-    font-size: 10em;
+    font-size: 9em;
   }
 
   .category-title {
@@ -1745,16 +1772,44 @@ section {
     margin-top: 0.2em;
     font-size: 10em;
   }
-  .industry-text-two-wrapper {
-    margin-left: 6.5em;
-    margin-top: 1.5em;
+
+  .military-text-one-wrapper {
+    margin-top: 3em;
   }
+
+  .military-text-two-wrapper {
+    margin-top: 3em;
+  }
+
+  .military-text-two {
+    font-size: 1em;
+  }
+
+  .scrolled-category-title {
+    font-size: 7.5em;
+  }
+
+  .industry-title {
+    font-size: 1em;
+  }
+
+  .industry-text-two-wrapper {
+    margin-left: 2em;
+    margin-top: 1.5em;
+    font-size: 0.8em;
+  }
+
+  .scroll-text-animate-one {
+    width: 70%;
+    margin-left: 2em;
+  }
+
   .category-title {
     font-size: 0.7em;
   }
 
   .ai-title {
-    font-size: 7em;
+    font-size: 6em;
   }
 
   .text-animate {
@@ -1762,7 +1817,7 @@ section {
   }
 
   .military-title {
-    font-size: 12em;
+    font-size: 10em;
   }
 
   .category-title:hover {
