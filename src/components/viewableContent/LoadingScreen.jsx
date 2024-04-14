@@ -126,7 +126,10 @@ export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
             our website via desktop or tablet!
           </div>
         ) : (
-          <h1 className="loading-header">
+          <h1
+            className="loading-header"
+            style={{ color: `${sparklesColours[sparklesColorIndex]}` }}
+          >
             {["l", "o", "a", "d", "i", "n", "g"].map((letter, index) => (
               <span
                 key={index}
