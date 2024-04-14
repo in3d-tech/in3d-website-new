@@ -522,13 +522,23 @@ section {
   }
 }
 
-.scaleEffect {
+.bg-scale-effect {
   background: url("/assets/images/backgrounds/moving-bg.jpg");
   height: 100%;
   width: 100%;
   position: absolute;
   opacity: 0.5;
   animation: scaleUpDown 20s infinite ease-in-out;
+  background-size: cover;
+}
+
+.scale-effect {
+  background: url("/assets/images/backgrounds/moving-bg.jpg");
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  opacity: 0.6;
+  animation: scaleUpDown 14s infinite ease-in-out;
   background-size: cover;
 }
 
@@ -766,7 +776,10 @@ section {
 }
 
 .flashing-div {
-  background: url("/assets/images/backgrounds/medicine/medicine_bg.jpg");
+  /* background: url("/assets/images/backgrounds/medicine/medicine_bg.jspg"); */
+  /* background: #750414; */
+  background: rgb(31, 66, 98);
+  /* background: url("/assets/images/backgrounds/Astro_1_Background.webp"); */
   /* no-repeat center; */
   position: fixed;
   /* background: black; */
@@ -790,7 +803,9 @@ section {
 
 .flashing-img {
   /* animation: flash 2s infinite; Adjust duration as needed */
+
   opacity: 0.85;
+  /* border: 1px solid yellow; */
 }
 
 .magnifying-glass {

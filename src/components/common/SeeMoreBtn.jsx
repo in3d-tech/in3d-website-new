@@ -144,7 +144,7 @@ export const SeeMoreBtn = () => {
           </>
         )}
       </span>
-      <button className="see-more-btn">See More</button>
+      <button className="see-more-btn">Learn More</button>
     </div>
   );
 };

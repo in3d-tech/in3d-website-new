@@ -31,7 +31,7 @@ export function BackgroundScroll({
     "industry",
     "medicine",
     "microsoft",
-    "security",
+    "homeland security",
     "artificalIntelligence",
     "military",
     "customization",
@@ -152,7 +152,6 @@ export function BackgroundScroll({
                   //   'url("/assets/images/backgrounds/taasia/taasia_bg.jpg")'
                   // );
                   // setHovered("taasia");
-                  console.log({ title });
                   setTitleOnMainPageHovered(title);
                 }}
                 onMouseOut={() => {

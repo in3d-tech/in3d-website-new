@@ -1,18 +1,22 @@
-import { useProgress } from "@react-three/drei";
-import { useEffect, useState } from "react";
+import { Sparkles, useGLTF, useProgress } from "@react-three/drei";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { useAppContext } from "../../context/appContext";
+import { Canvas } from "@react-three/fiber";
+// import { useGLTFAnimations } from "../scene/ModelComponent";
+// import * as THREE from "three";
 
 export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
   const [fadeOut, setFadeOut] = useState("");
-  const { active, progress, errors, total } = useProgress();
   const { isAstroModelDrawn, setRenderModels, customizeHasRendered } =
     useAppContext();
   const [animationActive, setAnimationActive] = useState(true);
   const [showLoading, setShowLoading] = useState(true);
+  const [sparklesColorIndex, setSparklesColorIndex] = useState(0);
 
   const height = window.innerHeight * 0.3;
 
   useEffect(() => {
+    // return;
     if (isMobileViewOnly && showLoading) {
       console.log("wassssup");
       setTimeout(() => setShowLoading(false), 2000);
@@ -43,8 +47,31 @@ export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
     }
   }, [isAstroModelDrawn, customizeHasRendered]);
 
+  const sparklesColours = [
+    "#0DA888", //"#CF9FFF",
+    "#3DE9D9",
+    "#CF9FFF",
+    "#995812",
+    "#3DE7E9",
+    "#467B3F",
+    "#F0CF5E",
+  ];
+
+  useEffect(() => {
+    // Color switching interval
+    const colorSwitchInterval = setInterval(() => {
+      setSparklesColorIndex(
+        (prevIndex) => (prevIndex + 1) % sparklesColours.length
+      );
+    }, 3000);
+
+    // Clear interval on component unmount
+    return () => clearInterval(colorSwitchInterval);
+  }, []);
+
   return (
     <div className={`flashing-div ${fadeOut}`}>
+      <div className="scale-effect"></div>
       <div
         style={{
           // border: "1px solid cyan",
@@ -55,17 +82,32 @@ export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
+          // border: "1px solid red",
         }}
       >
+        <Canvas
+          style={{
+            width: "100vw",
+            height: "100vh",
+            position: "absolute",
+          }}
+        >
+          <ambientLight intensity={2} />
+          <Suspense fallback={null}>
+            <Sparkles
+              count={500}
+              scale={10}
+              size={2.5}
+              color={sparklesColours[sparklesColorIndex]}
+            />
+          </Suspense>
+        </Canvas>
         <img
           className="flashing-img"
           style={{
             height: height,
-            // width: height + 300,
-            borderRadius: "50%",
-            // border: "1px solid yellow",
           }}
-          src="/assets/images/in3dlogo.png"
+          src="/assets/images/in3d-logo-white.png"
         />
 
         {!showLoading ? (
@@ -91,11 +133,6 @@ export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
                 className={`loading-span let${
                   animationActive ? index + 1 : ""
                 }`}
-                // className={
-                //   fadeOut == "flashing-fade-out"
-                //     ? "tester"
-                //     : `loading-span let${index + 1}`
-                // }
               >
                 {letter}
               </span>
@@ -103,33 +140,16 @@ export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
           </h1>
         )}
       </div>
-      {/* {isMobileViewOnly ? (
-        <div
-          style={{
-            color: "rgb(255,255,255,0.9)",
-            width: "70%",
-            fontFamily: "swiss-medium",
-          }}
-        >
-          Our mobile view is currently under maintenance, but you can access our
-          website via desktop or tablet!
-        </div>
-      ) : null} */}
-      {/* <span style={{ color: "black", fontSize: "3em" }}>
-        {progress < 100 && !isAstroModelDrawn
-          ? `${Math.trunc(progress)} % loaded`
-          : null}
-      </span> */}
     </div>
   );
 }
 
-export const LoaderComponent = () => {
-  return (
-    <span style={{ color: "black", fontSize: "1.5em", fontFamily: "gotham" }}>
-      {progress < 100 && !isAstroModelDrawn
-        ? `${Math.trunc(progress)} % loaded`
-        : null}
-    </span>
-  );
-};
+// export const LoaderComponent = () => {
+//   return (
+//     <span style={{ color: "black", fontSize: "1.5em", fontFamily: "gotham" }}>
+//       {progress < 100 && !isAstroModelDrawn
+//         ? `${Math.trunc(progress)} % loaded`
+//         : null}
+//     </span>
+//   );
+// };

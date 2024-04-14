@@ -69,7 +69,7 @@ export function AstroModel({
         end: "bottom bottom",
         scrub: 1,
         preventOverlaps: isInstantScroll ? true : false,
-        // fastScrollEnd: true, // 2250,
+        // fastScrollEnd: false, // 2250,
         // markers: true,
         onEnter: () => {
           // if (!visibleModels.length) setVisibleModels(true);
@@ -132,6 +132,7 @@ export function AstroModel({
     if (customizeRef.current) {
       let contactUsTimeline = gsap.timeline({
         defaults: { ease: "power1.out" },
+        preventOverlaps: isInstantScroll ? true : false,
         scrollTrigger: {
           trigger: ".section-ten",
           start: "top bottom",

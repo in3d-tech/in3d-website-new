@@ -34,9 +34,9 @@ function MappedModels({
   const isCustomizedRendered = useRef(false);
 
   useFrame(() => {
-    if (idx == 0) {
+    if (idx == 0 && !isCustomizedRendered.current) {
       // Check if the object is visible in the scene and loaded - not working
-      if (currentRef.current && scene && !isCustomizedRendered.current) {
+      if (currentRef.current && scene) {
         // Check if all objects in the scene have been rendered - not working
         const fullyRendered = scene.children.every((child) => child.visible);
         if (fullyRendered && active === false && scene) {
@@ -85,20 +85,20 @@ function MappedModels({
 
     model.timeline(timeline, currentRef, prevRef);
 
-    timeline.eventCallback("onUpdate", () => {
-      // Calculate the current progress of the animation
-      const currentProgress = timeline.progress();
-      // console.log({ currentProgress });
+    // timeline.eventCallback("onUpdate", () => {
+    //   // Calculate the current progress of the animation
+    //   const currentProgress = timeline.progress();
+    //   // console.log({ currentProgress });
 
-      // Check if the halfway point has not been reached and if we are past halfway
-      if (!halfwayReachedForward && currentProgress >= 0.5) {
-        // Set the flag to true to indicate that halfway point has been reached
-        halfwayReachedForward = true;
+    //   // Check if the halfway point has not been reached and if we are past halfway
+    //   if (!halfwayReachedForward && currentProgress >= 0.5) {
+    //     // Set the flag to true to indicate that halfway point has been reached
+    //     halfwayReachedForward = true;
 
-        // Call your function to set state or perform any other action
-        handleHalfwayPoint();
-      }
-    });
+    //     // Call your function to set state or perform any other action
+    //     handleHalfwayPoint();
+    //   }
+    // });
 
     // this second trigger is for timing the text animation with the model movement
     gsap.to(`.${model.section}`, {
@@ -109,7 +109,6 @@ function MappedModels({
         // markers: true,
 
         onEnter: () => {
-          console.log("onEnter animation");
           setModelAnimationIsHalfWay(idx + 2); // (+ 1 because only starts effect scrollSection 1)
         },
       },
@@ -121,7 +120,7 @@ function MappedModels({
   }, [currentRef, isInstantScroll]);
 
   function handleHalfwayPoint() {
-    console.log("Halfway point reached!");
+    // console.log("Halfway point reached!");
   }
 
   return (

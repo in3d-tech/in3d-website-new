@@ -63,7 +63,7 @@ export const Model_Data = [
   // MICROSOFT
 
   {
-    url: "/assets/models/microsoft_model_new.glb",
+    url: "/assets/models/microsoft_model.glb",
     refs: ["medicine", "microsoft"],
     section: "section-five",
     onEnter: {
@@ -79,9 +79,14 @@ export const Model_Data = [
       tl
         ?.to(
           currentRef.current.position,
-          { y: -4, x: 3.5, z: 0.3 },
+          { y: -4.2, x: 3.5, z: 0.4 },
           "simultaneously"
         )
+        // ?.to(
+        //   currentRef.current.position,
+        //   { y: -4, x: 3.5, z: 0.3 },
+        //   "simultaneously"
+        // )
         .to(currentRef.current.rotation, { y: -0.9 }, "simultaneously")
         .to(prevRef.current.position, { y: -8, x: -12 }, "simultaneously")
         .to(prevRef.current.rotation, { y: -0.4 }, "simultaneously"),

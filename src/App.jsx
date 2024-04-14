@@ -63,7 +63,7 @@ function App() {
         element.scrollIntoView(); // { behavior: "smooth" }
       }
       setIsInstantScroll(false);
-    }, 200);
+    }, 220);
   };
 
   return (
@@ -109,7 +109,7 @@ useGLTF.preload("/assets/models/engenir_model.glb");
 function ViewableContent() {
   return (
     <div className="viewable-content-wrapper">
-      <div className="scaleEffect"></div>
+      <div className="bg-scale-effect"></div>
     </div>
   );
 }
