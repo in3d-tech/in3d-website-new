@@ -23,7 +23,7 @@ export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
     }
 
     if (isAstroModelDrawn && !isMobileViewOnly) {
-      const renderModels = setTimeout(() => setRenderModels(true), 800);
+      const renderModels = setTimeout(() => setRenderModels(true), 1000);
 
       if (customizeHasRendered) {
         const fadeOut = setTimeout(() => {
@@ -95,7 +95,7 @@ export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
           <ambientLight intensity={2} />
           <Suspense fallback={null}>
             <Sparkles
-              count={500}
+              count={400}
               scale={10}
               size={2.5}
               color={sparklesColours[sparklesColorIndex]}

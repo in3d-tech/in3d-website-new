@@ -289,9 +289,9 @@ body {
   position: absolute;
   left: 25%;
   top: 50%;
-  width: 32px;
-  height: 3px;
-  background-color: black;
+  width: 36px;
+  height: 4px;
+  background-color: #750414;
   transition: all 400ms cubic-bezier(0.84, 0.06, 0.52, 1.8);
 }
 
@@ -307,15 +307,15 @@ body {
 
 .hamburger-icon {
   position: absolute;
-  height: 60px;
-  width: 60px;
-  top: 3em;
-  right: 3%;
+  height: 70px;
+  width: 70px;
+  top: 5em;
+  right: 5em;
   z-index: 1000;
   cursor: pointer;
   border-radius: 50%;
   transition: all 0.2s ease-in-out;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.7);
 
   &:hover {
     transform: scale(1.2);
@@ -357,8 +357,8 @@ nav {
   position: absolute;
   top: 0;
   right: 0;
-  height: 100%;
-  width: 0%;
+  /* height: 100%;
+  width: 0%; */
   z-index: 10;
   opacity: 0;
   display: flex;
@@ -385,9 +385,11 @@ nav {
 }
 
 nav.show {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
+  border: 1px solid red;
   opacity: 1;
+
   /* background: rgb(207, 210, 164, 0.5); */
 }
 
@@ -615,6 +617,10 @@ section {
   border-bottom: 5px solid white;
 }
 
+.ai-text-margin-top {
+  margin-top: 8em;
+}
+
 .medicine-title {
   font-size: 12em;
   text-align: center;
@@ -626,7 +632,7 @@ section {
 }
 
 .microsoft-title {
-  font-size: 10em;
+  font-size: 13em;
   text-align: center;
 }
 
@@ -640,6 +646,18 @@ section {
   margin-top: 4em;
   width: 60%;
   margin-left: 5em;
+}
+
+.microsoft-text-two-placemenet {
+  width: 50%;
+  margin-top: 20em;
+  font-size: 1.2em;
+}
+
+.customization-text-one-spacing {
+  width: 38%;
+  height: 30%;
+  margin-top: 10em;
 }
 
 /* taaasia */
@@ -959,6 +977,7 @@ section {
   grid-template-areas:
     "title1 title2 title3"
     "title4 title5 title6";
+
   gap: 10px;
   justify-items: center; /* Center the titles horizontally */
   align-items: center; /* Center the titles vertically */
@@ -1077,6 +1096,15 @@ section {
   font-size: 0.5em;
   color: rgb(255, 255, 255, 0.9);
   margin-top: 3em;
+}
+
+.contact-us-text-area {
+  width: 100%;
+  height: 8em;
+  border-radius: 12px;
+  opacity: 0.8;
+  padding: 15px;
+  font-size: 1em;
 }
 
 .overlay-test {
@@ -1288,14 +1316,12 @@ section {
 .scroll-text-animate-one {
   font-family: gotham;
   padding: 2px;
-  width: 75%;
   text-align: center;
-  margin-left: 6em;
   position: relative;
   opacity: 0;
   animation: text-reveal 0.6s ease-in-out forwards;
   animation-delay: 0.6s;
-  transform: translateY(-100%);
+  color: #3abce2;
 }
 
 .scroll-text-animate-two {
@@ -1655,6 +1681,10 @@ section {
     font-size: 11em;
   }
 
+  .microsoft-title {
+    font-size: 12em;
+  }
+
   .category-title {
     font-size: 0.7em;
   }
@@ -1668,8 +1698,16 @@ section {
     font-size: 7em;
   }
 
+  .ai-text-margin-top {
+    margin-top: 6em;
+  }
+
   .text-animate {
     font-size: 1.4em;
+  }
+
+  .medicine-title {
+    font-size: 11em;
   }
 
   .military-title {
@@ -1684,6 +1722,17 @@ section {
   .scrolled-category-text-one-new {
     font-size: 1.6em;
   }
+
+  .microsoft-text-two-placemenet {
+    margin-top: 17em;
+    font-size: 1em;
+  }
+
+  .customization-text-one-spacing {
+    width: 48%;
+    margin-top: 8em;
+  }
+
   @keyframes text-reveal-title {
     0% {
       opacity: 0;
@@ -1697,10 +1746,19 @@ section {
       transform: translateY(30%);
     }
   }
+
+  .contact-us-text-area {
+    height: 6em;
+  }
+
+  /* .title-container {
+    font-size: 1em;
+  } */
 }
 
 .contact-details-wrapper {
-  margin-top: 1em;
+  margin-top: 0em;
+  font-size: 0.48em;
 }
 
 /* med displays:  */
@@ -1722,6 +1780,14 @@ section {
 
   .ai-title {
     font-size: 6em;
+  }
+
+  .medicine-title {
+    font-size: 10.5em;
+  }
+
+  .microsoft-title {
+    font-size: 11em;
   }
 
   .military-title {
@@ -1780,12 +1846,24 @@ section {
     -webkit-box-shadow: 1px -1px 26px 7px rgba(130, 49, 49, 0.75);
     -moz-box-shadow: 1px -1px 26px 7px rgba(130, 49, 49, 0.75); */
   }
+
+  .contact-details-wrapper {
+    font-size: 0.43em;
+  }
 }
 
 @media (max-width: 1690px) and (max-height: 850px) {
   .title-container {
     margin-top: 0.2em;
     font-size: 10em;
+  }
+
+  .medicine-title {
+    font-size: 10em;
+  }
+
+  .microsoft-title {
+    font-size: 10.5em;
   }
 
   .military-text-one-wrapper {
@@ -1808,6 +1886,10 @@ section {
     font-size: 1em;
   }
 
+  .ai-text-margin-top {
+    margin-top: 5em;
+  }
+
   .industry-text-two-wrapper {
     margin-left: 2em;
     margin-top: 1.5em;
@@ -1824,7 +1906,7 @@ section {
   }
 
   .ai-title {
-    font-size: 6em;
+    font-size: 5.5em;
   }
 
   .text-animate {
@@ -1877,25 +1959,3 @@ section {
 /* small displays */
 @media screen and (max-width: 768px) {
 }
-
-/* .scrolled-category-title {
-  font-size: 4em;
-  font-family: gotham-bold;
-}
-
-.scrolled-category-text-one {
-  margin-top: 3em;
-  font-size: 2em;
-  line-height: 1.2em;
-  font-weight: bold;
-  display: flex;
-  flex-direction: column;
-}
-
-.scrolled-category-text-two {
-  margin-top: 1em;
-  font-size: 1.5em;
-  line-height: 1.2em;
-  display: flex;
-  flex-direction: column;
-} */

@@ -1,7 +1,11 @@
 import { Suspense, lazy, useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { AstroModel } from "../../components/scene/ModelComponent";
-import { CUSTOMIZATION, Model_Data } from "../../components/common/modelData";
+import {
+  ASTRO,
+  CUSTOMIZATION,
+  Model_Data,
+} from "../../components/common/modelData";
 
 import {
   IndustryText,
@@ -271,7 +275,13 @@ function Scene({ scrollToElementById }) {
 
           {
             <ambientLight
-              intensity={scrollArea?.currentSection == CUSTOMIZATION ? 2 : 0.2}
+              intensity={
+                scrollArea?.currentSection == CUSTOMIZATION
+                  ? 2
+                  : scrollArea.currentSection == ASTRO
+                  ? 0.2
+                  : 1
+              }
             />
           }
           {customizeHasRendered ? (

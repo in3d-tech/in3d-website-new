@@ -1,3 +1,12 @@
+export const ASTRO = 1;
+export const INDUSTRY = 2;
+export const MEDICINE = 3;
+export const MICROSOFT = 4;
+export const SECURITY = 5;
+export const AI = 6;
+export const MILITARY = 7;
+export const CUSTOMIZATION = 8;
+
 export const Model_Data = [
   // TAASIA
 
@@ -73,13 +82,13 @@ export const Model_Data = [
     onLeave: { currentSection: 3, prevSection: 4 },
     scale: [3, 3, 3],
 
-    position: [10, -9, -0.2],
+    position: [13, -9, -0.2],
     rotation: [0, 0.9, 0],
     timeline: (tl, currentRef, prevRef) =>
       tl
         ?.to(
           currentRef.current.position,
-          { y: -4.2, x: 3.5, z: 0.4 },
+          { y: -4, x: 1, z: -0.2 },
           "simultaneously"
         )
         // ?.to(
@@ -113,7 +122,7 @@ export const Model_Data = [
           "simultaneously"
         )
         .to(currentRef.current.rotation, { y: Math.PI + 1.3 }, "simultaneously")
-        .to(prevRef.current.position, { x: 10.5 }, "simultaneously")
+        .to(prevRef.current.position, { x: 13 }, "simultaneously")
         .to(prevRef.current.rotation, { y: 0.9 }, "simultaneously"),
   },
 
@@ -216,11 +225,3 @@ export const Model_Data = [
         .to(prevRef.current.rotation, { y: -2.2 }, "simultaneously"),
   },
 ];
-
-export const INDUSTRY = 2;
-export const MEDICINE = 3;
-export const MICROSOFT = 4;
-export const SECURITY = 5;
-export const AI = 6;
-export const MILITARY = 7;
-export const CUSTOMIZATION = 8;

@@ -52,15 +52,15 @@ export const IndustryText = ({ textClass, scrollArea, categoriesObj }) => (
           >
             <div
               className="scrolled-category-text-one"
-              style={{ width: "100%", marginTop: 0 }}
+              style={{ marginTop: 0 }}
             >
               <span
                 className="scroll-text-animate-one"
                 style={{
                   fontSize: "0.7em",
                   textAlign: "initial",
-                  color: "#3abce2",
                   fontStyle: "italic",
+                  width: "70%",
                 }}
               >
                 The world was recently introduced to the wonders of the industry
@@ -151,53 +151,71 @@ export const MedicineText = ({ textClass, scrollArea, categoriesObj }) => (
 );
 
 export const MicrosoftText = ({ textClass, scrollArea, categoriesObj }) => (
-  <div
-    className={`fader ${textClass}`}
-    style={{
-      height: "80vh",
-      width: "34%",
-      top: "20%",
-      left: "14%",
-      position: "absolute",
-      color: "white",
-      // fontSize: "3em",
-      fontFamily: "gotham",
-      display: "flex",
-      flexDirection: "column",
-      animation: "text-reveal 0.6s ease-in-out forwards",
-      // justifyContent: "space-between",
-    }}
-  >
-    <div className="microsoft-title scrolled-category-title ai-title-ani">
-      <span style={{ color: "#750414" }}>M</span>
-      {categoriesObj[scrollArea.currentSection].substring(1)}
+  <>
+    <div
+      className={`fader ${textClass}`}
+      style={{
+        position: "absolute",
+        width: "100vw",
+        color: "white",
+        fontFamily: "gotham",
+        height: "100%",
+      }}
+    >
+      <div className="microsoft-title ai-title-ani">
+        <span style={{ color: "#750414" }}>M</span>
+        {categoriesObj[scrollArea.currentSection].substring(1)}
+      </div>
     </div>
-    <div style={{ marginTop: "5em" }} className="scrolled-category-text-one">
-      <span>
-        In3D is the official and the inclusive Mixed Reality (MR) partner of
-        Microsoft Israel
-      </span>
+
+    <div
+      style={{
+        display: "flex",
+        height: "100%",
+        position: "absolute",
+        zIndex: 1,
+      }}
+    >
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+        className="scrolled-category-text-one"
+      >
+        <span style={{ color: "#3abce2", width: "40%" }}>
+          In3D is the official and the inclusive Mixed Reality (MR) partner of
+          Microsoft Israel
+        </span>
+      </div>
+
+      <div
+        className="scrolled-category-text-two"
+        style={{
+          flex: 1,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <span className="microsoft-text-two-placemenet">
+          In3D and Microsoft&#39;s teams share a strong connection and a
+          combined vison on the important roles of MR technology.
+        </span>
+      </div>
     </div>
-    <div className="scrolled-category-text-two">
-      <span>
-        In3D and Microsoft&#39;s teams share a strong connection and a combined
-        vison on the important roles of MR technology.
-      </span>
-    </div>
-  </div>
+  </>
 );
 
 export const SecurityText = ({ textClass, scrollArea, categoriesObj }) => (
   <div
     className={`fader ${textClass}`}
     style={{
-      // right: "4%",
       position: "absolute",
       color: "white",
-      // fontSize: "3em",
       fontFamily: "gotham",
-      // display: "flex",
-      // flexDirection: "column",
     }}
   >
     <div className="security-title security-title-ani">
@@ -244,7 +262,7 @@ export const AiText = ({ textClass, scrollArea, categoriesObj }) => (
     style={{
       height: "80vh",
       width: "40%",
-      top: "14%",
+      top: "12%",
       left: "10%",
       position: "absolute",
       color: "white",
@@ -252,7 +270,7 @@ export const AiText = ({ textClass, scrollArea, categoriesObj }) => (
       fontFamily: "gotham",
       display: "flex",
       flexDirection: "column",
-      zIndex: -1232,
+      zIndex: -1,
       // justifyContent: "space-between",\
     }}
   >
@@ -270,10 +288,7 @@ export const AiText = ({ textClass, scrollArea, categoriesObj }) => (
       {/* {categoriesObj[scrollArea.currentSection].substring(1)} */}
     </div>
 
-    <div
-      style={{ marginTop: "8em" }}
-      className="scrolled-category-text-two ai-text-two-ani"
-    >
+    <div className="ai-text-margin-top scrolled-category-text-two ai-text-two-ani">
       <span>
         The combination of a 3D XR software environment with A.I creates not
         only an advanced and innovative hardware and software operation but a
@@ -374,15 +389,7 @@ export const CustomizationText = ({ textClass, scrollArea, categoriesObj }) => (
           flexDirection: "column",
         }}
       >
-        <div
-          style={{
-            width: "38%",
-            height: "30%",
-            marginTop: "10em",
-            display: "flex",
-          }}
-          className="scrolled-category-text-two"
-        >
+        <div className="customization-text-one-spacing scrolled-category-text-two">
           <span style={{ fontSize: "1.1em" }}>
             As specialists we keep an amazing team of developers, 3D
             generalists, interface and graphics artists, and product designers
@@ -418,8 +425,12 @@ export const ContactUsText = ({ test }) => {
   };
 
   const handleSendMessage = (e) => {
-    setTimeout(() => setShowTextBox(false), 200);
-    setTimeout(() => setShowSentStatus(true), 200);
+    setTimeout(() => {
+      setShowTextBox(false);
+      setShowSentStatus(true);
+      setTextAreaInput("");
+    }, 200);
+
     setTimeout(() => setShowSentStatus(null), 3000);
   };
 
@@ -519,14 +530,7 @@ export const ContactUsText = ({ test }) => {
                       placeholder="Type your message here..."
                       type="text"
                       maxLength={300}
-                      style={{
-                        width: "100%",
-                        height: "8em",
-                        borderRadius: "12px",
-                        opacity: "0.8",
-                        padding: "15px",
-                        fontSize: "1em",
-                      }}
+                      className="contact-us-text-area"
                       onChange={(e) => {
                         let inputValue = e.target.value;
                         if (inputValue.length > 0) {
