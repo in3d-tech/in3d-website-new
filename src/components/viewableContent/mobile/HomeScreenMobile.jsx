@@ -299,7 +299,7 @@ export function AstroModel({ url, astroRef, setTextAnimation }) {
         object={scene}
         dispose={null}
         scale={[1, 1, 1]}
-        position={[-3.75, -5, -0.1]}
+        position={[-3.75, -5, -0.5]}
         rotation={[0.54, Math.PI - 0.35, 0]}
       />
     </group>

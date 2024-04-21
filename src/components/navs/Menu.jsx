@@ -10,7 +10,7 @@ export const Header = () => {
 
   const toggleNav = () => {
     setMenuOpened(!menuOpened);
-    setIsHovered(null);
+    setIsHovered(false);
 
     if (selectedCategory) {
       setTimeout(() => setSelectedCategory(null), 300);
@@ -22,59 +22,54 @@ export const Header = () => {
     { key: 2, title: "Medicine" },
     { key: 3, title: "Microsoft" },
     { key: 4, title: "Security" },
+    { key: 5, title: "Artifical Intelligence" },
     { key: 7, title: "Customization" },
     { key: 6, title: "Military" },
-    { key: 8, title: "" },
-    { key: 5, title: "Artifical Intelligence" },
+    // { key: 8, title: "" },
+    { key: 8, title: "About" },
   ];
 
   const getbgImage = () => {
-    if (!hovered)
-      return {
-        background: "url(/assets/images/backgrounds/medicine/medicine_bg.jpg)",
-      }; //{ animation: "zoomInBack 0.6s ease-out forwards" };
-    const baseStyles = {
-      // animation: "zoomOut 0.6s ease-out forwards",
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
-      transition: "background-image 0.8s ease",
-      background: "black",
-    };
     let url;
 
     switch (hovered) {
       case "Customization":
-        url =
-          "/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png";
+        url = "/assets/images/backgrounds/customize/Customize_Togle_Finish.jpg";
         break;
       case "Artifical Intelligence":
-        url = "/assets/images/backgrounds/ai/ai_bg.png";
+        url = "/assets/images/backgrounds/ai/Ai_Tugle_Finish.jpg";
         break;
       case "Microsoft":
-        url = "/assets/images/backgrounds/microsoft/microsoft_bg.jpg";
+        url = "/assets/images/backgrounds/microsoft/Microsoft_Tugle.jpg";
         break;
       case "Military":
-        url = "/assets/images/backgrounds/military/military_bg.jpg";
+        url = "/assets/images/backgrounds/military/Militery_Togle_Finish2.jpg";
         break;
       case "Security":
-        url = "/assets/images/backgrounds/security/security.jpg";
+        url = "/assets/images/backgrounds/security/Security_Togle_Finish2.jpg";
         break;
       case "Industry":
-        url = "/assets/images/backgrounds/taasia/taasia_bg.jpg";
+        url = "/assets/images/backgrounds/taasia/Industry_Togle.jpg";
         break;
       case "Medicine":
-        url = "/assets/images/backgrounds/medicine/medicine_bg.jpg";
+        url = "/assets/images/backgrounds/medicine/Medical_Togle.jpg";
         break;
 
       default:
-        url = "/assets/images/backgrounds/medicine/medicine_bg.jpg";
+        url = "";
         break;
     }
 
     return {
-      ...baseStyles,
+      position: "absolute",
       backgroundImage: `url(${url}`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+      width: "100%",
+      height: "100%",
+      animation: "zoomOutImg 1.8s ease-out forwards",
+      zIndex: 0,
     };
   };
 
@@ -82,7 +77,7 @@ export const Header = () => {
     if (menuOpened) {
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "auto";
+      document.body.style.overflowY = "auto";
     }
   }, [menuOpened]);
 
@@ -96,9 +91,24 @@ export const Header = () => {
         <div className="clear"></div>
       </div>
 
-      <nav id="nav" className={menuOpened ? "show" : ""} style={getbgImage()}>
+      <nav
+        id="nav"
+        className={menuOpened ? "show" : { opacity: 0 }}
+        // style={getbgImage()}
+      >
+        {hovered ? (
+          <div style={getbgImage()}></div>
+        ) : (
+          <div className="scale-effect num2"></div>
+        )}
+
+        <div className="h-nav-in3d-icon for-menu">
+          <img
+            className="in3d-fixed-logo"
+            src="/assets/images/in3d-logo-white.png"
+          />
+        </div>
         <div className="horizontal-nav-open-titles-container">
-          {/* <ul> */}
           {topics.map((topic, idx) => (
             <MagnifyingGlass
               title={topic.title}
@@ -107,10 +117,33 @@ export const Header = () => {
               toggleNav={toggleNav}
               hovered={hovered}
               setSelectedCategory={setSelectedCategory}
-              // delay={idx == 0 ? 1.3 : idx * 0.5}
             />
           ))}
-          {/* </ul> */}
+        </div>
+        <div
+          style={{
+            // borderBottom: "4px solid rgb(117, 4, 20, 0.6)",
+            borderTop: "1px solid rgb(255,255,255,0.6)",
+            position: "absolute",
+            width: "100%",
+            // height: "100px",
+            padding: "1em",
+            bottom: "6em",
+            display: "flex",
+            justifyContent: "space-evenly",
+          }}
+        >
+          {/* <div
+            style={{
+              color: "white",
+              fontSize: "3em",
+              fontFamily: "gotham-old",
+            }}
+          >
+            Contact Us
+          </div>
+          <div style={{ color: "white", fontSize: "3em" }}>set 2</div>
+          <div style={{ color: "white", fontSize: "3em" }}>set3</div> */}
         </div>
       </nav>
 

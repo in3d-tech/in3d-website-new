@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { extend } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
-// import { Header } from "./components/navs/Menu";
+import { Header } from "./components/navs/Menu";
 import { LoadingScreen } from "./components/viewableContent/LoadingScreen";
 import { useAppContext } from "./context/appContext";
 import useCheckIsMobileScreen from "./components/common/useCheckIsMobile";
@@ -80,7 +80,7 @@ function App() {
         currentLanguage={currentLanguage}
       /> */}
       <div className="app-bg">
-        {/* <Header /> */}
+        <Header />
         <Suspense fallback={null}>
           {selectedCategory ? <LazySelectedContent /> : null}
         </Suspense>

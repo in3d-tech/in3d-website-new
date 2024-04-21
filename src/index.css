@@ -4,6 +4,11 @@
 }
 
 @font-face {
+  font-family: gotham-old;
+  src: url("../src/fonts/GothamLight.ttf");
+}
+
+@font-face {
   font-family: swiss-medium;
   src: url("../src/fonts/Swiss 721 Medium.otf");
 }
@@ -84,6 +89,12 @@ body {
   top: 3.5em;
   left: 3em;
   z-index: 1;
+}
+
+.for-menu {
+  animation: slideUpIcon 1s ease-in-out forwards;
+
+  z-index: 5654654;
 }
 
 .h-nav-in3d-icon:hover {
@@ -291,7 +302,7 @@ body {
   top: 50%;
   width: 36px;
   height: 4px;
-  background-color: #750414;
+  background-color: #ffffff;
   transition: all 400ms cubic-bezier(0.84, 0.06, 0.52, 1.8);
 }
 
@@ -315,7 +326,7 @@ body {
   cursor: pointer;
   border-radius: 50%;
   transition: all 0.2s ease-in-out;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(255, 255, 255, 0.1);
 
   &:hover {
     transform: scale(1.2);
@@ -350,13 +361,16 @@ body {
 }
 
 nav {
-  background: rgb(0, 0, 0);
+  background: url("/assets/images/backgrounds/Astro_1_Background.webp")
+    no-repeat;
+  background-size: cover;
+
   /* background: url("/assets/images/backgrounds/medicine/medicine_bg.jpg") cover
     no-repeat center; */
-
   position: absolute;
+
   top: 0;
-  right: 0;
+  left: 0;
   /* height: 100%;
   width: 0%; */
   z-index: 10;
@@ -364,9 +378,9 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 600ms cubic-bezier(0.62, 0.04, 0.3, 1.56);
-
-  transition-delay: 100ms;
+  /* transition: 600ms cubic-bezier(0.62, 0.04, 0.3, 1.56); */
+  /* transition: all 600ms cubic-bezier(0.62, 0.04, 0.3, 1.56);
+  /* transition-delay: 200ms; */
   /* ul {
     margin: 0;
     position: absolute;
@@ -387,8 +401,7 @@ nav {
 nav.show {
   width: 100vw;
   height: 100vh;
-  border: 1px solid red;
-  opacity: 1;
+  animation: fadeIn 0.6s ease-in-out forwards;
 
   /* background: rgb(207, 210, 164, 0.5); */
 }
@@ -542,6 +555,10 @@ section {
   opacity: 0.6;
   animation: scaleUpDown 14s infinite ease-in-out;
   background-size: cover;
+}
+
+.num2 {
+  opacity: 0.4;
 }
 
 /* ------ titles ----  */
@@ -896,11 +913,12 @@ section {
 
 .magnifying-glass__text,
 .magnifying-glass__enlarged-text {
-  font-size: var(--fs-xl);
-  font-family: Gotham;
+  /* font-size: var(--fs-xl); */
+  font-family: gotham-old;
   /* // adjust font-size of the original text */
   text-align: center;
   line-height: 1;
+  font-size: 1.1em;
 }
 
 .magnifying-glass__enlarged-text {
@@ -931,11 +949,22 @@ section {
   0% {
     transform: scale(1);
   }
-  /* 50% {
-    transform: scale(1.025);
-  } */
+
   100% {
     transform: scale(1.2);
+  }
+}
+
+@keyframes zoomOutImg {
+  0% {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
   }
 }
 
@@ -976,15 +1005,13 @@ section {
   display: grid;
   grid-template-areas:
     "title1 title2 title3"
-    "title4 title5 title6";
+    "title4 title5 title6"
+    "title7 title8 ."; /* New row with two items */
 
   gap: 10px;
   justify-items: center; /* Center the titles horizontally */
   align-items: center; /* Center the titles vertically */
   border-radius: 5px;
-  /* box-shadow: 1px -1px 26px 7px rgba(130, 49, 49, 0.75);
-  -webkit-box-shadow: 1px -1px 26px 7px rgba(130, 49, 49, 0.75);
-  -moz-box-shadow: 1px -1px 26px 7px rgba(130, 49, 49, 0.75); */
 }
 
 .horizontal-nav-open-titles-container div:nth-child(1) {
@@ -1009,6 +1036,20 @@ section {
 
 .horizontal-nav-open-titles-container div:nth-child(6) {
   grid-area: title6;
+}
+
+.horizontal-nav-open-titles-container div:nth-child(7) {
+  grid-area: title7; /* Assign grid area to the 7th item */
+}
+
+.horizontal-nav-open-titles-container div:nth-child(8) {
+  grid-area: title8; /* Assign grid area to the 8th item */
+}
+
+/* Position the last row items evenly in the container */
+.horizontal-nav-open-titles-container div:nth-child(7),
+.horizontal-nav-open-titles-container div:nth-child(8) {
+  justify-content: center;
 }
 
 .mobile-category-wrapper {
@@ -1660,6 +1701,10 @@ section {
   font-size: 12em;
 }
 
+.ai-title {
+  font-size: 7.5em;
+}
+
 .industry-title {
   font-size: 1em;
 }
@@ -1695,7 +1740,8 @@ section {
   }
 
   .ai-title {
-    font-size: 7em;
+    font-size: 6.9em;
+    margin-top: 0.6em;
   }
 
   .ai-text-margin-top {
