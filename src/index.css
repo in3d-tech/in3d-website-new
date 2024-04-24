@@ -2017,7 +2017,7 @@ section {
 @media screen and (max-width: 768px) {
   .horizontal-nav-open-titles-container {
     width: 80%;
-    height: 500px;
+    /* height: 500px; */
     display: flex;
     flex-direction: column;
     justify-items: center; /* Center the titles horizontally */
@@ -2035,5 +2035,9 @@ section {
   .hamburger-icon {
     right: 1em;
     top: 1em;
+  }
+
+  .magnifying-glass {
+    font-size: 2em;
   }
 }
