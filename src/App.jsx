@@ -9,6 +9,7 @@ import { Header } from "./components/navs/Menu";
 import { LoadingScreen } from "./components/viewableContent/LoadingScreen";
 import { useAppContext } from "./context/appContext";
 import useCheckIsMobileScreen from "./components/common/useCheckIsMobile";
+import { getSparkleColour } from "./components/scene/ornaments/getSparkleColour";
 // import { useTranslation } from "react-i18next";
 
 // import { ChangeLanguage } from "./components/navs/ChangeLanguage";
@@ -47,10 +48,6 @@ function App() {
     if (isMobileDimensions) {
       setIsMobileViewOnly(true);
     }
-    // Object.values(backgrounds).forEach((image) => {
-    //   const img = new Image();
-    //   img.src = image;
-    // });
   }, []);
 
   const scrollToElementById = (idx) => {
@@ -107,8 +104,65 @@ useGLTF.preload("/assets/models/astronaut_new5 (3).glb");
 useGLTF.preload("/assets/models/engenir_model.glb");
 
 function ViewableContent() {
+  const { scrollArea } = useAppContext();
+
+  const sections = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+  useEffect(() => {
+    let tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".section-one",
+        start: "top top",
+        endTrigger: ".section-ten",
+        end: "bottom bottom",
+        scrub: 1,
+      },
+    });
+
+    // Assume ".innerLine" is the class of your inner line
+    tl.to(".inner-line", {
+      y: () => {
+        return (
+          window.innerHeight -
+          document.querySelector(".inner-line").offsetHeight
+        );
+      },
+      duration: 1,
+    });
+  }, []);
+
   return (
     <div className="viewable-content-wrapper">
+      <div
+        style={{
+          // borderRight: "1px solid rgb(255,255,255,0.4)",
+          backgroundColor: "rgb(0,0,0,0.2)",
+          height: "100%",
+          width: "0.7em",
+          marginLeft: "1em",
+          display: "flex",
+          position: "absolute",
+          flexDirection: "column",
+          // justifyContent: "space-evenly",
+          zIndex: 1,
+        }}
+      >
+        <div
+          style={{
+            backgroundColor: getSparkleColour(scrollArea.currentSection),
+          }}
+          className="inner-line"
+        ></div>
+        {/* {sections.map((section, idx) => (
+          <div
+            style={{
+              border: `3px solid ${getSparkleColour(section)}`,
+              height: "100%",
+              opacity: scrollArea.currentSection == section ? 1 : 0.4,
+            }}
+          ></div>
+        ))} */}
+      </div>
       <div className="bg-scale-effect"></div>
     </div>
   );

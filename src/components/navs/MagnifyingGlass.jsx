@@ -95,7 +95,9 @@ const MagnifyingGlass = (props) => {
             props.setSelectedCategory(props.title);
           }}
         >
-          {props.title}
+          <span style={props.fontSize ? { fontSize: "0.6em" } : null}>
+            {props.title}
+          </span>
         </div>
       </div>
 
