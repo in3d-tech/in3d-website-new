@@ -130,9 +130,23 @@ const IndustryText = ({ title }) => (
       display: "flex",
       flexDirection: "column",
       border: "1px solid rgba(255,255,255, 0.6)",
-      height: "80vh",
+      height: "60vh",
+      // opacity: "0.8",
     }}
   >
+    <div
+      style={{
+        position: "absolute",
+        height: "60vh",
+        width: "100%",
+        backgroundImage:
+          'url("/assets/images/backgrounds/taasia/Industry_Togle.jpg")',
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        filter: "blur(5px)",
+      }}
+    ></div>
     <div
       style={{
         flex: 1,
@@ -142,6 +156,7 @@ const IndustryText = ({ title }) => (
         flexDirection: "column",
         padding: "4px",
         textAlign: "center",
+        position: "absolute",
       }}
     >
       <div className="scrolled-category-title" style={{ marginTop: "1em" }}>
@@ -154,7 +169,7 @@ const IndustryText = ({ title }) => (
       </div>
       <div
         className="scrolled-category-text-two"
-        style={{ marginTop: "5em", fontSize: "1.2em" }}
+        style={{ marginTop: "1em", fontSize: "1.2em" }}
       >
         <span>Together with our clients we map out the</span>
         <span>challenges they face and develop tailor-made</span>
@@ -168,7 +183,7 @@ const MedicineText = ({ title }) => (
   <div
     className={`medical-test fader`}
     style={{
-      height: "80vh",
+      height: "60vh",
       top: "200%",
       color: "white",
       // fontSize: "3em",
@@ -176,10 +191,23 @@ const MedicineText = ({ title }) => (
       display: "flex",
       flexDirection: "column",
       // justifyContent: "space-between",
-      border: "1px solid rgba(255,255,255, 0.6)",
       padding: "4px",
     }}
   >
+    <div
+      style={{
+        position: "absolute",
+        zIndex: -1,
+        height: "60vh",
+        width: "100%",
+        backgroundImage:
+          'url("/assets/images/backgrounds/medicine/Medical_Togle.jpg")',
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        filter: "blur(5px)",
+      }}
+    ></div>
     <div className="scrolled-category-title" style={{ marginTop: "1em" }}>
       <span style={{ color: "#750414" }}>M</span>
       {title.substring(1)}
@@ -203,7 +231,7 @@ const MicrosoftText = ({ title }) => (
   <div
     className={`micro-test fader`}
     style={{
-      height: "80vh",
+      height: "60vh",
       color: "white",
       // fontSize: "3em",
       fontFamily: "gotham",
@@ -213,6 +241,20 @@ const MicrosoftText = ({ title }) => (
       border: "1px solid rgba(255,255,255, 0.6)",
     }}
   >
+    <div
+      style={{
+        position: "absolute",
+        zIndex: -1,
+        height: "60vh",
+        width: "100%",
+        backgroundImage:
+          'url("/assets/images/backgrounds/microsoft/Microsoft_Tugle.jpg")',
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        filter: "blur(5px)",
+      }}
+    ></div>
     <div className="scrolled-category-title">
       <span style={{ color: "#750414" }}>M</span>
       {title.substring(1)}
@@ -245,9 +287,23 @@ export const SecurityText = ({ title }) => (
       display: "flex",
       flexDirection: "column",
       // justifyContent: "space-between",
-      height: "80vh",
+      height: "60vh",
     }}
   >
+    <div
+      style={{
+        position: "absolute",
+        zIndex: -1,
+        height: "60vh",
+        width: "100%",
+        backgroundImage:
+          'url("/assets/images/backgrounds/security/Security_Togle_Finish2.jpg")',
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        filter: "blur(5px)",
+      }}
+    ></div>
     <div className="scrolled-category-title">
       <span style={{ color: "#750414" }}>S</span>
       {title.substring(1)}
@@ -286,6 +342,20 @@ export const AiText = ({ title }) => (
       height: "80vh",
     }}
   >
+    <div
+      style={{
+        position: "absolute",
+        zIndex: -1,
+        height: "60vh",
+        width: "100%",
+        backgroundImage:
+          'url("/assets/images/backgrounds/ai/Ai_Tugle_Finish.jpg")',
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        filter: "blur(5px)",
+      }}
+    ></div>
     <div className="scrolled-category-title">
       <span style={{ color: "#750414" }}>A</span>
       {title.substring(1)}

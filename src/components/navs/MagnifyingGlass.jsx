@@ -92,7 +92,7 @@ const MagnifyingGlass = (props) => {
             // return;
             if (props.allowClick) props.setSelectedContent(props.title);
             props.toggleNav();
-            props.setSelectedCategory(props.title);
+            // props.setSelectedCategory(props.title);
           }}
         >
           <span style={props.fontSize ? { fontSize: "0.6em" } : null}>

@@ -138,7 +138,7 @@ function ViewableContent() {
           // borderRight: "1px solid rgb(255,255,255,0.4)",
           backgroundColor: "rgb(0,0,0,0.2)",
           height: "100%",
-          width: "0.7em",
+          width: "0.6em",
           marginLeft: "1em",
           display: "flex",
           position: "absolute",
