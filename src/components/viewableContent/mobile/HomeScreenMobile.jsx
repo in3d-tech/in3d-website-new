@@ -46,7 +46,7 @@ function HomeScreenMobile() {
       setTimeout(() => {
         setCustomizeHasRendered(true);
         setStartExpandedAnimation(true);
-      });
+      }, 200);
     }
   }, [isAstroModelDrawn]);
 

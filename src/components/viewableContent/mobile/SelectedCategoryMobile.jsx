@@ -94,7 +94,7 @@ function SelectedCategoryMobile({ titleKey, astroRef, setMobileBackground }) {
   return (
     <div
       style={{
-        // height: "340vh",
+        // height: "330vh",
         zIndex: 1,
         display: "flex",
         flexDirection: "column",
@@ -128,14 +128,14 @@ const IndustryText = ({ title }) => (
       fontFamily: "gotham",
       display: "flex",
       flexDirection: "column",
-      height: "40vh",
+      height: "30vh",
       // opacity: "0.8",
     }}
   >
     <div
       style={{
         position: "absolute",
-        height: "40vh",
+        height: "30vh",
         width: "100%",
         backgroundImage:
           'url("/assets/images/backgrounds/taasia/Industry_Togle.jpg")',
@@ -180,7 +180,7 @@ const MedicineText = ({ title }) => (
   <div
     className={`medical-test fader`}
     style={{
-      height: "40vh",
+      height: "30vh",
       top: "200%",
       color: "white",
       // fontSize: "3em",
@@ -196,7 +196,7 @@ const MedicineText = ({ title }) => (
       style={{
         position: "absolute",
         zIndex: -1,
-        height: "40vh",
+        height: "30vh",
         width: "100%",
         backgroundImage:
           'url("/assets/images/backgrounds/medicine/Medical_Togle.jpg")',
@@ -231,7 +231,7 @@ const MicrosoftText = ({ title }) => (
   <div
     className={`micro-test fader`}
     style={{
-      height: "40vh",
+      height: "30vh",
       color: "white",
       // fontSize: "3em",
       fontFamily: "gotham",
@@ -245,7 +245,7 @@ const MicrosoftText = ({ title }) => (
       style={{
         position: "absolute",
         zIndex: -1,
-        height: "40vh",
+        height: "30vh",
         width: "100%",
         backgroundImage:
           'url("/assets/images/backgrounds/microsoft/Microsoft_Tugle.jpg")',
@@ -289,7 +289,7 @@ export const SecurityText = ({ title }) => (
       flexDirection: "column",
       justifyContent: "center",
       // justifyContent: "space-between",
-      height: "40vh",
+      height: "30vh",
       marginTop: "2em",
     }}
   >
@@ -297,7 +297,7 @@ export const SecurityText = ({ title }) => (
       style={{
         position: "absolute",
         zIndex: -1,
-        height: "40vh",
+        height: "30vh",
         width: "100%",
         backgroundImage:
           'url("/assets/images/backgrounds/security/Security_Togle_Finish2.jpg")',
@@ -344,7 +344,7 @@ export const AiText = ({ title }) => (
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
-      height: "40vh",
+      height: "30vh",
       marginTop: "2em",
     }}
   >
@@ -352,7 +352,7 @@ export const AiText = ({ title }) => (
       style={{
         position: "absolute",
         zIndex: -1,
-        height: "40vh",
+        height: "30vh",
         width: "100%",
         backgroundImage:
           'url("/assets/images/backgrounds/ai/Ai_Tugle_Finish.jpg")',
@@ -397,7 +397,7 @@ export const MilitaryText = ({ title }) => (
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
-      height: "40vh",
+      height: "30vh",
       marginTop: "2em",
     }}
   >
@@ -405,7 +405,7 @@ export const MilitaryText = ({ title }) => (
       style={{
         position: "absolute",
         zIndex: -1,
-        height: "40vh",
+        height: "30vh",
         width: "100%",
         backgroundImage:
           'url("/assets/images/backgrounds/military/Militery_Togle_Finish2.jpg")',
@@ -450,7 +450,7 @@ export const CustomizationText = ({ title }) => (
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
-      height: "40vh",
+      height: "30vh",
       marginTop: "2em",
     }}
   >
@@ -458,7 +458,7 @@ export const CustomizationText = ({ title }) => (
       style={{
         position: "absolute",
         zIndex: -1,
-        height: "40vh",
+        height: "30vh",
         width: "100%",
         backgroundImage:
           'url("/assets/images/backgrounds/customize/Customize_Togle_Finish.jpg")',
