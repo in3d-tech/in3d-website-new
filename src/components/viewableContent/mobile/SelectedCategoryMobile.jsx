@@ -155,7 +155,10 @@ const IndustryText = ({ title }) => (
         position: "absolute",
       }}
     >
-      <div className="scrolled-category-title" style={{ marginTop: "1em" }}>
+      <div
+        className="scrolled-category-title"
+        style={{ marginTop: "1em", marginLeft: "0.5em" }}
+      >
         {title} <span style={{ color: "#750414" }}>4.0</span>
       </div>
       <LearnMoreBtn />
@@ -206,7 +209,10 @@ const MedicineText = ({ title }) => (
         filter: "blur(5px)",
       }}
     ></div>
-    <div className="scrolled-category-title" style={{ marginTop: "1em" }}>
+    <div
+      className="scrolled-category-title"
+      style={{ marginTop: "1em", marginLeft: "0.5em" }}
+    >
       <span style={{ color: "#750414" }}>M</span>
       {title.substring(1)}
     </div>
@@ -255,7 +261,7 @@ const MicrosoftText = ({ title }) => (
         filter: "blur(5px)",
       }}
     ></div>
-    <div className="scrolled-category-title">
+    <div className="scrolled-category-title" style={{ marginLeft: "0.5em" }}>
       <span style={{ color: "#750414" }}>M</span>
       {title.substring(1)}
     </div>
@@ -307,7 +313,7 @@ export const SecurityText = ({ title }) => (
         filter: "blur(5px)",
       }}
     ></div>
-    <div className="scrolled-category-title">
+    <div className="scrolled-category-title" style={{ marginLeft: "0.5em" }}>
       <span style={{ color: "#750414" }}>S</span>
       {title.substring(1)}
     </div>
@@ -362,7 +368,7 @@ export const AiText = ({ title }) => (
         filter: "blur(5px)",
       }}
     ></div>
-    <div className="scrolled-category-title">
+    <div className="scrolled-category-title" style={{ marginLeft: "0.5em" }}>
       <span style={{ color: "#750414" }}>A</span>
       {title.substring(1)}
     </div>
@@ -415,7 +421,7 @@ export const MilitaryText = ({ title }) => (
         filter: "blur(5px)",
       }}
     ></div>
-    <div className="scrolled-category-title">
+    <div className="scrolled-category-title" style={{ marginLeft: "0.5em" }}>
       <span style={{ color: "#750414" }}>M</span>
       {title.substring(1)}
     </div>
@@ -468,7 +474,7 @@ export const CustomizationText = ({ title }) => (
         filter: "blur(5px)",
       }}
     ></div>
-    <div className="scrolled-category-title">
+    <div className="scrolled-category-title" style={{ marginLeft: "0.5em" }}>
       <span style={{ color: "#750414" }}>C</span>
       {title.substring(1)}
     </div>
@@ -524,7 +530,7 @@ export const ContactUsText = ({ title }) => (
 
 const LearnMoreBtn = () => {
   return (
-    <div style={{ marginTop: "1em" }}>
+    <div style={{ marginTop: "1em", marginLeft: "1em" }}>
       <button className="cta">
         <span className="hover-underline-animation"> Learn more </span>
         <svg
