@@ -1,5 +1,5 @@
-import { Sparkles, useGLTF, useProgress } from "@react-three/drei";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Sparkles } from "@react-three/drei";
+import { Suspense, useEffect, useState } from "react";
 import { useAppContext } from "../../context/appContext";
 import { Canvas } from "@react-three/fiber";
 // import { useGLTFAnimations } from "../scene/ModelComponent";
@@ -17,9 +17,15 @@ export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
 
   useEffect(() => {
     // return;
-    if (isMobileViewOnly && showLoading) {
-      console.log("wassssup");
-      setTimeout(() => setShowLoading(false), 2000);
+    // if (isMobileViewOnly && showLoading) {
+    if (isMobileViewOnly && customizeHasRendered) {
+      const loadingScreen = setTimeout(() => setShowloadingScreen(false), 2000);
+      const showLoad = setTimeout(() => setShowLoading(false), 2000);
+      document.body.style.overflowY = "auto";
+      return () => {
+        clearTimeout(loadingScreen);
+        clearTimeout(showLoad);
+      };
     }
 
     if (isAstroModelDrawn && !isMobileViewOnly) {

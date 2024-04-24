@@ -94,7 +94,7 @@ function SelectedCategoryMobile({ titleKey, astroRef, setMobileBackground }) {
   return (
     <div
       style={{
-        // height: "360vh",
+        // height: "340vh",
         zIndex: 1,
         display: "flex",
         flexDirection: "column",
@@ -103,7 +103,6 @@ function SelectedCategoryMobile({ titleKey, astroRef, setMobileBackground }) {
       <div style={{ height: "96vh" }}></div>
       <div
         style={{
-          // borderTop: "1px solid rgba(255,255,255, 0.6)",
           height: "20vh",
           marginTop: "2em",
         }}
@@ -129,15 +128,14 @@ const IndustryText = ({ title }) => (
       fontFamily: "gotham",
       display: "flex",
       flexDirection: "column",
-      border: "1px solid rgba(255,255,255, 0.6)",
-      height: "60vh",
+      height: "40vh",
       // opacity: "0.8",
     }}
   >
     <div
       style={{
         position: "absolute",
-        height: "60vh",
+        height: "40vh",
         width: "100%",
         backgroundImage:
           'url("/assets/images/backgrounds/taasia/Industry_Togle.jpg")',
@@ -151,8 +149,6 @@ const IndustryText = ({ title }) => (
       style={{
         flex: 1,
         display: "flex",
-        // background: "green",
-        // background: 'url("/assets/images/backgrounds/taasia/taasia_bg.jpg")',
         flexDirection: "column",
         padding: "4px",
         textAlign: "center",
@@ -162,7 +158,8 @@ const IndustryText = ({ title }) => (
       <div className="scrolled-category-title" style={{ marginTop: "1em" }}>
         {title} <span style={{ color: "#750414" }}>4.0</span>
       </div>
-      <div className="scrolled-category-text-one" style={{ marginTop: "2em" }}>
+      <LearnMoreBtn />
+      {/* <div className="scrolled-category-text-one" style={{ marginTop: "2em" }}>
         <span>The world was recently</span>
         <span>introduced to the wonders of</span>
         <span>the industry 4.0 revolution</span>
@@ -174,7 +171,7 @@ const IndustryText = ({ title }) => (
         <span>Together with our clients we map out the</span>
         <span>challenges they face and develop tailor-made</span>
         <span>solutions using XR and 3D technology that</span>
-      </div>
+      </div> */}
     </div>
   </div>
 );
@@ -183,7 +180,7 @@ const MedicineText = ({ title }) => (
   <div
     className={`medical-test fader`}
     style={{
-      height: "60vh",
+      height: "40vh",
       top: "200%",
       color: "white",
       // fontSize: "3em",
@@ -192,13 +189,14 @@ const MedicineText = ({ title }) => (
       flexDirection: "column",
       // justifyContent: "space-between",
       padding: "4px",
+      marginTop: "2em",
     }}
   >
     <div
       style={{
         position: "absolute",
         zIndex: -1,
-        height: "60vh",
+        height: "40vh",
         width: "100%",
         backgroundImage:
           'url("/assets/images/backgrounds/medicine/Medical_Togle.jpg")',
@@ -212,7 +210,9 @@ const MedicineText = ({ title }) => (
       <span style={{ color: "#750414" }}>M</span>
       {title.substring(1)}
     </div>
-    <div className="scrolled-category-text-one" style={{ marginTop: "2em" }}>
+    <LearnMoreBtn />
+
+    {/* <div className="scrolled-category-text-one" style={{ marginTop: "2em" }}>
       <span>The world of medicine is one</span>
       <span>of the most innovative sectors</span>
       <span>in the world</span>
@@ -223,7 +223,7 @@ const MedicineText = ({ title }) => (
     >
       <span>Using Extended Reality (XR) we at in3D became pioneers in</span>
       <span>development of XR products for medical organizations</span>
-    </div>
+    </div> */}
   </div>
 );
 
@@ -231,21 +231,21 @@ const MicrosoftText = ({ title }) => (
   <div
     className={`micro-test fader`}
     style={{
-      height: "60vh",
+      height: "40vh",
       color: "white",
       // fontSize: "3em",
       fontFamily: "gotham",
       display: "flex",
       flexDirection: "column",
-      // justifyContent: "space-between",
-      border: "1px solid rgba(255,255,255, 0.6)",
+      justifyContent: "center",
+      marginTop: "2em",
     }}
   >
     <div
       style={{
         position: "absolute",
         zIndex: -1,
-        height: "60vh",
+        height: "40vh",
         width: "100%",
         backgroundImage:
           'url("/assets/images/backgrounds/microsoft/Microsoft_Tugle.jpg")',
@@ -259,7 +259,9 @@ const MicrosoftText = ({ title }) => (
       <span style={{ color: "#750414" }}>M</span>
       {title.substring(1)}
     </div>
-    <div className="scrolled-category-text-one">
+    <LearnMoreBtn />
+
+    {/* <div className="scrolled-category-text-one">
       <span>In3D is the official and inclusive</span>
       <span>Mixed Reality (MR) partner</span>
       <span>of Microsoft Israel</span>
@@ -272,8 +274,7 @@ const MicrosoftText = ({ title }) => (
         In3D and Microsoft's teams share a strong connection and a combined
         vison on the important roles of MR technology
       </span>
-      {/* <span>efficiency for clinics and hospitals</span> */}
-    </div>
+    </div> */}
   </div>
 );
 
@@ -286,15 +287,17 @@ export const SecurityText = ({ title }) => (
       fontFamily: "gotham",
       display: "flex",
       flexDirection: "column",
+      justifyContent: "center",
       // justifyContent: "space-between",
-      height: "60vh",
+      height: "40vh",
+      marginTop: "2em",
     }}
   >
     <div
       style={{
         position: "absolute",
         zIndex: -1,
-        height: "60vh",
+        height: "40vh",
         width: "100%",
         backgroundImage:
           'url("/assets/images/backgrounds/security/Security_Togle_Finish2.jpg")',
@@ -309,6 +312,8 @@ export const SecurityText = ({ title }) => (
       {title.substring(1)}
     </div>
     <div className="scrolled-category-text-one">
+      <LearnMoreBtn />
+
       {/* <span>
         Thanks to years of collaboration with defense industries, we gained the
       </span>
@@ -338,15 +343,16 @@ export const AiText = ({ title }) => (
       fontFamily: "gotham",
       display: "flex",
       flexDirection: "column",
-      // justifyContent: "space-between",
-      height: "80vh",
+      justifyContent: "center",
+      height: "40vh",
+      marginTop: "2em",
     }}
   >
     <div
       style={{
         position: "absolute",
         zIndex: -1,
-        height: "60vh",
+        height: "40vh",
         width: "100%",
         backgroundImage:
           'url("/assets/images/backgrounds/ai/Ai_Tugle_Finish.jpg")',
@@ -360,13 +366,14 @@ export const AiText = ({ title }) => (
       <span style={{ color: "#750414" }}>A</span>
       {title.substring(1)}
     </div>
-    <div className="scrolled-category-text-one">
+    <LearnMoreBtn />
+
+    {/* <div className="scrolled-category-text-one">
       <span>Here is some basic information about our work with AI.</span>
       <span>
         needed experience, knowledge and tools to provide quick and out of the
         box
       </span>
-      {/* <span>of Microsoft Israel</span> */}
     </div>
     <div className="scrolled-category-text-two">
       <span>
@@ -374,8 +381,7 @@ export const AiText = ({ title }) => (
         products.
       </span>
 
-      {/* <span>efficiency for clinics and hospitals</span> */}
-    </div>
+    </div> */}
   </div>
 );
 
@@ -390,15 +396,32 @@ export const MilitaryText = ({ title }) => (
       fontFamily: "gotham",
       display: "flex",
       flexDirection: "column",
-      // justifyContent: "space-between",
-      height: "80vh",
+      justifyContent: "center",
+      height: "40vh",
+      marginTop: "2em",
     }}
   >
+    <div
+      style={{
+        position: "absolute",
+        zIndex: -1,
+        height: "40vh",
+        width: "100%",
+        backgroundImage:
+          'url("/assets/images/backgrounds/military/Militery_Togle_Finish2.jpg")',
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        filter: "blur(5px)",
+      }}
+    ></div>
     <div className="scrolled-category-title">
       <span style={{ color: "#750414" }}>M</span>
       {title.substring(1)}
     </div>
-    <div className="scrolled-category-text-one">
+    <LearnMoreBtn />
+
+    {/* <div className="scrolled-category-text-one">
       <span>Thanks to years of collaboration with defense industries, s</span>
       <span>we gained the needed experience, knowledge and</span>
       <span>
@@ -412,8 +435,7 @@ export const MilitaryText = ({ title }) => (
         <span style={{ fontStyle: "italic" }}> go to</span> for any AI products.
       </span>
 
-      {/* <span>efficiency for clinics and hospitals</span> */}
-    </div>
+    </div> */}
   </div>
 );
 
@@ -427,15 +449,32 @@ export const CustomizationText = ({ title }) => (
       fontFamily: "gotham",
       display: "flex",
       flexDirection: "column",
-      // justifyContent: "space-between",
-      height: "80vh",
+      justifyContent: "center",
+      height: "40vh",
+      marginTop: "2em",
     }}
   >
+    <div
+      style={{
+        position: "absolute",
+        zIndex: -1,
+        height: "40vh",
+        width: "100%",
+        backgroundImage:
+          'url("/assets/images/backgrounds/customize/Customize_Togle_Finish.jpg")',
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        filter: "blur(5px)",
+      }}
+    ></div>
     <div className="scrolled-category-title">
       <span style={{ color: "#750414" }}>C</span>
       {title.substring(1)}
     </div>
-    <div className="scrolled-category-text-one">
+    <LearnMoreBtn />
+
+    {/* <div className="scrolled-category-text-one">
       <span>We specialize in 3D and Extended Reality (EX),</span>
       <span>and as specialists we keep an amazing team of developers,</span>
       <span>
@@ -450,15 +489,14 @@ export const CustomizationText = ({ title }) => (
         products.
       </span>
 
-      {/* <span>efficiency for clinics and hospitals</span> */}
-    </div>
+    </div> */}
   </div>
 );
 
 export const ContactUsText = ({ title }) => (
   <div
     className="contact-us-wrapper"
-    style={{ position: "absolute", top: "800%" }}
+    style={{ position: "absolute", top: "800%", height: "60vh" }}
   >
     <span className="contact-title">Contact us</span>
     <div className="contact-details-wrapper">
@@ -483,3 +521,27 @@ export const ContactUsText = ({ title }) => (
     </div>
   </div>
 );
+
+const LearnMoreBtn = () => {
+  return (
+    <div style={{ marginTop: "1em" }}>
+      <button className="cta">
+        <span className="hover-underline-animation"> Learn more </span>
+        <svg
+          id="arrow-horizontal"
+          xmlns="http://www.w3.org/2000/svg"
+          width="30"
+          height="10"
+          viewBox="0 0 46 16"
+        >
+          <path
+            id="Path_10"
+            data-name="Path 10"
+            d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z"
+            transform="translate(30)"
+          ></path>
+        </svg>
+      </button>
+    </div>
+  );
+};

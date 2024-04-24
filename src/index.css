@@ -1650,6 +1650,37 @@ section {
 .simply-header:hover {
   cursor: default;
 }
+.cta {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: white;
+}
+
+.cta span {
+  padding-bottom: 7px;
+  letter-spacing: 4px;
+  font-size: 14px;
+  padding-right: 15px;
+  text-transform: uppercase;
+  color: white;
+}
+
+.cta svg {
+  transform: translateX(-8px);
+  transition: all 0.3s ease;
+  color: white;
+}
+
+.cta:hover svg {
+  transform: translateX(0);
+}
+
+.cta:active svg {
+  transform: scale(0.9);
+  color: white;
+}
+
 /* -------------------------------
 -----------------------------------------
 -----------------------------------------
@@ -1999,5 +2030,10 @@ section {
 
   .scrolled-category-title {
     font-size: 3em;
+  }
+
+  .hamburger-icon {
+    right: 1em;
+    top: 1em;
   }
 }
