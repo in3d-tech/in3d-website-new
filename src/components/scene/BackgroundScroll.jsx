@@ -215,6 +215,9 @@ export function BackgroundScroll({
             complies with legal and privacy requirements, engraves on its banner
             a high standard of service assembly, while maintaining accuracy,
             confidentiality and information security.
+            <br />
+            If you need more information, contact us at the email listed at the
+            bottom of the page.
           </div>
         </div>
       </section>
