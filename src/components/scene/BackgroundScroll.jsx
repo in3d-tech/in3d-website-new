@@ -193,7 +193,7 @@ export function BackgroundScroll({
           style={{
             color: "white",
             position: "absolute",
-            fontSize: "0.3em",
+            fontSize: "0.26em",
             // width: "80%",
             fontFamily: "gotham",
             bottom: "1em",
@@ -202,6 +202,13 @@ export function BackgroundScroll({
           }}
         >
           <div style={{ width: "80%" }}>
+            in3D does not disclose, collect, edit, transfer to a third party or
+            use private information of its customers or website users. In any
+            case in which in3D is asked to transfer private information, it will
+            immediately notify the relevant customer and act under his guidance.
+            For any inquiry or request for additional information on privacy
+            statements, contact by email: Nathanael@in3D-Tech.com
+            <br />
             in3D works according to international quality policies in
             development and production, information security and privacy
             security – ISO9001, ISO27001, ISO27701. The company undertakes and
