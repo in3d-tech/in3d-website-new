@@ -10,7 +10,7 @@ export const IndustryText = ({ title }) => (
       flexDirection: "column",
       // justifyContent: "space-between",
       padding: "4px",
-      marginTop: "2em",
+      marginTop: "3em",
       // zIndex: 243,
     }}
   >
@@ -65,7 +65,7 @@ export const MedicineText = ({ title }) => (
       flexDirection: "column",
       // justifyContent: "space-between",
       padding: "4px",
-      marginTop: "3em",
+      marginTop: "1em",
     }}
   >
     <div
@@ -117,7 +117,7 @@ export const MicrosoftText = ({ title }) => (
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
-      marginTop: "2em",
+      marginTop: "1em",
     }}
   >
     <div
@@ -169,7 +169,7 @@ export const SecurityText = ({ title }) => (
       justifyContent: "center",
       // justifyContent: "space-between",
       height: "30vh",
-      marginTop: "2em",
+      marginTop: "1em",
     }}
   >
     <div
@@ -224,7 +224,7 @@ export const AiText = ({ title }) => (
       flexDirection: "column",
       justifyContent: "center",
       height: "30vh",
-      marginTop: "2em",
+      marginTop: "1em",
     }}
   >
     <div
@@ -277,7 +277,7 @@ export const MilitaryText = ({ title }) => (
       flexDirection: "column",
       justifyContent: "center",
       height: "30vh",
-      marginTop: "2em",
+      marginTop: "1em",
     }}
   >
     <div
@@ -330,7 +330,7 @@ export const CustomizationText = ({ title }) => (
       flexDirection: "column",
       justifyContent: "center",
       height: "30vh",
-      marginTop: "2em",
+      marginTop: "1em",
     }}
   >
     <div
