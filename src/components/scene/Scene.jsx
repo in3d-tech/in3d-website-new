@@ -272,40 +272,12 @@ function Scene({ scrollToElementById }) {
             size={2}
             color={getSparkleColour(scrollArea.currentSection)}
           />
-
-          {
-            <ambientLight
-              intensity={
-                scrollArea?.currentSection == CUSTOMIZATION
-                  ? 2
-                  : scrollArea.currentSection == ASTRO
-                  ? 0.2
-                  : 1
-              }
-            />
-          }
-          {customizeHasRendered ? (
-            <>
-              <directionalLight
-                color={
-                  titleOnMainPageHovered
-                    ? hoveredTitleLight
-                    : "rgb(200,255,255)"
-                }
-                intensity={5}
-                position={[-25, 50, 10]}
-              />
-              <directionalLight
-                intensity={1}
-                position={[20, 0, -1]}
-                color={
-                  titleOnMainPageHovered
-                    ? hoveredTitleLight
-                    : "rgb(254,200,255)"
-                }
-              />
-            </>
-          ) : null}
+          <Lights
+            scrollArea={scrollArea}
+            titleOnMainPageHovered={titleOnMainPageHovered}
+            hoveredTitleLight={hoveredTitleLight}
+            customizeHasRendered={customizeHasRendered}
+          />
 
           <Camera />
           <Suspense fallback={null}>
@@ -334,3 +306,44 @@ function Scene({ scrollToElementById }) {
 }
 
 export default Scene;
+
+const Lights = ({
+  scrollArea,
+  titleOnMainPageHovered,
+  hoveredTitleLight,
+  customizeHasRendered,
+}) => {
+  return (
+    <>
+      {
+        <ambientLight
+          intensity={
+            scrollArea?.currentSection == CUSTOMIZATION
+              ? 2
+              : scrollArea.currentSection == ASTRO
+              ? 0.2
+              : 1
+          }
+        />
+      }
+      {customizeHasRendered ? (
+        <>
+          <directionalLight
+            color={
+              titleOnMainPageHovered ? hoveredTitleLight : "rgb(200,255,255)"
+            }
+            intensity={5}
+            position={[-25, 50, 10]}
+          />
+          <directionalLight
+            intensity={1}
+            position={[20, 0, -1]}
+            color={
+              titleOnMainPageHovered ? hoveredTitleLight : "rgb(254,200,255)"
+            }
+          />
+        </>
+      ) : null}
+    </>
+  );
+};

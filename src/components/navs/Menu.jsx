@@ -4,7 +4,7 @@ import { useAppContext } from "../../context/appContext";
 import { getSparkleColour } from "../scene/ornaments/getSparkleColour";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
-export const Header = () => {
+export const Header = ({ isMobileViewOnly }) => {
   const [hovered, setIsHovered] = useState(false);
 
   const {
@@ -94,7 +94,12 @@ export const Header = () => {
   return (
     <header>
       {/* <div style={hovered ? getbgImage() : null}> */}
-      <div className="hamburger-icon" id="icon" onClick={toggleNav}>
+      <div
+        style={isMobileViewOnly ? { background: "rgb(255,255,255, 0)" } : null}
+        className="hamburger-icon"
+        id="icon"
+        onClick={toggleNav}
+      >
         <div
           style={{
             backgroundColor: getSparkleColour(scrollArea.currentSection),

@@ -249,7 +249,7 @@ export function BackgroundScroll({
             confidentiality and information security.
             <br />
             If you need more information, contact us at the email listed at the
-            bottom of the page.
+            above.
           </div>
         </div>
       </section>

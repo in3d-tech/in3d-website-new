@@ -330,7 +330,7 @@ body {
   width: 70px;
   top: 5em;
   right: 5em;
-  z-index: 1000;
+  z-index: 12;
   cursor: pointer;
   border-radius: 50%;
   transition: all 0.2s ease-in-out;
@@ -1068,7 +1068,7 @@ section {
   top: 0;
   height: 100vh;
   width: 100vw;
-  z-index: 0;
+  opacity: 1;
 }
 
 /* contact us styles */
@@ -1688,9 +1688,19 @@ section {
 
 .fab-wrapper {
   position: fixed;
-  bottom: 30rem;
-  right: 40rem;
-  z-index: 1111212;
+  top: 4em;
+  right: 3em;
+  /* bottom: 30rem; */
+  /* right: 40rem; */
+  z-index: 112;
+  border: 1px solid yellow;
+  transition: top 0.5s, right 0.5s; /* Define transition for top and right properties */
+}
+
+.fab-wrapper.centered {
+  top: 50%; /* Move to the vertical center of the screen */
+  right: 48%; /* Move to the horizontal center of the screen */
+  transform: translate(50%, -50%); /* Adjust for centering */
 }
 
 .fab-checkbox {
@@ -1702,14 +1712,11 @@ section {
   right: -1rem;
   width: 4rem;
   height: 4rem;
-  background: blue;
+  z-index: 12;
+  cursor: pointer;
   border-radius: 50%;
-  background: #126ee2;
-  box-shadow: 0px 5px 20px #81a4f1;
-  transition: all 0.3s ease;
-  z-index: 1;
-  border-bottom-right-radius: 6px;
-  border: 1px solid #0c50a7;
+  transition: all 0.2s ease-in-out;
+  /* background: rgba(255, 255, 255, 0); */
 }
 
 .fab:before {
@@ -1720,7 +1727,7 @@ section {
   left: 0;
   top: 0;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0);
 }
 .fab-checkbox:checked ~ .fab:before {
   width: 90%;
@@ -1806,6 +1813,7 @@ section {
 
 .fab-checkbox:checked ~ .fab-wheel {
   transform: scale(1);
+  transition-delay: 0.5s;
 }
 .fab-action {
   position: absolute;
@@ -1833,33 +1841,33 @@ section {
 
 .fab-wheel .fab-action-1 {
   right: -6rem;
-  top: 4rem;
+  top: 8rem;
 }
 
 .fab-wheel .fab-action-2 {
-  right: 8rem;
-  top: 5.5rem;
+  right: 1.8rem;
+  top: 8rem;
 }
 .fab-wheel .fab-action-3 {
-  left: 2rem;
-  bottom: 1.4rem;
+  left: 8.5rem;
+  bottom: 1rem;
 }
 .fab-wheel .fab-action-4 {
-  left: 6rem;
-  bottom: -8rem;
+  left: 9rem;
+  bottom: -6rem;
 }
 
 .fab-wheel .fab-action-5 {
-  left: 18rem;
-  bottom: -11rem;
+  left: 16rem;
+  bottom: -9rem;
 }
 .fab-wheel .fab-action-6 {
-  left: 28rem;
-  bottom: -5rem;
+  left: 24rem;
+  bottom: -7rem;
 }
 .fab-wheel .fab-action-7 {
-  left: 30rem;
-  bottom: 5rem;
+  left: 25rem;
+  bottom: 1rem;
 }
 
 /* -------------------------------

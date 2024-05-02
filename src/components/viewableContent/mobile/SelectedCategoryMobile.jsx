@@ -1,186 +1,43 @@
-import { useEffect } from "react";
-import { gsap } from "gsap";
-
-function SelectedCategoryMobile({ titleKey, astroRef, setMobileBackground }) {
-  useEffect(() => {
-    if (astroRef.current) {
-      console.log("in leat onse");
-      let timeline = gsap.timeline({
-        defaults: { ease: "power1.out" },
-        scrollTrigger: {
-          trigger: ".industry-test",
-          start: "top bottom",
-          endTrigger: ".medical-test",
-          end: "top bottom",
-          scrub: 1,
-          // fastScrollEnd: true, // 2250,
-          markers: true,
-          onEnter: () => {
-            console.log("entered medicla section on mobile");
-            setMobileBackground([2]);
-          },
-          onLeaveBack: () => {
-            console.log("left back babby");
-            setMobileBackground([1]);
-          },
-          onEnterBack: () => setMobileBackground([2]),
-        },
-      });
-
-      timeline
-        .to(
-          astroRef.current.position,
-          { z: -1, x: -3, y: -7.5 },
-          "simultaneously"
-        )
-        .to(
-          astroRef.current.rotation,
-          { x: 0.1, y: Math.PI - 0.6 },
-          "simultaneously"
-        );
-
-      let medicalTimeline = gsap.timeline({
-        defaults: { ease: "power1.out" },
-        scrollTrigger: {
-          trigger: ".medical-test",
-          start: "center bottom",
-          endTrigger: ".micro-test",
-          end: "top center",
-          scrub: 1,
-          // fastScrollEnd: true, // 2250,
-          // markers: true,
-          onEnter: () => {
-            setMobileBackground([3]);
-          },
-        },
-      });
-
-      // medicalTimeline.to(
-      //   astroRef.current.position,
-      //   { y: -4 },
-      //   "simultaneously"
-      // );
-
-      let securityTimeline = gsap.timeline({
-        defaults: { ease: "power1.out" },
-        scrollTrigger: {
-          trigger: ".security-test",
-          start: "center bottom",
-          endTrigger: ".ai-test",
-          end: "top center",
-          scrub: 1,
-          // fastScrollEnd: true, // 2250,
-          // markers: true,
-          onEnter: () => {
-            setMobileBackground([4]);
-          },
-        },
-      });
-
-      // securityTimeline
-      //   .to(
-      //     astroRef.current.position,
-      //     { z: 3, x: 0, y: -6.5 },
-      //     "simultaneously"
-      //   )
-      //   .to(
-      //     astroRef.current.rotation,
-      //     { x: 0.5, y: 4.2, z: 0 },
-      //     "simultaneously"
-      //   );
-    }
-  }, [astroRef.current]);
-
-  return (
-    <div
-      style={{
-        // height: "330vh",
-        zIndex: 1,
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <div style={{ height: "96vh" }}></div>
-      <div
-        style={{
-          height: "20vh",
-          marginTop: "2em",
-        }}
-      ></div>
-      <IndustryText title={"Industry"} />
-      <MedicineText title={"Medicine"} />
-      <MicrosoftText title={"Microsoft"} />
-      <SecurityText title={"Security"} />
-      <AiText title={"Artifical Intelligence"} />
-      <MilitaryText title={"Military"} />
-      <CustomizationText title={"Customization"} />
-    </div>
-  );
-}
-
-export default SelectedCategoryMobile;
-
 export const IndustryText = ({ title }) => (
   <div
-    className={`industry-test`}
+    className={`industry-test fader`}
     style={{
+      height: "30vh",
       color: "white",
+      // fontSize: "3em",
       fontFamily: "gotham",
       display: "flex",
       flexDirection: "column",
-      height: "30vh",
-      // opacity: "0.8",
-      border: "1px solid red",
-      zIndex: 1,
+      // justifyContent: "space-between",
+      padding: "4px",
+      marginTop: "2em",
+      // zIndex: 243,
     }}
   >
     <div
       style={{
         position: "absolute",
+        zIndex: -1,
         height: "30vh",
-        // width: "100%",
+        width: "100%",
         backgroundImage:
           'url("/assets/images/backgrounds/taasia/Industry_Togle.jpg")',
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
-        filter: "blur(5px)",
-        border: "1px solid yellow",
+        filter: "blur(40px)",
       }}
     ></div>
+
     <div
-      style={{
-        flex: 1,
-        display: "flex",
-        flexDirection: "column",
-        padding: "4px",
-        textAlign: "center",
-        position: "absolute",
-      }}
+      className="scrolled-category-title"
+      style={{ marginTop: "1em", marginLeft: "0.5em" }}
     >
-      <div
-        className="scrolled-category-title"
-        style={{ marginTop: "1em", marginLeft: "0.5em" }}
-      >
-        {title} <span style={{ color: "#750414" }}>4.0</span>
-      </div>
-      {/* <LearnMoreBtn /> */}
-      <main className="content" data-form-type="card">
-        <a className="btn">
-          <span className="btn__circle"></span>
-          <span className="btn__white-circle">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              id="icon-arrow-right"
-              viewBox="0 0 21 12"
-            >
-              <path d="M17.104 5.072l-4.138-4.014L14.056 0l6 5.82-6 5.82-1.09-1.057 4.138-4.014H0V5.072h17.104z"></path>
-            </svg>
-          </span>
-          <span className="btn__text">Discover the project</span>
-        </a>
-      </main>
-      {/* <div className="scrolled-category-text-one" style={{ marginTop: "2em" }}>
+      {title} <span style={{ color: "#750414" }}>4.0</span>
+    </div>
+    <LearnMoreBtn />
+
+    {/* <div className="scrolled-category-text-one" style={{ marginTop: "2em" }}>
         <span>The world was recently</span>
         <span>introduced to the wonders of</span>
         <span>the industry 4.0 revolution</span>
@@ -193,7 +50,6 @@ export const IndustryText = ({ title }) => (
         <span>challenges they face and develop tailor-made</span>
         <span>solutions using XR and 3D technology that</span>
       </div> */}
-    </div>
   </div>
 );
 
@@ -202,7 +58,6 @@ export const MedicineText = ({ title }) => (
     className={`medical-test fader`}
     style={{
       height: "30vh",
-      top: "200%",
       color: "white",
       // fontSize: "3em",
       fontFamily: "gotham",
@@ -210,7 +65,7 @@ export const MedicineText = ({ title }) => (
       flexDirection: "column",
       // justifyContent: "space-between",
       padding: "4px",
-      marginTop: "2em",
+      marginTop: "3em",
     }}
   >
     <div
@@ -224,7 +79,7 @@ export const MedicineText = ({ title }) => (
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
-        filter: "blur(5px)",
+        filter: "blur(40px)",
       }}
     ></div>
     <div
@@ -276,7 +131,7 @@ export const MicrosoftText = ({ title }) => (
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
-        filter: "blur(5px)",
+        filter: "blur(40px)",
       }}
     ></div>
     <div className="scrolled-category-title" style={{ marginLeft: "0.5em" }}>
@@ -328,7 +183,7 @@ export const SecurityText = ({ title }) => (
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
-        filter: "blur(5px)",
+        filter: "blur(40px)",
       }}
     ></div>
     <div className="scrolled-category-title" style={{ marginLeft: "0.5em" }}>
@@ -383,7 +238,7 @@ export const AiText = ({ title }) => (
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
-        filter: "blur(5px)",
+        filter: "blur(40px)",
       }}
     ></div>
     <div className="scrolled-category-title" style={{ marginLeft: "0.5em" }}>
@@ -436,7 +291,7 @@ export const MilitaryText = ({ title }) => (
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
-        filter: "blur(5px)",
+        filter: "blur(40px)",
       }}
     ></div>
     <div className="scrolled-category-title" style={{ marginLeft: "0.5em" }}>
@@ -489,7 +344,7 @@ export const CustomizationText = ({ title }) => (
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
-        filter: "blur(5px)",
+        filter: "blur(40px)",
       }}
     ></div>
     <div className="scrolled-category-title" style={{ marginLeft: "0.5em" }}>
@@ -517,12 +372,12 @@ export const CustomizationText = ({ title }) => (
   </div>
 );
 
-export const ContactUsText = ({ title }) => (
+export const ContactUsText = ({ title = "Contact Us" }) => (
   <div
     className="contact-us-wrapper"
     style={{ position: "absolute", top: "800%", height: "60vh" }}
   >
-    <span className="contact-title">Contact us</span>
+    {/* <span className="contact-title">Contact us</span>
     <div className="contact-details-wrapper">
       <span>Feel free to contact us via:</span>
       <span style={{ marginTop: "0.5em", fontSize: "1em" }}>
@@ -542,9 +397,13 @@ export const ContactUsText = ({ title }) => (
           Here
         </span>
       </span>
-    </div>
+    </div> */}
   </div>
 );
+
+export const AboutUsText = ({ title }) => {
+  return <div>{title}</div>;
+};
 
 const LearnMoreBtn = () => {
   return (

@@ -4,10 +4,11 @@ import { Suspense, useEffect, useMemo, useState, useRef } from "react";
 import { useAppContext } from "../../../context/appContext";
 import { Camera } from "../../scene/Camera";
 import * as THREE from "three";
-import gsap from "gsap";
 import { Sparkles } from "@react-three/drei";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
-import SelectedCategoryMobile, {
+import {
+  AboutUsText,
   AiText,
   CustomizationText,
   IndustryText,
@@ -26,7 +27,11 @@ import {
   CUSTOMIZATION,
 } from "../../common/modelData";
 
+const ABOUT_US = 9;
+
 function HomeScreenMobile() {
+  const [isCentered, setIsCentered] = useState(false);
+
   const astroRef = useRef();
   const textContainerRef = useRef();
   const [isShouldShowCategoryInformation, setIsShouldShowCategoryInformation] =
@@ -41,6 +46,15 @@ function HomeScreenMobile() {
     isAstroModelDrawn,
     setCustomizeHasRendered,
   } = useAppContext();
+
+  const handleButtonClick = () => {
+    if (!isCentered) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflowY = "auto";
+    }
+    setIsCentered(!isCentered);
+  };
 
   useEffect(() => {
     console.log({ selectedCategory });
@@ -71,6 +85,46 @@ function HomeScreenMobile() {
 
   return (
     <>
+      <div className={isCentered ? "fab-wrapper centered" : "fab-wrapper"}>
+        <input
+          id="fabCheckbox"
+          type="checkbox"
+          className="fab-checkbox"
+          onClick={handleButtonClick}
+        />
+        <label className="fab" for="fabCheckbox">
+          {/* <span className="fab-dots fab-dots-1"></span>
+          <span className="fab-dots fab-dots-2"></span>
+          <span className="fab-dots fab-dots-3"></span> */}
+          <div className={isCentered ? "icon-1 a" : "icon-1"}></div>
+          <div className={isCentered ? "icon-2 c" : "icon-2"}></div>
+          <div className={isCentered ? "icon-3 b" : "icon-3"}></div>
+          <div className="clear"></div>
+        </label>
+        <div className="fab-wheel">
+          <a className="fab-action fab-action-1">
+            <i className="fas fa-question">Industry</i>
+          </a>
+          <a className="fab-action fab-action-2">
+            <i className="fas fa-book">Medicine</i>
+          </a>
+          <a className="fab-action fab-action-3">
+            <i className="fas fa-address-book">Microsoft</i>
+          </a>
+          <a className="fab-action fab-action-4">
+            <i className="fas fa-info">Security</i>
+          </a>
+          <a className="fab-action fab-action-5">
+            <i className="fas fa-info">A.I.</i>
+          </a>
+          <a className="fab-action fab-action-6">
+            <i className="fas fa-info">Military</i>
+          </a>
+          <a className="fab-action fab-action-7">
+            <i className="fas fa-info">Customization</i>
+          </a>
+        </div>
+      </div>
       <div
         style={{
           // minWidth: "100%",
@@ -80,10 +134,44 @@ function HomeScreenMobile() {
           overflow: "hidden",
           top: 0,
           left: 0,
-          background: backgrounds[mobileBackground],
+          background: isCentered
+            ? "rgb(0,0,0,0.8)"
+            : backgrounds[mobileBackground],
           // opacity: 0.4,
+          zIndex: isCentered ? 2 : 0,
+          transition: "background 1s",
         }}
-      ></div>
+      >
+        {isCentered ? (
+          <div
+            style={{
+              width: "100%",
+              borderTop: "1px solid rgb(255,255,255, 0.4)",
+              position: "absolute",
+              bottom: "5em",
+              left: 0,
+              height: "5em",
+              display: "flex",
+              justifyContent: "space-evenly",
+              alignItems: "center",
+            }}
+          >
+            <div className="animate-reveal">
+              <span style={{ color: "white", fontFamily: "gotham" }}>
+                About Us
+              </span>
+            </div>
+            <div className="animate-reveal">
+              <span style={{ color: "white", fontFamily: "gotham" }}>
+                Contact Us
+              </span>
+            </div>
+            <div className="linkdn-icon animate-reveal">
+              {<LinkedInIcon fontSize="large" sx={{ color: "white" }} />}
+            </div>
+          </div>
+        ) : null}
+      </div>
       <div
         style={{
           maxWidth: "100%",
@@ -92,6 +180,7 @@ function HomeScreenMobile() {
           justifyContent: "flex-end",
           alignItems: "center",
           transition: "background-image 0.8s",
+          // border: "1px solid yellow",
         }}
       >
         {isShouldShowCategoryInformation ? (
@@ -119,66 +208,49 @@ function HomeScreenMobile() {
             </button>
           </div>
         ) : null}
-        {/* <div style={{ position: "absolute", top: "1em" }}>
-          <div
-            className="text-animation"
-            style={{
-              color: "white",
-              fontSize: "2.5em",
-              marginRight: "2em",
-              fontFamily: "gotham",
-              transform: "translateX(-100px)", // Initial horizontal position
-            }}
-          >
-            Simply
-          </div>
-          <div
-            className="text-animation2"
-            style={{
-              color: "white",
-              fontSize: "2.5em",
-              marginLeft: "2em",
-              fontFamily: "gotham",
-              marginTop: "0.3em",
-              transform: "translateX(100px)", // Initial horizontal position
-            }}
-          >
-            Expand
-          </div>
-        </div> */}
         {startExpandedAnimation ? (
           <>
             <div
               style={{
-                bottom: "3em",
+                top: "0em",
                 left: "1em",
-                height: "15em",
+                height: "10em",
                 zIndex: 1,
                 position: "absolute",
-                width: "70%",
-                border: "1px solid yellow",
+                width: "50%",
               }}
-              className="container"
+              // className="container"
             >
               <div
-                style={{ fontSize: "2em", marginTop: "5em" }}
+                style={{
+                  fontSize: "2em",
+                  marginTop: "3em",
+                }}
                 className="text-animate simply-header"
               >
                 SIMPLY
               </div>
-              <div className="text-animate simply-header"> EXPAND</div>
+              <div
+                style={{
+                  textAlign: "right",
+                  fontSize: "2em",
+                }}
+                className="text-animate simply-header"
+              >
+                EXPAND
+              </div>
             </div>
           </>
         ) : null}
-        {/* 
-        {!true ? (
-          <SelectedCategoryMobile
-            titleKey={isShouldShowCategoryInformation}
-            astroRef={astroRef}
-            setMobileBackground={setMobileBackground}
-          />
-        ) : null} */}
-        <div>
+
+        <div
+          style={{
+            marginTop: "60vh",
+            position: "absolute",
+            top: 0,
+            zIndex: 1,
+          }}
+        >
           {categories.map((category, idx) => (
             <>{listData[idx + 2].text}</>
           ))}
@@ -196,13 +268,14 @@ function HomeScreenMobile() {
               color="pink" //{getSparkleColour(scrollArea.currentSection)}
             />
             <Suspense fallback={null}>
-              {/* <AstroModel
+              <AstroModel
                 url={"/assets/models/astronaut_new5 (3).glb"}
                 astroRef={astroRef}
-              /> */}
+              />
             </Suspense>
           </Canvas>
         </div>
+        {/* <div style={{ color: "white", fontSize: "3em" }}>about us</div> */}
       </div>
     </>
   );
@@ -319,4 +392,5 @@ const listData = {
   [MILITARY]: { text: <MilitaryText title={"Military"} /> },
   [AI]: { text: <AiText title={"Artifical Intelligence"} /> },
   [CUSTOMIZATION]: { text: <CustomizationText title={"Customization"} /> },
+  [ABOUT_US]: { text: <AboutUsText title={"About Us"} /> },
 };

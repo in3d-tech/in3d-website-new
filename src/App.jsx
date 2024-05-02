@@ -77,7 +77,9 @@ function App() {
         currentLanguage={currentLanguage}
       /> */}
       <div className="app-bg">
-        <Header />
+        {isMobileViewOnly ? null : (
+          <Header isMobileViewOnly={isMobileViewOnly} />
+        )}
         <Suspense fallback={null}>
           {selectedCategory ? <LazySelectedContent /> : null}
         </Suspense>
