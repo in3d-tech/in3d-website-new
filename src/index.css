@@ -1688,8 +1688,8 @@ section {
 
 .fab-wrapper {
   position: fixed;
-  top: 4em;
-  right: 3em;
+  top: 3.5em;
+  right: 2em;
   /* bottom: 30rem; */
   /* right: 40rem; */
   z-index: 112;
@@ -1739,6 +1739,10 @@ section {
 .fab:hover {
   background: #2c87e8;
   box-shadow: 0px 5px 20px 5px #81a4f1;
+}
+
+.fas {
+  font-family: gotham-old;
 }
 
 .fab-dots {

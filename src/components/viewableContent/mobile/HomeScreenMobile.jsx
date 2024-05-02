@@ -103,25 +103,25 @@ function HomeScreenMobile() {
         </label>
         <div className="fab-wheel">
           <a className="fab-action fab-action-1">
-            <i className="fas fa-question">Industry</i>
+            <i className="fas">Industry</i>
           </a>
           <a className="fab-action fab-action-2">
-            <i className="fas fa-book">Medicine</i>
+            <i className="fas">Medicine</i>
           </a>
           <a className="fab-action fab-action-3">
-            <i className="fas fa-address-book">Microsoft</i>
+            <i className="fas">Microsoft</i>
           </a>
           <a className="fab-action fab-action-4">
-            <i className="fas fa-info">Security</i>
+            <i className="fas">Security</i>
           </a>
           <a className="fab-action fab-action-5">
-            <i className="fas fa-info">A.I.</i>
+            <i className="fas">A.I.</i>
           </a>
           <a className="fab-action fab-action-6">
-            <i className="fas fa-info">Military</i>
+            <i className="fas">Military</i>
           </a>
           <a className="fab-action fab-action-7">
-            <i className="fas fa-info">Customization</i>
+            <i className="fas">Customization</i>
           </a>
         </div>
       </div>
