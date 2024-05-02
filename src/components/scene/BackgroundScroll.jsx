@@ -184,7 +184,39 @@ export function BackgroundScroll({
       <section id="sectionFour" className="section section-four"></section>
       <section id="sectionFive" className="section section-five"></section>
       <section id="sectionSix" className="section section-six"></section>
-      <section id="sectionSeven" className="section section-seven"></section>
+      <section id="sectionSeven" className="section section-seven">
+        {/* <div className="fab-wrapper">
+          <input id="fabCheckbox" type="checkbox" className="fab-checkbox" />
+          <label className="fab" for="fabCheckbox">
+            <span className="fab-dots fab-dots-1"></span>
+            <span className="fab-dots fab-dots-2"></span>
+            <span className="fab-dots fab-dots-3"></span>
+          </label>
+          <div className="fab-wheel">
+            <a className="fab-action fab-action-1">
+              <i className="fas fa-question">Industry</i>
+            </a>
+            <a className="fab-action fab-action-2">
+              <i className="fas fa-book">Medicine</i>
+            </a>
+            <a className="fab-action fab-action-3">
+              <i className="fas fa-address-book">Microsoft</i>
+            </a>
+            <a className="fab-action fab-action-4">
+              <i className="fas fa-info">Security</i>
+            </a>
+            <a className="fab-action fab-action-5">
+              <i className="fas fa-info">A.I.</i>
+            </a>
+            <a className="fab-action fab-action-6">
+              <i className="fas fa-info">Military</i>
+            </a>
+            <a className="fab-action fab-action-7">
+              <i className="fas fa-info">Customization</i>
+            </a>
+          </div>
+        </div> */}
+      </section>
       <section id="sectionEight" className="section section-eight"></section>
       <section id="sectionNine" className="section section-nine"></section>
       <section id="sectionTen" className="section section-ten">

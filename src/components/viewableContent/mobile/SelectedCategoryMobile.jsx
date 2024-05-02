@@ -120,7 +120,7 @@ function SelectedCategoryMobile({ titleKey, astroRef, setMobileBackground }) {
 
 export default SelectedCategoryMobile;
 
-const IndustryText = ({ title }) => (
+export const IndustryText = ({ title }) => (
   <div
     className={`industry-test`}
     style={{
@@ -130,19 +130,22 @@ const IndustryText = ({ title }) => (
       flexDirection: "column",
       height: "30vh",
       // opacity: "0.8",
+      border: "1px solid red",
+      zIndex: 1,
     }}
   >
     <div
       style={{
         position: "absolute",
         height: "30vh",
-        width: "100%",
+        // width: "100%",
         backgroundImage:
           'url("/assets/images/backgrounds/taasia/Industry_Togle.jpg")',
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         filter: "blur(5px)",
+        border: "1px solid yellow",
       }}
     ></div>
     <div
@@ -161,7 +164,22 @@ const IndustryText = ({ title }) => (
       >
         {title} <span style={{ color: "#750414" }}>4.0</span>
       </div>
-      <LearnMoreBtn />
+      {/* <LearnMoreBtn /> */}
+      <main className="content" data-form-type="card">
+        <a className="btn">
+          <span className="btn__circle"></span>
+          <span className="btn__white-circle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              id="icon-arrow-right"
+              viewBox="0 0 21 12"
+            >
+              <path d="M17.104 5.072l-4.138-4.014L14.056 0l6 5.82-6 5.82-1.09-1.057 4.138-4.014H0V5.072h17.104z"></path>
+            </svg>
+          </span>
+          <span className="btn__text">Discover the project</span>
+        </a>
+      </main>
       {/* <div className="scrolled-category-text-one" style={{ marginTop: "2em" }}>
         <span>The world was recently</span>
         <span>introduced to the wonders of</span>
@@ -179,7 +197,7 @@ const IndustryText = ({ title }) => (
   </div>
 );
 
-const MedicineText = ({ title }) => (
+export const MedicineText = ({ title }) => (
   <div
     className={`medical-test fader`}
     style={{
@@ -233,7 +251,7 @@ const MedicineText = ({ title }) => (
   </div>
 );
 
-const MicrosoftText = ({ title }) => (
+export const MicrosoftText = ({ title }) => (
   <div
     className={`micro-test fader`}
     style={{

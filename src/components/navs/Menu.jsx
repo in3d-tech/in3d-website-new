@@ -161,7 +161,7 @@ export const Header = () => {
               justifyContent: "space-between",
             }}
           >
-            <div>
+            <div className="animate-reveal">
               <MagnifyingGlass
                 title={"About Us"}
                 setIsHovered={setIsHovered}
@@ -171,7 +171,7 @@ export const Header = () => {
                 fontSize
               />
             </div>
-            <div className="linkdn-icon">
+            <div className="linkdn-icon animate-reveal">
               {<LinkedInIcon fontSize="large" />}
             </div>
 

@@ -5,7 +5,26 @@ import { useAppContext } from "../../../context/appContext";
 import { Camera } from "../../scene/Camera";
 import * as THREE from "three";
 import gsap from "gsap";
-import SelectedCategoryMobile from "./SelectedCategoryMobile";
+import { Sparkles } from "@react-three/drei";
+
+import SelectedCategoryMobile, {
+  AiText,
+  CustomizationText,
+  IndustryText,
+  MedicineText,
+  MicrosoftText,
+  MilitaryText,
+  SecurityText,
+} from "./SelectedCategoryMobile";
+import {
+  INDUSTRY,
+  MEDICINE,
+  MICROSOFT,
+  SECURITY,
+  MILITARY,
+  AI,
+  CUSTOMIZATION,
+} from "../../common/modelData";
 
 function HomeScreenMobile() {
   const astroRef = useRef();
@@ -137,55 +156,50 @@ function HomeScreenMobile() {
                 zIndex: 1,
                 position: "absolute",
                 width: "70%",
+                border: "1px solid yellow",
               }}
               className="container"
             >
-              <span
+              <div
                 style={{ fontSize: "2em", marginTop: "5em" }}
                 className="text-animate simply-header"
               >
-                SIMPLY EXPAND
-              </span>
+                SIMPLY
+              </div>
+              <div className="text-animate simply-header"> EXPAND</div>
             </div>
           </>
         ) : null}
-
-        {true ? (
+        {/* 
+        {!true ? (
           <SelectedCategoryMobile
             titleKey={isShouldShowCategoryInformation}
             astroRef={astroRef}
             setMobileBackground={setMobileBackground}
           />
-        ) : null}
-
-        {/* {isShouldShowCategoryInformation ? (
-          <SelectedCategoryMobile titleKey={isShouldShowCategoryInformation} />
-        ) : (
-          <div className="mobile-categories-wrapper">
-            {categories.map((category, idx) => (
-              <Category
-                category={category}
-                key={`categoryMobile${idx}`}
-                setIsShouldShowCategoryInformation={
-                  setIsShouldShowCategoryInformation
-                }
-                idx={idx}
-                scrollToElementById={scrollToElementById}
-              />
-            ))}
-          </div>
-        )} */}
+        ) : null} */}
+        <div>
+          {categories.map((category, idx) => (
+            <>{listData[idx + 2].text}</>
+          ))}
+        </div>
         <div className="canvas-container-mobile">
           <Canvas>
             {/* <LoaderComponent /> */}
             <ambientLight intensity={0.8} />
             <directionalLight intensity={3} />
             <Camera />
+            <Sparkles
+              count={300}
+              scale={10}
+              size={2}
+              color="pink" //{getSparkleColour(scrollArea.currentSection)}
+            />
             <Suspense fallback={null}>
-              <AstroModel
+              {/* <AstroModel
                 url={"/assets/models/astronaut_new5 (3).glb"}
                 astroRef={astroRef}
-              />
+              /> */}
             </Suspense>
           </Canvas>
         </div>
@@ -195,33 +209,6 @@ function HomeScreenMobile() {
 }
 
 export default HomeScreenMobile;
-
-const Category = ({
-  category,
-  idx,
-  setIsShouldShowCategoryInformation,
-  scrollToElementById,
-}) => {
-  return (
-    <button
-      onClick={() => {
-        setIsShouldShowCategoryInformation(idx);
-        setTimeout(() => {
-          scrollToElementById();
-        }, 200);
-      }}
-      className="mobile-category-wrapper"
-    >
-      <span
-        style={{
-          fontSize: "0.9em",
-        }}
-      >
-        {category}
-      </span>
-    </button>
-  );
-};
 
 const backgrounds = {
   1: 'url("/assets/images/backgrounds/Astro_1_Background.webp")',
@@ -323,3 +310,13 @@ function useGLTFAnimations(scene, animations) {
 
   return mixer;
 }
+
+const listData = {
+  [INDUSTRY]: { text: <IndustryText title={"Industry"} /> },
+  [MEDICINE]: { text: <MedicineText title={"Medicine"} /> },
+  [MICROSOFT]: { text: <MicrosoftText title={"Microsoft"} /> },
+  [SECURITY]: { text: <SecurityText title={"Security"} /> },
+  [MILITARY]: { text: <MilitaryText title={"Military"} /> },
+  [AI]: { text: <AiText title={"Artifical Intelligence"} /> },
+  [CUSTOMIZATION]: { text: <CustomizationText title={"Customization"} /> },
+};

@@ -18,12 +18,12 @@ export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
   useEffect(() => {
     // return;
     // if (isMobileViewOnly && showLoading) {
-    if (isMobileViewOnly && customizeHasRendered) {
-      // const loadingScreen = setTimeout(() => setShowloadingScreen(false), 2000);
+    if (isMobileViewOnly) {
+      const loadingScreen = setTimeout(() => setShowloadingScreen(false), 2000);
       const showLoad = setTimeout(() => setShowLoading(false), 2000);
       document.body.style.overflowY = "auto";
       return () => {
-        // clearTimeout(loadingScreen);
+        clearTimeout(loadingScreen);
         clearTimeout(showLoad);
       };
     }
