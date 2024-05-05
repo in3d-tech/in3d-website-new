@@ -16,6 +16,8 @@ export default function AppContextProvider({ children }) {
   const [titleOnMainPageHovered, setTitleOnMainPageHovered] = useState("");
   const [modelAnimationIsHalfWay, setModelAnimationIsHalfWay] = useState(null);
   const [customizeHasRendered, setCustomizeHasRendered] = useState(false);
+  const [selectedMenuActionMobile, setSelectedMenuActionMobile] =
+    useState(null);
 
   return (
     <AppContext.Provider
@@ -40,6 +42,8 @@ export default function AppContextProvider({ children }) {
         setModelAnimationIsHalfWay,
         customizeHasRendered,
         setCustomizeHasRendered,
+        selectedMenuActionMobile,
+        setSelectedMenuActionMobile,
       }}
     >
       {children}
@@ -72,6 +76,8 @@ export function useAppContext() {
       setModelAnimationIsHalfWay: () => {},
       customizeHasRendered: null,
       setCustomizeHasRendered: () => {},
+      selectedMenuActionMobile: null,
+      setSelectedMenuActionMobile: () => {},
     };
   }
 

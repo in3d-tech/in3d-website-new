@@ -1,376 +1,132 @@
-export const IndustryText = ({ title }) => (
-  <div
-    className={`industry-test fader`}
-    style={{
-      height: "30vh",
-      color: "white",
-      // fontSize: "3em",
-      fontFamily: "gotham",
-      display: "flex",
-      flexDirection: "column",
-      // justifyContent: "space-between",
-      padding: "4px",
-      marginTop: "3em",
-      // zIndex: 243,
-    }}
-  >
+export const HomeScreenCategoryText = ({
+  title,
+  idx,
+  selectedMenuActionMobile,
+  setSelectedMenuActionMobile,
+}) => {
+  const categoryDataByIndex = {
+    0: {
+      title: (
+        <>
+          Industry <span style={{ color: "#750414" }}>4.0</span>
+        </>
+      ),
+      bgImage: 'url("/assets/images/backgrounds/taasia/Industry_Togle.jpg")',
+      text: "Together with our clients we map out the challenges they face and develop tailor made solutions using XR and 3D technology that creates an innovative visual interface between men and machine.",
+    },
+    1: {
+      title: (
+        <>
+          <span style={{ color: "#750414" }}>M</span>
+          edicine
+        </>
+      ),
+      bgImage: 'url("/assets/images/backgrounds/medicine/Medical_Togle.jpg")',
+      text: "Using Extended Reality (XR) we at in3D became pioneers in development of XR products for medical organizations, collaborating together to empower innovation and efficiency for clinics and hospitals.",
+    },
+    2: {
+      title: (
+        <>
+          <span style={{ color: "#750414" }}>M</span>
+          icrosoft
+        </>
+      ),
+      bgImage:
+        'url("/assets/images/backgrounds/microsoft/Microsoft_Tugle.jpg")',
+      text: "In3D is the official and the inclusive Mixed Reality (MR) partner of Microsoft Israel",
+    },
+    3: {
+      title: (
+        <>
+          {" "}
+          <span style={{ color: "#750414" }}>S</span>
+          ecurity
+        </>
+      ),
+      bgImage:
+        'url("/assets/images/backgrounds/security/Security_Togle_Finish2.jpg")',
+      text: "Thanks to years of collaboration with defense industries, we gained the needed experience, knowledge and tools to provide quick and out of the box solutions that are tailored to the industries unique requirements.",
+    },
+    4: {
+      title: (
+        <>
+          <span style={{ color: "#750414" }}>A</span>
+          rtifical Intelligence
+        </>
+      ),
+      bgImage: 'url("/assets/images/backgrounds/ai/Ai_Tugle_Finish.jpg")',
+      text: " The combination of a 3D XR software environment with A.I creates not only an advanced and innovative hardware and software operation but a genuine cooperation between man and machine.",
+    },
+    5: {
+      title: (
+        <>
+          <span style={{ color: "#750414" }}>M</span>
+          ilitary
+        </>
+      ),
+      bgImage:
+        'url("/assets/images/backgrounds/military/Militery_Togle_Finish2.jpg")',
+      text: "We deliver top-of-the-line technology to all of our important industries, through development of complex simulators, XR platforms, and tailored applications that are now in the service of this significant sector.",
+    },
+    6: {
+      title: (
+        <>
+          <span style={{ color: "#750414" }}>C</span>
+          ustomization
+        </>
+      ),
+      bgImage:
+        'url("/assets/images/backgrounds/customize/Customize_Togle_Finish.jpg")',
+      text: "As specialists we keep an amazing team of developers, 3D generalists, interface and graphics artists, and product designers just so we can provide our clients with the flexibility and abilities needed to deliver the best product.",
+    },
+  };
+
+  return (
     <div
+      className={`industry-test fader`}
       style={{
-        position: "absolute",
-        zIndex: -1,
         height: "30vh",
-        width: "100%",
-        backgroundImage:
-          'url("/assets/images/backgrounds/taasia/Industry_Togle.jpg")',
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-        filter: "blur(40px)",
+        color: "white",
+        fontFamily: "gotham",
+        display: "flex",
+        flexDirection: "column",
+        padding: "4px",
+        marginTop: "3em",
+        borderTop: "1px solid rgb(255, 255, 255, 0.4)",
       }}
-    ></div>
-
-    <div
-      className="scrolled-category-title"
-      style={{ marginTop: "1em", marginLeft: "0.5em" }}
     >
-      {title} <span style={{ color: "#750414" }}>4.0</span>
-    </div>
-    <LearnMoreBtn />
-
-    {/* <div className="scrolled-category-text-one" style={{ marginTop: "2em" }}>
-        <span>The world was recently</span>
-        <span>introduced to the wonders of</span>
-        <span>the industry 4.0 revolution</span>
-      </div>
       <div
-        className="scrolled-category-text-two"
-        style={{ marginTop: "1em", fontSize: "1.2em" }}
+        style={{
+          position: "absolute",
+          zIndex: -1,
+          height: "30vh",
+          width: "100%",
+          backgroundImage:
+            categoryDataByIndex[idx]?.bgImage ||
+            'url("/assets/images/backgrounds/taasia/Industry_Togle.jpg")',
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          filter: "blur(40px)",
+        }}
+      ></div>
+
+      <div
+        className="scrolled-category-title"
+        style={{ marginTop: "1em", marginLeft: "0.5em" }}
       >
-        <span>Together with our clients we map out the</span>
-        <span>challenges they face and develop tailor-made</span>
-        <span>solutions using XR and 3D technology that</span>
-      </div> */}
-  </div>
-);
-
-export const MedicineText = ({ title }) => (
-  <div
-    className={`medical-test fader`}
-    style={{
-      height: "30vh",
-      color: "white",
-      // fontSize: "3em",
-      fontFamily: "gotham",
-      display: "flex",
-      flexDirection: "column",
-      // justifyContent: "space-between",
-      padding: "4px",
-      marginTop: "1em",
-    }}
-  >
-    <div
-      style={{
-        position: "absolute",
-        zIndex: -1,
-        height: "30vh",
-        width: "100%",
-        backgroundImage:
-          'url("/assets/images/backgrounds/medicine/Medical_Togle.jpg")',
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-        filter: "blur(40px)",
-      }}
-    ></div>
-    <div
-      className="scrolled-category-title"
-      style={{ marginTop: "1em", marginLeft: "0.5em" }}
-    >
-      <span style={{ color: "#750414" }}>M</span>
-      {title.substring(1)}
-    </div>
-    <LearnMoreBtn />
-
-    {/* <div className="scrolled-category-text-one" style={{ marginTop: "2em" }}>
-      <span>The world of medicine is one</span>
-      <span>of the most innovative sectors</span>
-      <span>in the world</span>
-    </div>
-    <div
-      className="scrolled-category-text-two"
-      style={{ marginTop: "4em", fontSize: "1.2em" }}
-    >
-      <span>Using Extended Reality (XR) we at in3D became pioneers in</span>
-      <span>development of XR products for medical organizations</span>
-    </div> */}
-  </div>
-);
-
-export const MicrosoftText = ({ title }) => (
-  <div
-    className={`micro-test fader`}
-    style={{
-      height: "30vh",
-      color: "white",
-      // fontSize: "3em",
-      fontFamily: "gotham",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      marginTop: "1em",
-    }}
-  >
-    <div
-      style={{
-        position: "absolute",
-        zIndex: -1,
-        height: "30vh",
-        width: "100%",
-        backgroundImage:
-          'url("/assets/images/backgrounds/microsoft/Microsoft_Tugle.jpg")',
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-        filter: "blur(40px)",
-      }}
-    ></div>
-    <div className="scrolled-category-title" style={{ marginLeft: "0.5em" }}>
-      <span style={{ color: "#750414" }}>M</span>
-      {title.substring(1)}
-    </div>
-    <LearnMoreBtn />
-
-    {/* <div className="scrolled-category-text-one">
-      <span>In3D is the official and inclusive</span>
-      <span>Mixed Reality (MR) partner</span>
-      <span>of Microsoft Israel</span>
-    </div>
-    <div className="scrolled-category-text-two">
-      <span>
-        As partners, in3D is your perfect go to for any Microsoft MR products.
+        {categoryDataByIndex[idx]?.title}
+      </div>
+      <span style={{ textAlign: "center", padding: "1em", fontSize: "0.8em" }}>
+        {categoryDataByIndex[idx]?.text}
       </span>
-      <span>
-        In3D and Microsoft's teams share a strong connection and a combined
-        vison on the important roles of MR technology
-      </span>
-    </div> */}
-  </div>
-);
-
-export const SecurityText = ({ title }) => (
-  <div
-    className={`security-test fader`}
-    style={{
-      color: "white",
-      // fontSize: "3em",
-      fontFamily: "gotham",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      // justifyContent: "space-between",
-      height: "30vh",
-      marginTop: "1em",
-    }}
-  >
-    <div
-      style={{
-        position: "absolute",
-        zIndex: -1,
-        height: "30vh",
-        width: "100%",
-        backgroundImage:
-          'url("/assets/images/backgrounds/security/Security_Togle_Finish2.jpg")',
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-        filter: "blur(40px)",
-      }}
-    ></div>
-    <div className="scrolled-category-title" style={{ marginLeft: "0.5em" }}>
-      <span style={{ color: "#750414" }}>S</span>
-      {title.substring(1)}
+      <LearnMoreBtn
+        setSelectedMenuActionMobile={setSelectedMenuActionMobile}
+        idx={idx}
+      />
     </div>
-    <div className="scrolled-category-text-one">
-      <LearnMoreBtn />
-
-      {/* <span>
-        Thanks to years of collaboration with defense industries, we gained the
-      </span>
-      <span>
-        needed experience, knowledge and tools to provide quick and out of the
-        box solutions that are tailored to the industries unique requirements
-      </span>
-    </div>
-    <div className="scrolled-category-text-two">
-      <span>
-        As partners, in3D is your perfect go to for any Microsoft MR products.
-      </span> */}
-
-      {/* <span>efficiency for clinics and hospitals</span> */}
-    </div>
-  </div>
-);
-
-export const AiText = ({ title }) => (
-  <div
-    className={`ai-test fader`}
-    style={{
-      // width: "34%",
-
-      color: "white",
-      // fontSize: "3em",
-      fontFamily: "gotham",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      height: "30vh",
-      marginTop: "1em",
-    }}
-  >
-    <div
-      style={{
-        position: "absolute",
-        zIndex: -1,
-        height: "30vh",
-        width: "100%",
-        backgroundImage:
-          'url("/assets/images/backgrounds/ai/Ai_Tugle_Finish.jpg")',
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-        filter: "blur(40px)",
-      }}
-    ></div>
-    <div className="scrolled-category-title" style={{ marginLeft: "0.5em" }}>
-      <span style={{ color: "#750414" }}>A</span>
-      {title.substring(1)}
-    </div>
-    <LearnMoreBtn />
-
-    {/* <div className="scrolled-category-text-one">
-      <span>Here is some basic information about our work with AI.</span>
-      <span>
-        needed experience, knowledge and tools to provide quick and out of the
-        box
-      </span>
-    </div>
-    <div className="scrolled-category-text-two">
-      <span>
-        Were here to let you know, in3D is your perfect go to for any AI
-        products.
-      </span>
-
-    </div> */}
-  </div>
-);
-
-export const MilitaryText = ({ title }) => (
-  <div
-    className={`fader`}
-    style={{
-      // width: "34%",
-
-      color: "white",
-      // fontSize: "3em",
-      fontFamily: "gotham",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      height: "30vh",
-      marginTop: "1em",
-    }}
-  >
-    <div
-      style={{
-        position: "absolute",
-        zIndex: -1,
-        height: "30vh",
-        width: "100%",
-        backgroundImage:
-          'url("/assets/images/backgrounds/military/Militery_Togle_Finish2.jpg")',
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-        filter: "blur(40px)",
-      }}
-    ></div>
-    <div className="scrolled-category-title" style={{ marginLeft: "0.5em" }}>
-      <span style={{ color: "#750414" }}>M</span>
-      {title.substring(1)}
-    </div>
-    <LearnMoreBtn />
-
-    {/* <div className="scrolled-category-text-one">
-      <span>Thanks to years of collaboration with defense industries, s</span>
-      <span>we gained the needed experience, knowledge and</span>
-      <span>
-        tools to provide quick and out of the box solutions that are tailored to
-        the industries unique requirement
-      </span>
-    </div>
-    <div className="scrolled-category-text-two">
-      <span>
-        Were here to let you know, in3D is your perfect
-        <span style={{ fontStyle: "italic" }}> go to</span> for any AI products.
-      </span>
-
-    </div> */}
-  </div>
-);
-
-export const CustomizationText = ({ title }) => (
-  <div
-    className={`fader`}
-    style={{
-      // width: "34%",
-      color: "white",
-      // fontSize: "3em",
-      fontFamily: "gotham",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      height: "30vh",
-      marginTop: "1em",
-    }}
-  >
-    <div
-      style={{
-        position: "absolute",
-        zIndex: -1,
-        height: "30vh",
-        width: "100%",
-        backgroundImage:
-          'url("/assets/images/backgrounds/customize/Customize_Togle_Finish.jpg")',
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-        filter: "blur(40px)",
-      }}
-    ></div>
-    <div className="scrolled-category-title" style={{ marginLeft: "0.5em" }}>
-      <span style={{ color: "#750414" }}>C</span>
-      {title.substring(1)}
-    </div>
-    <LearnMoreBtn />
-
-    {/* <div className="scrolled-category-text-one">
-      <span>We specialize in 3D and Extended Reality (EX),</span>
-      <span>and as specialists we keep an amazing team of developers,</span>
-      <span>
-        3D generalists, interface and graphics artists, and product designers
-        just so we can provide our clients with the flexibility and abilities
-        needed to deliver the best product
-      </span>
-    </div>
-    <div className="scrolled-category-text-two">
-      <span>
-        Were here to let you know, in3D is your perfect go to for any AI
-        products.
-      </span>
-
-    </div> */}
-  </div>
-);
+  );
+};
 
 export const ContactUsText = ({ title = "Contact Us" }) => (
   <div
@@ -405,10 +161,13 @@ export const AboutUsText = ({ title }) => {
   return <div>{title}</div>;
 };
 
-const LearnMoreBtn = () => {
+const LearnMoreBtn = ({ setSelectedMenuActionMobile, idx }) => {
   return (
     <div style={{ marginTop: "1em", marginLeft: "1em" }}>
-      <button className="cta">
+      <button
+        // onClick={() => setSelectedMenuActionMobile(`fab-action-${idx + 1}`)}
+        className="cta"
+      >
         <span className="hover-underline-animation"> Learn more </span>
         <svg
           id="arrow-horizontal"

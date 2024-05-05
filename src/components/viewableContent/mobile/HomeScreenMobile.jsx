@@ -6,34 +6,15 @@ import { Camera } from "../../scene/Camera";
 import * as THREE from "three";
 import { Sparkles } from "@react-three/drei";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-
-import {
-  AboutUsText,
-  AiText,
-  CustomizationText,
-  IndustryText,
-  MedicineText,
-  MicrosoftText,
-  MilitaryText,
-  SecurityText,
-} from "./SelectedCategoryMobile";
-import {
-  INDUSTRY,
-  MEDICINE,
-  MICROSOFT,
-  SECURITY,
-  MILITARY,
-  AI,
-  CUSTOMIZATION,
-} from "../../common/modelData";
+import { HomeScreenCategoryText } from "./SelectedCategoryMobile";
 
 const ABOUT_US = 9;
 
 function HomeScreenMobile() {
   const [isCentered, setIsCentered] = useState(false);
+  const [selectedAction, setSelectedAction] = useState(null);
 
   const astroRef = useRef();
-  const textContainerRef = useRef();
   const [isShouldShowCategoryInformation, setIsShouldShowCategoryInformation] =
     useState(false);
   const [startExpandedAnimation, setStartExpandedAnimation] = useState(false);
@@ -41,13 +22,13 @@ function HomeScreenMobile() {
   const {
     selectedCategory,
     mobileBackground,
-    setMobileBackground,
-    renderModels,
     isAstroModelDrawn,
     setCustomizeHasRendered,
+    selectedMenuActionMobile,
+    setSelectedMenuActionMobile,
   } = useAppContext();
 
-  const handleButtonClick = () => {
+  const handleMenuClick = () => {
     if (!isCentered) {
       document.body.style.overflow = "hidden";
     } else {
@@ -56,8 +37,11 @@ function HomeScreenMobile() {
     setIsCentered(!isCentered);
   };
 
+  const handleCategoryClick = (action) => {
+    setSelectedAction(action);
+  };
+
   useEffect(() => {
-    console.log({ selectedCategory });
     if (selectedCategory) {
       scrollToElementById();
     }
@@ -90,38 +74,126 @@ function HomeScreenMobile() {
           id="fabCheckbox"
           type="checkbox"
           className="fab-checkbox"
-          onClick={handleButtonClick}
+          onClick={() => {
+            if (!isCentered) setSelectedMenuActionMobile(null);
+            handleMenuClick();
+          }}
         />
+        {/* {!selectedMenuActionMobile ? ( */}
         <label className="fab" for="fabCheckbox">
-          {/* <span className="fab-dots fab-dots-1"></span>
-          <span className="fab-dots fab-dots-2"></span>
-          <span className="fab-dots fab-dots-3"></span> */}
           <div className={isCentered ? "icon-1 a" : "icon-1"}></div>
           <div className={isCentered ? "icon-2 c" : "icon-2"}></div>
           <div className={isCentered ? "icon-3 b" : "icon-3"}></div>
           <div className="clear"></div>
         </label>
+        {/* ) : null} */}
         <div className="fab-wheel">
-          <a className="fab-action fab-action-1">
-            <i className="fas">Industry</i>
+          <a
+            className={`fab-action fab-action-1  ${
+              selectedMenuActionMobile &&
+              selectedMenuActionMobile !== "fab-action-1"
+                ? "fade-out"
+                : ""
+            } ${selectedMenuActionMobile == "fab-action-1" ? "grow" : ""}`}
+          >
+            <button
+              onClick={() => setSelectedMenuActionMobile(`fab-action-1`)}
+              className="fas"
+            >
+              {selectedMenuActionMobile == "fab-action-1" ? "" : "Industry"}
+            </button>
           </a>
-          <a className="fab-action fab-action-2">
-            <i className="fas">Medicine</i>
+          <a
+            className={`fab-action fab-action-2  ${
+              selectedMenuActionMobile &&
+              selectedMenuActionMobile !== "fab-action-2"
+                ? "fade-out"
+                : ""
+            } ${selectedMenuActionMobile == "fab-action-2" ? "grow" : ""}`}
+          >
+            <button
+              onClick={() => {
+                setSelectedMenuActionMobile(`fab-action-2`);
+              }}
+              className="fas"
+            >
+              {selectedMenuActionMobile == "fab-action-2" ? "" : "Medicine"}
+            </button>
           </a>
-          <a className="fab-action fab-action-3">
-            <i className="fas">Microsoft</i>
+          <a
+            className={`fab-action fab-action-3  ${
+              selectedMenuActionMobile &&
+              selectedMenuActionMobile !== "fab-action-3"
+                ? "fade-out"
+                : ""
+            } ${selectedMenuActionMobile == "fab-action-3" ? "grow" : ""}`}
+          >
+            <button
+              onClick={() => setSelectedMenuActionMobile(`fab-action-3`)}
+              className="fas"
+            >
+              {selectedMenuActionMobile == "fab-action-3" ? "" : "Microsoft"}
+            </button>
           </a>
-          <a className="fab-action fab-action-4">
-            <i className="fas">Security</i>
+          <a
+            className={`fab-action fab-action-4  ${
+              selectedMenuActionMobile &&
+              selectedMenuActionMobile !== "fab-action-4"
+                ? "fade-out"
+                : ""
+            } ${selectedMenuActionMobile == "fab-action-4" ? "grow" : ""}`}
+          >
+            <button
+              onClick={() => setSelectedMenuActionMobile(`fab-action-4`)}
+              className="fas"
+            >
+              {selectedMenuActionMobile == "fab-action-4" ? "" : "Security"}
+            </button>
           </a>
-          <a className="fab-action fab-action-5">
-            <i className="fas">A.I.</i>
+          <a
+            className={`fab-action fab-action-5  ${
+              selectedMenuActionMobile &&
+              selectedMenuActionMobile !== "fab-action-5"
+                ? "fade-out"
+                : ""
+            } ${selectedMenuActionMobile == "fab-action-5" ? "grow" : ""}`}
+          >
+            <button
+              onClick={() => setSelectedMenuActionMobile(`fab-action-5`)}
+              className="fas"
+            >
+              {selectedMenuActionMobile == "fab-action-5" ? "" : "A.I."}
+            </button>
           </a>
-          <a className="fab-action fab-action-6">
-            <i className="fas">Military</i>
+          <a
+            className={`fab-action fab-action-6  ${
+              selectedMenuActionMobile &&
+              selectedMenuActionMobile !== "fab-action-6"
+                ? "fade-out"
+                : ""
+            } ${selectedMenuActionMobile == "fab-action-6" ? "grow" : ""}`}
+          >
+            <button
+              onClick={() => setSelectedMenuActionMobile(`fab-action-6`)}
+              className="fas"
+            >
+              {selectedMenuActionMobile == "fab-action-6" ? "" : "Military"}
+            </button>
           </a>
-          <a className="fab-action fab-action-7">
-            <i className="fas">Customization</i>
+          <a
+            className={`fab-action fab-action-7  ${
+              selectedMenuActionMobile &&
+              selectedMenuActionMobile !== "fab-action-7"
+                ? "fade-out"
+                : ""
+            } ${selectedMenuActionMobile == "fab-action-7" ? "grow" : ""}`}
+          >
+            <button
+              onClick={() => setSelectedMenuActionMobile(`fab-action-7`)}
+              className="fas"
+            >
+              {selectedMenuActionMobile == "fab-action-7" ? "" : "Customize"}
+            </button>
           </a>
         </div>
       </div>
@@ -245,14 +317,19 @@ function HomeScreenMobile() {
 
         <div
           style={{
-            marginTop: "60vh",
+            marginTop: "68vh",
             position: "absolute",
+            width: "98%",
             top: 0,
             zIndex: 1,
           }}
         >
           {categories.map((category, idx) => (
-            <>{listData[idx + 2].text}</>
+            <HomeScreenCategoryText
+              idx={idx}
+              selectedMenuActionMobile={selectedMenuActionMobile}
+              setSelectedMenuActionMobile={setSelectedMenuActionMobile}
+            />
           ))}
         </div>
         <div className="canvas-container-mobile">
@@ -383,14 +460,3 @@ function useGLTFAnimations(scene, animations) {
 
   return mixer;
 }
-
-const listData = {
-  [INDUSTRY]: { text: <IndustryText title={"Industry"} /> },
-  [MEDICINE]: { text: <MedicineText title={"Medicine"} /> },
-  [MICROSOFT]: { text: <MicrosoftText title={"Microsoft"} /> },
-  [SECURITY]: { text: <SecurityText title={"Security"} /> },
-  [MILITARY]: { text: <MilitaryText title={"Military"} /> },
-  [AI]: { text: <AiText title={"Artifical Intelligence"} /> },
-  [CUSTOMIZATION]: { text: <CustomizationText title={"Customization"} /> },
-  [ABOUT_US]: { text: <AboutUsText title={"About Us"} /> },
-};
