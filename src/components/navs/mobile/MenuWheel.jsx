@@ -15,6 +15,7 @@ export function MenuWheel({
   handleMenuClick,
   isMenuCentered,
   setSelectedCategory,
+  selectedCategory,
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
 

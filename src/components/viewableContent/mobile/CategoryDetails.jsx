@@ -16,7 +16,7 @@ function SelectedCategory({ title = "Industry" }) {
   }, []);
 
   return (
-    <div className="tester">
+    <div className="tester fade-in">
       <div style={{ position: "fixed", top: "1em", left: "1em", zIndex: 3 }}>
         <ArrowBackIcon
           fontSize="large"
@@ -34,7 +34,9 @@ function SelectedCategory({ title = "Industry" }) {
         <div style={{ fontSize: "3.5em", marginTop: "1.5em" }}>
           {data.title}
         </div>
-        <div style={{ width: "90%", marginTop: "2em" }}> {data.text}</div>
+        <div style={{ width: "90%", marginTop: "2em", fontFamily: "gotham" }}>
+          {data.text}
+        </div>
       </div>
     </div>
   );

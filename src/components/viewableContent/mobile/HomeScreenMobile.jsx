@@ -28,13 +28,13 @@ function HomeScreenMobile() {
     setSelectedMenuActionMobile,
   } = useAppContext();
 
-  const handleMenuClick = () => {
+  const handleMenuClick = (wasCategoryClicked) => {
     if (!isMenuCentered) {
       document.body.style.overflow = "hidden";
     } else {
       if (!selectedCategory) document.body.style.overflowY = "auto";
     }
-    setIsMenuCentered(!isMenuCentered);
+    if (!wasCategoryClicked) setIsMenuCentered(!isMenuCentered);
   };
 
   const handleCategoryClick = (action) => {
@@ -59,6 +59,7 @@ function HomeScreenMobile() {
         isMenuCentered={isMenuCentered}
         selectedMenuActionMobile={selectedMenuActionMobile}
         setSelectedCategory={setSelectedCategory}
+        selectedCategory={selectedCategory}
       />
       <div
         className={isMenuCentered ? "mobile-menu-opened-bg" : ""}
