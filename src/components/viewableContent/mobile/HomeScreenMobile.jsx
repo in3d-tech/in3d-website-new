@@ -32,7 +32,7 @@ function HomeScreenMobile() {
     if (!isMenuCentered) {
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflowY = "auto";
+      if (!selectedCategory) document.body.style.overflowY = "auto";
     }
     setIsMenuCentered(!isMenuCentered);
   };
@@ -94,43 +94,9 @@ function HomeScreenMobile() {
           justifyContent: "flex-end",
           alignItems: "center",
           transition: "background-image 0.8s",
-          // border: "1px solid yellow",
         }}
       >
-        {startExpandedAnimation ? (
-          <>
-            <div
-              style={{
-                top: "0em",
-                left: "1em",
-                height: "10em",
-                zIndex: 1,
-                position: "absolute",
-                width: "50%",
-              }}
-              // className="container"
-            >
-              <div
-                style={{
-                  fontSize: "2em",
-                  marginTop: "3em",
-                }}
-                className="text-animate simply-header"
-              >
-                SIMPLY
-              </div>
-              <div
-                style={{
-                  textAlign: "right",
-                  fontSize: "2em",
-                }}
-                className="text-animate simply-header"
-              >
-                EXPAND
-              </div>
-            </div>
-          </>
-        ) : null}
+        {startExpandedAnimation ? <TitleWithAnimation /> : null}
 
         <div
           style={{
@@ -150,26 +116,7 @@ function HomeScreenMobile() {
             />
           ))}
         </div>
-        <div className="canvas-container-mobile">
-          <Canvas>
-            {/* <LoaderComponent /> */}
-            <ambientLight intensity={0.8} />
-            <directionalLight intensity={3} />
-            <Camera />
-            <Sparkles
-              count={300}
-              scale={10}
-              size={2}
-              color="pink" //{getSparkleColour(scrollArea.currentSection)}
-            />
-            <Suspense fallback={null}>
-              <AstroModel
-                url={"/assets/models/astronaut_new5 (3).glb"}
-                astroRef={astroRef}
-              />
-            </Suspense>
-          </Canvas>
-        </div>
+        <ThreeScene astroRef={astroRef} />
       </div>
       <Suspense fallback={null}>
         {selectedCategory ? <LazySelectedContent /> : null}
@@ -201,6 +148,64 @@ const categories = [
   "MILITARY",
   "CUSTOMIZATION",
 ];
+
+const TitleWithAnimation = () => (
+  <div
+    style={{
+      top: "0em",
+      left: "1em",
+      height: "10em",
+      zIndex: 1,
+      position: "absolute",
+      width: "50%",
+    }}
+    // className="container"
+  >
+    <div
+      style={{
+        fontSize: "2em",
+        marginTop: "3em",
+      }}
+      className="text-animate simply-header"
+    >
+      SIMPLY
+    </div>
+    <div
+      style={{
+        textAlign: "right",
+        fontSize: "2em",
+      }}
+      className="text-animate simply-header"
+    >
+      EXPAND
+    </div>
+  </div>
+);
+
+const ThreeScene = ({ astroRef }) => {
+  return (
+    <div className="canvas-container-mobile">
+      <Canvas>
+        {/* <LoaderComponent /> */}
+        <ambientLight intensity={0.8} />
+        <directionalLight intensity={3} />
+        <Camera />
+        <Sparkles
+          count={300}
+          scale={10}
+          size={2}
+          color="pink" //{getSparkleColour(scrollArea.currentSection)}
+        />
+        <Suspense fallback={null}>
+          <AstroModel
+            url={"/assets/models/astronaut_new5 (3).glb"}
+            astroRef={astroRef}
+          />
+        </Suspense>
+      </Canvas>
+    </div>
+  );
+};
 
 export function AstroModel({ url, astroRef, setTextAnimation }) {
   const { isAstroModelDrawn, setIsAstroModelDrawn } = useAppContext();

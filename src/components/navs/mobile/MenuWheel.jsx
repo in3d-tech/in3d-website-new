@@ -8,7 +8,7 @@ import {
   MILITARY,
   CUSTOMIZATION,
 } from "../../common/modelData";
-
+import { useState } from "react";
 export function MenuWheel({
   selectedMenuActionMobile,
   setSelectedMenuActionMobile,
@@ -16,15 +16,28 @@ export function MenuWheel({
   isMenuCentered,
   setSelectedCategory,
 }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleCategorySelect = (category) => {
+    // console.log("in handle Cateogry");
+    if (!isMenuCentered) {
+      setSelectedMenuActionMobile(null);
+    }
+    setMenuOpen(false);
+    handleMenuClick();
+    setSelectedCategory(category);
+  };
+
   return (
     <div className={isMenuCentered ? "fab-wrapper centered" : "fab-wrapper"}>
       <input
         id="fabCheckbox"
         type="checkbox"
-        className="fab-checkbox"
+        className={`fab-checkbox ${menuOpen ? "checked" : ""}`}
         onClick={() => {
           if (!isMenuCentered) setSelectedMenuActionMobile(null);
           handleMenuClick();
+          setMenuOpen(!menuOpen);
         }}
       />
       <label className="fab" htmlFor="fabCheckbox">
@@ -45,7 +58,7 @@ export function MenuWheel({
           <button
             onClick={() => {
               setSelectedMenuActionMobile(`fab-action-1`);
-              setSelectedCategory(INDUSTRY);
+              handleCategorySelect(INDUSTRY);
             }}
             className="fas"
           >
@@ -70,7 +83,7 @@ export function MenuWheel({
           <button
             onClick={() => {
               setSelectedMenuActionMobile(`fab-action-2`);
-              setSelectedCategory(MEDICINE);
+              handleCategorySelect(MEDICINE);
             }}
             className="fas"
           >
@@ -95,7 +108,7 @@ export function MenuWheel({
           <button
             onClick={() => {
               setSelectedMenuActionMobile(`fab-action-3`);
-              setSelectedCategory(MICROSOFT);
+              handleCategorySelect(MICROSOFT);
             }}
             className="fas"
           >
@@ -120,7 +133,7 @@ export function MenuWheel({
           <button
             onClick={() => {
               setSelectedMenuActionMobile(`fab-action-4`);
-              setSelectedCategory(SECURITY);
+              handleCategorySelect(SECURITY);
             }}
             className="fas"
           >
@@ -145,7 +158,7 @@ export function MenuWheel({
           <button
             onClick={() => {
               setSelectedMenuActionMobile(`fab-action-5`);
-              setSelectedCategory(AI);
+              handleCategorySelect(AI);
             }}
             className="fas"
           >
@@ -170,7 +183,7 @@ export function MenuWheel({
           <button
             onClick={() => {
               setSelectedMenuActionMobile(`fab-action-6`);
-              setSelectedCategory(MILITARY);
+              handleCategorySelect(MILITARY);
             }}
             className="fas"
           >
@@ -195,7 +208,7 @@ export function MenuWheel({
           <button
             onClick={() => {
               setSelectedMenuActionMobile(`fab-action-7`);
-              setSelectedCategory(CUSTOMIZATION);
+              handleCategorySelect(CUSTOMIZATION);
             }}
             className="fas"
           >

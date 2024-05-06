@@ -81,7 +81,9 @@ function App() {
           <Header isMobileViewOnly={isMobileViewOnly} />
         )}
         <Suspense fallback={null}>
-          {selectedCategory ? <LazySelectedContent /> : null}
+          {selectedCategory && !isMobileViewOnly ? (
+            <LazySelectedContent />
+          ) : null}
         </Suspense>
       </div>
       <>

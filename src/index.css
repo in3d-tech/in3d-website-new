@@ -818,8 +818,8 @@ section {
   bottom: 0;
   background: radial-gradient(
     ellipse at center,
-    rgba(0, 0, 0, 0) 50%,
-    rgba(0, 0, 0, 0.75) 100%
+    rgba(0, 0, 0, 0) 40%,
+    rgba(0, 0, 0, 0.75) 90%
   );
 }
 
@@ -1788,7 +1788,7 @@ section {
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0);
 }
-.fab-checkbox:checked ~ .fab:before {
+.fab-checkbox.checked ~ .fab:before {
   width: 90%;
   height: 90%;
   left: 5%;
@@ -1802,7 +1802,7 @@ section {
 
 .fas {
   font-family: gotham;
-  font-size: 1.2em;
+  font-size: 1.4em;
   color: rgb(255, 255, 255, 0.9);
   border: none;
   background: none;
@@ -1835,7 +1835,7 @@ section {
   animation-delay: 0.8s;
 }
 
-.fab-checkbox:checked ~ .fab .fab-dots {
+.fab-checkbox.checked ~ .fab .fab-dots {
   height: 6px;
 }
 
@@ -1843,13 +1843,13 @@ section {
   transform: translateX(-50%) translateY(-50%) rotate(0deg);
 }
 
-.fab-checkbox:checked ~ .fab .fab-dots-1 {
+.fab-checkbox.checked ~ .fab .fab-dots-1 {
   width: 32px;
   border-radius: 10px;
   left: 50%;
   transform: translateX(-50%) translateY(-50%) rotate(45deg);
 }
-.fab-checkbox:checked ~ .fab .fab-dots-3 {
+.fab-checkbox.checked ~ .fab .fab-dots-3 {
   width: 32px;
   border-radius: 10px;
   right: 50%;
@@ -1862,7 +1862,7 @@ section {
   }
 }
 
-.fab-checkbox:checked ~ .fab .fab-dots {
+.fab-checkbox.checked ~ .fab .fab-dots {
   animation: none;
 }
 
@@ -1878,7 +1878,7 @@ section {
   transform: scale(0);
 }
 
-.fab-checkbox:checked ~ .fab-wheel {
+.fab-checkbox.checked ~ .fab-wheel {
   transform: scale(1);
   transition-delay: 0.5s;
 }
@@ -1898,7 +1898,7 @@ section {
   opacity: 0;
 }
 
-.fab-checkbox:checked ~ .fab-wheel .fab-action {
+.fab-checkbox.checked ~ .fab-wheel .fab-action {
   opacity: 1;
 }
 
@@ -1907,13 +1907,13 @@ section {
 }
 
 .fab-wheel .fab-action-1 {
-  right: -6rem;
+  right: -6.8rem;
   top: 8.5rem;
   /* background: rgb(13, 168, 136, 0.7); */
 }
 
 .fab-wheel .fab-action-2 {
-  right: 1.2rem;
+  right: 2rem;
   top: 8.5rem;
   /* background: rgba(77, 173, 182, 0.7); */
 }

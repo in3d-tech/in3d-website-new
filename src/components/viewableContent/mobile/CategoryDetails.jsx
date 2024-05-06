@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useAppContext } from "../../../context/appContext";
 import { INDUSTRY } from "../../common/modelData";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -5,6 +6,14 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 function SelectedCategory({ title = "Industry" }) {
   const { setSelectedCategory } = useAppContext();
   const data = getCategoryData();
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflowY = "auto";
+    };
+  }, []);
 
   return (
     <div className="tester">
@@ -14,9 +23,19 @@ function SelectedCategory({ title = "Industry" }) {
           onClick={() => setSelectedCategory(null)}
         />
       </div>
-
-      <div style={{ fontSize: "3em", marginTop: "2em" }}>{data.title}</div>
-      <div>{data.text}</div>
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <div style={{ fontSize: "3.5em", marginTop: "1.5em" }}>
+          {data.title}
+        </div>
+        <div style={{ width: "90%", marginTop: "2em" }}> {data.text}</div>
+      </div>
     </div>
   );
 }
