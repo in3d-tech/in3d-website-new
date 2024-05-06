@@ -1,26 +1,26 @@
 import { useGLTF, useProgress } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Suspense, useEffect, useMemo, useState, useRef } from "react";
+import { Suspense, useEffect, useMemo, useState, useRef, lazy } from "react";
 import { useAppContext } from "../../../context/appContext";
 import { Camera } from "../../scene/Camera";
 import * as THREE from "three";
 import { Sparkles } from "@react-three/drei";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import { HomeScreenCategoryText } from "./SelectedCategoryMobile";
+import { HomeScreenCategoryText } from "./CategoryHsDetails";
+import { MenuAboutContact, MenuWheel } from "../../navs/mobile/MenuWheel";
+// import { SelectedCategory } from "./CategoryDetails";
 
-const ABOUT_US = 9;
+const LazySelectedContent = lazy(() => import("./CategoryDetails"));
 
 function HomeScreenMobile() {
-  const [isCentered, setIsCentered] = useState(false);
+  const [isMenuCentered, setIsMenuCentered] = useState(false);
   const [selectedAction, setSelectedAction] = useState(null);
 
   const astroRef = useRef();
-  const [isShouldShowCategoryInformation, setIsShouldShowCategoryInformation] =
-    useState(false);
   const [startExpandedAnimation, setStartExpandedAnimation] = useState(false);
 
   const {
     selectedCategory,
+    setSelectedCategory,
     mobileBackground,
     isAstroModelDrawn,
     setCustomizeHasRendered,
@@ -29,32 +29,16 @@ function HomeScreenMobile() {
   } = useAppContext();
 
   const handleMenuClick = () => {
-    if (!isCentered) {
+    if (!isMenuCentered) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflowY = "auto";
     }
-    setIsCentered(!isCentered);
+    setIsMenuCentered(!isMenuCentered);
   };
 
   const handleCategoryClick = (action) => {
     setSelectedAction(action);
-  };
-
-  useEffect(() => {
-    if (selectedCategory) {
-      scrollToElementById();
-    }
-  }, [selectedCategory]);
-
-  const scrollToElementById = () => {
-    const element = document.getElementById("testId");
-
-    setTimeout(() => {
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" }); // { behavior: "smooth" }
-      }
-    }, 200);
   };
 
   useEffect(() => {
@@ -69,135 +53,15 @@ function HomeScreenMobile() {
 
   return (
     <>
-      <div className={isCentered ? "fab-wrapper centered" : "fab-wrapper"}>
-        <input
-          id="fabCheckbox"
-          type="checkbox"
-          className="fab-checkbox"
-          onClick={() => {
-            if (!isCentered) setSelectedMenuActionMobile(null);
-            handleMenuClick();
-          }}
-        />
-        {/* {!selectedMenuActionMobile ? ( */}
-        <label className="fab" for="fabCheckbox">
-          <div className={isCentered ? "icon-1 a" : "icon-1"}></div>
-          <div className={isCentered ? "icon-2 c" : "icon-2"}></div>
-          <div className={isCentered ? "icon-3 b" : "icon-3"}></div>
-          <div className="clear"></div>
-        </label>
-        {/* ) : null} */}
-        <div className="fab-wheel">
-          <a
-            className={`fab-action fab-action-1  ${
-              selectedMenuActionMobile &&
-              selectedMenuActionMobile !== "fab-action-1"
-                ? "fade-out"
-                : ""
-            } ${selectedMenuActionMobile == "fab-action-1" ? "grow" : ""}`}
-          >
-            <button
-              onClick={() => setSelectedMenuActionMobile(`fab-action-1`)}
-              className="fas"
-            >
-              {selectedMenuActionMobile == "fab-action-1" ? "" : "Industry"}
-            </button>
-          </a>
-          <a
-            className={`fab-action fab-action-2  ${
-              selectedMenuActionMobile &&
-              selectedMenuActionMobile !== "fab-action-2"
-                ? "fade-out"
-                : ""
-            } ${selectedMenuActionMobile == "fab-action-2" ? "grow" : ""}`}
-          >
-            <button
-              onClick={() => {
-                setSelectedMenuActionMobile(`fab-action-2`);
-              }}
-              className="fas"
-            >
-              {selectedMenuActionMobile == "fab-action-2" ? "" : "Medicine"}
-            </button>
-          </a>
-          <a
-            className={`fab-action fab-action-3  ${
-              selectedMenuActionMobile &&
-              selectedMenuActionMobile !== "fab-action-3"
-                ? "fade-out"
-                : ""
-            } ${selectedMenuActionMobile == "fab-action-3" ? "grow" : ""}`}
-          >
-            <button
-              onClick={() => setSelectedMenuActionMobile(`fab-action-3`)}
-              className="fas"
-            >
-              {selectedMenuActionMobile == "fab-action-3" ? "" : "Microsoft"}
-            </button>
-          </a>
-          <a
-            className={`fab-action fab-action-4  ${
-              selectedMenuActionMobile &&
-              selectedMenuActionMobile !== "fab-action-4"
-                ? "fade-out"
-                : ""
-            } ${selectedMenuActionMobile == "fab-action-4" ? "grow" : ""}`}
-          >
-            <button
-              onClick={() => setSelectedMenuActionMobile(`fab-action-4`)}
-              className="fas"
-            >
-              {selectedMenuActionMobile == "fab-action-4" ? "" : "Security"}
-            </button>
-          </a>
-          <a
-            className={`fab-action fab-action-5  ${
-              selectedMenuActionMobile &&
-              selectedMenuActionMobile !== "fab-action-5"
-                ? "fade-out"
-                : ""
-            } ${selectedMenuActionMobile == "fab-action-5" ? "grow" : ""}`}
-          >
-            <button
-              onClick={() => setSelectedMenuActionMobile(`fab-action-5`)}
-              className="fas"
-            >
-              {selectedMenuActionMobile == "fab-action-5" ? "" : "A.I."}
-            </button>
-          </a>
-          <a
-            className={`fab-action fab-action-6  ${
-              selectedMenuActionMobile &&
-              selectedMenuActionMobile !== "fab-action-6"
-                ? "fade-out"
-                : ""
-            } ${selectedMenuActionMobile == "fab-action-6" ? "grow" : ""}`}
-          >
-            <button
-              onClick={() => setSelectedMenuActionMobile(`fab-action-6`)}
-              className="fas"
-            >
-              {selectedMenuActionMobile == "fab-action-6" ? "" : "Military"}
-            </button>
-          </a>
-          <a
-            className={`fab-action fab-action-7  ${
-              selectedMenuActionMobile &&
-              selectedMenuActionMobile !== "fab-action-7"
-                ? "fade-out"
-                : ""
-            } ${selectedMenuActionMobile == "fab-action-7" ? "grow" : ""}`}
-          >
-            <button
-              onClick={() => setSelectedMenuActionMobile(`fab-action-7`)}
-              className="fas"
-            >
-              {selectedMenuActionMobile == "fab-action-7" ? "" : "Customize"}
-            </button>
-          </a>
-        </div>
-      </div>
+      <MenuWheel
+        setSelectedMenuActionMobile={setSelectedMenuActionMobile}
+        handleMenuClick={handleMenuClick}
+        isMenuCentered={isMenuCentered}
+        selectedMenuActionMobile={selectedMenuActionMobile}
+        setSelectedCategory={setSelectedCategory}
+      />
       <div
+        className={isMenuCentered ? "mobile-menu-opened-bg" : ""}
         style={{
           // minWidth: "100%",
           width: "100%",
@@ -206,43 +70,21 @@ function HomeScreenMobile() {
           overflow: "hidden",
           top: 0,
           left: 0,
-          background: isCentered
-            ? "rgb(0,0,0,0.8)"
-            : backgrounds[mobileBackground],
+          background: isMenuCentered ? "" : backgrounds[mobileBackground],
           // opacity: 0.4,
-          zIndex: isCentered ? 2 : 0,
+          zIndex: isMenuCentered ? 2 : 0,
           transition: "background 1s",
         }}
       >
-        {isCentered ? (
-          <div
-            style={{
-              width: "100%",
-              borderTop: "1px solid rgb(255,255,255, 0.4)",
-              position: "absolute",
-              bottom: "5em",
-              left: 0,
-              height: "5em",
-              display: "flex",
-              justifyContent: "space-evenly",
-              alignItems: "center",
-            }}
-          >
-            <div className="animate-reveal">
-              <span style={{ color: "white", fontFamily: "gotham" }}>
-                About Us
-              </span>
-            </div>
-            <div className="animate-reveal">
-              <span style={{ color: "white", fontFamily: "gotham" }}>
-                Contact Us
-              </span>
-            </div>
-            <div className="linkdn-icon animate-reveal">
-              {<LinkedInIcon fontSize="large" sx={{ color: "white" }} />}
-            </div>
+        {isMenuCentered ? (
+          <div className="h-nav-in3d-icon" style={{ animationDelay: "0.6s" }}>
+            <img
+              className="in3d-fixed-logo"
+              src="/assets/images/in3d-logo-white.png"
+            />
           </div>
         ) : null}
+        {isMenuCentered ? <MenuAboutContact /> : null}
       </div>
       <div
         style={{
@@ -255,31 +97,6 @@ function HomeScreenMobile() {
           // border: "1px solid yellow",
         }}
       >
-        {isShouldShowCategoryInformation ? (
-          <div
-            style={{
-              position: "fixed",
-              top: "1em",
-              right: "1.5em",
-              zIndex: 2,
-            }}
-          >
-            <button
-              style={{
-                all: "unset",
-                color: "yellow",
-                borderRadius: "4px",
-                fontSize: "1.5em",
-                padding: "2px",
-                width: "120%",
-                textAlign: "center",
-              }}
-              onClick={() => setIsShouldShowCategoryInformation(false)}
-            >
-              Back
-            </button>
-          </div>
-        ) : null}
         {startExpandedAnimation ? (
           <>
             <div
@@ -326,6 +143,7 @@ function HomeScreenMobile() {
         >
           {categories.map((category, idx) => (
             <HomeScreenCategoryText
+              key={idx}
               idx={idx}
               selectedMenuActionMobile={selectedMenuActionMobile}
               setSelectedMenuActionMobile={setSelectedMenuActionMobile}
@@ -352,8 +170,10 @@ function HomeScreenMobile() {
             </Suspense>
           </Canvas>
         </div>
-        {/* <div style={{ color: "white", fontSize: "3em" }}>about us</div> */}
       </div>
+      <Suspense fallback={null}>
+        {selectedCategory ? <LazySelectedContent /> : null}
+      </Suspense>
     </>
   );
 }

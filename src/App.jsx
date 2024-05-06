@@ -155,15 +155,6 @@ function ViewableContent() {
           }}
           className="inner-line"
         ></div>
-        {/* {sections.map((section, idx) => (
-          <div
-            style={{
-              border: `3px solid ${getSparkleColour(section)}`,
-              height: "100%",
-              opacity: scrollArea.currentSection == section ? 1 : 0.4,
-            }}
-          ></div>
-        ))} */}
       </div>
       <div className="bg-scale-effect"></div>
     </div>

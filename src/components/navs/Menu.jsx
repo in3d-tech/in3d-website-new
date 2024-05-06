@@ -177,7 +177,16 @@ export const Header = ({ isMobileViewOnly }) => {
               />
             </div>
             <div className="linkdn-icon animate-reveal">
-              {<LinkedInIcon fontSize="large" />}
+              {
+                <a
+                  href={"https://www.linkedin.com/company/in3d-tech.com"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ all: "unset" }}
+                >
+                  <LinkedInIcon fontSize="large" />
+                </a>
+              }
             </div>
 
             {/* <div></div>
