@@ -1735,7 +1735,7 @@ section {
 }
 
 .fab-wrapper.centered {
-  top: 50%; /* Move to the vertical center of the screen */
+  top: 75%; /* Move to the vertical center of the screen */
   right: 46%; /* Move to the horizontal center of the screen */
   transform: translate(50%, -50%); /* Adjust for centering */
 }
@@ -1791,9 +1791,9 @@ section {
 .fab-checkbox.checked ~ .fab:before {
   width: 90%;
   height: 90%;
-  left: 5%;
+  left: 8%;
   top: 5%;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 30, 30, 0.2);
 }
 /* .fab:hover {
   background: #2c87e8;
@@ -1888,7 +1888,7 @@ section {
   width: 7.5rem;
   /* height: 6rem; */
   /* border-radius: 50%; */
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid rgb(255, 255, 255, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1908,40 +1908,40 @@ section {
 }
 
 .fab-wheel .fab-action-1 {
-  right: -8rem;
-  top: 13rem;
+  left: 8.5rem;
+  top: 2rem;
   /* background: rgb(13, 168, 136, 0.7); */
 }
 
 .fab-wheel .fab-action-2 {
-  right: 2.8rem;
-  top: 13rem;
+  left: 8.5rem;
+  top: 5.5rem;
   /* background: rgba(77, 173, 182, 0.7); */
 }
 .fab-wheel .fab-action-3 {
   left: 8.5rem;
-  bottom: 0rem;
+  top: 9rem;
   /* background: rgb(207, 159, 255, 0.7); */
 }
 .fab-wheel .fab-action-4 {
-  left: 9.5rem;
-  bottom: -4.8rem;
+  left: 21.5rem;
+  top: 2rem;
   /* background: rgb(153, 88, 18, 0.7); */
 }
 
 .fab-wheel .fab-action-5 {
-  left: 15.2rem;
-  bottom: -9rem;
+  left: 21.5rem;
+  top: 5.5rem;
   /* background: rgb(61, 217, 233, 0.7); */
 }
 .fab-wheel .fab-action-6 {
-  left: 21rem;
-  bottom: -4.8rem;
+  left: 21.5rem;
+  top: 9rem;
   /* background: rgb(80, 123, 63, 0.7); */
 }
 .fab-wheel .fab-action-7 {
-  left: 22.5rem;
-  bottom: 0rem;
+  left: 15rem;
+  top: 12.5rem;
   /* background: rgb(240, 183, 94, 0.7); */
 }
 

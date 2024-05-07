@@ -142,8 +142,8 @@ export function MenuWheel({
               ""
             ) : (
               <>
-                <span style={{ color: "#750414" }}>A.</span>
-                I.
+                <span style={{ color: "#750414" }}>S</span>
+                ecurity
               </>
             )}
           </button>
@@ -167,8 +167,8 @@ export function MenuWheel({
               ""
             ) : (
               <>
-                <span style={{ color: "#750414" }}>C</span>
-                ustomize
+                <span style={{ color: "#750414" }}>A.</span>
+                I.
               </>
             )}
           </button>
@@ -217,8 +217,8 @@ export function MenuWheel({
               ""
             ) : (
               <>
-                <span style={{ color: "#750414" }}>S</span>
-                ecurity
+                <span style={{ color: "#750414" }}>C</span>
+                ustomize
               </>
             )}
           </button>
