@@ -12,7 +12,7 @@ export const HomeScreenCategoryText = ({
         </>
       ),
       bgImage: 'url("/assets/images/backgrounds/taasia/Industry_Togle.jpg")',
-      text: "Together with our clients we map out the challenges they face and develop tailor made solutions using XR and 3D technology that creates an innovative visual interface between men and machine.",
+      text: "Together with our clients we develop tailor made solutions using XR and 3D technology.",
     },
     1: {
       title: (
@@ -22,7 +22,7 @@ export const HomeScreenCategoryText = ({
         </>
       ),
       bgImage: 'url("/assets/images/backgrounds/medicine/Medical_Togle.jpg")',
-      text: "Using Extended Reality (XR) we at in3D became pioneers in development of XR products for medical organizations, collaborating together to empower innovation and efficiency for clinics and hospitals.",
+      text: "Using Extended Reality (XR) we at in3D became pioneers in development of XR products for medical organizations.",
     },
     2: {
       title: (
@@ -38,14 +38,13 @@ export const HomeScreenCategoryText = ({
     3: {
       title: (
         <>
-          {" "}
           <span style={{ color: "#750414" }}>S</span>
           ecurity
         </>
       ),
       bgImage:
         'url("/assets/images/backgrounds/security/Security_Togle_Finish2.jpg")',
-      text: "Thanks to years of collaboration with defense industries, we gained the needed experience, knowledge and tools to provide quick and out of the box solutions that are tailored to the industries unique requirements.",
+      text: "Thanks to years of collaboration with defense industries, we provide reliable and out of the box solutions tailored to the industries unique requirements.",
     },
     4: {
       title: (
@@ -55,7 +54,7 @@ export const HomeScreenCategoryText = ({
         </>
       ),
       bgImage: 'url("/assets/images/backgrounds/ai/Ai_Tugle_Finish.jpg")',
-      text: " The combination of a 3D XR software environment with A.I creates not only an advanced and innovative hardware and software operation but a genuine cooperation between man and machine.",
+      text: "The combination of a 3D XR software environment with A.I creates advanced and innovative operations",
     },
     5: {
       title: (
@@ -66,7 +65,7 @@ export const HomeScreenCategoryText = ({
       ),
       bgImage:
         'url("/assets/images/backgrounds/military/Militery_Togle_Finish2.jpg")',
-      text: "We deliver top-of-the-line technology to all of our important industries, through development of complex simulators, XR platforms, and tailored applications that are now in the service of this significant sector.",
+      text: "Through development of complex simulators, XR platforms, and tailored applications, we deliver top-of-the-line technology in the service of this significant sector.",
     },
     6: {
       title: (
@@ -77,7 +76,7 @@ export const HomeScreenCategoryText = ({
       ),
       bgImage:
         'url("/assets/images/backgrounds/customize/Customize_Togle_Finish.jpg")',
-      text: "As specialists we keep an amazing team of developers, 3D generalists, interface and graphics artists, and product designers just so we can provide our clients with the flexibility and abilities needed to deliver the best product.",
+      text: "With our amazing team, we provide the flexibility and abilities needed to deliver the best tailor-made product.",
     },
   };
 
@@ -93,6 +92,7 @@ export const HomeScreenCategoryText = ({
         padding: "4px",
         marginTop: "3em",
         borderTop: "1px solid rgb(255, 255, 255, 0.4)",
+        justifyContent: "space-evenly",
       }}
     >
       <div

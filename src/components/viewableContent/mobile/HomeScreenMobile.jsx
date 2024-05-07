@@ -117,7 +117,7 @@ function HomeScreenMobile() {
             />
           ))}
         </div>
-        <ThreeScene astroRef={astroRef} />
+        <Scene astroRef={astroRef} />
       </div>
       <Suspense fallback={null}>
         {selectedCategory ? <LazySelectedContent /> : null}
@@ -183,7 +183,7 @@ const TitleWithAnimation = () => (
   </div>
 );
 
-const ThreeScene = ({ astroRef }) => {
+const Scene = ({ astroRef }) => {
   return (
     <div className="canvas-container-mobile">
       <Canvas>

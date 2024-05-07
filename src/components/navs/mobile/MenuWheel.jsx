@@ -142,8 +142,8 @@ export function MenuWheel({
               ""
             ) : (
               <>
-                <span style={{ color: "#750414" }}>S</span>
-                ecurity
+                <span style={{ color: "#750414" }}>A.</span>
+                I.
               </>
             )}
           </button>
@@ -167,8 +167,8 @@ export function MenuWheel({
               ""
             ) : (
               <>
-                <span style={{ color: "#750414" }}>A.</span>
-                I.
+                <span style={{ color: "#750414" }}>C</span>
+                ustomize
               </>
             )}
           </button>
@@ -217,8 +217,8 @@ export function MenuWheel({
               ""
             ) : (
               <>
-                <span style={{ color: "#750414" }}>C</span>
-                ustomize
+                <span style={{ color: "#750414" }}>S</span>
+                ecurity
               </>
             )}
           </button>
@@ -245,10 +245,10 @@ export const MenuAboutContact = () => {
       }}
     >
       <div className="animate-reveal">
-        <span style={{ color: "white", fontFamily: "gotham" }}>About Us</span>
+        <span style={{ color: "white", fontFamily: "gotham" }}>About</span>
       </div>
       <div className="animate-reveal">
-        <span style={{ color: "white", fontFamily: "gotham" }}>Contact Us</span>
+        <span style={{ color: "white", fontFamily: "gotham" }}>Contact</span>
       </div>
       <div className="linkdn-icon animate-reveal">
         {
