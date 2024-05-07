@@ -1735,7 +1735,7 @@ section {
 }
 
 .fab-wrapper.centered {
-  top: 75%; /* Move to the vertical center of the screen */
+  top: 71%; /* Move to the vertical center of the screen */
   right: 46%; /* Move to the horizontal center of the screen */
   transform: translate(50%, -50%); /* Adjust for centering */
 }

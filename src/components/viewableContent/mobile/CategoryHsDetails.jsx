@@ -94,7 +94,7 @@ export const HomeScreenCategoryText = ({
             justifyContent: "center",
           }}
         >
-          <div style={{ width: "90%" }}>
+          <div style={{ width: "90%", textAlign: "center" }}>
             in3D does not disclose, collect, edit, transfer to a third party or
             use private information of its customers or website users. In any
             case in which in3D is asked to transfer private information, it will
