@@ -148,6 +148,7 @@ const categories = [
   "ARTIFICAL INTELLIGENCE",
   "MILITARY",
   "CUSTOMIZATION",
+  "ABOUTCONTACT",
 ];
 
 const TitleWithAnimation = () => (

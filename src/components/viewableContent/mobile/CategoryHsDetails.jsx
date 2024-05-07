@@ -1,3 +1,5 @@
+import { MenuAboutContact } from "../../navs/mobile/MenuWheel";
+
 export const HomeScreenCategoryText = ({
   title,
   idx,
@@ -78,7 +80,62 @@ export const HomeScreenCategoryText = ({
         'url("/assets/images/backgrounds/customize/Customize_Togle_Finish.jpg")',
       text: "With our amazing team, we provide the flexibility and abilities needed to deliver the best tailor-made product.",
     },
+    7: {
+      text: (
+        <div
+          style={{
+            color: "white",
+            position: "absolute",
+            fontSize: "6px",
+            // width: "80%",
+            fontFamily: "gotham",
+            bottom: "1em",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <div style={{ width: "90%" }}>
+            in3D does not disclose, collect, edit, transfer to a third party or
+            use private information of its customers or website users. In any
+            case in which in3D is asked to transfer private information, it will
+            immediately notify the relevant customer and act under his guidance.
+            For any inquiry or request for additional information on privacy
+            statements, contact by email: Nathanael@in3D-Tech.com
+            <br />
+            in3D works according to international quality policies in
+            development and production, information security and privacy
+            security – ISO9001, ISO27001, ISO27701. The company undertakes and
+            complies with legal and privacy requirements, engraves on its banner
+            a high standard of service assembly, while maintaining accuracy,
+            confidentiality and information security.
+            <br />
+            If you need more information, contact us at the email listed at the
+            above.
+          </div>
+        </div>
+      ),
+    },
   };
+
+  if (idx == 7) {
+    return (
+      <div
+        style={{
+          height: "30vh",
+          color: "white",
+          fontFamily: "gotham",
+          display: "flex",
+          flexDirection: "column",
+          padding: "4px",
+          // marginTop: "3em",
+          justifyContent: "space-evenly",
+        }}
+      >
+        <MenuAboutContact />
+        {categoryDataByIndex[idx].text}
+      </div>
+    );
+  }
 
   return (
     <div
