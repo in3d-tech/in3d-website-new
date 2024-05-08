@@ -121,18 +121,18 @@ export const HomeScreenCategoryText = ({
     return (
       <div
         style={{
-          height: "30vh",
+          height: "25vh",
           color: "white",
           fontFamily: "gotham",
           display: "flex",
           flexDirection: "column",
           padding: "4px",
           // marginTop: "3em",
-          justifyContent: "space-evenly",
+          justifyContent: "center",
         }}
       >
-        <MenuAboutContact />
-        {categoryDataByIndex[idx].text}
+        <MenuAboutContact isFromHomeScreen />
+        {/* {categoryDataByIndex[idx].text} */}
       </div>
     );
   }

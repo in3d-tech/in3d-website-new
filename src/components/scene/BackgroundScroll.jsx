@@ -95,22 +95,7 @@ export function BackgroundScroll({
                   SIMPLY EXPAND
                 </span>
               </div>
-              <div
-                className="down-indicator-wrapper"
-                // style={{
-                //   marginTop: "1.5em",
-                //   marginLeft: "2em",
-                //   display: "flex",
-                //   justifyContent: "center",
-                //   alignItems: "center",
-
-                //   position: "absolute",
-
-                //   height: "300px",
-                //   width: "300px",
-                //   border: "1px solid red",
-                // }}
-              >
+              <div className="down-indicator-wrapper">
                 <div className="icon-scroll"></div>
                 <div className="down-indicator"></div>
                 <div
@@ -129,16 +114,6 @@ export function BackgroundScroll({
         </div>
       </section>
       <section className="section section-two">
-        {/* <div
-          ref={textRef}
-          style={{
-            height: "50%",
-            width: "50%",
-            position: "absolute",
-            top: 0,
-          }}
-          id="midSection2"
-        ></div> */}
         {fixed ? (
           <div
             ref={titlesContainerRef}
@@ -147,18 +122,9 @@ export function BackgroundScroll({
             {categories.map((title, idx) => (
               <div
                 onMouseOver={() => {
-                  // document.documentElement.style.setProperty(
-                  //   "--color",
-                  //   'url("/assets/images/backgrounds/taasia/taasia_bg.jpg")'
-                  // );
-                  // setHovered("taasia");
                   setTitleOnMainPageHovered(title);
                 }}
                 onMouseOut={() => {
-                  // document.documentElement.style.setProperty(
-                  //   "--color",
-                  //   'url("/assets/images/backgrounds/Astro_1_Background.webp")'
-                  // );
                   setTitleOnMainPageHovered("");
                 }}
                 onClick={() => scrollToElementById(idx)}
@@ -184,39 +150,7 @@ export function BackgroundScroll({
       <section id="sectionFour" className="section section-four"></section>
       <section id="sectionFive" className="section section-five"></section>
       <section id="sectionSix" className="section section-six"></section>
-      <section id="sectionSeven" className="section section-seven">
-        {/* <div className="fab-wrapper">
-          <input id="fabCheckbox" type="checkbox" className="fab-checkbox" />
-          <label className="fab" for="fabCheckbox">
-            <span className="fab-dots fab-dots-1"></span>
-            <span className="fab-dots fab-dots-2"></span>
-            <span className="fab-dots fab-dots-3"></span>
-          </label>
-          <div className="fab-wheel">
-            <a className="fab-action fab-action-1">
-              <i className="fas fa-question">Industry</i>
-            </a>
-            <a className="fab-action fab-action-2">
-              <i className="fas fa-book">Medicine</i>
-            </a>
-            <a className="fab-action fab-action-3">
-              <i className="fas fa-address-book">Microsoft</i>
-            </a>
-            <a className="fab-action fab-action-4">
-              <i className="fas fa-info">Security</i>
-            </a>
-            <a className="fab-action fab-action-5">
-              <i className="fas fa-info">A.I.</i>
-            </a>
-            <a className="fab-action fab-action-6">
-              <i className="fas fa-info">Military</i>
-            </a>
-            <a className="fab-action fab-action-7">
-              <i className="fas fa-info">Customization</i>
-            </a>
-          </div>
-        </div> */}
-      </section>
+      <section id="sectionSeven" className="section section-seven"></section>
       <section id="sectionEight" className="section section-eight"></section>
       <section id="sectionNine" className="section section-nine"></section>
       <section id="sectionTen" className="section section-ten">

@@ -34,7 +34,9 @@ function HomeScreenMobile() {
     } else {
       if (!selectedCategory) document.body.style.overflowY = "auto";
     }
-    if (!wasCategoryClicked) setIsMenuCentered(!isMenuCentered);
+    if (!wasCategoryClicked) {
+      setIsMenuCentered(!isMenuCentered);
+    }
   };
 
   const handleCategoryClick = (action) => {
@@ -73,7 +75,7 @@ function HomeScreenMobile() {
           left: 0,
           background: isMenuCentered ? "" : backgrounds[mobileBackground],
           // opacity: 0.4,
-          zIndex: isMenuCentered ? 2 : 0,
+          zIndex: isMenuCentered ? 3 : 0,
           transition: "background 1s",
         }}
       >
@@ -81,11 +83,17 @@ function HomeScreenMobile() {
           <div className="h-nav-in3d-icon" style={{ animationDelay: "0.6s" }}>
             <img
               className="in3d-fixed-logo"
+              style={{ width: "3.2em" }}
               src="/assets/images/in3d-logo-white.png"
             />
           </div>
         ) : null}
-        {isMenuCentered ? <MenuAboutContact /> : null}
+        {isMenuCentered ? (
+          <MenuAboutContact
+            isMenuCentered={isMenuCentered}
+            handleMenuClick={handleMenuClick}
+          />
+        ) : null}
       </div>
       <div
         style={{

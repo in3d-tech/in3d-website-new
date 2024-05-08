@@ -8,7 +8,7 @@ import {
   MILITARY,
   CUSTOMIZATION,
 } from "../../common/modelData";
-import { useState } from "react";
+import { useAppContext } from "../../../context/appContext";
 export function MenuWheel({
   selectedMenuActionMobile,
   setSelectedMenuActionMobile,
@@ -17,14 +17,13 @@ export function MenuWheel({
   setSelectedCategory,
   selectedCategory,
 }) {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const { menuOpenMobile, setMenuOpenMobile } = useAppContext();
 
   const handleCategorySelect = (category) => {
-    // console.log("in handle Cateogry");
     if (!isMenuCentered) {
       setSelectedMenuActionMobile(null);
     }
-    setMenuOpen(false);
+    setMenuOpenMobile(false);
     handleMenuClick();
     setSelectedCategory(category);
   };
@@ -34,17 +33,26 @@ export function MenuWheel({
       <input
         id="fabCheckbox"
         type="checkbox"
-        className={`fab-checkbox ${menuOpen ? "checked" : ""}`}
+        className={`fab-checkbox ${menuOpenMobile ? "checked" : ""}`}
         onClick={() => {
           if (!isMenuCentered) setSelectedMenuActionMobile(null);
           handleMenuClick();
-          setMenuOpen(!menuOpen);
+          setMenuOpenMobile(!menuOpenMobile);
         }}
       />
       <label className="fab" htmlFor="fabCheckbox">
-        <div className={isMenuCentered ? "icon-1 a" : "icon-1"}></div>
-        <div className={isMenuCentered ? "icon-2 c" : "icon-2"}></div>
-        <div className={isMenuCentered ? "icon-3 b" : "icon-3"}></div>
+        <div
+          className={isMenuCentered ? "icon-1 a" : "icon-1"}
+          style={selectedCategory ? { background: "#750414" } : null}
+        ></div>
+        <div
+          className={isMenuCentered ? "icon-2 c" : "icon-2"}
+          style={selectedCategory ? { background: "#750414" } : null}
+        ></div>
+        <div
+          className={isMenuCentered ? "icon-3 b" : "icon-3"}
+          style={selectedCategory ? { background: "#750414" } : null}
+        ></div>
         <div className="clear"></div>
       </label>
       <div className="fab-wheel">
@@ -228,15 +236,22 @@ export function MenuWheel({
   );
 }
 
-export const MenuAboutContact = () => {
+export const MenuAboutContact = ({
+  isFromHomeScreen,
+  isMenuCentered,
+  handleMenuClick,
+}) => {
+  const { setSelectedCategory, menuOpenMobile, setMenuOpenMobile } =
+    useAppContext();
   const linkedInUrl = "https://www.linkedin.com/company/in3d-tech.com";
+
   return (
     <div
       style={{
         width: "100%",
         borderTop: "1px solid rgb(255,255,255, 0.4)",
         position: "absolute",
-        bottom: "5em",
+        bottom: isFromHomeScreen ? "1em" : "5em",
         left: 0,
         height: "5em",
         display: "flex",
@@ -245,10 +260,32 @@ export const MenuAboutContact = () => {
       }}
     >
       <div className="animate-reveal">
-        <span style={{ color: "white", fontFamily: "gotham" }}>About</span>
+        <span
+          onClick={() => {
+            setSelectedCategory("about");
+            if (isMenuCentered) {
+              handleMenuClick();
+              setMenuOpenMobile(!menuOpenMobile);
+            }
+          }}
+          style={{ color: "white", fontFamily: "gotham" }}
+        >
+          About
+        </span>
       </div>
       <div className="animate-reveal">
-        <span style={{ color: "white", fontFamily: "gotham" }}>Contact</span>
+        <span
+          onClick={() => {
+            setSelectedCategory("contact");
+            if (isMenuCentered) {
+              handleMenuClick();
+              setMenuOpenMobile(!menuOpenMobile);
+            }
+          }}
+          style={{ color: "white", fontFamily: "gotham" }}
+        >
+          Contact
+        </span>
       </div>
       <div className="linkdn-icon animate-reveal">
         {
