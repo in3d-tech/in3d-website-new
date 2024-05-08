@@ -479,7 +479,7 @@ export const ContactUsText = ({ test }) => {
                   <span>
                     <PhoneIcon fontSize="small" />
                   </span>
-                  : +972-54-218-5021
+                  : +972-52-678-7276
                 </div>
                 <div>
                   <PhoneIcon fontSize="small" />: +1(302)-219-4023
