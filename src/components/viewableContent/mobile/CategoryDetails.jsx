@@ -151,8 +151,8 @@ const getCategoryData = ({ selectedCategory }) => {
             in3D is an Israeli based company with worldwide aspirations. <br />
             <br />
             We develop 3D virtual environment software for different clients
-            from different sectors from all around the world We specialize in
-            Extended Reality (XR) but first and most we are its believers.{" "}
+            from different sectors from all around the world. We specialize in
+            Extended Reality (XR) but first and foremost we are its believers.{" "}
             <br />
             <br /> WE ARE NOT A START-UP, WE WOULD RATHER START-WORKING WITH
             YOU! We push ourselves hard to be innovative each day, and it has
