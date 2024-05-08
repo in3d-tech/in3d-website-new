@@ -1195,6 +1195,23 @@ section {
   z-index: 4;
 }
 
+.home-categories-wrapper-mobile {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  transition: background-image 0.8s;
+}
+
+.home-categories-map-mobile {
+  margin-top: 68vh;
+  position: absolute;
+  width: 98%;
+  top: 0;
+  z-index: 1;
+}
+
 .text-test {
   z-index: 20000090909;
   font-family: "Yanone Kaffeesatz";

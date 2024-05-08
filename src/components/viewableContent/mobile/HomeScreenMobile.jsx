@@ -95,33 +95,17 @@ function HomeScreenMobile() {
           />
         ) : null}
       </div>
-      <div
-        style={{
-          maxWidth: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-end",
-          alignItems: "center",
-          transition: "background-image 0.8s",
-        }}
-      >
+      <div className="home-categories-wrapper-mobile">
         {startExpandedAnimation ? <TitleWithAnimation /> : null}
 
-        <div
-          style={{
-            marginTop: "68vh",
-            position: "absolute",
-            width: "98%",
-            top: 0,
-            zIndex: 1,
-          }}
-        >
+        <div className="home-categories-map-mobile">
           {categories.map((category, idx) => (
             <HomeScreenCategoryText
               key={idx}
               idx={idx}
               selectedMenuActionMobile={selectedMenuActionMobile}
               setSelectedMenuActionMobile={setSelectedMenuActionMobile}
+              setSelectedCategory={setSelectedCategory}
             />
           ))}
         </div>

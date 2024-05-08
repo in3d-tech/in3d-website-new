@@ -5,6 +5,7 @@ export const HomeScreenCategoryText = ({
   idx,
   selectedMenuActionMobile,
   setSelectedMenuActionMobile,
+  setSelectedCategory,
 }) => {
   const categoryDataByIndex = {
     0: {
@@ -141,7 +142,7 @@ export const HomeScreenCategoryText = ({
     <div
       className={`industry-test fader`}
       style={{
-        height: "30vh",
+        height: "28vh",
         color: "white",
         fontFamily: "gotham",
         display: "flex",
@@ -180,6 +181,7 @@ export const HomeScreenCategoryText = ({
       <LearnMoreBtn
         setSelectedMenuActionMobile={setSelectedMenuActionMobile}
         idx={idx}
+        setSelectedCategory={setSelectedCategory}
       />
     </div>
   );
@@ -218,11 +220,16 @@ export const AboutUsText = ({ title }) => {
   return <div>{title}</div>;
 };
 
-const LearnMoreBtn = ({ setSelectedMenuActionMobile, idx }) => {
+const LearnMoreBtn = ({
+  setSelectedMenuActionMobile,
+  idx,
+  setSelectedCategory,
+}) => {
   return (
     <div style={{ marginTop: "1em", marginLeft: "1em" }}>
       <button
         // onClick={() => setSelectedMenuActionMobile(`fab-action-${idx + 1}`)}
+        onClick={() => setSelectedCategory(idx + 2)}
         className="cta"
       >
         <span className="hover-underline-animation"> Learn more </span>
