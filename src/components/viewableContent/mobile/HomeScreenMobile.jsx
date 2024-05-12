@@ -14,7 +14,7 @@ const LazySelectedContent = lazy(() => import("./CategoryDetails"));
 function HomeScreenMobile() {
   const [isMenuCentered, setIsMenuCentered] = useState(false);
   const [selectedAction, setSelectedAction] = useState(null);
-
+  const [tilt, setTilt] = useState({ tiltLR: 0, tiltFB: 0, dir: 0 });
   const astroRef = useRef();
   const [startExpandedAnimation, setStartExpandedAnimation] = useState(false);
 
@@ -53,6 +53,24 @@ function HomeScreenMobile() {
     }
   }, [isAstroModelDrawn]);
 
+  useEffect(() => {
+    // Handler to handle device tilt event
+    const handleTilt = (event) => {
+      setTilt({
+        tiltLR: event.gamma,
+        tiltFB: event.beta,
+        dir: event.alpha,
+      });
+    };
+
+    // Add and cleanup the event listener
+    window.addEventListener("deviceorientation", handleTilt);
+
+    return () => {
+      window.removeEventListener("deviceorientation", handleTilt);
+    };
+  }, []); // On mount and unmount
+
   return (
     <>
       <MenuWheel
@@ -63,6 +81,21 @@ function HomeScreenMobile() {
         setSelectedCategory={setSelectedCategory}
         selectedCategory={selectedCategory}
       />
+      <div
+        style={{
+          position: "fixed",
+          top: "3em",
+          left: "3em",
+          width: "200px",
+          height: "300px",
+          border: "1px solid yellow",
+          zIndex: 2,
+        }}
+      >
+        Tilt LR: {tilt.tiltLR} <br />
+        Tilt FB: {tilt.tiltFB} <br />
+        Direction: {tilt.dir} <br />
+      </div>
       <div
         className={isMenuCentered ? "mobile-menu-opened-bg" : ""}
         style={{
