@@ -7,6 +7,7 @@ import * as THREE from "three";
 import { Sparkles } from "@react-three/drei";
 import { HomeScreenCategoryText } from "./CategoryHsDetails";
 import { MenuAboutContact, MenuWheel } from "../../navs/mobile/MenuWheel";
+// import useScreenOrientation from "../../common/useScreenOrientation";
 // import { SelectedCategory } from "./CategoryDetails";
 
 const LazySelectedContent = lazy(() => import("./CategoryDetails"));
@@ -71,6 +72,10 @@ function HomeScreenMobile() {
     };
   }, []); // On mount and unmount
 
+  // const orientation = useScreenOrientation();
+
+  // console.log({ orientation });
+
   return (
     <>
       <MenuWheel
@@ -81,7 +86,7 @@ function HomeScreenMobile() {
         setSelectedCategory={setSelectedCategory}
         selectedCategory={selectedCategory}
       />
-      <div
+      {/* <div
         style={{
           position: "fixed",
           top: "3em",
@@ -90,12 +95,13 @@ function HomeScreenMobile() {
           height: "300px",
           border: "1px solid yellow",
           zIndex: 2,
+          color: "white",
         }}
       >
         Tilt LR: {tilt.tiltLR} <br />
         Tilt FB: {tilt.tiltFB} <br />
         Direction: {tilt.dir} <br />
-      </div>
+      </div> */}
       <div
         className={isMenuCentered ? "mobile-menu-opened-bg" : ""}
         style={{
