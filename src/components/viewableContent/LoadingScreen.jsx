@@ -2,6 +2,7 @@ import { Sparkles } from "@react-three/drei";
 import { Suspense, useEffect, useState } from "react";
 import { useAppContext } from "../../context/appContext";
 import { Canvas } from "@react-three/fiber";
+import { TextScrambleComponent } from "../common/shuffleTexts";
 // import { useGLTFAnimations } from "../scene/ModelComponent";
 // import * as THREE from "three";
 
@@ -69,7 +70,7 @@ export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
       setSparklesColorIndex(
         (prevIndex) => (prevIndex + 1) % sparklesColours.length
       );
-    }, 3000);
+    }, 4000);
 
     // Clear interval on component unmount
     return () => clearInterval(colorSwitchInterval);
@@ -132,21 +133,22 @@ export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
             our website via desktop or tablet!
           </div>
         ) : (
-          <h1
-            className="loading-header"
-            style={{ color: `${sparklesColours[sparklesColorIndex]}` }}
-          >
-            {["l", "o", "a", "d", "i", "n", "g"].map((letter, index) => (
-              <span
-                key={index}
-                className={`loading-span let${
-                  animationActive ? index + 1 : ""
-                }`}
-              >
-                {letter}
-              </span>
-            ))}
-          </h1>
+          // <h1
+          //   className="loading-header"
+          //   style={{ color: `${sparklesColours[sparklesColorIndex]}` }}
+          // >
+          //   {["l", "o", "a", "d", "i", "n", "g"].map((letter, index) => (
+          //     <span
+          //       key={index}
+          //       className={`loading-span let${
+          //         animationActive ? index + 1 : ""
+          //       }`}
+          //     >
+          //       {letter}
+          //     </span>
+          //   ))}
+          // </h1>
+          <TextScrambleComponent colour={sparklesColours[sparklesColorIndex]} />
         )}
       </div>
     </div>

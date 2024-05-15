@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAppContext } from "../../context/appContext";
 import { ContactUsText } from "../common/textData";
 import { SeeMoreBtn } from "../common/SeeMoreBtn";
+import { TextScrambleComponentHover } from "../common/shuffleTexts";
 
 export function BackgroundScroll({
   section1MenuRef,
@@ -34,46 +35,46 @@ export function BackgroundScroll({
     "homeland security",
     "artificalIntelligence",
     "military",
-    "customization",
+    "customize",
   ];
 
-  // const Text = ({ selectedCategory = 6, isExpanded }) => {
-  //   // console.log({ selectedModel });
+  const Text = ({ selectedCategory = 6, isExpanded }) => {
+    // console.log({ selectedModel });
 
-  //   const letters = getLettersByModel(selectedCategory, isExpanded);
+    const letters = getLettersByModel(selectedCategory, isExpanded);
 
-  //   if (!letters) return null;
-  //   //       color: #af3737; medicine red?
-  //   const shadowColor = {
-  //     1: { color: "#af3737" },
-  //     2: { color: "#999" },
-  //     3: { color: "#999" },
-  //     4: { color: "#00A4EF" },
-  //     5: { color: "#2B5317" },
-  //     6: { color: "#999" },
-  //     7: { color: "#999" },
-  //   };
-  //   return (
-  //     <>
-  //       {/* <div className="overlay-test"></div> */}
+    if (!letters) return null;
+    //       color: #af3737; medicine red?
+    const shadowColor = {
+      1: { color: "#af3737" },
+      2: { color: "#999" },
+      3: { color: "#999" },
+      4: { color: "#00A4EF" },
+      5: { color: "#2B5317" },
+      6: { color: "#999" },
+      7: { color: "#999" },
+    };
+    return (
+      <>
+        {/* <div className="overlay-test"></div> */}
 
-  //       <div
-  //         className="text-test"
-  //         style={isExpanded ? { marginTop: "2em" } : null}
-  //       >
-  //         {letters.map((letter, index) => (
-  //           <div className="wrapper-test" key={index}>
-  //             <div className="letter">{letter}</div>
-  //             <div className="shadow" style={shadowColor[selectedCategory]}>
-  //               {letter}
-  //             </div>
-  //           </div>
-  //         ))}
-  //       </div>
-  //     </>
-  //   );
-  // };
-
+        <div
+          className="text-test"
+          style={isExpanded ? { marginTop: "2em" } : null}
+        >
+          {letters.map((letter, index) => (
+            <div className="wrapper-test" key={index}>
+              <div className="letter">{letter}</div>
+              <div className="shadow" style={shadowColor[selectedCategory]}>
+                {letter}
+              </div>
+            </div>
+          ))}
+        </div>
+      </>
+    );
+  };
+  const text = "Hello world";
   return (
     <>
       <section className="section section-one">
@@ -90,6 +91,20 @@ export function BackgroundScroll({
 
           {startExpandedAnimation ? (
             <>
+              {/* <div
+                style={{
+                  position: "absolute",
+                  top: "200px",
+                  left: 0,
+                  zIndex: 23432432,
+                  border: "1px solid red",
+                  height: "500px",
+                  background: "grey",
+                  width: "900px",
+                }}
+              >
+                <TextScrambleComponent />
+              </div> */}
               <div className="container">
                 <span className="text-animate simply-header">
                   SIMPLY EXPAND
@@ -119,25 +134,42 @@ export function BackgroundScroll({
             ref={titlesContainerRef}
             className={`home-categories-wrapper ${hovered}`}
           >
-            {categories.map((title, idx) => (
-              <div
-                onMouseOver={() => {
-                  setTitleOnMainPageHovered(title);
-                }}
-                onMouseOut={() => {
-                  setTitleOnMainPageHovered("");
-                }}
-                onClick={() => scrollToElementById(idx)}
-                key={idx}
-                className={textAnimation}
-              >
-                <span className={"button-ani"}>
-                  {title == "artificalIntelligence"
-                    ? "ARTIFICAL INTELLIGENCE"
-                    : title.toUpperCase()}
-                </span>
-              </div>
-            ))}
+            {categories.map(
+              (title, idx) => (
+                // <Overlay index={idx} title={title} />
+                // idx == 0 ? (
+                <div key={idx} className={textAnimation}>
+                  <TextScrambleComponentHover
+                    handleClick={() => scrollToElementById(idx)}
+                    text={
+                      title == "artificalIntelligence"
+                        ? "ARTIFICAL INTELLIGENCE"
+                        : title.toUpperCase()
+                    }
+                  />
+                </div>
+              )
+              // ) : (
+              //   <div
+              //     onMouseOver={() => {
+              //       setTitleOnMainPageHovered(title);
+              //     }}
+              //     onMouseOut={() => {
+              //       setTitleOnMainPageHovered("");
+              //     }}
+              //     onClick={() => scrollToElementById(idx)}
+              //     key={idx}
+              //     className={textAnimation}
+              //   >
+              //     <span className={"button-ani"}>
+              //       {title == "artificalIntelligence"
+              //         ? "ARTIFICAL INTELLIGENCE"
+              //         : title.toUpperCase()}
+              //     </span>
+              //   </div>
+              // )
+              // )}
+            )}
           </div>
         ) : null}
       </section>

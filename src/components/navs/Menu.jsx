@@ -4,7 +4,7 @@ import { useAppContext } from "../../context/appContext";
 import { getSparkleColour } from "../scene/ornaments/getSparkleColour";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
-export const Header = ({ isMobileViewOnly }) => {
+export const HamburgerMenu = ({ isMobileViewOnly }) => {
   const [hovered, setIsHovered] = useState(false);
 
   const {

@@ -18,6 +18,15 @@
   src: url("../src/fonts/GothamBold.otf");
 }
 
+/* custom cursor */
+
+:root {
+  --color-cursor: 255, 255, 255;
+  --cursor-outline-shade: 0.3;
+  --cursor-size: 10px;
+  --cursor-outline-size: 60px;
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -26,6 +35,32 @@ body {
   /* background: black; */
   overflow-y: hidden;
   overflow-x: hidden;
+  /* cursor: none; */
+}
+
+#cursor-dot,
+#cursor-dot-outline {
+  z-index: 999;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out;
+}
+
+#cursor-dot {
+  width: var(--cursor-size);
+  height: var(--cursor-size);
+  background-color: rgba(var(--color-cursor), 1);
+}
+
+#cursor-dot-outline {
+  width: var(--cursor-outline-size);
+  height: var(--cursor-outline-size);
+  background-color: rgba(var(--color-cursor), var(--cursor-outline-shade));
 }
 
 .flex-center {
@@ -43,7 +78,7 @@ body {
     to right,
     rgba(255, 255, 255),
     rgba(255, 255, 255) 50%,
-    rgb(255, 255, 255, 0.5) 50%
+    rgb(255, 255, 255, 0.7) 50%
   );
   background-position-x: 100%;
   background-position-y: 0;
@@ -136,6 +171,11 @@ body {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: flex-start;
+  /* 
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  align-items: center; */
   /* margin-top: 6em; */
   /* border: 1px solid orange; */
   position: fixed;
@@ -1962,6 +2002,142 @@ section {
   left: 15rem;
   top: 12.5rem;
   /* background: rgb(240, 183, 94, 0.7); */
+}
+
+.abla {
+  color: #ffffff;
+  display: inline-block;
+  font-size: 36px;
+  letter-spacing: 5px;
+  margin: 0 10px;
+  padding: 2px 12px 6px 19px;
+  position: relative;
+  text-decoration: none;
+}
+
+.dud {
+  color: #757575;
+}
+
+h1 + hr {
+  margin: 0 auto 2em;
+}
+
+#cursor-dot,
+#cursor-dot-outline {
+  z-index: 999;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out;
+}
+
+#cursor-dot {
+  width: var(--cursor-size);
+  height: var(--cursor-size);
+  background-color: rgba(var(--color-cursor), 1);
+}
+
+#cursor-dot-outline {
+  width: var(--cursor-outline-size);
+  height: var(--cursor-outline-size);
+  background-color: rgba(var(--color-cursor), var(--cursor-outline-shade));
+}
+*/ .column {
+  margin: 15px 15px 0;
+  padding: 0;
+}
+.column:last-child {
+  padding-bottom: 60px;
+}
+.column::after {
+  content: "";
+  clear: both;
+  display: block;
+}
+.column div {
+  position: relative;
+  float: left;
+  width: 300px;
+  height: 200px;
+  margin: 0 0 0 25px;
+  padding: 0;
+}
+.column div:first-child {
+  margin-left: 0;
+
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  z-index: -1;
+  display: block;
+  width: 300px;
+  margin: 0;
+  padding: 0;
+  color: #444;
+  font-size: 18px;
+  text-decoration: none;
+  text-align: center;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+  opacity: 0;
+}
+figure {
+  width: 90px;
+  height: 90px;
+  margin: 0;
+  padding: 0;
+  /* background: #fff; */
+  overflow: hidden;
+}
+
+/* Shine */
+.hover14 figure {
+  position: relative;
+}
+.hover14 figure::before {
+  position: absolute;
+  top: 0;
+  left: -75%;
+  z-index: 2;
+  display: block;
+  content: "";
+  width: 50%;
+  height: 100%;
+  background: -webkit-linear-gradient(
+    left,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
+  -webkit-transform: skewX(-25deg);
+  transform: skewX(-25deg);
+}
+.hover14 figure:hover::before {
+  -webkit-animation: shine 0.75s;
+  animation: shine 0.75s;
+}
+@-webkit-keyframes shine {
+  100% {
+    left: 125%;
+  }
+}
+@keyframes shine {
+  100% {
+    left: 125%;
+  }
+}
+
+.hover14:hover {
+  cursor: pointer;
 }
 
 /* -------------------------------
