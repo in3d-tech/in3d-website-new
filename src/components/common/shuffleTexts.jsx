@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useCallback } from "react";
 
 class TextScramble {
-  constructor(el) {
+  constructor(el, speed = 1) {
+    // Add speed parameter with a default value
     this.el = el;
+    this.speed = speed; // Store the speed
     this.chars = "!<>-_\\/[]{}—=+*^?#________";
     this.update = this.update.bind(this);
   }
@@ -15,8 +17,8 @@ class TextScramble {
     for (let i = 0; i < length; i++) {
       const from = oldText[i] || "";
       const to = newText[i] || "";
-      const start = Math.random() * 40;
-      const end = start + Math.random() * 40;
+      const start = Math.random() * 40 * this.speed;
+      const end = start + Math.random() * 40 * this.speed;
       this.queue.push({ from, to, start, end });
     }
     cancelAnimationFrame(this.frameRequest);
@@ -38,7 +40,7 @@ class TextScramble {
           char = this.randomChar();
           this.queue[i].char = char;
         }
-        output += `<span class=${"dud"}>${char}</span>`;
+        output += `<span className="dud">${char}</span>`;
       } else {
         output += from;
       }
@@ -58,10 +60,10 @@ class TextScramble {
 }
 
 const phrases = [
-  "Pioneer",
+  // "Pioneer",
   "Develop",
   "Advance",
-  "Expand",
+  // "Expand",
   "Craft",
   "Build",
   "Design",
@@ -75,7 +77,7 @@ export const TextScrambleComponent = ({ colour }) => {
     let counter = 0;
     const next = () => {
       fx.setText(phrases[counter]).then(() => {
-        setTimeout(next, 800);
+        setTimeout(next, 100);
       });
       counter = (counter + 1) % phrases.length;
     };
@@ -98,7 +100,7 @@ export const TextScrambleComponentHover = ({ text, handleClick }) => {
   const textRef = useRef(null);
 
   const handleMouseEnter = useCallback(() => {
-    const fx = new TextScramble(textRef.current);
+    const fx = new TextScramble(textRef.current, 0.4);
     fx.setText(text);
   }, [text]);
 

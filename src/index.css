@@ -76,7 +76,7 @@ body {
   background-clip: text;
   background-image: linear-gradient(
     to right,
-    rgba(255, 255, 255),
+    rgb(188, 153, 199),
     rgba(255, 255, 255) 50%,
     rgb(255, 255, 255, 0.65) 50%
   );
@@ -100,6 +100,47 @@ body {
   width: 100%;
   justify-content: center;
   z-index: 5;
+}
+
+.logo {
+  /* adjust the below to control the 3D effect */
+  --x: 5px;
+  --y: 20px;
+  transform: perspective(1000px) rotateX(var(--_a, 40deg));
+  /* */
+  clip-path: polygon(
+    var(--y) var(--y),
+    calc(100% - var(--y)) var(--y),
+    calc(100% - var(--y)) calc(100% - var(--y)),
+    calc(100% - var(--y) - var(--x)) var(--_c, 100%),
+    calc(var(--x) + var(--y)) var(--_c, 100%),
+    var(--y) calc(100% - var(--y))
+  );
+  outline: var(--y) solid rgba(255, 255, 255, 0.1);
+  outline-offset: calc(-1 * var(--y));
+  padding: var(--y) var(--y) 0 var(--y);
+  transition: 1s;
+}
+.two-dee-box:hover .logo {
+  --_a: 0deg;
+  --_c: calc(100% - var(--y));
+}
+
+.two-dee-box {
+  cursor: pointer;
+}
+h2 {
+  text-align: center;
+  margin: 0;
+  font-size: 30px;
+  font-weight: bold;
+  font-family: sans-serif;
+  transform: translateY(250%);
+  transition: 0.8s;
+}
+.two-dee-box:hover h2 {
+  transform: translateY(0%);
+  transition: 0.8s 0.2s;
 }
 
 .section-one-first-title {
@@ -2017,7 +2058,7 @@ section {
   display: inline-block;
   font-size: 36px;
   letter-spacing: 5px;
-  margin: 0 10px;
+  margin: 0 -5px;
   padding: 2px 12px 6px 19px;
   position: relative;
   text-decoration: none;

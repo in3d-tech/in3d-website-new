@@ -18,12 +18,13 @@ export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
   const height = window.innerHeight * 0.3;
 
   if (!has4SecondsPassed) {
-    setHas4SecondsPassed(1);
-    setTimeout(() => setHas4SecondsPassed(2), 4000);
+    setTimeout(() => setHas4SecondsPassed(true), 4000);
   }
 
   useEffect(() => {
-    // return;
+    if (!has4SecondsPassed) {
+      return;
+    }
     // if (isMobileViewOnly && showLoading) {
     if (isMobileViewOnly) {
       const loadingScreen = setTimeout(() => setShowloadingScreen(false), 2000);
@@ -58,7 +59,7 @@ export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
         clearTimeout(renderModels);
       };
     }
-  }, [isAstroModelDrawn, customizeHasRendered]);
+  }, [isAstroModelDrawn, customizeHasRendered, has4SecondsPassed]);
 
   const sparklesColours = [
     "#0DA888", //"#CF9FFF",
@@ -115,15 +116,56 @@ export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
             />
           </Suspense>
         </Canvas>
-        <img
-          className="flashing-img"
+        <div
           style={{
-            height: height,
+            width: "100vw",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
           }}
-          src="/assets/images/in3d-logo-white.png"
-        />
+        >
+          <div>
+            <img
+              className="flashing-img"
+              style={{
+                height: height,
+              }}
+              src="/assets/images/plain-logo.png"
+            />
+          </div>
 
-        {!showLoading ? (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              width: "100vw",
+              justifyContent: "center",
+            }}
+          >
+            <div
+              style={{
+                flex: 1,
+                height: "100%",
+                display: "flex",
+                justifyContent: "flex-end",
+                alignItems: "flex-end",
+              }}
+            >
+              <span className="abla" style={{ margin: 0 }}>
+                Simply{" "}
+              </span>
+            </div>
+
+            <div style={{ flex: 1 }}>
+              <TextScrambleComponent
+                colour={sparklesColours[sparklesColorIndex]}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* {!showLoading ? (
           <div
             style={{
               color: "rgb(255,255,255,0.9)",
@@ -140,7 +182,7 @@ export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
           </div>
         ) : (
           <TextScrambleComponent colour={sparklesColours[sparklesColorIndex]} />
-        )}
+        )} */}
       </div>
     </div>
   );
