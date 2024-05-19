@@ -10,11 +10,17 @@ export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
   const [fadeOut, setFadeOut] = useState("");
   const { isAstroModelDrawn, setRenderModels, customizeHasRendered } =
     useAppContext();
+  const [has4SecondsPassed, setHas4SecondsPassed] = useState(false);
   const [animationActive, setAnimationActive] = useState(true);
   const [showLoading, setShowLoading] = useState(true);
   const [sparklesColorIndex, setSparklesColorIndex] = useState(0);
 
   const height = window.innerHeight * 0.3;
+
+  if (!has4SecondsPassed) {
+    setHas4SecondsPassed(1);
+    setTimeout(() => setHas4SecondsPassed(2), 4000);
+  }
 
   useEffect(() => {
     // return;
@@ -133,27 +139,28 @@ export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
             our website via desktop or tablet!
           </div>
         ) : (
-          // <h1
-          //   className="loading-header"
-          //   style={{ color: `${sparklesColours[sparklesColorIndex]}` }}
-          // >
-          //   {["l", "o", "a", "d", "i", "n", "g"].map((letter, index) => (
-          //     <span
-          //       key={index}
-          //       className={`loading-span let${
-          //         animationActive ? index + 1 : ""
-          //       }`}
-          //     >
-          //       {letter}
-          //     </span>
-          //   ))}
-          // </h1>
           <TextScrambleComponent colour={sparklesColours[sparklesColorIndex]} />
         )}
       </div>
     </div>
   );
 }
+
+// <h1
+//   className="loading-header"
+//   style={{ color: `${sparklesColours[sparklesColorIndex]}` }}
+// >
+//   {["l", "o", "a", "d", "i", "n", "g"].map((letter, index) => (
+//     <span
+//       key={index}
+//       className={`loading-span let${
+//         animationActive ? index + 1 : ""
+//       }`}
+//     >
+//       {letter}
+//     </span>
+//   ))}
+// </h1>
 
 // export const LoaderComponent = () => {
 //   return (

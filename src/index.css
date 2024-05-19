@@ -1721,6 +1721,14 @@ section {
   }
 }
 
+.icon-scroll:hover {
+  cursor: pointer;
+}
+
+.down-indicator:hover {
+  cursor: pointer;
+}
+
 .down-indicator::before {
   animation: bounce 1s ease infinite;
   /* bottom: 4rem; */

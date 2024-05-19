@@ -4,6 +4,7 @@ import { AstroModel } from "../../components/scene/ModelComponent";
 import {
   ASTRO,
   CUSTOMIZATION,
+  INDUSTRY,
   Model_Data,
 } from "../../components/common/modelData";
 
@@ -320,7 +321,8 @@ const Lights = ({
           intensity={
             scrollArea?.currentSection == CUSTOMIZATION
               ? 2
-              : scrollArea.currentSection == ASTRO
+              : scrollArea.currentSection == ASTRO ||
+                scrollArea.currentSection == INDUSTRY
               ? 0.2
               : 1
           }

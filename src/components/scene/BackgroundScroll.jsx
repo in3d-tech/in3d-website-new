@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useAppContext } from "../../context/appContext";
 import { ContactUsText } from "../common/textData";
 import { SeeMoreBtn } from "../common/SeeMoreBtn";
@@ -22,6 +22,7 @@ export function BackgroundScroll({
   } = useAppContext();
 
   const [startExpandedAnimation, setStartExpandedAnimation] = useState(false);
+  const sectionIndustryRef = useRef(null);
 
   useEffect(() => {
     if (!customizeHasRendered) return;
@@ -54,6 +55,7 @@ export function BackgroundScroll({
       6: { color: "#999" },
       7: { color: "#999" },
     };
+
     return (
       <>
         {/* <div className="overlay-test"></div> */}
@@ -75,6 +77,14 @@ export function BackgroundScroll({
     );
   };
   const text = "Hello world";
+  const scrollToElement = () => {
+    if (sectionIndustryRef.current) {
+      sectionIndustryRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
   return (
     <>
       <section className="section section-one">
@@ -91,28 +101,14 @@ export function BackgroundScroll({
 
           {startExpandedAnimation ? (
             <>
-              {/* <div
-                style={{
-                  position: "absolute",
-                  top: "200px",
-                  left: 0,
-                  zIndex: 23432432,
-                  border: "1px solid red",
-                  height: "500px",
-                  background: "grey",
-                  width: "900px",
-                }}
-              >
-                <TextScrambleComponent />
-              </div> */}
               <div className="container">
                 <span className="text-animate simply-header">
                   SIMPLY EXPAND
                 </span>
               </div>
               <div className="down-indicator-wrapper">
-                <div className="icon-scroll"></div>
-                <div className="down-indicator"></div>
+                <div className="icon-scroll" onClick={scrollToElement}></div>
+                <div onClick={scrollToElement} className="down-indicator"></div>
                 <div
                   style={{
                     position: "relative",
@@ -178,7 +174,11 @@ export function BackgroundScroll({
         className="section section-two-half"
         ref={section1MenuRef}
       ></section>
-      <section id="sectionThree" className="section section-three"></section>
+      <section
+        ref={sectionIndustryRef}
+        id="sectionThree"
+        className="section section-three"
+      ></section>
       <section id="sectionFour" className="section section-four"></section>
       <section id="sectionFive" className="section section-five"></section>
       <section id="sectionSix" className="section section-six"></section>
