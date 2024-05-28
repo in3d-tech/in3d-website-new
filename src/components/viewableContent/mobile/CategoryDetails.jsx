@@ -468,10 +468,9 @@ function Model({ url, modelRef, selectedCategory }) {
   // const { active, progress, errors, total } = useProgress();
 
   const [isDragging, setIsDragging] = useState(false); // State to check if user is interacting
-
   const [initialX, setInitialX] = useState(null); // To store initial pointer or touch position
-
   const [rotationFactor, setRotationFactor] = useState(0); // Temporarily store the rotation change
+  const [inertia, setInertia] = useState(0); // Store inertia for smooth stopping
 
   const modelAttributes = {
     [INDUSTRY]: {
@@ -515,33 +514,37 @@ function Model({ url, modelRef, selectedCategory }) {
     setIsDragging(true);
 
     setInitialX(event.clientX); // Get the initial pointer position
+
+    setInertia(0); // Reset inertia on new drag
   };
 
   const handlePointerMove = (event) => {
     if (isDragging && initialX !== null) {
       const currentX = event.clientX;
-
       const deltaX = currentX - initialX;
+      let newRotationFactor = deltaX * 0.01;
+      newRotationFactor = Math.min(
+        MAX_ROTATION_SPEED,
+        Math.max(-MAX_ROTATION_SPEED, newRotationFactor)
+      ); // Clamp the speed
 
-      setRotationFactor(deltaX * 0.01); // Calculate the rotation factor based on pointer movement
-
+      setRotationFactor(newRotationFactor); // Calculate the rotation factor based on pointer movement
       setInitialX(currentX); // Update initial pointer position for continuous rotation
     }
   };
 
   const handlePointerUp = () => {
     setIsDragging(false);
-
     setInitialX(null);
-
-    setRotationFactor(0); // Reset the rotation factor when pointer interaction ends
+    setInertia(rotationFactor); // Store the last rotation factor as inertia
+    setRotationFactor(0); // Reset the rotation factor
   };
 
   const handleTouchStart = (event) => {
     if (event.touches && event.touches.length > 0) {
       setIsDragging(true);
-
       setInitialX(event.touches[0].clientX); // Get the initial touch position
+      setInertia(0); // Reset inertia on new drag
     }
   };
 
@@ -553,26 +556,34 @@ function Model({ url, modelRef, selectedCategory }) {
       event.touches.length > 0
     ) {
       const currentX = event.touches[0].clientX;
-
       const deltaX = currentX - initialX;
+      let newRotationFactor = deltaX * 0.01;
+      newRotationFactor = Math.min(
+        MAX_ROTATION_SPEED,
+        Math.max(-MAX_ROTATION_SPEED, newRotationFactor)
+      ); // Clamp the speed
 
-      setRotationFactor(deltaX * 0.01); // Calculate the rotation factor based on touch movement
-
+      setRotationFactor(newRotationFactor); // Calculate the rotation factor based on touch movement
       setInitialX(currentX); // Update initial touch position for continuous rotation
     }
   };
 
   const handleTouchEnd = () => {
     setIsDragging(false);
-
     setInitialX(null);
-
-    setRotationFactor(0); // Reset the rotation factor when touch interaction ends
+    setInertia(rotationFactor); // Store the last rotation factor as inertia
+    setRotationFactor(0); // Reset the rotation factor
   };
 
   useFrame(() => {
-    if (isDragging && scene) {
-      scene.rotation.y += rotationFactor; // Apply the rotation factor if the user is dragging
+    if (scene) {
+      scene.rotation.y += rotationFactor;
+
+      // Apply inertia if not dragging
+      if (!isDragging && Math.abs(inertia) > 0.0001) {
+        scene.rotation.y += inertia;
+        setInertia(inertia * DECAY_FACTOR); // Decay inertia over time
+      }
     }
   });
 
