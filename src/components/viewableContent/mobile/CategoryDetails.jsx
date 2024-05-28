@@ -461,11 +461,12 @@ function ContactUsMobile({ test }) {
 function Model({ url, modelRef, selectedCategory }) {
   const { isAstroModelDrawn, setIsAstroModelDrawn } = useAppContext();
 
-  const [initialTouch, setInitialTouch] = useState(null); // To store initial touch position
-  const [rotationY, setRotationY] = useState(0); // To store the rotation value
-
   const { scene, animations } = useGLTF(url);
   const mixer = useGLTFAnimations(scene, animations);
+
+  const [initialTouchX, setInitialTouchX] = useState(null); // To store initial touch position
+
+  const [rotationFactor, setRotationFactor] = useState(0); // Temporarily store the rotation change
 
   const { active, progress, errors, total } = useProgress();
 
@@ -507,52 +508,50 @@ function Model({ url, modelRef, selectedCategory }) {
     },
   };
 
-  useEffect(() => {
-    console.log(progress);
-  }, [progress]);
-  // gsap.set(".scene", { scale: 0.7 });
-
   const handleTouchStart = (event) => {
     if (event.touches && event.touches.length > 0) {
-      setInitialTouch(event.touches[0].clientX);
+      setInitialTouchX(event.touches[0].clientX);
     }
   };
 
   const handleTouchMove = (event) => {
-    if (initialTouch !== null && event.touches && event.touches.length > 0) {
-      const currentTouch = event.touches[0].clientX;
+    if (initialTouchX !== null && event.touches && event.touches.length > 0) {
+      const currentTouchX = event.touches[0].clientX;
 
-      const delta = currentTouch - initialTouch;
+      const deltaX = currentTouchX - initialTouchX;
 
-      setRotationY(delta * 0.01); // Adjust the multiplier for sensitivity
+      setRotationFactor(deltaX * 0.01); // Adjust the multiplier for sensitivity
+
+      setInitialTouchX(currentTouchX); // Update initial touch position for continuous rotation
     }
   };
 
   const handleTouchEnd = () => {
-    setInitialTouch(null);
+    setInitialTouchX(null);
+
+    setRotationFactor(0); // Reset the rotation factor when touch interaction ends
   };
 
   useFrame(() => {
     if (scene) {
-      scene.rotation.y += rotationY;
+      scene.rotation.y += rotationFactor;
     }
   });
 
   return (
     <group
-      onPointerDown={handleTouchStart}
-      onPointerMove={handleTouchMove}
-      onPointerUp={handleTouchEnd}
-      onPointerOut={handleTouchEnd}
-      onClick={() => console.log("JELLLOO ")}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onTouchCancel={handleTouchEnd} // Handle touch cancel event
     >
       <primitive
         ref={modelRef}
         object={scene}
         dispose={null}
-        scale={modelAttributes[selectedCategory].scale} //{[1, 1, 1]}
-        position={modelAttributes[selectedCategory].position} //{[0, -2, 1]}
-        rotation={modelAttributes[selectedCategory].rotation} //{[0.54, Math.PI / 3, 0]}
+        scale={modelAttributes[selectedCategory].scale}
+        position={modelAttributes[selectedCategory].position}
+        rotation={modelAttributes[selectedCategory].rotation}
       />
     </group>
   );
