@@ -285,7 +285,7 @@ export function AstroModel({ url, astroRef, setTextAnimation }) {
         console.log("Astro object is fully rendered!");
       }
     }
-  }, [scene, setIsAstroModelDrawn]);
+  }, [isAstroModelDrawn]);
 
   return (
     <group>

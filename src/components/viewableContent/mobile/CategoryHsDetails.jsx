@@ -178,11 +178,11 @@ export const HomeScreenCategoryText = ({
       <span style={{ textAlign: "center", padding: "1em", fontSize: "0.8em" }}>
         {categoryDataByIndex[idx]?.text}
       </span>
-      <LearnMoreBtn
+      {/* <LearnMoreBtn
         setSelectedMenuActionMobile={setSelectedMenuActionMobile}
         idx={idx}
         setSelectedCategory={setSelectedCategory}
-      />
+      /> */}
     </div>
   );
 };

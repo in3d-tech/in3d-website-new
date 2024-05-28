@@ -27,7 +27,7 @@ export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
       return;
     }
     // if (isMobileViewOnly && showLoading) {
-    if (isMobileViewOnly) {
+    if (isAstroModelDrawn && isMobileViewOnly) {
       const loadingScreen = setTimeout(() => setShowloadingScreen(false), 2000);
       const showLoad = setTimeout(() => setShowLoading(false), 2000);
       document.body.style.overflowY = "auto";
