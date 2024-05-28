@@ -219,13 +219,13 @@ export function BackgroundScroll({
           </div>
         </div>
       </section>
-      {scrollArea.currentSection > scrollArea.prevSection ? (
+      {/* {scrollArea.currentSection > scrollArea.prevSection ? (
         scrollArea.currentSection == modelAnimationIsHalfWay ? (
           <SeeMoreBtn />
         ) : null
       ) : (
         <SeeMoreBtn />
-      )}
+      )} */}
     </>
   );
 }
