@@ -86,8 +86,8 @@ function SelectedCategory() {
             }}
           >
             <Canvas>
-              <ambientLight intensity={0.8} />
-              <directionalLight intensity={3} />
+              <ambientLight intensity={1} />
+              <directionalLight intensity={4} />
               <Camera />
               <Sparkles
                 count={300}
