@@ -22,6 +22,7 @@ export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
   }
 
   useEffect(() => {
+    // return;
     if (!has4SecondsPassed) {
       return;
     }

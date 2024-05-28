@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { extend } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
-import { HamburgerMenu } from "./components/navs/Menu";
+import { HamburgerMenu } from "./components/navs/HamburgerMenu";
 import { LoadingScreen } from "./components/viewableContent/LoadingScreen";
 import { useAppContext } from "./context/appContext";
 import useCheckIsMobileScreen from "./components/common/useCheckIsMobile";

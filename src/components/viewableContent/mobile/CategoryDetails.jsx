@@ -1,13 +1,38 @@
-import { useEffect, useState, useRef } from "react";
+import { Suspense, useEffect, useMemo, useState, useRef, lazy } from "react";
 import emailjs from "@emailjs/browser";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
 import { useAppContext } from "../../../context/appContext";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useGLTF, useProgress } from "@react-three/drei";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Camera } from "../../scene/Camera";
+import * as THREE from "three";
+import { Sparkles } from "@react-three/drei";
+import {
+  INDUSTRY,
+  MEDICINE,
+  MICROSOFT,
+  SECURITY,
+  AI,
+  MILITARY,
+  CUSTOMIZATION,
+} from "../../common/modelData";
+
+const models = {
+  [INDUSTRY]: "/assets/models/engenir_model.glb",
+  [MEDICINE]: "/assets/models/medical_model1 (1).glb",
+  [MICROSOFT]: "/assets/models/microsoft_model.glb",
+  [SECURITY]: "/assets/models/security.glb",
+  [AI]: "/assets/models/ai_model.glb",
+  [MILITARY]: "/assets/models/military.glb",
+  [CUSTOMIZATION]: "/assets/models/costimize_model_v02.glb",
+};
 
 function SelectedCategory() {
   const { setSelectedCategory, selectedCategory } = useAppContext();
   const data = getCategoryData({ selectedCategory });
+  const modelRef = useRef();
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -17,8 +42,12 @@ function SelectedCategory() {
     };
   }, []);
 
+  const isAboutOrContact =
+    selectedCategory === "about" || selectedCategory === "contact";
+
   return (
     <div className="tester fade-in">
+      {/* <div className="tester" style={{ opacity: 0.5 }}> */}
       <div style={{ position: "fixed", top: "1em", left: "1em", zIndex: 3 }}>
         <ArrowBackIcon
           fontSize="large"
@@ -41,6 +70,37 @@ function SelectedCategory() {
         >
           {data.title}
         </div>
+        {isAboutOrContact ? null : (
+          <div
+            style={{
+              // border: "1px solid yellow",
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100vw",
+              height: "100vh",
+            }}
+          >
+            <Canvas>
+              <ambientLight intensity={0.8} />
+              <directionalLight intensity={3} />
+              <Camera />
+              <Sparkles
+                count={300}
+                scale={10}
+                size={2}
+                color="pink" //{getSparkleColour(scrollArea.currentSection)}
+              />
+              <Suspense fallback={null}>
+                <Model
+                  url={models[selectedCategory]} //"/assets/models/engenir_model.glb"
+                  modelRef={modelRef}
+                  selectedCategory={selectedCategory}
+                />
+              </Suspense>
+            </Canvas>
+          </div>
+        )}
 
         {selectedCategory == "contact" ? (
           <ContactUsMobile test={true} />
@@ -51,6 +111,7 @@ function SelectedCategory() {
               width: "90%",
               marginTop: "2em",
               fontFamily: "gotham",
+              textAlign: "center",
             }}
           >
             {data.text}
@@ -73,6 +134,8 @@ const getCategoryData = ({ selectedCategory }) => {
       ),
       bgImage: 'url("/assets/images/backgrounds/taasia/Industry_Togle.jpg")',
       text: "Together with our clients we map out the challenges they face and develop tailor made solutions using XR and 3D technology that creates an innovative visual interface between men and machine.",
+
+      url: "/assets/models/engenir_model.glb",
     },
     1: {
       title: (
@@ -83,6 +146,7 @@ const getCategoryData = ({ selectedCategory }) => {
       ),
       bgImage: 'url("/assets/images/backgrounds/medicine/Medical_Togle.jpg")',
       text: "Using Extended Reality (XR) we at in3D became pioneers in development of XR products for medical organizations, collaborating together to empower innovation and efficiency for clinics and hospitals.",
+      url: "/assets/models/medical_model1 (1).glb",
     },
     2: {
       title: (
@@ -94,6 +158,7 @@ const getCategoryData = ({ selectedCategory }) => {
       bgImage:
         'url("/assets/images/backgrounds/microsoft/Microsoft_Tugle.jpg")',
       text: "In3D is the official and the inclusive Mixed Reality (MR) partner of Microsoft Israel",
+      url: "/assets/models/microsoft_model.glb",
     },
     3: {
       title: (
@@ -105,6 +170,7 @@ const getCategoryData = ({ selectedCategory }) => {
       bgImage:
         'url("/assets/images/backgrounds/security/Security_Togle_Finish2.jpg")',
       text: "Thanks to years of collaboration with defense industries, we gained the needed experience, knowledge and tools to provide quick and out of the box solutions that are tailored to the industries unique requirements.",
+      url: "/assets/models/security.glb",
     },
     4: {
       title: (
@@ -115,6 +181,7 @@ const getCategoryData = ({ selectedCategory }) => {
       ),
       bgImage: 'url("/assets/images/backgrounds/ai/Ai_Tugle_Finish.jpg")',
       text: " The combination of a 3D XR software environment with A.I creates not only an advanced and innovative hardware and software operation but a genuine cooperation between man and machine.",
+      url: "/assets/models/ai_model.glb",
     },
     5: {
       title: (
@@ -126,6 +193,7 @@ const getCategoryData = ({ selectedCategory }) => {
       bgImage:
         'url("/assets/images/backgrounds/military/Militery_Togle_Finish2.jpg")',
       text: "We deliver top-of-the-line technology to all of our important industries, through development of complex simulators, XR platforms, and tailored applications that are now in the service of this significant sector.",
+      url: "/assets/models/military.glb",
     },
     6: {
       title: (
@@ -137,7 +205,9 @@ const getCategoryData = ({ selectedCategory }) => {
       bgImage:
         'url("/assets/images/backgrounds/customize/Customize_Togle_Finish.jpg")',
       text: "As specialists we keep an amazing team of developers, 3D generalists, interface and graphics artists, and product designers just so we can provide our clients with the flexibility and abilities needed to deliver the best product.",
+      url: "/assets/models/costimize_model_v02.glb",
     },
+
     about: {
       title: (
         <>
@@ -216,27 +286,6 @@ const getCategoryData = ({ selectedCategory }) => {
 
   return categoryData[selectedCategory - 2];
 };
-
-function AboutUs() {
-  return (
-    <div>
-      <h2>About Us</h2>
-      <div style={{ border: "1px solid red", color: "black" }}>
-        in3D is an Israeli based company with worldwide aspirations. <br /> We
-        develop 3D virtual environment software for different clients from
-        different sectors from all around the world We specialize in Extended
-        Reality (XR) but first and most we are its believers. <br /> WE ARE NOT
-        A START-UP, WE WOULD RATHER START-WORKING WITH YOU! We push ourselves
-        hard to be innovative each day, and it has required us to trailblaze
-        both our technology and our way, designating ourselves to a significant
-        role in the tech industry for years to come. <br /> in3D is an ISO9001
-        and ISO27001 certified company. We operate by the most demanding
-        requirements so please feel comfortable to choose in3D for your next
-        project
-      </div>
-    </div>
-  );
-}
 
 function ContactUsMobile({ test }) {
   const [showTextBox, setShowTextBox] = useState(false);
@@ -407,4 +456,122 @@ function ContactUsMobile({ test }) {
       )}
     </>
   );
+}
+
+function Model({ url, modelRef, selectedCategory }) {
+  const { isAstroModelDrawn, setIsAstroModelDrawn } = useAppContext();
+
+  const [initialTouch, setInitialTouch] = useState(null); // To store initial touch position
+  const [rotationY, setRotationY] = useState(0); // To store the rotation value
+
+  const { scene, animations } = useGLTF(url);
+  const mixer = useGLTFAnimations(scene, animations);
+
+  const { active, progress, errors, total } = useProgress();
+
+  const modelAttributes = {
+    [INDUSTRY]: {
+      rotation: [0, 0, 0],
+      scale: [1.5, 1.5, 1.5],
+      position: [0, -2.25, 0],
+    },
+    [MEDICINE]: {
+      rotation: [0, 0, 0],
+      scale: [1.3, 1.3, 1.3],
+      position: [2.35, -2, 0],
+    },
+    [MICROSOFT]: {
+      rotation: [0, 0, 0],
+      scale: [1.4, 1.4, 1.4],
+      position: [0, -2, 0],
+    },
+    [SECURITY]: {
+      rotation: [0, Math.PI, 0],
+      scale: [4.6, 4.6, 4.6],
+      position: [-0.2, -1.6, 0],
+    },
+    [AI]: {
+      rotation: [0, 0.5, 0],
+      scale: [1.3, 1.3, 1.3],
+      position: [-0.2, -2, 0],
+    },
+    [MILITARY]: {
+      rotation: [0, 0.2, 0],
+      scale: [2.4, 2.4, 2.4],
+      position: [0, -2.1, 0],
+    },
+    [CUSTOMIZATION]: {
+      rotation: [0, 0.5, 0],
+      scale: [1.9, 1.9, 1.9],
+      position: [0, -2.3, 0],
+    },
+  };
+
+  useEffect(() => {
+    console.log(progress);
+  }, [progress]);
+  // gsap.set(".scene", { scale: 0.7 });
+
+  const handleTouchStart = (event) => {
+    if (event.touches && event.touches.length > 0) {
+      setInitialTouch(event.touches[0].clientX);
+    }
+  };
+
+  const handleTouchMove = (event) => {
+    if (initialTouch !== null && event.touches && event.touches.length > 0) {
+      const currentTouch = event.touches[0].clientX;
+
+      const delta = currentTouch - initialTouch;
+
+      setRotationY(delta * 0.01); // Adjust the multiplier for sensitivity
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setInitialTouch(null);
+  };
+
+  useFrame(() => {
+    if (scene) {
+      scene.rotation.y += rotationY;
+    }
+  });
+
+  return (
+    <group
+      onPointerDown={handleTouchStart}
+      onPointerMove={handleTouchMove}
+      onPointerUp={handleTouchEnd}
+      onPointerOut={handleTouchEnd}
+      onClick={() => console.log("JELLLOO ")}
+    >
+      <primitive
+        ref={modelRef}
+        object={scene}
+        dispose={null}
+        scale={modelAttributes[selectedCategory].scale} //{[1, 1, 1]}
+        position={modelAttributes[selectedCategory].position} //{[0, -2, 1]}
+        rotation={modelAttributes[selectedCategory].rotation} //{[0.54, Math.PI / 3, 0]}
+      />
+    </group>
+  );
+}
+
+function useGLTFAnimations(scene, animations) {
+  const { invalidate } = useThree();
+  const mixer = useMemo(() => new THREE.AnimationMixer(scene), [scene]);
+
+  useEffect(() => {
+    if (!mixer || !animations) return;
+
+    animations.forEach((clip) => mixer.clipAction(clip).play());
+
+    const handler = setInterval(() => invalidate(), 1000 / 60);
+    return () => clearInterval(handler);
+  }, [animations, mixer, invalidate]);
+
+  useFrame((_state, delta) => mixer && mixer.update(delta));
+
+  return mixer;
 }
