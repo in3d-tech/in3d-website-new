@@ -18,7 +18,7 @@ export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
   const height = window.innerHeight * 0.3;
 
   if (!has4SecondsPassed) {
-    setTimeout(() => setHas4SecondsPassed(true), 4000);
+    setTimeout(() => setHas4SecondsPassed(true), 3600);
   }
 
   useEffect(() => {

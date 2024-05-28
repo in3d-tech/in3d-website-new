@@ -464,11 +464,7 @@ function Model({ url, modelRef, selectedCategory }) {
   const { scene, animations } = useGLTF(url);
   const mixer = useGLTFAnimations(scene, animations);
 
-  const [initialTouchX, setInitialTouchX] = useState(null); // To store initial touch position
-
-  const [rotationFactor, setRotationFactor] = useState(0); // Temporarily store the rotation change
-
-  const { active, progress, errors, total } = useProgress();
+  // const { active, progress, errors, total } = useProgress();
 
   const modelAttributes = {
     [INDUSTRY]: {
@@ -488,13 +484,13 @@ function Model({ url, modelRef, selectedCategory }) {
     },
     [SECURITY]: {
       rotation: [0, Math.PI, 0],
-      scale: [4.6, 4.6, 4.6],
+      scale: [4.4, 4.4, 4.4],
       position: [-0.2, -1.6, 0],
     },
     [AI]: {
       rotation: [0, 0.5, 0],
-      scale: [1.3, 1.3, 1.3],
-      position: [-0.2, -2, 0],
+      scale: [1.25, 1.25, 1.25],
+      position: [-0.2, -2.2, 0],
     },
     [MILITARY]: {
       rotation: [0, 0.2, 0],
@@ -508,9 +504,18 @@ function Model({ url, modelRef, selectedCategory }) {
     },
   };
 
+  const [isDragging, setIsDragging] = useState(false); // State to check if user is interacting
+
+  const [initialTouchX, setInitialTouchX] = useState(null); // To store initial touch position
+
+  const [rotationFactor, setRotationFactor] = useState(0); // Temporarily store the rotation change
+
   const handleTouchStart = (event) => {
+    console.log("JABADUDU");
     if (event.touches && event.touches.length > 0) {
-      setInitialTouchX(event.touches[0].clientX);
+      setIsDragging(true);
+
+      setInitialTouchX(event.touches[0].clientX); // Get the initial touch position
     }
   };
 
@@ -520,21 +525,23 @@ function Model({ url, modelRef, selectedCategory }) {
 
       const deltaX = currentTouchX - initialTouchX;
 
-      setRotationFactor(deltaX * 0.01); // Adjust the multiplier for sensitivity
+      setRotationFactor(deltaX * 0.01); // Calculate the rotation factor based on touch movement
 
       setInitialTouchX(currentTouchX); // Update initial touch position for continuous rotation
     }
   };
 
   const handleTouchEnd = () => {
+    setIsDragging(false);
+
     setInitialTouchX(null);
 
     setRotationFactor(0); // Reset the rotation factor when touch interaction ends
   };
 
   useFrame(() => {
-    if (scene) {
-      scene.rotation.y += rotationFactor;
+    if (isDragging && scene) {
+      scene.rotation.y += rotationFactor; // Apply the rotation factor if the user is dragging
     }
   });
 
@@ -543,7 +550,7 @@ function Model({ url, modelRef, selectedCategory }) {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      onTouchCancel={handleTouchEnd} // Handle touch cancel event
+      onTouchCancel={handleTouchEnd}
     >
       <primitive
         ref={modelRef}
