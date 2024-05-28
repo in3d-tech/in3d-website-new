@@ -19,6 +19,9 @@ import {
   CUSTOMIZATION,
 } from "../../common/modelData";
 
+const MAX_ROTATION_SPEED = 0.05; // Maximum rotation speed
+const DECAY_FACTOR = 0.95; // Decay factor for inertia
+
 const models = {
   [INDUSTRY]: "/assets/models/engenir_model.glb",
   [MEDICINE]: "/assets/models/medical_model1 (1).glb",
