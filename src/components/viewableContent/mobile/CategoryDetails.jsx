@@ -64,8 +64,9 @@ function SelectedCategory() {
       >
         <div
           style={{
-            fontSize: "3.5em",
+            fontSize: "3em",
             marginTop: selectedCategory == "about" ? "1em" : "1.5em",
+            textAlign: "center",
           }}
         >
           {data.title}
@@ -466,6 +467,12 @@ function Model({ url, modelRef, selectedCategory }) {
 
   // const { active, progress, errors, total } = useProgress();
 
+  const [isDragging, setIsDragging] = useState(false); // State to check if user is interacting
+
+  const [initialPointerX, setInitialPointerX] = useState(null); // To store initial pointer position
+
+  const [rotationFactor, setRotationFactor] = useState(0); // Temporarily store the rotation change
+
   const modelAttributes = {
     [INDUSTRY]: {
       rotation: [0, 0, 0],
@@ -504,39 +511,30 @@ function Model({ url, modelRef, selectedCategory }) {
     },
   };
 
-  const [isDragging, setIsDragging] = useState(false); // State to check if user is interacting
+  const handlePointerDown = (event) => {
+    setIsDragging(true);
 
-  const [initialTouchX, setInitialTouchX] = useState(null); // To store initial touch position
+    setInitialPointerX(event.clientX); // Get the initial pointer position
+  };
 
-  const [rotationFactor, setRotationFactor] = useState(0); // Temporarily store the rotation change
+  const handlePointerMove = (event) => {
+    if (isDragging && initialPointerX !== null) {
+      const currentPointerX = event.clientX;
 
-  const handleTouchStart = (event) => {
-    console.log("JABADUDU");
-    if (event.touches && event.touches.length > 0) {
-      setIsDragging(true);
+      const deltaX = currentPointerX - initialPointerX;
 
-      setInitialTouchX(event.touches[0].clientX); // Get the initial touch position
+      setRotationFactor(deltaX * 0.01); // Calculate the rotation factor based on pointer movement
+
+      setInitialPointerX(currentPointerX); // Update initial pointer position for continuous rotation
     }
   };
 
-  const handleTouchMove = (event) => {
-    if (initialTouchX !== null && event.touches && event.touches.length > 0) {
-      const currentTouchX = event.touches[0].clientX;
-
-      const deltaX = currentTouchX - initialTouchX;
-
-      setRotationFactor(deltaX * 0.01); // Calculate the rotation factor based on touch movement
-
-      setInitialTouchX(currentTouchX); // Update initial touch position for continuous rotation
-    }
-  };
-
-  const handleTouchEnd = () => {
+  const handlePointerUp = () => {
     setIsDragging(false);
 
-    setInitialTouchX(null);
+    setInitialPointerX(null);
 
-    setRotationFactor(0); // Reset the rotation factor when touch interaction ends
+    setRotationFactor(0); // Reset the rotation factor when pointer interaction ends
   };
 
   useFrame(() => {
@@ -547,10 +545,10 @@ function Model({ url, modelRef, selectedCategory }) {
 
   return (
     <group
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-      onTouchCancel={handleTouchEnd}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+      onPointerCancel={handlePointerUp} // Handle pointer cancel event
     >
       <primitive
         ref={modelRef}
