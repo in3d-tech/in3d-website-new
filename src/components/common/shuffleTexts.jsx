@@ -61,7 +61,6 @@ class TextScramble {
 export const TextScrambleComponent = ({ colour, isHomePage, isMobile }) => {
   const textRef = useRef(null);
 
-  console.log({ isHomePage });
   const phrases = isHomePage
     ? ["SIMPLY EXPAND"]
     : ["Pioneer", "Develop", "Advance", "Expand", "Craft", "Build", "Design"];
