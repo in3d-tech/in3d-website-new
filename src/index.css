@@ -876,6 +876,7 @@ section {
   background-repeat: no-repeat;
   background-position: center;
   z-index: 2;
+  border: 1px solid yellow;
 }
 
 .mobile-menu-opened-bg {
@@ -907,7 +908,10 @@ section {
 /* ------------- selected category page ------------ */
 
 .selected-category-wrapper {
-  background: black;
+  background-image: url("/assets/images/backgrounds/toogle\ menu\ BG.jpg");
+  background-size: contain;
+  /* background-repeat: no-repeat; */
+  /* background-position: center; */
   opacity: 1;
   height: 100vh;
   width: 0;
@@ -916,13 +920,12 @@ section {
   transition: width 0.8s;
   border-right: 1px solid rgba(255, 255, 255, 1);
   z-index: 10;
+  overflow-y: auto;
+  /* overflow-y: scroll; */
 }
 
 .horizontal-nav-wrapper-open {
   width: 100vw;
-}
-
-.selected-category-content-wrapper {
 }
 
 @keyframes flash {

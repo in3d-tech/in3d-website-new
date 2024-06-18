@@ -2,10 +2,9 @@ import React, { useEffect, useRef, useCallback } from "react";
 
 class TextScramble {
   constructor(el, speed = 1) {
-    // Add speed parameter with a default value
     this.el = el;
-    this.speed = speed; // Store the speed
-    this.chars = "!<>-_\\/[]{}—=+*^?#________";
+    this.speed = speed;
+    this.chars = "!<>-_/[]{}—=+*^?#________";
     this.update = this.update.bind(this);
   }
 
@@ -59,42 +58,50 @@ class TextScramble {
   }
 }
 
-const phrases = [
-  // "Pioneer",
-  "Develop",
-  "Advance",
-  // "Expand",
-  "Craft",
-  "Build",
-  "Design",
-];
-
-export const TextScrambleComponent = ({ colour }) => {
+export const TextScrambleComponent = ({ colour, isHomePage, isMobile }) => {
   const textRef = useRef(null);
+
+  console.log({ isHomePage });
+  const phrases = isHomePage
+    ? ["SIMPLY EXPAND"]
+    : ["Pioneer", "Develop", "Advance", "Expand", "Craft", "Build", "Design"];
 
   useEffect(() => {
     const fx = new TextScramble(textRef.current);
     let counter = 0;
+
     const next = () => {
       fx.setText(phrases[counter]).then(() => {
-        setTimeout(next, 100);
+        if (!isMobile && !isHomePage) {
+          setTimeout(next, 100);
+        }
       });
       counter = (counter + 1) % phrases.length;
     };
-    next();
+
+    // Only run for 10 seconds if isHomePage is true
+    if (isHomePage) {
+      const intervalId = setInterval(next, 1000); // Adjustable interval
+      setTimeout(() => clearInterval(intervalId), 3200); // Stop after 10 seconds
+      return () => clearInterval(intervalId);
+    } else {
+      next();
+    }
 
     // Cleanup on unmount
     return () => cancelAnimationFrame(fx.frameRequest);
   }, []);
 
   return (
-    <div className={""} style={{ marginTop: "2em" }}>
-      <div className={"abla"} style={{ color: colour }} ref={textRef}></div>
+    <div className={""} style={{ marginTop: isHomePage ? "0.3em" : "2em" }}>
+      <div
+        className={isHomePage ? "" : "abla"}
+        style={{ color: isHomePage ? "white" : colour }}
+        ref={textRef}
+      ></div>
     </div>
   );
 };
-
-// ----------------------------------------------------------------
 
 export const TextScrambleComponentHover = ({ text, handleClick }) => {
   const textRef = useRef(null);
@@ -105,7 +112,6 @@ export const TextScrambleComponentHover = ({ text, handleClick }) => {
   }, [text]);
 
   return (
-    // <div className={""}>
     <span
       className="button-ani"
       onClick={handleClick}
@@ -114,6 +120,5 @@ export const TextScrambleComponentHover = ({ text, handleClick }) => {
     >
       {text}
     </span>
-    // </div>
   );
 };

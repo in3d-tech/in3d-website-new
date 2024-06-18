@@ -91,42 +91,40 @@ export const HamburgerMenu = ({ isMobileViewOnly }) => {
     }
   }, [menuOpened]);
 
+  const icons = [
+    { className: "icon-1", altClassName: "a" },
+    { className: "icon-2", altClassName: "c" },
+    { className: "icon-3", altClassName: "b" },
+  ];
+
   return (
     <header>
-      {/* <div style={hovered ? getbgImage() : null}> */}
       <div
         style={isMobileViewOnly ? { background: "rgb(255,255,255, 0)" } : null}
         className="hamburger-icon"
         id="icon"
         onClick={toggleNav}
       >
-        <div
-          style={{
-            backgroundColor: getSparkleColour(scrollArea.currentSection),
-          }}
-          className={menuOpened ? "icon-1 a" : "icon-1"}
-        ></div>
-        <div
-          style={{
-            backgroundColor: getSparkleColour(scrollArea.currentSection),
-          }}
-          className={menuOpened ? "icon-2 c" : "icon-2"}
-        ></div>
-        <div
-          style={{
-            backgroundColor: getSparkleColour(scrollArea.currentSection),
-          }}
-          className={menuOpened ? "icon-3 b" : "icon-3"}
-        ></div>
+        {icons.map((icon, index) => (
+          <div
+            key={index}
+            style={{
+              backgroundColor: selectedCategory
+                ? "#750414"
+                : getSparkleColour(scrollArea.currentSection),
+            }}
+            className={
+              menuOpened || selectedCategory
+                ? `${icon.className} ${icon.altClassName}`
+                : icon.className
+            }
+          ></div>
+        ))}
         <div className="clear"></div>
       </div>
 
       {menuOpened ? (
-        <nav
-          id="nav"
-          className={menuOpened ? "show" : { opacity: 0 }}
-          // style={getbgImage()}
-        >
+        <nav id="nav" className={menuOpened ? "show" : { opacity: 0 }}>
           {hovered ? (
             <div style={getbgImage()}></div>
           ) : (
@@ -140,7 +138,7 @@ export const HamburgerMenu = ({ isMobileViewOnly }) => {
             />
           </div>
           <div className="horizontal-nav-open-titles-container">
-            {topics.map((topic, idx, self) => (
+            {topics.map((topic, idx) => (
               <MagnifyingGlass
                 title={topic.title}
                 key={`magnifying${idx}`}
@@ -153,7 +151,6 @@ export const HamburgerMenu = ({ isMobileViewOnly }) => {
           </div>
           <div
             style={{
-              // borderBottom: "4px solid rgb(117, 4, 20, 0.6)",
               borderTop: "1px solid rgb(255,255,255,0.6)",
               position: "absolute",
               width: "90%",
@@ -162,7 +159,6 @@ export const HamburgerMenu = ({ isMobileViewOnly }) => {
               bottom: "0em",
               display: "flex",
               alignItems: "center",
-              // justifyContent: "center",
               justifyContent: "space-between",
             }}
           >

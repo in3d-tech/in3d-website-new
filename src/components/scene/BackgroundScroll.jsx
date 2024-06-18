@@ -1,8 +1,11 @@
 import { useEffect, useState, useRef } from "react";
 import { useAppContext } from "../../context/appContext";
 import { ContactUsText } from "../common/textData";
-import { SeeMoreBtn } from "../common/SeeMoreBtn";
-import { TextScrambleComponentHover } from "../common/shuffleTexts";
+// import { SeeMoreBtn } from "../common/SeeMoreBtn";
+import {
+  TextScrambleComponent,
+  TextScrambleComponentHover,
+} from "../common/shuffleTexts";
 
 export function BackgroundScroll({
   section1MenuRef,
@@ -103,7 +106,12 @@ export function BackgroundScroll({
             <>
               <div className="container">
                 <span className="text-animate simply-header">
-                  SIMPLY EXPAND
+                  <TextScrambleComponent isHomePage={true} />
+                  {/* SIMPLY */}
+                  <span>
+                    {/* <TextScrambleComponent isHomePage /> */}
+                    {/* EXPAND */}
+                  </span>
                 </span>
               </div>
               <div className="down-indicator-wrapper">

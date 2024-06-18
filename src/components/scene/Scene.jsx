@@ -46,6 +46,8 @@ function Scene({ scrollToElementById }) {
   const [textAnimation, setTextAnimation] = useState(
     "category-title-no-opacity"
   );
+  // const [mousePosition, setMousePosition] = useState({ x: null, y: null });
+
   const {
     scrollArea,
     setMenuOpened,
@@ -242,12 +244,55 @@ function Scene({ scrollToElementById }) {
 
   return (
     <div className="scene one" style={{}} ref={containerRef}>
+      {/* {customizeHasRendered ? (
+        <div
+          style={{
+            position: "fixed",
+            top: "2em",
+            left: "3em",
+            zIndex: 1,
+          }}
+          className="hover14 column"
+          onClick={scrollToTop}
+        >
+          <figure>
+            <img
+              style={{ height: "90px" }}
+              // className="in3d-fixed-logo"
+              src="/assets/images/in3d-logo-white.png"
+            />
+          </figure>
+        </div>
+      ) : null} */}
+
       {customizeHasRendered ? (
-        <div className="h-nav-in3d-icon" onClick={scrollToTop}>
-          <img
-            className="in3d-fixed-logo"
-            src="/assets/images/in3d-logo-white.png"
-          />
+        <div
+          style={{
+            position: "fixed",
+            top: "2em",
+            left: "3em",
+            zIndex: 1,
+            // width: "200px",
+            // height: "200px",
+            // border: "1px solid white",
+            // background: "white",
+          }}
+          className="hover14 column"
+          onClick={scrollToTop}
+        >
+          {/* <figure style={{ all: "unset" }}> */}
+          <span className="two-dee-box">
+            {/* <h2>Jelly Fish</h2> */}
+
+            <img
+              style={{ height: "90px" }}
+              // className="in3d-fixed-logo"
+              className="logo"
+              // className="in3d-logo-hp"
+              src="/assets/images/in3d-logo-white.png"
+            />
+          </span>
+          {/* </figure> */}
         </div>
       ) : null}
 
@@ -265,8 +310,10 @@ function Scene({ scrollToElementById }) {
               : null
             : refsObj[scrollArea.currentSection - 2].text
           : null}
-        <Canvas className={`canvas-container`}>
-          {/* <Stars intensity={0.5} count={2000} /> */}
+        <Canvas
+          className={`canvas-container`}
+          // camera={{ position: [-30, -10, 5] }}
+        >
           <Sparkles
             count={300}
             scale={10}
@@ -281,6 +328,10 @@ function Scene({ scrollToElementById }) {
           />
 
           <Camera />
+          {/* <Rig /> */}
+          {/* <Suspense fallback={null}>
+            {scrollArea.currentSection == SECURITY ? <TextModel /> : null}
+          </Suspense> */}
           <Suspense fallback={null}>
             <AstroModel
               url={"/assets/models/astronaut_new5 (3).glb"}
