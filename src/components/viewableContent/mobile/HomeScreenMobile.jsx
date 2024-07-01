@@ -125,7 +125,7 @@ function HomeScreenMobile() {
         {isMenuCentered ? (
           <div
             className="h-nav-in3d-icon"
-            style={{ animationDelay: "0.6s", left: "40.8%" }}
+            style={{ animationDelay: "0.6s", left: "40%" }}
           >
             <img
               className="in3d-fixed-logo"
