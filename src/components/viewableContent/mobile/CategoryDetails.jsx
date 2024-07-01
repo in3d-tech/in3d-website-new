@@ -4,7 +4,7 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
 import { useAppContext } from "../../../context/appContext";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useGLTF, useProgress } from "@react-three/drei";
+// import { useGLTF, useProgress } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Camera } from "../../scene/Camera";
 import * as THREE from "three";
@@ -18,6 +18,9 @@ import {
   MILITARY,
   CUSTOMIZATION,
 } from "../../common/modelData";
+import { getCategoryData } from "./logic/getCategoryDetails";
+import { Model } from "./logic/Model";
+import { VideoPlayer } from "../../common/Logo";
 
 const MAX_ROTATION_SPEED = 0.05; // Maximum rotation speed
 const DECAY_FACTOR = 0.95; // Decay factor for inertia
@@ -33,9 +36,15 @@ const models = {
 };
 
 function SelectedCategory() {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [nextImageIndex, setNextImageIndex] = useState(1);
+  const [opacity, setOpacity] = useState(1);
+
   const { setSelectedCategory, selectedCategory } = useAppContext();
   const data = getCategoryData({ selectedCategory });
   const modelRef = useRef();
+
+  console.log({ selectedCategory });
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -44,12 +53,27 @@ function SelectedCategory() {
       document.body.style.overflowY = "auto";
     };
   }, []);
+  // document.body.style.overflowY = "scroll";
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setOpacity(0);
+
+      setTimeout(() => {
+        setCurrentImageIndex(nextImageIndex);
+        setNextImageIndex((nextImageIndex + 1) % industryImages.length);
+        setOpacity(1);
+      }, 1000); // Match with your CSS transition duration
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [nextImageIndex]);
 
   const isAboutOrContact =
     selectedCategory === "about" || selectedCategory === "contact";
 
   return (
-    <div className="tester fade-in">
+    <div className="tester fade-in" style={{}}>
       {/* <div className="tester" style={{ opacity: 0.5 }}> */}
       <div style={{ position: "fixed", top: "1em", left: "1em", zIndex: 3 }}>
         <ArrowBackIcon
@@ -70,22 +94,59 @@ function SelectedCategory() {
             fontSize: "3em",
             marginTop: selectedCategory == "about" ? "1em" : "1.5em",
             textAlign: "center",
+            // lineHeight: "1.5em",
+            // letterSpacing: "0.2em",
           }}
         >
           {data.title}
         </div>
+        <div
+          style={{
+            fontSize: selectedCategory == "about" ? "0.79em" : "1em",
+            width: "90%",
+            marginTop: "4em",
+            fontFamily: "gotham",
+            textAlign: "center",
+            lineHeight: "1.5em",
+            // letterSpacing: "1.1em",
+          }}
+        >
+          {data.text}
+        </div>
         {isAboutOrContact ? null : (
           <div
             style={{
-              // border: "1px solid yellow",
               position: "absolute",
-              top: 0,
+              top: "4em",
               left: 0,
               width: "100vw",
               height: "100vh",
             }}
           >
-            <Canvas>
+            <div
+              style={{
+                height: "50%",
+                position: "absolute",
+                bottom: "0em",
+                width: "100%",
+                // backgroundImage:
+                //   'url("/assets/images/backgrounds/taasia/taasia_bg.jpg")',
+                zIndex: 0,
+                backgroundImage: `url(${industryImages[currentImageIndex]})`,
+                transition: "opacity 1s ease-in-out",
+                opacity: 1,
+              }}
+              className="blurred-bg"
+            ></div>
+            <Canvas
+              style={
+                {
+                  // backgroundImage:
+                  //   'url("/assets/images/backgrounds/taasia/taasia_bg.jpg")',
+                  // opacity: 0.2,
+                }
+              }
+            >
               <ambientLight intensity={1} />
               <directionalLight intensity={4} />
               <Camera />
@@ -103,193 +164,65 @@ function SelectedCategory() {
                 />
               </Suspense>
             </Canvas>
+            {data.text2 && (
+              <>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <div
+                    style={{
+                      fontSize: selectedCategory == "about" ? "0.79em" : "1em",
+                      width: "90%",
+                      marginTop: "5em",
+                      fontFamily: "gotham",
+                      textAlign: "center",
+                      lineHeight: "1.5em",
+                    }}
+                  >
+                    {data.text2}
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         )}
 
-        {selectedCategory == "contact" ? (
-          <ContactUsMobile test={true} />
-        ) : (
-          <div
-            style={{
-              fontSize: selectedCategory == "about" ? "0.79em" : "1em",
-              width: "90%",
-              marginTop: "2em",
-              fontFamily: "gotham",
-              textAlign: "center",
-            }}
-          >
-            {data.text}
-          </div>
-        )}
+        {selectedCategory == "contact" ? <ContactUsMobile test={true} /> : null}
+        <div
+          style={{
+            marginTop: "12em",
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+            // justifyContent: "space-evenly",
+          }}
+        >
+          <IndustryPage selectedCategory={selectedCategory} />
+          {data.text3 && (
+            <div
+              style={{
+                fontSize: selectedCategory == "about" ? "0.79em" : "1em",
+                width: "90%",
+                marginTop: "2em",
+                fontFamily: "gotham",
+                textAlign: "center",
+                lineHeight: "1.5em",
+              }}
+            >
+              {data.text3}
+            </div>
+          )}
+        </div>
+        <div style={{ height: "50px" }}></div>
       </div>
     </div>
   );
 }
 
 export default SelectedCategory;
-
-const getCategoryData = ({ selectedCategory }) => {
-  const categoryData = {
-    0: {
-      title: (
-        <>
-          Industry <span style={{ color: "#750414" }}>4.0</span>
-        </>
-      ),
-      bgImage: 'url("/assets/images/backgrounds/taasia/Industry_Togle.jpg")',
-      text: "Together with our clients we map out the challenges they face and develop tailor made solutions using XR and 3D technology that creates an innovative visual interface between men and machine.",
-
-      url: "/assets/models/engenir_model.glb",
-    },
-    1: {
-      title: (
-        <>
-          <span style={{ color: "#750414" }}>M</span>
-          edicine
-        </>
-      ),
-      bgImage: 'url("/assets/images/backgrounds/medicine/Medical_Togle.jpg")',
-      text: "Using Extended Reality (XR) we at in3D became pioneers in development of XR products for medical organizations, collaborating together to empower innovation and efficiency for clinics and hospitals.",
-      url: "/assets/models/medical_model1 (1).glb",
-    },
-    2: {
-      title: (
-        <>
-          <span style={{ color: "#750414" }}>M</span>
-          icrosoft
-        </>
-      ),
-      bgImage:
-        'url("/assets/images/backgrounds/microsoft/Microsoft_Tugle.jpg")',
-      text: "In3D is the official and the inclusive Mixed Reality (MR) partner of Microsoft Israel",
-      url: "/assets/models/microsoft_model.glb",
-    },
-    3: {
-      title: (
-        <>
-          <span style={{ color: "#750414" }}>S</span>
-          ecurity
-        </>
-      ),
-      bgImage:
-        'url("/assets/images/backgrounds/security/Security_Togle_Finish2.jpg")',
-      text: "Thanks to years of collaboration with defense industries, we gained the needed experience, knowledge and tools to provide quick and out of the box solutions that are tailored to the industries unique requirements.",
-      url: "/assets/models/security.glb",
-    },
-    4: {
-      title: (
-        <>
-          <span style={{ color: "#750414" }}>A</span>
-          rtifical Intelligence
-        </>
-      ),
-      bgImage: 'url("/assets/images/backgrounds/ai/Ai_Tugle_Finish.jpg")',
-      text: " The combination of a 3D XR software environment with A.I creates not only an advanced and innovative hardware and software operation but a genuine cooperation between man and machine.",
-      url: "/assets/models/ai_model.glb",
-    },
-    5: {
-      title: (
-        <>
-          <span style={{ color: "#750414" }}>M</span>
-          ilitary
-        </>
-      ),
-      bgImage:
-        'url("/assets/images/backgrounds/military/Militery_Togle_Finish2.jpg")',
-      text: "We deliver top-of-the-line technology to all of our important industries, through development of complex simulators, XR platforms, and tailored applications that are now in the service of this significant sector.",
-      url: "/assets/models/military.glb",
-    },
-    6: {
-      title: (
-        <>
-          <span style={{ color: "#750414" }}>C</span>
-          ustomization
-        </>
-      ),
-      bgImage:
-        'url("/assets/images/backgrounds/customize/Customize_Togle_Finish.jpg")',
-      text: "As specialists we keep an amazing team of developers, 3D generalists, interface and graphics artists, and product designers just so we can provide our clients with the flexibility and abilities needed to deliver the best product.",
-      url: "/assets/models/costimize_model_v02.glb",
-    },
-
-    about: {
-      title: (
-        <>
-          <span style={{ color: "#750414" }}>A</span>
-          bout Us
-        </>
-      ),
-      text: (
-        <>
-          <div style={{ color: "black", textAlign: "center" }}>
-            in3D is an Israeli based company with worldwide aspirations. <br />
-            <br />
-            We develop 3D virtual environment software for different clients
-            from different sectors from all around the world. We specialize in
-            Extended Reality (XR) but first and foremost we are its believers.{" "}
-            <br />
-            <br /> WE ARE NOT A START-UP, WE WOULD RATHER START-WORKING WITH
-            YOU! We push ourselves hard to be innovative each day, and it has
-            required us to trailblaze both our technology and our way,
-            designating ourselves to a significant role in the tech industry for
-            years to come. <br /> <br />
-            in3D is an ISO9001 and ISO27001 certified company. We operate by the
-            most demanding requirements so please feel comfortable to choose
-            in3D for your next project
-          </div>
-
-          <div
-            style={{
-              color: "black",
-              fontSize: "8.3px",
-              // width: "80%",
-              fontFamily: "gotham",
-              display: "flex",
-              justifyContent: "center",
-              marginTop: "2em",
-            }}
-          >
-            <div style={{ width: "90%", textAlign: "center" }}>
-              in3D does not disclose, collect, edit, transfer to a third party
-              or use private information of its customers or website users. In
-              any case in which in3D is asked to transfer private information,
-              it will immediately notify the relevant customer and act under his
-              guidance. For any inquiry or request for additional information on
-              privacy statements, contact by email: Nathanael@in3D-Tech.com
-              <br />
-              in3D works according to international quality policies in
-              development and production, information security and privacy
-              security – ISO9001, ISO27001, ISO27701. The company undertakes and
-              complies with legal and privacy requirements, engraves on its
-              banner a high standard of service assembly, while maintaining
-              accuracy, confidentiality and information security.
-              <br />
-              If you need more information, contact us at the email listed at
-              the above.
-            </div>
-          </div>
-        </>
-      ),
-    },
-    contact: {
-      title: (
-        <>
-          <span style={{ color: "#750414" }}>C</span>
-          ontact Us
-        </>
-      ),
-    },
-  };
-
-  if (selectedCategory == "about") {
-    return categoryData["about"];
-  }
-  if (selectedCategory == "contact") {
-    return categoryData["contact"];
-  }
-
-  return categoryData[selectedCategory - 2];
-};
 
 function ContactUsMobile({ test }) {
   const [showTextBox, setShowTextBox] = useState(false);
@@ -462,157 +395,6 @@ function ContactUsMobile({ test }) {
   );
 }
 
-function Model({ url, modelRef, selectedCategory }) {
-  const { isAstroModelDrawn, setIsAstroModelDrawn } = useAppContext();
-
-  const { scene, animations } = useGLTF(url);
-  const mixer = useGLTFAnimations(scene, animations);
-
-  // const { active, progress, errors, total } = useProgress();
-
-  const [isDragging, setIsDragging] = useState(false); // State to check if user is interacting
-  const [initialX, setInitialX] = useState(null); // To store initial pointer or touch position
-  const [rotationFactor, setRotationFactor] = useState(0); // Temporarily store the rotation change
-  const [inertia, setInertia] = useState(0); // Store inertia for smooth stopping
-
-  const modelAttributes = {
-    [INDUSTRY]: {
-      rotation: [0, 0, 0],
-      scale: [1.5, 1.5, 1.5],
-      position: [0, -2.25, 0],
-    },
-    [MEDICINE]: {
-      rotation: [0, 0, 0],
-      scale: [1.3, 1.3, 1.3],
-      position: [2.35, -2, 0],
-    },
-    [MICROSOFT]: {
-      rotation: [0, 0, 0],
-      scale: [1.4, 1.4, 1.4],
-      position: [0, -2, 0],
-    },
-    [SECURITY]: {
-      rotation: [0, Math.PI, 0],
-      scale: [4.4, 4.4, 4.4],
-      position: [-0.2, -1.6, 0],
-    },
-    [AI]: {
-      rotation: [0, 0.5, 0],
-      scale: [1.25, 1.25, 1.25],
-      position: [-0.2, -2.2, 0],
-    },
-    [MILITARY]: {
-      rotation: [0, 0.2, 0],
-      scale: [2.4, 2.4, 2.4],
-      position: [0, -2.1, 0],
-    },
-    [CUSTOMIZATION]: {
-      rotation: [0, 0.5, 0],
-      scale: [1.9, 1.9, 1.9],
-      position: [0, -2.3, 0],
-    },
-  };
-
-  const handlePointerDown = (event) => {
-    setIsDragging(true);
-
-    setInitialX(event.clientX); // Get the initial pointer position
-
-    setInertia(0); // Reset inertia on new drag
-  };
-
-  const handlePointerMove = (event) => {
-    if (isDragging && initialX !== null) {
-      const currentX = event.clientX;
-      const deltaX = currentX - initialX;
-      let newRotationFactor = deltaX * 0.01;
-      newRotationFactor = Math.min(
-        MAX_ROTATION_SPEED,
-        Math.max(-MAX_ROTATION_SPEED, newRotationFactor)
-      ); // Clamp the speed
-
-      setRotationFactor(newRotationFactor); // Calculate the rotation factor based on pointer movement
-      setInitialX(currentX); // Update initial pointer position for continuous rotation
-    }
-  };
-
-  const handlePointerUp = () => {
-    setIsDragging(false);
-    setInitialX(null);
-    setInertia(rotationFactor); // Store the last rotation factor as inertia
-    setRotationFactor(0); // Reset the rotation factor
-  };
-
-  const handleTouchStart = (event) => {
-    if (event.touches && event.touches.length > 0) {
-      setIsDragging(true);
-      setInitialX(event.touches[0].clientX); // Get the initial touch position
-      setInertia(0); // Reset inertia on new drag
-    }
-  };
-
-  const handleTouchMove = (event) => {
-    if (
-      isDragging &&
-      initialX !== null &&
-      event.touches &&
-      event.touches.length > 0
-    ) {
-      const currentX = event.touches[0].clientX;
-      const deltaX = currentX - initialX;
-      let newRotationFactor = deltaX * 0.01;
-      newRotationFactor = Math.min(
-        MAX_ROTATION_SPEED,
-        Math.max(-MAX_ROTATION_SPEED, newRotationFactor)
-      ); // Clamp the speed
-
-      setRotationFactor(newRotationFactor); // Calculate the rotation factor based on touch movement
-      setInitialX(currentX); // Update initial touch position for continuous rotation
-    }
-  };
-
-  const handleTouchEnd = () => {
-    setIsDragging(false);
-    setInitialX(null);
-    setInertia(rotationFactor); // Store the last rotation factor as inertia
-    setRotationFactor(0); // Reset the rotation factor
-  };
-
-  useFrame(() => {
-    if (scene) {
-      scene.rotation.y += rotationFactor;
-
-      // Apply inertia if not dragging
-      if (!isDragging && Math.abs(inertia) > 0.0001) {
-        scene.rotation.y += inertia;
-        setInertia(inertia * DECAY_FACTOR); // Decay inertia over time
-      }
-    }
-  });
-
-  return (
-    <group
-      onPointerDown={handlePointerDown}
-      onPointerMove={handlePointerMove}
-      onPointerUp={handlePointerUp}
-      onPointerCancel={handlePointerUp} // Handle pointer cancel event
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-      onTouchCancel={handleTouchEnd} // Handle touch cancel event
-    >
-      <primitive
-        ref={modelRef}
-        object={scene}
-        dispose={null}
-        scale={modelAttributes[selectedCategory].scale}
-        position={modelAttributes[selectedCategory].position}
-        rotation={modelAttributes[selectedCategory].rotation}
-      />
-    </group>
-  );
-}
-
 function useGLTFAnimations(scene, animations) {
   const { invalidate } = useThree();
   const mixer = useMemo(() => new THREE.AnimationMixer(scene), [scene]);
@@ -630,3 +412,158 @@ function useGLTFAnimations(scene, animations) {
 
   return mixer;
 }
+
+const content = {
+  [INDUSTRY]: [
+    "https://in3dwebsite.blob.core.windows.net/video/ICL",
+    "https://in3dwebsite.blob.core.windows.net/video/agoran 2.mp4",
+  ],
+  [MEDICINE]: [
+    "https://in3dwebsite.blob.core.windows.net/photos/medical_overlay_1-min.jpg",
+    "https://in3dwebsite.blob.core.windows.net/photos/med-overlay-bot-min.jpg",
+    "https://in3dwebsite.blob.core.windows.net/video/Medical - Real time operation (1).mp4",
+  ],
+  [MICROSOFT]: [
+    "https://in3dwebsite.blob.core.windows.net/photos/microsoft-shake-cutout-min.png",
+    "https://in3dwebsite.blob.core.windows.net/video/Mesh Hololens - Remote Collaboration.mp4",
+    "https://in3dwebsite.blob.core.windows.net/video/What can HoloLens 2 do_.mp4",
+    "https://in3dwebsite.blob.core.windows.net/video/Medical Holoportation - Ichilov (1) (1).mp4",
+    "https://in3dwebsite.blob.core.windows.net/photos/microsoft-building-min.jpg",
+    "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4",
+    "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4",
+  ],
+  [SECURITY]: [
+    "https://in3dwebsite.blob.core.windows.net/video/VR - Fire Department - Elevator Simulator (1).mp4",
+    "https://in3dwebsite.blob.core.windows.net/video/Hololens-Abach-Treatment-Simulator.mp4",
+    "https://in3dwebsite.blob.core.windows.net/video/AR Factory Real Time Control Panel Data - 2 level (3).mp4",
+    "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4",
+  ],
+  [AI]: [],
+  [MILITARY]: [
+    "https://in3dwebsite.blob.core.windows.net/video/Boat 3D Scan.mp4",
+    "https://in3dwebsite.blob.core.windows.net/video/Rafael - Family - Truck (1).mp4",
+    "https://in3dwebsite.blob.core.windows.net/video/Rafael - Family - Missile (1).mp4",
+    "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4",
+    "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4",
+  ],
+  [CUSTOMIZATION]: [
+    "/assets/images/backgrounds/customize/Globe 3D Store - 14.10.20.mp4",
+    "/assets/images/backgrounds/customize/BIM Construction with Hololens.mp4",
+    "/assets/images/backgrounds/customize/Package scanning and moving pilot.mp4",
+    "/assets/images/backgrounds/customize/Hotze - VR Rakal.mp4",
+  ],
+};
+
+// ----- Industry
+// (src = "https://in3dwebsite.blob.core.windows.net/video/ICL"),
+//   (src = "https://in3dwebsite.blob.core.windows.net/video/agoran 2.mp4"),
+//   (rc =
+//     "https://in3dwebsite.blob.core.windows.net/photos/industry-machine-min.jpg");
+
+// // ----- med
+// src =
+//   "https://in3dwebsite.blob.core.windows.net/photos/medical_overlay_1-min.jpg";
+//   src="https://in3dwebsite.blob.core.windows.net/photos/med-overlay-bot-min.jpg"
+//   src="https://in3dwebsite.blob.core.windows.net/video/Medical - Real time operation (1).mp4"
+
+// // ----- micro
+// src="https://in3dwebsite.blob.core.windows.net/photos/microsoft-shake-cutout-min.png"
+//  src="https://in3dwebsite.blob.core.windows.net/video/Mesh Hololens - Remote Collaboration.mp4"
+//  src="https://in3dwebsite.blob.core.windows.net/video/What can HoloLens 2 do_.mp4"
+// src="https://in3dwebsite.blob.core.windows.net/video/Medical Holoportation - Ichilov (1) (1).mp4"
+// "https://in3dwebsite.blob.core.windows.net/photos/microsoft-building-min.jpg"
+// "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4"
+// "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4"
+
+// // ----- security
+// isBottom
+// ? "https://in3dwebsite.blob.core.windows.net/video/VR - Fire Department - Elevator Simulator (1).mp4"
+//                 : "https://in3dwebsite.blob.core.windows.net/video/Hololens-Abach-Treatment-Simulator.mp4"
+//  src="https://in3dwebsite.blob.core.windows.net/video/AR Factory Real Time Control Panel Data - 2 level (3).mp4"
+//  "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4"
+// // ----- ai
+
+// // ----- military
+// src="https://in3dwebsite.blob.core.windows.net/video/Boat 3D Scan.mp4"
+// src="https://in3dwebsite.blob.core.windows.net/video/Rafael - Family - Truck (1).mp4"
+// src="https://in3dwebsite.blob.core.windows.net/video/Rafael - Family - Missile (1).mp4"
+// "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4"
+// "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4"
+// // ----- customization
+// src="/assets/images/backgrounds/customize/Globe 3D Store - 14.10.20.mp4"
+// src="/assets/images/backgrounds/customize/BIM Construction with Hololens.mp4"
+// src="/assets/images/backgrounds/customize/Package scanning and moving pilot.mp4"
+// src="/assets/images/backgrounds/customize/Hotze - VR Rakal.mp4"
+
+const IndustryPage = ({ selectedCategory }) => {
+  const mediaContent = content[selectedCategory];
+  if (!selectedCategory || !mediaContent) {
+    return null;
+  }
+  return (
+    <div
+      className="industry-page"
+      style={{
+        marginTop: "30em",
+      }}
+    >
+      {mediaContent
+        ? mediaContent.map((src, index) => (
+            <div
+              className="video-wrapper"
+              key={index}
+              style={{
+                animationDelay: `${index * 0.5}s`,
+              }}
+            >
+              <VideoPlayer src={src} videoRef={null} isMobile />
+            </div>
+          ))
+        : null}
+    </div>
+  );
+};
+
+const industryImages = [
+  "/assets/images/backgrounds/taasia/industry-large.jpg",
+  "/assets/images/backgrounds/taasia/industry-hat.png",
+  "https://in3dwebsite.blob.core.windows.net/photos/industry-machine-min.jpg",
+  "https://in3dwebsite.blob.core.windows.net/photos/Customize_Togle_Finish-min.jpg",
+];
+
+// switch (hovered) {
+//   case "Customization":
+//     // url = "/assets/images/backgrounds/customize/Customize_Togle_Finish.jpg";
+//     url =
+//       "https://in3dwebsite.blob.core.windows.net/photos/Customize_Togle_Finish-min.jpg";
+//     break;
+//   case "Artifical Intelligence":
+//     // url = "/assets/images/backgrounds/ai/Ai_Tugle_Finish.jpg";
+//     url =
+//       "https://in3dwebsite.blob.core.windows.net/photos/Ai_Tugle_Finish-min.jpg";
+//     break;
+//   case "Microsoft":
+//     // url = "/assets/images/backgrounds/microsoft/Microsoft_Tugle.jpg";
+//     url =
+//       "https://in3dwebsite.blob.core.windows.net/photos/Microsoft_Tugle-min.jpg";
+//     break;
+//   case "Military":
+//     // url = "/assets/images/backgrounds/military/Militery_Togle_Finish2.jpg";
+//     url =
+//       "https://in3dwebsite.blob.core.windows.net/photos/Militery_Togle_Finish2-min.jpg";
+//     break;
+//   case "Security":
+//     // url = "/assets/images/backgrounds/security/Security_Togle_Finish2.jpg";
+//     url =
+//       "https://in3dwebsite.blob.core.windows.net/photos/Security_Togle_Finish2-min.jpg";
+//     break;
+//   case "Industry":
+//     // url = "/assets/images/backgrounds/taasia/Industry_Togle.jpg";
+//     url =
+//       "https://in3dwebsite.blob.core.windows.net/photos/Industry_Togle-min.jpg";
+//     break;
+//   case "Medicine":
+//     // url = "/assets/images/backgrounds/medicine/Medical_Togle.jpg";
+//     url =
+//       "https://in3dwebsite.blob.core.windows.net/photos/Medical_Togle-min.jpg";
+//     break;

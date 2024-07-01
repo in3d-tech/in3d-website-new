@@ -7,11 +7,12 @@ export const HomeScreenCategoryText = ({
   setSelectedMenuActionMobile,
   setSelectedCategory,
 }) => {
+  // style={{ color: "#750414" }}
   const categoryDataByIndex = {
     0: {
       title: (
         <>
-          Industry <span style={{ color: "#750414" }}>4.0</span>
+          Industry <span>4.0</span>
         </>
       ),
       bgImage: 'url("/assets/images/backgrounds/taasia/Industry_Togle.jpg")',
@@ -20,7 +21,7 @@ export const HomeScreenCategoryText = ({
     1: {
       title: (
         <>
-          <span style={{ color: "#750414" }}>M</span>
+          <span>M</span>
           edicine
         </>
       ),
@@ -30,7 +31,7 @@ export const HomeScreenCategoryText = ({
     2: {
       title: (
         <>
-          <span style={{ color: "#750414" }}>M</span>
+          <span>M</span>
           icrosoft
         </>
       ),
@@ -41,7 +42,7 @@ export const HomeScreenCategoryText = ({
     3: {
       title: (
         <>
-          <span style={{ color: "#750414" }}>S</span>
+          <span>S</span>
           ecurity
         </>
       ),
@@ -52,7 +53,7 @@ export const HomeScreenCategoryText = ({
     4: {
       title: (
         <>
-          <span style={{ color: "#750414" }}>A</span>
+          <span>A</span>
           rtifical Intelligence
         </>
       ),
@@ -62,7 +63,7 @@ export const HomeScreenCategoryText = ({
     5: {
       title: (
         <>
-          <span style={{ color: "#750414" }}>M</span>
+          <span>M</span>
           ilitary
         </>
       ),
@@ -73,7 +74,7 @@ export const HomeScreenCategoryText = ({
     6: {
       title: (
         <>
-          <span style={{ color: "#750414" }}>C</span>
+          <span>C</span>
           ustomization
         </>
       ),
@@ -159,13 +160,13 @@ export const HomeScreenCategoryText = ({
           zIndex: -1,
           height: "30vh",
           width: "100%",
-          backgroundImage:
-            categoryDataByIndex[idx]?.bgImage ||
-            'url("/assets/images/backgrounds/taasia/Industry_Togle.jpg")',
+          // backgroundImage:
+          //   categoryDataByIndex[idx]?.bgImage ||
+          //   'url("/assets/images/backgrounds/taasia/Industry_Togle.jpg")',
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
-          filter: "blur(40px)",
+          filter: idx == 6 ? "blur(40px)" : "blur(40px)",
         }}
       ></div>
 
@@ -178,11 +179,11 @@ export const HomeScreenCategoryText = ({
       <span style={{ textAlign: "center", padding: "1em", fontSize: "0.8em" }}>
         {categoryDataByIndex[idx]?.text}
       </span>
-      {/* <LearnMoreBtn
+      <LearnMoreBtn
         setSelectedMenuActionMobile={setSelectedMenuActionMobile}
         idx={idx}
         setSelectedCategory={setSelectedCategory}
-      /> */}
+      />
     </div>
   );
 };
@@ -236,7 +237,7 @@ const LearnMoreBtn = ({
         <svg
           id="arrow-horizontal"
           xmlns="http://www.w3.org/2000/svg"
-          width="30"
+          width="40"
           height="10"
           viewBox="0 0 46 16"
         >
@@ -245,6 +246,9 @@ const LearnMoreBtn = ({
             data-name="Path 10"
             d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z"
             transform="translate(30)"
+            fill="white"
+            stroke="white"
+            stroke-width="2"
           ></path>
         </svg>
       </button>

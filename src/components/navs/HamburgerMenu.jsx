@@ -44,25 +44,39 @@ export const HamburgerMenu = ({ isMobileViewOnly }) => {
 
     switch (hovered) {
       case "Customization":
-        url = "/assets/images/backgrounds/customize/Customize_Togle_Finish.jpg";
+        // url = "/assets/images/backgrounds/customize/Customize_Togle_Finish.jpg";
+        url =
+          "https://in3dwebsite.blob.core.windows.net/photos/Customize_Togle_Finish-min.jpg";
         break;
       case "Artifical Intelligence":
-        url = "/assets/images/backgrounds/ai/Ai_Tugle_Finish.jpg";
+        // url = "/assets/images/backgrounds/ai/Ai_Tugle_Finish.jpg";
+        url =
+          "https://in3dwebsite.blob.core.windows.net/photos/Ai_Tugle_Finish-min.jpg";
         break;
       case "Microsoft":
-        url = "/assets/images/backgrounds/microsoft/Microsoft_Tugle.jpg";
+        // url = "/assets/images/backgrounds/microsoft/Microsoft_Tugle.jpg";
+        url =
+          "https://in3dwebsite.blob.core.windows.net/photos/Microsoft_Tugle-min.jpg";
         break;
       case "Military":
-        url = "/assets/images/backgrounds/military/Militery_Togle_Finish2.jpg";
+        // url = "/assets/images/backgrounds/military/Militery_Togle_Finish2.jpg";
+        url =
+          "https://in3dwebsite.blob.core.windows.net/photos/Militery_Togle_Finish2-min.jpg";
         break;
       case "Security":
-        url = "/assets/images/backgrounds/security/Security_Togle_Finish2.jpg";
+        // url = "/assets/images/backgrounds/security/Security_Togle_Finish2.jpg";
+        url =
+          "https://in3dwebsite.blob.core.windows.net/photos/Security_Togle_Finish2-min.jpg";
         break;
       case "Industry":
-        url = "/assets/images/backgrounds/taasia/Industry_Togle.jpg";
+        // url = "/assets/images/backgrounds/taasia/Industry_Togle.jpg";
+        url =
+          "https://in3dwebsite.blob.core.windows.net/photos/Industry_Togle-min.jpg";
         break;
       case "Medicine":
-        url = "/assets/images/backgrounds/medicine/Medical_Togle.jpg";
+        // url = "/assets/images/backgrounds/medicine/Medical_Togle.jpg";
+        url =
+          "https://in3dwebsite.blob.core.windows.net/photos/Medical_Togle-min.jpg";
         break;
 
       default:

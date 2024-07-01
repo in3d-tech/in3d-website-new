@@ -7,6 +7,7 @@ import * as THREE from "three";
 import { Sparkles } from "@react-three/drei";
 import { HomeScreenCategoryText } from "./CategoryHsDetails";
 import { MenuAboutContact, MenuWheel } from "../../navs/mobile/MenuWheel";
+import { TextScrambleComponent } from "../../common/shuffleTexts";
 // import useScreenOrientation from "../../common/useScreenOrientation";
 // import { SelectedCategory } from "./CategoryDetails";
 
@@ -18,6 +19,7 @@ function HomeScreenMobile() {
   const [tilt, setTilt] = useState({ tiltLR: 0, tiltFB: 0, dir: 0 });
   const astroRef = useRef();
   const [startExpandedAnimation, setStartExpandedAnimation] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const {
     selectedCategory,
@@ -43,6 +45,8 @@ function HomeScreenMobile() {
   const handleCategoryClick = (action) => {
     setSelectedAction(action);
   };
+
+  if (!isMobile) setTimeout(() => setIsMobile(true), 5000);
 
   useEffect(() => {
     if (!isAstroModelDrawn) return;
@@ -119,10 +123,13 @@ function HomeScreenMobile() {
         }}
       >
         {isMenuCentered ? (
-          <div className="h-nav-in3d-icon" style={{ animationDelay: "0.6s" }}>
+          <div
+            className="h-nav-in3d-icon"
+            style={{ animationDelay: "0.6s", left: "40.8%" }}
+          >
             <img
               className="in3d-fixed-logo"
-              style={{ width: "3.2em" }}
+              style={{ width: "6em" }}
               src="/assets/images/in3d-logo-white.png"
             />
           </div>
@@ -134,8 +141,11 @@ function HomeScreenMobile() {
           />
         ) : null}
       </div>
+      (
       <div className="home-categories-wrapper-mobile">
-        {startExpandedAnimation ? <TitleWithAnimation /> : null}
+        {startExpandedAnimation ? (
+          <TitleWithAnimation isMobile={isMobile} />
+        ) : null}
 
         <div className="home-categories-map-mobile">
           {categories.map((category, idx) => (
@@ -150,6 +160,7 @@ function HomeScreenMobile() {
         </div>
         <Scene astroRef={astroRef} />
       </div>
+      )
       <Suspense fallback={null}>
         {selectedCategory ? <LazySelectedContent /> : null}
       </Suspense>
@@ -182,7 +193,7 @@ const categories = [
   "ABOUTCONTACT",
 ];
 
-const TitleWithAnimation = () => (
+const TitleWithAnimation = ({ isMobile }) => (
   <div
     style={{
       top: "0em",
@@ -205,12 +216,12 @@ const TitleWithAnimation = () => (
     </div>
     <div
       style={{
-        textAlign: "right",
+        textAlign: "center",
         fontSize: "2em",
       }}
       className="text-animate simply-header"
     >
-      EXPAND
+      <TextScrambleComponent isHomepage isMobile={isMobile} />
     </div>
   </div>
 );

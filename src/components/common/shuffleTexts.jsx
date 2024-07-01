@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useCallback } from "react";
+const VOWELS = "aeiouAEIOU";
 
 class TextScramble {
   constructor(el, speed = 1) {
@@ -16,6 +17,11 @@ class TextScramble {
     for (let i = 0; i < length; i++) {
       const from = oldText[i] || "";
       const to = newText[i] || "";
+      // Only scramble vowels
+      if (!VOWELS.includes(to)) {
+        this.queue.push({ from, to, start: 0, end: 0 });
+        continue;
+      }
       const start = Math.random() * 40 * this.speed;
       const end = start + Math.random() * 40 * this.speed;
       this.queue.push({ from, to, start, end });
@@ -39,7 +45,7 @@ class TextScramble {
           char = this.randomChar();
           this.queue[i].char = char;
         }
-        output += `<span className="dud">${char}</span>`;
+        output += `<span class="dud">${char}</span>`;
       } else {
         output += from;
       }
@@ -60,10 +66,10 @@ class TextScramble {
 
 export const TextScrambleComponent = ({ colour, isHomePage, isMobile }) => {
   const textRef = useRef(null);
-
+  // change back develope to pioneer
   const phrases = isHomePage
     ? ["SIMPLY EXPAND"]
-    : ["Pioneer", "Develop", "Advance", "Expand", "Craft", "Build", "Design"];
+    : ["Develop", "Pioneer", "Advance", "Expand", "Craft", "Build", "Design"];
 
   useEffect(() => {
     const fx = new TextScramble(textRef.current);
@@ -89,7 +95,7 @@ export const TextScrambleComponent = ({ colour, isHomePage, isMobile }) => {
 
     // Cleanup on unmount
     return () => cancelAnimationFrame(fx.frameRequest);
-  }, []);
+  }, [isHomePage, isMobile, phrases]);
 
   return (
     <div className={""} style={{ marginTop: isHomePage ? "0.3em" : "2em" }}>

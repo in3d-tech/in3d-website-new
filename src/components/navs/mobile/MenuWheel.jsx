@@ -75,7 +75,7 @@ export function MenuWheel({
               ""
             ) : (
               <>
-                <span style={{ color: "#750414" }}>I</span>
+                <span>I</span>
                 ndustry
               </>
             )}
@@ -100,7 +100,7 @@ export function MenuWheel({
               ""
             ) : (
               <>
-                <span style={{ color: "#750414" }}>M</span>
+                <span>M</span>
                 edicine
               </>
             )}
@@ -125,7 +125,7 @@ export function MenuWheel({
               ""
             ) : (
               <>
-                <span style={{ color: "#750414" }}>M</span>
+                <span>M</span>
                 icrosoft
               </>
             )}
@@ -150,7 +150,7 @@ export function MenuWheel({
               ""
             ) : (
               <>
-                <span style={{ color: "#750414" }}>S</span>
+                <span>S</span>
                 ecurity
               </>
             )}
@@ -175,7 +175,7 @@ export function MenuWheel({
               ""
             ) : (
               <>
-                <span style={{ color: "#750414" }}>A.</span>
+                <span>A.</span>
                 I.
               </>
             )}
@@ -200,7 +200,7 @@ export function MenuWheel({
               ""
             ) : (
               <>
-                <span style={{ color: "#750414" }}>M</span>
+                <span>M</span>
                 ilitary
               </>
             )}
@@ -225,7 +225,7 @@ export function MenuWheel({
               ""
             ) : (
               <>
-                <span style={{ color: "#750414" }}>C</span>
+                <span>C</span>
                 ustomize
               </>
             )}
