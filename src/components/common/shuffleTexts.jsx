@@ -69,7 +69,15 @@ export const TextScrambleComponent = ({ colour, isHomePage, isMobile }) => {
   // change back develope to pioneer
   const phrases = isHomePage
     ? ["SIMPLY EXPAND"]
-    : ["Develop", "Pioneer", "Advance", "Expand", "Craft", "Build", "Design"];
+    : [
+        isMobile ? "Expand" : "Pioneer",
+        "Develop",
+        "Advance",
+        "Expand",
+        "Craft",
+        "Build",
+        "Design",
+      ];
 
   useEffect(() => {
     const fx = new TextScramble(textRef.current);

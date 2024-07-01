@@ -160,9 +160,10 @@ export const HomeScreenCategoryText = ({
           zIndex: -1,
           height: "30vh",
           width: "100%",
-          // backgroundImage:
-          //   categoryDataByIndex[idx]?.bgImage ||
-          //   'url("/assets/images/backgrounds/taasia/Industry_Togle.jpg")',
+          backgroundImage:
+            // categoryDataByIndex[idx]?.bgImage ||
+            categoryDataByIndex[4]?.bgImage ||
+            'url("/assets/images/backgrounds/taasia/Industry_Togle.jpg")',
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
