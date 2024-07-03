@@ -240,25 +240,39 @@ export const MenuAboutContact = ({
   isFromHomeScreen,
   isMenuCentered,
   handleMenuClick,
+  isFromSelectedCategory,
 }) => {
   const { setSelectedCategory, menuOpenMobile, setMenuOpenMobile } =
     useAppContext();
   const linkedInUrl = "https://www.linkedin.com/company/in3d-tech.com";
 
+  const regularStyle = {
+    width: "100%",
+    borderTop: "1px solid rgb(255,255,255, 0.4)",
+    position: "absolute",
+    bottom: isFromHomeScreen ? "1em" : "5em",
+    left: 0,
+    height: "5em",
+    display: "flex",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+  };
+
+  const selectedCategoryStyle = {
+    position: "absolute",
+    top: "200%",
+    width: "100%",
+    borderTop: "1px solid rgb(0,0,0, 0.4)",
+    left: 0,
+    height: "5em",
+    display: "flex",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    // border: "5px solid blue",
+  };
+
   return (
-    <div
-      style={{
-        width: "100%",
-        borderTop: "1px solid rgb(255,255,255, 0.4)",
-        position: "absolute",
-        bottom: isFromHomeScreen ? "1em" : "5em",
-        left: 0,
-        height: "5em",
-        display: "flex",
-        justifyContent: "space-evenly",
-        alignItems: "center",
-      }}
-    >
+    <div style={isFromSelectedCategory ? selectedCategoryStyle : regularStyle}>
       <div className="animate-reveal">
         <span
           onClick={() => {
@@ -268,7 +282,10 @@ export const MenuAboutContact = ({
               setMenuOpenMobile(!menuOpenMobile);
             }
           }}
-          style={{ color: "white", fontFamily: "gotham" }}
+          style={{
+            color: isFromSelectedCategory ? "black" : "white",
+            fontFamily: "gotham",
+          }}
         >
           About
         </span>
@@ -282,7 +299,10 @@ export const MenuAboutContact = ({
               setMenuOpenMobile(!menuOpenMobile);
             }
           }}
-          style={{ color: "white", fontFamily: "gotham" }}
+          style={{
+            color: isFromSelectedCategory ? "black" : "white",
+            fontFamily: "gotham",
+          }}
         >
           Contact
         </span>
@@ -290,7 +310,10 @@ export const MenuAboutContact = ({
       <div className="linkdn-icon animate-reveal">
         {
           <a href={linkedInUrl} target="_blank" rel="noopener noreferrer">
-            <LinkedInIcon fontSize="large" sx={{ color: "white" }} />
+            <LinkedInIcon
+              fontSize="large"
+              sx={{ color: isFromSelectedCategory ? "black" : "white" }}
+            />
           </a>
         }
       </div>

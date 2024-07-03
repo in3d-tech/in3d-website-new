@@ -10,6 +10,8 @@ import { MenuAboutContact, MenuWheel } from "../../navs/mobile/MenuWheel";
 import { TextScrambleComponent } from "../../common/shuffleTexts";
 // import useScreenOrientation from "../../common/useScreenOrientation";
 // import { SelectedCategory } from "./CategoryDetails";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 
 const LazySelectedContent = lazy(() => import("./CategoryDetails"));
 
@@ -17,14 +19,17 @@ function HomeScreenMobile() {
   const [isMenuCentered, setIsMenuCentered] = useState(false);
   const [selectedAction, setSelectedAction] = useState(null);
   const [tilt, setTilt] = useState({ tiltLR: 0, tiltFB: 0, dir: 0 });
+  const [slide, setSlide] = useState(0);
   const astroRef = useRef();
   const [startExpandedAnimation, setStartExpandedAnimation] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [debug, setDebug] = useState("yessss");
 
   const {
     selectedCategory,
     setSelectedCategory,
     mobileBackground,
+    setMobileBackground,
     isAstroModelDrawn,
     setCustomizeHasRendered,
     selectedMenuActionMobile,
@@ -82,6 +87,42 @@ function HomeScreenMobile() {
 
   return (
     <>
+      <div
+        className="swiper"
+        style={{
+          // border: "1px solid yellow",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          height: "100%",
+          width: "100%",
+          zIndex: 1,
+          // background: "white",
+        }}
+      >
+        <div style={{ color: "yellow", position: "absolute" }}>{debug} </div>
+        <TiltDiv setDebug={setDebug} />
+        <Swiper
+          spaceBetween={50}
+          slidesPerView={3}
+          onSlideChange={(e) => {
+            console.log("slide change", e.realIndex);
+            setSlide(e.realIndex);
+            if (e.realIndex > 1) setMobileBackground(e.realIndex - 1);
+          }}
+          onSwiper={(swiper) => console.log(swiper)}
+          style={{ height: "100%" }}
+        >
+          <SwiperSlide></SwiperSlide>
+          <SwiperSlide></SwiperSlide>
+          <SwiperSlide></SwiperSlide>
+          <SwiperSlide></SwiperSlide>
+          <SwiperSlide></SwiperSlide>
+          <SwiperSlide></SwiperSlide>
+          <SwiperSlide></SwiperSlide>
+          <SwiperSlide></SwiperSlide>
+        </Swiper>
+      </div>
       <MenuWheel
         setSelectedMenuActionMobile={setSelectedMenuActionMobile}
         handleMenuClick={handleMenuClick}
@@ -90,22 +131,6 @@ function HomeScreenMobile() {
         setSelectedCategory={setSelectedCategory}
         selectedCategory={selectedCategory}
       />
-      {/* <div
-        style={{
-          position: "fixed",
-          top: "3em",
-          left: "3em",
-          width: "200px",
-          height: "300px",
-          border: "1px solid yellow",
-          zIndex: 2,
-          color: "white",
-        }}
-      >
-        Tilt LR: {tilt.tiltLR} <br />
-        Tilt FB: {tilt.tiltFB} <br />
-        Direction: {tilt.dir} <br />
-      </div> */}
       <div
         className={isMenuCentered ? "mobile-menu-opened-bg" : ""}
         style={{
@@ -125,7 +150,7 @@ function HomeScreenMobile() {
         {isMenuCentered ? (
           <div
             className="h-nav-in3d-icon"
-            style={{ animationDelay: "0.6s", left: "40%" }}
+            style={{ animationDelay: "0.6s", left: "39%" }}
           >
             <img
               className="in3d-fixed-logo"
@@ -190,6 +215,7 @@ const categories = [
   "ARTIFICAL INTELLIGENCE",
   "MILITARY",
   "CUSTOMIZATION",
+  "About",
   "ABOUTCONTACT",
 ];
 
@@ -208,7 +234,7 @@ const TitleWithAnimation = ({ isMobile }) => (
     <div
       style={{
         fontSize: "2em",
-        marginTop: "3em",
+        marginTop: "1em",
       }}
       className="text-animate simply-header"
     >
@@ -329,3 +355,101 @@ function useGLTFAnimations(scene, animations) {
 
   return mixer;
 }
+
+const TiltDiv = ({ setDebug }) => {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  // useEffect(() => {
+  //   const requestDeviceOrientationPermission = async () => {
+  //     if (typeof DeviceOrientationEvent.requestPermission === "function") {
+  //       try {
+  //         const response = await DeviceOrientationEvent.requestPermission();
+  //         if (response === "granted") {
+  //           console.log("in 1");
+  //           window.addEventListener("deviceorientation", handleOrientation);
+  //         }
+  //       } catch (error) {
+  //         console.log("in 2");
+  //         console.error(error);
+  //       }
+  //     } else {
+  //       console.log("in 3");
+  //       window.addEventListener("deviceorientation", handleOrientation);
+  //     }
+  //   };
+
+  //   requestDeviceOrientationPermission();
+
+  //   return () => {
+  //     window.removeEventListener("deviceorientation", handleOrientation);
+  //   };
+  // }, []);
+
+  useEffect(() => {
+    const handleOrientation = (event) => {
+      const { beta, gamma } = event; // beta is front-back, gamma is left-right
+
+      // Setting a range for gamma (-90 to 90) degrees
+      const maxGamma = 45; // Maximum gamma angle we want to handle
+
+      // Normalize gamma value (-1 to 1), preserving the sign
+      let normalizedGamma =
+        Math.min(maxGamma, Math.max(-maxGamma, gamma)) / maxGamma;
+
+      // Reversing the direction of movement for gamma
+      normalizedGamma = -normalizedGamma;
+
+      // Set the new position based on normalized gamma
+      setPosition({
+        x: normalizedGamma * 50, // Adjust the multiplier to control the distance the div moves
+      });
+    };
+
+    const requestDeviceOrientationPermission = async () => {
+      setDebug("in 3");
+
+      if (typeof DeviceOrientationEvent.requestPermission === "function") {
+        setDebug("in 2");
+
+        try {
+          const response = await DeviceOrientationEvent.requestPermission();
+          setDebug(response);
+
+          if (response === "granted") {
+            console.log("in 6");
+            setDebug("in 1");
+            window.addEventListener("deviceorientation", handleOrientation);
+          }
+        } catch (error) {
+          console.log("in 2");
+          console.error(error);
+        }
+      } else {
+        console.log("in 3");
+        setDebug("in 3");
+        window.addEventListener("deviceorientation", handleOrientation);
+      }
+    };
+
+    requestDeviceOrientationPermission();
+
+    window.addEventListener("deviceorientation", handleOrientation);
+
+    return () => {
+      window.removeEventListener("deviceorientation", handleOrientation);
+    };
+  }, []);
+
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: `calc(50% + ${position.x}vw)`,
+    transform: "translate(-50%, -50%)",
+    width: "50px",
+    height: "50px",
+    backgroundColor: "red",
+    borderRadius: "50%",
+  };
+
+  return <div style={style} />;
+};

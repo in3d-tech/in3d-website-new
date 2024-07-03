@@ -106,7 +106,10 @@ export const TextScrambleComponent = ({ colour, isHomePage, isMobile }) => {
   }, [isHomePage, isMobile, phrases]);
 
   return (
-    <div className={""} style={{ marginTop: isHomePage ? "0.3em" : "2em" }}>
+    <div
+      className={""}
+      style={{ marginTop: isHomePage ? "0.3em" : isMobile ? "0em" : "2em" }}
+    >
       <div
         className={isHomePage ? "" : "abla"}
         style={{ color: isHomePage ? "white" : colour }}

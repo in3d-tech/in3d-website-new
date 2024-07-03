@@ -12,11 +12,37 @@ export const getCategoryData = ({ selectedCategory }) => {
       ),
       bgImage: 'url("/assets/images/backgrounds/taasia/Industry_Togle.jpg")',
       // text: "Together with our clients we map out the challenges they face and develop tailor made solutions using XR and 3D technology that creates an innovative visual interface between men and machine.",
-      text: "The world was recently introduced to the wonders of the industry 4.0 revolution Industry is experiencing a quantum leap forward, with seemingly endless tools that impact everything we know about manufacturing and maintenance.",
+      text: (
+        <>
+          <span style={{ fontSize: "1.2em", color: "#750414" }}>
+            The world was recently introduced to the wonders of the industry{" "}
+            <span style={{ color: "black" }}>4.0 </span>
+            revolution.
+          </span>
+          <br />
+          <br />
+          <span style={{ opacity: 0.8 }}>
+            Industry is experiencing a quantum leap forward, with seemingly
+            endless tools that impact everything we know about manufacturing and
+            maintenance.
+          </span>
+        </>
+      ),
       text2:
         "Together with our clients we map out the challenges they face and develop tailor made solutions using XR and 3D technology that creates a whole new and improved visual interface platform",
-      text3:
-        "3D XR isn't just an innovative experience. We carefully evaluate each solution we offer through business perspectives such as ROI,workplace efficiency and simplification of complexed procedures",
+      text3: (
+        <>
+          <span style={{ fontSize: "1.2em" }}>
+            3D XR isn't just an innovative experience.{" "}
+          </span>
+          <span style={{ opacity: 0.8 }}>
+            We carefully evaluate each solution we offer through business
+            perspectives such as ROI, workplace efficiency and simplification of
+            complexed procedure
+          </span>
+          s
+        </>
+      ),
       url: "/assets/models/engenir_model.glb",
     },
     1: {

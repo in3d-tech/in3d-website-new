@@ -37,7 +37,7 @@ body {
   overflow-x: hidden;
   /* cursor: none; */
 }
-
+/* 
 /* --------- cube -------- */
 
 @keyframes turn {
@@ -968,6 +968,9 @@ section {
   background: no-repeat center center;
   background-size: cover;
   /* No transition here */
+  box-shadow: -1px 3px 28px 6px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: -1px 3px 28px 6px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -1px 3px 28px 6px rgba(0, 0, 0, 0.75);
 }
 
 .fade {
@@ -982,7 +985,7 @@ section {
   width: 100%;
   height: 100%;
   background: inherit;
-  filter: blur(20px);
+  filter: blur(10px);
   pointer-events: none;
 }
 

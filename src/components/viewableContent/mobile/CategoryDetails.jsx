@@ -21,6 +21,14 @@ import {
 import { getCategoryData } from "./logic/getCategoryDetails";
 import { Model } from "./logic/Model";
 import { VideoPlayer } from "../../common/Logo";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
+
+import { FreeMode, Navigation, Thumbs } from "swiper/modules";
+import { MenuAboutContact } from "../../navs/mobile/MenuWheel";
 
 const MAX_ROTATION_SPEED = 0.05; // Maximum rotation speed
 const DECAY_FACTOR = 0.95; // Decay factor for inertia
@@ -40,11 +48,12 @@ function SelectedCategory() {
   const [nextImageIndex, setNextImageIndex] = useState(1);
   const [opacity, setOpacity] = useState(1);
 
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const { setSelectedCategory, selectedCategory } = useAppContext();
   const data = getCategoryData({ selectedCategory });
   const modelRef = useRef();
 
-  console.log({ selectedCategory });
+  // console.log({ selectedCategory });
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -96,6 +105,7 @@ function SelectedCategory() {
             textAlign: "center",
             // lineHeight: "1.5em",
             // letterSpacing: "0.2em",
+            fontFamily: "gotham",
           }}
         >
           {data.title}
@@ -135,6 +145,9 @@ function SelectedCategory() {
                 backgroundImage: `url(${industryImages[currentImageIndex]})`,
                 transition: "opacity 1s ease-in-out",
                 opacity: 1,
+                // border: "1px solid red",
+                // borderRadius: "20%",
+                borderRadius: "12px",
               }}
               className="blurred-bg"
             ></div>
@@ -184,6 +197,7 @@ function SelectedCategory() {
                   >
                     {data.text2}
                   </div>
+                  <MenuAboutContact isFromSelectedCategory />
                 </div>
               </>
             )}
@@ -200,13 +214,17 @@ function SelectedCategory() {
             // justifyContent: "space-evenly",
           }}
         >
-          <IndustryPage selectedCategory={selectedCategory} />
+          <IndustryPage
+            selectedCategory={selectedCategory}
+            thumbsSwiper={thumbsSwiper}
+            setThumbsSwiper={setThumbsSwiper}
+          />
           {data.text3 && (
             <div
               style={{
                 fontSize: selectedCategory == "about" ? "0.79em" : "1em",
                 width: "90%",
-                marginTop: "2em",
+                marginTop: "3em",
                 fontFamily: "gotham",
                 textAlign: "center",
                 lineHeight: "1.5em",
@@ -495,7 +513,24 @@ const content = {
 // src="/assets/images/backgrounds/customize/Package scanning and moving pilot.mp4"
 // src="/assets/images/backgrounds/customize/Hotze - VR Rakal.mp4"
 
-const IndustryPage = ({ selectedCategory }) => {
+const IndustryPage = ({ selectedCategory, thumbsSwiper, setThumbsSwiper }) => {
+  return (
+    <>
+      <div
+        className="industry-page"
+        style={{
+          marginTop: "34em",
+        }}
+      >
+        <SwiperComponent
+          thumbsSwiper={thumbsSwiper}
+          setThumbsSwiper={setThumbsSwiper}
+        />
+      </div>
+    </>
+  );
+
+  return null;
   const mediaContent = content[selectedCategory];
   if (!selectedCategory || !mediaContent) {
     return null;
@@ -567,3 +602,103 @@ const industryImages = [
 //     url =
 //       "https://in3dwebsite.blob.core.windows.net/photos/Medical_Togle-min.jpg";
 //     break;
+
+const SwiperComponent = ({ thumbsSwiper, setThumbsSwiper }) => {
+  return (
+    <>
+      <Swiper
+        style={{
+          "--swiper-navigation-color": "#fff",
+          "--swiper-pagination-color": "#fff",
+          width: "86vw",
+          height: "16em",
+          // border: "1px solid yellow",
+          borderRadius: "12px",
+        }}
+        spaceBetween={10}
+        navigation={true}
+        thumbs={{ swiper: thumbsSwiper }}
+        modules={[FreeMode, Navigation, Thumbs]}
+        className="mySwiper2"
+      >
+        <SwiperSlide>
+          {/* <img
+            style={{ all: "unset", width: "200px" }}
+            src="https://swiperjs.com/demos/images/nature-1.jpg"
+          /> */}
+          <VideoPlayer />
+        </SwiperSlide>
+        <SwiperSlide>
+          {/* <img src="https://swiperjs.com/demos/images/nature-2.jpg" /> */}
+          <VideoPlayer
+            src={"https://in3dwebsite.blob.core.windows.net/video/agoran 2.mp4"}
+          />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+        </SwiperSlide>
+        {/* <SwiperSlide>
+          <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
+        </SwiperSlide> */}
+      </Swiper>
+      {/* <Swiper
+        onSwiper={setThumbsSwiper}
+        spaceBetween={10}
+        slidesPerView={4}
+        freeMode={true}
+        watchSlidesProgress={true}
+        modules={[FreeMode, Navigation, Thumbs]}
+        className="mySwiper"
+      >
+        <SwiperSlide>
+          <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
+        </SwiperSlide>
+      </Swiper> */}
+    </>
+  );
+};

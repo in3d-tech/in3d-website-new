@@ -82,7 +82,7 @@ export const HomeScreenCategoryText = ({
         'url("/assets/images/backgrounds/customize/Customize_Togle_Finish.jpg")',
       text: "With our amazing team, we provide the flexibility and abilities needed to deliver the best tailor-made product.",
     },
-    7: {
+    8: {
       text: (
         <div
           style={{
@@ -117,9 +117,22 @@ export const HomeScreenCategoryText = ({
         </div>
       ),
     },
+    7: {
+      title: "About us",
+      text: (
+        <>
+          We are on a mission to evolve
+          <br />
+          <br />
+          3D isn't only a technology, it’s a different way of thinking, with
+          more perspective Our goal is to gather all senses into the virtual
+          world and blur the boundaries between realities
+        </>
+      ),
+    },
   };
 
-  if (idx == 7) {
+  if (idx == 8) {
     return (
       <div
         style={{
@@ -177,7 +190,7 @@ export const HomeScreenCategoryText = ({
       >
         {categoryDataByIndex[idx]?.title}
       </div>
-      <span style={{ textAlign: "center", padding: "1em", fontSize: "0.8em" }}>
+      <span style={{ textAlign: "left", padding: "1em", fontSize: "0.8em" }}>
         {categoryDataByIndex[idx]?.text}
       </span>
       <LearnMoreBtn
@@ -249,7 +262,7 @@ const LearnMoreBtn = ({
             transform="translate(30)"
             fill="white"
             stroke="white"
-            stroke-width="2"
+            strokeWidth="2"
           ></path>
         </svg>
       </button>

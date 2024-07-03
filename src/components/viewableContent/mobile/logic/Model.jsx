@@ -43,7 +43,7 @@ export function Model({ url, modelRef, selectedCategory }) {
     [MICROSOFT]: {
       rotation: [0, 0, 0],
       scale: [1.4, 1.4, 1.4],
-      position: [0, -2, 0],
+      position: [0, -3, 0],
     },
     [SECURITY]: {
       rotation: [0, Math.PI, 0],
