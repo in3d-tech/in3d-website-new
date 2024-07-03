@@ -406,10 +406,10 @@ const TiltDiv = ({ setDebug }) => {
     };
 
     const requestDeviceOrientationPermission = async () => {
-      setDebug("in 3");
+      setDebug("in 3.5");
 
       if (typeof DeviceOrientationEvent.requestPermission === "function") {
-        setDebug("in 2");
+        setDebug("in 2.2");
 
         try {
           setDebug("in 2.5");
@@ -425,7 +425,7 @@ const TiltDiv = ({ setDebug }) => {
             window.addEventListener("deviceorientation", handleOrientation);
           }
         } catch (error) {
-          setDebug("in 2", error);
+          setDebug("in 2.1", error);
           console.error(error);
         }
       } else {
