@@ -389,6 +389,7 @@ const TiltDiv = ({ setDebug }) => {
       setPosition({
         x: normalizedGamma * 50,
       });
+      setDebug(`x: ${normalizedGamma * 50}`);
     }
   }, [beta, gamma, permission]);
 
