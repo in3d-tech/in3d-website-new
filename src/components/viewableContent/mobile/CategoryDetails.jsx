@@ -108,7 +108,7 @@ function SelectedCategory() {
             fontFamily: "gotham",
           }}
         >
-          {data.title}
+          {data?.title}
         </div>
         <div
           style={{
@@ -121,7 +121,7 @@ function SelectedCategory() {
             // letterSpacing: "1.1em",
           }}
         >
-          {data.text}
+          {data?.text}
         </div>
         {isAboutOrContact ? null : (
           <div
@@ -170,14 +170,16 @@ function SelectedCategory() {
                 color="pink" //{getSparkleColour(scrollArea.currentSection)}
               />
               <Suspense fallback={null}>
-                <Model
-                  url={models[selectedCategory]} //"/assets/models/engenir_model.glb"
-                  modelRef={modelRef}
-                  selectedCategory={selectedCategory}
-                />
+                {models[selectedCategory] ? (
+                  <Model
+                    url={models[selectedCategory]} //"/assets/models/engenir_model.glb"
+                    modelRef={modelRef}
+                    selectedCategory={selectedCategory}
+                  />
+                ) : null}
               </Suspense>
             </Canvas>
-            {data.text2 && (
+            {data?.text2 && (
               <>
                 <div
                   style={{
@@ -195,7 +197,7 @@ function SelectedCategory() {
                       lineHeight: "1.5em",
                     }}
                   >
-                    {data.text2}
+                    {data?.text2}
                   </div>
                   <MenuAboutContact isFromSelectedCategory />
                 </div>
@@ -219,7 +221,7 @@ function SelectedCategory() {
             thumbsSwiper={thumbsSwiper}
             setThumbsSwiper={setThumbsSwiper}
           />
-          {data.text3 && (
+          {data?.text3 && (
             <div
               style={{
                 fontSize: selectedCategory == "about" ? "0.79em" : "1em",
@@ -230,7 +232,7 @@ function SelectedCategory() {
                 lineHeight: "1.5em",
               }}
             >
-              {data.text3}
+              {data?.text3}
             </div>
           )}
         </div>

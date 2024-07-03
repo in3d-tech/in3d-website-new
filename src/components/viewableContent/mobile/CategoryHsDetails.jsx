@@ -118,7 +118,7 @@ export const HomeScreenCategoryText = ({
       ),
     },
     7: {
-      title: "About us",
+      title: <span>About us</span>,
       text: (
         <>
           We are on a mission to evolve
@@ -244,7 +244,12 @@ const LearnMoreBtn = ({
     <div style={{ marginTop: "1em", marginLeft: "1em" }}>
       <button
         // onClick={() => setSelectedMenuActionMobile(`fab-action-${idx + 1}`)}
-        onClick={() => setSelectedCategory(idx + 2)}
+        onClick={() => {
+          if (idx == 7) {
+            return;
+          }
+          setSelectedCategory(idx + 2);
+        }}
         className="cta"
       >
         <span className="hover-underline-animation"> Learn more </span>

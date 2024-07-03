@@ -100,8 +100,8 @@ function HomeScreenMobile() {
           // background: "white",
         }}
       >
-        <div style={{ color: "yellow", position: "absolute" }}>{debug} </div>
-        <TiltDiv setDebug={setDebug} />
+        {/* <div style={{ color: "yellow", position: "absolute" }}>{debug} </div> */}
+        {/* <TiltDiv setDebug={setDebug} /> */}
         <Swiper
           spaceBetween={50}
           slidesPerView={3}
