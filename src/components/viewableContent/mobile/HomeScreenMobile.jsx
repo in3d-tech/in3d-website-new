@@ -18,7 +18,7 @@ const LazySelectedContent = lazy(() => import("./CategoryDetails"));
 function HomeScreenMobile() {
   const [isMenuCentered, setIsMenuCentered] = useState(false);
   const [selectedAction, setSelectedAction] = useState(null);
-  const [tilt, setTilt] = useState({ tiltLR: 0, tiltFB: 0, dir: 0 });
+  // const [tilt, setTilt] = useState({ tiltLR: 0, tiltFB: 0, dir: 0 });
   const [slide, setSlide] = useState(0);
   const astroRef = useRef();
   const [startExpandedAnimation, setStartExpandedAnimation] = useState(false);
@@ -63,23 +63,23 @@ function HomeScreenMobile() {
     }
   }, [isAstroModelDrawn]);
 
-  useEffect(() => {
-    // Handler to handle device tilt event
-    const handleTilt = (event) => {
-      setTilt({
-        tiltLR: event.gamma,
-        tiltFB: event.beta,
-        dir: event.alpha,
-      });
-    };
+  // useEffect(() => {
+  //   // Handler to handle device tilt event
+  //   const handleTilt = (event) => {
+  //     setTilt({
+  //       tiltLR: event.gamma,
+  //       tiltFB: event.beta,
+  //       dir: event.alpha,
+  //     });
+  //   };
 
-    // Add and cleanup the event listener
-    window.addEventListener("deviceorientation", handleTilt);
+  //   // Add and cleanup the event listener
+  //   window.addEventListener("deviceorientation", handleTilt);
 
-    return () => {
-      window.removeEventListener("deviceorientation", handleTilt);
-    };
-  }, []); // On mount and unmount
+  //   return () => {
+  //     window.removeEventListener("deviceorientation", handleTilt);
+  //   };
+  // }, []); // On mount and unmount
 
   // const orientation = useScreenOrientation();
 
@@ -253,6 +253,14 @@ const TitleWithAnimation = ({ isMobile }) => (
 );
 
 const Scene = ({ astroRef }) => {
+  const [tilt, setTilt] = useState({ tiltLR: 0, tiltFB: 0, dir: 0 });
+  const { permission, requestPermission } = useDeviceOrientation((tiltData) => {
+    setTilt({
+      tiltLR: tiltData.gamma,
+      tiltFB: tiltData.beta,
+      dir: tiltData.alpha,
+    });
+  });
   return (
     <div className="canvas-container-mobile">
       <Canvas>
@@ -270,6 +278,7 @@ const Scene = ({ astroRef }) => {
           <AstroModel
             url={"/assets/models/astronaut_new5 (3).glb"}
             astroRef={astroRef}
+            tilt={tilt}
           />
         </Suspense>
       </Canvas>
@@ -277,7 +286,7 @@ const Scene = ({ astroRef }) => {
   );
 };
 
-export function AstroModel({ url, astroRef, setTextAnimation }) {
+export function AstroModel({ url, astroRef, setTextAnimation, tilt }) {
   const { isAstroModelDrawn, setIsAstroModelDrawn } = useAppContext();
 
   const { scene, animations } = useGLTF(url);
@@ -292,8 +301,14 @@ export function AstroModel({ url, astroRef, setTextAnimation }) {
 
   const isFullyRenderedRef = useRef(false);
 
+  console.log({ tilt });
+
   // Use useFrame to check if the object is fully rendered on every frame
   useFrame(() => {
+    if (astroRef.current && tilt.dir) {
+      astroRef.current.rotation.y = tilt.tiltLR * (Math.PI / 180); // Adjust this multiplier to control rotation sensitivity
+      astroRef.current.rotation.x = tilt.tiltFB * (Math.PI / 180); // Adjust this multiplier to control rotation sensitivity
+    }
     // Check if the object is visible in the scene and loaded
     if (astroRef.current && scene && !isFullyRenderedRef.current) {
       // Check if all objects in the scene have been rendered
@@ -423,7 +438,7 @@ const TiltDiv = ({ setDebug }) => {
   );
 };
 
-const useDeviceOrientation = () => {
+const useDeviceOrientation = (onOrientationChange) => {
   const [orientation, setOrientation] = useState({
     alpha: null,
     beta: null,
@@ -434,6 +449,9 @@ const useDeviceOrientation = () => {
   const handleOrientation = (event) => {
     const { alpha, beta, gamma } = event;
     setOrientation({ alpha, beta, gamma });
+    if (onOrientationChange) {
+      onOrientationChange({ alpha, beta, gamma });
+    }
   };
 
   const requestPermission = async () => {
