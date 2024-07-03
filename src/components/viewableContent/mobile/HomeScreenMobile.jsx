@@ -357,103 +357,110 @@ function useGLTFAnimations(scene, animations) {
 }
 
 const TiltDiv = ({ setDebug }) => {
+  const {
+    orientation: { beta, gamma },
+    permission,
+    requestPermission,
+  } = useDeviceOrientation();
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
-  // useEffect(() => {
-  //   const requestDeviceOrientationPermission = async () => {
-  //     if (typeof DeviceOrientationEvent.requestPermission === "function") {
-  //       try {
-  //         const response = await DeviceOrientationEvent.requestPermission();
-  //         if (response === "granted") {
-  //           console.log("in 1");
-  //           window.addEventListener("deviceorientation", handleOrientation);
-  //         }
-  //       } catch (error) {
-  //         console.log("in 2");
-  //         console.error(error);
-  //       }
-  //     } else {
-  //       console.log("in 3");
-  //       window.addEventListener("deviceorientation", handleOrientation);
-  //     }
-  //   };
-
-  //   requestDeviceOrientationPermission();
-
-  //   return () => {
-  //     window.removeEventListener("deviceorientation", handleOrientation);
-  //   };
-  // }, []);
-
   useEffect(() => {
-    const handleOrientation = (event) => {
-      const { beta, gamma } = event; // beta is front-back, gamma is left-right
-
-      // Setting a range for gamma (-90 to 90) degrees
-      const maxGamma = 45; // Maximum gamma angle we want to handle
-
-      // Normalize gamma value (-1 to 1), preserving the sign
+    if (beta !== null && gamma !== null && permission === "granted") {
+      const maxGamma = 45;
       let normalizedGamma =
         Math.min(maxGamma, Math.max(-maxGamma, gamma)) / maxGamma;
-
-      // Reversing the direction of movement for gamma
       normalizedGamma = -normalizedGamma;
 
-      // Set the new position based on normalized gamma
       setPosition({
-        x: normalizedGamma * 50, // Adjust the multiplier to control the distance the div moves
+        x: normalizedGamma * 50,
       });
-    };
+    }
+  }, [beta, gamma, permission]);
 
-    const requestDeviceOrientationPermission = async () => {
-      setDebug("in 3.5");
+  const handleRetry = () => {
+    window.location.reload(); // Simple retry by reloading the page
+  };
 
-      if (typeof DeviceOrientationEvent.requestPermission === "function") {
-        setDebug("in 2.2");
+  return (
+    <div>
+      {permission === "default" && (
+        <button
+          style={{
+            zIndex: 50000,
+            position: "absolute",
+            left: "14em",
+            top: "3em",
+          }}
+          onClick={requestPermission}
+        >
+          Enable Device Orientation
+        </button>
+      )}
+      {permission === "granted" && (
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: `calc(50% + ${position.x}vw)`,
+            transform: "translate(-50%, -50%)",
+            width: "50px",
+            height: "50px",
+            backgroundColor: "red",
+            borderRadius: "50%",
+          }}
+        />
+      )}
+      {permission === "denied" && (
+        <div>
+          <p>
+            Device orientation permission denied. Please enable it in your
+            settings and reload the page.
+          </p>
+          <button onClick={handleRetry}>Retry</button>
+        </div>
+      )}
+    </div>
+  );
+};
 
-        try {
-          setDebug("in 2.5");
+const useDeviceOrientation = () => {
+  const [orientation, setOrientation] = useState({
+    alpha: null,
+    beta: null,
+    gamma: null,
+  });
+  const [permission, setPermission] = useState("default");
 
-          const response = await DeviceOrientationEvent.requestPermission();
-          setDebug("in 2.9");
+  const handleOrientation = (event) => {
+    const { alpha, beta, gamma } = event;
+    setOrientation({ alpha, beta, gamma });
+  };
 
-          setDebug(response);
-
-          if (response === "granted") {
-            console.log("in 6");
-            setDebug("in 1");
-            window.addEventListener("deviceorientation", handleOrientation);
-          }
-        } catch (error) {
-          setDebug(`${typeof error} -in 2.1, ${error}`);
-          console.error(error);
+  const requestPermission = async () => {
+    if (typeof DeviceOrientationEvent.requestPermission === "function") {
+      try {
+        const response = await DeviceOrientationEvent.requestPermission();
+        if (response === "granted") {
+          setPermission("granted");
+          window.addEventListener("deviceorientation", handleOrientation);
+        } else {
+          setPermission("denied");
         }
-      } else {
-        console.log("in 3");
-        setDebug("in 3");
-        window.addEventListener("deviceorientation", handleOrientation);
+      } catch (error) {
+        setPermission("denied");
       }
-    };
+    } else {
+      setPermission("granted");
+      window.addEventListener("deviceorientation", handleOrientation);
+    }
+  };
 
-    requestDeviceOrientationPermission();
-
-    window.addEventListener("deviceorientation", handleOrientation);
-
+  useEffect(() => {
+    // Cleanup listener on unmount
     return () => {
       window.removeEventListener("deviceorientation", handleOrientation);
     };
   }, []);
 
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: `calc(50% + ${position.x}vw)`,
-    transform: "translate(-50%, -50%)",
-    width: "50px",
-    height: "50px",
-    backgroundColor: "red",
-    borderRadius: "50%",
-  };
-
-  return <div style={style} />;
+  return { orientation, permission, requestPermission };
 };
