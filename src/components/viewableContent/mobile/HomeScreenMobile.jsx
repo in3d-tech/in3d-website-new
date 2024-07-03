@@ -425,7 +425,7 @@ const TiltDiv = ({ setDebug }) => {
             window.addEventListener("deviceorientation", handleOrientation);
           }
         } catch (error) {
-          setDebug("in 2.1", error);
+          setDebug(`${typeof error} -in 2.1, ${error}`);
           console.error(error);
         }
       } else {
