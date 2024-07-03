@@ -412,7 +412,11 @@ const TiltDiv = ({ setDebug }) => {
         setDebug("in 2");
 
         try {
+          setDebug("in 2.5");
+
           const response = await DeviceOrientationEvent.requestPermission();
+          setDebug("in 2.9");
+
           setDebug(response);
 
           if (response === "granted") {
