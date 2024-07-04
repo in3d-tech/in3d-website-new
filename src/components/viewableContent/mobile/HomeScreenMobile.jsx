@@ -348,7 +348,7 @@ function AstroModel({
     }
     if (astroRef.current) {
       // Update rotation based on the tilt values
-      const newRotationY = astroRef.current.rotation.y + tilt.tiltLR * 0.002;
+      const newRotationY = astroRef.current.rotation.y + tilt.tiltLR * 0.0002;
       astroRef.current.rotation.y = newRotationY;
     }
   });
