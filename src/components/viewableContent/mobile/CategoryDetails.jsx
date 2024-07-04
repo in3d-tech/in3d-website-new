@@ -1,10 +1,9 @@
-import { Suspense, useEffect, useMemo, useState, useRef, lazy } from "react";
+import { Suspense, useEffect, useMemo, useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
 import { useAppContext } from "../../../context/appContext";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-// import { useGLTF, useProgress } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Camera } from "../../scene/Camera";
 import * as THREE from "three";
@@ -22,16 +21,11 @@ import { getCategoryData } from "./logic/getCategoryDetails";
 import { Model } from "./logic/Model";
 import { VideoPlayer } from "../../common/Logo";
 import { Swiper, SwiperSlide } from "swiper/react";
-
-import "swiper/css/free-mode";
+import "swiper/css";
+import "swiper/css/pagination";
 import "swiper/css/navigation";
-import "swiper/css/thumbs";
-
-import { FreeMode, Navigation, Thumbs } from "swiper/modules";
+import { Pagination, Navigation } from "swiper/modules";
 import { MenuAboutContact } from "../../navs/mobile/MenuWheel";
-
-const MAX_ROTATION_SPEED = 0.05; // Maximum rotation speed
-const DECAY_FACTOR = 0.95; // Decay factor for inertia
 
 const models = {
   [INDUSTRY]: "/assets/models/engenir_model.glb",
@@ -151,15 +145,7 @@ function SelectedCategory() {
               }}
               className="blurred-bg"
             ></div>
-            <Canvas
-              style={
-                {
-                  // backgroundImage:
-                  //   'url("/assets/images/backgrounds/taasia/taasia_bg.jpg")',
-                  // opacity: 0.2,
-                }
-              }
-            >
+            <Canvas>
               <ambientLight intensity={1} />
               <directionalLight intensity={4} />
               <Camera />
@@ -218,8 +204,8 @@ function SelectedCategory() {
         >
           <IndustryPage
             selectedCategory={selectedCategory}
-            thumbsSwiper={thumbsSwiper}
-            setThumbsSwiper={setThumbsSwiper}
+            // thumbsSwiper={thumbsSwiper}
+            // setThumbsSwiper={setThumbsSwiper}
           />
           {data?.text3 && (
             <div
@@ -474,47 +460,6 @@ const content = {
   ],
 };
 
-// ----- Industry
-// (src = "https://in3dwebsite.blob.core.windows.net/video/ICL"),
-//   (src = "https://in3dwebsite.blob.core.windows.net/video/agoran 2.mp4"),
-//   (rc =
-//     "https://in3dwebsite.blob.core.windows.net/photos/industry-machine-min.jpg");
-
-// // ----- med
-// src =
-//   "https://in3dwebsite.blob.core.windows.net/photos/medical_overlay_1-min.jpg";
-//   src="https://in3dwebsite.blob.core.windows.net/photos/med-overlay-bot-min.jpg"
-//   src="https://in3dwebsite.blob.core.windows.net/video/Medical - Real time operation (1).mp4"
-
-// // ----- micro
-// src="https://in3dwebsite.blob.core.windows.net/photos/microsoft-shake-cutout-min.png"
-//  src="https://in3dwebsite.blob.core.windows.net/video/Mesh Hololens - Remote Collaboration.mp4"
-//  src="https://in3dwebsite.blob.core.windows.net/video/What can HoloLens 2 do_.mp4"
-// src="https://in3dwebsite.blob.core.windows.net/video/Medical Holoportation - Ichilov (1) (1).mp4"
-// "https://in3dwebsite.blob.core.windows.net/photos/microsoft-building-min.jpg"
-// "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4"
-// "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4"
-
-// // ----- security
-// isBottom
-// ? "https://in3dwebsite.blob.core.windows.net/video/VR - Fire Department - Elevator Simulator (1).mp4"
-//                 : "https://in3dwebsite.blob.core.windows.net/video/Hololens-Abach-Treatment-Simulator.mp4"
-//  src="https://in3dwebsite.blob.core.windows.net/video/AR Factory Real Time Control Panel Data - 2 level (3).mp4"
-//  "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4"
-// // ----- ai
-
-// // ----- military
-// src="https://in3dwebsite.blob.core.windows.net/video/Boat 3D Scan.mp4"
-// src="https://in3dwebsite.blob.core.windows.net/video/Rafael - Family - Truck (1).mp4"
-// src="https://in3dwebsite.blob.core.windows.net/video/Rafael - Family - Missile (1).mp4"
-// "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4"
-// "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4"
-// // ----- customization
-// src="/assets/images/backgrounds/customize/Globe 3D Store - 14.10.20.mp4"
-// src="/assets/images/backgrounds/customize/BIM Construction with Hololens.mp4"
-// src="/assets/images/backgrounds/customize/Package scanning and moving pilot.mp4"
-// src="/assets/images/backgrounds/customize/Hotze - VR Rakal.mp4"
-
 const IndustryPage = ({ selectedCategory, thumbsSwiper, setThumbsSwiper }) => {
   return (
     <>
@@ -524,10 +469,7 @@ const IndustryPage = ({ selectedCategory, thumbsSwiper, setThumbsSwiper }) => {
           marginTop: "34em",
         }}
       >
-        <SwiperComponent
-          thumbsSwiper={thumbsSwiper}
-          setThumbsSwiper={setThumbsSwiper}
-        />
+        {selectedCategory ? <SwiperComponent /> : null}
       </div>
     </>
   );
@@ -605,33 +547,26 @@ const industryImages = [
 //       "https://in3dwebsite.blob.core.windows.net/photos/Medical_Togle-min.jpg";
 //     break;
 
-const SwiperComponent = ({ thumbsSwiper, setThumbsSwiper }) => {
+const SwiperComponent = () => {
   return (
     <>
       <Swiper
-        style={{
-          "--swiper-navigation-color": "#fff",
-          "--swiper-pagination-color": "#fff",
-          width: "86vw",
-          height: "16em",
-          // border: "1px solid yellow",
-          borderRadius: "12px",
+        slidesPerView={1}
+        spaceBetween={30}
+        loop={true}
+        pagination={{
+          clickable: true,
         }}
-        spaceBetween={10}
         navigation={true}
-        thumbs={{ swiper: thumbsSwiper }}
-        modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper2"
+        modules={[Pagination, Navigation]}
+        className="mySwiper"
+        style={{ border: "1px solid red", width: "300px", height: "400px" }}
       >
         <SwiperSlide>
-          {/* <img
-            style={{ all: "unset", width: "200px" }}
-            src="https://swiperjs.com/demos/images/nature-1.jpg"
-          /> */}
+          {" "}
           <VideoPlayer />
         </SwiperSlide>
         <SwiperSlide>
-          {/* <img src="https://swiperjs.com/demos/images/nature-2.jpg" /> */}
           <VideoPlayer
             src={"https://in3dwebsite.blob.core.windows.net/video/agoran 2.mp4"}
           />
@@ -639,68 +574,8 @@ const SwiperComponent = ({ thumbsSwiper, setThumbsSwiper }) => {
         <SwiperSlide>
           <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
         </SwiperSlide>
-        {/* <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-        </SwiperSlide> */}
+        <SwiperSlide>Slide 4</SwiperSlide>
       </Swiper>
-      {/* <Swiper
-        onSwiper={setThumbsSwiper}
-        spaceBetween={10}
-        slidesPerView={4}
-        freeMode={true}
-        watchSlidesProgress={true}
-        modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper"
-      >
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-        </SwiperSlide>
-      </Swiper> */}
     </>
   );
 };

@@ -10,8 +10,9 @@ import { MenuAboutContact, MenuWheel } from "../../navs/mobile/MenuWheel";
 import { TextScrambleComponent } from "../../common/shuffleTexts";
 // import useScreenOrientation from "../../common/useScreenOrientation";
 // import { SelectedCategory } from "./CategoryDetails";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import "swiper/css";
+import { Swipe, TiltDiv } from "../../common/SwipeAndTilt";
 
 const LazySelectedContent = lazy(() => import("./CategoryDetails"));
 
@@ -19,7 +20,7 @@ function HomeScreenMobile() {
   const [isMenuCentered, setIsMenuCentered] = useState(false);
   const [selectedAction, setSelectedAction] = useState(null);
   // const [tilt, setTilt] = useState({ tiltLR: 0, tiltFB: 0, dir: 0 });
-  const [slide, setSlide] = useState(0);
+  // const [slide, setSlide] = useState(0);
   const astroRef = useRef();
   const [startExpandedAnimation, setStartExpandedAnimation] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -87,42 +88,6 @@ function HomeScreenMobile() {
 
   return (
     <>
-      <div
-        className="swiper"
-        style={{
-          // border: "1px solid yellow",
-          position: "fixed",
-          top: 0,
-          left: 0,
-          height: "100%",
-          width: "100%",
-          zIndex: 1,
-          // background: "white",
-        }}
-      >
-        {/* <div style={{ color: "yellow", position: "absolute" }}>{debug} </div> */}
-        {/* <TiltDiv setDebug={setDebug} /> */}
-        <Swiper
-          spaceBetween={50}
-          slidesPerView={3}
-          onSlideChange={(e) => {
-            console.log("slide change", e.realIndex);
-            setSlide(e.realIndex);
-            if (e.realIndex > 1) setMobileBackground(e.realIndex - 1);
-          }}
-          onSwiper={(swiper) => console.log(swiper)}
-          style={{ height: "100%" }}
-        >
-          <SwiperSlide></SwiperSlide>
-          <SwiperSlide></SwiperSlide>
-          <SwiperSlide></SwiperSlide>
-          <SwiperSlide></SwiperSlide>
-          <SwiperSlide></SwiperSlide>
-          <SwiperSlide></SwiperSlide>
-          <SwiperSlide></SwiperSlide>
-          <SwiperSlide></SwiperSlide>
-        </Swiper>
-      </div>
       <MenuWheel
         setSelectedMenuActionMobile={setSelectedMenuActionMobile}
         handleMenuClick={handleMenuClick}
@@ -183,7 +148,12 @@ function HomeScreenMobile() {
             />
           ))}
         </div>
-        <Scene astroRef={astroRef} />
+        <Scene
+          astroRef={astroRef}
+          setMobileBackground={setMobileBackground}
+          selectedCategory={selectedCategory}
+          setDebug={setDebug}
+        />
       </div>
       )
       <Suspense fallback={null}>
@@ -252,17 +222,50 @@ const TitleWithAnimation = ({ isMobile }) => (
   </div>
 );
 
-const Scene = ({ astroRef }) => {
+const Scene = ({
+  astroRef,
+  setMobileBackground,
+  selectedCategory,
+  setDebug,
+}) => {
+  const [slide, setSlide] = useState(0);
+
+  const [position, setPosition] = useState({ x: 0, y: 0 });
   const [tilt, setTilt] = useState({ tiltLR: 0, tiltFB: 0, dir: 0 });
-  const { permission, requestPermission } = useDeviceOrientation((tiltData) => {
+  // const { permission, requestPermission } = useDeviceOrientation((tiltData) => {
+  //   setTilt({
+  //     tiltLR: tiltData.gamma,
+  //     tiltFB: tiltData.beta,
+  //     dir: tiltData.alpha,
+  //   });
+  // });
+
+  const handleTiltChange = (tiltData) => {
     setTilt({
       tiltLR: tiltData.gamma,
       tiltFB: tiltData.beta,
       dir: tiltData.alpha,
     });
-  });
+  };
+
   return (
     <div className="canvas-container-mobile">
+      {!selectedCategory ? (
+        <>
+          <TiltDiv
+            setDebug={setDebug}
+            position={position}
+            setPosition={setPosition}
+            onTiltChange={handleTiltChange} // Pass the handler here
+          />
+          <Swipe
+            setSlide={setSlide}
+            setMobileBackground={setMobileBackground}
+            position={position}
+            setPosition={setPosition}
+          />
+        </>
+      ) : null}
       <Canvas>
         {/* <LoaderComponent /> */}
         <ambientLight intensity={0.8} />
@@ -278,6 +281,8 @@ const Scene = ({ astroRef }) => {
           <AstroModel
             url={"/assets/models/astronaut_new5 (3).glb"}
             astroRef={astroRef}
+            position={position}
+            setPosition={setPosition}
             tilt={tilt}
           />
         </Suspense>
@@ -286,7 +291,13 @@ const Scene = ({ astroRef }) => {
   );
 };
 
-export function AstroModel({ url, astroRef, setTextAnimation, tilt }) {
+function AstroModel({
+  url,
+  astroRef,
+  setTextAnimation,
+  position,
+  setPosition,
+}) {
   const { isAstroModelDrawn, setIsAstroModelDrawn } = useAppContext();
 
   const { scene, animations } = useGLTF(url);
@@ -301,14 +312,8 @@ export function AstroModel({ url, astroRef, setTextAnimation, tilt }) {
 
   const isFullyRenderedRef = useRef(false);
 
-  console.log({ tilt });
-
   // Use useFrame to check if the object is fully rendered on every frame
   useFrame(() => {
-    if (astroRef.current && tilt.dir) {
-      astroRef.current.rotation.y = tilt.tiltLR * (Math.PI / 180); // Adjust this multiplier to control rotation sensitivity
-      astroRef.current.rotation.x = tilt.tiltFB * (Math.PI / 180); // Adjust this multiplier to control rotation sensitivity
-    }
     // Check if the object is visible in the scene and loaded
     if (astroRef.current && scene && !isFullyRenderedRef.current) {
       // Check if all objects in the scene have been rendered
@@ -370,116 +375,3 @@ function useGLTFAnimations(scene, animations) {
 
   return mixer;
 }
-
-const TiltDiv = ({ setDebug }) => {
-  const {
-    orientation: { beta, gamma },
-    permission,
-    requestPermission,
-  } = useDeviceOrientation();
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    if (beta !== null && gamma !== null && permission === "granted") {
-      const maxGamma = 45;
-      let normalizedGamma =
-        Math.min(maxGamma, Math.max(-maxGamma, gamma)) / maxGamma;
-      normalizedGamma = -normalizedGamma;
-
-      setPosition({
-        x: normalizedGamma * 50,
-      });
-      setDebug(`x: ${normalizedGamma * 50}`);
-    }
-  }, [beta, gamma, permission]);
-
-  const handleRetry = () => {
-    window.location.reload(); // Simple retry by reloading the page
-  };
-
-  return (
-    <div>
-      {permission === "default" && (
-        <button
-          style={{
-            zIndex: 50000,
-            position: "absolute",
-            left: "14em",
-            top: "3em",
-          }}
-          onClick={requestPermission}
-        >
-          Enable Device Orientation
-        </button>
-      )}
-      {permission === "granted" && (
-        <div
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: `calc(50% + ${position.x}vw)`,
-            transform: "translate(-50%, -50%)",
-            width: "50px",
-            height: "50px",
-            backgroundColor: "red",
-            borderRadius: "50%",
-          }}
-        />
-      )}
-      {permission === "denied" && (
-        <div>
-          <p>
-            Device orientation permission denied. Please enable it in your
-            settings and reload the page.
-          </p>
-          <button onClick={handleRetry}>Retry</button>
-        </div>
-      )}
-    </div>
-  );
-};
-
-const useDeviceOrientation = (onOrientationChange) => {
-  const [orientation, setOrientation] = useState({
-    alpha: null,
-    beta: null,
-    gamma: null,
-  });
-  const [permission, setPermission] = useState("default");
-
-  const handleOrientation = (event) => {
-    const { alpha, beta, gamma } = event;
-    setOrientation({ alpha, beta, gamma });
-    if (onOrientationChange) {
-      onOrientationChange({ alpha, beta, gamma });
-    }
-  };
-
-  const requestPermission = async () => {
-    if (typeof DeviceOrientationEvent.requestPermission === "function") {
-      try {
-        const response = await DeviceOrientationEvent.requestPermission();
-        if (response === "granted") {
-          setPermission("granted");
-          window.addEventListener("deviceorientation", handleOrientation);
-        } else {
-          setPermission("denied");
-        }
-      } catch (error) {
-        setPermission("denied");
-      }
-    } else {
-      setPermission("granted");
-      window.addEventListener("deviceorientation", handleOrientation);
-    }
-  };
-
-  useEffect(() => {
-    // Cleanup listener on unmount
-    return () => {
-      window.removeEventListener("deviceorientation", handleOrientation);
-    };
-  }, []);
-
-  return { orientation, permission, requestPermission };
-};
