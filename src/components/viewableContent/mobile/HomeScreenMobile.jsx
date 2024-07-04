@@ -250,7 +250,7 @@ const Scene = ({
 
   return (
     <div className="canvas-container-mobile">
-      <div
+      {/* <div
         style={{
           border: "1px solid red",
           position: "absolute",
@@ -264,7 +264,7 @@ const Scene = ({
       >{`tilt": ${tilt.dir} -
       ${tilt.tiltLR}-
       ${tilt.tiltFB}
-      `}</div>
+      `}</div> */}
       {!selectedCategory ? (
         <>
           <TiltDiv

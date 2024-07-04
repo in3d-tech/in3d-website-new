@@ -14,7 +14,7 @@ export function Swipe({
       // className="swiper"
       style={{
         position: "fixed",
-        border: "1px solid yellow",
+        // border: "1px solid yellow",
         top: 0,
         left: 0,
         height: "100%",
@@ -51,74 +51,6 @@ export function Swipe({
     </div>
   );
 }
-
-// const TiltDiv = ({ setDebug }) => {
-//   const {
-//     orientation: { beta, gamma },
-//     permission,
-//     requestPermission,
-//   } = useDeviceOrientation();
-//   const [position, setPosition] = useState({ x: 0, y: 0 });
-
-//   useEffect(() => {
-//     if (beta !== null && gamma !== null && permission === "granted") {
-//       const maxGamma = 45;
-//       let normalizedGamma =
-//         Math.min(maxGamma, Math.max(-maxGamma, gamma)) / maxGamma;
-//       normalizedGamma = -normalizedGamma;
-
-//       setPosition({
-//         x: normalizedGamma * 50,
-//       });
-//       setDebug(`x: ${normalizedGamma * 50}`);
-//     }
-//   }, [beta, gamma, permission]);
-
-//   const handleRetry = () => {
-//     window.location.reload(); // Simple retry by reloading the page
-//   };
-
-//   return (
-//     <div>
-//       {permission === "default" && (
-//         <button
-//           style={{
-//             zIndex: 50000,
-//             position: "absolute",
-//             left: "14em",
-//             top: "3em",
-//           }}
-//           onClick={requestPermission}
-//         >
-//           Enable Device Orientation
-//         </button>
-//       )}
-//       {permission === "granted" && (
-//         <div
-//           style={{
-//             position: "absolute",
-//             top: "50%",
-//             left: `calc(50% + ${position.x}vw)`,
-//             transform: "translate(-50%, -50%)",
-//             width: "50px",
-//             height: "50px",
-//             backgroundColor: "red",
-//             borderRadius: "50%",
-//           }}
-//         />
-//       )}
-//       {permission === "denied" && (
-//         <div>
-//           <p>
-//             Device orientation permission denied. Please enable it in your
-//             settings and reload the page.
-//           </p>
-//           <button onClick={handleRetry}>Retry</button>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
 
 export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
   const {
@@ -157,14 +89,15 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
       {permission === "default" && (
         <button
           style={{
-            zIndex: 50000,
+            zIndex: 500,
             position: "absolute",
-            left: "14em",
-            top: "3em",
+            left: "2em",
+            top: "14em",
+            opacity: 0.4,
           }}
           onClick={requestPermission}
         >
-          Enable Device Orientation
+          Enable D.O.
         </button>
       )}
       {permission === "granted" && (
