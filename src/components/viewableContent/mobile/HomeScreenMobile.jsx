@@ -321,6 +321,9 @@ function AstroModel({
 
   const { active, progress, errors, total } = useProgress();
 
+  const minRotationY = Math.PI - 0.4; // Define minimum rotation angle
+  const maxRotationY = Math.PI - 0.3; // Define maximum rotation angle
+
   useEffect(() => {
     console.log(progress);
   }, [progress]);
@@ -349,12 +352,17 @@ function AstroModel({
     if (astroRef.current) {
       // Update rotation based on the tilt values
       const newRotationY = astroRef.current.rotation.y + tilt.tiltLR * 0.0005;
-      if (newRotationY > 0 && newRotationY > Math.PI - 0.4) {
+
+      // Apply constraints
+      if (newRotationY <= maxRotationY && newRotationY >= minRotationY) {
         astroRef.current.rotation.y = newRotationY;
       }
-      if (newRotationY < 0 && newRotationY > Math.PI - 0.3) {
-        astroRef.current.rotation.y = newRotationY;
-      }
+      // console.log(
+      //   "Rotation Y:",
+      //   astroRef.current.rotation.y,
+      //   "Tilt LR:",
+      //   tilt.tiltLR
+      // );
     }
   });
 
