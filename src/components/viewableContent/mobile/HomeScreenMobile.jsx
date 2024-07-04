@@ -312,6 +312,7 @@ function AstroModel({
   setTextAnimation,
   position,
   setPosition,
+  tilt,
 }) {
   const { isAstroModelDrawn, setIsAstroModelDrawn } = useAppContext();
 
@@ -344,6 +345,11 @@ function AstroModel({
         setTimeout(() => setIsAstroModelDrawn(true), 1000);
         console.log("Astro object is fully rendered!");
       }
+    }
+    if (astroRef.current) {
+      // Update rotation based on the tilt values
+      const newRotationY = astroRef.current.rotation.y + tilt.tiltLR * 0.05;
+      astroRef.current.rotation.y = newRotationY;
     }
   });
 
