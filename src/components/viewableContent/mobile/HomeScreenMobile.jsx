@@ -348,8 +348,13 @@ function AstroModel({
     }
     if (astroRef.current) {
       // Update rotation based on the tilt values
-      const newRotationY = astroRef.current.rotation.y + tilt.tiltLR * 0.0002;
-      astroRef.current.rotation.y = newRotationY;
+      const newRotationY = astroRef.current.rotation.y + tilt.tiltLR * 0.0005;
+      if (newRotationY > 0 && newRotationY < Math.PI - 0.45) {
+        astroRef.current.rotation.y = newRotationY;
+      }
+      if (newRotationY < 0 && newRotationY > Math.PI - 0.25) {
+        astroRef.current.rotation.y = newRotationY;
+      }
     }
   });
 
