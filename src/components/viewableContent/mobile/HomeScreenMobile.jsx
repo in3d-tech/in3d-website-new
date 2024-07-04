@@ -315,10 +315,14 @@ export function AstroModel({ url, astroRef, tilt }) {
 
   const isFullyRenderedRef = useRef(false);
 
-  const minRotationY = Math.PI - 0.4; // Define minimum Y rotation angle
-  const maxRotationY = Math.PI - 0.3; // Define maximum Y rotation angle
-  const minRotationX = 0.4; // Define minimum X rotation angle
-  const maxRotationX = 0.7; // Define maximum X rotation angle
+  // Define rotation limits and sensitivity multipliers for both X and Y axes
+  const minRotationY = Math.PI - 0.4;
+  const maxRotationY = Math.PI - 0.3;
+  const minRotationX = 0.3;
+  const maxRotationX = 0.8;
+
+  const ySensitivity = 0.0005; // Sensitivity for Y-axis
+  const xSensitivity = 0.0005; // Sensitivity for X-axis
 
   useEffect(() => {
     console.log(progress);
@@ -341,14 +345,19 @@ export function AstroModel({ url, astroRef, tilt }) {
     }
 
     if (astroRef.current) {
-      // Update Y rotation based on the tiltLR values
-      const newRotationY = astroRef.current.rotation.y + tilt.tiltLR * 0.0005;
+      // Update Y rotation based on tiltLR values
+      const newRotationY =
+        astroRef.current.rotation.y + tilt.tiltLR * ySensitivity;
+      // Update X rotation based on tiltFB values
+      const newRotationX =
+        astroRef.current.rotation.x + tilt.tiltFB * xSensitivity;
+
+      // Apply constraints for Y rotation
       if (newRotationY <= maxRotationY && newRotationY >= minRotationY) {
         astroRef.current.rotation.y = newRotationY;
       }
 
-      // Update X rotation based on the tiltFB values
-      const newRotationX = astroRef.current.rotation.x + tilt.tiltFB * 0.0005;
+      // Apply constraints for X rotation
       if (newRotationX <= maxRotationX && newRotationX >= minRotationX) {
         astroRef.current.rotation.x = newRotationX;
       }
