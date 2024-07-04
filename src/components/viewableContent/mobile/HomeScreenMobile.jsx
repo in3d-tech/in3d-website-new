@@ -352,7 +352,7 @@ function AstroModel({
       if (newRotationY > 0 && newRotationY > Math.PI - 0.4) {
         astroRef.current.rotation.y = newRotationY;
       }
-      if (newRotationY < 0 && newRotationY < Math.PI - 0.3) {
+      if (newRotationY < 0 && newRotationY > Math.PI - 0.3) {
         astroRef.current.rotation.y = newRotationY;
       }
     }
