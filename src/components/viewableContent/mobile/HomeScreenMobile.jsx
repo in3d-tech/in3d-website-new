@@ -306,36 +306,27 @@ const Scene = ({
   );
 };
 
-function AstroModel({
-  url,
-  astroRef,
-  setTextAnimation,
-  position,
-  setPosition,
-  tilt,
-}) {
+export function AstroModel({ url, astroRef, tilt }) {
   const { isAstroModelDrawn, setIsAstroModelDrawn } = useAppContext();
-
   const { scene, animations } = useGLTF(url);
   const mixer = useGLTFAnimations(scene, animations);
 
   const { active, progress, errors, total } = useProgress();
 
-  const minRotationY = Math.PI - 0.4; // Define minimum rotation angle
-  const maxRotationY = Math.PI - 0.3; // Define maximum rotation angle
+  const isFullyRenderedRef = useRef(false);
+
+  const minRotationY = Math.PI - 0.4; // Define minimum Y rotation angle
+  const maxRotationY = Math.PI - 0.3; // Define maximum Y rotation angle
+  const minRotationX = 0.4; // Define minimum X rotation angle
+  const maxRotationX = 0.7; // Define maximum X rotation angle
 
   useEffect(() => {
     console.log(progress);
   }, [progress]);
-  // gsap.set(".scene", { scale: 0.7 });
 
-  const isFullyRenderedRef = useRef(false);
-
-  // Use useFrame to check if the object is fully rendered on every frame
   useFrame(() => {
     // Check if the object is visible in the scene and loaded
     if (astroRef.current && scene && !isFullyRenderedRef.current) {
-      // Check if all objects in the scene have been rendered
       const fullyRendered = scene.children.every((child) => child.visible);
       if (
         fullyRendered &&
@@ -343,32 +334,42 @@ function AstroModel({
         active === false &&
         scene
       ) {
-        // Object is fully rendered
         isFullyRenderedRef.current = true;
         setTimeout(() => setIsAstroModelDrawn(true), 1000);
         console.log("Astro object is fully rendered!");
       }
     }
-    if (astroRef.current) {
-      // Update rotation based on the tilt values
-      const newRotationY = astroRef.current.rotation.y + tilt.tiltLR * 0.0005;
 
-      // Apply constraints
+    if (astroRef.current) {
+      // Update Y rotation based on the tiltLR values
+      const newRotationY = astroRef.current.rotation.y + tilt.tiltLR * 0.0005;
       if (newRotationY <= maxRotationY && newRotationY >= minRotationY) {
         astroRef.current.rotation.y = newRotationY;
       }
+
+      // Update X rotation based on the tiltFB values
+      const newRotationX = astroRef.current.rotation.x + tilt.tiltFB * 0.0005;
+      if (newRotationX <= maxRotationX && newRotationX >= minRotationX) {
+        astroRef.current.rotation.x = newRotationX;
+      }
+
       // console.log(
       //   "Rotation Y:",
       //   astroRef.current.rotation.y,
       //   "Tilt LR:",
       //   tilt.tiltLR
       // );
+      // console.log(
+      //   "Rotation X:",
+      //   astroRef.current.rotation.x,
+      //   "Tilt FB:",
+      //   tilt.tiltFB
+      // );
     }
   });
 
   useEffect(() => {
     if (scene && astroRef.current && !isFullyRenderedRef.current) {
-      // Check if all objects in the scene have been rendered
       const fullyRendered = scene.children.every((child) => child.visible);
 
       if (fullyRendered && isAstroModelDrawn === false) {
