@@ -23,11 +23,11 @@ export function Swipe({
       }}
     >
       {/* <div style={{ color: "yellow", position: "absolute" }}>{debug} </div> */}
-      {/* <TiltDiv
+      <TiltDiv
         setDebug={setDebug}
         position={position}
         setPosition={setPosition}
-      /> */}
+      />
       <Swiper
         spaceBetween={50}
         slidesPerView={3}
@@ -52,12 +52,12 @@ export function Swipe({
   );
 }
 
-export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
+const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
   const {
     orientation: { beta, gamma },
     permission,
     requestPermission,
-  } = useDeviceOrientation();
+  } = useDeviceOrientation(onTiltChange);
 
   useEffect(() => {
     if (beta !== null && gamma !== null && permission === "granted") {
@@ -71,17 +71,12 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
         x: normalizedGamma * 50,
       });
 
-      // Call the callback to pass tilt values up
-      if (onTiltChange) {
-        onTiltChange({ beta, gamma });
-      }
-
       setDebug(`x: ${normalizedGamma * 50}`);
     }
   }, [beta, gamma, permission, onTiltChange, setDebug, setPosition]);
 
   const handleRetry = () => {
-    window.location.reload(); // Simple retry by reloading the page
+    window.location.reload();
   };
 
   return (
@@ -165,7 +160,6 @@ const useDeviceOrientation = (onOrientationChange) => {
   useEffect(() => {
     requestPermission();
 
-    // Cleanup listener on unmount
     return () => {
       window.removeEventListener("deviceorientation", handleOrientation);
     };
