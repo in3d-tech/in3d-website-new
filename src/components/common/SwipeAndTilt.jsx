@@ -78,7 +78,7 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
 
       setDebug(`x: ${normalizedGamma * 50}`);
     }
-  }, [beta, gamma, permission, onTiltChange]);
+  }, [beta, gamma, permission, onTiltChange, setDebug, setPosition]);
 
   const handleRetry = () => {
     window.location.reload(); // Simple retry by reloading the page
@@ -126,6 +126,7 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
     </div>
   );
 };
+
 const useDeviceOrientation = (onOrientationChange) => {
   const [orientation, setOrientation] = useState({
     alpha: null,
@@ -162,6 +163,8 @@ const useDeviceOrientation = (onOrientationChange) => {
   };
 
   useEffect(() => {
+    requestPermission();
+
     // Cleanup listener on unmount
     return () => {
       window.removeEventListener("deviceorientation", handleOrientation);
