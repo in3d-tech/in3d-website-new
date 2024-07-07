@@ -259,8 +259,8 @@ export const MenuAboutContact = ({
   };
 
   const selectedCategoryStyle = {
-    position: "absolute",
-    top: "200%",
+    // position: "absolute",
+    // top: "200%",
     width: "100%",
     borderTop: "1px solid rgb(0,0,0, 0.4)",
     left: 0,
@@ -270,6 +270,8 @@ export const MenuAboutContact = ({
     alignItems: "center",
     // border: "5px solid blue",
   };
+
+  // console.log({ isFromSelectedCategory });
 
   return (
     <div style={isFromSelectedCategory ? selectedCategoryStyle : regularStyle}>
