@@ -234,16 +234,8 @@ const Scene = ({
   setDebug,
 }) => {
   const [slide, setSlide] = useState(0);
-
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [tilt, setTilt] = useState({ tiltLR: 0, tiltFB: 0, dir: 0 });
-  // const { permission, requestPermission } = useDeviceOrientation((tiltData) => {
-  //   setTilt({
-  //     tiltLR: tiltData.gamma,
-  //     tiltFB: tiltData.beta,
-  //     dir: tiltData.alpha,
-  //   });
-  // });
 
   const handleTiltChange = (tiltData) => {
     setTilt({
@@ -255,21 +247,6 @@ const Scene = ({
 
   return (
     <div className="canvas-container-mobile">
-      {/* <div
-        style={{
-          border: "1px solid red",
-          position: "absolute",
-          top: 0,
-          left: "10px",
-          width: "100%",
-          height: "400px",
-          zIndex: 5,
-          color: "yellow",
-        }}
-      >{`tilt": ${tilt.dir} -
-      ${tilt.tiltLR}-
-      ${tilt.tiltFB}
-      `}</div> */}
       {!selectedCategory ? (
         <>
           <TiltDiv
@@ -287,16 +264,10 @@ const Scene = ({
         </>
       ) : null}
       <Canvas>
-        {/* <LoaderComponent /> */}
         <ambientLight intensity={0.8} />
         <directionalLight intensity={3} />
         <Camera />
-        <Sparkles
-          count={300}
-          scale={10}
-          size={2}
-          color="pink" //{getSparkleColour(scrollArea.currentSection)}
-        />
+        <Sparkles count={300} scale={10} size={2} color="pink" />
         <Suspense fallback={null}>
           <AstroModel
             url={"/assets/models/astronaut_new5 (3).glb"}

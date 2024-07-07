@@ -57,7 +57,7 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
     orientation: { beta, gamma },
     permission,
     requestPermission,
-  } = useDeviceOrientation();
+  } = useDeviceOrientation(onTiltChange);
 
   useEffect(() => {
     if (beta !== null && gamma !== null && permission === "granted") {
@@ -71,14 +71,9 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
         x: normalizedGamma * 50,
       });
 
-      // Call the callback to pass tilt values up
-      if (onTiltChange) {
-        onTiltChange({ beta, gamma });
-      }
-
       setDebug(`x: ${normalizedGamma * 50}`);
     }
-  }, [beta, gamma, permission, onTiltChange]);
+  }, [beta, gamma, permission, setDebug, setPosition]);
 
   const handleRetry = () => {
     window.location.reload(); // Simple retry by reloading the page
@@ -105,7 +100,7 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
           style={{
             position: "absolute",
             top: "50%",
-            left: `calc(50% + ${position.x}vw)`,
+            left: `calc(50% + ${position?.x || 0}vw)`,
             transform: "translate(-50%, -50%)",
             width: "50px",
             height: "50px",
@@ -126,16 +121,26 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
     </div>
   );
 };
+
 const useDeviceOrientation = (onOrientationChange) => {
   const [orientation, setOrientation] = useState({
     alpha: null,
     beta: null,
     gamma: null,
   });
+  const [initialOrientation, setInitialOrientation] = useState(null);
   const [permission, setPermission] = useState("default");
 
   const handleOrientation = (event) => {
-    const { alpha, beta, gamma } = event;
+    let { alpha, beta, gamma } = event;
+
+    // Normalize values relative to the initial orientation
+    if (initialOrientation) {
+      beta -= initialOrientation.beta;
+      gamma -= initialOrientation.gamma;
+      // Optionally handle alpha rotation similarly if needed
+    }
+
     setOrientation({ alpha, beta, gamma });
     if (onOrientationChange) {
       onOrientationChange({ alpha, beta, gamma });
@@ -148,7 +153,19 @@ const useDeviceOrientation = (onOrientationChange) => {
         const response = await DeviceOrientationEvent.requestPermission();
         if (response === "granted") {
           setPermission("granted");
-          window.addEventListener("deviceorientation", handleOrientation);
+          window.addEventListener("deviceorientation", handleOrientation, true);
+          // Capture the initial orientation
+          window.addEventListener(
+            "deviceorientation",
+            (event) => {
+              setInitialOrientation({
+                alpha: event.alpha,
+                beta: event.beta,
+                gamma: event.gamma,
+              });
+            },
+            { once: true }
+          );
         } else {
           setPermission("denied");
         }
@@ -157,14 +174,26 @@ const useDeviceOrientation = (onOrientationChange) => {
       }
     } else {
       setPermission("granted");
-      window.addEventListener("deviceorientation", handleOrientation);
+      window.addEventListener("deviceorientation", handleOrientation, true);
+      // Capture the initial orientation
+      window.addEventListener(
+        "deviceorientation",
+        (event) => {
+          setInitialOrientation({
+            alpha: event.alpha,
+            beta: event.beta,
+            gamma: event.gamma,
+          });
+        },
+        { once: true }
+      );
     }
   };
 
   useEffect(() => {
     // Cleanup listener on unmount
     return () => {
-      window.removeEventListener("deviceorientation", handleOrientation);
+      window.removeEventListener("deviceorientation", handleOrientation, true);
     };
   }, []);
 
