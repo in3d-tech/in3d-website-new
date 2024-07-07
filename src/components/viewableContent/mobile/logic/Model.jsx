@@ -32,8 +32,8 @@ export function Model({ url, modelRef, selectedCategory }) {
   const modelAttributes = {
     [INDUSTRY]: {
       rotation: [0, 0, 0],
-      scale: [1.5, 1.5, 1.5],
-      position: [0, -3.25, 0],
+      scale: [2.3, 2.3, 2.3],
+      position: [0, -2, 0],
     },
     [MEDICINE]: {
       rotation: [0, 0, 0],

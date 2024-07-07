@@ -37,6 +37,12 @@ body {
   overflow-x: hidden;
   /* cursor: none; */
 }
+
+/* .swiper {
+  width: 100%;
+  height: 100%;
+} */
+
 /* 
 /* --------- cube -------- */
 
@@ -985,7 +991,7 @@ section {
   width: 100%;
   height: 100%;
   background: inherit;
-  filter: blur(10px);
+  filter: blur(0px);
   pointer-events: none;
 }
 

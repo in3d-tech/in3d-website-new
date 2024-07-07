@@ -23,7 +23,7 @@ import { VideoPlayer } from "../../common/Logo";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/navigation";
+// import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper/modules";
 import { MenuAboutContact } from "../../navs/mobile/MenuWheel";
 
@@ -76,9 +76,9 @@ function SelectedCategory() {
     selectedCategory === "about" || selectedCategory === "contact";
 
   return (
-    <div className="tester fade-in" style={{}}>
+    <div className="tester fade-in" style={{ border: "1px solid black" }}>
       {/* <div className="tester" style={{ opacity: 0.5 }}> */}
-      <div style={{ position: "fixed", top: "1em", left: "1em", zIndex: 3 }}>
+      <div style={{ position: "fixed", top: "1em", left: "1em" }}>
         <ArrowBackIcon
           fontSize="large"
           onClick={() => setSelectedCategory(null)}
@@ -90,6 +90,7 @@ function SelectedCategory() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          // border: "1px solid yellow",
         }}
       >
         <div
@@ -120,41 +121,44 @@ function SelectedCategory() {
         {isAboutOrContact ? null : (
           <div
             style={{
-              position: "absolute",
-              top: "4em",
+              // position: "absolute",
+              // top: "4em",
               left: 0,
               width: "100vw",
-              height: "100vh",
+              height: "60vh",
+              marginTop: "4em",
             }}
           >
             <div
               style={{
                 height: "50%",
                 position: "absolute",
-                bottom: "0em",
+                // bottom: 0,
+                // bottom: "0em",
                 width: "100%",
-                // backgroundImage:
-                //   'url("/assets/images/backgrounds/taasia/taasia_bg.jpg")',
+                // top: "4em",
+
                 zIndex: 0,
                 backgroundImage: `url(${industryImages[currentImageIndex]})`,
                 transition: "opacity 1s ease-in-out",
                 opacity: 1,
-                // border: "1px solid red",
+                // border: "1px solid blue",
+
                 // borderRadius: "20%",
                 borderRadius: "12px",
               }}
               className="blurred-bg"
             ></div>
-            <Canvas>
+            <Canvas style={{ zIndex: 1 }}>
               <ambientLight intensity={1} />
               <directionalLight intensity={4} />
               <Camera />
-              <Sparkles
+              {/* <Sparkles
                 count={300}
                 scale={10}
                 size={2}
                 color="pink" //{getSparkleColour(scrollArea.currentSection)}
-              />
+              /> */}
               <Suspense fallback={null}>
                 {models[selectedCategory] ? (
                   <Model
@@ -165,41 +169,41 @@ function SelectedCategory() {
                 ) : null}
               </Suspense>
             </Canvas>
-            {data?.text2 && (
-              <>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                  }}
-                >
-                  <div
-                    style={{
-                      fontSize: selectedCategory == "about" ? "0.79em" : "1em",
-                      width: "90%",
-                      marginTop: "5em",
-                      fontFamily: "gotham",
-                      textAlign: "center",
-                      lineHeight: "1.5em",
-                    }}
-                  >
-                    {data?.text2}
-                  </div>
-                  <MenuAboutContact isFromSelectedCategory />
-                </div>
-              </>
-            )}
           </div>
         )}
-
+        {data?.text2 && (
+          <>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                // border: "1px solid green",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: selectedCategory == "about" ? "0.79em" : "1em",
+                  width: "90%",
+                  marginTop: "2em",
+                  fontFamily: "gotham",
+                  textAlign: "center",
+                  lineHeight: "1.5em",
+                }}
+              >
+                {data?.text2}
+              </div>
+            </div>
+          </>
+        )}
         {selectedCategory == "contact" ? <ContactUsMobile test={true} /> : null}
         <div
           style={{
-            marginTop: "12em",
+            // marginTop: "12em",
             display: "flex",
             alignItems: "center",
             flexDirection: "column",
-            // justifyContent: "space-evenly",
+            // border: "1px solid black",
+            // justifyContent: "center",
           }}
         >
           <IndustryPage
@@ -222,7 +226,9 @@ function SelectedCategory() {
             </div>
           )}
         </div>
+
         <div style={{ height: "50px" }}></div>
+        <MenuAboutContact isFromSelectedCategory />
       </div>
     </div>
   );
@@ -466,7 +472,7 @@ const IndustryPage = ({ selectedCategory, thumbsSwiper, setThumbsSwiper }) => {
       <div
         className="industry-page"
         style={{
-          marginTop: "34em",
+          marginTop: "4em",
         }}
       >
         {selectedCategory ? <SwiperComponent /> : null}
@@ -548,9 +554,39 @@ const industryImages = [
 //     break;
 
 const SwiperComponent = () => {
+  const pagination = {
+    clickable: true,
+    renderBullet: function (index, className) {
+      return '<span class="' + className + '">' + "" + "</span>";
+    },
+  };
   return (
     <>
       <Swiper
+        pagination={pagination}
+        modules={[Pagination]}
+        className="mySwiper"
+        style={{ height: "15em", width: "94vw", borderRadius: "10px" }}
+      >
+        <SwiperSlide>
+          <VideoPlayer />
+        </SwiperSlide>
+        <SwiperSlide>
+          <VideoPlayer
+            src={"https://in3dwebsite.blob.core.windows.net/video/agoran 2.mp4"}
+          />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+        </SwiperSlide>
+        {/* <SwiperSlide>Slide 4</SwiperSlide>
+        <SwiperSlide>Slide 5</SwiperSlide>
+        <SwiperSlide>Slide 6</SwiperSlide>
+        <SwiperSlide>Slide 7</SwiperSlide>
+        <SwiperSlide>Slide 8</SwiperSlide>
+        <SwiperSlide>Slide 9</SwiperSlide> */}
+      </Swiper>
+      {/* <Swiper
         slidesPerView={1}
         spaceBetween={30}
         loop={true}
@@ -575,7 +611,7 @@ const SwiperComponent = () => {
           <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
         </SwiperSlide>
         <SwiperSlide>Slide 4</SwiperSlide>
-      </Swiper>
+      </Swiper> */}
     </>
   );
 };

@@ -86,6 +86,8 @@ function HomeScreenMobile() {
 
   // console.log({ orientation });
 
+  // console.log({ selectedCategory });
+
   return (
     <>
       <MenuWheel
@@ -108,6 +110,9 @@ function HomeScreenMobile() {
           left: 0,
           background: isMenuCentered ? "" : backgrounds[mobileBackground],
           // opacity: 0.4,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
           zIndex: isMenuCentered ? 3 : 0,
           transition: "background 1s",
         }}
@@ -115,7 +120,7 @@ function HomeScreenMobile() {
         {isMenuCentered ? (
           <div
             className="h-nav-in3d-icon"
-            style={{ animationDelay: "0.6s", left: "39%" }}
+            style={{ animationDelay: "0.6s", left: "37%" }}
           >
             <img
               className="in3d-fixed-logo"
@@ -167,13 +172,13 @@ export default HomeScreenMobile;
 
 const backgrounds = {
   1: 'url("/assets/images/backgrounds/Astro_1_Background.webp")',
-  2: 'url("/assets/images/backgrounds/taasia/taasia_bg.jpg")',
+  2: 'url("https://in3dwebsite.blob.core.windows.net/photos/Medical_Togle-min.jpg")',
   3: 'url("/assets/images/backgrounds//medicine/medicine_bg.jpg")',
   4: 'url("/assets/images/backgrounds/microsoft/microsoft_bg.jpg")',
   5: 'url("/assets/images/backgrounds/security/security.jpg")',
-  6: 'url("/assets/images/backgrounds/ai/ai_bg.png',
+  6: 'url("https://in3dwebsite.blob.core.windows.net/photos/Ai_Tugle_Finish-min.jpg',
   7: 'url("/assets/images/backgrounds/military/military_bg.jpg")',
-  8: 'url("/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png")',
+  8: 'url("https://in3dwebsite.blob.core.windows.net/photos/Customize_Togle_Finish-min.jpg")',
   9: 'url("/assets/images/backgrounds/Astro_1_Background.webp")',
 };
 
