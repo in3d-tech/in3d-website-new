@@ -52,7 +52,7 @@ export function Swipe({
   );
 }
 
-const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
+export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
   const {
     orientation: { beta, gamma },
     permission,
