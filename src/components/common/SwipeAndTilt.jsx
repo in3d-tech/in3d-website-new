@@ -122,13 +122,25 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
         />
       )} */}
       {permission === "denied" && (
-        <div>
-          <p>
-            Device orientation permission denied. Please enable it in your
-            settings and reload the page.
-          </p>
-          <button onClick={handleRetry}>Retry</button>
-        </div>
+        // <div>
+        //   <p>
+        //     Device orientation permission denied. Please enable it in your
+        //     settings and reload the page.
+        //   </p>
+        //   <button onClick={handleRetry}>Retry</button>
+        // </div>
+        <button
+          style={{
+            zIndex: 500,
+            position: "absolute",
+            left: "2em",
+            top: "14em",
+            opacity: 0.4,
+          }}
+          onClick={requestPermission}
+        >
+          Enable D.O.
+        </button>
       )}
     </div>
   );
