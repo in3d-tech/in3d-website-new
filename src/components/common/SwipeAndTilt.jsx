@@ -53,11 +53,21 @@ export function Swipe({
 }
 
 export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
+  const [hasUserSeenPopup, setHasUserSeenPopup] = useState(false);
   const {
     orientation: { beta, gamma },
     permission,
     requestPermission,
   } = useDeviceOrientation(onTiltChange);
+
+  useEffect(() => {
+    if (!hasUserSeenPopup) {
+      console.log("in 1");
+      requestPermission();
+      console.log("in 2");
+      setHasUserSeenPopup(true);
+    }
+  }, []);
 
   useEffect(() => {
     if (beta !== null && gamma !== null && permission === "granted") {
@@ -82,6 +92,7 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
   return (
     <div>
       {permission === "default" && (
+        // <div>
         <button
           style={{
             zIndex: 500,
@@ -94,8 +105,9 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
         >
           Enable D.O.
         </button>
+        // </div>
       )}
-      {permission === "granted" && (
+      {/* {permission === "granted" && (
         <div
           style={{
             position: "absolute",
@@ -108,7 +120,7 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
             borderRadius: "50%",
           }}
         />
-      )}
+      )} */}
       {permission === "denied" && (
         <div>
           <p>

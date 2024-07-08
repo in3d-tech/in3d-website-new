@@ -255,12 +255,12 @@ const Scene = ({
             setPosition={setPosition}
             onTiltChange={handleTiltChange} // Pass the handler here
           />
-          <Swipe
+          {/* <Swipe
             setSlide={setSlide}
             setMobileBackground={setMobileBackground}
             position={position}
             setPosition={setPosition}
-          />
+          /> */}
         </>
       ) : null}
       <Canvas>
