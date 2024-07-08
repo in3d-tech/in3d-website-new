@@ -120,6 +120,7 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
     </div>
   );
 };
+
 const useDeviceOrientation = (onOrientationChange) => {
   const [orientation, setOrientation] = useState({
     alpha: null,
@@ -135,12 +136,11 @@ const useDeviceOrientation = (onOrientationChange) => {
     // Set initial orientation if not already set
     if (!initialOrientation) {
       setInitialOrientation({ alpha, beta, gamma });
-      return;
+    } else {
+      // Normalize values relative to the initial orientation
+      beta -= initialOrientation.beta;
+      gamma -= initialOrientation.gamma;
     }
-
-    // Normalize values relative to the initial orientation
-    beta -= initialOrientation.beta;
-    gamma -= initialOrientation.gamma;
 
     setOrientation({ alpha, beta, gamma });
     if (onOrientationChange) {
