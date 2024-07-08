@@ -62,9 +62,7 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
 
   useEffect(() => {
     if (!hasUserSeenPopup) {
-      console.log("in 1");
       requestPermission();
-      console.log("in 2");
       setHasUserSeenPopup(true);
     }
   }, []);
@@ -92,7 +90,6 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
   return (
     <div>
       {permission === "default" && (
-        // <div>
         <button
           style={{
             zIndex: 500,
@@ -105,30 +102,8 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
         >
           Enable D.O.
         </button>
-        // </div>
       )}
-      {/* {permission === "granted" && (
-        <div
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: `calc(50% + ${position?.x || 0}vw)`,
-            transform: "translate(-50%, -50%)",
-            width: "50px",
-            height: "50px",
-            backgroundColor: "red",
-            borderRadius: "50%",
-          }}
-        />
-      )} */}
       {permission === "denied" && (
-        // <div>
-        //   <p>
-        //     Device orientation permission denied. Please enable it in your
-        //     settings and reload the page.
-        //   </p>
-        //   <button onClick={handleRetry}>Retry</button>
-        // </div>
         <button
           style={{
             zIndex: 500,
@@ -145,7 +120,6 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
     </div>
   );
 };
-
 const useDeviceOrientation = (onOrientationChange) => {
   const [orientation, setOrientation] = useState({
     alpha: null,
@@ -158,12 +132,15 @@ const useDeviceOrientation = (onOrientationChange) => {
   const handleOrientation = (event) => {
     let { alpha, beta, gamma } = event;
 
-    // Normalize values relative to the initial orientation
-    if (initialOrientation) {
-      beta -= initialOrientation.beta;
-      gamma -= initialOrientation.gamma;
-      // Optionally handle alpha rotation similarly if needed
+    // Set initial orientation if not already set
+    if (!initialOrientation) {
+      setInitialOrientation({ alpha, beta, gamma });
+      return;
     }
+
+    // Normalize values relative to the initial orientation
+    beta -= initialOrientation.beta;
+    gamma -= initialOrientation.gamma;
 
     setOrientation({ alpha, beta, gamma });
     if (onOrientationChange) {
@@ -178,18 +155,6 @@ const useDeviceOrientation = (onOrientationChange) => {
         if (response === "granted") {
           setPermission("granted");
           window.addEventListener("deviceorientation", handleOrientation, true);
-          // Capture the initial orientation
-          window.addEventListener(
-            "deviceorientation",
-            (event) => {
-              setInitialOrientation({
-                alpha: event.alpha,
-                beta: event.beta,
-                gamma: event.gamma,
-              });
-            },
-            { once: true }
-          );
         } else {
           setPermission("denied");
         }
@@ -199,18 +164,6 @@ const useDeviceOrientation = (onOrientationChange) => {
     } else {
       setPermission("granted");
       window.addEventListener("deviceorientation", handleOrientation, true);
-      // Capture the initial orientation
-      window.addEventListener(
-        "deviceorientation",
-        (event) => {
-          setInitialOrientation({
-            alpha: event.alpha,
-            beta: event.beta,
-            gamma: event.gamma,
-          });
-        },
-        { once: true }
-      );
     }
   };
 
