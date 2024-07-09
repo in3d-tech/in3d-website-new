@@ -236,6 +236,7 @@ const Scene = ({
   const [slide, setSlide] = useState(0);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [tilt, setTilt] = useState({ tiltLR: 0, tiltFB: 0, dir: 0 });
+  const [tempTiltValue, setTempTiltValue] = useState(null);
 
   const handleTiltChange = (tiltData) => {
     setTilt({
@@ -245,9 +246,15 @@ const Scene = ({
     });
   };
 
+  useEffect(() => {
+    if (!tempTiltValue) {
+      setTimeout(() => setTempTiltValue(tilt), 2000);
+    }
+  }, []);
+
   return (
     <div className="canvas-container-mobile">
-      <div
+      {/* <div
         style={{
           position: "absolute",
           border: "1px solid yellow",
@@ -265,7 +272,14 @@ const Scene = ({
         >{`tiltLR: ${tilt.tiltLR}`}</div>
         <div style={{ color: "white" }}>{`tiltFB: ${tilt.tiltFB}`}</div>
         <div style={{ color: "white" }}>{`dir: ${tilt.dir}`}</div>
-      </div>
+        {tempTiltValue ? (
+          <div
+            style={{ color: "white" }}
+          >{`storeValues - tiltLR: ${tempTiltValue.tiltLR} - and - tiltFB: ${tempTiltValue.tiltFB}`}</div>
+        ) : (
+          <div style={{ color: "white" }}>hhel0 world</div>
+        )}
+      </div> */}
       {!selectedCategory ? (
         <>
           <TiltDiv
@@ -316,8 +330,8 @@ export function AstroModel({ url, astroRef, tilt }) {
   const minRotationX = 0.49;
   const maxRotationX = 0.59;
 
-  const ySensitivity = 0.0002; // Sensitivity for Y-axis
-  const xSensitivity = 0.0002; // Sensitivity for X-axis
+  const ySensitivity = 0.0001; // Sensitivity for Y-axis
+  const xSensitivity = 0.0001; // Sensitivity for X-axis
 
   useEffect(() => {
     console.log(progress);
