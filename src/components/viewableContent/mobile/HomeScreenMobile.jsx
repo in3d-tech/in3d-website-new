@@ -247,6 +247,25 @@ const Scene = ({
 
   return (
     <div className="canvas-container-mobile">
+      <div
+        style={{
+          position: "absolute",
+          border: "1px solid yellow",
+          width: "90vw",
+          height: "50vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-end",
+          left: "1em",
+          zIndex: 5000,
+        }}
+      >
+        <div
+          style={{ color: "white", fontSize: "1.2em" }}
+        >{`tiltLR: ${tilt.tiltLR}`}</div>
+        <div style={{ color: "white" }}>{`tiltFB: ${tilt.tiltFB}`}</div>
+        <div style={{ color: "white" }}>{`dir: ${tilt.dir}`}</div>
+      </div>
       {!selectedCategory ? (
         <>
           <TiltDiv
