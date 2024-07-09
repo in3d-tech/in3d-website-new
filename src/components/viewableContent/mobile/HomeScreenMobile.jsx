@@ -257,7 +257,7 @@ const Scene = ({
           flexDirection: "column",
           justifyContent: "flex-end",
           left: "1em",
-          zIndex: 5000,
+          zIndex: 50,
         }}
       >
         <div
