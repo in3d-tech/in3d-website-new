@@ -51,7 +51,7 @@ export function Security() {
         bottomVideoRef1={bottomVideoRef1}
         bottomVideoRef2={bottomVideoRef2}
       />
-      {/* <BottomModel /> */}
+      <BottomModel />
     </div>
   );
 }
@@ -61,34 +61,18 @@ const Top = () => {
     <div style={{ display: "flex" }}>
       <div className="selected-content-first-divider">
         <div className="sc-content-left-half">
-          <div
-            style={{
-              marginTop: "5em",
-              fontSize: "1.5em",
-              fontFamily: "gotham",
-              // opacity: 0.72,
-              width: "70%",
-              lineHeight: "1.8em",
-            }}
-            className="headline-animation"
-          >
+          <div className="security-font-one">
             In3D has strong relations with the security and defense sector and
             an MOD (Ministry of Defense) official provider. <br /> <br />
             Working directly with many security bodies such as the fire and
             rescue department, Israel Police, IDF and more
           </div>
-          <div
-            style={{
-              fontSize: "5em",
-              fontFamily: "gotham-bold",
-              width: "80%",
-            }}
-            className="text-animation"
-          >
+          <div className="text-animation security-headline">
             <h1
-              style={{
-                borderTop: "4px solid black",
-              }}
+              // style={{
+              //   borderTop: "4px solid black",
+              // }}
+              className="headline-animation-security"
             >
               {"Security"}
             </h1>
@@ -131,16 +115,8 @@ const Bottom = ({
         }}
       >
         <p
-          style={{
-            width: "50%",
-            fontFamily: "gotham",
-            fontSize: "1.4em",
-            // opacity: 0.7,
-            lineHeight: "1.9em",
-            marginTop: "4em",
-          }}
           ref={bottomTextRef}
-          className="bottom-text-security"
+          className="bottom-text-security security-font-two"
         >
           Part of our vision is to promote innovation, which is a big part of
           what Israel stands for. We succeeded in delivering top-of-the-line
@@ -171,13 +147,15 @@ const ImageOverlay = ({ isBottom, bottomVideoRef2, bottomVideoRef1 }) => {
       style={{
         height: "80%",
         marginTop: "7em",
-        alignItems: isBottom ? "flex-start" : "center",
+        alignItems: isBottom ? "center" : "center",
       }}
     >
       <div className="image-container">
         <span
-          className="large-image-industry sc-image-glass-bg"
-          style={{ height: "22em" }}
+          className={`large-image-industry sc-image-glass-bg ${
+            isBottom ? "security-vid-one-bottom" : "security-vid-one-top"
+          }`}
+          // style={{ height: isBottom ? "18em" : "22em" }}
         >
           <VideoPlayer
             src={
@@ -188,8 +166,8 @@ const ImageOverlay = ({ isBottom, bottomVideoRef2, bottomVideoRef1 }) => {
           />
         </span>
         <span
-          className="small-image-industry top-left-industry sc-image-glass-bg"
-          style={{ height: "18em" }}
+          className="small-image-industry top-left-industry sc-image-glass-bg security-top-vid"
+          // style={{ height: "15em" }}
         >
           <VideoPlayer src="https://in3dwebsite.blob.core.windows.net/video/AR Factory Real Time Control Panel Data - 2 level (3).mp4" />
         </span>
@@ -208,7 +186,7 @@ const ImageOverlay = ({ isBottom, bottomVideoRef2, bottomVideoRef1 }) => {
         {isBottom ? (
           <span
             className="small-image-industry bottom-right-industry sc-image-glass-bg"
-            style={{ left: "9em" }}
+            style={{ left: "11.5em", marginTop: "3.1em" }}
           >
             <VideoPlayer
               src="https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4"
@@ -232,19 +210,16 @@ const BottomModel = ({ modelRef }) => (
         justifyContent: "center",
       }}
     >
-      <Canvas
-      // style={{ border: "1px solid black", zIndex: 54433 }}
-      // camera={{ position: [0, 0, 10], fov: 75 }}
+      {/* <Canvas
+
       >
         <ambientLight intensity={1} />
         <pointLight position={[10, 10, 10]} />
         <directionalLight position={[0, 10, 0]} intensity={1} />
-        {/* <OrbitControls /> */}
-        {/* <Stars count={2/000} /> */}
-        {/* <Camera /> */}
-        <Suspense fallback={null}>
-          {/* <ModelComponent url={"/assets/models/engenir_model.glb"} /> */}
-          <ModelComponent
+
+        <Suspense fallback={null}> */}
+      {/* <ModelComponent url={"/assets/models/engenir_model.glb"} /> */}
+      {/* <ModelComponent
             url={"/assets/models/security.glb"}
             modelRef={modelRef}
             dontRotate
@@ -253,7 +228,7 @@ const BottomModel = ({ modelRef }) => (
             // scale={(10, 10, 10)}
           />
         </Suspense>
-      </Canvas>
+      </Canvas> */}
     </div>
   </div>
 );

@@ -186,10 +186,7 @@ const Top = () => (
       }}
     >
       <div className="about-us-title-container">
-        <span
-          className="contact-us-text-wrapper contact-us-line-0"
-          style={{ fontSize: "6em", fontWeight: 900, fontFamily: "gotham" }}
-        >
+        <span className="contact-us-text-wrapper contact-us-line-0 contact-header">
           Who We Are
         </span>
       </div>
@@ -200,8 +197,8 @@ const Top = () => (
     </div>
     <div className="in3d-description-container">
       <div
-        className="contact-us-text-wrapper contact-us-line-0"
-        style={{ width: "80%", textAlign: "left", animationDelay: "1s" }}
+        className="contact-us-text-wrapper contact-us-line-0 contact-text-one"
+        style={{ animationDelay: "1s" }}
       >
         In3D is an Israeli Software house with ambitions to become a software
         house without borders
@@ -260,17 +257,7 @@ const Middle = ({
         </div>
       </div>
 
-      <div
-        style={{
-          fontSize: "2em",
-          fontFamily: "gotham",
-          // borderRight: "3px solid black",
-          // height: "12em",
-          // marginRight: "3em",
-        }}
-        className="no-opacity"
-        ref={midOneTextTwo}
-      >
+      <div className="no-opacity about-text-three" ref={midOneTextTwo}>
         <div
           style={{ marginTop: "2em", textAlign: "right", marginRight: "2em" }}
         >
@@ -400,46 +387,25 @@ const Bottom = ({ bottomRef, bottomTextContainerRef, bottomTextRef }) => {
       }}
     >
       <div
-        style={{
-          color: "white",
-          fontSize: "1.4em",
-          fontFamily: "gotham",
-          marginBottom: "4em",
-
-          width: "60%",
-        }}
         ref={bottomTextContainerRef}
+        className="about-us-text-bottom-container"
         // className="border-bottom-animation-container"
       >
-        <div
-          style={{
-            textAlign: "right",
-            marginRight: "6em",
-            marginBottom: "2em",
-          }}
-          ref={bottomTextRef}
-          className="no-opacity"
-        >
-          <span style={{ lineHeight: "2em" }}>
-            In3D has ISO9001 quality standards
-          </span>
+        <div ref={bottomTextRef} className="no-opacity about-us-bottom-text">
+          <span>in3D has ISO9001 quality standards</span>
           <br />
-          <span style={{ lineHeight: "2em" }}>
-            and ISO27001 information secuity
-          </span>
+          <span>and ISO27001 information secuity</span>
           <br />
-          <span style={{ lineHeight: "2em" }}>
+          <span>
             and provides its services under the strictest standard definitions
           </span>
           <br />
-          <span style={{ lineHeight: "2em" }}>
+          <span>
             {" "}
             and for well-known and large businesses and organizations,
           </span>
           <br />
-          <span style={{ lineHeight: "2em" }}>
-            so please feel free to choose us for your next project
-          </span>
+          <span>so please feel free to choose us for your next project</span>
           <br />
         </div>
       </div>

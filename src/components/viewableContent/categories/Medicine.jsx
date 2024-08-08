@@ -45,26 +45,10 @@ const Top = ({ topVideoRef }) => {
       </div>
       <div className="selected-content-first-divider">
         <div className="sc-content-left-half">
-          <div
-            style={{
-              fontSize: "4em",
-              fontFamily: "gotham-bold",
-              width: "100%",
-              textAlign: "center",
-              marginTop: "2em",
-            }}
-          >
+          <div className="medicine-top-header-container">
             <h1 style={{ borderBottom: "4px solid black" }}>{headline}</h1>
           </div>
-          <div
-            style={{
-              fontSize: "1.5em",
-              fontFamily: "gotham",
-              opacity: 0.72,
-              width: "80%",
-              lineHeight: "1.8em",
-            }}
-          >
+          <div className="medicine-top-text">
             The world of medicine is one of the most innovative sectors in the
             world. <br />
             Using Extended Reality (XR) we at in3D became pioneers in
@@ -144,17 +128,7 @@ const Middle = ({ middleVideoRef }) => {
             borderTop: "4px solid rgb(0,0,0,0.6)",
           }}
         >
-          <p
-            style={{
-              fontSize: "1.4em",
-              marginLeft: "2em",
-              fontFamily: "gotham",
-              opacity: 0.72,
-              width: "70%",
-              lineHeight: "1.8em",
-              textAlign: "center",
-            }}
-          >
+          <p className="medicine-bottom-text">
             Our team is very conscious of our medical clients' needs, and
             together we can develop a new and exciting working environment that
             upgrades working methods and quality of care

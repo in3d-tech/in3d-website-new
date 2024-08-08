@@ -100,7 +100,7 @@ const ImageOverlay = () => {
       <div className="image-container">
         <span
           className="large-image-industry sc-image-glass-bg"
-          style={{ height: "20em", zIndex: 2, right: "10em", top: "4em" }}
+          style={{ height: "20em", zIndex: 2, right: "10em", top: "8em" }}
         >
           {/* <img
             src="/assets/images/backgrounds/microsoft/Microsoft_Tugle.jpg"
@@ -113,7 +113,7 @@ const ImageOverlay = () => {
         </span>
         <span
           className="small-image-industry top-left-industry sc-image-glass-bg"
-          style={{ left: "20em", top: "1em" }}
+          style={{ left: "20em", top: "4em" }}
         >
           {/* <img
             src="/assets/images/backgrounds/microsoft/Microsoft_Tugle.jpg"
@@ -127,7 +127,7 @@ const ImageOverlay = () => {
 
         <span
           className="small-image-industry bottom-left-industry sc-image-glass-bg"
-          style={{ left: "20em" }}
+          style={{ left: "20em", bottom: "4em" }}
         >
           {/* <img
             // style={{ width: "92%" }}

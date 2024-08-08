@@ -40,14 +40,9 @@ const Top = () => {
       >
         <div
           style={{
-            fontFamily: "gotham",
-            color: "rgb(0,0,0,0.6)",
-            fontSize: "1.3em",
-            lineHeight: "1.8em",
             animationDelay: "1.4s",
-            zIndex: 1,
           }}
-          className="contact-us-text-wrapper"
+          className="contact-us-text-wrapper ai-text-one"
         >
           Navigate through our virtual environments with ease, <br />
           blending with real-world operations for intuitive control <br /> and

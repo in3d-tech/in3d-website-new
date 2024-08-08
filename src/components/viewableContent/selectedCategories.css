@@ -277,6 +277,24 @@
   animation-delay: 0.5s;
 }
 
+.headline-animation-security {
+  position: relative;
+  /* animation: slideInDown 2.7s ease-out forwards; */
+  display: inline-block;
+}
+
+.headline-animation-security::after {
+  content: "";
+  position: absolute;
+  /* bottom: -4px; */
+  left: 0;
+  right: 0;
+  height: 4px; /* Adjust to match the border height */
+  background-color: black;
+  animation: borderGrowFive 2s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
 .text-animation {
   animation: slideInUp 2.7s ease-out forwards;
 }
@@ -285,6 +303,7 @@
   transition: transform 1s ease-in-out, filter 1.8s ease-in-out; /* Smooth transition for both transform and filter */
   filter: grayscale(100%); /* Initial state is greyscale */
   transform: translateY(40px);
+  height: 23em;
 }
 
 .middle-image.scrolled {
@@ -459,6 +478,10 @@
 
 /* --------- industry --------- */
 
+.industry-bottom {
+  height: 18em;
+}
+
 .large-image-industry {
   position: relative;
   width: 100%;
@@ -495,6 +518,7 @@
   bottom: 0;
   left: 0;
   transform: translate(-50%, 50%);
+  height: 13em;
 }
 
 .large-image-industry:hover {
@@ -540,6 +564,32 @@
   ); /* Adjust the clipping path */
 }
 
+.medicine-top-text {
+  font-size: 1.5em;
+  font-family: gotham;
+  opacity: 0.72;
+  width: 80%;
+  line-height: 1.8em;
+}
+
+.medicine-top-header-container {
+  font-size: 4em;
+  font-family: gotham-bold;
+  width: 100%;
+  text-align: center;
+  margin-top: 2em;
+}
+
+.medicine-bottom-text {
+  font-size: 1.4em;
+  margin-left: 2em;
+  font-family: gotham;
+  opacity: 0.72;
+  width: 70%;
+  line-height: 1.8em;
+  text-align: center;
+}
+
 .overlay-image-med-bot {
   position: absolute;
   object-fit: cover; /* Adjust the image size */
@@ -581,6 +631,18 @@
   z-index: 1;
   transition: transform 0.2s, z-index 0.2s, border-color 0.2s;
   border: 5px solid transparent;
+}
+
+.security-vid-one-top {
+  height: 22em;
+}
+
+.security-vid-one-bottom {
+  height: 18em;
+}
+
+.security-top-vid {
+  height: 15em;
 }
 
 .small-image-security {
@@ -628,6 +690,28 @@
   transform: translateY(0px);
 }
 
+.security-headline {
+  font-size: 5em;
+  font-family: gotham-bold;
+  width: 80%;
+}
+
+.security-font-one {
+  width: 70%;
+  font-family: gotham;
+  font-size: 1.5em;
+  line-height: 1.8em;
+  margin-top: 5em;
+}
+
+.security-font-two {
+  width: 50%;
+  font-family: gotham;
+  font-size: 1.4em;
+  line-height: 1.9em;
+  margin-top: 4em;
+}
+
 /* ------- customize ------ */
 
 .large-image-customize {
@@ -638,6 +722,10 @@
   z-index: 0;
   transition: transform 0.2s, z-index 0.2s, border-color 0.2s;
   /* border: 5px solid transparent; */
+}
+
+.customize-overlay-one-container {
+  margin-left: 20em;
 }
 
 .small-image-customize {
@@ -675,6 +763,26 @@
 
 .customize-category-middle {
   display: flex;
+}
+
+.customize-text-one {
+  font-size: 1.5em;
+  font-family: gotham;
+  opacity: 0.72;
+  width: 80%;
+  line-height: 1.8em;
+}
+
+.customize-text-bottom {
+  margin-top: 4em;
+  margin-right: 4em;
+  font-size: 1.45em;
+  font-family: gotham;
+  opacity: 0.64;
+  width: 50%;
+  line-height: 1.6em;
+  text-align: right;
+  align-self: end;
 }
 
 .overlay-color-customize {
@@ -724,6 +832,14 @@
   display: flex;
   justify-content: flex-end;
   position: relative;
+}
+
+.ai-text-one {
+  font-family: gotham;
+  color: rgb(0, 0, 0, 0.6);
+  font-size: 1.3em;
+  line-height: 1.8em;
+  z-index: 1;
 }
 
 .ai-title-container::after {
@@ -864,6 +980,26 @@
   }
 }
 
+.about-text-three {
+  font-size: 2em;
+  font-family: gotham;
+}
+
+.about-us-bottom-text {
+  text-align: right;
+  margin-right: 6em;
+  margin-bottom: 2em;
+}
+
+.about-us-text-bottom-container {
+  color: white;
+  font-size: 1.4em;
+  font-family: gotham;
+  margin-bottom: 4em;
+  width: 60%;
+  line-height: 2em;
+}
+
 .in3d-description-container {
   color: white;
   position: absolute;
@@ -906,6 +1042,17 @@
   box-shadow: -7px -4px 19px -3px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: -7px -4px 19px -3px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: -7px -4px 19px -3px rgba(0, 0, 0, 0.75);
+}
+
+.contact-header {
+  font-size: 6em;
+  font-weight: 900;
+  font-family: gotham;
+}
+
+.contact-text-one {
+  width: 80%;
+  text-align: left;
 }
 /* 
 .contact-us-borders {
@@ -1161,6 +1308,129 @@
   .industry-headline {
     font-size: 2em;
   }
+
+  .bottom-left-industry {
+    height: 10em;
+  }
+
+  .middle-image {
+    height: 20em;
+  }
+
+  .industry-bottom {
+    height: 16em;
+  }
+
+  .industry-top-text {
+    font-size: 1.4em;
+    margin-top: 1em;
+    width: 80%;
+    line-height: 1.5em;
+  }
+
+  .industry-left-half-top {
+    margin-top: 2em;
+  }
+
+  .medicine-top-text {
+    font-size: 1.4em;
+
+    line-height: 1.6em;
+  }
+  .medicine-top-header-container {
+    font-size: 3.5em;
+
+    margin-top: 1.5em;
+  }
+  .medicine-bottom-text {
+    font-size: 1.3em;
+    margin-left: 2em;
+    line-height: 1.7em;
+    margin-top: 2.5em;
+  }
+
+  .security-vid-one-top {
+    height: 16em;
+  }
+
+  .security-vid-one-bottom {
+    height: 16em;
+  }
+  .security-top-vid {
+    height: 13em;
+  }
+
+  .security-headline {
+    font-size: 4em;
+    width: 80%;
+  }
+
+  .security-font-two {
+    font-size: 1.3em;
+    line-height: 1.6em;
+    margin-top: 5em;
+  }
+
+  .security-font-one {
+    font-size: 1.4em;
+    line-height: 1.6em;
+    margin-top: 7.5em;
+  }
+
+  .customize-text-one {
+    font-size: 1.4em;
+
+    line-height: 1.6em;
+  }
+
+  .customize-overlay-one-container {
+    margin-left: 15em;
+  }
+
+  .customize-text-bottom {
+    margin-top: 3em;
+    margin-right: 5.5em;
+    font-size: 1.4em;
+    line-height: 1.5em;
+  }
+  .customize-overlay-bottom {
+    margin-top: 2em;
+  }
+  .ai-text-one {
+    font-size: 1.1em;
+    line-height: 1.5em;
+    margin-left: 1.5em;
+    margin-top: 2em;
+  }
+
+  .ai-eye-image {
+    top: 26%;
+    left: 56.5%;
+  }
+
+  .contact-header {
+    font-size: 4.2em;
+  }
+
+  .in3d-description-container {
+    right: 14%;
+    top: 77%;
+    font-size: 2.3em;
+  }
+
+  .about-text-three {
+    font-size: 1.5em;
+    font-family: gotham;
+  }
+
+  .about-us-text-bottom-container {
+    color: white;
+    font-size: 1.25em;
+    font-family: gotham;
+    margin-bottom: 4em;
+    width: 60%;
+    line-height: 1.3em;
+  }
 }
 
 @media screen and (max-width: 1350px) {
@@ -1169,6 +1439,44 @@
   }
   .in3d-contact-disclaimer {
     width: 80%;
+  }
+  .middle-image {
+    height: 18em;
+  }
+
+  .industry-bottom {
+    height: 14em;
+  }
+  .medicine-top-text {
+    font-size: 1.2em;
+
+    line-height: 1.5em;
+  }
+  .medicine-top-header-container {
+    font-size: 3.5em;
+
+    margin-top: 1.2em;
+  }
+  .medicine-bottom-text {
+    font-size: 1.3em;
+    margin-left: 2em;
+    line-height: 1.6em;
+    margin-top: 3em;
+  }
+  .security-vid-one-top {
+    height: 15em;
+  }
+
+  .security-vid-one-bottom {
+    height: 15em;
+  }
+  .contact-header {
+    font-size: 4em;
+  }
+  .in3d-description-container {
+    right: 14%;
+    top: 77%;
+    font-size: 2.1em;
   }
 }
 

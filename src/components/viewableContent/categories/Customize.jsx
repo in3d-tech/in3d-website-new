@@ -70,7 +70,10 @@ export function Customize() {
 const ImageOverlayFirst = () => {
   return (
     <div style={{ borderBottom: "4px solid black" }}>
-      <div className="image-container" style={{ marginLeft: "20em" }}>
+      <div
+        className="image-container customize-overlay-one-container"
+        // style={{ marginLeft: "20em" }}
+      >
         <span
           className="large-image-customize  sc-image-glass-bg"
           style={{ width: "100%" }}
@@ -123,15 +126,7 @@ const Top = () => {
           <h1 style={{ borderBottom: "4px solid black" }}>{headline}</h1>
           {/* <h1>{headline}</h1> */}
         </div>
-        <div
-          style={{
-            fontSize: "1.5em",
-            fontFamily: "gotham",
-            opacity: 0.72,
-            width: "80%",
-            lineHeight: "1.8em",
-          }}
-        >
+        <div className="customize-text-one">
           We specialize in 3D and Extended Reality (EX), and as specialists we
           keep an amazing team of developers, 3D generalists, interface and
           graphic artists, and product designers just so we can provide our
@@ -152,14 +147,15 @@ const Middle = () => {
       <div className="sc-content-left-half-customize">
         <div
           style={{
-            fontSize: "1.5em",
-            fontFamily: "gotham",
-            opacity: 0.72,
-            width: "80%",
-            lineHeight: "1.8em",
+            // fontSize: "1.5em",
+            // fontFamily: "gotham",
+            // opacity: 0.72,
+            // width: "80%",
+            // lineHeight: "1.8em",
             borderTop: "4px solid black",
             padding: "4em",
           }}
+          className="customize-text-one"
         >
           With a constant curiosity and accumulated experience, we have
           successfully developed software products on most of the existing
@@ -330,19 +326,7 @@ const Bottom = ({
           flexDirection: "column",
         }}
       >
-        <div
-          style={{
-            marginTop: "4em",
-            marginRight: "4em",
-            fontSize: "1.45em",
-            fontFamily: "gotham",
-            opacity: 0.64,
-            width: "50%",
-            lineHeight: "1.6em",
-            textAlign: "right",
-            alignSelf: "end",
-          }}
-        >
+        <div className="customize-text-bottom">
           With years of experience working with a huge variety of sectors and
           different businesses, we provide assitance with needed authorizations
           and hardware modifications required by INFOSEC, worker's committees,
@@ -350,7 +334,7 @@ const Bottom = ({
           design and implementation of tailer-made solutions that started as a
           vision of one diligent employee
         </div>
-        <div>
+        <div className="customize-overlay-bottom">
           <ImageOverlayThird
             bottomOverlayRef={bottomOverlayRef}
             bottomVidRef1={bottomVidRef1}

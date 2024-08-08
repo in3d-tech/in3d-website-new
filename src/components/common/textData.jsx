@@ -189,7 +189,7 @@ export const MicrosoftText = ({ textClass, scrollArea, categoriesObj }) => (
         className="scrolled-category-text-one"
       >
         <span style={{ color: "#3abce2", width: "40%" }}>
-          In3D is the official and the inclusive Mixed Reality (MR) partner of
+          in3D is the official and the inclusive Mixed Reality (MR) partner of
           Microsoft Israel
         </span>
       </div>
@@ -204,7 +204,7 @@ export const MicrosoftText = ({ textClass, scrollArea, categoriesObj }) => (
         }}
       >
         <span className="microsoft-text-two-placemenet">
-          In3D and Microsoft&#39;s teams share a strong connection and a
+          in3D and Microsoft&#39;s teams share a strong connection and a
           combined vison on the important roles of MR technology.
         </span>
       </div>

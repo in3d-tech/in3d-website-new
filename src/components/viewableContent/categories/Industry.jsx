@@ -200,7 +200,7 @@ const ImageOverlay = () => {
           style={{ width: "70%", marginTop: "2em" }}
         >
           <img
-            src="/assets/images/backgrounds/taasia/industry-hat.png"
+            src="https://in3dwebsite.blob.core.windows.net/photos/industry-hat-min.png" //"/assets/images/backgrounds/taasia/industry-hat.png"
             alt="Top Left"
             style={{ width: "55%", borderRadius: "12px" }}
           />
@@ -218,7 +218,7 @@ const ImageOverlay = () => {
         </span>
         <span
           className="small-image-industry bottom-left-industry sc-image-glass-bg"
-          style={{ height: "13em" }}
+          // style={{ height: "13em" }}
         >
           {/* <img
             src="/assets/images/backgrounds/taasia/Industry_Togle.jpg"
@@ -259,7 +259,7 @@ const Top = ({ scene, animations }) => {
         </div>
       </div> */}
       <div className="selected-content-first-divider">
-        <div className="sc-content-left-half">
+        <div className="sc-content-left-half industry-left-half-top">
           <div
             // style={{
             //   fontSize: "3.2em",
@@ -357,7 +357,7 @@ const Middle = ({
           /> */}
           <span
             className="middle-image"
-            style={{ width: "100%", height: "25em" }}
+            style={{ width: "100%" }}
             // style={{ border: "1px solid red", height: "100%" }}
             ref={middleImageRef}
           >
@@ -377,13 +377,9 @@ const Middle = ({
         >
           <p
             style={{
-              fontSize: "1.5em",
-              fontFamily: "gotham",
-              lineHeight: "1.8em",
-              textAlign: "center",
               width: "70%",
             }}
-            className="text-animation"
+            className="text-animation industry-top-text "
           >
             <span style={{ opacity: 1 }}>Together with our clients </span>
             <span style={{ opacity: 0.8 }}>
@@ -495,8 +491,8 @@ const Bottom = ({
           ) : null}
         </span>
         <span
-          className="large-image-customize bottom-customize sc-image-glass-bg bottom-image"
-          style={{ width: "100%", height: "18em", marginTop: "2em" }}
+          className="large-image-customize bottom-customize sc-image-glass-bg bottom-image industry-bottom"
+          style={{ width: "100%", marginTop: "2em" }}
           ref={bottomImage2Ref}
           // className="bottom-image"
         >
