@@ -52,7 +52,6 @@ function Scene({ scrollToElementById }) {
     scrollArea,
     setMenuOpened,
     titleOnMainPageHovered,
-    setIsInstantScroll,
     modelAnimationIsHalfWay,
     customizeHasRendered,
   } = useAppContext();
@@ -62,6 +61,7 @@ function Scene({ scrollToElementById }) {
   const textContainerRef = useRef();
   const titlesContainerRef = useRef();
   const astroRef = useRef();
+  const aboutUsRef = useRef();
   const microsoftRef = useRef();
   const taasiaRef = useRef();
   const medicineRef = useRef();
@@ -69,17 +69,17 @@ function Scene({ scrollToElementById }) {
   const customizeRef = useRef();
   const securityRef = useRef();
   const aiRef = useRef();
-
+  const testShadowsRef = useRef();
   const textClass = shouldFadeIn ? "fade-in" : "fade-out";
 
   const categoriesObj = {
-    2: "Industry",
-    3: "Medicine",
-    4: "Microsoft",
-    5: "Security",
-    6: "Artificial intelligence",
-    7: "Military",
-    8: "Customization",
+    3: "Industry",
+    4: "Medicine",
+    5: "Microsoft",
+    6: "Security",
+    7: "Artificial intelligence",
+    8: "Military",
+    9: "Customization",
   };
 
   const createTextComponent = (currentRef, prevRef, TextComponent) => ({
@@ -114,14 +114,15 @@ function Scene({ scrollToElementById }) {
 
     const backgrounds = {
       1: 'url("/assets/images/backgrounds/Astro_1_Background.webp")',
-      2: 'url("/assets/images/backgrounds/taasia/taasia_bg.jpg")',
-      3: 'url("/assets/images/backgrounds/medicine/medicine_bg.jpg")',
-      4: 'url("/assets/images/backgrounds/microsoft/microsoft_bg.jpg")',
-      5: 'url("/assets/images/backgrounds/security/security.jpg")',
-      6: 'url("/assets/images/backgrounds/ai/ai_bg.png',
-      7: 'url("/assets/images/backgrounds/military/military_bg.jpg")',
-      8: 'url("/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png")',
-      9: 'url("/assets/images/backgrounds/Astro_1_Background.webp")',
+      2: 'url("/assets/images/backgrounds/Astro_1_Background.webp")',
+      3: 'url("/assets/images/backgrounds/taasia/taasia_bg.jpg")',
+      4: 'url("/assets/images/backgrounds/medicine/medicine_bg.jpg")',
+      5: 'url("/assets/images/backgrounds/microsoft/microsoft_bg.jpg")',
+      6: 'url("/assets/images/backgrounds/security/security.jpg")',
+      7: 'url("/assets/images/backgrounds/ai/ai_bg.png',
+      8: 'url("/assets/images/backgrounds/military/military_bg.jpg")',
+      9: 'url("/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png")',
+      10: 'url("/assets/images/backgrounds/Astro_1_Background.webp")',
     };
 
     document.documentElement.style.setProperty(
@@ -163,9 +164,9 @@ function Scene({ scrollToElementById }) {
     let titlesTimeline = gsap.timeline({
       defaults: { ease: "power1.out" },
       scrollTrigger: {
-        trigger: ".section-two",
+        trigger: ".section-three",
         start: "top bottom",
-        endTrigger: ".section-three",
+        endTrigger: ".section-four",
         end: "top bottom",
         scrub: 1,
         // markers: true,
@@ -205,6 +206,7 @@ function Scene({ scrollToElementById }) {
 
   const models = Model_Data.map((model, idx) => {
     const { currentRef, prevRef } = refsObj[idx] || refsObj[0];
+
     let nextRef;
     if (idx == 6) {
       nextRef = astroRef;
@@ -221,6 +223,8 @@ function Scene({ scrollToElementById }) {
         setVisibleModels={setVisibleModels}
         model={model}
         isAstro={nextRef}
+        testShadowsRef={testShadowsRef}
+        // textRef={textRef}
       />
     );
   });
@@ -285,7 +289,7 @@ function Scene({ scrollToElementById }) {
             {/* <h2>Jelly Fish</h2> */}
 
             <img
-              style={{ height: "90px" }}
+              style={{ height: "90px", border: "1px solid yellow" }}
               // className="in3d-fixed-logo"
               className="logo"
               // className="in3d-logo-hp"
@@ -303,14 +307,15 @@ function Scene({ scrollToElementById }) {
           width: "100vw",
         }}
       >
-        {scrollArea.currentSection >= 2
+        {scrollArea.currentSection >= 3
           ? scrollArea.currentSection > scrollArea.prevSection
             ? scrollArea.currentSection == modelAnimationIsHalfWay
-              ? refsObj[scrollArea.currentSection - 2].text
+              ? refsObj[scrollArea.currentSection - 3].text
               : null
-            : refsObj[scrollArea.currentSection - 2].text
+            : refsObj[scrollArea.currentSection - 3].text
           : null}
         <Canvas
+          // shadows
           className={`canvas-container`}
           // camera={{ position: [-30, -10, 5] }}
         >
@@ -329,9 +334,7 @@ function Scene({ scrollToElementById }) {
 
           <Camera />
           {/* <Rig /> */}
-          {/* <Suspense fallback={null}>
-            {scrollArea.currentSection == SECURITY ? <TextModel /> : null}
-          </Suspense> */}
+
           <Suspense fallback={null}>
             <AstroModel
               url={"/assets/models/astronaut_new5 (3).glb"}
@@ -341,10 +344,12 @@ function Scene({ scrollToElementById }) {
               setTextAnimation={setTextAnimation}
               customizeRef={customizeRef}
             />
+
             {models}
           </Suspense>
         </Canvas>
       </div>
+
       <BackgroundScroll
         section1MenuRef={section1MenuRef}
         scrollToElementById={scrollToElementById}
@@ -387,16 +392,19 @@ const Lights = ({
             }
             intensity={5}
             position={[-25, 50, 10]}
+            castShadow
           />
           <directionalLight
             intensity={1}
             position={[20, 0, -1]}
+            castShadow
             color={
               titleOnMainPageHovered ? hoveredTitleLight : "rgb(254,200,255)"
             }
           />
         </>
       ) : null}
+      {/* <ambientLight intensity={1} color={"green"} /> */}
     </>
   );
 };

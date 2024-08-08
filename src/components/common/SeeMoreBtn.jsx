@@ -1,4 +1,5 @@
 import { useAppContext } from "../../context/appContext";
+import { getSparkleColour } from "../scene/ornaments/getSparkleColour";
 import {
   INDUSTRY,
   MEDICINE,
@@ -27,7 +28,10 @@ export const SeeMoreBtn = () => {
       };
       text = (
         <>
-          Industry <span style={{ color: "#750414" }}>4.0</span>
+          Industry
+          <span style={{ color: getSparkleColour(scrollArea.currentSection) }}>
+            4.0
+          </span>
         </>
       );
       break;
@@ -42,7 +46,10 @@ export const SeeMoreBtn = () => {
       };
       text = (
         <>
-          <span style={{ color: "#750414" }}>M</span>edicine
+          <span style={{ color: getSparkleColour(scrollArea.currentSection) }}>
+            M
+          </span>
+          edicine
         </>
       );
       break;
@@ -55,7 +62,10 @@ export const SeeMoreBtn = () => {
 
       text = (
         <>
-          <span style={{ color: "#750414" }}>M</span>icrosoft
+          <span style={{ color: getSparkleColour(scrollArea.currentSection) }}>
+            M
+          </span>
+          icrosoft
         </>
       );
       break;
@@ -67,7 +77,10 @@ export const SeeMoreBtn = () => {
       };
       text = (
         <>
-          <span style={{ color: "#750414" }}>S</span>ecurity
+          <span style={{ color: getSparkleColour(scrollArea.currentSection) }}>
+            S
+          </span>
+          ecurity
         </>
       );
       break;
@@ -78,8 +91,11 @@ export const SeeMoreBtn = () => {
       };
       text = (
         <>
-          <span style={{ color: "#750414" }}>A</span>I
-          {/* <span style={{ color: "#750414" }}>.</span> */}
+          <span style={{ color: getSparkleColour(scrollArea.currentSection) }}>
+            A
+          </span>
+          I
+          {/* <span style={{ color: getSparkleColour(scrollArea.currentSection) }}>.</span> */}
         </>
       );
       break;
@@ -90,8 +106,11 @@ export const SeeMoreBtn = () => {
       };
       text = (
         <>
-          <span style={{ color: "#750414" }}>M</span>ilitary
-          {/* <span style={{ color: "#750414" }}>.</span> */}
+          <span style={{ color: getSparkleColour(scrollArea.currentSection) }}>
+            M
+          </span>
+          ilitary
+          {/* <span style={{ color: getSparkleColour(scrollArea.currentSection) }}>.</span> */}
         </>
       );
       break;
@@ -103,7 +122,10 @@ export const SeeMoreBtn = () => {
       };
       text = (
         <>
-          <span style={{ color: "#750414" }}>C</span>ustomization
+          <span style={{ color: getSparkleColour(scrollArea.currentSection) }}>
+            C
+          </span>
+          ustomization
         </>
       );
       break;

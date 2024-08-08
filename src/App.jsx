@@ -10,7 +10,7 @@ import { LoadingScreen } from "./components/viewableContent/LoadingScreen";
 import { useAppContext } from "./context/appContext";
 import useCheckIsMobileScreen from "./components/common/useCheckIsMobile";
 import { getSparkleColour } from "./components/scene/ornaments/getSparkleColour";
-// import Cursor from "./components/common/cursor";
+import Cursor from "./components/common/cursor";
 // import { useTranslation } from "react-i18next";
 // import { ChangeLanguage } from "./components/navs/ChangeLanguage";
 // import Tilt from "react-parallax-tilt";
@@ -70,7 +70,7 @@ function App() {
 
   return (
     <>
-      {/* {isMobileViewOnly ? null : <Cursor />} */}
+      {isMobileViewOnly ? null : <Cursor />}
       {showLoadingScreen ? (
         <LoadingScreen
           setShowloadingScreen={setShowloadingScreen}

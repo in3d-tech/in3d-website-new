@@ -119,7 +119,11 @@ export const TextScrambleComponent = ({ colour, isHomePage, isMobile }) => {
   );
 };
 
-export const TextScrambleComponentHover = ({ text, handleClick }) => {
+export const TextScrambleComponentHover = ({
+  text,
+  handleClick,
+  setIsCursorHovering,
+}) => {
   const textRef = useRef(null);
 
   const handleMouseEnter = useCallback(() => {
@@ -133,6 +137,8 @@ export const TextScrambleComponentHover = ({ text, handleClick }) => {
       onClick={handleClick}
       ref={textRef}
       onMouseEnter={handleMouseEnter}
+      onMouseOver={() => setIsCursorHovering(true)}
+      onMouseOut={() => setIsCursorHovering(false)}
     >
       {text}
     </span>

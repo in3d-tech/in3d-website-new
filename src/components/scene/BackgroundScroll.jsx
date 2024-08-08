@@ -1,11 +1,13 @@
 import { useEffect, useState, useRef } from "react";
 import { useAppContext } from "../../context/appContext";
 import { ContactUsText } from "../common/textData";
-// import { SeeMoreBtn } from "../common/SeeMoreBtn";
+import { SeeMoreBtn } from "../common/SeeMoreBtn";
 import {
   TextScrambleComponent,
   TextScrambleComponentHover,
 } from "../common/shuffleTexts";
+// import { ContactBtn } from "../common/Logo";
+import { AboutUsText } from "./AboutUsHomepageText";
 
 export function BackgroundScroll({
   section1MenuRef,
@@ -16,15 +18,15 @@ export function BackgroundScroll({
   fixed,
 }) {
   const {
-    renderModels,
-    titleOnMainPageHovered,
-    setTitleOnMainPageHovered,
+    setIsCursorHovering,
     customizeHasRendered,
     scrollArea,
     modelAnimationIsHalfWay,
+    setSelectedCategory,
   } = useAppContext();
 
   const [startExpandedAnimation, setStartExpandedAnimation] = useState(false);
+  const [showAboutUsHomepage, setShowAboutUsHomepage] = useState(false);
   const sectionIndustryRef = useRef(null);
 
   useEffect(() => {
@@ -79,7 +81,7 @@ export function BackgroundScroll({
       </>
     );
   };
-  const text = "Hello world";
+
   const scrollToElement = () => {
     if (sectionIndustryRef.current) {
       sectionIndustryRef.current.scrollIntoView({
@@ -90,7 +92,10 @@ export function BackgroundScroll({
   };
   return (
     <>
-      <section className="section section-one">
+      <section
+        className="section section-one"
+        // style={{ background: "grey", border: "1px solid yellow" }}
+      >
         <div
           style={{
             position: "absolute",
@@ -115,8 +120,18 @@ export function BackgroundScroll({
                 </span>
               </div>
               <div className="down-indicator-wrapper">
-                <div className="icon-scroll" onClick={scrollToElement}></div>
-                <div onClick={scrollToElement} className="down-indicator"></div>
+                <div
+                  className="icon-scroll"
+                  onClick={scrollToElement}
+                  onMouseOver={() => setIsCursorHovering(true)}
+                  onMouseOut={() => setIsCursorHovering(false)}
+                ></div>
+                <div
+                  onClick={scrollToElement}
+                  className="down-indicator"
+                  onMouseOver={() => setIsCursorHovering(true)}
+                  onMouseOut={() => setIsCursorHovering(false)}
+                ></div>
                 <div
                   style={{
                     position: "relative",
@@ -132,7 +147,19 @@ export function BackgroundScroll({
           ) : null}
         </div>
       </section>
-      <section className="section section-two">
+      <section
+        // style={{ background: "cyan", opacity: 0.4 }}
+        className="section section-two"
+      >
+        {scrollArea.currentSection == 2 ? (
+          <AboutUsText
+            scrollArea={scrollArea}
+            fixedCategoryColumn={fixed}
+            setSelectedCategory={setSelectedCategory}
+          />
+        ) : null}
+      </section>
+      <section className="section section-three">
         {fixed ? (
           <div
             ref={titlesContainerRef}
@@ -150,6 +177,7 @@ export function BackgroundScroll({
                         ? "ARTIFICAL INTELLIGENCE"
                         : title.toUpperCase()
                     }
+                    setIsCursorHovering={setIsCursorHovering}
                   />
                 </div>
               )
@@ -179,21 +207,26 @@ export function BackgroundScroll({
       </section>
       <section
         id="sectionTwoHalf"
-        className="section section-two-half"
+        className="section section-three-half"
         ref={section1MenuRef}
       ></section>
+      {/* <section
+        className="section section-one-third"
+      ></section> */}
+
       <section
         ref={sectionIndustryRef}
-        id="sectionThree"
-        className="section section-three"
+        id="sectionFour"
+        className="section section-four"
       ></section>
-      <section id="sectionFour" className="section section-four"></section>
       <section id="sectionFive" className="section section-five"></section>
       <section id="sectionSix" className="section section-six"></section>
       <section id="sectionSeven" className="section section-seven"></section>
       <section id="sectionEight" className="section section-eight"></section>
       <section id="sectionNine" className="section section-nine"></section>
-      <section id="sectionTen" className="section section-ten">
+
+      <section id="sectionTen" className="section section-ten"></section>
+      <section id="sectionEleven" className="section section-eleven">
         {<ContactUsText test={true} />}
         <div
           style={{
@@ -227,20 +260,20 @@ export function BackgroundScroll({
           </div>
         </div>
       </section>
-      {/* {scrollArea.currentSection > scrollArea.prevSection ? (
+      {scrollArea.currentSection > scrollArea.prevSection ? (
         scrollArea.currentSection == modelAnimationIsHalfWay ? (
           <SeeMoreBtn />
         ) : null
       ) : (
         <SeeMoreBtn />
-      )} */}
+      )}
     </>
   );
 }
 
 const getLettersByModel = (modelIdx = 1, isExpanded) => {
   if (!modelIdx || typeof modelIdx !== "number" || modelIdx == 0) {
-    console.log("why we in here", typeof modelIdx);
+    console.log("here", typeof modelIdx);
     return;
   }
   //   console.log({ modelIdx });

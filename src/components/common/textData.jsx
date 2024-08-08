@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
+// import { SeeMoreBtn } from "./SeeMoreBtn";
 
 export const IndustryText = ({ textClass, scrollArea, categoriesObj }) => (
   <>
@@ -26,8 +27,8 @@ export const IndustryText = ({ textClass, scrollArea, categoriesObj }) => (
               // fontSize: "1em",
             }}
           >
-            {categoriesObj[scrollArea.currentSection]}{" "}
-            <span style={{ color: "#750414" }}>4.0</span>
+            {/* {categoriesObj[scrollArea.currentSection]}{" "}
+            <span style={{ color: "#750414" }}>4.0</span> */}
           </div>
         </div>
 
@@ -85,6 +86,7 @@ export const IndustryText = ({ textClass, scrollArea, categoriesObj }) => (
         {categoriesObj[scrollArea.currentSection]}
       </span>
     </div> */}
+      {/* <SeeMoreBtn /> */}
     </div>
   </>
 );
@@ -103,8 +105,8 @@ export const MedicineText = ({ textClass, scrollArea, categoriesObj }) => (
       }}
     >
       <div className="medicine-title ai-title-ani">
-        <span style={{ color: "#750414" }}>M</span>
-        {categoriesObj[scrollArea.currentSection].substring(1)}
+        {/* <span style={{ color: "#750414" }}>M</span>
+        {categoriesObj[scrollArea.currentSection].substring(1)} */}
       </div>
     </div>
 
@@ -147,6 +149,7 @@ export const MedicineText = ({ textClass, scrollArea, categoriesObj }) => (
         </span>
       </div>
     </div>
+    {/* <SeeMoreBtn /> */}
   </div>
 );
 
@@ -163,8 +166,8 @@ export const MicrosoftText = ({ textClass, scrollArea, categoriesObj }) => (
       }}
     >
       <div className="microsoft-title ai-title-ani">
-        <span style={{ color: "#750414" }}>M</span>
-        {categoriesObj[scrollArea.currentSection].substring(1)}
+        {/* <span style={{ color: "#750414" }}>M</span>
+        {categoriesObj[scrollArea.currentSection].substring(1)} */}
       </div>
     </div>
 
@@ -219,17 +222,19 @@ export const SecurityText = ({ textClass, scrollArea, categoriesObj }) => (
     }}
   >
     <div className="security-title security-title-ani">
-      <span style={{ color: "#750414" }}>S</span>
-      {categoriesObj[scrollArea.currentSection].substring(1)}
+      <span style={{ opacity: 0 }}>
+        <span style={{ color: "#750414" }}>S</span>
+        {categoriesObj[scrollArea.currentSection].substring(1)}
+      </span>
     </div>
 
     <div style={{ display: "flex" }}>
       <div style={{ flex: 1.5 }}></div>
       <div
-        style={{ marginTop: "8em", flex: 1 }}
+        style={{ marginTop: "-1em", flex: 1 }}
         className="scrolled-category-text-one security-text-ani"
       >
-        <span style={{ width: "80%" }}>
+        <span style={{ width: "70%", fontSize: "0.75em", textAlign: "right" }}>
           Thanks to years of collaboration with defense industries, we gained
           the needed experience, knowledge and tools to provide quick and out of
           the box solutions that are tailored to the industries unique
@@ -274,17 +279,16 @@ export const AiText = ({ textClass, scrollArea, categoriesObj }) => (
       // justifyContent: "space-between",\
     }}
   >
-    {/* <div className="scrolled-category-title ai-title-ani">
-      {categoriesObj[scrollArea.currentSection]}
-    </div> */}
-
     <div className="ai-title ai-title-ani">
-      <div>
-        <span style={{ color: "#750414" }}>A</span>rtificial
-      </div>
-      <div>
-        <span style={{ color: "#750414" }}>I</span>ntelligence
-      </div>
+      <span style={{ opacity: 0 }}>
+        <div>
+          <span style={{ color: "#750414" }}>A</span>rtificial
+        </div>
+        <div>
+          <span style={{ color: "#750414" }}>I</span>ntelligence
+        </div>
+      </span>
+
       {/* {categoriesObj[scrollArea.currentSection].substring(1)} */}
     </div>
 
@@ -328,9 +332,11 @@ export const MilitaryText = ({ textClass, scrollArea, categoriesObj }) => (
       // justifyContent: "space-between",
     }}
   >
-    <div style={{}} className="military-title ai-title-ani">
-      <span style={{ color: "#750414" }}>M</span>
-      {categoriesObj[scrollArea.currentSection].substring(1)}
+    <div className="military-title ai-title-ani">
+      <span style={{ opacity: 0 }}>
+        <span style={{ color: "#750414" }}>M</span>
+        {categoriesObj[scrollArea.currentSection].substring(1)}
+      </span>
     </div>
 
     <div className="military-text-one-wrapper scrolled-category-text-one industry-text-one-ani">
@@ -373,12 +379,14 @@ export const CustomizationText = ({ textClass, scrollArea, categoriesObj }) => (
           textAlign: "center",
           // marginLeft: "10em",
           fontSize: "calc(4.5vw + 4.5vh + 4.5vmin)",
-          borderBottom: "5px solid white",
+          // borderBottom: "5px solid white",
         }}
         className="scrolled-category-title security-title-ani"
       >
-        <span style={{ color: "#750414" }}>C</span>
-        {categoriesObj[scrollArea.currentSection].substring(1)}
+        <span style={{ opacity: 0 }}>
+          <span style={{ color: "#750414" }}>C</span>
+          {categoriesObj[scrollArea.currentSection].substring(1)}
+        </span>
       </div>
 
       <div
@@ -413,10 +421,36 @@ export const CustomizationText = ({ textClass, scrollArea, categoriesObj }) => (
   </div>
 );
 
-export const ContactUsText = ({ test }) => {
+export const ContactUsText = ({ test, isFromSelectedCategory }) => {
   const [showTextBox, setShowTextBox] = useState(false);
   const [showSentStatus, setShowSentStatus] = useState(null);
   const [textAreaInput, setTextAreaInput] = useState("");
+  const [animateItems, setAnimateItems] = useState([
+    false,
+    false,
+    false,
+    false,
+  ]);
+
+  useEffect(() => {
+    let timeoutIds = [];
+    if (animateItems) {
+      animateItems.forEach((_, index) => {
+        timeoutIds.push(
+          setTimeout(() => {
+            setAnimateItems((prev) => {
+              const newItems = [...prev];
+              newItems[index] = true;
+              return newItems;
+            });
+          }, (index + 1) * 1000)
+        ); // Delay each item by 1s
+      });
+    }
+    return () => {
+      timeoutIds.forEach(clearTimeout);
+    };
+  }, [animateItems]);
 
   useEffect(() => emailjs.init("YOUR-PUBLIC-KEY-HERE"), []);
 
@@ -455,6 +489,192 @@ export const ContactUsText = ({ test }) => {
         }
       );
   };
+
+  if (isFromSelectedCategory) {
+    return (
+      <div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-evenly",
+            fontFamily: "gotham",
+          }}
+        >
+          <div
+            className={`fade-item fade-item-1 ${
+              animateItems[0] ? "active" : ""
+            }`}
+          >
+            <span>
+              <PhoneIcon fontSize="medium" />
+            </span>
+            : +972-52-678-7276
+          </div>
+          <div
+            className={`fade-item fade-item-2 ${
+              animateItems[1] ? "active" : ""
+            }`}
+          >
+            <PhoneIcon fontSize="medium" />: +1(302)-219-4023
+          </div>
+        </div>
+        <div
+          className="flex-center"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-evenly",
+          }}
+        >
+          <div
+            className={`fade-item fade-item-3 ${
+              animateItems[2] ? "active" : ""
+            }`}
+            style={{
+              display: "flex",
+              marginTop: "0.6em",
+              fontFamily: "gotham",
+            }}
+          >
+            <div>
+              <EmailIcon />
+            </div>
+            <div>: sales@in3d-tech.com</div>
+          </div>
+          <div
+            // className={`fade-item fade-item-4 ${
+            //   animateItems[3] ? "active" : ""
+            // }`}
+            style={{ opacity: 0 }}
+          >
+            <PhoneIcon fontSize="medium" />: +1(302)-219-4023
+          </div>
+        </div>
+
+        <div
+          style={{ textAlign: "center", fontFamily: "gotham" }}
+          className={`fade-item fade-item-4 ${animateItems[3] ? "active" : ""}`}
+        >
+          Or send us a message:{" "}
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            height: "10em",
+          }}
+          className={`fade-item fade-item-5 ${animateItems[3] ? "active" : ""}`}
+        >
+          <textarea style={{ width: "90%" }} />
+        </div>
+      </div>
+    );
+  }
+
+  // export const ContactUsText = ({ test, isFromSelectedCategory }) => {
+  //   const [showTextBox, setShowTextBox] = useState(false);
+  //   const [showSentStatus, setShowSentStatus] = useState(null);
+  //   const [textAreaInput, setTextAreaInput] = useState("");
+
+  //   useEffect(() => emailjs.init("YOUR-PUBLIC-KEY-HERE"), []);
+
+  //   const toggleTextBox = () => {
+  //     setShowTextBox(!showTextBox);
+  //   };
+
+  //   const handleSendMessage = (e) => {
+  //     setTimeout(() => {
+  //       setShowTextBox(false);
+  //       setShowSentStatus(true);
+  //       setTextAreaInput("");
+  //     }, 200);
+
+  //     setTimeout(() => setShowSentStatus(null), 3000);
+  //   };
+
+  //   const form = useRef();
+
+  //   const sendEmail = (e) => {
+  //     e.preventDefault(); // prevents the page from reloading when you hit “Send”
+
+  //     emailjs
+  //       .sendForm(
+  //         "service_tv1wlgo",
+  //         "template_evr30vn",
+  //         form.current,
+  //         "HorIaM2iMYpuvqSef"
+  //       )
+  //       .then(
+  //         (result) => {
+  //           // show the user a success message
+  //         },
+  //         (error) => {
+  //           // show the user an error
+  //         }
+  //       );
+  //   };
+
+  //   if (isFromSelectedCategory) {
+  //     return (
+  //       <div>
+  //         <div
+  //           style={{
+  //             display: "flex",
+  //             justifyContent: "space-evenly",
+  //             fontFamily: "gotham",
+  //           }}
+  //         >
+  //           <div>
+  //             <span>
+  //               <PhoneIcon fontSize="medium" />
+  //             </span>
+  //             : +972-52-678-7276
+  //           </div>
+  //           <div>
+  //             <PhoneIcon fontSize="medium" />: +1(302)-219-4023
+  //           </div>
+  //         </div>
+  //         <div
+  //           className="flex-center"
+  //           style={{
+  //             display: "flex",
+  //             alignItems: "center",
+  //             justifyContent: "space-evenly",
+  //           }}
+  //         >
+  //           <div
+  //             style={{
+  //               display: "flex",
+  //               marginTop: "0.6em",
+  //               fontFamily: "gotham",
+  //             }}
+  //           >
+  //             <div>
+  //               <EmailIcon />
+  //             </div>
+  //             <div>: sales@in3d-tech.com</div>
+  //           </div>
+
+  //           <div style={{ opacity: 0 }}>
+  //             <PhoneIcon fontSize="medium" />: +1(302)-219-4023
+  //           </div>
+  //         </div>
+
+  //         <div style={{ textAlign: "center", fontFamily: "gotham" }}>
+  //           Or send us a message:{" "}
+  //         </div>
+  //         <div
+  //           style={{
+  //             display: "flex",
+  //             justifyContent: "center",
+  //             height: "10em",
+  //           }}
+  //         >
+  //           <textarea style={{ width: "90%" }} />
+  //         </div>
+  //       </div>
+  //     );
+  //   }
 
   return (
     <>

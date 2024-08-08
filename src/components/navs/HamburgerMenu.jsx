@@ -6,6 +6,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 export const HamburgerMenu = ({ isMobileViewOnly }) => {
   const [hovered, setIsHovered] = useState(false);
+  const [timeoutId, setTimeoutId] = useState(null);
 
   const {
     menuOpened,
@@ -13,10 +14,13 @@ export const HamburgerMenu = ({ isMobileViewOnly }) => {
     setSelectedCategory,
     selectedCategory,
     scrollArea,
+    setIsCursorHovering,
   } = useAppContext();
 
   const toggleNav = () => {
     setMenuOpened(!menuOpened);
+
+    // setMenuOpened(!menuOpened);
     setIsHovered(false);
 
     if (selectedCategory) {
@@ -34,9 +38,6 @@ export const HamburgerMenu = ({ isMobileViewOnly }) => {
     { key: 8, title: "" },
     { key: 9, title: "Artifical Intelligence" },
     { key: 10, title: "" },
-
-    // { key: 8, title: "" },
-    // { key: 8, title: "About" },
   ];
 
   const getbgImage = () => {
@@ -44,41 +45,33 @@ export const HamburgerMenu = ({ isMobileViewOnly }) => {
 
     switch (hovered) {
       case "Customization":
-        // url = "/assets/images/backgrounds/customize/Customize_Togle_Finish.jpg";
         url =
           "https://in3dwebsite.blob.core.windows.net/photos/Customize_Togle_Finish-min.jpg";
         break;
       case "Artifical Intelligence":
-        // url = "/assets/images/backgrounds/ai/Ai_Tugle_Finish.jpg";
         url =
           "https://in3dwebsite.blob.core.windows.net/photos/Ai_Tugle_Finish-min.jpg";
         break;
       case "Microsoft":
-        // url = "/assets/images/backgrounds/microsoft/Microsoft_Tugle.jpg";
         url =
           "https://in3dwebsite.blob.core.windows.net/photos/Microsoft_Tugle-min.jpg";
         break;
       case "Military":
-        // url = "/assets/images/backgrounds/military/Militery_Togle_Finish2.jpg";
         url =
           "https://in3dwebsite.blob.core.windows.net/photos/Militery_Togle_Finish2-min.jpg";
         break;
       case "Security":
-        // url = "/assets/images/backgrounds/security/Security_Togle_Finish2.jpg";
         url =
           "https://in3dwebsite.blob.core.windows.net/photos/Security_Togle_Finish2-min.jpg";
         break;
       case "Industry":
-        // url = "/assets/images/backgrounds/taasia/Industry_Togle.jpg";
         url =
           "https://in3dwebsite.blob.core.windows.net/photos/Industry_Togle-min.jpg";
         break;
       case "Medicine":
-        // url = "/assets/images/backgrounds/medicine/Medical_Togle.jpg";
         url =
           "https://in3dwebsite.blob.core.windows.net/photos/Medical_Togle-min.jpg";
         break;
-
       default:
         url = "";
         break;
@@ -86,7 +79,7 @@ export const HamburgerMenu = ({ isMobileViewOnly }) => {
 
     return {
       position: "absolute",
-      backgroundImage: `url(${url}`,
+      backgroundImage: `url(${url})`,
       backgroundSize: "cover",
       backgroundPosition: "center",
       backgroundRepeat: "no-repeat",
@@ -118,6 +111,8 @@ export const HamburgerMenu = ({ isMobileViewOnly }) => {
         className="hamburger-icon"
         id="icon"
         onClick={toggleNav}
+        onMouseOver={() => setIsCursorHovering(true)}
+        onMouseOut={() => setIsCursorHovering(false)}
       >
         {icons.map((icon, index) => (
           <div
@@ -145,7 +140,11 @@ export const HamburgerMenu = ({ isMobileViewOnly }) => {
             <div className="scale-effect num2"></div>
           )}
 
-          <div className="h-nav-in3d-icon for-menu">
+          <div
+            className="h-nav-in3d-icon for-menu"
+            onMouseOver={() => setIsCursorHovering(true)}
+            onMouseOut={() => setIsCursorHovering(false)}
+          >
             <img
               className="in3d-fixed-logo"
               src="/assets/images/in3d-logo-white.png"
@@ -160,64 +159,90 @@ export const HamburgerMenu = ({ isMobileViewOnly }) => {
                 toggleNav={toggleNav}
                 hovered={hovered}
                 setSelectedCategory={setSelectedCategory}
+                timeoutId={timeoutId}
+                setTimeoutId={setTimeoutId}
               />
             ))}
           </div>
           <div
             style={{
-              borderTop: "1px solid rgb(255,255,255,0.6)",
+              borderTop: "4px solid rgb(255,255,255,0.6)",
               position: "absolute",
               width: "90%",
               height: "5em",
               padding: "1em",
               bottom: "0em",
               display: "flex",
-              alignItems: "center",
               justifyContent: "space-between",
             }}
           >
-            <div className="animate-reveal">
-              <MagnifyingGlass
-                title={"About Us"}
-                setIsHovered={setIsHovered}
-                toggleNav={toggleNav}
-                hovered={hovered}
-                setSelectedCategory={setSelectedCategory}
-                fontSize
-              />
-            </div>
-            <div className="linkdn-icon animate-reveal">
-              {
-                <a
-                  href={"https://www.linkedin.com/company/in3d-tech.com"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ all: "unset" }}
-                >
-                  <LinkedInIcon fontSize="large" />
-                </a>
-              }
+            <div style={{ display: "flex" }}>
+              <div className="animate-reveal" style={{ flex: 1 }}>
+                <MagnifyingGlass
+                  title={"About"}
+                  setIsHovered={setIsHovered}
+                  toggleNav={toggleNav}
+                  hovered={hovered}
+                  setSelectedCategory={setSelectedCategory}
+                  timeoutId={timeoutId}
+                  setTimeoutId={setTimeoutId}
+                  fontSize
+                />
+              </div>
+              <div
+                style={{
+                  position: "relative",
+                  left: "13%",
+                  height: "100%",
+                  animation: "fadeIn 2s ease-in-out",
+                }}
+              >
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "10%",
+                    height: "60%",
+                    width: "1px",
+                    backgroundColor: "white",
+                    left: "0",
+                  }}
+                ></div>
+              </div>
+              <div
+                className="animate-reveal"
+                style={{
+                  marginLeft: "6em",
+                  flex: 1,
+                }}
+              >
+                <MagnifyingGlass
+                  title={"Contact"}
+                  setIsHovered={setIsHovered}
+                  toggleNav={toggleNav}
+                  hovered={hovered}
+                  setSelectedCategory={setSelectedCategory}
+                  timeoutId={timeoutId}
+                  setTimeoutId={setTimeoutId}
+                  fontSize
+                />
+              </div>
             </div>
 
-            {/* <div></div>
-            <div></div> */}
-            {/* <div
-            style={{
-              color: "white",
-              fontSize: "3em",
-              fontFamily: "gotham-old",
-            }}
-          >
-            Contact Us
-          </div>
-          <div style={{ color: "white", fontSize: "3em" }}>set 2</div>
-          <div style={{ color: "white", fontSize: "3em" }}>set3</div> */}
+            <div className="linkdn-icon animate-reveal">
+              <a
+                href={"https://www.linkedin.com/company/in3d-tech.com"}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ all: "unset" }}
+                onMouseOver={() => setIsCursorHovering(true)}
+                onMouseOut={() => setIsCursorHovering(false)}
+              >
+                <LinkedInIcon fontSize="large" />
+              </a>
+            </div>
           </div>
         </nav>
       ) : null}
-
-      {/* <div className="dark-blue" id="blue"></div> */}
-      {/* </div> */}
     </header>
   );
 };

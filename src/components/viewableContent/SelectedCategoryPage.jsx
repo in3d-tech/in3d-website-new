@@ -1,5 +1,14 @@
 import { useEffect, useState } from "react";
 import { useAppContext } from "../../context/appContext";
+import { Industry } from "./categories/Industry";
+import { Security } from "./categories/Security";
+import { Customize } from "./categories/Customize";
+import { Medicine } from "./categories/Medicine";
+import { Microsoft } from "./categories/Microsoft";
+import { Military } from "./categories/Military";
+import { Ai } from "./categories/Ai";
+import { About } from "./categories/About";
+import { Contact } from "./categories/Contact";
 
 const backgrounds = {
   1: 'url("/assets/images/backgrounds/taasiya.jpg")',
@@ -9,28 +18,40 @@ const backgrounds = {
   5: 'url("/assets/images/backgrounds/Astro_1_Background.webp")',
 };
 
-const categoriesObj = {
-  1: "TAASIA",
-  2: "MEDICINE",
-  3: "MICROSOFT",
-  4: "MILITARY",
-  7: "ARTIFICAL INTELLIGENCE",
-  5: "SECURITY",
-  5: "CUSTOMIZATION",
-};
-
 function SelectedCategoryPage() {
   const [transitionToPage, setTransitionToPage] = useState(false);
+  const [showContent, setShowContent] = useState(false);
   const { selectedCategory } = useAppContext();
-  // useEffect(() => {
-  //   if (selectedCategory) {
-  //     setTransitionToPage(true);
-  //     document.body.style.overflow = "hidden";
-  //   } else {
-  //     setTransitionToPage(false);
-  //     document.body.style.overflow = "auto";
-  //   }
-  // }, [selectedCategory]);
+
+  useEffect(() => {
+    if (selectedCategory) {
+      setTransitionToPage(true);
+      setTimeout(() => (document.body.style.overflow = "hidden"), 750);
+    } else {
+      setTransitionToPage(false);
+      document.body.style.overflow = "auto";
+    }
+  }, [selectedCategory]);
+
+  useEffect(() => {
+    setTimeout(() => setShowContent(true), 1000);
+
+    () => {
+      setShowContent(false);
+    };
+  }, [selectedCategory]);
+
+  const categories = {
+    Industry: <Industry />,
+    Medicine: <Medicine />,
+    Microsoft: <Microsoft />,
+    Security: <Security />,
+    "Artifical Intelligence": <Ai />,
+    Military: <Military />,
+    Customization: <Customize />,
+    About: <About />,
+    Contact: <Contact />,
+  };
 
   return (
     <div
@@ -42,28 +63,10 @@ function SelectedCategoryPage() {
       }}
     >
       {selectedCategory ? (
-        <Content selectedCategory={selectedCategory} />
+        showContent ? (
+          <>{categories[selectedCategory] || null}</>
+        ) : null
       ) : null}
-    </div>
-  );
-}
-
-function Content({ selectedCategory }) {
-  return (
-    <div className="selected-category-content-wrapper">
-      <div
-        style={{
-          textAlign: "center",
-          fontSize: "3em",
-          fontFamily: "gotham-bold",
-        }}
-      >
-        <h1>{categoriesObj[selectedCategory]}</h1>
-      </div>
-      {/* <div>
-        <div></div>
-        <div></div>
-      </div> */}
     </div>
   );
 }

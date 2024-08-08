@@ -19,6 +19,8 @@ export default function AppContextProvider({ children }) {
   const [menuOpenMobile, setMenuOpenMobile] = useState(false);
   const [selectedMenuActionMobile, setSelectedMenuActionMobile] =
     useState(null);
+  const [isCursorHovering, setIsCursorHovering] = useState(false);
+  // const [isSectionTwo, setIsSectionTwo] = useState(fal)
 
   return (
     <AppContext.Provider
@@ -47,6 +49,8 @@ export default function AppContextProvider({ children }) {
         setSelectedMenuActionMobile,
         menuOpenMobile,
         setMenuOpenMobile,
+        isCursorHovering,
+        setIsCursorHovering,
       }}
     >
       {children}
@@ -83,6 +87,8 @@ export function useAppContext() {
       setSelectedMenuActionMobile: () => {},
       menuOpenMobile: false,
       setMenuOpenMobile: () => {},
+      isCursorHovering: false,
+      setIsCursorHovering: () => {},
     };
   }
 

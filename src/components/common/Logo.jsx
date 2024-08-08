@@ -30,14 +30,14 @@ export const ContactBtn = ({ isFromSelectedCategory }) => {
     setOpen(true);
     setTimeout(() => {
       setShowContent(true);
-    }, 1000); // Match this with your animation duration
+    }, 1000);
   };
 
   return (
     <>
       {open ? (
         <div
-          className="border-grow contact-us-shadow" // Apply the animation class
+          className="border-grow contact-us-shadow"
           style={{
             height: "20em",
             width: "30em",
@@ -88,70 +88,12 @@ export const ContactBtn = ({ isFromSelectedCategory }) => {
   );
 };
 
-// export const ContactBtn = ({ isFromSelectedCategory }) => {
-//   const [open, setOpen] = useState(false);
-//   const [showContent, setShowContent] = useState(false);
-
-//   const handleClick = () => {
-//     setOpen(true);
-//     setTimeout(() => {
-//       setShowContent(true);
-//     }, 1000); // Match this with your animation duration
-//   };
-
-//   return (
-//     <>
-//       {open ? (
-//         <div
-//           className="border-grow" // Apply the animation class
-//           style={{
-//             height: "20em",
-//             width: "30em",
-//             border: "1px solid rgb(0,0,0,0.4)",
-//             borderRadius: "5px",
-//           }}
-//         >
-//           {showContent && (
-//             <>
-//               <button
-//                 onClick={() => {
-//                   setOpen(false);
-//                   setShowContent(false);
-//                 }}
-//               >
-//                 x
-//               </button>
-//               <ContactUsText isFromSelectedCategory={isFromSelectedCategory} />
-//             </>
-//           )}
-//         </div>
-//       ) : (
-//         <button
-//           style={{
-//             color: "black",
-//             fontFamily: "gotham",
-//             width: "8em",
-//             height: "2em",
-//             textAlign: "center",
-//             fontSize: "1.2em",
-//           }}
-//           className="categories-contact-btn"
-//           onClick={handleClick}
-//         >
-//           Contact Us
-//         </button>
-//       )}
-//     </>
-//   );
-// };
-
 export const VideoPlayer = ({ src, startTime = 0, videoRef, isMobile }) => {
   // const videoRef = useRef(null);
 
   useEffect(() => {
     const videoElement = videoRef?.current;
     if (videoElement) {
-      console.log("dont think we ever got in here");
       // Set the start time when the video metadata is loaded
       const handleLoadedMetadata = () => {
         videoElement.currentTime = startTime;

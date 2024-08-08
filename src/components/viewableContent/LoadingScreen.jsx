@@ -188,29 +188,3 @@ export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
     </div>
   );
 }
-
-// <h1
-//   className="loading-header"
-//   style={{ color: `${sparklesColours[sparklesColorIndex]}` }}
-// >
-//   {["l", "o", "a", "d", "i", "n", "g"].map((letter, index) => (
-//     <span
-//       key={index}
-//       className={`loading-span let${
-//         animationActive ? index + 1 : ""
-//       }`}
-//     >
-//       {letter}
-//     </span>
-//   ))}
-// </h1>
-
-// export const LoaderComponent = () => {
-//   return (
-//     <span style={{ color: "black", fontSize: "1.5em", fontFamily: "gotham" }}>
-//       {progress < 100 && !isAstroModelDrawn
-//         ? `${Math.trunc(progress)} % loaded`
-//         : null}
-//     </span>
-//   );
-// };
