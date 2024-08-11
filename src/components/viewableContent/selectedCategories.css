@@ -1304,6 +1304,12 @@
   }
 }
 
+@media screen and (max-width: 1675px) {
+  .about-text-three {
+    font-size: 1.7em;
+  }
+}
+
 @media screen and (max-width: 1575px) {
   .industry-headline {
     font-size: 2em;

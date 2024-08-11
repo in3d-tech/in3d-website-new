@@ -21,6 +21,7 @@ export default function AppContextProvider({ children }) {
     useState(null);
   const [isCursorHovering, setIsCursorHovering] = useState(false);
   // const [isSectionTwo, setIsSectionTwo] = useState(fal)
+  const [videosPreloaded, setVideosPreloaded] = useState(false);
 
   return (
     <AppContext.Provider
@@ -51,6 +52,8 @@ export default function AppContextProvider({ children }) {
         setMenuOpenMobile,
         isCursorHovering,
         setIsCursorHovering,
+        videosPreloaded,
+        setVideosPreloaded,
       }}
     >
       {children}
@@ -89,6 +92,8 @@ export function useAppContext() {
       setMenuOpenMobile: () => {},
       isCursorHovering: false,
       setIsCursorHovering: () => {},
+      videosPreloaded: false,
+      setVideosPreloaded: () => {},
     };
   }
 

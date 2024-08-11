@@ -4,6 +4,7 @@ import { ContactBtn, Logo, VideoPlayer } from "../../common/Logo";
 import { categoryObserver } from "../../common/categoryObserver";
 import { ModelComponent } from "./ModelComponent";
 import { Canvas } from "@react-three/fiber";
+import { useAppContext } from "../../../context/appContext";
 
 export function Customize() {
   const imageRef = useRef(null);
@@ -12,6 +13,9 @@ export function Customize() {
   const modelRef = useRef(null);
   const bottomVidRef1 = useRef(null);
   const bottomVidRef2 = useRef(null);
+
+  const { videosPreloaded } = useAppContext();
+
   useEffect(() => {
     if (bottomVidRef1 || bottomVidRef2) {
       console.log({ ref1: bottomVidRef1.current, bottomVidRef2 });
@@ -42,6 +46,15 @@ export function Customize() {
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (videosPreloaded) {
+      bottomVidRef1.current.src =
+        "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4";
+      bottomVidRef2.current.src =
+        "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4";
+    }
+  }, [videosPreloaded]);
 
   return (
     <div
@@ -245,7 +258,8 @@ const ImageOverlayThird = ({
           /> */}
           <VideoPlayer
             src={
-              "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4"
+              ""
+              // "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4"
             }
             videoRef={bottomVidRef1}
             startTime={7}
@@ -265,7 +279,8 @@ const ImageOverlayThird = ({
           /> */}
           <VideoPlayer
             src={
-              "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4"
+              ""
+              // "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4"
             }
             videoRef={bottomVidRef2}
             startTime={28}

@@ -320,7 +320,7 @@ const MiddleTwo = ({ midTwoImageRef, midTwoTextOneRef }) => {
           top: "10%",
           width: "82%",
           height: "90%",
-          backgroundColor: "white",
+          // backgroundColor: "white",
           transform: "skew(-61deg)",
           mixBlendMode: "difference",
           pointerEvents: "none",

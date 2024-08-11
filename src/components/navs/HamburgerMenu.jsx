@@ -4,9 +4,36 @@ import { useAppContext } from "../../context/appContext";
 import { getSparkleColour } from "../scene/ornaments/getSparkleColour";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
+const IMAGE_URLS = {
+  Customization:
+    "https://in3dwebsite.blob.core.windows.net/photos/Customize_Togle_Finish-min.jpg",
+  "Artifical Intelligence":
+    "https://in3dwebsite.blob.core.windows.net/photos/Ai_Tugle_Finish-min.jpg",
+  Microsoft:
+    "https://in3dwebsite.blob.core.windows.net/photos/Microsoft_Tugle-min.jpg",
+  Military:
+    "https://in3dwebsite.blob.core.windows.net/photos/Militery_Togle_Finish2-min.jpg",
+  Security:
+    "https://in3dwebsite.blob.core.windows.net/photos/Security_Togle_Finish2-min.jpg",
+  Industry:
+    "https://in3dwebsite.blob.core.windows.net/photos/Industry_Togle-min.jpg",
+  Medicine:
+    "https://in3dwebsite.blob.core.windows.net/photos/Medical_Togle-min.jpg",
+};
+
+const preloadImages = (urls) => {
+  const images = {};
+  Object.keys(urls).forEach((category) => {
+    images[category] = new Image();
+    images[category].src = urls[category];
+  });
+  return images;
+};
+
 export const HamburgerMenu = ({ isMobileViewOnly }) => {
   const [hovered, setIsHovered] = useState(false);
   const [timeoutId, setTimeoutId] = useState(null);
+  const [preloadedImages, setPreloadedImages] = useState({});
 
   const {
     menuOpened,
@@ -15,7 +42,52 @@ export const HamburgerMenu = ({ isMobileViewOnly }) => {
     selectedCategory,
     scrollArea,
     setIsCursorHovering,
+    videosPreloaded,
+    setVideosPreloaded,
   } = useAppContext();
+
+  // const customizeBg =
+  //   "https://in3dwebsite.blob.core.windows.net/photos/Customize_Togle_Finish-min.jpg";
+  // const aiBg =
+  //   "https://in3dwebsite.blob.core.windows.net/photos/Ai_Tugle_Finish-min.jpg";
+  // const microsoftBg =
+  //   "https://in3dwebsite.blob.core.windows.net/photos/Microsoft_Tugle-min.jpg";
+  // const militaryBg =
+  //   "https://in3dwebsite.blob.core.windows.net/photos/Militery_Togle_Finish2-min.jpg";
+  // const securityBg =
+  //   "https://in3dwebsite.blob.core.windows.net/photos/Security_Togle_Finish2-min.jpg";
+  // const industryBg =
+  //   "https://in3dwebsite.blob.core.windows.net/photos/Industry_Togle-min.jpg";
+  // const medicineBg =
+  //   "https://in3dwebsite.blob.core.windows.net/photos/Medical_Togle-min.jpg";
+
+  useEffect(() => {
+    if (menuOpened && Object.keys(preloadedImages).length === 0) {
+      setPreloadedImages(preloadImages(IMAGE_URLS));
+    }
+  }, [menuOpened, preloadedImages]);
+
+  const preloadVideos = () => {
+    if (!videosPreloaded) {
+      const video1 = document.createElement("video");
+      video1.src =
+        "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4";
+
+      const video2 = document.createElement("video");
+      video2.src =
+        "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4";
+
+      video1.load();
+      video2.load();
+
+      // Set videosPreloaded to true once both videos are fully loaded
+      Promise.all([video1.play(), video2.play()]).then(() => {
+        video1.pause();
+        video2.pause();
+        setVideosPreloaded(true);
+      });
+    }
+  };
 
   const toggleNav = () => {
     setMenuOpened(!menuOpened);
@@ -40,59 +112,70 @@ export const HamburgerMenu = ({ isMobileViewOnly }) => {
     { key: 10, title: "" },
   ];
 
-  const getbgImage = () => {
-    let url;
+  // const getbgImage = () => {
+  //   let url;
 
-    switch (hovered) {
-      case "Customization":
-        url =
-          "https://in3dwebsite.blob.core.windows.net/photos/Customize_Togle_Finish-min.jpg";
-        break;
-      case "Artifical Intelligence":
-        url =
-          "https://in3dwebsite.blob.core.windows.net/photos/Ai_Tugle_Finish-min.jpg";
-        break;
-      case "Microsoft":
-        url =
-          "https://in3dwebsite.blob.core.windows.net/photos/Microsoft_Tugle-min.jpg";
-        break;
-      case "Military":
-        url =
-          "https://in3dwebsite.blob.core.windows.net/photos/Militery_Togle_Finish2-min.jpg";
-        break;
-      case "Security":
-        url =
-          "https://in3dwebsite.blob.core.windows.net/photos/Security_Togle_Finish2-min.jpg";
-        break;
-      case "Industry":
-        url =
-          "https://in3dwebsite.blob.core.windows.net/photos/Industry_Togle-min.jpg";
-        break;
-      case "Medicine":
-        url =
-          "https://in3dwebsite.blob.core.windows.net/photos/Medical_Togle-min.jpg";
-        break;
-      default:
-        url = "";
-        break;
+  //   switch (hovered) {
+  //     case "Customization":
+  //       url = customizeBg;
+  //       break;
+  //     case "Artifical Intelligence":
+  //       url = aiBg;
+  //       break;
+  //     case "Microsoft":
+  //       url = microsoftBg;
+  //       break;
+  //     case "Military":
+  //       url = militaryBg;
+  //       break;
+  //     case "Security":
+  //       url = securityBg;
+  //       break;
+  //     case "Industry":
+  //       url = industryBg;
+  //       break;
+  //     case "Medicine":
+  //       url = medicineBg;
+  //       break;
+  //     default:
+  //       url = "";
+  //       break;
+  //   }
+
+  //   return {
+  //     position: "absolute",
+  //     backgroundImage: `url(${url})`,
+  //     backgroundSize: "cover",
+  //     backgroundPosition: "center",
+  //     backgroundRepeat: "no-repeat",
+  //     width: "100%",
+  //     height: "100%",
+  //     animation: "zoomOutImg 1.8s ease-out forwards",
+  //     zIndex: 0,
+  //   };
+  // };
+
+  const getBgImage = () => {
+    if (preloadedImages[hovered]) {
+      return {
+        position: "absolute",
+        backgroundImage: `url(${preloadedImages[hovered].src})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        width: "100%",
+        height: "100%",
+        animation: "zoomOutImg 1.8s ease-out forwards",
+        zIndex: 0,
+      };
     }
-
-    return {
-      position: "absolute",
-      backgroundImage: `url(${url})`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
-      width: "100%",
-      height: "100%",
-      animation: "zoomOutImg 1.8s ease-out forwards",
-      zIndex: 0,
-    };
+    return {};
   };
 
   useEffect(() => {
     if (menuOpened) {
       document.body.style.overflow = "hidden";
+      preloadVideos();
     } else {
       document.body.style.overflowY = "auto";
     }
@@ -135,7 +218,7 @@ export const HamburgerMenu = ({ isMobileViewOnly }) => {
       {menuOpened ? (
         <nav id="nav" className={menuOpened ? "show" : { opacity: 0 }}>
           {hovered ? (
-            <div style={getbgImage()}></div>
+            <div className="scale-effect" style={getBgImage()}></div>
           ) : (
             <div className="scale-effect num2"></div>
           )}

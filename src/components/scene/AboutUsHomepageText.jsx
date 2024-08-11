@@ -143,7 +143,7 @@ export const AboutUsText = ({
 
           <button
             onClick={() => setSelectedCategory("Who we Are")}
-            className="see-more-btn"
+            className="see-more-btn hp-about-btn-hover"
             style={{
               width: "10%",
               // height: "580px",

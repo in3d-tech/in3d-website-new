@@ -672,6 +672,12 @@ h2 {
   transform-style: preserve-3d;
 }
 
+/* .icon-1:hover,
+.icon-2:hover,
+.icon-3:hover {
+  background: linear-gradient(145deg, #bd4343, #5d0d0d);
+} */
+
 .icon-1 {
   transform: translateY(-8px);
   animation-delay: 100ms;
@@ -696,6 +702,17 @@ h2 {
 
   &:hover {
     transform: scale(1.2);
+
+    .icon-1 {
+      background: red;
+    }
+    .icon-2 {
+      background: red;
+    }
+    .icon-3 {
+      background: red;
+    }
+
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
   }
 }
@@ -930,6 +947,10 @@ section {
 
 .num2 {
   opacity: 0.4;
+}
+
+.fill-opacity {
+  opacity: 1;
 }
 
 /* ------ titles ----  */
@@ -1730,6 +1751,11 @@ section {
   /* cursor: pointer; */
   border: 1px solid rgb(0, 0, 0, 0.8);
   /* font-family: gotham; */
+}
+
+.hp-about-btn-hover:hover {
+  transition: color 1.5s;
+  color: orange;
 }
 
 .scroll-text-animate {
