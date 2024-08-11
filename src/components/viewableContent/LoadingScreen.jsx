@@ -16,7 +16,7 @@ export function LoadingScreen({
   const { isAstroModelDrawn, setRenderModels, customizeHasRendered } =
     useAppContext();
   const [has4SecondsPassed, setHas4SecondsPassed] = useState(false);
-  const [animationActive, setAnimationActive] = useState(true);
+  const [showDelayedMessage, setShowDelayedMessage] = useState(false);
   const [showLoading, setShowLoading] = useState(true);
   const [sparklesColorIndex, setSparklesColorIndex] = useState(0);
 
@@ -27,6 +27,9 @@ export function LoadingScreen({
   }
 
   useEffect(() => {
+    const delayedtimeout = setTimeout(() => {
+      setShowDelayedMessage(true);
+    }, 5000);
     // return;
     if (!has4SecondsPassed) {
       return;
@@ -63,6 +66,7 @@ export function LoadingScreen({
 
       return () => {
         clearTimeout(renderModels);
+        clearTimeout(delayedtimeout);
       };
     }
   }, [isAstroModelDrawn, customizeHasRendered, has4SecondsPassed]);
@@ -93,6 +97,24 @@ export function LoadingScreen({
     <div className={`flashing-div ${fadeOut}`}>
       {showLoadingScreen ? <Cursor /> : null}
       <div className="scale-effect"></div>
+      {showDelayedMessage ? (
+        <div
+          style={{
+            position: "absolute",
+            fontFamily: "gotham",
+            bottom: "2em",
+            textAlign: "center",
+            // left: "25%",
+            width: "100%",
+            color: "white",
+            animation: "fadeIn 2s ease-in-out",
+          }}
+        >
+          "Welcome to our 3D experience! The initial load might take a bit
+          longer as <br /> we're preparing all the interactive elements for you.
+          Please be patient—it'll be worth the wait!"
+        </div>
+      ) : null}
       <div
         style={{
           // border: "1px solid cyan",

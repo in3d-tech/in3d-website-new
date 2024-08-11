@@ -117,7 +117,7 @@ export const VideoPlayer = ({ src, startTime = 0, videoRef, isMobile }) => {
       className="video-container"
       style={isMobile ? { borderRadius: "12px" } : null}
     >
-      <video controls className="video-player" ref={videoRef}>
+      <video controls className="video-player" ref={videoRef} preload="auto">
         <source
           // src={process.env.PUBLIC_URL + "/path-to-your-video.mp4"}
           src={src ? src : "/assets/images/backgrounds/taasia/Kornit Guide.mp4"}

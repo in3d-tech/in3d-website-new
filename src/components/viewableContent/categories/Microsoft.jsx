@@ -2,11 +2,17 @@ import { ContactBtn, Logo, VideoPlayer } from "../../common/Logo";
 import { useEffect, useRef, useState, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ModelComponent } from "./ModelComponent";
+import { useAppContext } from "../../../context/appContext";
 
 export function Microsoft() {
   const [displayVideos, setDisplayVideos] = useState(false);
   const topVidoe1Ref = useRef(null);
   const topVidoe2Ref = useRef(null);
+  const bottomVidRef1 = useRef(null);
+  const bottomVidRef2 = useRef(null);
+  const bottomVidRef3 = useRef(null);
+
+  const { videosPreloaded } = useAppContext();
 
   useEffect(() => {
     console.log("microsoft rendered");
@@ -14,6 +20,17 @@ export function Microsoft() {
       setTimeout(() => setDisplayVideos(true), 1500);
     }
   }, []);
+
+  useEffect(() => {
+    if (videosPreloaded) {
+      setTimeout(() => {
+        topVidoe1Ref.current.src =
+          "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4";
+        topVidoe2Ref.current.src =
+          "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4";
+      }, 500);
+    }
+  }, [videosPreloaded]);
 
   return (
     <div
@@ -41,13 +58,13 @@ export function Microsoft() {
           style={{ width: "90%" }}
         ></img>
       </div>
-      <Bottom />
+      <Bottom bottomVidRef1={bottomVidRef1} bottomVidRef3={bottomVidRef3} />
       {/* <BottomModel /> */}
     </div>
   );
 }
 
-const Bottom = () => {
+const Bottom = ({ bottomVidRef1, bottomVidRef3 }) => {
   return (
     <div
       className="selected-content-second-divider"
@@ -88,13 +105,16 @@ const Bottom = () => {
           alignItems: "center",
         }}
       >
-        <ImageOverlay />
+        <ImageOverlay
+          bottomVidRef1={bottomVidRef1}
+          bottomVidRef3={bottomVidRef3}
+        />
       </div>
     </div>
   );
 };
 
-const ImageOverlay = () => {
+const ImageOverlay = ({ bottomVidRef1, bottomVidRef3 }) => {
   return (
     <div className="sc-right-half">
       <div className="image-container">
@@ -122,7 +142,11 @@ const ImageOverlay = () => {
             style={{ width: "100%" }}
           /> */}
           {/* <VideoPlayer src="/assets/images/backgrounds/microsoft/What can HoloLens 2 do_.mp4" /> */}
-          <VideoPlayer src="https://in3dwebsite.blob.core.windows.net/video/What can HoloLens 2 do_.mp4" />
+          <VideoPlayer
+            src="https://in3dwebsite.blob.core.windows.net/video/What can HoloLens 2 do_.mp4"
+            videoRef={bottomVidRef1}
+            startTime={5}
+          />
         </span>
 
         <span
@@ -137,7 +161,11 @@ const ImageOverlay = () => {
             style={{ width: "100%" }}
           /> */}
           {/* <VideoPlayer src="/assets/images/backgrounds/microsoft/Medical Holoportation - Ichilov.mp4" /> */}
-          <VideoPlayer src="https://in3dwebsite.blob.core.windows.net/video/Medical Holoportation - Ichilov (1) (1).mp4" />
+          <VideoPlayer
+            src="https://in3dwebsite.blob.core.windows.net/video/Medical Holoportation - Ichilov (1) (1).mp4"
+            startTime={2}
+            videoRef={bottomVidRef3}
+          />
         </span>
       </div>
     </div>
@@ -215,11 +243,11 @@ const Top = ({
               alt="Large"
               // className="bottom-image"
             /> */}
-            {displayVideos ? (
+            {true ? (
               <VideoPlayer
                 src={
-                  // "/assets/images/backgrounds/microsoft/Hololens 2 - Guides.mp4"
-                  "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4"
+                  ""
+                  // "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4"
                 }
                 videoRef={topVidoe1Ref}
                 startTime={7}
@@ -237,14 +265,14 @@ const Top = ({
               // className="bottom-image"
               ref={bottomImage2Ref}
             /> */}
-            {displayVideos ? (
+            {true ? (
               <VideoPlayer
                 src={
-                  // "/assets/images/backgrounds/microsoft/Hololens 1 - Remote Assist.mp4"
-                  "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4"
+                  ""
+                  // "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4"
                 }
                 videoRef={topVidoe2Ref}
-                startTime={28}
+                startTime={3}
               />
             ) : null}
           </span>
@@ -302,7 +330,7 @@ const Top = ({
       <div
         style={{
           width: "50%",
-          border: "1px solid black",
+          // border: "1px solid black",
           position: "absolute",
           bottom: "4em",
           left: 0,
