@@ -142,7 +142,7 @@ export const AboutUsText = ({
           </div>
 
           <button
-            onClick={() => setSelectedCategory("About")}
+            onClick={() => setSelectedCategory("Who we Are")}
             className="see-more-btn"
             style={{
               width: "10%",

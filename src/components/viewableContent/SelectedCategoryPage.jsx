@@ -49,7 +49,7 @@ function SelectedCategoryPage() {
     "Artifical Intelligence": <Ai />,
     Military: <Military />,
     Customization: <Customize />,
-    About: <About />,
+    "Who we Are": <About />,
     Contact: <Contact />,
   };
 

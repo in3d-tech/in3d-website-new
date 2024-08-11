@@ -176,10 +176,16 @@ export const HamburgerMenu = ({ isMobileViewOnly }) => {
               justifyContent: "space-between",
             }}
           >
-            <div style={{ display: "flex" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "flex-start",
+                width: "30%",
+              }}
+            >
               <div className="animate-reveal" style={{ flex: 1 }}>
                 <MagnifyingGlass
-                  title={"About"}
+                  title={"Who we Are"}
                   setIsHovered={setIsHovered}
                   toggleNav={toggleNav}
                   hovered={hovered}

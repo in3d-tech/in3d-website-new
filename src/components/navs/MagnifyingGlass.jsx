@@ -111,7 +111,7 @@ const MagnifyingGlass = (props) => {
         >
           <span
             style={
-              props.fontSize ? { fontSize: "0.7em" } : { fontWeight: "bold" }
+              props.fontSize ? { fontSize: "0.5em" } : { fontWeight: "bold" }
             }
           >
             {props.title}

@@ -1,5 +1,6 @@
 import { useAppContext } from "../../context/appContext";
 import { getSparkleColour } from "../scene/ornaments/getSparkleColour";
+// import { Industry } from "../viewableContent/categories/Industry";
 import {
   INDUSTRY,
   MEDICINE,
@@ -11,7 +12,8 @@ import {
 } from "./modelData";
 
 export const SeeMoreBtn = () => {
-  const { scrollArea, modelAnimationIsHalfWay } = useAppContext();
+  const { scrollArea, modelAnimationIsHalfWay, setSelectedCategory } =
+    useAppContext();
 
   let styles;
   let text;
@@ -135,6 +137,16 @@ export const SeeMoreBtn = () => {
       break;
   }
 
+  const categorySelect = {
+    3: "Industry",
+    4: "Medicine",
+    5: "Microsoft",
+    6: "Artifical Intelligence",
+    7: "Military",
+    8: "Customization",
+    9: "Contact",
+  };
+
   return (
     <div
       // style={{
@@ -166,48 +178,14 @@ export const SeeMoreBtn = () => {
           </>
         )}
       </span>
-      <button className="see-more-btn">Learn More</button>
+      <button
+        onClick={() =>
+          setSelectedCategory(categorySelect[scrollArea.currentSection])
+        }
+        className="see-more-btn"
+      >
+        Learn More
+      </button>
     </div>
   );
 };
-
-// industry
-
-{
-  /* <div
-      style={{
-        position: "fixed",
-        zIndex: 2234234234,
-        right: "7em",
-        bottom: "1em",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-      className="testy"
-    >
-      <span style={{ fontSize: "2em" }}>
-        Industry <span style={{ color: "#750414" }}>4.0</span>
-      </span>
-      <button className="see-more-btn">See More</button>
-    </div> */
-}
-
-// security
-
-//   <div
-//   style={{
-//     position: "fixed",
-//     zIndex: 13423,
-//     left: "7em",
-//     bottom: "1em",
-//     display: "flex",
-//     flexDirection: "column",
-//     alignItems: "center",
-//   }}
-// >
-//   <span style={{ fontSize: "2em" }}>
-//     <span style={{ color: "#750414" }}>S</span>ecurity
-//   </span>
-//   <button className="see-more-btn">See More</button>
-// </div>
