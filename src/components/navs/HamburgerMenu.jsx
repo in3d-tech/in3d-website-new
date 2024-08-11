@@ -180,8 +180,8 @@ export const HamburgerMenu = ({ isMobileViewOnly }) => {
               style={{
                 display: "flex",
                 alignItems: "flex-start",
-                width: "30%",
               }}
+              className="desktop-menu-about-contact-wrapper"
             >
               <div className="animate-reveal" style={{ flex: 1 }}>
                 <MagnifyingGlass
@@ -243,7 +243,7 @@ export const HamburgerMenu = ({ isMobileViewOnly }) => {
                 onMouseOver={() => setIsCursorHovering(true)}
                 onMouseOut={() => setIsCursorHovering(false)}
               >
-                <LinkedInIcon fontSize="large" />
+                <LinkedInIcon fontSize="large" style={{ color: "white" }} />
               </a>
             </div>
           </div>

@@ -969,6 +969,12 @@ section {
   transition: background-image 0.8s;
 }
 
+.desktop-menu-about-contact-wrapper {
+  display: flex;
+  width: 30%;
+  align-items: flex-start;
+}
+
 .scrolled-category-title {
   font-family: gotham;
   color: #d8f3f6;
@@ -2562,7 +2568,7 @@ figure {
 }
 
 /* med displays:  */
-@media screen and (max-width: 1560px) {
+@media screen and (max-width: 1575px) {
   .security-title {
     font-size: 10em;
   }
@@ -2636,6 +2642,22 @@ figure {
 
   .contact-details-wrapper {
     font-size: 0.43em;
+  }
+
+  .desktop-menu-about-contact-wrapper {
+    width: 35%;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .desktop-menu-about-contact-wrapper {
+    width: 44%;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .desktop-menu-about-contact-wrapper {
+    width: 50%;
   }
 }
 

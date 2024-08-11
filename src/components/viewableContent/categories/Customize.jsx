@@ -84,7 +84,7 @@ const ImageOverlayFirst = () => {
             // className="large-image"
             alt="Large"
           /> */}
-          <VideoPlayer src="/assets/images/backgrounds/customize/ar real estate.mp4" />
+          <VideoPlayer src="https://in3dwebsite.blob.core.windows.net/video/ar real estate.mp4" />
         </span>
         <span
           className="large-image-customize bottom-customize  sc-image-glass-bg"
@@ -96,7 +96,7 @@ const ImageOverlayFirst = () => {
             // className="large-image"
             alt="Large"
           /> */}
-          <VideoPlayer src="/assets/images/backgrounds/customize/Globe 3D Store - 14.10.20.mp4" />
+          <VideoPlayer src="https://in3dwebsite.blob.core.windows.net/video/Globe 3D Store - 14.10.20.mp4" />
         </span>
       </div>
     </div>
@@ -186,7 +186,7 @@ const ImageOverlaySecond = () => {
             // className="large-image"
             alt="Large"
           /> */}
-          <VideoPlayer src="/assets/images/backgrounds/customize/BIM Construction with Hololens.mp4" />
+          <VideoPlayer src="https://in3dwebsite.blob.core.windows.net/video/BIM Construction with Hololens.mp4" />
         </span>
         <span
           className="large-image-customize bottom-customize  sc-image-glass-bg"
@@ -198,7 +198,7 @@ const ImageOverlaySecond = () => {
             // className="large-image"
             alt="Large"
           /> */}
-          <VideoPlayer src="/assets/images/backgrounds/customize/Package scanning and moving pilot.mp4" />
+          <VideoPlayer src="https://in3dwebsite.blob.core.windows.net/video/Package scanning and moving pilot.mp4" />
         </span>
         <span
           className="large-image-customize top-customize  sc-image-glass-bg"
@@ -210,7 +210,7 @@ const ImageOverlaySecond = () => {
             // className="large-image"
             alt="Large"
           /> */}
-          <VideoPlayer src="/assets/images/backgrounds/customize/Hotze - VR Rakal.mp4" />
+          <VideoPlayer src="https://in3dwebsite.blob.core.windows.net/video/Hotze - VR Rakal.mp4" />
         </span>
       </div>
     </div>
@@ -244,7 +244,9 @@ const ImageOverlayThird = ({
             alt="Large"
           /> */}
           <VideoPlayer
-            src={"/assets/images/backgrounds/microsoft/Hololens 2 - Guides.mp4"}
+            src={
+              "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4"
+            }
             videoRef={bottomVidRef1}
             startTime={7}
           />
@@ -263,7 +265,7 @@ const ImageOverlayThird = ({
           /> */}
           <VideoPlayer
             src={
-              "/assets/images/backgrounds/microsoft/Hololens 1 - Remote Assist.mp4"
+              "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4"
             }
             videoRef={bottomVidRef2}
             startTime={28}

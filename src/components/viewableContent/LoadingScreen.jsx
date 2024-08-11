@@ -3,10 +3,15 @@ import { Suspense, useEffect, useState } from "react";
 import { useAppContext } from "../../context/appContext";
 import { Canvas } from "@react-three/fiber";
 import { TextScrambleComponent } from "../common/shuffleTexts";
+import Cursor from "../common/cursor";
 // import { useGLTFAnimations } from "../scene/ModelComponent";
 // import * as THREE from "three";
 
-export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
+export function LoadingScreen({
+  setShowloadingScreen,
+  isMobileViewOnly,
+  showLoadingScreen,
+}) {
   const [fadeOut, setFadeOut] = useState("");
   const { isAstroModelDrawn, setRenderModels, customizeHasRendered } =
     useAppContext();
@@ -86,6 +91,7 @@ export function LoadingScreen({ setShowloadingScreen, isMobileViewOnly }) {
 
   return (
     <div className={`flashing-div ${fadeOut}`}>
+      {showLoadingScreen ? <Cursor /> : null}
       <div className="scale-effect"></div>
       <div
         style={{
