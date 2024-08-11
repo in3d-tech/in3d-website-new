@@ -479,7 +479,8 @@
 /* --------- industry --------- */
 
 .industry-bottom {
-  height: 18em;
+  height: 16em;
+  width: 100%;
 }
 
 .large-image-industry {
@@ -1295,6 +1296,12 @@
   }
 }
 
+@media screen and (max-width: 1800px) {
+  .industry-bottom {
+    height: 15em;
+  }
+}
+
 @media screen and (max-width: 1750px) {
   .industry-headline {
     font-size: 2.2em;
@@ -1324,7 +1331,7 @@
   }
 
   .industry-bottom {
-    height: 16em;
+    height: 14em;
   }
 
   .industry-top-text {
@@ -1452,6 +1459,8 @@
 
   .industry-bottom {
     height: 14em;
+    width: 90%;
+    right: 2em;
   }
   .medicine-top-text {
     font-size: 1.2em;

@@ -462,7 +462,7 @@ const Bottom = ({
         flex: 1,
         display: "flex",
         flexDirection: "column",
-        marginTop: "7em",
+        marginTop: "6em",
         justifyContent: "center",
       }}
     >
@@ -475,8 +475,7 @@ const Bottom = ({
         }}
       >
         <span
-          className="large-image-customize sc-image-glass-bg"
-          style={{ width: "100%" }}
+          className="large-image-customize sc-image-glass-bg industry-bottom"
           ref={bottomImageRef}
         >
           {/* <img
@@ -492,7 +491,7 @@ const Bottom = ({
         </span>
         <span
           className="large-image-customize bottom-customize sc-image-glass-bg bottom-image industry-bottom"
-          style={{ width: "100%", marginTop: "2em" }}
+          style={{ marginTop: "2em" }}
           ref={bottomImage2Ref}
           // className="bottom-image"
         >
