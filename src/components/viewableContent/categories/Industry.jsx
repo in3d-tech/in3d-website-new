@@ -7,6 +7,7 @@ import { ModelComponent } from "./ModelComponent";
 
 export function Industry({ selectedCategory }) {
   const [displayVideos, setDisplayVideos] = useState(false);
+  const [vids, setVids] = useState(false);
   const headline =
     selectedCategory === "Industry" ? "Industry 4.0" : selectedCategory;
 
@@ -18,54 +19,49 @@ export function Industry({ selectedCategory }) {
   const bottomTextRef = useRef(null);
   const bottomImageRef = useRef(null);
   const bottomImage2Ref = useRef(null);
+  const vid1 = useRef(null);
+  const vid2 = useRef(null);
 
   useEffect(() => {
     // console.log("industry rendered");
+    preloadVideos();
     if (!displayVideos) {
       setTimeout(() => setDisplayVideos(true), 1500);
     }
   }, []);
+
+  const preloadVideos = () => {
+    if (!vids) {
+      const video1Element = vid1.current;
+      const video2Element = vid2.current;
+
+      video1Element.preload = "auto";
+      video2Element.preload = "auto";
+
+      video1Element.addEventListener("loadedmetadata", () => {
+        video1Element.play();
+        video1Element.pause();
+      });
+
+      video2Element.addEventListener("loadedmetadata", () => {
+        video2Element.play();
+        video2Element.pause();
+      });
+
+      setVids(true);
+    }
+  };
 
   useEffect(() => {
     const middleImageElement = middleImageRef.current;
     const middleElement = middleRef.current;
     const overlayElement = overlayRef.current;
 
-    // const observerOptions = {
-    //   root: null,
-    //   rootMargin: "0px",
-    //   threshold: 0.2, // 0.55,
-    // };
-
     const observerOptions2 = {
       root: null,
       rootMargin: "0px",
       threshold: 0.3, // 0.55,
     };
-
-    // const observer = new IntersectionObserver((entries) => {
-    //   entries.forEach((entry) => {
-    //     if (entry.isIntersecting) {
-    //       middleImageElement.classList.add("scrolled");
-    //       overlayElement.classList.add("scrolled");
-    //     } else {
-    //       middleImageElement.classList.remove("scrolled");
-    //       overlayElement.classList.remove("scrolled");
-    //     }
-    //   });
-    // }, observerOptions);
-
-    // if (middleElement && middleElement) {
-    //   observer.observe(middleElement);
-    // }
-
-    // const midObserver = categoryObserver({
-    //   sectionRef: middleElement,
-    //   image1Ref: middleImageElement,
-    //   image2Ref: overlayElement,
-    //   // textRef: botTextElement,
-    //   observerOptions: observerOptions,
-    // });
 
     const midObserver2 = categoryObserver({
       sectionRef: middleElement,
@@ -161,7 +157,7 @@ export function Industry({ selectedCategory }) {
       // style={{ height: "370vh" }}
     >
       <Logo />
-      <Top />
+      <Top vid1={vid1} vid2={vid2} />
       <Middle
         middleRef={middleRef}
         middleImageRef={middleImageRef}
@@ -181,7 +177,7 @@ export function Industry({ selectedCategory }) {
   );
 }
 
-const ImageOverlay = () => {
+const ImageOverlay = ({ vid1, vid2 }) => {
   return (
     <div className="sc-right-half">
       <div className="image-container">
@@ -209,74 +205,34 @@ const ImageOverlay = () => {
           className="small-image-industry top-right-industry sc-image-glass-bg"
           style={{ marginTop: "2em" }}
         >
-          {/* <img
-            src="/assets/images/backgrounds/taasia/Industry_Togle.jpg"
-            alt="Top Right"
-            style={{ width: "100%", borderRadius: "12px" }}
-          /> */}
-          <VideoPlayer src="https://in3dwebsite.blob.core.windows.net/video/ICL - Smart 3D Warehouse.mp4" />
+          <VideoPlayer
+            videoRef={vid1}
+            src="https://in3dwebsite.blob.core.windows.net/video/ICL - Smart 3D Warehouse.mp4"
+          />
         </span>
         <span
           className="small-image-industry bottom-left-industry sc-image-glass-bg"
           // style={{ height: "13em" }}
         >
-          {/* <img
-            src="/assets/images/backgrounds/taasia/Industry_Togle.jpg"
-            alt="Bottom Left"
-            style={{ width: "100%", borderRadius: "12px" }}
-          /> */}
-          <VideoPlayer src="https://in3dwebsite.blob.core.windows.net/video/agoran 2.mp4" />
+          <VideoPlayer
+            videoRef={vid2}
+            src="https://in3dwebsite.blob.core.windows.net/video/agoran 2.mp4"
+          />
         </span>
       </div>
     </div>
   );
 };
 
-const Top = ({ scene, animations }) => {
+const Top = ({ vid1, vid2 }) => {
   const modelRef = useRef();
   const headline = "Industry 4.0";
   return (
     <div style={{ display: "flex" }} className="top-top">
-      {/* <div
-        style={{
-          height: "800px",
-          width: "900px",
-          position: "absolute",
-          top: 0,
-          left: 0,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <div class="cube">
-          <div className="face top">Top</div>
-          <div className="face bottom">Bottom</div>
-          <div className="face left">Left</div>
-          <div className="face right">Right</div>
-          <div className="face front">Front</div>
-          <div className="face back">Back</div>
-        </div>
-      </div> */}
       <div className="selected-content-first-divider">
         <div className="sc-content-left-half industry-left-half-top">
-          <div
-            // style={{
-            //   fontSize: "3.2em",
-            //   fontFamily: "gotham-bold",
-            //   width: "80%",
-            //   textAlign: "center",
-            // }}
-            className="industry-headline"
-          >
-            <h1
-              className="headline-animation"
-              // style={{
-              //   borderBottom: "4px solid black",
-              // }}
-            >
-              {headline}
-            </h1>
+          <div className="industry-headline">
+            <h1 className="headline-animation">{headline}</h1>
           </div>
 
           <div
@@ -295,7 +251,7 @@ const Top = ({ scene, animations }) => {
         className="selected-content-first-divider"
         style={{ marginTop: "5em" }}
       >
-        <ImageOverlay />
+        <ImageOverlay vid1={vid1} vid2={vid2} />
       </div>
     </div>
   );

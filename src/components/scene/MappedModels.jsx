@@ -109,17 +109,19 @@ function MappedModels({
   useFrame(() => {
     if (idx == 0 && !isCustomizedRendered.current) {
       // Check if the object is visible in the scene and loaded - not working
-      if (currentRef.current && scene) {
-        // Check if all objects in the scene have been rendered - not working
-        const fullyRendered = scene.children.every((child) => child.visible);
-        if (fullyRendered && active === false && scene) {
-          // Object is fully rendered
-          isCustomizedRendered.current = true;
-          setCustomizeHasRendered(true);
-          // setTimeout(() => setIsAstroModelDrawn(true), 1000);
-          console.log("industry object is fully rendered!");
-        }
-      }
+      isCustomizedRendered.current = true;
+      setCustomizeHasRendered(true);
+      // if (currentRef.current && scene) {
+      //   // Check if all objects in the scene have been rendered - not working
+      //   const fullyRendered = scene.children.every((child) => child.visible);
+      //   if (fullyRendered && active === false && scene) {
+      //     // Object is fully rendered
+      //     isCustomizedRendered.current = true;
+      //     setCustomizeHasRendered(true);
+      //     // setTimeout(() => setIsAstroModelDrawn(true), 1000);
+      //     console.log("industry object is fully rendered!");
+      //   }
+      // }
     }
   });
 

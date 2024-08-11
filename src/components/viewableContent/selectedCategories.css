@@ -83,7 +83,7 @@
   opacity: 0;
   overflow: hidden;
   animation: fadeIn 1s linear forwards;
-  animation-delay: 0.8s;
+  animation-delay: 0.6s;
 }
 
 .selected-content-first-divider-customize {
@@ -94,7 +94,7 @@
   /* margin-top: 8em; */
   opacity: 0;
   animation: fadeIn 1s linear forwards;
-  animation-delay: 0.8s;
+  animation-delay: 0.6s;
 }
 
 /* .selected-content-first-divider-customize-bot {
@@ -144,11 +144,11 @@
 .sc-right-half::after {
   content: "";
   position: absolute;
-  bottom: -4px; /* Adjust this to match the border position */
+  bottom: -4px;
   left: 0;
   width: 100%;
-  height: 4px; /* Height corresponding to the border size */
-  background-color: black; /* Border color */
+  height: 4px;
+  background-color: black;
   animation: borderGrowFive 1.2s ease-out forwards;
   animation-delay: 0.4s;
 }
@@ -374,6 +374,32 @@
   object-fit: cover; /* Ensures the video covers the entire container */
   border-radius: 8px; /* Rounded corners for a modern look */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25); /* Subtle shadow for depth */
+}
+
+.sc-title-container {
+  font-size: 4em;
+  position: relative;
+  display: inline-block; /* Ensures the container wraps around the h1 */
+  width: 80%;
+  font-family: gotham-bold;
+}
+
+.sc-title-container h1 {
+  margin: 0;
+  padding: 15px;
+  position: relative;
+  z-index: 1; /* Ensure the text is above the border */
+}
+
+.sc-title-container::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 4px; /* Set the height you want for the border */
+  background: black;
+  animation: borderGrow 2.5s forwards;
 }
 
 .categories-contact-btn {
@@ -638,6 +664,22 @@
   height: 22em;
 }
 
+.border-top-animation {
+  position: relative;
+}
+
+.border-top-animation::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 4px; /* Set the height you want for the border */
+  background: black;
+  animation: borderGrow 1.2s forwards;
+  /* animation-delay: 5s; */
+}
+
 .security-vid-one-bottom {
   height: 18em;
 }
@@ -681,13 +723,13 @@
 }
 
 .bottom-text-security {
-  transition: transform 3s ease-in-out, opacity 2s ease-in-out;
+  transition: transform 1.5s ease-in-out, opacity 1.5s ease-in-out;
   opacity: 0;
   transform: translateY(120px);
 }
 
 .bottom-text-security.scrolled {
-  opacity: 0.7;
+  opacity: 0.8;
   transform: translateY(0px);
 }
 
@@ -702,7 +744,7 @@
   font-family: gotham;
   font-size: 1.5em;
   line-height: 1.8em;
-  margin-top: 5em;
+  margin-top: 7em;
 }
 
 .security-font-two {
@@ -1300,6 +1342,12 @@
   .industry-bottom {
     height: 15em;
   }
+
+  .security-font-one {
+    font-size: 1.4em;
+    line-height: 1.6em;
+    margin-top: 9em;
+  }
 }
 
 @media screen and (max-width: 1750px) {
@@ -1309,11 +1357,17 @@
   .contact-us-header-font {
     font-size: 2em;
   }
+  .sc-title-container {
+    font-size: 3.5em;
+  }
 }
 
 @media screen and (max-width: 1675px) {
   .about-text-three {
     font-size: 1.7em;
+  }
+  .sc-title-container {
+    font-size: 3.2em;
   }
 }
 
@@ -1326,6 +1380,10 @@
     height: 10em;
   }
 
+  .sc-title-container {
+    font-size: 2.8em;
+    margin-top: 2em;
+  }
   .middle-image {
     height: 20em;
   }

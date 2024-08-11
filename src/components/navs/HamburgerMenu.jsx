@@ -44,22 +44,9 @@ export const HamburgerMenu = ({ isMobileViewOnly }) => {
     setIsCursorHovering,
     videosPreloaded,
     setVideosPreloaded,
+    industryContent,
+    setIndustryContent,
   } = useAppContext();
-
-  // const customizeBg =
-  //   "https://in3dwebsite.blob.core.windows.net/photos/Customize_Togle_Finish-min.jpg";
-  // const aiBg =
-  //   "https://in3dwebsite.blob.core.windows.net/photos/Ai_Tugle_Finish-min.jpg";
-  // const microsoftBg =
-  //   "https://in3dwebsite.blob.core.windows.net/photos/Microsoft_Tugle-min.jpg";
-  // const militaryBg =
-  //   "https://in3dwebsite.blob.core.windows.net/photos/Militery_Togle_Finish2-min.jpg";
-  // const securityBg =
-  //   "https://in3dwebsite.blob.core.windows.net/photos/Security_Togle_Finish2-min.jpg";
-  // const industryBg =
-  //   "https://in3dwebsite.blob.core.windows.net/photos/Industry_Togle-min.jpg";
-  // const medicineBg =
-  //   "https://in3dwebsite.blob.core.windows.net/photos/Medical_Togle-min.jpg";
 
   useEffect(() => {
     if (menuOpened && Object.keys(preloadedImages).length === 0) {
@@ -111,49 +98,6 @@ export const HamburgerMenu = ({ isMobileViewOnly }) => {
     { key: 9, title: "Artifical Intelligence" },
     { key: 10, title: "" },
   ];
-
-  // const getbgImage = () => {
-  //   let url;
-
-  //   switch (hovered) {
-  //     case "Customization":
-  //       url = customizeBg;
-  //       break;
-  //     case "Artifical Intelligence":
-  //       url = aiBg;
-  //       break;
-  //     case "Microsoft":
-  //       url = microsoftBg;
-  //       break;
-  //     case "Military":
-  //       url = militaryBg;
-  //       break;
-  //     case "Security":
-  //       url = securityBg;
-  //       break;
-  //     case "Industry":
-  //       url = industryBg;
-  //       break;
-  //     case "Medicine":
-  //       url = medicineBg;
-  //       break;
-  //     default:
-  //       url = "";
-  //       break;
-  //   }
-
-  //   return {
-  //     position: "absolute",
-  //     backgroundImage: `url(${url})`,
-  //     backgroundSize: "cover",
-  //     backgroundPosition: "center",
-  //     backgroundRepeat: "no-repeat",
-  //     width: "100%",
-  //     height: "100%",
-  //     animation: "zoomOutImg 1.8s ease-out forwards",
-  //     zIndex: 0,
-  //   };
-  // };
 
   const getBgImage = () => {
     if (preloadedImages[hovered]) {

@@ -28,9 +28,12 @@ export function Military({ selectedCategory }) {
 
 const ImageOverlay = () => {
   return (
-    <div className="sc-right-half">
+    <div className="sc-right-half" style={{ height: "60%", marginTop: "2em" }}>
       <div className="image-container">
-        <span className="large-image-industry sc-image-glass-bg">
+        <span
+          className="large-image-industry sc-image-glass-bg"
+          style={{ top: "3em" }}
+        >
           {/* <img
             src="/assets/images/backgrounds/military/Militery_Togle_Finish2.jpg"
             // className="large-image"
@@ -39,7 +42,10 @@ const ImageOverlay = () => {
           /> */}
           <VideoPlayer src="https://in3dwebsite.blob.core.windows.net/video/Boat 3D Scan.mp4" />
         </span>
-        <span className="small-image-industry top-left-industry sc-image-glass-bg">
+        <span
+          className="small-image-industry top-left-industry sc-image-glass-bg"
+          style={{ top: "3em" }}
+        >
           {/* <img
             src="/assets/images/backgrounds/military/Militery_Togle_Finish2.jpg"
             // className="small-image top-left"
@@ -60,14 +66,8 @@ const Top = () => {
     <div style={{ display: "flex", flexDirection: "row-reverse" }}>
       <div className="selected-content-first-divider">
         <div className="sc-content-left-half">
-          <div
-            style={{
-              fontSize: "3em",
-              fontFamily: "gotham-bold",
-              width: "70%",
-            }}
-          >
-            <h1 style={{ borderBottom: "4px solid black" }}>{headline}</h1>
+          <div className="sc-title-container">
+            <h1>{headline}</h1>
           </div>
           <div
             style={{
@@ -76,6 +76,7 @@ const Top = () => {
               opacity: 0.72,
               width: "80%",
               lineHeight: "1.8em",
+              marginTop: "2em",
             }}
           >
             Thanks to years of collaboration with defense industries, we gained
@@ -87,7 +88,10 @@ const Top = () => {
       </div>
       <div
         className="selected-content-first-divider"
-        style={{ alignItems: "flex-end", justifyContent: "center" }}
+        style={{
+          alignItems: "flex-end",
+          justifyContent: "center",
+        }}
       >
         <ImageOverlay />
         {/* <MiddleThird /> */}

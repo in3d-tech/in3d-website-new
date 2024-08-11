@@ -45,8 +45,7 @@ export function LoadingScreen({
     if (isAstroModelDrawn && !isMobileViewOnly) {
       const renderModels = setTimeout(() => setRenderModels(true), 1000);
 
-      // if (customizeHasRendered) {
-      if (isAstroModelDrawn) {
+      if (customizeHasRendered) {
         const fadeOut = setTimeout(() => {
           setFadeOut("flashing-fade-out");
           document.body.style.overflowY = "auto";
@@ -66,7 +65,7 @@ export function LoadingScreen({
         clearTimeout(renderModels);
       };
     }
-  }, [isAstroModelDrawn, has4SecondsPassed]);
+  }, [isAstroModelDrawn, customizeHasRendered, has4SecondsPassed]);
 
   const sparklesColours = [
     "#0DA888", //"#CF9FFF",

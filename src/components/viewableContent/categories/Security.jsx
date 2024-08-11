@@ -1,8 +1,8 @@
-import { useRef, useEffect, Suspense } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Logo, VideoPlayer } from "../../common/Logo";
 import { categoryObserver } from "../../common/categoryObserver";
-import { ModelComponent } from "./ModelComponent";
-import { Canvas } from "@react-three/fiber";
+// import { ModelComponent } from "./ModelComponent";
+// import { Canvas } from "@react-three/fiber";
 
 export function Security() {
   const headline = "Security";
@@ -12,6 +12,8 @@ export function Security() {
   const bottomVideoRef1 = useRef(null);
   const bottomVideoRef2 = useRef(null);
 
+  const [showBottom, setShowBottom] = useState(false);
+
   useEffect(() => {
     const botElement = bottomRef.current;
     const botTextElement = bottomTextRef.current;
@@ -20,7 +22,7 @@ export function Security() {
     const observerOptionsBottom = {
       root: null,
       rootMargin: "0px",
-      threshold: 0.6, // Trigger when 80% of the middle section is in view
+      threshold: 0.3, // Trigger when 80% of the middle section is in view
     };
 
     const bottomObserver = categoryObserver({
@@ -28,6 +30,7 @@ export function Security() {
       image1Ref: botImageElement,
       textRef: botTextElement,
       observerOptions: observerOptionsBottom,
+      setShowBottom,
     });
 
     return () => {
@@ -50,6 +53,7 @@ export function Security() {
         bottomRef={bottomRef}
         bottomVideoRef1={bottomVideoRef1}
         bottomVideoRef2={bottomVideoRef2}
+        showBottom={showBottom}
       />
       <BottomModel />
     </div>
@@ -95,6 +99,7 @@ const Bottom = ({
   bottomRef,
   bottomVideoRef1,
   bottomVideoRef2,
+  showBottom,
 }) => {
   return (
     <div
@@ -103,13 +108,15 @@ const Bottom = ({
       ref={bottomRef}
     >
       <div
-        className="left-half-placeholder"
+        className={`left-half-placeholder ${
+          showBottom ? "border-top-animation" : ""
+        }`}
         style={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           flex: 1,
-          borderTop: "4px solid black",
+          // borderTop: "4px solid black",
           height: "60%",
           marginTop: "12em",
         }}
@@ -145,8 +152,8 @@ const ImageOverlay = ({ isBottom, bottomVideoRef2, bottomVideoRef1 }) => {
     <div
       className="sc-right-half"
       style={{
-        height: "80%",
-        marginTop: "7em",
+        height: "70%",
+        marginTop: "4em",
         alignItems: isBottom ? "center" : "center",
       }}
     >
@@ -155,7 +162,7 @@ const ImageOverlay = ({ isBottom, bottomVideoRef2, bottomVideoRef1 }) => {
           className={`large-image-industry sc-image-glass-bg ${
             isBottom ? "security-vid-one-bottom" : "security-vid-one-top"
           }`}
-          // style={{ height: isBottom ? "18em" : "22em" }}
+          style={{ height: isBottom ? "16em" : "18em" }}
         >
           <VideoPlayer
             src={
@@ -167,12 +174,19 @@ const ImageOverlay = ({ isBottom, bottomVideoRef2, bottomVideoRef1 }) => {
         </span>
         <span
           className="small-image-industry top-left-industry sc-image-glass-bg security-top-vid"
-          // style={{ height: "15em" }}
+          style={isBottom ? { height: "12em" } : null}
         >
           <VideoPlayer src="https://in3dwebsite.blob.core.windows.net/video/AR Factory Real Time Control Panel Data - 2 level (3).mp4" />
         </span>
 
-        <span className="small-image-industry bottom-left-industry sc-image-glass-bg">
+        <span
+          className="small-image-industry bottom-left-industry sc-image-glass-bg"
+          style={
+            isBottom
+              ? { marginLeft: "4em", marginBottom: "0em" }
+              : { marginBottom: "2em" }
+          }
+        >
           <VideoPlayer
             src={
               isBottom
@@ -186,7 +200,7 @@ const ImageOverlay = ({ isBottom, bottomVideoRef2, bottomVideoRef1 }) => {
         {isBottom ? (
           <span
             className="small-image-industry bottom-right-industry sc-image-glass-bg"
-            style={{ left: "11.5em", marginTop: "3.1em" }}
+            style={{ left: "12em", bottom: "-4em" }}
           >
             <VideoPlayer
               src="https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4"

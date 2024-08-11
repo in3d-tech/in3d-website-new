@@ -5,6 +5,7 @@ export const categoryObserver = ({
   textRef,
   observerOptions,
   isDoubleAnimation,
+  setShowBottom,
 }) => {
   if (!observerOptions || !sectionRef) {
     return;
@@ -13,6 +14,9 @@ export const categoryObserver = ({
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
+        if (setShowBottom) {
+          setShowBottom(true);
+        }
         if (textRef) {
           textRef.classList.add("scrolled");
         }
