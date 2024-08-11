@@ -135,8 +135,9 @@ const Top = () => {
             width: "80%",
             marginTop: "3em",
           }}
+          className="mirosoft-title-one"
         >
-          <h1 style={{ borderBottom: "4px solid black" }}>{headline}</h1>
+          <h1>{headline}</h1>
           {/* <h1>{headline}</h1> */}
         </div>
         <div className="customize-text-one">

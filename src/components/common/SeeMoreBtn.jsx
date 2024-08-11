@@ -141,10 +141,11 @@ export const SeeMoreBtn = () => {
     3: "Industry",
     4: "Medicine",
     5: "Microsoft",
-    6: "Artifical Intelligence",
-    7: "Military",
-    8: "Customization",
-    9: "Contact",
+    6: "Security",
+    7: "Artifical Intelligence",
+    8: "Military",
+    9: "Customization",
+    10: "Contact",
   };
 
   return (

@@ -403,6 +403,25 @@
   animation: borderGrow 2.5s forwards;
 }
 
+.mirosoft-title-one {
+  position: relative;
+  display: inline-block; /* Ensures the container wraps around the h1 */
+  width: 80%;
+  font-family: gotham-bold;
+}
+
+.mirosoft-title-one::after {
+  content: "";
+  position: absolute;
+  bottom: 1em;
+  left: 0;
+  width: 0;
+  height: 4px; /* Set the height you want for the border */
+  background: black;
+  animation: borderGrow 2.5s forwards;
+  animation-delay: 0.3s;
+}
+
 .categories-contact-btn {
   all: unset;
 

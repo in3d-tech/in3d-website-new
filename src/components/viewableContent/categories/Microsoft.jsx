@@ -297,8 +297,9 @@ const Top = ({
             fontFamily: "gotham-bold",
             width: "60%",
           }}
+          className="mirosoft-title-one "
         >
-          <h1 style={{ borderBottom: "4px solid black" }}>{"Microsoft"}</h1>
+          <h1>{"Microsoft"}</h1>
         </div>
         <div
           ref={middleTextRef}
