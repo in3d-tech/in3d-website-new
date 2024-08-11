@@ -80,7 +80,7 @@ const Top = ({ topVideoRef }) => {
             <VideoPlayer
               videoRef={topVideoRef}
               src="https://in3dwebsite.blob.core.windows.net/video/Medical Holoportation - Ichilov (1) (1).mp4"
-              startTime={12}
+              startTime={2}
             />
           </span>
         </div>
