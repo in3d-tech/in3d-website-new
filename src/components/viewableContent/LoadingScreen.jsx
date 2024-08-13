@@ -65,7 +65,7 @@ export function LoadingScreen({
       }
 
       return () => {
-        clearTimeout(renderModels);
+        // clearTimeout(renderModels);
         clearTimeout(delayedtimeout);
       };
     }

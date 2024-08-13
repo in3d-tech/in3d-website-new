@@ -19,6 +19,7 @@ export function AstroModel({
     setScrollArea,
     isAstroModelDrawn,
     setIsAstroModelDrawn,
+    setCustomizeHasRendered,
   } = useAppContext();
 
   const { scene, animations } = useGLTF(url);
@@ -42,7 +43,10 @@ export function AstroModel({
       ) {
         // Object is fully rendered
         isFullyRenderedRef.current = true;
-        setTimeout(() => setIsAstroModelDrawn(true), 1000);
+        setTimeout(() => {
+          setIsAstroModelDrawn(true);
+          setCustomizeHasRendered(true);
+        }, 1000);
         console.log("Astro object rendered!");
       }
     }
@@ -54,7 +58,10 @@ export function AstroModel({
       const fullyRendered = scene.children.every((child) => child.visible);
 
       if (fullyRendered && isAstroModelDrawn === false) {
-        setTimeout(() => setIsAstroModelDrawn(true), 1500);
+        setTimeout(() => {
+          setIsAstroModelDrawn(true);
+          setCustomizeHasRendered(true);
+        }, 1000);
         console.log("Astro object rendered!");
       }
     }

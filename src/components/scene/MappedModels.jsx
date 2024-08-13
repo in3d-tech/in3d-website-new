@@ -73,7 +73,10 @@ function MappedModels({
     setScrollArea,
     setModelAnimationIsHalfWay,
     setCustomizeHasRendered,
+    isAstroModelDrawn,
   } = useAppContext();
+
+  // if (!isAstroModelDrawn) return null;
 
   const { scene, animations } = useGLTF(model.url);
   const mixer = useGLTFAnimations(scene, animations);
@@ -109,8 +112,8 @@ function MappedModels({
   useFrame(() => {
     if (idx == 0 && !isCustomizedRendered.current) {
       // Check if the object is visible in the scene and loaded - not working
-      isCustomizedRendered.current = true;
-      setCustomizeHasRendered(true);
+      // isCustomizedRendered.current = true;
+      // setCustomizeHasRendered(true);
       // if (currentRef.current && scene) {
       //   // Check if all objects in the scene have been rendered - not working
       //   const fullyRendered = scene.children.every((child) => child.visible);
