@@ -4,13 +4,13 @@ export const preloadImage = (src) => {
 };
 
 export const firstImagesToLoad = [
-  "https://in3dwebsite.blob.core.windows.net/photos/taasia_bg-min.jpg",
-  "https://in3dwebsite.blob.core.windows.net/photos/medicine_bg.jpg",
-  "https://in3dwebsite.blob.core.windows.net/photos/microsoft_bg.jpg",
-  "https://in3dwebsite.blob.core.windows.net/photos/security.jpg",
-  "https://in3dwebsite.blob.core.windows.net/photos/ai_bg.png",
-  "https://in3dwebsite.blob.core.windows.net/photos/military_bg.jpg",
-  "https://in3dwebsite.blob.core.windows.net/photos/Costumize_Smoke_Background_V01-min-compressed.png",
+  //     "https://in3dwebsite.blob.core.windows.net/photos/taasia_bg-min.jpg",
+  //     "https://in3dwebsite.blob.core.windows.net/photos/medicine_bg.jpg",
+  //     "https://in3dwebsite.blob.core.windows.net/photos/microsoft_bg.jpg",
+  //     "https://in3dwebsite.blob.core.windows.net/photos/security.jpg",
+  //     "https://in3dwebsite.blob.core.windows.net/photos/ai_bg.png",
+  //     "https://in3dwebsite.blob.core.windows.net/photos/military_bg.jpg",
+  //     "https://in3dwebsite.blob.core.windows.net/photos/Costumize_Smoke_Background_V01-min-compressed.png",
   "https://in3dwebsite.blob.core.windows.net/photos/Customize_Togle_Finish-min.jpg",
   "https://in3dwebsite.blob.core.windows.net/photos/Ai_Tugle_Finish-min.jpg",
   "https://in3dwebsite.blob.core.windows.net/photos/Microsoft_Tugle-min.jpg",
