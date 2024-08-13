@@ -22,6 +22,7 @@ export default function AppContextProvider({ children }) {
   const [isCursorHovering, setIsCursorHovering] = useState(false);
   // const [isSectionTwo, setIsSectionTwo] = useState(fal)
   const [videosPreloaded, setVideosPreloaded] = useState(false);
+  const [firstContentLoaded, setfirstContentLoaded] = useState(false);
 
   return (
     <AppContext.Provider
@@ -54,6 +55,8 @@ export default function AppContextProvider({ children }) {
         setIsCursorHovering,
         videosPreloaded,
         setVideosPreloaded,
+        firstContentLoaded,
+        setfirstContentLoaded,
       }}
     >
       {children}
@@ -94,6 +97,8 @@ export function useAppContext() {
       setIsCursorHovering: () => {},
       videosPreloaded: false,
       setVideosPreloaded: () => {},
+      firstContentLoaded: false,
+      setfirstContentLoaded: () => {},
     };
   }
 

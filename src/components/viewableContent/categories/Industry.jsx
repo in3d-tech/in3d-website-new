@@ -186,7 +186,7 @@ const ImageOverlay = ({ vid1, vid2 }) => {
           style={{ marginTop: "3em" }}
         >
           <img
-            src="/assets/images/backgrounds/taasia/industry-large.jpg"
+            src="https://in3dwebsite.blob.core.windows.net/photos/industry-large-min.jpg"
             alt="Large"
             style={{ width: "100%" }}
           />

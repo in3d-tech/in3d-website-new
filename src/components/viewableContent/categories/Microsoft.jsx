@@ -15,7 +15,6 @@ export function Microsoft() {
   const { videosPreloaded } = useAppContext();
 
   useEffect(() => {
-    console.log("microsoft rendered");
     if (!displayVideos) {
       setTimeout(() => setDisplayVideos(true), 1500);
     }
@@ -53,10 +52,10 @@ export function Microsoft() {
         }}
       >
         <img
-          // src="/assets/images/backgrounds/microsoft/microsoft-shake-cutout.png"
-          src="https://in3dwebsite.blob.core.windows.net/photos/microsoft-shake-cutout-min.png"
+          src="https://in3dwebsite.blob.core.windows.net/photos/handshake_newer.png"
+          // src="https://in3dwebsite.blob.core.windows.net/photos/microsoft-shake-cutout-min.png"
           style={{ width: "90%" }}
-        ></img>
+        />
       </div>
       <Bottom bottomVidRef1={bottomVidRef1} bottomVidRef3={bottomVidRef3} />
       {/* <BottomModel /> */}
@@ -258,13 +257,6 @@ const Top = ({
             className="large-image-customize bottom-customize sc-image-glass-bg"
             style={{ width: "100%" }}
           >
-            {/* <img
-              style={{ backgroundSize: "cover", width: "100%" }}
-              src="/assets/images/backgrounds/microsoft/Microsoft_Tugle.jpg"
-              alt="Large"
-              // className="bottom-image"
-              ref={bottomImage2Ref}
-            /> */}
             {true ? (
               <VideoPlayer
                 src={

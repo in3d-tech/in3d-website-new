@@ -24,6 +24,11 @@ import { BackgroundScroll } from "./BackgroundScroll";
 import { useAppContext } from "../../context/appContext";
 import { Sparkles } from "@react-three/drei";
 import { getSparkleColour } from "./ornaments/getSparkleColour.js";
+import {
+  preloadImage,
+  firstImagesToLoad,
+  secondImagesToLoad,
+} from "../common/cacheImages.js";
 
 const MappedModels = lazy(() => import("./MappedModels.jsx"));
 
@@ -54,6 +59,8 @@ function Scene({ scrollToElementById }) {
     titleOnMainPageHovered,
     modelAnimationIsHalfWay,
     customizeHasRendered,
+    firstContentLoaded,
+    setfirstContentLoaded,
   } = useAppContext();
 
   const containerRef = useRef(null);
@@ -186,13 +193,21 @@ function Scene({ scrollToElementById }) {
     if (visibleText) {
       setShouldFadeIn(true);
 
-      // After a delay, reset shouldFadeIn to trigger fade out
       const timeout = setTimeout(() => {
         setShouldFadeIn(false);
       }, 2000);
       return () => clearTimeout(timeout);
     }
   }, [visibleText]);
+
+  useEffect(() => {
+    if (customizeHasRendered && !firstContentLoaded) {
+      setfirstContentLoaded(true);
+
+      firstImagesToLoad.forEach(preloadImage);
+      secondImagesToLoad.forEach(preloadImage);
+    }
+  }, [customizeHasRendered]);
 
   const allModelPositions = [
     taasiaRef,
@@ -235,17 +250,6 @@ function Scene({ scrollToElementById }) {
     });
   }
 
-  // const scrollToElement = () => {
-  //   if (section1MenuRef.current) {
-  //     const elementPosition =
-  //       section1MenuRef.current.getBoundingClientRect().top;
-  //     window.scrollTo({
-  //       top: elementPosition,
-  //     });
-  //   }
-  // };
-  // midSection2
-
   return (
     <div className="scene one" style={{}} ref={containerRef}>
       {/* {customizeHasRendered ? (
@@ -276,27 +280,17 @@ function Scene({ scrollToElementById }) {
             top: "2em",
             left: "3em",
             zIndex: 1,
-            // width: "200px",
-            // height: "200px",
-            // border: "1px solid white",
-            // background: "white",
           }}
           className="hover14 column"
           onClick={scrollToTop}
         >
-          {/* <figure style={{ all: "unset" }}> */}
           <span className="two-dee-box">
-            {/* <h2>Jelly Fish</h2> */}
-
             <img
               style={{ height: "90px", border: "1px solid yellow" }}
-              // className="in3d-fixed-logo"
               className="logo"
-              // className="in3d-logo-hp"
               src="/assets/images/in3d-logo-white.png"
             />
           </span>
-          {/* </figure> */}
         </div>
       ) : null}
 
@@ -317,7 +311,6 @@ function Scene({ scrollToElementById }) {
         <Canvas
           // shadows
           className={`canvas-container`}
-          // camera={{ position: [-30, -10, 5] }}
         >
           <Sparkles
             count={300}
@@ -404,7 +397,6 @@ const Lights = ({
           />
         </>
       ) : null}
-      {/* <ambientLight intensity={1} color={"green"} /> */}
     </>
   );
 };

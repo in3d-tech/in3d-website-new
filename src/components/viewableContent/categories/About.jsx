@@ -42,7 +42,6 @@ export function About() {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          console.log("somehow we found thsi thing?");
           botElement.classList.add("animated-img");
           setIsTwoOneTextInView(true);
           // midTxtTwo.classList.add("border-right-animation-container");
@@ -55,7 +54,6 @@ export function About() {
     const observerTwo = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          console.log("somehow we found thsi thing?");
           midTxtTwo.classList.add("border-right-animation-container");
         } else {
           //   botElement.classList.remove("scrolled");
@@ -66,7 +64,6 @@ export function About() {
     const midTwoObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          console.log("heyooo");
           midTwo.classList.add("fade-in");
           midTwoTxtOne.classList.add("border-left-animation");
         }
@@ -179,7 +176,8 @@ const Top = () => (
       style={{
         height: "100vh",
         background:
-          "url(https://in3dwebsite.blob.core.windows.net/photos/about_P1-min.png)",
+          "url(https://in3dwebsite.blob.core.windows.net/photos/astronaut_P1_stronger-min.png)",
+        // "url(https://in3dwebsite.blob.core.windows.net/photos/about_P1-min.png)",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         // backgroundPosition: "",
