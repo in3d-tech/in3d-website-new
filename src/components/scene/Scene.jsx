@@ -58,6 +58,7 @@ function Scene({ scrollToElementById }) {
     setMenuOpened,
     titleOnMainPageHovered,
     modelAnimationIsHalfWay,
+    isAstroModelDrawn,
     customizeHasRendered,
     firstContentLoaded,
     setfirstContentLoaded,
@@ -122,13 +123,13 @@ function Scene({ scrollToElementById }) {
     const backgrounds = {
       1: 'url("/assets/images/backgrounds/Astro_1_Background.webp")',
       2: 'url("/assets/images/backgrounds/Astro_1_Background.webp")',
-      3: 'url("/assets/images/backgrounds/taasia/taasia_bg.jpg")',
-      4: 'url("/assets/images/backgrounds/medicine/medicine_bg.jpg")',
-      5: 'url("/assets/images/backgrounds/microsoft/microsoft_bg.jpg")',
-      6: 'url("/assets/images/backgrounds/security/security.jpg")',
-      7: 'url("/assets/images/backgrounds/ai/ai_bg.png',
-      8: 'url("/assets/images/backgrounds/military/military_bg.jpg")',
-      9: 'url("/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png")',
+      3: "url(https://in3dwebsite.blob.core.windows.net/photos/taasia_bg-min.jpg)",
+      4: "url(https://in3dwebsite.blob.core.windows.net/photos/medicine_bg.jpg)",
+      5: "url(https://in3dwebsite.blob.core.windows.net/photos/microsoft_bg.jpg)",
+      6: "url(https://in3dwebsite.blob.core.windows.net/photos/security.jpg)",
+      7: "url(https://in3dwebsite.blob.core.windows.net/photos/ai_bg.png)",
+      8: "url(https://in3dwebsite.blob.core.windows.net/photos/military_bg.jpg)",
+      9: "url(https://in3dwebsite.blob.core.windows.net/photos/Costumize_Smoke_Background_V01-min-compressed.png)",
       10: 'url("/assets/images/backgrounds/Astro_1_Background.webp")',
     };
 
