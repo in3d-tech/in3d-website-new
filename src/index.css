@@ -1290,7 +1290,7 @@ section {
 .flashing-div {
   background: rgb(31, 66, 98);
   position: fixed;
-  z-index: 4000000000000;
+  z-index: 40;
   top: 0;
   left: 0;
   display: flex;
