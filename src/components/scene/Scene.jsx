@@ -27,7 +27,7 @@ import { getSparkleColour } from "./ornaments/getSparkleColour.js";
 import {
   preloadImage,
   firstImagesToLoad,
-  secondImagesToLoad,
+  // secondImagesToLoad,
 } from "../common/cacheImages.js";
 
 const MappedModels = lazy(() => import("./MappedModels.jsx"));
@@ -205,7 +205,7 @@ function Scene({ scrollToElementById }) {
       setfirstContentLoaded(true);
 
       firstImagesToLoad.forEach(preloadImage);
-      secondImagesToLoad.forEach(preloadImage);
+      // secondImagesToLoad.forEach(preloadImage);
     }
   }, [customizeHasRendered]);
 

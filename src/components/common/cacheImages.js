@@ -15,9 +15,6 @@ export const firstImagesToLoad = [
   "https://in3dwebsite.blob.core.windows.net/photos/about-2-min.png",
   "https://in3dwebsite.blob.core.windows.net/photos/about-3-min.png",
   "https://in3dwebsite.blob.core.windows.net/photos/about-4-min.png",
-];
-
-export const secondImagesToLoad = [
   "https://in3dwebsite.blob.core.windows.net/photos/astronaut6-min.png",
   "https://in3dwebsite.blob.core.windows.net/photos/industry-hat-min.png",
   "https://in3dwebsite.blob.core.windows.net/photos/industry-machine-min.jpg",
@@ -28,3 +25,15 @@ export const secondImagesToLoad = [
   "https://in3dwebsite.blob.core.windows.net/photos/microsoft-building-min.jpg",
   "https://in3dwebsite.blob.core.windows.net/photos/customize-dna-min.jpg",
 ];
+
+// export const secondImagesToLoad = [
+//   "https://in3dwebsite.blob.core.windows.net/photos/astronaut6-min.png",
+//   "https://in3dwebsite.blob.core.windows.net/photos/industry-hat-min.png",
+//   "https://in3dwebsite.blob.core.windows.net/photos/industry-machine-min.jpg",
+//   "https://in3dwebsite.blob.core.windows.net/photos/industry-large-min.jpg",
+//   "https://in3dwebsite.blob.core.windows.net/photos/medical_overlay_1-min.jpg",
+//   "https://in3dwebsite.blob.core.windows.net/photos/med-overlay-bot-min.jpg",
+//   "https://in3dwebsite.blob.core.windows.net/photos/handshake_newer.png",
+//   "https://in3dwebsite.blob.core.windows.net/photos/microsoft-building-min.jpg",
+//   "https://in3dwebsite.blob.core.windows.net/photos/customize-dna-min.jpg",
+// ];
