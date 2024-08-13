@@ -46,7 +46,7 @@ export function LoadingScreen({
     }
 
     if (isAstroModelDrawn && !isMobileViewOnly) {
-      const renderModels = setTimeout(() => setRenderModels(true), 1000);
+      // const renderModels = setTimeout(() => setRenderModels(true), 500);
 
       if (customizeHasRendered) {
         const fadeOut = setTimeout(() => {
@@ -55,7 +55,7 @@ export function LoadingScreen({
         }, 100);
         const closeLoadingScreen = setTimeout(
           () => setShowloadingScreen(false),
-          2200
+          1200
         );
         return () => {
           // clearTimeout(loadingText);
