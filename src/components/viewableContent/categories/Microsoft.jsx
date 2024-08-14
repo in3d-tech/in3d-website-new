@@ -2,17 +2,19 @@ import { ContactBtn, Logo, VideoPlayer } from "../../common/Logo";
 import { useEffect, useRef, useState, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ModelComponent } from "./ModelComponent";
-import { useAppContext } from "../../../context/appContext";
+// import { useAppContext } from "../../../context/appContext";
 
 export function Microsoft() {
   const [displayVideos, setDisplayVideos] = useState(false);
   const topVidoe1Ref = useRef(null);
   const topVidoe2Ref = useRef(null);
   const bottomVidRef1 = useRef(null);
-  const bottomVidRef2 = useRef(null);
+  const bottomVidContainerRef = useRef(null);
   const bottomVidRef3 = useRef(null);
+  const bottomTextContainerRef = useRef(null);
+  const bottomTextRef = useRef(null);
 
-  const { videosPreloaded } = useAppContext();
+  // const { videosPreloaded } = useAppContext();
 
   useEffect(() => {
     if (!displayVideos) {
@@ -21,20 +23,43 @@ export function Microsoft() {
   }, []);
 
   useEffect(() => {
-    if (videosPreloaded) {
-      setTimeout(() => {
-        topVidoe1Ref.current.src =
-          "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4";
-        topVidoe2Ref.current.src =
-          "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4";
-      }, 500);
-    }
-  }, [videosPreloaded]);
+    const bottomContainer = bottomVidContainerRef.current;
+    const bottomTextContainer = bottomTextContainerRef.current;
+    const bottomText = bottomTextRef.current;
+
+    const observerOptionsBottom = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.3, // Trigger when 80% of the middle section is in view
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          if (bottomContainer) {
+            bottomContainer.classList.add("sc-right-half-microsoft");
+            bottomTextContainer.classList.add("border-top-animation-microsoft");
+          }
+          if (bottomText) {
+            bottomText.classList.add("microsoft-text-bottom");
+          }
+        }
+      });
+    }, observerOptionsBottom);
+
+    observer.observe(bottomContainer);
+
+    return () => {
+      if (observer && bottomContainer) {
+        observer.unobserve(bottomContainer);
+      }
+    };
+  }, []);
 
   return (
     <div
       className="selected-category-content-wrapper"
-      style={{ height: "270vh" }}
+      style={{ height: "200vh" }}
     >
       <Logo />
       <Top
@@ -45,38 +70,52 @@ export function Microsoft() {
       <div
         style={{
           position: "absolute",
-          top: "22em",
-          right: "-7em",
+          top: "14em",
+          right: "-14em",
           zIndex: -2,
-          width: "60%",
+          width: "68%",
         }}
       >
         <img
           src="https://in3dwebsite.blob.core.windows.net/photos/handshake_newer.png"
           // src="https://in3dwebsite.blob.core.windows.net/photos/microsoft-shake-cutout-min.png"
-          style={{ width: "90%" }}
+          style={{ width: "100%" }}
         />
       </div>
-      <Bottom bottomVidRef1={bottomVidRef1} bottomVidRef3={bottomVidRef3} />
+      <Bottom
+        bottomVidRef1={bottomVidRef1}
+        bottomVidRef3={bottomVidRef3}
+        bottomVidContainerRef={bottomVidContainerRef}
+        bottomTextContainerRef={bottomTextContainerRef}
+        bottomTextRef={bottomTextRef}
+      />
       {/* <BottomModel /> */}
     </div>
   );
+  W;
 }
 
-const Bottom = ({ bottomVidRef1, bottomVidRef3 }) => {
+const Bottom = ({
+  bottomVidRef1,
+  bottomVidRef3,
+  bottomVidContainerRef,
+  bottomTextRef,
+  bottomTextContainerRef,
+}) => {
   return (
     <div
       className="selected-content-second-divider"
       style={{ display: "flex", height: "100%" }}
     >
       <div
+        ref={bottomTextContainerRef}
         className="left-half-placeholder"
         style={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           flex: 1,
-          borderTop: "4px solid black",
+          // borderTop: "4px solid black",
           height: "60%",
           marginTop: "12em",
         }}
@@ -89,6 +128,8 @@ const Bottom = ({ bottomVidRef1, bottomVidRef3 }) => {
             opacity: 0.7,
             lineHeight: "1.6em",
           }}
+          ref={bottomTextRef}
+          // className="microsoft-text-bottom"
         >
           As partners, in3D is your perfect go-to for any Microsoft MR products.
           <br /> <br /> In3D and Microsoft's teams share a strong connection and
@@ -107,59 +148,42 @@ const Bottom = ({ bottomVidRef1, bottomVidRef3 }) => {
         <ImageOverlay
           bottomVidRef1={bottomVidRef1}
           bottomVidRef3={bottomVidRef3}
+          bottomVidContainerRef={bottomVidContainerRef}
         />
       </div>
     </div>
   );
 };
 
-const ImageOverlay = ({ bottomVidRef1, bottomVidRef3 }) => {
+const ImageOverlay = ({
+  bottomVidRef1,
+  bottomVidRef3,
+  bottomVidContainerRef,
+}) => {
   return (
-    <div className="sc-right-half">
+    <div ref={bottomVidContainerRef} className="no-opacity">
       <div className="image-container">
         <span
           className="large-image-industry sc-image-glass-bg"
-          style={{ height: "20em", zIndex: 2, right: "10em", top: "8em" }}
+          style={{ height: "18em", zIndex: 2, right: "10em", top: "6.5em" }}
         >
-          {/* <img
-            src="/assets/images/backgrounds/microsoft/Microsoft_Tugle.jpg"
-            // className="large-image"
-            alt="Large"
-            style={{ width: "100%", height: "100%" }}
-          /> */}
-          {/* <VideoPlayer src="/assets/images/backgrounds/microsoft/Mesh Hololens - Remote Collaboration.mp4" /> */}
           <VideoPlayer src="https://in3dwebsite.blob.core.windows.net/video/Mesh Hololens - Remote Collaboration.mp4" />
         </span>
         <span
-          className="small-image-industry top-left-industry sc-image-glass-bg"
-          style={{ left: "20em", top: "4em" }}
+          className="small-image-industry top-left-microsoft sc-image-glass-bg"
+          style={{ left: "0em", top: "5em" }}
         >
-          {/* <img
-            src="/assets/images/backgrounds/microsoft/Microsoft_Tugle.jpg"
-            // className="small-image top-left"
-            alt="Top Left"
-            style={{ width: "100%" }}
-          /> */}
-          {/* <VideoPlayer src="/assets/images/backgrounds/microsoft/What can HoloLens 2 do_.mp4" /> */}
           <VideoPlayer
             src="https://in3dwebsite.blob.core.windows.net/video/What can HoloLens 2 do_.mp4"
             videoRef={bottomVidRef1}
-            startTime={5}
+            startTime={4}
           />
         </span>
 
         <span
-          className="small-image-industry bottom-left-industry sc-image-glass-bg"
-          style={{ left: "20em", bottom: "4em" }}
+          className="small-image-industry bottom-left-microsoft sc-image-glass-bg"
+          style={{ left: "0em", bottom: "4em" }}
         >
-          {/* <img
-            // style={{ width: "92%" }}
-            src="/assets/images/backgrounds/microsoft/Microsoft_Tugle.jpg"
-            // className="small-image bottom-left"
-            alt="Bottom Left"
-            style={{ width: "100%" }}
-          /> */}
-          {/* <VideoPlayer src="/assets/images/backgrounds/microsoft/Medical Holoportation - Ichilov.mp4" /> */}
           <VideoPlayer
             src="https://in3dwebsite.blob.core.windows.net/video/Medical Holoportation - Ichilov (1) (1).mp4"
             startTime={2}
@@ -171,15 +195,7 @@ const ImageOverlay = ({ bottomVidRef1, bottomVidRef3 }) => {
   );
 };
 
-const Top = ({
-  // middleRef,
-  // middleImageRef,
-  // overlayRef,
-  // middleTextRef,
-  displayVideos,
-  topVidoe1Ref,
-  topVidoe2Ref,
-}) => {
+const Top = ({ displayVideos, topVidoe1Ref, topVidoe2Ref }) => {
   const middleRef = useRef(null);
   const middleImageRef = useRef(null);
   const overlayRef = useRef(null);
@@ -224,7 +240,7 @@ const Top = ({
 
       <div style={{ flex: 1 }}>
         <div
-          className="image-container"
+          className="image-container image-top-container-microsoft"
           style={{
             marginLeft: "22em",
             marginTop: "14em",
@@ -235,18 +251,10 @@ const Top = ({
             className="large-image-customize sc-image-glass-bg"
             style={{ width: "100%" }}
           >
-            {/* <img
-              style={{ backgroundSize: "cover", width: "100%" }}
-              ref={bottomImageRef}
-              src="/assets/images/backgrounds/microsoft/Microsoft_Tugle.jpg"
-              alt="Large"
-              // className="bottom-image"
-            /> */}
             {true ? (
               <VideoPlayer
                 src={
-                  ""
-                  // "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4"
+                  "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4"
                 }
                 videoRef={topVidoe1Ref}
                 startTime={7}
@@ -254,19 +262,16 @@ const Top = ({
             ) : null}
           </span>
           <span
-            className="large-image-customize bottom-customize sc-image-glass-bg"
-            style={{ width: "100%" }}
+            className="large-image-customize  sc-image-glass-bg"
+            style={{ width: "100%", top: "-3em", right: "8em" }}
           >
-            {true ? (
-              <VideoPlayer
-                src={
-                  ""
-                  // "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4"
-                }
-                videoRef={topVidoe2Ref}
-                startTime={3}
-              />
-            ) : null}
+            <VideoPlayer
+              src={
+                "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4"
+              }
+              videoRef={topVidoe2Ref}
+              startTime={3}
+            />
           </span>
         </div>
       </div>
@@ -291,7 +296,7 @@ const Top = ({
           }}
           className="mirosoft-title-one "
         >
-          <h1>{"Microsoft"}</h1>
+          <h1 className="microsoft-header-title">{"Microsoft"}</h1>
         </div>
         <div
           ref={middleTextRef}
@@ -308,7 +313,7 @@ const Top = ({
               lineHeight: "1.8em",
               textAlign: "center",
               width: "70%",
-              marginRight: "8em",
+              marginRight: "4em",
             }}
             className="text-animation"
           >

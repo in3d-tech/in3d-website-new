@@ -110,9 +110,9 @@ export function LoadingScreen({
             animation: "fadeIn 2s ease-in-out",
           }}
         >
-          "Welcome to our 3D experience! The initial load might take a bit
-          longer as <br /> we're preparing all the interactive elements for you.
-          Please be patient—it'll be worth the wait!"
+          Welcome to our 3D experience! The initial load might take a bit longer
+          as <br /> we're preparing all the interactive elements for you. Please
+          be patient—it'll be worth the wait!
         </div>
       ) : null}
       <div

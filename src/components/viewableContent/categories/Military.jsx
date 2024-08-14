@@ -235,7 +235,7 @@ const Bottom = ({ bottomVideoRef1, bottomVideoRef2 }) => (
           <VideoPlayer
             src="https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4"
             videoRef={bottomVideoRef2}
-            startTime={28}
+            startTime={8}
           />
         </span>
       </div>

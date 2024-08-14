@@ -18,10 +18,99 @@
   src: url("../../fonts/GothamBold.otf");
 }
 
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
 .swiper-slide {
   text-align: center;
   font-size: 18px;
-  /* background: #fff; */
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+body {
+  background: #000;
+  color: #000;
+}
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper {
+  width: 100%;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.swiper-slide {
+  background-size: contain;
+  background-position: center;
+}
+
+.mySwiper2 {
+  height: 30vh;
+  width: 100%;
+}
+
+.mySwiper {
+  height: 40vh;
+  box-sizing: border-box;
+  padding: 10px 0;
+}
+
+.mySwiper .swiper-slide {
+  width: 25%;
+  height: 100%;
+  opacity: 0.4;
+}
+
+.mySwiper .swiper-slide-thumb-active {
+  opacity: 1;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* .swiper-slide {
+  text-align: center;
+  font-size: 18px;
 
   display: flex;
   justify-content: center;
@@ -49,7 +138,7 @@
 .swiper-pagination-bullet-active {
   color: #fff;
   background: #007aff;
-}
+} */
 
 .selected-category-content-wrapper {
   display: flex;
@@ -418,7 +507,7 @@
   width: 0;
   height: 4px; /* Set the height you want for the border */
   background: black;
-  animation: borderGrow 2.5s forwards;
+  animation: borderGrow 2s forwards;
   animation-delay: 0.3s;
 }
 
@@ -661,11 +750,73 @@
 .overlay-color-microsoft {
   height: 100%;
   clip-path: polygon(
-    -20% 220%,
+    -15% 220%,
     0% 35%,
     40% -40%,
-    65% 0%
+    70% 0%
   ); /* Adjust the clipping path */
+}
+
+.top-left-microsoft {
+  top: 0;
+  left: 0;
+  transform: translate(50%, -50%);
+}
+
+.bottom-left-microsoft {
+  bottom: 0;
+  left: 0;
+  transform: translate(50%, 50%);
+  height: 13em;
+}
+
+.microsoft-header-title {
+  animation: fadeInMoveUp 2.3s ease-in-out;
+  /* animation-delay: 0.5s; */
+  /* opacity: 0; */
+}
+
+.sc-right-half-microsoft {
+  height: 80%;
+  width: 84%;
+  border-bottom: 4px solid transparent; /* Initially hidden */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* Required for pseudo-element positioning */
+  animation: slideInDown 1.2s ease-out forwards;
+  animation-delay: 0.7s;
+}
+
+.sc-right-half-microsoft::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: black;
+  animation: borderGrowFive 1.2s ease-out forwards;
+  animation-delay: 0.4s;
+}
+
+.border-top-animation-microsoft {
+  position: relative;
+}
+
+.border-top-animation-microsoft::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 4px; /* Height of the border */
+  background: black;
+  animation: borderGrow 1.2s forwards;
+}
+
+.microsoft-text-bottom {
+  animation: fadeIn 2s ease-in-out;
 }
 
 /* ----------------- SECURITY -------------- */
@@ -1379,6 +1530,10 @@
   }
   .sc-title-container {
     font-size: 3.5em;
+  }
+
+  .image-top-container-microsoft {
+    right: 3em;
   }
 }
 

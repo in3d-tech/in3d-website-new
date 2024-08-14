@@ -54,27 +54,27 @@ export const HamburgerMenu = ({ isMobileViewOnly }) => {
     }
   }, [menuOpened, preloadedImages]);
 
-  const preloadVideos = () => {
-    if (!videosPreloaded) {
-      const video1 = document.createElement("video");
-      video1.src =
-        "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4";
+  // const preloadVideos = () => {
+  //   if (!videosPreloaded) {
+  //     const video1 = document.createElement("video");
+  //     video1.src =
+  //       "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4";
 
-      const video2 = document.createElement("video");
-      video2.src =
-        "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4";
+  //     const video2 = document.createElement("video");
+  //     video2.src =
+  //       "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4";
 
-      video1.load();
-      video2.load();
+  //     video1.load();
+  //     video2.load();
 
-      // Set videosPreloaded to true once both videos are fully loaded
-      Promise.all([video1.play(), video2.play()]).then(() => {
-        video1.pause();
-        video2.pause();
-        setVideosPreloaded(true);
-      });
-    }
-  };
+  //     // Set videosPreloaded to true once both videos are fully loaded
+  //     Promise.all([video1.play(), video2.play()]).then(() => {
+  //       video1.pause();
+  //       video2.pause();
+  //       setVideosPreloaded(true);
+  //     });
+  //   }
+  // };
 
   const toggleNav = () => {
     setMenuOpened(!menuOpened);
@@ -119,7 +119,7 @@ export const HamburgerMenu = ({ isMobileViewOnly }) => {
   useEffect(() => {
     if (menuOpened) {
       document.body.style.overflow = "hidden";
-      preloadVideos();
+      // preloadVideos();
     } else {
       document.body.style.overflowY = "auto";
     }

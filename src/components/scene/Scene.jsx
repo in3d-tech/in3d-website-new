@@ -27,6 +27,7 @@ import { getSparkleColour } from "./ornaments/getSparkleColour.js";
 import {
   preloadImage,
   firstImagesToLoad,
+  preloadVideos,
   // secondImagesToLoad,
 } from "../common/cacheImages.js";
 
@@ -62,6 +63,7 @@ function Scene({ scrollToElementById }) {
     customizeHasRendered,
     firstContentLoaded,
     setfirstContentLoaded,
+    setVideosPreloaded,
   } = useAppContext();
 
   const containerRef = useRef(null);
@@ -206,6 +208,8 @@ function Scene({ scrollToElementById }) {
       setfirstContentLoaded(true);
 
       firstImagesToLoad.forEach(preloadImage);
+      preloadVideos({ setVideosPreloaded });
+
       // secondImagesToLoad.forEach(preloadImage);
     }
   }, [customizeHasRendered]);
