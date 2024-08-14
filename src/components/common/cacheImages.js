@@ -42,7 +42,7 @@ export const preloadVideos = ({ setVideosPreloaded }) => {
     "https://in3dwebsite.blob.core.windows.net/video/AR Factory Real Time Control Panel Data - 2 level (3).mp4",
     "https://in3dwebsite.blob.core.windows.net/video/Kornit Guide (1).mp4",
     "https://in3dwebsite.blob.core.windows.net/video/Intel Remote Assist and Guides (1).mp4",
-    "https://in3dwebsite.blob.core.windows.net/video/Medical Holoportation - Ichilov (1) (1).mp4",
+
     "https://in3dwebsite.blob.core.windows.net/video/Medical - Real time operation (1).mp4",
     "https://in3dwebsite.blob.core.windows.net/video/Mesh Hololens - Remote Collaboration.mp4",
     "https://in3dwebsite.blob.core.windows.net/video/What can HoloLens 2 do_.mp4",
@@ -50,12 +50,9 @@ export const preloadVideos = ({ setVideosPreloaded }) => {
     "https://in3dwebsite.blob.core.windows.net/video/Boat 3D Scan.mp4",
     "https://in3dwebsite.blob.core.windows.net/video/Rafael - Family - Truck (1).mp4",
     "https://in3dwebsite.blob.core.windows.net/video/Rafael - Family - Missile (1).mp4",
-    "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4",
-    "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4",
+
     "https://in3dwebsite.blob.core.windows.net/video/VR - Fire Department - Elevator Simulator (1).mp4",
     "https://in3dwebsite.blob.core.windows.net/video/Hololens-Abach-Treatment-Simulator.mp4",
-    "https://in3dwebsite.blob.core.windows.net/video/AR Factory Real Time Control Panel Data - 2 level (3).mp4",
-    "https://in3dwebsite.blob.core.windows.net/video/ICL - Smart 3D Warehouse.mp4",
   ];
 
   const loadVideo = (src) => {
