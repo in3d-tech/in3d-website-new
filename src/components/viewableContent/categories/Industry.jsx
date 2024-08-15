@@ -217,6 +217,7 @@ const ImageOverlay = ({ vid1, vid2 }) => {
           <VideoPlayer
             videoRef={vid2}
             src="https://in3dwebsite.blob.core.windows.net/video/agoran 2.mp4"
+            startTime={2}
           />
         </span>
       </div>
@@ -442,7 +443,10 @@ const Bottom = ({
             className="bottom-image"
           /> */}
           {displayVideos ? (
-            <VideoPlayer src="https://in3dwebsite.blob.core.windows.net/video/Kornit Guide (1).mp4" />
+            <VideoPlayer
+              src="https://in3dwebsite.blob.core.windows.net/video/Kornit Guide (1).mp4"
+              startTime={1}
+            />
           ) : null}
         </span>
         <span
@@ -461,7 +465,10 @@ const Bottom = ({
           {displayVideos ? (
             // <VideoPlayer src="/assets/images/backgrounds/taasia/AR Factory Real Time Control Panel Data - 2 level.mp4" />
 
-            <VideoPlayer src="https://in3dwebsite.blob.core.windows.net/video/Intel Remote Assist and Guides (1).mp4" />
+            <VideoPlayer
+              src="https://in3dwebsite.blob.core.windows.net/video/Intel Remote Assist and Guides (1).mp4"
+              startTime={1}
+            />
           ) : null}
         </span>
       </div>

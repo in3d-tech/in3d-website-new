@@ -89,42 +89,90 @@ export const ContactBtn = ({ isFromSelectedCategory }) => {
 };
 
 export const VideoPlayer = ({ src, startTime = 0, videoRef, isMobile }) => {
-  // const videoRef = useRef(null);
-
   useEffect(() => {
     const videoElement = videoRef?.current;
     if (videoElement) {
-      // Set the start time when the video metadata is loaded
       const handleLoadedMetadata = () => {
         videoElement.currentTime = startTime;
       };
 
-      // Add event listener
-      videoElement.addEventListener("loadedmetadata", handleLoadedMetadata);
+      const handleCanPlay = () => {
+        // Video can start playing, show initial frame here if needed
+        videoElement.play(); // Optionally, start playback automatically
+        videoElement.pause(); // Pause immediately if you want user interaction to start playback
+      };
 
-      // Cleanup event listener
+      // Set the start time when the video metadata is loaded
+      videoElement.addEventListener("loadedmetadata", handleLoadedMetadata);
+      videoElement.addEventListener("canplay", handleCanPlay);
+
+      // Cleanup event listeners
       return () => {
         videoElement.removeEventListener(
           "loadedmetadata",
           handleLoadedMetadata
         );
+        videoElement.removeEventListener("canplay", handleCanPlay);
       };
     }
-  }, [startTime]);
+  }, [startTime, videoRef]);
 
   return (
     <div
       className="video-container"
       style={isMobile ? { borderRadius: "12px" } : null}
     >
-      <video controls className="video-player" ref={videoRef} preload="auto">
-        <source
-          // src={process.env.PUBLIC_URL + "/path-to-your-video.mp4"}
-          src={src ? src : "/assets/images/backgrounds/taasia/Kornit Guide.mp4"}
-          type="video/mp4"
-        />
+      <video
+        controls
+        className="video-player"
+        ref={videoRef}
+        preload="metadata" // Only preload metadata
+        poster="path/to/your/poster/image.jpg" // Add poster image for initial load
+      >
+        <source src={src} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
     </div>
   );
 };
+
+// export const VideoPlayer = ({ src, startTime = 0, videoRef, isMobile }) => {
+//   // const videoRef = useRef(null);
+
+//   useEffect(() => {
+//     const videoElement = videoRef?.current;
+//     if (videoElement) {
+//       // Set the start time when the video metadata is loaded
+//       const handleLoadedMetadata = () => {
+//         videoElement.currentTime = startTime;
+//       };
+
+//       // Add event listener
+//       videoElement.addEventListener("loadedmetadata", handleLoadedMetadata);
+
+//       // Cleanup event listener
+//       return () => {
+//         videoElement.removeEventListener(
+//           "loadedmetadata",
+//           handleLoadedMetadata
+//         );
+//       };
+//     }
+//   }, [startTime]);
+
+//   return (
+//     <div
+//       className="video-container"
+//       style={isMobile ? { borderRadius: "12px" } : null}
+//     >
+//       <video controls className="video-player" ref={videoRef} preload="auto">
+//         <source
+//           // src={process.env.PUBLIC_URL + "/path-to-your-video.mp4"}
+//           src={src ? src : "/assets/images/backgrounds/taasia/Kornit Guide.mp4"}
+//           type="video/mp4"
+//         />
+//         Your browser does not support the video tag.
+//       </video>
+//     </div>
+//   );
+// };

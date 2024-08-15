@@ -28,7 +28,7 @@ export const firstImagesToLoad = [
   "https://in3dwebsite.blob.core.windows.net/photos/ai-2-min.png",
 ];
 
-export const preloadVideos = ({ setVideosPreloaded }) => {
+export const preloadVideos = ({ setVideosPreloaded, batchSize = 3 }) => {
   const videoSources = [
     "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4",
     "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4",
@@ -42,7 +42,6 @@ export const preloadVideos = ({ setVideosPreloaded }) => {
     "https://in3dwebsite.blob.core.windows.net/video/AR Factory Real Time Control Panel Data - 2 level (3).mp4",
     "https://in3dwebsite.blob.core.windows.net/video/Kornit Guide (1).mp4",
     "https://in3dwebsite.blob.core.windows.net/video/Intel Remote Assist and Guides (1).mp4",
-
     "https://in3dwebsite.blob.core.windows.net/video/Medical - Real time operation (1).mp4",
     "https://in3dwebsite.blob.core.windows.net/video/Mesh Hololens - Remote Collaboration.mp4",
     "https://in3dwebsite.blob.core.windows.net/video/What can HoloLens 2 do_.mp4",
@@ -50,7 +49,6 @@ export const preloadVideos = ({ setVideosPreloaded }) => {
     "https://in3dwebsite.blob.core.windows.net/video/Boat 3D Scan.mp4",
     "https://in3dwebsite.blob.core.windows.net/video/Rafael - Family - Truck (1).mp4",
     "https://in3dwebsite.blob.core.windows.net/video/Rafael - Family - Missile (1).mp4",
-
     "https://in3dwebsite.blob.core.windows.net/video/VR - Fire Department - Elevator Simulator (1).mp4",
     "https://in3dwebsite.blob.core.windows.net/video/Hololens-Abach-Treatment-Simulator.mp4",
   ];
@@ -59,27 +57,209 @@ export const preloadVideos = ({ setVideosPreloaded }) => {
     return new Promise((resolve, reject) => {
       const video = document.createElement("video");
       video.src = src;
-      video.preload = "auto"; // Auto preloads the video
+      video.preload = "auto";
 
-      // Listen for 'canplay' event instead of 'onloadeddata'
-      video.oncanplay = () => resolve(video);
+      // Set the video to start at the 3-second mark to buffer only a portion
+      video.currentTime = 8;
+
+      // Resolve when enough data is loaded to start play
+      video.oncanplay = () => {
+        console.log(`Preloaded part of: ${src}`);
+        resolve(video);
+      };
       video.onerror = () => reject(new Error(`Failed to load video: ${src}`));
-
-      // Optionally set currentTime to ensure we preload at least the first few seconds
-      video.currentTime = 3; // Load a few seconds in
     });
   };
 
-  // Stagger the preloading execution
-  const staggeredPreload = async (sources) => {
-    for (const src of sources) {
-      await loadVideo(src);
+  const preloadBatch = async (batch) => {
+    console.log(`Preloading batch: ${batch}`);
+    return Promise.all(batch.map((src) => loadVideo(src)));
+  };
+
+  const staggeredPreload = async (sources, batchSize) => {
+    let index = 0;
+    while (index < sources.length) {
+      const batch = sources.slice(index, index + batchSize);
+      await preloadBatch(batch);
+      index += batchSize;
     }
     setVideosPreloaded(true);
   };
 
-  staggeredPreload(videoSources).catch((error) => console.error(error));
+  staggeredPreload(videoSources, batchSize).catch((error) =>
+    console.error(error)
+  );
 };
+
+// ---------- APPROACH 4 - -----------
+
+// export const preloadVideos = ({ setVideosPreloaded, batchSize = 3 }) => {
+//   const videoSources = [
+//     "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/ar real estate.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Globe 3D Store - 14.10.20.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/BIM Construction with Hololens.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Package scanning and moving pilot.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Hotze - VR Rakal.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/ICL - Smart 3D Warehouse.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/agoran 2.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/AR Factory Real Time Control Panel Data - 2 level (3).mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Kornit Guide (1).mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Intel Remote Assist and Guides (1).mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Medical - Real time operation (1).mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Mesh Hololens - Remote Collaboration.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/What can HoloLens 2 do_.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Medical Holoportation - Ichilov (1) (1).mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Boat 3D Scan.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Rafael - Family - Truck (1).mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Rafael - Family - Missile (1).mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/VR - Fire Department - Elevator Simulator (1).mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Hololens-Abach-Treatment-Simulator.mp4",
+//   ];
+
+//   const loadVideo = (src) => {
+//     return new Promise((resolve, reject) => {
+//       const video = document.createElement("video");
+//       video.src = src;
+//       video.preload = "auto";
+//       video.oncanplaythrough = () => resolve(video); // Ensure entire video is buffered
+//       video.onerror = () => reject(new Error(`Failed to load video: ${src}`));
+//     });
+//   };
+
+//   const preloadBatch = async (batch) => {
+//     return await Promise.all(batch.map((src) => loadVideo(src)));
+//   };
+
+//   const staggeredPreload = async (sources, batchSize) => {
+//     let index = 0;
+//     while (index < sources.length) {
+//       const batch = sources.slice(index, index + batchSize);
+//       await preloadBatch(batch);
+//       index += batchSize;
+//     }
+//     setVideosPreloaded(true);
+//   };
+
+//   staggeredPreload(videoSources, batchSize).catch((error) =>
+//     console.error(error)
+//   );
+// };
+
+// ----- APPROACH 3 - STAGGER MULTIPLE VIDS ----------
+
+// export const preloadVideos = ({ setVideosPreloaded, batchSize = 3 }) => {
+//   const videoSources = [
+//     "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/ar real estate.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Globe 3D Store - 14.10.20.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/BIM Construction with Hololens.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Package scanning and moving pilot.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Hotze - VR Rakal.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/ICL - Smart 3D Warehouse.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/agoran 2.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/AR Factory Real Time Control Panel Data - 2 level (3).mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Kornit Guide (1).mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Intel Remote Assist and Guides (1).mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Medical - Real time operation (1).mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Mesh Hololens - Remote Collaboration.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/What can HoloLens 2 do_.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Medical Holoportation - Ichilov (1) (1).mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Boat 3D Scan.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Rafael - Family - Truck (1).mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Rafael - Family - Missile (1).mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/VR - Fire Department - Elevator Simulator (1).mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Hololens-Abach-Treatment-Simulator.mp4",
+//   ];
+
+//   const loadVideo = (src) => {
+//     return new Promise((resolve, reject) => {
+//       const video = document.createElement("video");
+//       video.src = src;
+//       video.preload = "auto"; // Auto preloads the video
+//       video.oncanplay = () => resolve(video); // Resolve when enough data is loaded
+//       video.onerror = () => reject(new Error(`Failed to load video: ${src}`));
+//       video.currentTime = 3; // Load a few seconds in
+//     });
+//   };
+
+//   const preloadBatch = async (batch) => {
+//     return await Promise.all(batch.map((src) => loadVideo(src)));
+//   };
+
+//   const staggeredPreload = async (sources, batchSize) => {
+//     let index = 0;
+//     while (index < sources.length) {
+//       const batch = sources.slice(index, index + batchSize);
+//       await preloadBatch(batch);
+//       index += batchSize;
+//     }
+//     setVideosPreloaded(true);
+//   };
+
+//   staggeredPreload(videoSources, batchSize).catch((error) =>
+//     console.error(error)
+//   );
+// };
+
+// ---------- APPROACH 2 -----------
+
+// export const preloadVideos = ({ setVideosPreloaded }) => {
+//   const videoSources = [
+//     "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/ar real estate.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Globe 3D Store - 14.10.20.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/BIM Construction with Hololens.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Package scanning and moving pilot.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Hotze - VR Rakal.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/ICL - Smart 3D Warehouse.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/agoran 2.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/AR Factory Real Time Control Panel Data - 2 level (3).mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Kornit Guide (1).mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Intel Remote Assist and Guides (1).mp4",
+
+//     "https://in3dwebsite.blob.core.windows.net/video/Medical - Real time operation (1).mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Mesh Hololens - Remote Collaboration.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/What can HoloLens 2 do_.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Medical Holoportation - Ichilov (1) (1).mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Boat 3D Scan.mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Rafael - Family - Truck (1).mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Rafael - Family - Missile (1).mp4",
+
+//     "https://in3dwebsite.blob.core.windows.net/video/VR - Fire Department - Elevator Simulator (1).mp4",
+//     "https://in3dwebsite.blob.core.windows.net/video/Hololens-Abach-Treatment-Simulator.mp4",
+//   ];
+
+//   const loadVideo = (src) => {
+//     return new Promise((resolve, reject) => {
+//       const video = document.createElement("video");
+//       video.src = src;
+//       video.preload = "auto"; // Auto preloads the video
+
+//       // Listen for 'canplay' event instead of 'onloadeddata'
+//       video.oncanplay = () => resolve(video);
+//       video.onerror = () => reject(new Error(`Failed to load video: ${src}`));
+
+//       // Optionally set currentTime to ensure we preload at least the first few seconds
+//       video.currentTime = 3; // Load a few seconds in
+//     });
+//   };
+
+//   // Stagger the preloading execution
+//   const staggeredPreload = async (sources) => {
+//     for (const src of sources) {
+//       await loadVideo(src);
+//     }
+//     setVideosPreloaded(true);
+//   };
+
+//   staggeredPreload(videoSources).catch((error) => console.error(error));
+// };
+
+// --------- APPROACH ONE -------------
 
 // export const preloadVideos = ({ videosPreloaded, setVideosPreloaded }) => {
 //   if (!videosPreloaded) {

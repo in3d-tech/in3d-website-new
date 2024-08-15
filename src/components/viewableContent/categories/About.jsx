@@ -30,7 +30,7 @@ export function About() {
     const observerOptions = {
       root: null,
       rootMargin: "0px",
-      threshold: 0.5, // Trigger when 80% of the middle section is in view
+      threshold: 0.55, // Trigger when 80% of the middle section is in view
     };
 
     const observerOptionsTwo = {

@@ -208,7 +208,7 @@ function Scene({ scrollToElementById }) {
       setfirstContentLoaded(true);
 
       firstImagesToLoad.forEach(preloadImage);
-      preloadVideos({ setVideosPreloaded });
+      preloadVideos({ setVideosPreloaded, batchSize: 3 });
 
       // secondImagesToLoad.forEach(preloadImage);
     }
