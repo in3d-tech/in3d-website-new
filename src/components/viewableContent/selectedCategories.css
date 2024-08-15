@@ -708,6 +708,14 @@ body {
   line-height: 1.8em;
 }
 
+/* .medicine-top-header-container {
+  font-size: 4em;
+  font-family: gotham-bold;
+  width: 100%;
+  text-align: center;
+  margin-top: 2em;
+} */
+
 .medicine-top-header-container {
   font-size: 4em;
   font-family: gotham-bold;
@@ -716,11 +724,46 @@ body {
   margin-top: 2em;
 }
 
+.medicine-top-header-container .med-titled {
+  display: inline-block;
+  position: relative;
+}
+
+/* .medicine-top-header-container .med-titled::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 4px;
+  background-color: black;
+  animation: borderGrow 2s ease-in-out;
+} */
+
+.medicine-top-border::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 0.6;
+  animation: borderGrow 2s forwards ease-in-out;
+}
+
+.medicine-top-header-container .med-titled::after {
+  width: 100%;
+}
+
 .medicine-bottom-text {
   font-size: 1.4em;
   margin-left: 2em;
   font-family: gotham;
-  opacity: 0.72;
+  /* opacity: 0.72; */
+  opacity: 0;
+  animation: opacityMed 1s forwards;
+  animation-delay: 1s;
   width: 70%;
   line-height: 1.8em;
   text-align: center;
@@ -736,6 +779,52 @@ body {
     70% -10%,
     140% 0%
   ); /* Adjust the clipping path */
+}
+
+@keyframes borderGrowMed {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+@keyframes opacityMed {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.72;
+  }
+}
+
+.medicine-top-border {
+  display: flex;
+  margin-top: 9em;
+  border-top: 4px solid rgba(0, 0, 0, 0.6);
+  width: 0;
+  animation: borderGrowMed 1.2s forwards ease-in-out;
+}
+
+.grow-border {
+  position: absolute;
+  width: 0; /* Start with width 0 */
+  border: 2px solid rgba(0, 0, 0, 0.6);
+  bottom: -90%;
+  right: 0;
+  animation: growRightToLeft 1.4s forwards ease-in-out;
+}
+
+@keyframes growRightToLeft {
+  from {
+    width: 0;
+  }
+  to {
+    width: 50%; /* Grow to 50% */
+  }
 }
 
 /* ----------- microsoft -----------  */
@@ -771,7 +860,7 @@ body {
 }
 
 .microsoft-header-title {
-  animation: fadeInMoveUp 2.3s ease-in-out;
+  animation: fadeInMoveUp 1.3s ease-in-out;
   /* animation-delay: 0.5s; */
   /* opacity: 0; */
 }

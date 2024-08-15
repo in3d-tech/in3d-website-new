@@ -89,6 +89,7 @@ export const ContactBtn = ({ isFromSelectedCategory }) => {
 };
 
 export const VideoPlayer = ({ src, startTime = 0, videoRef, isMobile }) => {
+  const vidRef = useRef(null);
   useEffect(() => {
     const videoElement = videoRef?.current;
     if (videoElement) {
@@ -125,7 +126,7 @@ export const VideoPlayer = ({ src, startTime = 0, videoRef, isMobile }) => {
       <video
         controls
         className="video-player"
-        ref={videoRef}
+        ref={videoRef ? videoRef : vidRef}
         preload="metadata" // Only preload metadata
         poster="path/to/your/poster/image.jpg" // Add poster image for initial load
       >

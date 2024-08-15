@@ -68,22 +68,6 @@ function App() {
     // console.log(blobLoader);
   }
 
-  if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-      navigator.serviceWorker.register("/serviceWorker.js").then(
-        (registration) => {
-          console.log(
-            "Service Worker registration successful with scope: ",
-            registration.scope
-          );
-        },
-        (error) => {
-          console.error("Service Worker registration failed: ", error);
-        }
-      );
-    });
-  }
-
   return (
     <>
       {isMobileViewOnly ? null : <Cursor />}

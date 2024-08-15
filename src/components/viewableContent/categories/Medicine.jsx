@@ -1,13 +1,70 @@
 import "../selectedCategories.css";
 import { ContactBtn, Logo, VideoPlayer } from "../../common/Logo";
-import { useRef, Suspense } from "react";
+import { useRef, Suspense, useEffect } from "react";
 import { ModelComponent } from "./ModelComponent";
 import { Canvas } from "@react-three/fiber";
 
 export function Medicine({ selectedCategory }) {
   const topVideoRef = useRef();
   const middleVideoRef = useRef();
-  const modelRef = useRef();
+  const middleText = useRef();
+  const middleTopBorder = useRef();
+  const middleBottomBorder = useRef();
+  const middleElementRef = useRef();
+
+  useEffect(() => {
+    const middleElement = middleElementRef.current;
+    const middleTop = middleTopBorder.current;
+    const middleBottom = middleBottomBorder.current;
+    const middleTopText = middleText.current;
+    const observerOptions = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.3, // Trigger when 80% of the middle section is in view
+    };
+
+    const observerOptionsTwo = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.9, // Trigger when 80% of the middle section is in view
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          console.log("now intersectin numero 1");
+          middleTop.classList.add("medicine-top-border");
+          middleTopText.classList.add("medicine-bottom-text");
+        }
+      });
+    }, observerOptions);
+
+    const observerTwo = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          console.log("now intersecting number deux");
+          middleBottom.classList.add("grow-border");
+        }
+      });
+    }, observerOptionsTwo);
+
+    if (middleElement) {
+      observer.observe(middleElement);
+    }
+
+    if (middleElement) {
+      observerTwo.observe(middleElement);
+    }
+
+    return () => {
+      if (middleElement) {
+        observer.unobserve(middleElement);
+      }
+      if (middleElement) {
+        observerTwo.unobserve(middleElement);
+      }
+    };
+  }, []);
 
   return (
     <div
@@ -16,7 +73,13 @@ export function Medicine({ selectedCategory }) {
     >
       <Logo />
       <Top topVideoRef={topVideoRef} />
-      <Middle middleVideoRef={middleVideoRef} />
+      <Middle
+        middleVideoRef={middleVideoRef}
+        middleTopBorder={middleTopBorder}
+        middleBottomBorder={middleBottomBorder}
+        middleElementRef={middleElementRef}
+        middleText={middleText}
+      />
       {/* <ModelComponent /> */}
       {/* <Bottom modelRef={modelRef} /> */}
     </div>
@@ -32,7 +95,7 @@ const Top = ({ topVideoRef }) => {
           position: "absolute",
           width: "100%",
           height: "100%",
-          border: "1px solid rgb(0,0,0,0.2)",
+          // border: "1px solid rgb(0,0,0,0.2)",
         }}
         className="overlay-image-med-one"
       >
@@ -46,7 +109,12 @@ const Top = ({ topVideoRef }) => {
       <div className="selected-content-first-divider">
         <div className="sc-content-left-half">
           <div className="medicine-top-header-container">
-            <h1 style={{ borderBottom: "4px solid black" }}>{headline}</h1>
+            <h1
+              className="med-titled"
+              style={{ animation: "fadeInMoveUp 2.3s ease-in-out" }}
+            >
+              {headline}
+            </h1>
           </div>
           <div className="medicine-top-text">
             The world of medicine is one of the most innovative sectors in the
@@ -100,9 +168,15 @@ const Top = ({ topVideoRef }) => {
   );
 };
 
-const Middle = ({ middleVideoRef }) => {
+const Middle = ({
+  middleVideoRef,
+  middleTopBorder,
+  middleBottomBorder,
+  middleElementRef,
+  middleText,
+}) => {
   return (
-    <div style={{ display: "flex" }}>
+    <div ref={middleElementRef} style={{ display: "flex" }}>
       <div
         style={{
           position: "absolute",
@@ -121,14 +195,16 @@ const Middle = ({ middleVideoRef }) => {
       </div>
       <div style={{ flex: 1 }}>
         <div
-          style={{
-            display: "flex",
-            // justifyContent: "center",
-            marginTop: "9em",
-            borderTop: "4px solid rgb(0,0,0,0.6)",
-          }}
+          ref={middleTopBorder}
+          // style={{
+          //   display: "flex",
+          //   marginTop: "9em",
+          //   borderTop: "4px solid rgb(0,0,0,0.6)",
+          // }}
+          // className="medicine-top-border"
+          className=""
         >
-          <p className="medicine-bottom-text">
+          <p className="no-opacity" ref={middleText}>
             Our team is very conscious of our medical clients' needs, and
             together we can develop a new and exciting working environment that
             upgrades working methods and quality of care
@@ -161,13 +237,15 @@ const Middle = ({ middleVideoRef }) => {
         </span>
       </div>
       <div
-        style={{
-          position: "absolute",
-          width: "50%",
-          border: "1px solid black",
-          bottom: "-90%",
-          right: 0,
-        }}
+        ref={middleBottomBorder}
+        // className="grow-border"
+        // style={{
+        //   position: "absolute",
+        //   width: "50%",
+        //   border: "1px solid black",
+        //   bottom: "-90%",
+        //   right: 0,
+        // }}
       ></div>
     </div>
   );

@@ -21,6 +21,9 @@ export function Industry({ selectedCategory }) {
   const bottomImage2Ref = useRef(null);
   const vid1 = useRef(null);
   const vid2 = useRef(null);
+  const midVid = useRef(null);
+  const botVid1 = useRef(null);
+  const botVid2 = useRef(null);
 
   useEffect(() => {
     // console.log("industry rendered");
@@ -153,7 +156,7 @@ export function Industry({ selectedCategory }) {
   return (
     <div
       className="selected-category-content-wrapper"
-      style={{ height: "370vh" }}
+      style={{ height: "300vh" }}
       // style={{ height: "370vh" }}
     >
       <Logo />
@@ -164,6 +167,7 @@ export function Industry({ selectedCategory }) {
         overlayRef={overlayRef}
         middleTextRef={middleTextRef}
         displayVideos={displayVideos}
+        midVid={midVid}
       />
       <Bottom
         bottomImageRef={bottomImageRef}
@@ -171,6 +175,8 @@ export function Industry({ selectedCategory }) {
         bottomRef={bottomRef}
         bottomImage2Ref={bottomImage2Ref}
         displayVideos={displayVideos}
+        botVid1={botVid1}
+        botVid2={botVid2}
       />
       {/* <BottomModel /> */}
     </div>
@@ -264,6 +270,7 @@ const Middle = ({
   overlayRef,
   middleTextRef,
   displayVideos,
+  midVid,
 }) => {
   return (
     <div
@@ -319,7 +326,11 @@ const Middle = ({
             ref={middleImageRef}
           >
             {displayVideos ? (
-              <VideoPlayer src="https://in3dwebsite.blob.core.windows.net/video/AR Factory Real Time Control Panel Data - 2 level (3).mp4" />
+              <VideoPlayer
+                videoRef={midVid}
+                // startTime={1}
+                src="https://in3dwebsite.blob.core.windows.net/video/AR Factory Real Time Control Panel Data - 2 level (3).mp4"
+              />
             ) : null}
           </span>
         </span>
@@ -362,7 +373,7 @@ const Middle = ({
           right: 0,
         }}
       ></div>
-      <div
+      {/* <div
         style={{
           position: "absolute",
           bottom: "-168%",
@@ -371,7 +382,7 @@ const Middle = ({
         }}
       >
         <ContactBtn isFromSelectedCategory />
-      </div>
+      </div> */}
     </div>
   );
 };
@@ -382,6 +393,8 @@ const Bottom = ({
   bottomRef,
   bottomImage2Ref,
   displayVideos,
+  botVid1,
+  botVid2,
 }) => (
   <div ref={bottomRef} style={{ height: "100vh", display: "flex" }}>
     <div
@@ -446,6 +459,7 @@ const Bottom = ({
             <VideoPlayer
               src="https://in3dwebsite.blob.core.windows.net/video/Kornit Guide (1).mp4"
               startTime={1}
+              videoRef={botVid1}
             />
           ) : null}
         </span>
@@ -468,6 +482,7 @@ const Bottom = ({
             <VideoPlayer
               src="https://in3dwebsite.blob.core.windows.net/video/Intel Remote Assist and Guides (1).mp4"
               startTime={1}
+              videoRef={botVid2}
             />
           ) : null}
         </span>
