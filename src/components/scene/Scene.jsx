@@ -63,6 +63,7 @@ function Scene({ scrollToElementById }) {
     customizeHasRendered,
     firstContentLoaded,
     setfirstContentLoaded,
+    videosPreloaded,
     setVideosPreloaded,
   } = useAppContext();
 
@@ -208,7 +209,7 @@ function Scene({ scrollToElementById }) {
       setfirstContentLoaded(true);
 
       firstImagesToLoad.forEach(preloadImage);
-      preloadVideos({ setVideosPreloaded, batchSize: 3 });
+      preloadVideos({ setVideosPreloaded, batchSize: 3, videosPreloaded });
 
       // secondImagesToLoad.forEach(preloadImage);
     }

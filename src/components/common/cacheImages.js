@@ -28,7 +28,14 @@ export const firstImagesToLoad = [
   "https://in3dwebsite.blob.core.windows.net/photos/ai-2-min.png",
 ];
 
-export const preloadVideos = ({ setVideosPreloaded, batchSize = 3 }) => {
+export const preloadVideos = ({
+  setVideosPreloaded,
+  batchSize = 3,
+  videosPreloaded,
+}) => {
+  if (videosPreloaded) {
+    return;
+  }
   const videoSources = [
     "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4",
     "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4",
