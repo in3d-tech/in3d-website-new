@@ -205,7 +205,7 @@ const ImageOverlay = ({ isBottom, bottomVideoRef2, bottomVideoRef1 }) => {
             <VideoPlayer
               src="https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4"
               videoRef={isBottom ? bottomVideoRef2 : null}
-              startTime={isBottom ? 28 : null}
+              startTime={isBottom ? 2 : null}
             />
           </span>
         ) : null}

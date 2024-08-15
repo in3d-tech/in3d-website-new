@@ -4,17 +4,20 @@ import { ContactBtn, Logo, VideoPlayer } from "../../common/Logo";
 import { categoryObserver } from "../../common/categoryObserver";
 import { ModelComponent } from "./ModelComponent";
 import { Canvas } from "@react-three/fiber";
-import { useAppContext } from "../../../context/appContext";
 
 export function Customize() {
+  const topVidRef1 = useRef(null);
+  const topVidRef2 = useRef(null);
+  const midVidRef1 = useRef(null);
+  const midVidRef2 = useRef(null);
+  const midVidRef3 = useRef(null);
+
   const imageRef = useRef(null);
   const bottomRef = useRef(null);
   const bottomOverlayRef = useRef(null);
   const modelRef = useRef(null);
   const bottomVidRef1 = useRef(null);
   const bottomVidRef2 = useRef(null);
-
-  const { videosPreloaded } = useAppContext();
 
   useEffect(() => {
     if (bottomVidRef1 || bottomVidRef2) {
@@ -47,24 +50,19 @@ export function Customize() {
     };
   }, []);
 
-  useEffect(() => {
-    if (videosPreloaded) {
-      bottomVidRef1.current.src =
-        "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4";
-      bottomVidRef2.current.src =
-        "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4";
-    }
-  }, [videosPreloaded]);
-
   return (
     <div
       className="selected-category-content-wrapper-customize"
-      style={{ height: "370vh" }}
+      style={{ height: "300vh" }}
     >
       <Logo />
-      <Top />
+      <Top topVidRef1={topVidRef1} topVidRef2={topVidRef2} />
       <div className="selected-content-first-divider">
-        <Middle />
+        <Middle
+          midVidRef1={midVidRef1}
+          midVidRef2={midVidRef2}
+          midVidRef3={midVidRef3}
+        />
       </div>
       <div className="selected-content-first-divider">
         <Bottom
@@ -80,7 +78,7 @@ export function Customize() {
   );
 }
 
-const ImageOverlayFirst = () => {
+const ImageOverlayFirst = ({ topVidRef1, topVidRef2 }) => {
   return (
     <div style={{ borderBottom: "4px solid black" }}>
       <div
@@ -97,7 +95,11 @@ const ImageOverlayFirst = () => {
             // className="large-image"
             alt="Large"
           /> */}
-          <VideoPlayer src="https://in3dwebsite.blob.core.windows.net/video/ar real estate.mp4" />
+          <VideoPlayer
+            src="https://in3dwebsite.blob.core.windows.net/video/ar real estate.mp4"
+            startTime={1}
+            videoRef={topVidRef1}
+          />
         </span>
         <span
           className="large-image-customize bottom-customize  sc-image-glass-bg"
@@ -109,20 +111,24 @@ const ImageOverlayFirst = () => {
             // className="large-image"
             alt="Large"
           /> */}
-          <VideoPlayer src="https://in3dwebsite.blob.core.windows.net/video/Globe 3D Store - 14.10.20.mp4" />
+          <VideoPlayer
+            src="https://in3dwebsite.blob.core.windows.net/video/Globe 3D Store - 14.10.20.mp4"
+            startTime={1}
+            videoRef={topVidRef2}
+          />
         </span>
       </div>
     </div>
   );
 };
 
-const Top = () => {
+const Top = ({ topVidRef1, topVidRef2 }) => {
   const headline = "Customize";
 
   return (
     <div className="selected-content-first-divider-customize">
       <div className="sc-content-left-half-customize">
-        <ImageOverlayFirst />
+        <ImageOverlayFirst topVidRef1={topVidRef1} topVidRef2={topVidRef2} />
       </div>
       <div
         className="sc-right-half-customize"
@@ -153,7 +159,7 @@ const Top = () => {
   );
 };
 
-const Middle = () => {
+const Middle = ({ midVidRef1, midVidRef2, midVidRef3 }) => {
   return (
     <div className="customize-category-middle">
       {/* <Logo /> */}
@@ -180,13 +186,17 @@ const Middle = () => {
       </div>
 
       <div className="selected-content-first-divider-customize">
-        <ImageOverlaySecond />
+        <ImageOverlaySecond
+          midVidRef1={midVidRef1}
+          midVidRef2={midVidRef2}
+          midVidRef3={midVidRef3}
+        />
       </div>
     </div>
   );
 };
 
-const ImageOverlaySecond = () => {
+const ImageOverlaySecond = ({ midVidRef1, midVidRef2, midVidRef3 }) => {
   return (
     <div className="sc-right-half">
       <div className="image-container">
@@ -200,7 +210,11 @@ const ImageOverlaySecond = () => {
             // className="large-image"
             alt="Large"
           /> */}
-          <VideoPlayer src="https://in3dwebsite.blob.core.windows.net/video/BIM Construction with Hololens.mp4" />
+          <VideoPlayer
+            videoRef={midVidRef1}
+            startTime={1}
+            src="https://in3dwebsite.blob.core.windows.net/video/BIM Construction with Hololens.mp4"
+          />
         </span>
         <span
           className="large-image-customize bottom-customize  sc-image-glass-bg"
@@ -212,7 +226,11 @@ const ImageOverlaySecond = () => {
             // className="large-image"
             alt="Large"
           /> */}
-          <VideoPlayer src="https://in3dwebsite.blob.core.windows.net/video/Package scanning and moving pilot.mp4" />
+          <VideoPlayer
+            videoRef={midVidRef2}
+            startTime={1}
+            src="https://in3dwebsite.blob.core.windows.net/video/Package scanning and moving pilot.mp4"
+          />
         </span>
         <span
           className="large-image-customize top-customize  sc-image-glass-bg"
@@ -224,7 +242,11 @@ const ImageOverlaySecond = () => {
             // className="large-image"
             alt="Large"
           /> */}
-          <VideoPlayer src="https://in3dwebsite.blob.core.windows.net/video/Hotze - VR Rakal.mp4" />
+          <VideoPlayer
+            videoRef={midVidRef3}
+            startTime={1}
+            src="https://in3dwebsite.blob.core.windows.net/video/Hotze - VR Rakal.mp4"
+          />
         </span>
       </div>
     </div>
@@ -259,8 +281,7 @@ const ImageOverlayThird = ({
           /> */}
           <VideoPlayer
             src={
-              ""
-              // "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4"
+              "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4"
             }
             videoRef={bottomVidRef1}
             startTime={7}
@@ -280,11 +301,10 @@ const ImageOverlayThird = ({
           /> */}
           <VideoPlayer
             src={
-              ""
-              // "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4"
+              "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4"
             }
             videoRef={bottomVidRef2}
-            startTime={28}
+            startTime={3}
           />
         </span>
       </div>

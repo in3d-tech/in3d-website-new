@@ -86,7 +86,7 @@ const Top = ({ topVideoRef }) => {
         </div>
         {/* <MiddleThird /> */}
       </div>
-      <div
+      {/* <div
         style={{
           position: "absolute",
           bottom: "-178%",
@@ -95,7 +95,7 @@ const Top = ({ topVideoRef }) => {
         }}
       >
         <ContactBtn isFromSelectedCategory />
-      </div>
+      </div> */}
     </div>
   );
 };
