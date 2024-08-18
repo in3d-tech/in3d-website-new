@@ -50,7 +50,7 @@ const ImageOverlay = ({ topVid1Ref, topVid2Ref }) => {
         </span>
         <span
           className="small-image-industry top-left-industry sc-image-glass-bg"
-          style={{ top: "3em" }}
+          style={{ top: "3em", height: "15em", width: "26em" }}
         >
           {/* <img
             src="/assets/images/backgrounds/military/Militery_Togle_Finish2.jpg"
@@ -159,7 +159,7 @@ const Middle = ({ midVidRef }) => {
           height: "100%",
         }}
       >
-        <span className="sc-image-glass-bg">
+        <span className="sc-image-glass-bg" style={{ height: "25em" }}>
           {/* <img
             src="/assets/images/backgrounds/military/Militery_Togle_Finish2.jpg"
             alt="work-example"
@@ -221,7 +221,7 @@ const Bottom = ({ bottomVideoRef1, bottomVideoRef2 }) => (
       >
         <span
           className="large-image-customize  sc-image-glass-bg"
-          style={{ flex: 1, width: "50%" }}
+          style={{ flex: 1, height: "18em", width: "50%" }}
         >
           {/* <img
             style={{ backgroundSize: "cover", width: "100%" }}
@@ -237,7 +237,7 @@ const Bottom = ({ bottomVideoRef1, bottomVideoRef2 }) => (
         </span>
         <span
           className="large-image-customize   sc-image-glass-bg"
-          style={{ flex: 1, width: "94%" }}
+          style={{ flex: 1, height: "18em", width: "94%" }}
         >
           {/* <img
             style={{ backgroundSize: "cover", width: "100%" }}

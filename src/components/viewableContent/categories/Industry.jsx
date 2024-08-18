@@ -209,7 +209,7 @@ const ImageOverlay = ({ vid1, vid2 }) => {
         </span>
         <span
           className="small-image-industry top-right-industry sc-image-glass-bg"
-          style={{ marginTop: "2em" }}
+          style={{ marginTop: "2em", height: "14em" }}
         >
           <VideoPlayer
             videoRef={vid1}

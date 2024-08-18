@@ -223,7 +223,10 @@ const Middle = ({
           height: "100%",
         }}
       >
-        <span className="sc-image-glass-bg" style={{ marginTop: "20em" }}>
+        <span
+          className="sc-image-glass-bg"
+          style={{ marginTop: "20em", height: "25em" }}
+        >
           {/* <img
             src="/assets/images/backgrounds/medicine/Medical_Togle.jpg"
             alt="work-example"

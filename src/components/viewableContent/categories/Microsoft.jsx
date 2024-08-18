@@ -165,13 +165,19 @@ const ImageOverlay = ({
       <div className="image-container">
         <span
           className="large-image-industry sc-image-glass-bg"
-          style={{ height: "18em", zIndex: 2, right: "10em", top: "6.5em" }}
+          style={{
+            height: "18em",
+            zIndex: 2,
+            right: "10em",
+            top: "6.5em",
+            height: "15em",
+          }}
         >
           <VideoPlayer src="https://in3dwebsite.blob.core.windows.net/video/Mesh Hololens - Remote Collaboration.mp4" />
         </span>
         <span
           className="small-image-industry top-left-microsoft sc-image-glass-bg"
-          style={{ left: "0em", top: "5em" }}
+          style={{ left: "0em", top: "5em", height: "13em" }}
         >
           <VideoPlayer
             src="https://in3dwebsite.blob.core.windows.net/video/What can HoloLens 2 do_.mp4"
@@ -249,7 +255,7 @@ const Top = ({ displayVideos, topVidoe1Ref, topVidoe2Ref }) => {
         >
           <span
             className="large-image-customize sc-image-glass-bg"
-            style={{ width: "100%" }}
+            style={{ width: "100%", height: "17em" }}
           >
             {true ? (
               <VideoPlayer
@@ -263,7 +269,7 @@ const Top = ({ displayVideos, topVidoe1Ref, topVidoe2Ref }) => {
           </span>
           <span
             className="large-image-customize  sc-image-glass-bg"
-            style={{ width: "100%", top: "-3em", right: "8em" }}
+            style={{ width: "100%", top: "-3em", right: "8em", height: "17em" }}
           >
             <VideoPlayer
               src={

@@ -200,7 +200,7 @@ const ImageOverlay = ({ isBottom, bottomVideoRef2, bottomVideoRef1 }) => {
         {isBottom ? (
           <span
             className="small-image-industry bottom-right-industry sc-image-glass-bg"
-            style={{ left: "12em", bottom: "-4em" }}
+            style={{ left: "12em", bottom: "-4em", height: "14em" }}
           >
             <VideoPlayer
               src="https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4"

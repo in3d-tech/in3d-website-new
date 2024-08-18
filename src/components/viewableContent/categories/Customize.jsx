@@ -87,7 +87,7 @@ const ImageOverlayFirst = ({ topVidRef1, topVidRef2 }) => {
       >
         <span
           className="large-image-customize  sc-image-glass-bg"
-          style={{ width: "100%" }}
+          style={{ width: "100%", height: "18em" }}
         >
           {/* <img
             style={{ backgroundSize: "cover", width: "100%" }}
@@ -103,7 +103,7 @@ const ImageOverlayFirst = ({ topVidRef1, topVidRef2 }) => {
         </span>
         <span
           className="large-image-customize bottom-customize  sc-image-glass-bg"
-          style={{ width: "100%", right: "3em" }}
+          style={{ width: "100%", right: "3em", height: "18em" }}
         >
           {/* <img
             style={{ backgroundSize: "cover", width: "100%" }}
@@ -270,7 +270,7 @@ const ImageOverlayThird = ({
       <div>
         <span
           className="large-image-customize sc-image-glass-bg"
-          style={{ width: "90%" }}
+          style={{ width: "90%", height: "17em" }}
         >
           {/* <img
             ref={bottomOverlayRef}
@@ -291,7 +291,7 @@ const ImageOverlayThird = ({
       <div>
         <span
           className="large-image-customize sc-image-glass-bg"
-          style={{ width: "90%" }}
+          style={{ width: "90%", height: "17em" }}
         >
           {/* <img
             style={{ backgroundSize: "cover", width: "100%" }}
