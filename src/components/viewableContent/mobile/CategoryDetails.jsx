@@ -1,13 +1,16 @@
-import { Suspense, useEffect, useMemo, useState, useRef } from "react";
+import { Suspense, useEffect, useMemo, useState, useRef, memo } from "react";
 import emailjs from "@emailjs/browser";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
 import { useAppContext } from "../../../context/appContext";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Camera } from "../../scene/Camera";
-import * as THREE from "three";
-import { Sparkles } from "@react-three/drei";
+// import { Canvas, useFrame, useThree } from "@react-three/fiber";
+// import { Camera } from "../../scene/Camera";
+// import * as THREE from "three";
+// import { Sparkles } from "@react-three/drei";
+import Carousel from "react-material-ui-carousel";
+import { Paper, Button } from "@mui/material";
+
 import {
   INDUSTRY,
   MEDICINE,
@@ -18,31 +21,24 @@ import {
   CUSTOMIZATION,
 } from "../../common/modelData";
 import { getCategoryData } from "./logic/getCategoryDetails";
-import { Model } from "./logic/Model";
+// import { Model } from "./logic/Model";
 import { VideoPlayer } from "../../common/Logo";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-// import "swiper/css/navigation";
-import { Pagination, Navigation } from "swiper/modules";
-import { MenuAboutContact } from "../../navs/mobile/MenuWheel";
 
-const models = {
-  [INDUSTRY]: "/assets/models/engenir_model.glb",
-  [MEDICINE]: "/assets/models/medical_model1 (1).glb",
-  [MICROSOFT]: "/assets/models/microsoft_model.glb",
-  [SECURITY]: "/assets/models/security.glb",
-  [AI]: "/assets/models/ai_model.glb",
-  [MILITARY]: "/assets/models/military.glb",
-  [CUSTOMIZATION]: "/assets/models/costimize_model_v02.glb",
-};
+// import "swiper/css/navigation";
+import { MenuAboutContact } from "../../navs/mobile/MenuWheel";
+// import zIndex from "@mui/material/styles/zIndex";
+
+// const models = {
+//   [INDUSTRY]: "/assets/models/engenir_model.glb",
+//   [MEDICINE]: "/assets/models/medical_model1 (1).glb",
+//   [MICROSOFT]: "/assets/models/microsoft_model.glb",
+//   [SECURITY]: "/assets/models/security.glb",
+//   [AI]: "/assets/models/ai_model.glb",
+//   [MILITARY]: "/assets/models/military.glb",
+//   [CUSTOMIZATION]: "/assets/models/costimize_model_v02.glb",
+// };
 
 function SelectedCategory() {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [nextImageIndex, setNextImageIndex] = useState(1);
-  const [opacity, setOpacity] = useState(1);
-
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const { setSelectedCategory, selectedCategory } = useAppContext();
   const data = getCategoryData({ selectedCategory });
   const modelRef = useRef();
@@ -57,20 +53,6 @@ function SelectedCategory() {
     };
   }, []);
   // document.body.style.overflowY = "scroll";
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setOpacity(0);
-
-      setTimeout(() => {
-        setCurrentImageIndex(nextImageIndex);
-        setNextImageIndex((nextImageIndex + 1) % industryImages.length);
-        setOpacity(1);
-      }, 1000); // Match with your CSS transition duration
-    }, 4000);
-
-    return () => clearInterval(interval);
-  }, [nextImageIndex]);
 
   const isAboutOrContact =
     selectedCategory === "about" || selectedCategory === "contact";
@@ -89,7 +71,7 @@ function SelectedCategory() {
           width: "100%",
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
+          // alignItems: "center",
           // border: "1px solid yellow",
         }}
       >
@@ -97,10 +79,13 @@ function SelectedCategory() {
           style={{
             fontSize: "3em",
             marginTop: selectedCategory == "about" ? "1em" : "1.5em",
-            textAlign: "center",
+            textAlign: "left",
             // lineHeight: "1.5em",
             // letterSpacing: "0.2em",
             fontFamily: "gotham",
+            color: "white",
+            width: "70vw",
+            alignSelf: "flex-end",
           }}
         >
           {data?.title}
@@ -109,68 +94,25 @@ function SelectedCategory() {
           style={{
             fontSize: selectedCategory == "about" ? "0.79em" : "1em",
             width: "90%",
-            marginTop: "4em",
+            marginLeft: "2em",
+            marginTop: "3em",
             fontFamily: "gotham",
-            textAlign: "center",
-            lineHeight: "1.5em",
+            textAlign: "left",
+            lineHeight: "1.8em",
+            color: "rgb(255,255,255)",
             // letterSpacing: "1.1em",
           }}
         >
           {data?.text}
         </div>
-        {isAboutOrContact ? null : (
-          <div
-            style={{
-              // position: "absolute",
-              // top: "4em",
-              left: 0,
-              width: "100vw",
-              height: "60vh",
-              marginTop: "4em",
-            }}
-          >
-            <div
-              style={{
-                height: "50%",
-                position: "absolute",
-                // bottom: 0,
-                // bottom: "0em",
-                width: "100%",
-                // top: "4em",
+        <div
+          style={{
+            borderTop: "1px solid white",
+            width: "70%",
+            marginTop: "3em",
+          }}
+        ></div>
 
-                zIndex: 0,
-                backgroundImage: `url(${industryImages[currentImageIndex]})`,
-                transition: "opacity 1s ease-in-out",
-                opacity: 1,
-                // border: "1px solid blue",
-
-                // borderRadius: "20%",
-                borderRadius: "12px",
-              }}
-              className="blurred-bg"
-            ></div>
-            <Canvas style={{ zIndex: 1 }}>
-              <ambientLight intensity={1} />
-              <directionalLight intensity={4} />
-              <Camera />
-              {/* <Sparkles
-                count={300}
-                scale={10}
-                size={2}
-                color="pink" //{getSparkleColour(scrollArea.currentSection)}
-              /> */}
-              <Suspense fallback={null}>
-                {models[selectedCategory] ? (
-                  <Model
-                    url={models[selectedCategory]} //"/assets/models/engenir_model.glb"
-                    modelRef={modelRef}
-                    selectedCategory={selectedCategory}
-                  />
-                ) : null}
-              </Suspense>
-            </Canvas>
-          </div>
-        )}
         {data?.text2 && (
           <>
             <div
@@ -188,6 +130,7 @@ function SelectedCategory() {
                   fontFamily: "gotham",
                   textAlign: "center",
                   lineHeight: "1.5em",
+                  color: "white",
                 }}
               >
                 {data?.text2}
@@ -220,6 +163,7 @@ function SelectedCategory() {
                 fontFamily: "gotham",
                 textAlign: "center",
                 lineHeight: "1.5em",
+                color: "white",
               }}
             >
               {data?.text3}
@@ -407,23 +351,23 @@ function ContactUsMobile({ test }) {
   );
 }
 
-function useGLTFAnimations(scene, animations) {
-  const { invalidate } = useThree();
-  const mixer = useMemo(() => new THREE.AnimationMixer(scene), [scene]);
+// function useGLTFAnimations(scene, animations) {
+//   const { invalidate } = useThree();
+//   const mixer = useMemo(() => new THREE.AnimationMixer(scene), [scene]);
 
-  useEffect(() => {
-    if (!mixer || !animations) return;
+//   useEffect(() => {
+//     if (!mixer || !animations) return;
 
-    animations.forEach((clip) => mixer.clipAction(clip).play());
+//     animations.forEach((clip) => mixer.clipAction(clip).play());
 
-    const handler = setInterval(() => invalidate(), 1000 / 60);
-    return () => clearInterval(handler);
-  }, [animations, mixer, invalidate]);
+//     const handler = setInterval(() => invalidate(), 1000 / 60);
+//     return () => clearInterval(handler);
+//   }, [animations, mixer, invalidate]);
 
-  useFrame((_state, delta) => mixer && mixer.update(delta));
+//   useFrame((_state, delta) => mixer && mixer.update(delta));
 
-  return mixer;
-}
+//   return mixer;
+// }
 
 const content = {
   [INDUSTRY]: [
@@ -460,158 +404,99 @@ const content = {
   ],
   [CUSTOMIZATION]: [
     "/assets/images/backgrounds/customize/Globe 3D Store - 14.10.20.mp4",
+    // "https://in3dwebsite.blob.core.windows.net/video/Globe 3D Store - 14.10.20.mp4",
+
     "/assets/images/backgrounds/customize/BIM Construction with Hololens.mp4",
+    // "https://in3dwebsite.blob.core.windows.net/video/BIM Construction with Hololens.mp4",
+
     "/assets/images/backgrounds/customize/Package scanning and moving pilot.mp4",
+    // "https://in3dwebsite.blob.core.windows.net/video/Package scanning and moving pilot.mp4",
+
     "/assets/images/backgrounds/customize/Hotze - VR Rakal.mp4",
+    // "https://in3dwebsite.blob.core.windows.net/video/Hotze - VR Rakal.mp4",
+
+    // "https://in3dwebsite.blob.core.windows.net/video/ar real estate.mp4",
   ],
 };
 
 const IndustryPage = ({ selectedCategory, thumbsSwiper, setThumbsSwiper }) => {
+  console.log("sexy back");
+  const mediaContent = useMemo(
+    () => content[selectedCategory],
+    [selectedCategory]
+  );
+
   return (
     <>
       <div
         className="industry-page"
-        style={{
-          marginTop: "4em",
-        }}
+        style={{ marginTop: "4em", height: "20em", width: "90vw" }}
       >
-        {selectedCategory ? <SwiperComponent /> : null}
+        {selectedCategory ? <Example items={mediaContent} /> : null}
       </div>
     </>
-  );
-
-  return null;
-  const mediaContent = content[selectedCategory];
-  if (!selectedCategory || !mediaContent) {
-    return null;
-  }
-  return (
-    <div
-      className="industry-page"
-      style={{
-        marginTop: "30em",
-      }}
-    >
-      {mediaContent
-        ? mediaContent.map((src, index) => (
-            <div
-              className="video-wrapper"
-              key={index}
-              style={{
-                animationDelay: `${index * 0.5}s`,
-              }}
-            >
-              <VideoPlayer src={src} videoRef={null} isMobile />
-            </div>
-          ))
-        : null}
-    </div>
   );
 };
 
 const industryImages = [
-  "/assets/images/backgrounds/taasia/industry-large.jpg",
-  "/assets/images/backgrounds/taasia/industry-hat.png",
-  "https://in3dwebsite.blob.core.windows.net/photos/industry-machine-min.jpg",
-  "https://in3dwebsite.blob.core.windows.net/photos/Customize_Togle_Finish-min.jpg",
+  "https://in3dwebsite.blob.core.windows.net/video/Mesh Hololens - Remote Collaboration.mp4",
+  "https://in3dwebsite.blob.core.windows.net/video/What can HoloLens 2 do_.mp4",
 ];
 
-// switch (hovered) {
-//   case "Customization":
-//     // url = "/assets/images/backgrounds/customize/Customize_Togle_Finish.jpg";
-//     url =
-//       "https://in3dwebsite.blob.core.windows.net/photos/Customize_Togle_Finish-min.jpg";
-//     break;
-//   case "Artifical Intelligence":
-//     // url = "/assets/images/backgrounds/ai/Ai_Tugle_Finish.jpg";
-//     url =
-//       "https://in3dwebsite.blob.core.windows.net/photos/Ai_Tugle_Finish-min.jpg";
-//     break;
-//   case "Microsoft":
-//     // url = "/assets/images/backgrounds/microsoft/Microsoft_Tugle.jpg";
-//     url =
-//       "https://in3dwebsite.blob.core.windows.net/photos/Microsoft_Tugle-min.jpg";
-//     break;
-//   case "Military":
-//     // url = "/assets/images/backgrounds/military/Militery_Togle_Finish2.jpg";
-//     url =
-//       "https://in3dwebsite.blob.core.windows.net/photos/Militery_Togle_Finish2-min.jpg";
-//     break;
-//   case "Security":
-//     // url = "/assets/images/backgrounds/security/Security_Togle_Finish2.jpg";
-//     url =
-//       "https://in3dwebsite.blob.core.windows.net/photos/Security_Togle_Finish2-min.jpg";
-//     break;
-//   case "Industry":
-//     // url = "/assets/images/backgrounds/taasia/Industry_Togle.jpg";
-//     url =
-//       "https://in3dwebsite.blob.core.windows.net/photos/Industry_Togle-min.jpg";
-//     break;
-//   case "Medicine":
-//     // url = "/assets/images/backgrounds/medicine/Medical_Togle.jpg";
-//     url =
-//       "https://in3dwebsite.blob.core.windows.net/photos/Medical_Togle-min.jpg";
-//     break;
-
-const SwiperComponent = () => {
-  const pagination = {
-    clickable: true,
-    renderBullet: function (index, className) {
-      return '<span class="' + className + '">' + "" + "</span>";
-    },
-  };
+const Example = memo(({ items }) => {
+  const vidRef = useRef();
   return (
-    <>
-      <Swiper
-        pagination={pagination}
-        modules={[Pagination]}
-        className="mySwiper"
-        style={{ height: "15em", width: "94vw", borderRadius: "10px" }}
-      >
-        <SwiperSlide>
-          <VideoPlayer />
-        </SwiperSlide>
-        <SwiperSlide>
-          <VideoPlayer
-            src={"https://in3dwebsite.blob.core.windows.net/video/agoran 2.mp4"}
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-        </SwiperSlide>
-        {/* <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide> */}
-      </Swiper>
-      {/* <Swiper
-        slidesPerView={1}
-        spaceBetween={30}
-        loop={true}
-        pagination={{
-          clickable: true,
-        }}
-        navigation={true}
-        modules={[Pagination, Navigation]}
-        className="mySwiper"
-        style={{ border: "1px solid red", width: "300px", height: "400px" }}
-      >
-        <SwiperSlide>
-          {" "}
-          <VideoPlayer />
-        </SwiperSlide>
-        <SwiperSlide>
-          <VideoPlayer
-            src={"https://in3dwebsite.blob.core.windows.net/video/agoran 2.mp4"}
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-      </Swiper> */}
-    </>
+    <Carousel
+      indicators={true}
+      indicatorContainerProps={{
+        style: {
+          height: "150px",
+          zIndex: 500,
+          position: "absolute",
+          bottom: "-6em",
+          left: 0,
+        },
+      }}
+      navButtonsWrapperProps={{
+        // Move the buttons to the bottom. Unsetting top here to override default style.
+        style: {
+          border: "5px solid red",
+          height: "4em",
+          top: "25%",
+          opacity: 1,
+        },
+      }}
+      height={"100%"}
+      sx={{ width: "100%" }}
+    >
+      {industryImages.map((item, i) => (
+        <Item vidRef={vidRef} key={i} url={item} />
+      ))}
+    </Carousel>
   );
-};
+});
+
+const Item = memo((props) => {
+  useEffect(() => console.log("carousel prop"), []);
+  return (
+    <Paper style={{ height: "80%", border: "1px solid blue" }}>
+      {/* <h2>{props.item.name}</h2>
+      <p>{props.item.description}</p> */}
+      <div style={{ position: "absolute" }}>
+        <VideoPlayer
+          src={
+            props.url
+            // "https://in3dwebsite.blob.core.windows.net/video/Mesh Hololens - Remote Collaboration.mp4"
+          }
+          videoRef={props.vidRef}
+        />
+      </div>
+
+      {/* <img
+        src="https://in3dwebsite.blob.core.windows.net/photos/handshake_newer.png"
+        style={{ objectFit: "contain", width: "100%" }}
+      /> */}
+      {/* <Button className="CheckButton">Check it out!</Button> */}
+    </Paper>
+  );
+});
