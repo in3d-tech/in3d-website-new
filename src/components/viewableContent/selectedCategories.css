@@ -25,93 +25,10 @@
 
 .swiper-slide {
   text-align: center;
-  font-size: 18px;
+  font-size: 38px;
   background: #fff;
 
   /* Center slide text vertically */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-body {
-  background: #000;
-  color: #000;
-}
-.swiper {
-  width: 100%;
-  height: 100%;
-}
-
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
-
-  /* Center slide text vertically */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.swiper {
-  width: 100%;
-  height: 300px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.swiper-slide {
-  background-size: contain;
-  background-position: center;
-}
-
-.mySwiper2 {
-  height: 30vh;
-  width: 100%;
-}
-
-.mySwiper {
-  height: 40vh;
-  box-sizing: border-box;
-  padding: 10px 0;
-}
-
-.mySwiper .swiper-slide {
-  width: 25%;
-  height: 100%;
-  opacity: 0.4;
-}
-
-.mySwiper .swiper-slide-thumb-active {
-  opacity: 1;
-}
-
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-/* .swiper-slide {
-  text-align: center;
-  font-size: 18px;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -125,24 +42,26 @@ body {
 }
 
 .swiper-pagination-bullet {
+  border: 10px solid white;
   width: 20px;
   height: 20px;
   text-align: center;
   line-height: 20px;
   font-size: 12px;
-  color: #ffffff;
+  color: #000;
   opacity: 1;
-  background: rgba(255, 255, 255);
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .swiper-pagination-bullet-active {
   color: #fff;
   background: #007aff;
-} */
+}
 
 .selected-category-content-wrapper {
   display: flex;
   flex-direction: column;
+
   /* overflow-y: scroll; */
   height: 300vh;
   /* background: rgb(0, 0, 0, 0.3); */
@@ -454,17 +373,37 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: #000; /* Background color to look sleek */
+  background-color: #000;
 }
 
 .video-player {
   width: 100%;
-  min-height: 100%;
   height: 100%;
-  object-fit: cover; /* Ensures the video covers the entire container */
-  border-radius: 8px; /* Rounded corners for a modern look */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25); /* Subtle shadow for depth */
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  position: relative;
+  /* border: 10px solid red; */
 }
+
+/* .video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.video-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  position: absolute;
+  top: 0;
+  left: 0;
+} */
 
 .sc-title-container {
   font-size: 4em;

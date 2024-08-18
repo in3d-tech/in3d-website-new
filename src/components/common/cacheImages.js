@@ -30,7 +30,7 @@ export const firstImagesToLoad = [
 
 export const preloadVideos = ({
   setVideosPreloaded,
-  batchSize = 3,
+  batchSize = 4,
   videosPreloaded,
 }) => {
   if (videosPreloaded) {
@@ -64,12 +64,10 @@ export const preloadVideos = ({
     return new Promise((resolve, reject) => {
       const video = document.createElement("video");
       video.src = src;
-      video.preload = "auto";
+      video.preload = "metadata";
 
-      // Set the video to start at the 3-second mark to buffer only a portion
       video.currentTime = 8;
 
-      // Resolve when enough data is loaded to start play
       video.oncanplay = () => {
         console.log(`Preloaded part of: ${src}`);
         resolve(video);

@@ -127,8 +127,9 @@ export const VideoPlayer = ({ src, startTime = 0, videoRef, isMobile }) => {
         controls
         className="video-player"
         ref={videoRef ? videoRef : vidRef}
-        preload="metadata" // Only preload metadata
-        poster="path/to/your/poster/image.jpg" // Add poster image for initial load
+        preload="metadata"
+        // poster="/assets/images/backgrounds/medicine/Medical_Togle.jpg"
+        poster="/assets/images/in3d-logo-white.png"
       >
         <source src={src} type="video/mp4" />
         Your browser does not support the video tag.
