@@ -10,13 +10,16 @@ export function Military({ selectedCategory }) {
 
   const bottomVideoRef1 = useRef(null);
   const bottomVideoRef2 = useRef(null);
+  const topVid1Ref = useRef(null);
+  const topVid2Ref = useRef(null);
+  const midVidRef = useRef(null);
   const modelRef = useRef(null);
 
   return (
     <div className="selected-category-content-wrapper">
       <Logo />
-      <Top />
-      <Middle />
+      <Top topVid1Ref={topVid1Ref} topVid2Ref={topVid2Ref} />
+      <Middle midVidRef={midVidRef} />
       <Bottom
         bottomVideoRef1={bottomVideoRef1}
         bottomVideoRef2={bottomVideoRef2}
@@ -26,7 +29,7 @@ export function Military({ selectedCategory }) {
   );
 }
 
-const ImageOverlay = () => {
+const ImageOverlay = ({ topVid1Ref, topVid2Ref }) => {
   return (
     <div className="sc-right-half" style={{ height: "60%", marginTop: "2em" }}>
       <div className="image-container">
@@ -40,7 +43,10 @@ const ImageOverlay = () => {
             alt="Large"
             style={{ width: "100%" }}
           /> */}
-          <VideoPlayer src="https://in3dwebsite.blob.core.windows.net/video/Boat 3D Scan.mp4" />
+          <VideoPlayer
+            src="https://in3dwebsite.blob.core.windows.net/video/Boat 3D Scan.mp4"
+            videoRef={topVid2Ref}
+          />
         </span>
         <span
           className="small-image-industry top-left-industry sc-image-glass-bg"
@@ -53,14 +59,18 @@ const ImageOverlay = () => {
             style={{ width: "100%" }}
           /> */}
           {/* <VideoPlayer src="/assets/images/backgrounds/military/Rafael - Family - Truck.mp4" /> */}
-          <VideoPlayer src="https://in3dwebsite.blob.core.windows.net/video/Rafael - Family - Truck (1).mp4" />
+          <VideoPlayer
+            src="https://in3dwebsite.blob.core.windows.net/video/Rafael - Family - Truck (1).mp4"
+            startTime={1}
+            videoRef={topVid1Ref}
+          />
         </span>
       </div>
     </div>
   );
 };
 
-const Top = () => {
+const Top = ({ topVid1Ref, topVid2Ref }) => {
   const headline = "Military";
   return (
     <div style={{ display: "flex", flexDirection: "row-reverse" }}>
@@ -93,14 +103,14 @@ const Top = () => {
           justifyContent: "center",
         }}
       >
-        <ImageOverlay />
+        <ImageOverlay topVid1Ref={topVid1Ref} topVid2Ref={topVid2Ref} />
         {/* <MiddleThird /> */}
       </div>
     </div>
   );
 };
 
-const Middle = () => {
+const Middle = ({ midVidRef }) => {
   return (
     <div style={{ height: "100vh", display: "flex" }}>
       <div
@@ -156,7 +166,10 @@ const Middle = () => {
             style={{ height: "25em", width: "100%" }}
           /> */}
           {/* <VideoPlayer src="/assets/images/backgrounds/security/Hololens 2 - Guides (1).mp4" /> */}
-          <VideoPlayer src="https://in3dwebsite.blob.core.windows.net/video/Rafael - Family - Missile (1).mp4" />
+          <VideoPlayer
+            videoRef={midVidRef}
+            src="https://in3dwebsite.blob.core.windows.net/video/Rafael - Family - Missile (1).mp4"
+          />
         </span>
       </div>
     </div>
