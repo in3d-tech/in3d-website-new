@@ -129,7 +129,7 @@ export const VideoPlayer = ({ src, startTime = 0, videoRef, isMobile }) => {
         ref={videoRef ? videoRef : vidRef}
         preload="metadata"
         // poster="/assets/images/backgrounds/medicine/Medical_Togle.jpg"
-        poster="/assets/images/in3d-logo-white.png"
+        poster="/assets/images/plain-logo.png"
         // poster="/public/assets/images/backgrounds/Astro_1_Background.webp"
       >
         <source src={src} type="video/mp4" />
