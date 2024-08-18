@@ -1,56 +1,56 @@
-import { Swiper, SwiperSlide } from "swiper/react";
+// import { Swiper, SwiperSlide } from "swiper/react";
 // import "swiper/css";
 import { useState, useEffect } from "react";
 
-export function Swipe({
-  setSlide,
-  setMobileBackground,
-  setDebug,
-  position,
-  setPosition,
-}) {
-  return (
-    <div
-      // className="swiper"
-      style={{
-        position: "fixed",
-        // border: "1px solid yellow",
-        top: 0,
-        left: 0,
-        height: "100%",
-        width: "100%",
-        zIndex: 1,
-      }}
-    >
-      {/* <div style={{ color: "yellow", position: "absolute" }}>{debug} </div> */}
-      {/* <TiltDiv
-        setDebug={setDebug}
-        position={position}
-        setPosition={setPosition}
-      /> */}
-      <Swiper
-        spaceBetween={50}
-        slidesPerView={3}
-        onSlideChange={(e) => {
-          console.log("slide change", e.realIndex);
-          setSlide(e.realIndex);
-          if (e.realIndex > 1) setMobileBackground(e.realIndex - 1);
-        }}
-        onSwiper={(swiper) => console.log(swiper)}
-        style={{ height: "100%" }}
-      >
-        <SwiperSlide></SwiperSlide>
-        <SwiperSlide></SwiperSlide>
-        <SwiperSlide></SwiperSlide>
-        <SwiperSlide></SwiperSlide>
-        <SwiperSlide></SwiperSlide>
-        <SwiperSlide></SwiperSlide>
-        <SwiperSlide></SwiperSlide>
-        <SwiperSlide></SwiperSlide>
-      </Swiper>
-    </div>
-  );
-}
+// export function Swipe({
+//   setSlide,
+//   setMobileBackground,
+//   setDebug,
+//   position,
+//   setPosition,
+// }) {
+//   return (
+//     <div
+//       // className="swiper"
+//       style={{
+//         position: "fixed",
+//         // border: "1px solid yellow",
+//         top: 0,
+//         left: 0,
+//         height: "100%",
+//         width: "100%",
+//         zIndex: 1,
+//       }}
+//     >
+//       {/* <div style={{ color: "yellow", position: "absolute" }}>{debug} </div> */}
+//       {/* <TiltDiv
+//         setDebug={setDebug}
+//         position={position}
+//         setPosition={setPosition}
+//       /> */}
+//       <Swiper
+//         spaceBetween={50}
+//         slidesPerView={3}
+//         onSlideChange={(e) => {
+//           console.log("slide change", e.realIndex);
+//           setSlide(e.realIndex);
+//           if (e.realIndex > 1) setMobileBackground(e.realIndex - 1);
+//         }}
+//         onSwiper={(swiper) => console.log(swiper)}
+//         style={{ height: "100%" }}
+//       >
+//         <SwiperSlide></SwiperSlide>
+//         <SwiperSlide></SwiperSlide>
+//         <SwiperSlide></SwiperSlide>
+//         <SwiperSlide></SwiperSlide>
+//         <SwiperSlide></SwiperSlide>
+//         <SwiperSlide></SwiperSlide>
+//         <SwiperSlide></SwiperSlide>
+//         <SwiperSlide></SwiperSlide>
+//       </Swiper>
+//     </div>
+//   );
+// }
 
 export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
   const [hasUserSeenPopup, setHasUserSeenPopup] = useState(false);
@@ -152,6 +152,7 @@ const useDeviceOrientation = (onOrientationChange) => {
     if (typeof DeviceOrientationEvent.requestPermission === "function") {
       try {
         const response = await DeviceOrientationEvent.requestPermission();
+        confirm(`${response}`);
         if (response === "granted") {
           setPermission("granted");
           window.addEventListener("deviceorientation", handleOrientation, true);

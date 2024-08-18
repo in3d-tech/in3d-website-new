@@ -12,7 +12,7 @@ import { TextScrambleComponent } from "../../common/shuffleTexts";
 // import { SelectedCategory } from "./CategoryDetails";
 // import { Swiper, SwiperSlide } from "swiper/react";
 // import "swiper/css";
-import { Swipe, TiltDiv } from "../../common/SwipeAndTilt";
+import { TiltDiv } from "../../common/SwipeAndTilt";
 
 const LazySelectedContent = lazy(() => import("./CategoryDetails"));
 
