@@ -156,6 +156,7 @@ export function BackgroundScroll({
             scrollArea={scrollArea}
             fixedCategoryColumn={fixed}
             setSelectedCategory={setSelectedCategory}
+            setIsCursorHovering={setIsCursorHovering}
           />
         ) : null}
       </section>

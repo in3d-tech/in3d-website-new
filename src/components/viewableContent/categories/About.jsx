@@ -11,6 +11,7 @@ export function About() {
   const midTwoRef = useRef();
   const midTwoImageRef = useRef();
   const midTwoTextOneRef = useRef();
+  const midTwoTextTwoRef = useRef();
   const bottomImageRef = useRef();
   const bottomTextContainerRef = useRef();
   const bottomTextRef = useRef();
@@ -26,6 +27,7 @@ export function About() {
     const bottomTextContainer = bottomTextContainerRef.current;
     const bottomText = bottomTextRef.current;
     const midTwoTxtOne = midTwoTextOneRef.current;
+    const midTwoTextTwo = midTwoTextTwoRef.current;
 
     const observerOptions = {
       root: null,
@@ -66,6 +68,7 @@ export function About() {
         if (entry.isIntersecting) {
           midTwo.classList.add("fade-in");
           midTwoTxtOne.classList.add("border-left-animation");
+          midTwoTextTwo.classList.add("mid-customize-text");
         }
       });
     }, observerOptions);
@@ -146,6 +149,7 @@ export function About() {
         midTwoImageRef={midTwoImageRef}
         midTwoRef={midTwoRef}
         midTwoTextOneRef={midTwoTextOneRef}
+        midTwoTextTwoRef={midTwoTextTwoRef}
       />
       <Bottom
         bottomRef={bottomImageRef}
@@ -280,7 +284,7 @@ const Middle = ({
   );
 };
 
-const MiddleTwo = ({ midTwoImageRef, midTwoTextOneRef }) => {
+const MiddleTwo = ({ midTwoImageRef, midTwoTextOneRef, midTwoTextTwoRef }) => {
   return (
     <div
       ref={midTwoImageRef}
@@ -345,7 +349,11 @@ const MiddleTwo = ({ midTwoImageRef, midTwoTextOneRef }) => {
           padding: "8px",
         }}
       >
-        <div style={{ marginBottom: "1em", textAlign: "right" }}>
+        <div
+          ref={midTwoTextTwoRef}
+          style={{ marginBottom: "1em", textAlign: "right" }}
+          className="no-opacity"
+        >
           Our mission is to play an important <br />
           role in the technology market for <br /> many years to come
         </div>

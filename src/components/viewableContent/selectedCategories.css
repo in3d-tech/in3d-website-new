@@ -304,7 +304,8 @@
 }
 
 .text-animation {
-  animation: slideInUp 2.7s ease-out forwards;
+  animation: slideInUp 2.4s ease-out forwards;
+  animation-delay: 1s;
 }
 
 .middle-image {

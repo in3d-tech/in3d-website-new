@@ -243,7 +243,7 @@ const Top = ({ vid1, vid2 }) => {
           </div>
 
           <div
-            className="industry-top-text text-animation"
+            className="no-opacity industry-top-text text-animation"
             style={{ zIndex: 1 }}
           >
             The world was recently introduced to the wonders of the industry 4.0

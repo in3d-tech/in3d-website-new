@@ -6,6 +6,7 @@ export const AboutUsText = ({
   scrollArea,
   fixedCategoryColumn,
   setSelectedCategory,
+  setIsCursorHovering,
 }) => {
   // useEffect(()=>)
   const [showText, setShowText] = useState(false);
@@ -125,7 +126,9 @@ export const AboutUsText = ({
               <div
                 style={{
                   color: "white",
+                  opacity: 0,
                   animation: "fadeIn 1.8s forwards",
+                  animationDelay: "0.6s",
                   fontSize: "0.5em",
                   // background: "rgb(0,0,0,0.7)",
                   borderRadius: "8px",
@@ -147,13 +150,15 @@ export const AboutUsText = ({
             style={{
               width: "10%",
               // height: "580px",
-              fontSize: "0.4em",
+              fontSize: "0.35em",
               // marginLeft: "4.5em",
               // marginTop: "15em",
               bottom: "-5em",
               right: "10em",
               position: "absolute",
             }}
+            onMouseOver={() => setIsCursorHovering(true)}
+            onMouseOut={() => setIsCursorHovering(false)}
           >
             Learn More
           </button>

@@ -30,7 +30,7 @@ export const firstImagesToLoad = [
 
 export const preloadVideos = ({
   setVideosPreloaded,
-  batchSize = 4,
+  batchSize = 5,
   videosPreloaded,
 }) => {
   if (videosPreloaded) {
@@ -69,7 +69,7 @@ export const preloadVideos = ({
       video.currentTime = 8;
 
       video.oncanplay = () => {
-        console.log(`Preloaded part of: ${src}`);
+        // console.log(`Preloaded part of: ${src}`);
         resolve(video);
       };
       video.onerror = () => reject(new Error(`Failed to load video: ${src}`));
@@ -77,7 +77,7 @@ export const preloadVideos = ({
   };
 
   const preloadBatch = async (batch) => {
-    console.log(`Preloading batch: ${batch}`);
+    // console.log(`Preloading batch: ${batch}`);
     return Promise.all(batch.map((src) => loadVideo(src)));
   };
 
