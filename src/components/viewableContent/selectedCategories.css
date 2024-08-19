@@ -929,7 +929,7 @@
 }
 
 .bottom-text-security.scrolled {
-  opacity: 0.8;
+  opacity: 1;
   transform: translateY(0px);
 }
 
@@ -953,6 +953,26 @@
   font-size: 1.4em;
   line-height: 1.9em;
   margin-top: 4em;
+}
+
+/* --------- military ----------- */
+
+.top-border-animation-container {
+  position: relative;
+  border-top: 4px solid transparent; /* Start with transparent border */
+  overflow: hidden; /* Ensure the animation stays within the bounds */
+}
+
+.top-border-animation-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 4px; /* Match the border height */
+  background: black;
+  animation: borderGrow 2s forwards;
+  animation-delay: 0.3s;
 }
 
 /* ------- customize ------ */

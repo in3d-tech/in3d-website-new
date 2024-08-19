@@ -43,7 +43,7 @@ export function Security() {
   return (
     <div
       className="selected-category-content-wrapper"
-      style={{ height: "270vh" }}
+      style={{ height: "200vh" }}
     >
       <Logo />
       <Top />
@@ -55,7 +55,7 @@ export function Security() {
         bottomVideoRef2={bottomVideoRef2}
         showBottom={showBottom}
       />
-      <BottomModel />
+      {/* <BottomModel /> */}
     </div>
   );
 }
@@ -71,7 +71,7 @@ const Top = () => {
             Working directly with many security bodies such as the fire and
             rescue department, Israel Police, IDF and more
           </div>
-          <div className="text-animation security-headline">
+          <div className="no-opacity text-animation security-headline">
             <h1
               // style={{
               //   borderTop: "4px solid black",
@@ -124,6 +124,7 @@ const Bottom = ({
         <p
           ref={bottomTextRef}
           className="bottom-text-security security-font-two"
+          // style={{ opacity: 0.7 }}
         >
           Part of our vision is to promote innovation, which is a big part of
           what Israel stands for. We succeeded in delivering top-of-the-line
@@ -134,7 +135,11 @@ const Bottom = ({
       </div>
       <div
         className="right-half-placeholder bottom-text-security"
-        style={{ flex: 1, marginTop: "10em", padding: "2em" }}
+        style={{
+          flex: 1,
+          marginTop: "10em",
+          padding: "2em",
+        }}
         ref={bottomImageRef}
       >
         <ImageOverlay
@@ -152,7 +157,7 @@ const ImageOverlay = ({ isBottom, bottomVideoRef2, bottomVideoRef1 }) => {
     <div
       className="sc-right-half"
       style={{
-        height: "70%",
+        height: "86%",
         marginTop: "4em",
         alignItems: isBottom ? "center" : "center",
       }}
@@ -162,7 +167,7 @@ const ImageOverlay = ({ isBottom, bottomVideoRef2, bottomVideoRef1 }) => {
           className={`large-image-industry sc-image-glass-bg ${
             isBottom ? "security-vid-one-bottom" : "security-vid-one-top"
           }`}
-          style={{ height: isBottom ? "16em" : "18em" }}
+          style={{ height: isBottom ? "15em" : "18em" }}
         >
           <VideoPlayer
             src={
@@ -183,7 +188,7 @@ const ImageOverlay = ({ isBottom, bottomVideoRef2, bottomVideoRef1 }) => {
           className="small-image-industry bottom-left-industry sc-image-glass-bg"
           style={
             isBottom
-              ? { marginLeft: "4em", marginBottom: "0em" }
+              ? { marginLeft: "4em", marginBottom: "1em" }
               : { marginBottom: "2em" }
           }
         >
@@ -200,7 +205,7 @@ const ImageOverlay = ({ isBottom, bottomVideoRef2, bottomVideoRef1 }) => {
         {isBottom ? (
           <span
             className="small-image-industry bottom-right-industry sc-image-glass-bg"
-            style={{ left: "12em", bottom: "-4em", height: "14em" }}
+            style={{ left: "18em", bottom: "-6em", height: "12em" }}
           >
             <VideoPlayer
               src="https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4"
