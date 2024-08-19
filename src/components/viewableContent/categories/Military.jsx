@@ -2,7 +2,7 @@ import "../selectedCategories.css";
 import { ContactBtn, Logo, VideoPlayer } from "../../common/Logo";
 import { ModelComponent } from "./ModelComponent";
 import { Canvas } from "@react-three/fiber";
-import { useRef, Suspense } from "react";
+import { useRef, Suspense, useEffect, useState } from "react";
 
 export function Military({ selectedCategory }) {
   const headline =
@@ -12,14 +12,61 @@ export function Military({ selectedCategory }) {
   const bottomVideoRef2 = useRef(null);
   const topVid1Ref = useRef(null);
   const topVid2Ref = useRef(null);
+  const midVidContainerRef = useRef(null);
   const midVidRef = useRef(null);
   const modelRef = useRef(null);
+  const middleElementRef = useRef(null);
+  const midTextContainerRef = useRef(null);
+  const midTextRef = useRef(null);
+
+  useEffect(() => {
+    const middleElement = middleElementRef.current;
+    const midTextContainer = midTextContainerRef.current;
+    const midText = midTextRef.current;
+    const midVidContainer = midVidContainerRef.current;
+
+    const observerOptions = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.6,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          midTextContainer.classList.add("top-border-animation-container");
+          midText.classList.add("fade-in-sc-right-mid-vid");
+          midVidContainer.classList.add("fade-in-sc-shorter");
+          // setIsTwoOneTextInView(true);
+          // midTxtTwo.classList.add("border-right-animation-container");
+        } else {
+          //   botElement.classList.remove("scrolled");
+        }
+      });
+    }, observerOptions);
+
+    if (middleElement) {
+      observer.observe(middleElement);
+    }
+
+    return () => {
+      if (observer) {
+        observer.unobserve(middleElement);
+      }
+    };
+  }, []);
 
   return (
     <div className="selected-category-content-wrapper">
       <Logo />
       <Top topVid1Ref={topVid1Ref} topVid2Ref={topVid2Ref} />
-      <Middle midVidRef={midVidRef} />
+      <Middle
+        midVidRef={midVidRef}
+        middleElementRef={middleElementRef}
+        midTextContainerRef={midTextContainerRef}
+        midTextRef={midTextRef}
+        midVidContainerRef={midVidContainerRef}
+      />
       <Bottom
         bottomVideoRef1={bottomVideoRef1}
         bottomVideoRef2={bottomVideoRef2}
@@ -110,9 +157,15 @@ const Top = ({ topVid1Ref, topVid2Ref }) => {
   );
 };
 
-const Middle = ({ midVidRef }) => {
+const Middle = ({
+  midVidRef,
+  middleElementRef,
+  midTextContainerRef,
+  midTextRef,
+  midVidContainerRef,
+}) => {
   return (
-    <div style={{ height: "100vh", display: "flex" }}>
+    <div ref={middleElementRef} style={{ height: "100vh", display: "flex" }}>
       <div
         style={{
           flex: 1,
@@ -121,25 +174,30 @@ const Middle = ({ midVidRef }) => {
         }}
       >
         <div
+          ref={midTextContainerRef}
+          className=""
           style={{
             display: "flex",
             justifyContentl: "center",
-            borderTop: "4px solid black",
+            // borderTop: "4px solid black",
             // marginTop: "8em",
             alignItems: "center",
             width: "70%",
           }}
         >
           <p
+            ref={midTextRef}
             style={{
               fontSize: "1.5em",
               fontFamily: "gotham",
-              opacity: 0.72,
+              // opacity: 0.72,
               width: "100%",
               lineHeight: "1.8em",
               textAlign: "center",
               marginLeft: "2em",
+              marginTop: "1.5em",
             }}
+            className="no-opacity"
           >
             In3D is committed to ISO standards and all other needed security
             measures such as secure development facilities, information security
@@ -159,7 +217,11 @@ const Middle = ({ midVidRef }) => {
           height: "100%",
         }}
       >
-        <span className="sc-image-glass-bg" style={{ height: "25em" }}>
+        <span
+          className="no-opacity sc-image-glass-bg "
+          style={{ height: "24em", marginTop: "4em" }}
+          ref={midVidContainerRef}
+        >
           {/* <img
             src="/assets/images/backgrounds/military/Militery_Togle_Finish2.jpg"
             alt="work-example"
