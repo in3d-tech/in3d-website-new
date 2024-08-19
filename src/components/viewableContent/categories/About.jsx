@@ -30,13 +30,13 @@ export function About() {
     const observerOptions = {
       root: null,
       rootMargin: "0px",
-      threshold: 0.55, // Trigger when 80% of the middle section is in view
+      threshold: 0.55,
     };
 
     const observerOptionsTwo = {
       root: null,
       rootMargin: "0px",
-      threshold: 0.1, // Trigger when 80% of the middle section is in view
+      threshold: 0.1,
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -90,15 +90,6 @@ export function About() {
       });
     }, observerOptions);
 
-    // const bottomTextObserver = new IntersectionObserver((entries) => {
-    //   entries.forEach((entry) => {
-    //     if (entry.isIntersecting) {
-    //       console.log("bottom text is in sight");
-    //       bottomText.classList.add("contact-us-text-wrapper contact-us-line-0");
-    //     }
-    //   });
-    // }, observerOptions);
-
     if (botElement) {
       observer.observe(botElement);
     }
@@ -118,10 +109,6 @@ export function About() {
     if (bottomTextContainer) {
       bottomTextContainerObserver.observe(bottomTextContainer);
     }
-
-    // if (bottomTextContainer) {
-    //   bottomTextObserver.observe(bottomTextContainer);
-    // }
 
     return () => {
       if (botElement) {

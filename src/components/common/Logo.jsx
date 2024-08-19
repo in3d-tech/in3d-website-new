@@ -90,8 +90,9 @@ export const ContactBtn = ({ isFromSelectedCategory }) => {
 
 export const VideoPlayer = ({ src, startTime = 0, videoRef, isMobile }) => {
   const vidRef = useRef(null);
+  const { selectedCategory } = useAppContext();
   useEffect(() => {
-    const videoElement = videoRef?.current;
+    const videoElement = videoRef ? videoRef.current : vidRef.current;
     if (videoElement) {
       const handleLoadedMetadata = () => {
         videoElement.currentTime = startTime;
@@ -118,6 +119,23 @@ export const VideoPlayer = ({ src, startTime = 0, videoRef, isMobile }) => {
     }
   }, [startTime, videoRef]);
 
+  const IMAGE_URLS = {
+    Customization:
+      "https://in3dwebsite.blob.core.windows.net/photos/Customize_Togle_Finish-min.jpg",
+    "Artifical Intelligence":
+      "https://in3dwebsite.blob.core.windows.net/photos/Ai_Tugle_Finish-min.jpg",
+    Microsoft:
+      "https://in3dwebsite.blob.core.windows.net/photos/Microsoft_Tugle-min.jpg",
+    Military:
+      "https://in3dwebsite.blob.core.windows.net/photos/Militery_Togle_Finish2-min.jpg",
+    Security:
+      "https://in3dwebsite.blob.core.windows.net/photos/Security_Togle_Finish2-min.jpg",
+    Industry:
+      "https://in3dwebsite.blob.core.windows.net/photos/Industry_Togle-min.jpg",
+    Medicine:
+      "https://in3dwebsite.blob.core.windows.net/photos/Medical_Togle-min.jpg",
+  };
+
   return (
     <div
       className="video-container"
@@ -129,8 +147,10 @@ export const VideoPlayer = ({ src, startTime = 0, videoRef, isMobile }) => {
         ref={videoRef ? videoRef : vidRef}
         preload="metadata"
         // poster="/assets/images/backgrounds/medicine/Medical_Togle.jpg"
-        poster="/assets/images/plain-logo.png"
+        // poster="/assets/images/plain-logo.png"
         // poster="/public/assets/images/backgrounds/Astro_1_Background.webp"
+        // poster="/public/assets/images/backgrounds/taasia/Industry_Togle.jpg"
+        poster={selectedCategory ? IMAGE_URLS[selectedCategory] : ""}
       >
         <source src={src} type="video/mp4" />
         Your browser does not support the video tag.
