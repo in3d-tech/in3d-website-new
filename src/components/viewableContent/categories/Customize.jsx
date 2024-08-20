@@ -120,20 +120,8 @@ export function Customize() {
 const ImageOverlayFirst = ({ topVidRef1, topVidRef2 }) => {
   return (
     <div className="customize-overlay-one-left-border">
-      <div
-        className="image-container customize-overlay-one-container"
-        // style={{ marginLeft: "20em" }}
-      >
-        <span
-          className="large-image-customize  sc-image-glass-bg"
-          style={{ width: "100%", height: "18em" }}
-        >
-          {/* <img
-            style={{ backgroundSize: "cover", width: "100%" }}
-            src="/assets/images/backgrounds/customize/Customize_Togle_Finish.jpg"
-            // className="large-image"
-            alt="Large"
-          /> */}
+      <div className="image-container customize-overlay-one-container">
+        <span className="large-image-customize  sc-image-glass-bg customize-top-vid-size">
           <VideoPlayer
             src="https://in3dwebsite.blob.core.windows.net/video/ar real estate.mp4"
             startTime={1}
@@ -141,15 +129,9 @@ const ImageOverlayFirst = ({ topVidRef1, topVidRef2 }) => {
           />
         </span>
         <span
-          className="large-image-customize bottom-customize  sc-image-glass-bg"
-          style={{ width: "100%", right: "3em", height: "18em" }}
+          className="large-image-customize bottom-customize  sc-image-glass-bg customize-top-vid-size"
+          style={{ right: "3em" }}
         >
-          {/* <img
-            style={{ backgroundSize: "cover", width: "100%" }}
-            src="/assets/images/backgrounds/customize/Customize_Togle_Finish.jpg"
-            // className="large-image"
-            alt="Large"
-          /> */}
           <VideoPlayer
             src="https://in3dwebsite.blob.core.windows.net/video/Globe 3D Store - 14.10.20.mp4"
             startTime={1}
@@ -169,21 +151,17 @@ const Top = ({ topVidRef1, topVidRef2 }) => {
       <div className="sc-content-left-half-customize">
         <ImageOverlayFirst topVidRef1={topVidRef1} topVidRef2={topVidRef2} />
       </div>
-      <div
-        className="sc-right-half-customize"
-        //   className="selected-content-first-divider-customize"
-      >
+      <div className="sc-right-half-customize">
         <div
           style={{
             fontSize: "3em",
             fontFamily: "gotham-bold",
             width: "80%",
-            marginTop: "3em",
+            marginTop: "2.5em",
           }}
           className="mirosoft-title-one"
         >
           <h1>{headline}</h1>
-          {/* <h1>{headline}</h1> */}
         </div>
         <div className="no-opacity customize-text-one">
           We specialize in 3D and Extended Reality (EX), and as specialists we
@@ -260,17 +238,14 @@ const ImageOverlaySecond = ({
 }) => {
   return (
     <div ref={midVidRef} className="no-opacity">
-      <div ref={midVidInnerRef} className="image-container">
+      <div
+        ref={midVidInnerRef}
+        className="image-container customize-mid-vid-container-size"
+      >
         <span
           className="large-image-customize sc-image-glass-bg"
           style={{ width: "100%", height: "14em", left: "2em" }}
         >
-          {/* <img
-            style={{ backgroundSize: "cover", width: "100%" }}
-            src="/assets/images/backgrounds/customize/Customize_Togle_Finish.jpg"
-            // className="large-image"
-            alt="Large"
-          /> */}
           <VideoPlayer
             videoRef={midVidRef1}
             startTime={1}
@@ -281,12 +256,6 @@ const ImageOverlaySecond = ({
           className="large-image-customize bottom-customize  sc-image-glass-bg"
           style={{ width: "100%", height: "14em", right: "5em", bottom: "2em" }}
         >
-          {/* <img
-            style={{ backgroundSize: "cover", width: "100%" }}
-            src="/assets/images/backgrounds/customize/Customize_Togle_Finish.jpg"
-            // className="large-image"
-            alt="Large"
-          /> */}
           <VideoPlayer
             videoRef={midVidRef2}
             startTime={1}
@@ -297,12 +266,6 @@ const ImageOverlaySecond = ({
           className="large-image-customize top-customize  sc-image-glass-bg"
           style={{ width: "100%", height: "14em" }}
         >
-          {/* <img
-            style={{ backgroundSize: "cover", width: "100%" }}
-            src="/assets/images/backgrounds/customize/Customize_Togle_Finish.jpg"
-            // className="large-image"
-            alt="Large"
-          /> */}
           <VideoPlayer
             videoRef={midVidRef3}
             startTime={1}
@@ -333,19 +296,12 @@ const ImageOverlayThird = ({
           className="large-image-customize sc-image-glass-bg"
           style={{ width: "90%", height: "17em" }}
         >
-          {/* <img
-            ref={bottomOverlayRef}
-            style={{ backgroundSize: "cover", width: "100%" }}
-            src="/assets/images/backgrounds/customize/Customize_Togle_Finish.jpg"
-            // className="large-image"
-            alt="Large"
-          /> */}
           <VideoPlayer
             src={
               "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4"
             }
             videoRef={bottomVidRef1}
-            startTime={7}
+            startTime={5}
           />
         </span>
       </div>
@@ -354,12 +310,6 @@ const ImageOverlayThird = ({
           className="large-image-customize sc-image-glass-bg"
           style={{ width: "90%", height: "17em" }}
         >
-          {/* <img
-            style={{ backgroundSize: "cover", width: "100%" }}
-            src="/assets/images/backgrounds/customize/Customize_Togle_Finish.jpg"
-            // className="large-image"
-            alt="Large"
-          /> */}
           <VideoPlayer
             src={
               "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4"
