@@ -66,7 +66,7 @@ export const preloadVideos = ({
       video.src = src;
       video.preload = "metadata";
 
-      video.currentTime = 8;
+      video.currentTime = 5;
 
       video.oncanplay = () => {
         // console.log(`Preloaded part of: ${src}`);

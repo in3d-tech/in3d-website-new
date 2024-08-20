@@ -94,6 +94,24 @@
   animation-delay: 0.6s;
 }
 
+.selected-content-first-divider-security {
+  flex: 1;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  overflow: hidden;
+}
+
+.security-txt-one-fade-in {
+  opacity: 0;
+
+  animation: fadeIn 1s linear forwards;
+  animation-delay: 1.5s;
+}
+
 .selected-content-first-divider-customize {
   flex: 1;
   width: 100%;
@@ -299,8 +317,8 @@
   right: 0;
   height: 4px; /* Adjust to match the border height */
   background-color: black;
-  animation: borderGrowFive 2s ease-out forwards;
-  animation-delay: 0.5s;
+  animation: borderGrowFive 1.8s ease-out forwards;
+  animation-delay: 0.4s;
 }
 
 .text-animation {
@@ -597,6 +615,11 @@
   height: 13em;
 }
 
+.bottom-right-industry {
+  transform: translate(-10%, 10%);
+  height: 13em;
+}
+
 .large-image-industry:hover {
   transform: scale(1.1);
   z-index: 10;
@@ -694,6 +717,11 @@
 
 .medicine-top-header-container .med-titled::after {
   width: 100%;
+}
+
+.med-mid-vid-wrapper {
+  margin-top: 18em;
+  height: 25em;
 }
 
 .medicine-bottom-text {
@@ -848,6 +876,20 @@
   animation: fadeIn 2s ease-in-out;
 }
 
+.microsoft-top-vid-container {
+  margin-left: 22em;
+  margin-top: 14em;
+}
+
+.microsoft-bottom-vid-container-size {
+  height: 13em;
+}
+
+.micro-bot-vid-large {
+  height: 15em;
+  top: 6.5em;
+}
+
 /* ----------------- SECURITY -------------- */
 
 .large-image-security {
@@ -862,6 +904,7 @@
 
 .security-vid-one-top {
   height: 22em;
+  top: 3em;
 }
 
 .border-top-animation {
@@ -885,7 +928,8 @@
 }
 
 .security-top-vid {
-  height: 15em;
+  height: 14em;
+  top: 2em;
 }
 
 .small-image-security {
@@ -1656,6 +1700,14 @@
     line-height: 1.6em;
     margin-top: 9em;
   }
+  .med-mid-vid-wrapper {
+    margin-top: 15em;
+    height: 23em;
+  }
+  .microsoft-top-vid-container {
+    margin-top: 12em;
+    margin-left: 21em;
+  }
 }
 
 @media screen and (max-width: 1750px) {
@@ -1672,6 +1724,10 @@
   .image-top-container-microsoft {
     right: 3em;
   }
+  .security-headline {
+    font-size: 4em;
+    width: 80%;
+  }
 }
 
 @media screen and (max-width: 1675px) {
@@ -1680,6 +1736,13 @@
   }
   .sc-title-container {
     font-size: 3.2em;
+  }
+  .microsoft-top-vid-container {
+    margin-left: 20em;
+    margin-top: 10em;
+  }
+  .microsoft-bottom-vid-container-size {
+    height: 11em;
   }
 }
 
@@ -1731,7 +1794,9 @@
     line-height: 1.7em;
     margin-top: 2.5em;
   }
-
+  .micro-bot-vid-large {
+    top: 4.5em;
+  }
   .security-vid-one-top {
     height: 16em;
   }
@@ -1740,7 +1805,7 @@
     height: 16em;
   }
   .security-top-vid {
-    height: 13em;
+    height: 12em;
   }
 
   .security-headline {
@@ -1814,6 +1879,22 @@
     width: 60%;
     line-height: 1.3em;
   }
+
+  .med-mid-vid-wrapper {
+    height: 20em;
+  }
+
+  .microsoft-top-vid-container {
+    margin-left: 19em;
+    margin-top: 9em;
+  }
+  .microsoft-bottom-vid-container-size {
+    height: 10em;
+  }
+  .micro-bot-vid-large {
+    height: 12em;
+    top: 3.5em;
+  }
 }
 
 @media screen and (max-width: 1350px) {
@@ -1842,6 +1923,7 @@
 
     margin-top: 1.2em;
   }
+
   .medicine-bottom-text {
     font-size: 1.3em;
     margin-left: 2em;
@@ -1862,6 +1944,17 @@
     right: 14%;
     top: 77%;
     font-size: 2.1em;
+  }
+  .med-mid-vid-wrapper {
+    height: 17em;
+  }
+
+  .microsoft-top-vid-container {
+    margin-left: 17em;
+    margin-top: 7em;
+  }
+  .security-headline {
+    font-size: 3.6em;
   }
 }
 

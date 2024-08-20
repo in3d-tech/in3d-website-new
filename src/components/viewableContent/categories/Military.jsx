@@ -1,7 +1,7 @@
 import "../selectedCategories.css";
 import { ContactBtn, Logo, VideoPlayer } from "../../common/Logo";
-import { ModelComponent } from "./ModelComponent";
-import { Canvas } from "@react-three/fiber";
+// import { ModelComponent } from "./ModelComponent";
+// import { Canvas } from "@react-three/fiber";
 import { useRef, Suspense, useEffect, useState } from "react";
 
 export function Military({ selectedCategory }) {
@@ -294,7 +294,7 @@ const Bottom = ({ bottomVideoRef1, bottomVideoRef2 }) => (
           <VideoPlayer
             src="https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4"
             videoRef={bottomVideoRef1}
-            startTime={7}
+            startTime={5}
           />
         </span>
         <span
@@ -310,7 +310,7 @@ const Bottom = ({ bottomVideoRef1, bottomVideoRef2 }) => (
           <VideoPlayer
             src="https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4"
             videoRef={bottomVideoRef2}
-            startTime={8}
+            startTime={3}
           />
         </span>
       </div>
@@ -318,47 +318,47 @@ const Bottom = ({ bottomVideoRef1, bottomVideoRef2 }) => (
   </div>
 );
 
-const BottomModel = ({ modelRef }) => (
-  <div style={{ height: "80vh", display: "flex" }}>
-    <div
-      style={{
-        flex: 1,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Canvas
-        // style={{ border: "1px solid black", zIndex: 54433 }}
-        camera={{ position: [0, 0, 10], fov: 75 }}
-      >
-        <ambientLight intensity={1} />
-        <pointLight position={[10, 10, 10]} />
-        <directionalLight position={[0, 10, 0]} intensity={1} />
-        {/* <OrbitControls /> */}
-        {/* <Stars count={2/000} /> */}
-        {/* <Camera /> */}
-        <Suspense fallback={null}>
-          {/* <ModelComponent url={"/assets/models/engenir_model.glb"} /> */}
-          <ModelComponent
-            url={"/assets/models/military.glb"}
-            modelRef={modelRef}
-            // dontRotate
-            position={[0, -3, 0]}
-            scale={[9, 9, 9]}
-          />
-        </Suspense>
-      </Canvas>
-    </div>
-    <div
-      style={{
-        position: "absolute",
-        bottom: "-198%",
-        left: "2em",
-        zIndex: 1,
-      }}
-    >
-      <ContactBtn isFromSelectedCategory />
-    </div>
-  </div>
-);
+// const BottomModel = ({ modelRef }) => (
+//   <div style={{ height: "80vh", display: "flex" }}>
+//     <div
+//       style={{
+//         flex: 1,
+//         display: "flex",
+//         alignItems: "center",
+//         justifyContent: "center",
+//       }}
+//     >
+//       <Canvas
+//         // style={{ border: "1px solid black", zIndex: 54433 }}
+//         camera={{ position: [0, 0, 10], fov: 75 }}
+//       >
+//         <ambientLight intensity={1} />
+//         <pointLight position={[10, 10, 10]} />
+//         <directionalLight position={[0, 10, 0]} intensity={1} />
+//         {/* <OrbitControls /> */}
+//         {/* <Stars count={2/000} /> */}
+//         {/* <Camera /> */}
+//         <Suspense fallback={null}>
+//           {/* <ModelComponent url={"/assets/models/engenir_model.glb"} /> */}
+//           <ModelComponent
+//             url={"/assets/models/military.glb"}
+//             modelRef={modelRef}
+//             // dontRotate
+//             position={[0, -3, 0]}
+//             scale={[9, 9, 9]}
+//           />
+//         </Suspense>
+//       </Canvas>
+//     </div>
+//     <div
+//       style={{
+//         position: "absolute",
+//         bottom: "-198%",
+//         left: "2em",
+//         zIndex: 1,
+//       }}
+//     >
+//       <ContactBtn isFromSelectedCategory />
+//     </div>
+//   </div>
+// );

@@ -224,8 +224,8 @@ const Middle = ({
         }}
       >
         <span
-          className="sc-image-glass-bg"
-          style={{ marginTop: "20em", height: "25em" }}
+          className="sc-image-glass-bg med-mid-vid-wrapper"
+          // style={{ marginTop: "20em", height: "25em" }}
         >
           {/* <img
             src="/assets/images/backgrounds/medicine/Medical_Togle.jpg"

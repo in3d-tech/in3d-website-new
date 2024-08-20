@@ -63,9 +63,9 @@ export function Security() {
 const Top = () => {
   return (
     <div style={{ display: "flex" }}>
-      <div className="selected-content-first-divider">
+      <div className="selected-content-first-divider-security">
         <div className="sc-content-left-half">
-          <div className="security-font-one">
+          <div className="security-font-one security-txt-one-fade-in">
             In3D has strong relations with the security and defense sector and
             an MOD (Ministry of Defense) official provider. <br /> <br />
             Working directly with many security bodies such as the fire and
@@ -162,7 +162,10 @@ const ImageOverlay = ({ isBottom, bottomVideoRef2, bottomVideoRef1 }) => {
         alignItems: isBottom ? "center" : "center",
       }}
     >
-      <div className="image-container">
+      <div
+        className="image-container"
+        style={isBottom ? { marginBottom: "3em" } : {}}
+      >
         <span
           className={`large-image-industry sc-image-glass-bg ${
             isBottom ? "security-vid-one-bottom" : "security-vid-one-top"
@@ -189,7 +192,7 @@ const ImageOverlay = ({ isBottom, bottomVideoRef2, bottomVideoRef1 }) => {
           style={
             isBottom
               ? { marginLeft: "4em", marginBottom: "1em" }
-              : { marginBottom: "2em" }
+              : { marginBottom: "3em" }
           }
         >
           <VideoPlayer

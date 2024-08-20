@@ -186,10 +186,10 @@ export function Industry({ selectedCategory }) {
 const ImageOverlay = ({ vid1, vid2 }) => {
   return (
     <div className="sc-right-half">
-      <div className="image-container">
+      <div className="image-container" style={{ marginTop: "2em" }}>
         <span
           className="large-image-industry sc-image-glass-bg"
-          style={{ marginTop: "3em" }}
+          style={{ marginTop: "3em", height: "60%" }}
         >
           <img
             src="https://in3dwebsite.blob.core.windows.net/photos/industry-large-min.jpg"
@@ -209,7 +209,7 @@ const ImageOverlay = ({ vid1, vid2 }) => {
         </span>
         <span
           className="small-image-industry top-right-industry sc-image-glass-bg"
-          style={{ marginTop: "2em", height: "14em" }}
+          style={{ marginTop: "4em", height: "13em" }}
         >
           <VideoPlayer
             videoRef={vid1}
@@ -218,7 +218,7 @@ const ImageOverlay = ({ vid1, vid2 }) => {
         </span>
         <span
           className="small-image-industry bottom-left-industry sc-image-glass-bg"
-          // style={{ height: "13em" }}
+          style={{ top: "8em" }}
         >
           <VideoPlayer
             videoRef={vid2}

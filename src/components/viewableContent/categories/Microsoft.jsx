@@ -1,7 +1,7 @@
 import { ContactBtn, Logo, VideoPlayer } from "../../common/Logo";
 import { useEffect, useRef, useState, Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
-import { ModelComponent } from "./ModelComponent";
+// import { Canvas } from "@react-three/fiber";W
+// import { ModelComponent } from "./ModelComponent";
 // import { useAppContext } from "../../../context/appContext";
 
 export function Microsoft() {
@@ -162,22 +162,21 @@ const ImageOverlay = ({
 }) => {
   return (
     <div ref={bottomVidContainerRef} className="no-opacity">
-      <div className="image-container">
+      <div className="image-container" style={{ border: "1px solid green" }}>
         <span
-          className="large-image-industry sc-image-glass-bg"
+          className="large-image-industry sc-image-glass-bg micro-bot-vid-large"
           style={{
-            height: "18em",
+            // height: "18em",
             zIndex: 2,
             right: "10em",
-            top: "6.5em",
             height: "15em",
           }}
         >
           <VideoPlayer src="https://in3dwebsite.blob.core.windows.net/video/Mesh Hololens - Remote Collaboration.mp4" />
         </span>
         <span
-          className="small-image-industry top-left-microsoft sc-image-glass-bg"
-          style={{ left: "0em", top: "5em", height: "13em" }}
+          className="small-image-industry top-left-microsoft sc-image-glass-bg microsoft-bottom-vid-container-size"
+          style={{ left: "0em", top: "5em" }}
         >
           <VideoPlayer
             src="https://in3dwebsite.blob.core.windows.net/video/What can HoloLens 2 do_.mp4"
@@ -187,7 +186,7 @@ const ImageOverlay = ({
         </span>
 
         <span
-          className="small-image-industry bottom-left-microsoft sc-image-glass-bg"
+          className="small-image-industry bottom-left-microsoft sc-image-glass-bg microsoft-bottom-vid-container-size"
           style={{ left: "0em", bottom: "4em" }}
         >
           <VideoPlayer
@@ -245,14 +244,7 @@ const Top = ({ displayVideos, topVidoe1Ref, topVidoe2Ref }) => {
       </div>
 
       <div style={{ flex: 1 }}>
-        <div
-          className="image-container image-top-container-microsoft"
-          style={{
-            marginLeft: "22em",
-            marginTop: "14em",
-            // transform: "grayscale(100%)",
-          }}
-        >
+        <div className="image-container image-top-container-microsoft microsoft-top-vid-container">
           <span
             className="large-image-customize sc-image-glass-bg"
             style={{ width: "100%", height: "17em" }}
@@ -263,7 +255,7 @@ const Top = ({ displayVideos, topVidoe1Ref, topVidoe2Ref }) => {
                   "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4"
                 }
                 videoRef={topVidoe1Ref}
-                startTime={7}
+                startTime={5}
               />
             ) : null}
           </span>
@@ -344,48 +336,48 @@ const Top = ({ displayVideos, topVidoe1Ref, topVidoe2Ref }) => {
   );
 };
 
-const BottomModel = ({ modelRef }) => (
-  <div style={{ height: "70vh", display: "flex" }}>
-    <div
-      style={{
-        flex: 1,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Canvas
-        // style={{ border: "1px solid black", zIndex: 54433 }}
-        camera={{ position: [0, 0, 10], fov: 75 }}
-      >
-        <ambientLight intensity={1} />
-        <pointLight position={[10, 10, 10]} />
-        <directionalLight position={[0, 10, 0]} intensity={1} />
-        {/* <OrbitControls /> */}
-        {/* <Stars count={2/000} /> */}
-        {/* <Camera /> */}
-        <Suspense fallback={null}>
-          {/* <ModelComponent url={"/assets/models/engenir_model.glb"} /> */}
-          <ModelComponent
-            url={"/assets/models/microsoft_model.glb"}
-            modelRef={modelRef}
-            dontRotate
-            position={[1, -5, -5]}
-            scale={[6, 6, 6]}
-            rotation={[0.2, 0, 0]}
-          />
-        </Suspense>
-      </Canvas>
-    </div>
-    <div
-      style={{
-        position: "absolute",
-        bottom: "-168%",
-        left: "2em",
-        zIndex: 1,
-      }}
-    >
-      <ContactBtn isFromSelectedCategory />
-    </div>
-  </div>
-);
+// const BottomModel = ({ modelRef }) => (
+//   <div style={{ height: "70vh", display: "flex" }}>
+//     <div
+//       style={{
+//         flex: 1,
+//         display: "flex",
+//         alignItems: "center",
+//         justifyContent: "center",
+//       }}
+//     >
+//       <Canvas
+//         // style={{ border: "1px solid black", zIndex: 54433 }}
+//         camera={{ position: [0, 0, 10], fov: 75 }}
+//       >
+//         <ambientLight intensity={1} />
+//         <pointLight position={[10, 10, 10]} />
+//         <directionalLight position={[0, 10, 0]} intensity={1} />
+//         {/* <OrbitControls /> */}
+//         {/* <Stars count={2/000} /> */}
+//         {/* <Camera /> */}
+//         <Suspense fallback={null}>
+//           {/* <ModelComponent url={"/assets/models/engenir_model.glb"} /> */}
+//           <ModelComponent
+//             url={"/assets/models/microsoft_model.glb"}
+//             modelRef={modelRef}
+//             dontRotate
+//             position={[1, -5, -5]}
+//             scale={[6, 6, 6]}
+//             rotation={[0.2, 0, 0]}
+//           />
+//         </Suspense>
+//       </Canvas>
+//     </div>
+//     <div
+//       style={{
+//         position: "absolute",
+//         bottom: "-168%",
+//         left: "2em",
+//         zIndex: 1,
+//       }}
+//     >
+//       <ContactBtn isFromSelectedCategory />
+//     </div>
+//   </div>
+// );
