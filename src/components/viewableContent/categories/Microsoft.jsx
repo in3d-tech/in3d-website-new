@@ -162,7 +162,7 @@ const ImageOverlay = ({
 }) => {
   return (
     <div ref={bottomVidContainerRef} className="no-opacity">
-      <div className="image-container" style={{ border: "1px solid green" }}>
+      <div className="image-container">
         <span
           className="large-image-industry sc-image-glass-bg micro-bot-vid-large"
           style={{

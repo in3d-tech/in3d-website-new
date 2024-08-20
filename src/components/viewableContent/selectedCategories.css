@@ -322,6 +322,7 @@
 }
 
 .text-animation {
+  opacity: 0;
   animation: slideInUp 2.4s ease-out forwards;
   animation-delay: 1s;
 }
