@@ -32,6 +32,7 @@ export const SeeMoreBtn = () => {
         <>
           Industry
           <span style={{ color: getSparkleColour(scrollArea.currentSection) }}>
+            {" "}
             4.0
           </span>
         </>

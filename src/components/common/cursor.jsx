@@ -95,7 +95,7 @@ function Cursor() {
   function toggleCursorSize() {
     if (cursorEnlarged.current) {
       cursorDotOutline.current.style.transform =
-        "translate(-50%, -50%) rotate(45deg) scale(2)";
+        "translate(-50%, -50%) rotate(45deg) scale(1.2)";
     } else {
       cursorDotOutline.current.style.transform =
         "translate(-50%, -50%) rotate(45deg) scale(1)";

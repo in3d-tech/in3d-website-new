@@ -145,7 +145,7 @@ export const HamburgerMenu = ({ isMobileViewOnly }) => {
           <div
             key={index}
             style={{
-              backgroundColor: selectedCategory
+              background: selectedCategory
                 ? "#750414"
                 : getSparkleColour(scrollArea.currentSection),
             }}

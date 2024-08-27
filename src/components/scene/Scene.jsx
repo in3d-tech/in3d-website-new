@@ -59,12 +59,12 @@ function Scene({ scrollToElementById }) {
     setMenuOpened,
     titleOnMainPageHovered,
     modelAnimationIsHalfWay,
-    isAstroModelDrawn,
     customizeHasRendered,
     firstContentLoaded,
     setfirstContentLoaded,
     videosPreloaded,
     setVideosPreloaded,
+    setIsCursorHovering,
   } = useAppContext();
 
   const containerRef = useRef(null);
@@ -258,27 +258,6 @@ function Scene({ scrollToElementById }) {
 
   return (
     <div className="scene one" style={{}} ref={containerRef}>
-      {/* {customizeHasRendered ? (
-        <div
-          style={{
-            position: "fixed",
-            top: "2em",
-            left: "3em",
-            zIndex: 1,
-          }}
-          className="hover14 column"
-          onClick={scrollToTop}
-        >
-          <figure>
-            <img
-              style={{ height: "90px" }}
-              // className="in3d-fixed-logo"
-              src="/assets/images/in3d-logo-white.png"
-            />
-          </figure>
-        </div>
-      ) : null} */}
-
       {customizeHasRendered ? (
         <div
           style={{
@@ -292,7 +271,9 @@ function Scene({ scrollToElementById }) {
         >
           <span className="two-dee-box">
             <img
-              style={{ height: "90px", border: "1px solid yellow" }}
+              onMouseOver={() => setIsCursorHovering(true)}
+              onMouseOut={() => setIsCursorHovering(false)}
+              style={{ height: "90px" }}
               className="logo"
               src="/assets/images/in3d-logo-white.png"
             />
@@ -376,8 +357,7 @@ const Lights = ({
           intensity={
             scrollArea?.currentSection == CUSTOMIZATION
               ? 2
-              : scrollArea.currentSection == ASTRO ||
-                scrollArea.currentSection == INDUSTRY
+              : scrollArea.currentSection == ASTRO
               ? 0.2
               : 1
           }
