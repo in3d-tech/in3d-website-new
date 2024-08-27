@@ -1,56 +1,4 @@
-// import { Swiper, SwiperSlide } from "swiper/react";
-// import "swiper/css";
 import { useState, useEffect } from "react";
-
-// export function Swipe({
-//   setSlide,
-//   setMobileBackground,
-//   setDebug,
-//   position,
-//   setPosition,
-// }) {
-//   return (
-//     <div
-//       // className="swiper"
-//       style={{
-//         position: "fixed",
-//         // border: "1px solid yellow",
-//         top: 0,
-//         left: 0,
-//         height: "100%",
-//         width: "100%",
-//         zIndex: 1,
-//       }}
-//     >
-//       {/* <div style={{ color: "yellow", position: "absolute" }}>{debug} </div> */}
-//       {/* <TiltDiv
-//         setDebug={setDebug}
-//         position={position}
-//         setPosition={setPosition}
-//       /> */}
-//       <Swiper
-//         spaceBetween={50}
-//         slidesPerView={3}
-//         onSlideChange={(e) => {
-//           console.log("slide change", e.realIndex);
-//           setSlide(e.realIndex);
-//           if (e.realIndex > 1) setMobileBackground(e.realIndex - 1);
-//         }}
-//         onSwiper={(swiper) => console.log(swiper)}
-//         style={{ height: "100%" }}
-//       >
-//         <SwiperSlide></SwiperSlide>
-//         <SwiperSlide></SwiperSlide>
-//         <SwiperSlide></SwiperSlide>
-//         <SwiperSlide></SwiperSlide>
-//         <SwiperSlide></SwiperSlide>
-//         <SwiperSlide></SwiperSlide>
-//         <SwiperSlide></SwiperSlide>
-//         <SwiperSlide></SwiperSlide>
-//       </Swiper>
-//     </div>
-//   );
-// }
 
 export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
   const [hasUserSeenPopup, setHasUserSeenPopup] = useState(false);
@@ -60,13 +8,29 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
     requestPermission,
   } = useDeviceOrientation(onTiltChange);
 
+  // Setup event listeners for user interactions to request permission
   useEffect(() => {
-    if (!hasUserSeenPopup) {
-      requestPermission();
-      setHasUserSeenPopup(true);
-    }
-  }, []);
+    const handleUserInteraction = () => {
+      if (!hasUserSeenPopup) {
+        requestPermission();
+        setHasUserSeenPopup(true);
+        // Clean up interaction listeners after first interaction
+        document.removeEventListener("scroll", handleUserInteraction);
+        document.removeEventListener("touchstart", handleUserInteraction);
+      }
+    };
 
+    document.addEventListener("scroll", handleUserInteraction);
+    document.addEventListener("touchstart", handleUserInteraction);
+
+    // Clean up interaction listeners on unmount
+    return () => {
+      document.removeEventListener("scroll", handleUserInteraction);
+      document.removeEventListener("touchstart", handleUserInteraction);
+    };
+  }, [hasUserSeenPopup]);
+
+  // Handle device orientation change
   useEffect(() => {
     if (beta !== null && gamma !== null && permission === "granted") {
       const maxGamma = 45;
@@ -75,21 +39,15 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
       normalizedGamma = -normalizedGamma;
 
       // Set position state based on gamma value
-      setPosition({
-        x: normalizedGamma * 50,
-      });
+      setPosition({ x: normalizedGamma * 50 });
 
       setDebug(`x: ${normalizedGamma * 50}`);
     }
   }, [beta, gamma, permission, setDebug, setPosition]);
 
-  const handleRetry = () => {
-    window.location.reload(); // Simple retry by reloading the page
-  };
-
   return (
     <div>
-      {permission === "default" && (
+      {permission === "default" || permission === "denied" ? (
         <button
           style={{
             zIndex: 500,
@@ -102,21 +60,7 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
         >
           Enable D.O.
         </button>
-      )}
-      {permission === "denied" && (
-        <button
-          style={{
-            zIndex: 500,
-            position: "absolute",
-            left: "2em",
-            top: "14em",
-            opacity: 0.4,
-          }}
-          onClick={requestPermission}
-        >
-          Enable D.O.
-        </button>
-      )}
+      ) : null}
     </div>
   );
 };
@@ -152,7 +96,7 @@ const useDeviceOrientation = (onOrientationChange) => {
     if (typeof DeviceOrientationEvent.requestPermission === "function") {
       try {
         const response = await DeviceOrientationEvent.requestPermission();
-        confirm(`${response}`);
+        confirm(`${response}`); // Optional: for debugging
         if (response === "granted") {
           setPermission("granted");
           window.addEventListener("deviceorientation", handleOrientation, true);

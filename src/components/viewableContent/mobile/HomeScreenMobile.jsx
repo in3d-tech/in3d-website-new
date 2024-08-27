@@ -64,30 +64,6 @@ function HomeScreenMobile() {
     }
   }, [isAstroModelDrawn]);
 
-  // useEffect(() => {
-  //   // Handler to handle device tilt event
-  //   const handleTilt = (event) => {
-  //     setTilt({
-  //       tiltLR: event.gamma,
-  //       tiltFB: event.beta,
-  //       dir: event.alpha,
-  //     });
-  //   };
-
-  //   // Add and cleanup the event listener
-  //   window.addEventListener("deviceorientation", handleTilt);
-
-  //   return () => {
-  //     window.removeEventListener("deviceorientation", handleTilt);
-  //   };
-  // }, []); // On mount and unmount
-
-  // const orientation = useScreenOrientation();
-
-  // console.log({ orientation });
-
-  // console.log({ selectedCategory });
-
   return (
     <>
       <MenuWheel
@@ -195,38 +171,43 @@ const categories = [
   "ABOUTCONTACT",
 ];
 
-const TitleWithAnimation = ({ isMobile }) => (
-  <div
-    style={{
-      top: "0em",
-      left: "1em",
-      height: "10em",
-      zIndex: 1,
-      position: "absolute",
-      width: "50%",
-    }}
-    // className="container"
-  >
+const TitleWithAnimation = ({ isMobile }) => {
+  return (
     <div
       style={{
-        fontSize: "2em",
-        marginTop: "1em",
+        top: "0em",
+        left: "1em",
+        height: "10em",
+        zIndex: 1,
+        position: "absolute",
+        width: "50%",
+        // border: "2px solid yellow",
       }}
-      className="text-animate simply-header"
+      // className="container"
     >
-      SIMPLY
+      <div
+        style={{
+          fontSize: "1.8em",
+          marginTop: "1em",
+          animationDelay: "2.5s",
+        }}
+        className="text-animate simply-header"
+      >
+        SIMPLY
+      </div>
+      <div
+        style={{
+          textAlign: "center",
+          // fontSize: "1em",
+          animationDelay: "2.5s",
+        }}
+        className="text-animate simply-header"
+      >
+        <TextScrambleComponent isHomepage isMobile={isMobile} />
+      </div>
     </div>
-    <div
-      style={{
-        textAlign: "center",
-        fontSize: "2em",
-      }}
-      className="text-animate simply-header"
-    >
-      <TextScrambleComponent isHomepage isMobile={isMobile} />
-    </div>
-  </div>
-);
+  );
+};
 
 const Scene = ({
   astroRef,
