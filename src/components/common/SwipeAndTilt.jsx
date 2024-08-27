@@ -98,7 +98,9 @@ const useDeviceOrientation = (onOrientationChange) => {
         const response = await DeviceOrientationEvent.requestPermission();
         confirm(`${response}`); // Optional: for debugging
         if (response === "granted") {
-          setPermission("granted");
+          setPermission(
+            "in3D is requesting permission to use device orientation"
+          );
           window.addEventListener("deviceorientation", handleOrientation, true);
         } else {
           setPermission("denied");
@@ -107,7 +109,7 @@ const useDeviceOrientation = (onOrientationChange) => {
         setPermission("denied");
       }
     } else {
-      setPermission("granted");
+      setPermission("in3D is requesting permission to use device orientation");
       window.addEventListener("deviceorientation", handleOrientation, true);
     }
   };
