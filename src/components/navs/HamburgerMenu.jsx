@@ -174,7 +174,7 @@ export const HamburgerMenu = ({ isMobileViewOnly }) => {
           >
             <img
               className="in3d-fixed-logo"
-              src="/assets/images/in3d-logo-white.png"
+              src="/assets/images/plain-logo.png"
             />
           </div>
           <div className="horizontal-nav-open-titles-container">

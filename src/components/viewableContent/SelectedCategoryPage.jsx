@@ -9,6 +9,7 @@ import { Military } from "./categories/Military";
 import { Ai } from "./categories/Ai";
 import { About } from "./categories/About";
 import { Contact } from "./categories/Contact";
+import { Logo } from "../common/Logo";
 
 const backgrounds = {
   1: 'url("/assets/images/backgrounds/taasiya.jpg")',
@@ -64,7 +65,10 @@ function SelectedCategoryPage() {
     >
       {selectedCategory ? (
         showContent ? (
-          <>{categories[selectedCategory] || null}</>
+          <>
+            <Logo />
+            {categories[selectedCategory] || null}
+          </>
         ) : null
       ) : null}
     </div>

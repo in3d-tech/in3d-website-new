@@ -19,7 +19,7 @@ export const Logo = () => {
     <div className="h-nav-in3d-icon for-menu">
       <img
         className="in3d-fixed-logo"
-        src="/assets/images/in3d-logo-white.png"
+        src="/assets/images/plain-logo.png"
         alt="logo"
         onClick={() => {
           setSelectedCategory(false);
@@ -183,14 +183,12 @@ export const VideoPlayer = ({ src, startTime = 0, videoRef, isMobile }) => {
       style={isMobile ? { borderRadius: "12px" } : null}
     >
       <video
+        playsInline
         controls
         className={isMobile ? "video-player-mobile" : "video-player"}
         ref={videoRef ? videoRef : vidRef}
         preload="metadata"
         // poster="/assets/images/backgrounds/medicine/Medical_Togle.jpg"
-        // poster="/assets/images/plain-logo.png"
-        // poster="/public/assets/images/backgrounds/Astro_1_Background.webp"
-        // poster="/public/assets/images/backgrounds/taasia/Industry_Togle.jpg"
         poster={
           selectedCategory
             ? isMobile
@@ -205,44 +203,3 @@ export const VideoPlayer = ({ src, startTime = 0, videoRef, isMobile }) => {
     </div>
   );
 };
-
-// export const VideoPlayer = ({ src, startTime = 0, videoRef, isMobile }) => {
-//   // const videoRef = useRef(null);
-
-//   useEffect(() => {
-//     const videoElement = videoRef?.current;
-//     if (videoElement) {
-//       // Set the start time when the video metadata is loaded
-//       const handleLoadedMetadata = () => {
-//         videoElement.currentTime = startTime;
-//       };
-
-//       // Add event listener
-//       videoElement.addEventListener("loadedmetadata", handleLoadedMetadata);
-
-//       // Cleanup event listener
-//       return () => {
-//         videoElement.removeEventListener(
-//           "loadedmetadata",
-//           handleLoadedMetadata
-//         );
-//       };
-//     }
-//   }, [startTime]);
-
-//   return (
-//     <div
-//       className="video-container"
-//       style={isMobile ? { borderRadius: "12px" } : null}
-//     >
-//       <video controls className="video-player" ref={videoRef} preload="auto">
-//         <source
-//           // src={process.env.PUBLIC_URL + "/path-to-your-video.mp4"}
-//           src={src ? src : "/assets/images/backgrounds/taasia/Kornit Guide.mp4"}
-//           type="video/mp4"
-//         />
-//         Your browser does not support the video tag.
-//       </video>
-//     </div>
-//   );
-// };
