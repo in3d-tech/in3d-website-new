@@ -42,12 +42,12 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
 
   return (
     <div>
-      {customMessage && (
+      {/* {customMessage && (
         <div className="custom-message">
           {customMessage}
           <button onClick={() => setCustomMessage("")}>Close</button>
         </div>
-      )}
+      )} */}
       {permission === "default" || permission === "denied" ? (
         <button
           style={{
@@ -55,7 +55,7 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
             position: "absolute",
             left: "2em",
             top: "14em",
-            opacity: 0.4,
+            opacity: 0,
           }}
           onClick={requestPermission}
         >
