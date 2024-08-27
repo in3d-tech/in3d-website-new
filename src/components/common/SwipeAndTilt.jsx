@@ -54,7 +54,7 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
             position: "absolute",
             left: "2em",
             top: "14em",
-            opacity: 0.4,
+            opacity: 0,
           }}
           onClick={requestPermission}
         >
@@ -98,9 +98,7 @@ const useDeviceOrientation = (onOrientationChange) => {
         const response = await DeviceOrientationEvent.requestPermission();
         confirm(`${response}`); // Optional: for debugging
         if (response === "granted") {
-          setPermission(
-            "in3D is requesting permission to use device orientation"
-          );
+          setPermission("granted");
           window.addEventListener("deviceorientation", handleOrientation, true);
         } else {
           setPermission("denied");
@@ -109,7 +107,7 @@ const useDeviceOrientation = (onOrientationChange) => {
         setPermission("denied");
       }
     } else {
-      setPermission("in3D is requesting permission to use device orientation");
+      setPermission("granted");
       window.addEventListener("deviceorientation", handleOrientation, true);
     }
   };
