@@ -3,7 +3,6 @@ import { MenuAboutContact } from "../../navs/mobile/MenuWheel";
 export const HomeScreenCategoryText = ({
   title,
   idx,
-  selectedMenuActionMobile,
   setSelectedMenuActionMobile,
   setSelectedCategory,
 }) => {
@@ -245,10 +244,10 @@ const LearnMoreBtn = ({
       <button
         // onClick={() => setSelectedMenuActionMobile(`fab-action-${idx + 1}`)}
         onClick={() => {
-          if (idx == 7) {
+          if (idx == 8) {
             return;
           }
-          setSelectedCategory(idx + 2);
+          setSelectedCategory(idx + 3);
         }}
         className="cta"
       >

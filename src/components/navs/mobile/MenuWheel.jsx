@@ -262,7 +262,7 @@ export const MenuAboutContact = ({
     // position: "absolute",
     // top: "200%",
     width: "100%",
-    borderTop: "1px solid rgb(0,0,0, 0.4)",
+    borderTop: "1px solid rgb(255,255,255, 0.4)",
     left: 0,
     height: "5em",
     display: "flex",
@@ -278,14 +278,14 @@ export const MenuAboutContact = ({
       <div className="animate-reveal">
         <span
           onClick={() => {
-            setSelectedCategory("about");
+            setSelectedCategory("10");
             if (isMenuCentered) {
               handleMenuClick();
               setMenuOpenMobile(!menuOpenMobile);
             }
           }}
           style={{
-            color: isFromSelectedCategory ? "black" : "white",
+            color: isFromSelectedCategory ? "white" : "white",
             fontFamily: "gotham",
           }}
         >
@@ -302,7 +302,7 @@ export const MenuAboutContact = ({
             }
           }}
           style={{
-            color: isFromSelectedCategory ? "black" : "white",
+            color: isFromSelectedCategory ? "white" : "white",
             fontFamily: "gotham",
           }}
         >
@@ -314,7 +314,7 @@ export const MenuAboutContact = ({
           <a href={linkedInUrl} target="_blank" rel="noopener noreferrer">
             <LinkedInIcon
               fontSize="large"
-              sx={{ color: isFromSelectedCategory ? "black" : "white" }}
+              sx={{ color: isFromSelectedCategory ? "white" : "white" }}
             />
           </a>
         }

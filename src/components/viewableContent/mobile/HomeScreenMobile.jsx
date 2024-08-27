@@ -145,6 +145,7 @@ function HomeScreenMobile() {
         <div className="home-categories-map-mobile">
           {categories.map((category, idx) => (
             <HomeScreenCategoryText
+              selectedCategory={selectedCategory}
               key={idx}
               idx={idx}
               selectedMenuActionMobile={selectedMenuActionMobile}
