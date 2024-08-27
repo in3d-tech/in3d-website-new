@@ -9,7 +9,12 @@ export const getCategoryData = ({ selectedCategory }) => {
     1: {
       title: (
         <div className="medicine-title-mobile">
-          <div className="medicine-top-text-mobile">Industry 4.0</div>
+          <div
+            className="medicine-top-text-mobile"
+            style={{ fontSize: "0.85em" }}
+          >
+            Industry 4.0
+          </div>
         </div>
       ),
       bgImage: 'url("/assets/images/backgrounds/taasia/Industry_Togle.jpg")',
