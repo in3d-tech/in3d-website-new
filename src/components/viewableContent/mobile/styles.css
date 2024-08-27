@@ -43,6 +43,17 @@
   }
 }
 
+@keyframes fadeInMoveUpLessOpacity {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  to {
+    opacity: 0.6;
+    transform: translateY(0);
+  }
+}
+
 .medicine-top-text-mobile {
   opacity: 0;
   animation: fadeInMoveUp 0.6s forwards ease-in-out;
@@ -59,4 +70,15 @@
   opacity: 0;
   animation: fadeInMoveUp 0.6s forwards ease-in-out;
   animation-delay: 1.4s;
+}
+
+.contact-us-mobile-img {
+  width: 100%;
+  position: absolute;
+  left: -2em;
+  top: 7em;
+  z-index: -1;
+  opacity: 0;
+  animation: fadeInMoveUpLessOpacity 2s forwards ease-in-out;
+  animation-delay: 1.3s;
 }
