@@ -2103,7 +2103,7 @@ section {
   right: 2em;
   /* bottom: 30rem; */
   /* right: 40rem; */
-  z-index: 112;
+  z-index: 30;
   transition: top 0.75s, right 0.75s; /* Define transition for top and right properties */
 }
 
@@ -2321,7 +2321,7 @@ section {
 .abla {
   color: #ffffff;
   display: inline-block;
-  font-size: 36px;
+  font-size: 34px;
   letter-spacing: 5px;
   margin: 0 -5px;
   padding: 2px 12px 6px 19px;

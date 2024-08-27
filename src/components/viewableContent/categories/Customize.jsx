@@ -130,7 +130,10 @@ const ImageOverlayFirst = ({ topVidRef1, topVidRef2 }) => {
         </span>
         <span
           className="large-image-customize bottom-customize  sc-image-glass-bg customize-top-vid-size"
-          style={{ right: "3em" }}
+          style={{
+            right: "8em",
+            top: "-3em",
+          }}
         >
           <VideoPlayer
             src="https://in3dwebsite.blob.core.windows.net/video/Globe 3D Store - 14.10.20.mp4"
@@ -244,7 +247,7 @@ const ImageOverlaySecond = ({
       >
         <span
           className="large-image-customize sc-image-glass-bg"
-          style={{ width: "100%", height: "14em", left: "2em" }}
+          style={{ width: "100%", height: "14em", left: "8.5em" }}
         >
           <VideoPlayer
             videoRef={midVidRef1}
@@ -264,7 +267,7 @@ const ImageOverlaySecond = ({
         </span>
         <span
           className="large-image-customize top-customize  sc-image-glass-bg"
-          style={{ width: "100%", height: "14em" }}
+          style={{ width: "100%", height: "14em", top: "-9em" }}
         >
           <VideoPlayer
             videoRef={midVidRef3}

@@ -36,12 +36,16 @@ export function LoadingScreen({
     }
     // if (isMobileViewOnly && showLoading) {
     if (isAstroModelDrawn && isMobileViewOnly) {
-      const loadingScreen = setTimeout(() => setShowloadingScreen(false), 2000);
-      const showLoad = setTimeout(() => setShowLoading(false), 2000);
+      const fadeOutTimer = setTimeout(() =>
+        setFadeOut("flashing-fade-out", 1000)
+      );
+      const loadingScreen = setTimeout(() => setShowloadingScreen(false), 1500);
+      const showLoad = setTimeout(() => setShowLoading(false), 1500);
       document.body.style.overflowY = "auto";
       return () => {
         clearTimeout(loadingScreen);
         clearTimeout(showLoad);
+        clearTimeout(fadeOutTimer);
       };
     }
 

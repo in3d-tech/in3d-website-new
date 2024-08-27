@@ -92,23 +92,24 @@ export const TextScrambleComponent = ({ colour, isHomePage, isMobile }) => {
       counter = (counter + 1) % phrases.length;
     };
 
-    // Only run for 10 seconds if isHomePage is true
     if (isHomePage) {
-      const intervalId = setInterval(next, 1000); // Adjustable interval
-      setTimeout(() => clearInterval(intervalId), 3200); // Stop after 10 seconds
+      const intervalId = setInterval(next, 1000);
+      setTimeout(() => clearInterval(intervalId), 3200);
       return () => clearInterval(intervalId);
     } else {
       next();
     }
 
-    // Cleanup on unmount
     return () => cancelAnimationFrame(fx.frameRequest);
   }, [isHomePage, isMobile, phrases]);
 
   return (
     <div
-      className={""}
-      style={{ marginTop: isHomePage ? "0.3em" : isMobile ? "0em" : "2em" }}
+      style={
+        {
+          // marginTop: isHomePage ? "0.3em" : isMobile ? "0em" : "2em",
+        }
+      }
     >
       <div
         className={isHomePage ? "" : "abla"}

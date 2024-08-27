@@ -180,9 +180,14 @@ const ImageOverlay = ({ isBottom, bottomVideoRef2, bottomVideoRef1 }) => {
             }
           />
         </span>
+
         <span
           className="small-image-industry top-left-industry sc-image-glass-bg security-top-vid"
-          style={isBottom ? { height: "12em" } : null}
+          style={
+            isBottom
+              ? { height: "12em", top: "-4em", left: "-4em" }
+              : { top: "-4em", left: "-7em" }
+          }
         >
           <VideoPlayer src="https://in3dwebsite.blob.core.windows.net/video/AR Factory Real Time Control Panel Data - 2 level (3).mp4" />
         </span>
@@ -191,8 +196,8 @@ const ImageOverlay = ({ isBottom, bottomVideoRef2, bottomVideoRef1 }) => {
           className="small-image-industry bottom-left-industry sc-image-glass-bg"
           style={
             isBottom
-              ? { marginLeft: "4em", marginBottom: "1em" }
-              : { marginBottom: "3em" }
+              ? { marginLeft: "-5em", marginBottom: "-1em" }
+              : { marginBottom: "-1em", left: "-7em" }
           }
         >
           <VideoPlayer
@@ -205,10 +210,11 @@ const ImageOverlay = ({ isBottom, bottomVideoRef2, bottomVideoRef1 }) => {
             startTime={isBottom ? 7 : null}
           />
         </span>
+
         {isBottom ? (
           <span
             className="small-image-industry bottom-right-industry sc-image-glass-bg"
-            style={{ left: "18em", bottom: "-6em", height: "12em" }}
+            style={{ left: "20em", bottom: "-2em", height: "12em" }}
           >
             <VideoPlayer
               src="https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4"

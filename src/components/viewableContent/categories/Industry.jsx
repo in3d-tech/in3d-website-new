@@ -199,7 +199,7 @@ const ImageOverlay = ({ vid1, vid2 }) => {
         </span>
         <span
           className="small-image-industry top-left-industry sc-image-glass-bg"
-          style={{ width: "70%", marginTop: "2em" }}
+          style={{ width: "70%", marginTop: "-1.5em", left: "-8em" }}
         >
           <img
             src="https://in3dwebsite.blob.core.windows.net/photos/industry-hat-min.png" //"/assets/images/backgrounds/taasia/industry-hat.png"
@@ -209,16 +209,17 @@ const ImageOverlay = ({ vid1, vid2 }) => {
         </span>
         <span
           className="small-image-industry top-right-industry sc-image-glass-bg"
-          style={{ marginTop: "4em", height: "13em" }}
+          style={{ left: "10em", marginTop: "-1em", height: "13em" }}
         >
           <VideoPlayer
             videoRef={vid1}
             src="https://in3dwebsite.blob.core.windows.net/video/ICL - Smart 3D Warehouse.mp4"
           />
         </span>
+
         <span
           className="small-image-industry bottom-left-industry sc-image-glass-bg"
-          style={{ top: "8em" }}
+          style={{ top: "13em", left: "-8em" }}
         >
           <VideoPlayer
             videoRef={vid2}
@@ -464,7 +465,7 @@ const Bottom = ({
           ) : null}
         </span>
         <span
-          className="large-image-customize bottom-customize sc-image-glass-bg bottom-image industry-bottom"
+          className="large-image-customize bottom-industry sc-image-glass-bg bottom-image industry-bottom"
           style={{ marginTop: "2em" }}
           ref={bottomImage2Ref}
           // className="bottom-image"

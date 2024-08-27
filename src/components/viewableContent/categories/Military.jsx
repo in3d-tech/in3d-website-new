@@ -82,30 +82,17 @@ const ImageOverlay = ({ topVid1Ref, topVid2Ref }) => {
       <div className="image-container">
         <span
           className="large-image-industry sc-image-glass-bg"
-          style={{ top: "3em" }}
+          style={{ top: "3em", zIndex: 4 }}
         >
-          {/* <img
-            src="/assets/images/backgrounds/military/Militery_Togle_Finish2.jpg"
-            // className="large-image"
-            alt="Large"
-            style={{ width: "100%" }}
-          /> */}
           <VideoPlayer
             src="https://in3dwebsite.blob.core.windows.net/video/Boat 3D Scan.mp4"
             videoRef={topVid2Ref}
           />
         </span>
         <span
-          className="small-image-industry top-left-industry sc-image-glass-bg"
-          style={{ top: "3em", height: "15em", width: "26em" }}
+          className="small-image-military top-left-military sc-image-glass-bg"
+          style={{ top: "-4em", left: "-7em", height: "15em", width: "26em" }}
         >
-          {/* <img
-            src="/assets/images/backgrounds/military/Militery_Togle_Finish2.jpg"
-            // className="small-image top-left"
-            alt="Top Left"
-            style={{ width: "100%" }}
-          /> */}
-          {/* <VideoPlayer src="/assets/images/backgrounds/military/Rafael - Family - Truck.mp4" /> */}
           <VideoPlayer
             src="https://in3dwebsite.blob.core.windows.net/video/Rafael - Family - Truck (1).mp4"
             startTime={1}
@@ -285,12 +272,6 @@ const Bottom = ({ bottomVideoRef1, bottomVideoRef2 }) => (
           className="large-image-customize  sc-image-glass-bg"
           style={{ flex: 1, height: "18em", width: "50%" }}
         >
-          {/* <img
-            style={{ backgroundSize: "cover", width: "100%" }}
-            src="/assets/images/backgrounds/military/Militery_Togle_Finish2.jpg"
-            // className="large-image"
-            alt="Large"
-          /> */}
           <VideoPlayer
             src="https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4"
             videoRef={bottomVideoRef1}
@@ -301,12 +282,6 @@ const Bottom = ({ bottomVideoRef1, bottomVideoRef2 }) => (
           className="large-image-customize   sc-image-glass-bg"
           style={{ flex: 1, height: "18em", width: "94%" }}
         >
-          {/* <img
-            style={{ backgroundSize: "cover", width: "100%" }}
-            src="/assets/images/backgrounds/military/Militery_Togle_Finish2.jpg"
-            // className="large-image"
-            alt="Large"
-          /> */}
           <VideoPlayer
             src="https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4"
             videoRef={bottomVideoRef2}
