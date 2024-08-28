@@ -66,7 +66,25 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
             ? "DENIED BABY"
             : "new Option"}
         </button>
-      ) : null}
+      ) : (
+        <div
+          style={{
+            color: "yellow",
+            fontSize: "2em",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            bordeR: "1px solid red",
+            zIndex: 5000300,
+            width: "50vw",
+            height: "50vh",
+          }}
+        >
+          HELLO WORLD
+          <br />
+          {permission}
+        </div>
+      )}
     </div>
   );
 };
