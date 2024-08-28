@@ -59,7 +59,12 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
           }}
           onClick={requestPermission}
         >
-          Enable D.O.
+          {/* Enable D.O. */}
+          {permission === "default"
+            ? "is DEFAULT"
+            : permission === "denied"
+            ? "DENIED BABY"
+            : "new Option"}
         </button>
       ) : null}
     </div>
