@@ -51,55 +51,55 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
       {permission === "default" || permission === "denied" ? (
         <>
           <button
-            style={{
-              zIndex: 500,
-              position: "absolute",
-              left: "2em",
-              top: "14em",
-              opacity: 0,
-            }}
+            // style={{
+            //   zIndex: 500,
+            //   position: "absolute",
+            //   left: "2em",
+            //   top: "14em",
+            //   opacity: 0,
+            // }}
             onClick={requestPermission}
           >
             {/* Enable D.O. */}
-            {permission === "default"
+            {/* {permission === "default"
               ? "is DEFAULT"
               : permission === "denied"
               ? "DENIED BABY"
-              : "new Option"}
+              : "new Option"} */}
           </button>
           <div
-            style={{
-              color: "cyan",
-              fontSize: "2em",
-              position: "absolute",
-              top: 0,
-              left: 0,
-              bordeR: "1px solid yellow",
-              zIndex: 5000300,
-              width: "50vw",
-              height: "50vh",
-            }}
+          // style={{
+          //   color: "cyan",
+          //   fontSize: "2em",
+          //   position: "absolute",
+          //   top: 0,
+          //   left: 0,
+          //   bordeR: "1px solid yellow",
+          //   zIndex: 5000300,
+          //   width: "50vw",
+          //   height: "50vh",
+          // }}
           >
-            INITLIZAED BBY <button onClick={requestPermission}>click me</button>
+            {/* INITLIZAED BBY <button onClick={requestPermission}>click me</button> */}
           </div>
         </>
       ) : (
         <div
-          style={{
-            color: "yellow",
-            fontSize: "2em",
-            position: "absolute",
-            top: 0,
-            left: 0,
-            bordeR: "1px solid red",
-            zIndex: 5000300,
-            width: "50vw",
-            height: "50vh",
-          }}
+        // style={{
+        //   color: "yellow",
+        //   fontSize: "2em",
+        //   position: "absolute",
+        //   top: 0,
+        //   left: 0,
+        //   bordeR: "1px solid red",
+        //   zIndex: 5000300,
+        //   width: "50vw",
+        //   height: "50vh",
+        // }}
         >
-          HELLO WORLD
+          {/* HELLO WORLD */}
           <br />
-          {permission}
+          {/* {permission} */}
         </div>
       )}
     </div>
