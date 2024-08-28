@@ -80,7 +80,7 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
               height: "50vh",
             }}
           >
-            INITLIZAED BBY
+            INITLIZAED BBY <button onClick={requestPermission}>click me</button>
           </div>
         </>
       ) : (
