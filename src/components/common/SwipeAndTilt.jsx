@@ -49,23 +49,40 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
         </div>
       )} */}
       {permission === "default" || permission === "denied" ? (
-        <button
-          style={{
-            zIndex: 500,
-            position: "absolute",
-            left: "2em",
-            top: "14em",
-            opacity: 0,
-          }}
-          onClick={requestPermission}
-        >
-          {/* Enable D.O. */}
-          {permission === "default"
-            ? "is DEFAULT"
-            : permission === "denied"
-            ? "DENIED BABY"
-            : "new Option"}
-        </button>
+        <>
+          <button
+            style={{
+              zIndex: 500,
+              position: "absolute",
+              left: "2em",
+              top: "14em",
+              opacity: 0,
+            }}
+            onClick={requestPermission}
+          >
+            {/* Enable D.O. */}
+            {permission === "default"
+              ? "is DEFAULT"
+              : permission === "denied"
+              ? "DENIED BABY"
+              : "new Option"}
+          </button>
+          <div
+            style={{
+              color: "cyan",
+              fontSize: "2em",
+              position: "absolute",
+              top: 0,
+              left: 0,
+              bordeR: "1px solid yellow",
+              zIndex: 5000300,
+              width: "50vw",
+              height: "50vh",
+            }}
+          >
+            INITLIZAED BBY
+          </div>
+        </>
       ) : (
         <div
           style={{
