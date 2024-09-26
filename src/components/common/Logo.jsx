@@ -188,6 +188,7 @@ export const VideoPlayer = ({ src, startTime = 0, videoRef, isMobile }) => {
         className={isMobile ? "video-player-mobile" : "video-player"}
         ref={videoRef ? videoRef : vidRef}
         preload="metadata"
+        muted
         // poster="/assets/images/backgrounds/medicine/Medical_Togle.jpg"
         poster={
           selectedCategory
