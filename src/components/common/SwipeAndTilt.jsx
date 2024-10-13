@@ -58,6 +58,13 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
             //   top: "14em",
             //   opacity: 0,
             // }}
+            style={{
+              // background: "red",
+              width: "100vw",
+              height: "100vh",
+              position: "absolute",
+              opacity: 0,
+            }}
             onClick={requestPermission}
           >
             {/* Enable D.O. */}
