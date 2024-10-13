@@ -51,13 +51,6 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
       {permission === "default" || permission === "denied" ? (
         <>
           <button
-            // style={{
-            //   zIndex: 500,
-            //   position: "absolute",
-            //   left: "2em",
-            //   top: "14em",
-            //   opacity: 0,
-            // }}
             style={{
               // background: "red",
               width: "100vw",
