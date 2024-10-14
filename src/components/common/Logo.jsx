@@ -112,6 +112,7 @@ export const VideoPlayer = ({ src, startTime = 0, videoRef, isMobile }) => {
         if (isMobile) {
           if (videoElement.muted) {
             videoElement.play();
+            videoElement.pause();
           } else {
             // If not muted, attempt to play and handle autoplay restrictions
             const playPromise = videoElement.play();
@@ -121,10 +122,12 @@ export const VideoPlayer = ({ src, startTime = 0, videoRef, isMobile }) => {
                 // Optionally, mute and try to play again
                 videoElement.muted = true;
                 videoElement.play();
+                videoElement.pause();
               });
             }
           }
         } else {
+          videoElement.muted = true;
           videoElement.play();
           videoElement.pause();
         }
