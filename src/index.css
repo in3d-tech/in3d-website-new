@@ -1252,7 +1252,7 @@ section {
   -webkit-backdrop-filter: blur(7.9px);
   /* border: 1px solid rgba(255, 255, 255, 0.32); */
 
-  position: relative;
+  /* position: relative; */
 }
 
 .mobile-menu-opened-bg::before {
@@ -1561,7 +1561,6 @@ section {
 
 .contact-us-wrapper-mobile {
   position: absolute;
-
   display: flex;
   flex-direction: column;
   justify-content: center;

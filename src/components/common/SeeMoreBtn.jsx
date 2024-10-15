@@ -1,6 +1,7 @@
 import { useAppContext } from "../../context/appContext";
 import { getSparkleColour } from "../scene/ornaments/getSparkleColour";
 // import { Industry } from "../viewableContent/categories/Industry";
+import Tilt from "react-parallax-tilt";
 import {
   INDUSTRY,
   MEDICINE,
@@ -170,16 +171,24 @@ export const SeeMoreBtn = () => {
         alignItems: "center",
       }}
     >
-      <span style={{ fontSize: "2em", color: "white" }}>
-        {/* <span style={{ color: "#750414" }}>M</span>edicine */}
-        {text ? (
-          text
-        ) : (
-          <>
-            <span style={{ color: "#750414" }}>M</span>edicine
-          </>
-        )}
-      </span>
+      <Tilt
+        glareEnable={true}
+        glareMaxOpacity={0.8}
+        glareColor="#ffffff"
+        glarePosition="bottom"
+        glareBorderRadius="20px"
+      >
+        <span style={{ fontSize: "2em", color: "white" }}>
+          {/* <span style={{ color: "#750414" }}>M</span>edicine */}
+          {text ? (
+            text
+          ) : (
+            <>
+              <span style={{ color: "#750414" }}>M</span>edicine
+            </>
+          )}
+        </span>
+      </Tilt>
       <button
         onClick={() =>
           setSelectedCategory(categorySelect[scrollArea.currentSection])
