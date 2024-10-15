@@ -258,6 +258,9 @@ const content = {
 };
 
 const IndustryPage = ({ selectedCategory, thumbsSwiper, setThumbsSwiper }) => {
+  // if (selectedCategory == "contact") {
+  //   return null;
+  // }
   const mediaContent = useMemo(
     () => content[selectedCategory],
     [selectedCategory]
@@ -274,6 +277,7 @@ const IndustryPage = ({ selectedCategory, thumbsSwiper, setThumbsSwiper }) => {
           height: "20em",
           width: "90vw",
           borderRadius: "12px",
+          zIndex: selectedCategory == "contact" ? -1 : "",
         }}
       >
         {selectedCategory ? (
