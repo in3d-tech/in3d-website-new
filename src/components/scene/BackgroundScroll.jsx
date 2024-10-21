@@ -172,7 +172,7 @@ export function BackgroundScroll({
                 // idx == 0 ? (
                 <div key={idx} className={textAnimation}>
                   <TextScrambleComponentHover
-                    handleClick={() => scrollToElementById(idx)}
+                    handleClick={() => scrollToElementById(idx + 1)}
                     text={
                       title == "artificalIntelligence"
                         ? "ARTIFICAL INTELLIGENCE"
@@ -211,9 +211,6 @@ export function BackgroundScroll({
         className="section section-three-half"
         ref={section1MenuRef}
       ></section>
-      {/* <section
-        className="section section-one-third"
-      ></section> */}
 
       <section
         ref={sectionIndustryRef}
