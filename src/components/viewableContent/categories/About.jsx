@@ -351,7 +351,7 @@ const MiddleTwo = ({ midTwoImageRef, midTwoTextOneRef, midTwoTextTwoRef }) => {
       >
         <div
           ref={midTwoTextTwoRef}
-          style={{ marginBottom: "1em", textAlign: "right" }}
+          style={{ marginBottom: "1em", textAlign: "left", color: "white" }}
           className="no-opacity"
         >
           Our mission is to play an important <br />

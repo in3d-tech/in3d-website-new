@@ -235,6 +235,17 @@ body {
   z-index: 5;
 }
 
+.homepage-scroll-bar {
+  background-color: rgb(0, 0, 0, 0.2);
+  height: 100%;
+  width: 0.6em;
+  margin-left: 1em;
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  z-index: 1;
+}
+
 .glass-effect {
   /* background: rgba(255, 255, 255, 0.16);
   border-radius: 16px;

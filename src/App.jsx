@@ -99,8 +99,7 @@ function App() {
             <LazyMobileView />
           ) : (
             <>
-              <ViewableContent />
-
+              <ScrollProgressBar />
               <LazyScene scrollToElementById={scrollToElementById} />
             </>
           )}
@@ -117,7 +116,7 @@ useGLTF.preload("/assets/models/engenir_model.glb");
 // useGLTF.preload("/assets/models/medical_model1 (1).glb");
 // useGLTF.preload("/assets/models/costimize_model_v02.glb");
 
-function ViewableContent() {
+function ScrollProgressBar() {
   const { scrollArea } = useAppContext();
 
   const sections = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -147,20 +146,7 @@ function ViewableContent() {
 
   return (
     <div className="viewable-content-wrapper">
-      <div
-        style={{
-          // borderRight: "1px solid rgb(255,255,255,0.4)",
-          backgroundColor: "rgb(0,0,0,0.2)",
-          height: "100%",
-          width: "0.6em",
-          marginLeft: "1em",
-          display: "flex",
-          position: "absolute",
-          flexDirection: "column",
-          // justifyContent: "space-evenly",
-          zIndex: 1,
-        }}
-      >
+      <div className="homepage-scroll-bar">
         <div
           style={{
             backgroundColor: getSparkleColour(scrollArea.currentSection),

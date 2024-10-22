@@ -1,12 +1,53 @@
 import { MenuAboutContact } from "../../navs/mobile/MenuWheel";
+import { gsap } from "gsap";
+// import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect } from "react";
 
 export const HomeScreenCategoryText = ({
   title,
   idx,
   setSelectedMenuActionMobile,
   setSelectedCategory,
+  setSelectedCategoryItemByIdx,
 }) => {
+  // gsap.to("body", {
+  //   backgroundColor: "#750414",
+  //   scrollTrigger: {
+  //     trigger: ".industry-test", // Your target element
+  //     start: "top center", // When the top of the element reaches the center of the viewport
+  //     end: "bottom center", // Until the bottom of the element reaches the center of the viewport
+  //     scrub: true, // Smooth transition
+  //     onEnter: () => console.log("ENNTERED INDUST?RY: ", idx),
+  //   },
+  // });
   // style={{ color: "#750414" }}
+
+  useEffect(() => {
+    const trigger = gsap.to(
+      {},
+      {
+        scrollTrigger: {
+          trigger: `.category-${idx}`, // Create a unique class or ID for each element
+          start: "top center",
+          end: "bottom center",
+          onEnter: () => {
+            setSelectedCategoryItemByIdx(idx);
+          },
+          onEnterBack: () => setSelectedCategoryItemByIdx(idx),
+          onLeaveBack: () => {
+            if (idx === 0) {
+              setSelectedCategoryItemByIdx(-1);
+            }
+          },
+        },
+      }
+    );
+
+    return () => {
+      trigger.scrollTrigger.kill(); // Cleanup the ScrollTrigger on component unmount
+    };
+  }, [idx, setSelectedCategoryItemByIdx]);
+
   const categoryDataByIndex = {
     0: {
       title: (
@@ -14,6 +55,7 @@ export const HomeScreenCategoryText = ({
           Industry <span>4.0</span>
         </>
       ),
+      scrolledName: "industry",
       bgImage: 'url("/assets/images/backgrounds/taasia/Industry_Togle.jpg")',
       text: "Together with our clients we develop tailor made solutions using XR and 3D technology.",
     },
@@ -24,6 +66,7 @@ export const HomeScreenCategoryText = ({
           edicine
         </>
       ),
+      scrolledName: "medicine",
       bgImage: 'url("/assets/images/backgrounds/medicine/Medical_Togle.jpg")',
       text: "Using Extended Reality (XR) we at in3D became pioneers in development of XR products for medical organizations.",
     },
@@ -45,6 +88,7 @@ export const HomeScreenCategoryText = ({
           ecurity
         </>
       ),
+      scrolledName: "security",
       bgImage:
         'url("/assets/images/backgrounds/security/Security_Togle_Finish2.jpg")',
       text: "Thanks to years of collaboration with defense industries, we provide reliable and out of the box solutions tailored to the industries unique requirements.",
@@ -56,6 +100,7 @@ export const HomeScreenCategoryText = ({
           rtifical Intelligence
         </>
       ),
+      scrolledName: "ai",
       bgImage: 'url("/assets/images/backgrounds/ai/Ai_Tugle_Finish.jpg")',
       text: "The combination of a 3D XR software environment with A.I creates advanced and innovative operations",
     },
@@ -66,6 +111,7 @@ export const HomeScreenCategoryText = ({
           ilitary
         </>
       ),
+      scrolledName: "military",
       bgImage:
         'url("/assets/images/backgrounds/military/Militery_Togle_Finish2.jpg")',
       text: "Through development of complex simulators, XR platforms, and tailored applications, we deliver top-of-the-line technology in the service of this significant sector.",
@@ -77,6 +123,7 @@ export const HomeScreenCategoryText = ({
           ustomization
         </>
       ),
+      scrolledName: "customize",
       bgImage:
         'url("/assets/images/backgrounds/customize/Customize_Togle_Finish.jpg")',
       text: "With our amazing team, we provide the flexibility and abilities needed to deliver the best tailor-made product.",
@@ -153,9 +200,9 @@ export const HomeScreenCategoryText = ({
 
   return (
     <div
-      className={`industry-test fader`}
+      className={`industry-test category-${idx} fader`}
       style={{
-        height: "28vh",
+        height: "48vh",
         color: "white",
         fontFamily: "gotham",
         display: "flex",
@@ -189,7 +236,14 @@ export const HomeScreenCategoryText = ({
       >
         {categoryDataByIndex[idx]?.title}
       </div>
-      <span style={{ textAlign: "left", padding: "1em", fontSize: "0.8em" }}>
+      <span
+        style={{
+          textAlign: "left",
+          padding: "1em",
+          fontSize: "0.9em",
+          lineHeight: "1.6em",
+        }}
+      >
         {categoryDataByIndex[idx]?.text}
       </span>
       <LearnMoreBtn

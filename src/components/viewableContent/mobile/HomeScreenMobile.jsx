@@ -12,7 +12,15 @@ import { TextScrambleComponent } from "../../common/shuffleTexts";
 // import { SelectedCategory } from "./CategoryDetails";
 // import { Swiper, SwiperSlide } from "swiper/react";
 // import "swiper/css";
-import { TiltDiv } from "../../common/SwipeAndTilt";
+// import { DeviceTilt } from "../../common/SwipeAndTilt";
+
+const INDUSTRY = 0;
+const MEDICINE = 1;
+const MICROSOFT = 2;
+const SECURITY = 3;
+const AI = 4;
+const MILITARY = 5;
+const CUSTOMIZATION = 6;
 
 const LazySelectedContent = lazy(() => import("./CategoryDetails"));
 
@@ -25,7 +33,8 @@ function HomeScreenMobile() {
   const [startExpandedAnimation, setStartExpandedAnimation] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [debug, setDebug] = useState("yessss");
-
+  const [selectedCategoryItemByIdx, setSelectedCategoryItemByIdx] =
+    useState(-1);
   const {
     selectedCategory,
     setSelectedCategory,
@@ -75,22 +84,19 @@ function HomeScreenMobile() {
         selectedCategory={selectedCategory}
       />
       <div
-        className={isMenuCentered ? "mobile-menu-opened-bg" : ""}
+        className={
+          isMenuCentered
+            ? "homescreen-mobile mobile-menu-opened-bg"
+            : "homescreen-mobile"
+        }
         style={{
-          // minWidth: "100%",
-          width: "100%",
-          height: "100vh",
-          position: "fixed",
-          overflow: "hidden",
-          top: 0,
-          left: 0,
           background: isMenuCentered ? "" : backgrounds[mobileBackground],
-          // opacity: 0.4,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           backgroundPosition: "center",
           zIndex: isMenuCentered ? 3 : 0,
           transition: "background 1s",
+          // border: "2px solid yellow",
         }}
       >
         {isMenuCentered ? (
@@ -127,6 +133,7 @@ function HomeScreenMobile() {
               selectedMenuActionMobile={selectedMenuActionMobile}
               setSelectedMenuActionMobile={setSelectedMenuActionMobile}
               setSelectedCategory={setSelectedCategory}
+              setSelectedCategoryItemByIdx={setSelectedCategoryItemByIdx}
             />
           ))}
         </div>
@@ -135,6 +142,7 @@ function HomeScreenMobile() {
           setMobileBackground={setMobileBackground}
           selectedCategory={selectedCategory}
           setDebug={setDebug}
+          selectedCategoryItemByIdx={selectedCategoryItemByIdx}
         />
       </div>
       )
@@ -214,11 +222,23 @@ const Scene = ({
   setMobileBackground,
   selectedCategory,
   setDebug,
+  selectedCategoryItemByIdx,
 }) => {
   const [slide, setSlide] = useState(0);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [tilt, setTilt] = useState({ tiltLR: 0, tiltFB: 0, dir: 0 });
   const [tempTiltValue, setTempTiltValue] = useState(null);
+
+  const sparklesColour = {
+    "-1": "",
+    [INDUSTRY]: "rgb(13,168,136, 0.1)",
+    [MEDICINE]: "rgb(61,220,233, 0.1)",
+    [MICROSOFT]: "rgb(0,0,255, 0.1)",
+    [SECURITY]: "rgb(153,88,18, 0.1)",
+    [AI]: "rgb(61,217,233, 0.1)",
+    [MILITARY]: "rgb(80,123,63, 0.2)",
+    [CUSTOMIZATION]: "rgb(240,183,94, 0.2)",
+  };
 
   const handleTiltChange = (tiltData) => {
     setTilt({
@@ -236,49 +256,22 @@ const Scene = ({
 
   return (
     <div className="canvas-container-mobile">
-      {/* <div
-        style={{
-          position: "absolute",
-          border: "1px solid yellow",
-          width: "90vw",
-          height: "50vh",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-end",
-          left: "1em",
-          zIndex: 50,
-        }}
-      >
-        <div
-          style={{ color: "white", fontSize: "1.2em" }}
-        >{`tiltLR: ${tilt.tiltLR}`}</div>
-        <div style={{ color: "white" }}>{`tiltFB: ${tilt.tiltFB}`}</div>
-        <div style={{ color: "white" }}>{`dir: ${tilt.dir}`}</div>
-        {tempTiltValue ? (
-          <div
-            style={{ color: "white" }}
-          >{`storeValues - tiltLR: ${tempTiltValue.tiltLR} - and - tiltFB: ${tempTiltValue.tiltFB}`}</div>
-        ) : (
-          <div style={{ color: "white" }}>hhel0 world</div>
-        )}
-      </div> */}
       {!selectedCategory ? (
         <>
-          <TiltDiv
+          {/* <DeviceTilt
             setDebug={setDebug}
             position={position}
             setPosition={setPosition}
-            onTiltChange={handleTiltChange} // Pass the handler here
-          />
-          {/* <Swipe
-            setSlide={setSlide}
-            setMobileBackground={setMobileBackground}
-            position={position}
-            setPosition={setPosition}
+            onTiltChange={handleTiltChange}
           /> */}
         </>
       ) : null}
-      <Canvas>
+      <Canvas
+        style={{
+          backgroundColor: sparklesColour[selectedCategoryItemByIdx],
+          transition: "backgroundColor: 5s ease-in-out",
+        }}
+      >
         <ambientLight intensity={0.8} />
         <directionalLight intensity={3} />
         <Camera />

@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
+import { useAppContext } from "../../context/appContext";
 // import { SeeMoreBtn } from "./SeeMoreBtn";
 
 export const IndustryText = ({ textClass, scrollArea, categoriesObj }) => (
@@ -432,6 +433,8 @@ export const ContactUsText = ({ test, isFromSelectedCategory }) => {
     false,
   ]);
 
+  const { setIsCursorHovering } = useAppContext();
+
   useEffect(() => {
     let timeoutIds = [];
     if (animateItems) {
@@ -619,6 +622,8 @@ export const ContactUsText = ({ test, isFromSelectedCategory }) => {
                   textDecoration: "underline",
                   fontWeight: "600",
                 }}
+                onMouseOver={() => setIsCursorHovering(true)}
+                onMouseOut={() => setIsCursorHovering(false)}
               >
                 here
               </button>
@@ -659,6 +664,8 @@ export const ContactUsText = ({ test, isFromSelectedCategory }) => {
                     <button
                       onClick={handleSendMessage}
                       className="contact-us-send-text-btn"
+                      onMouseOver={() => setIsCursorHovering(true)}
+                      onMouseOut={() => setIsCursorHovering(false)}
                     >
                       Send
                     </button>
