@@ -120,7 +120,7 @@ export const VideoPlayer = ({
           if (videoElement.muted) {
             videoElement.play();
             if (itemIndex != 0) {
-              // videoElement.pause();
+              videoElement.pause();
             }
           } else {
             // If not muted, attempt to play and handle autoplay restrictions
@@ -134,7 +134,7 @@ export const VideoPlayer = ({
                 videoElement.muted = true;
                 videoElement.play();
                 if (itemIndex != 0) {
-                  // videoElement.pause();
+                  videoElement.pause();
                 }
               });
             }
