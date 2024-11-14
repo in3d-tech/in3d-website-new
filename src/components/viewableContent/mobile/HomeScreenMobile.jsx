@@ -257,6 +257,8 @@ const Scene = ({
     }
   }, []);
 
+  // console.log("hello world");
+
   return (
     <div className="canvas-container-mobile">
       {!selectedCategory ? (
