@@ -275,7 +275,7 @@ export const getCategoryData = ({ selectedCategory }) => {
         <>
           <div
             style={{
-              color: "black",
+              // color: "black",
               textAlign: "left",
               color: "white",
               // backgroundImage:

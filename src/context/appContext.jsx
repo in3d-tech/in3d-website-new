@@ -23,6 +23,11 @@ export default function AppContextProvider({ children }) {
   // const [isSectionTwo, setIsSectionTwo] = useState(fal)
   const [videosPreloaded, setVideosPreloaded] = useState(false);
   const [firstContentLoaded, setfirstContentLoaded] = useState(false);
+  const [isUserScrolling, setIsUserScrolling] = useState(false);
+  const [
+    hasUserSeenOrientationPermissionPopup,
+    setHasUserSeenOrientationPermissionPopup,
+  ] = useState(false);
 
   return (
     <AppContext.Provider
@@ -57,6 +62,10 @@ export default function AppContextProvider({ children }) {
         setVideosPreloaded,
         firstContentLoaded,
         setfirstContentLoaded,
+        isUserScrolling,
+        setIsUserScrolling,
+        hasUserSeenOrientationPermissionPopup,
+        setHasUserSeenOrientationPermissionPopup,
       }}
     >
       {children}
@@ -99,6 +108,10 @@ export function useAppContext() {
       setVideosPreloaded: () => {},
       firstContentLoaded: false,
       setfirstContentLoaded: () => {},
+      isUserScrolling: false,
+      setIsUserScrolling: () => {},
+      hasUserSeenOrientationPermissionPopup: false,
+      setHasUserSeenOrientationPermissionPopup: () => {},
     };
   }
 

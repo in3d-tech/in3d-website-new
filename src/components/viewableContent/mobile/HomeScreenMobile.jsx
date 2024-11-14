@@ -12,7 +12,7 @@ import { TextScrambleComponent } from "../../common/shuffleTexts";
 // import { SelectedCategory } from "./CategoryDetails";
 // import { Swiper, SwiperSlide } from "swiper/react";
 // import "swiper/css";
-// import { DeviceTilt } from "../../common/SwipeAndTilt";
+import { DeviceTilt } from "../../common/SwipeAndTilt";
 
 const INDUSTRY = 0;
 const MEDICINE = 1;
@@ -61,7 +61,9 @@ function HomeScreenMobile() {
     setSelectedAction(action);
   };
 
-  if (!isMobile) setTimeout(() => setIsMobile(true), 5000);
+  useEffect(() => {
+    if (!isMobile) setTimeout(() => setIsMobile(true), 5000);
+  }, []);
 
   useEffect(() => {
     if (!isAstroModelDrawn) return;
@@ -91,9 +93,6 @@ function HomeScreenMobile() {
         }
         style={{
           background: isMenuCentered ? "" : backgrounds[mobileBackground],
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
           zIndex: isMenuCentered ? 3 : 0,
           transition: "background 1s",
           // border: "2px solid yellow",
@@ -124,7 +123,10 @@ function HomeScreenMobile() {
           <TitleWithAnimation isMobile={isMobile} />
         ) : null}
 
-        <div className="home-categories-map-mobile">
+        <div
+          className="home-categories-map-mobile"
+          style={{ opacity: selectedCategory ? 0 : "" }}
+        >
           {categories.map((category, idx) => (
             <HomeScreenCategoryText
               selectedCategory={selectedCategory}
@@ -133,6 +135,7 @@ function HomeScreenMobile() {
               selectedMenuActionMobile={selectedMenuActionMobile}
               setSelectedMenuActionMobile={setSelectedMenuActionMobile}
               setSelectedCategory={setSelectedCategory}
+              selectedCategoryItemByIdx={selectedCategoryItemByIdx}
               setSelectedCategoryItemByIdx={setSelectedCategoryItemByIdx}
             />
           ))}
@@ -258,12 +261,12 @@ const Scene = ({
     <div className="canvas-container-mobile">
       {!selectedCategory ? (
         <>
-          {/* <DeviceTilt
+          <DeviceTilt
             setDebug={setDebug}
             position={position}
             setPosition={setPosition}
             onTiltChange={handleTiltChange}
-          /> */}
+          />
         </>
       ) : null}
       <Canvas

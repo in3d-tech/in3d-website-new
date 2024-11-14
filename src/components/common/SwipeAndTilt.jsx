@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 
-export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
+export const DeviceTilt = ({
+  setDebug,
+  onTiltChange,
+  position,
+  setPosition,
+}) => {
   const [hasUserSeenPopup, setHasUserSeenPopup] = useState(false);
   const [customMessage, setCustomMessage] = useState("");
   const {
@@ -14,16 +19,16 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
       if (!hasUserSeenPopup) {
         requestPermission();
         setHasUserSeenPopup(true);
-        document.removeEventListener("scroll", handleUserInteraction);
+        // document.removeEventListener("scroll", handleUserInteraction);
         document.removeEventListener("touchstart", handleUserInteraction);
       }
     };
 
-    document.addEventListener("scroll", handleUserInteraction);
+    // document.addEventListener("scroll", handleUserInteraction);
     document.addEventListener("touchstart", handleUserInteraction);
 
     return () => {
-      document.removeEventListener("scroll", handleUserInteraction);
+      // document.removeEventListener("scroll", handleUserInteraction);
       document.removeEventListener("touchstart", handleUserInteraction);
     };
   }, [hasUserSeenPopup, requestPermission]);
@@ -52,11 +57,12 @@ export const TiltDiv = ({ setDebug, onTiltChange, position, setPosition }) => {
         <>
           <button
             style={{
-              // background: "red",
+              background: "red",
               width: "100vw",
-              height: "100vh",
+              height: "100%",
               position: "absolute",
-              opacity: 0,
+              opacity: 0.4,
+              zIndex: 3,
             }}
             onClick={requestPermission}
           >

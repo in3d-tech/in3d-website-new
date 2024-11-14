@@ -9,6 +9,7 @@ export const HomeScreenCategoryText = ({
   setSelectedMenuActionMobile,
   setSelectedCategory,
   setSelectedCategoryItemByIdx,
+  selectedCategoryItemByIdx,
 }) => {
   // gsap.to("body", {
   //   backgroundColor: "#750414",
@@ -28,7 +29,7 @@ export const HomeScreenCategoryText = ({
       {
         scrollTrigger: {
           trigger: `.category-${idx}`, // Create a unique class or ID for each element
-          start: "top center",
+          start: "top 45%",
           end: "bottom center",
           onEnter: () => {
             setSelectedCategoryItemByIdx(idx);
@@ -45,6 +46,7 @@ export const HomeScreenCategoryText = ({
 
     return () => {
       trigger.scrollTrigger.kill(); // Cleanup the ScrollTrigger on component unmount
+      // tl.kill();
     };
   }, [idx, setSelectedCategoryItemByIdx]);
 
@@ -198,9 +200,19 @@ export const HomeScreenCategoryText = ({
     );
   }
 
+  // const contentInViewSlideStyles = {
+  //   gridRow: 1,
+  //   gridColumn: 1,
+  //   padding: "36px",
+  //   clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+  //   background: "rgb(3, 255, 255, 0.3)",
+  // };
+
   return (
     <div
-      className={`industry-test category-${idx} fader`}
+      className={`industry-test category-${idx} fader ${
+        selectedCategoryItemByIdx == idx ? "main-content" : null
+      }`}
       style={{
         height: "48vh",
         color: "white",
@@ -211,6 +223,7 @@ export const HomeScreenCategoryText = ({
         marginTop: "3em",
         borderTop: "1px solid rgb(255, 255, 255, 0.4)",
         justifyContent: "space-evenly",
+        // border: "2px solid red",
       }}
     >
       <div
@@ -232,7 +245,11 @@ export const HomeScreenCategoryText = ({
 
       <div
         className="scrolled-category-title"
-        style={{ marginTop: "1em", marginLeft: "0.5em" }}
+        style={{
+          marginTop: "1em",
+          marginLeft: "0.5em",
+          fontSize: selectedCategoryItemByIdx == idx ? "2.2em" : "2em",
+        }}
       >
         {categoryDataByIndex[idx]?.title}
       </div>
@@ -240,7 +257,7 @@ export const HomeScreenCategoryText = ({
         style={{
           textAlign: "left",
           padding: "1em",
-          fontSize: "0.9em",
+          fontSize: selectedCategoryItemByIdx == idx ? "1.1em" : "0.9em",
           lineHeight: "1.6em",
         }}
       >

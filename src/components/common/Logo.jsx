@@ -97,7 +97,14 @@ export const ContactBtn = ({ isFromSelectedCategory }) => {
   );
 };
 
-export const VideoPlayer = ({ src, startTime = 0, videoRef, isMobile }) => {
+export const VideoPlayer = ({
+  src,
+  startTime = 0,
+  videoRef,
+  isMobile,
+  isHaveBorderRadius,
+  itemIndex,
+}) => {
   const vidRef = useRef(null);
   const { selectedCategory } = useAppContext();
 
@@ -112,17 +119,23 @@ export const VideoPlayer = ({ src, startTime = 0, videoRef, isMobile }) => {
         if (isMobile) {
           if (videoElement.muted) {
             videoElement.play();
-            videoElement.pause();
+            if (itemIndex != 0) {
+              videoElement.pause();
+            }
           } else {
             // If not muted, attempt to play and handle autoplay restrictions
+            // if (itemIndex == 0) {
             const playPromise = videoElement.play();
+            // }
             if (playPromise !== undefined) {
               playPromise.catch(() => {
                 // Auto-play was prevented
                 // Optionally, mute and try to play again
                 videoElement.muted = true;
                 videoElement.play();
-                videoElement.pause();
+                if (itemIndex != 0) {
+                  videoElement.pause();
+                }
               });
             }
           }
@@ -133,6 +146,34 @@ export const VideoPlayer = ({ src, startTime = 0, videoRef, isMobile }) => {
         }
         // Video can start playing, show initial frame here
       };
+
+      // const handleCanPlay = () => {
+      //   if (itemIndex === 0) {
+      //     console.log("ZHIP SZCBOOP");
+      //     // Ensure only the first video attempts to autoplay
+      //     videoElement.muted = true; // Ensure muted
+      //     const playPromise = videoElement.play();
+      //     if (playPromise !== undefined) {
+      //       playPromise
+      //         .then(() => {
+      //           // Autoplay started successfully
+      //           console.log("SHOUDL Be AUTOPLAYING");
+      //           console.log({ videoRef });
+      //           // videoElement.play();
+      //         })
+      //         .catch(() => {
+      //           // Autoplay failed, possibly due to restrictions
+      //           console.log("big CATCJ BREAk");
+      //           videoElement.muted = true;
+      //           videoElement.play();
+      //         });
+      //     } else {
+      //       console.log("we found outselves in the else condition!");
+      //     }
+      //   } else {
+      //     videoElement.pause();
+      //   }
+      // };
 
       videoElement.addEventListener("loadedmetadata", handleLoadedMetadata);
       videoElement.addEventListener("canplay", handleCanPlay);
@@ -183,12 +224,13 @@ export const VideoPlayer = ({ src, startTime = 0, videoRef, isMobile }) => {
   return (
     <div
       className={isMobile ? "video-container-mobile" : "video-container"}
-      style={isMobile ? { borderRadius: "12px" } : null}
+      style={isMobile || isHaveBorderRadius ? { borderRadius: "12px" } : null}
     >
       <video
         playsInline
         controls
         className={isMobile ? "video-player-mobile" : "video-player"}
+        style={{ height: "300px" }}
         ref={videoRef ? videoRef : vidRef}
         preload="metadata"
         muted
@@ -196,7 +238,7 @@ export const VideoPlayer = ({ src, startTime = 0, videoRef, isMobile }) => {
         poster={
           selectedCategory
             ? isMobile
-              ? IMAGE_URLS_MOBILE[selectedCategory]
+              ? null // IMAGE_URLS_MOBILE[selectedCategory]
               : IMAGE_URLS[selectedCategory]
             : ""
         }

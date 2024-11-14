@@ -294,9 +294,11 @@ const Example = memo(({ media, selectedCategory }) => {
   return (
     <Carousel
       indicators={true}
+      autoPlay={false}
+      index={0}
       indicatorContainerProps={{
         style: {
-          height: "150px",
+          height: "120px",
           zIndex: 500,
           position: "absolute",
           bottom: "-5em",
@@ -307,12 +309,12 @@ const Example = memo(({ media, selectedCategory }) => {
         // Move the buttons to the bottom. Unsetting top here to override default style.
         style: {
           // border: "5px solid red",
-          height: "4em",
-          top: "25%",
+          height: "5em",
+          top: "40%",
           opacity: 1,
         },
       }}
-      height={"100%"}
+      height={"300px"}
       sx={{ width: "100%" }}
     >
       {media.length
@@ -323,6 +325,7 @@ const Example = memo(({ media, selectedCategory }) => {
               key={i}
               url={item}
               startTime={2}
+              itemIndex={i}
             />
           ))
         : null}
@@ -333,7 +336,9 @@ const Example = memo(({ media, selectedCategory }) => {
 const Item = memo((props) => {
   // useEffect(() => console.log("carousel prop"), []);
   return (
-    <Paper style={{ height: "100%", borderRadius: "12px", background: "none" }}>
+    <Paper
+      style={{ height: "100px", borderRadius: "12px", background: "none" }}
+    >
       {/* <h2>{props.item.name}</h2>
       <p>{props.item.description}</p> */}
       <div
@@ -341,7 +346,7 @@ const Item = memo((props) => {
           position: "absolute",
           borderRadius: "12px",
           width: "100%",
-          height: "70%",
+          height: "100%",
         }}
       >
         {props.selectedCategory == 10 ? (
@@ -356,6 +361,7 @@ const Item = memo((props) => {
             startTime={2}
             isMobile
             selectedCategory={props.selectedCategory}
+            itemIndex={props.itemIndex}
           />
         )}
       </div>
