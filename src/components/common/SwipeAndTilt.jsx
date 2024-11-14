@@ -6,75 +6,33 @@ export const DeviceTilt = ({
   position,
   setPosition,
 }) => {
-  const [hasUserTriggeredEvent, setHasUserTriggeredEvent] = useState(false);
   const [customMessage, setCustomMessage] = useState("");
+  const [hasRequestedPermission, setHasRequestedPermission] = useState(false);
+
   const {
     orientation: { beta, gamma },
     permission,
     requestPermission,
   } = useDeviceOrientation(onTiltChange, setCustomMessage);
 
-  const handleSwipe = useCallback(() => {
-    if (!hasUserTriggeredEvent) {
-      requestPermission();
-      setHasUserTriggeredEvent(true);
-      window.removeEventListener("touchstart", handleTouchStart, false);
-      window.removeEventListener("touchmove", handleTouchMove, false);
-    }
-  }, [hasUserTriggeredEvent, requestPermission]);
-
-  let xDown = null;
-  let yDown = null;
-
-  function handleTouchStart(evt) {
-    const firstTouch = (evt.touches || evt.originalEvent.touches)[0];
-    xDown = firstTouch.clientX;
-    yDown = firstTouch.clientY;
-  }
-
-  function handleTouchMove(evt) {
-    if (!xDown || !yDown) {
-      return;
-    }
-    const xUp = evt.touches[0].clientX;
-    const yUp = evt.touches[0].clientY;
-
-    const xDiff = xDown - xUp;
-    const yDiff = yDown - yUp;
-
-    if (Math.abs(xDiff) > Math.abs(yDiff)) {
-      /* horizontal swipe */
-      if (xDiff > 0) {
-        /* left swipe */
-        handleSwipe();
-      } else {
-        /* right swipe */
-        handleSwipe();
-      }
-    } else {
-      /* vertical swipe */
-      if (yDiff > 0) {
-        /* up swipe */
-        handleSwipe();
-      } else {
-        /* down swipe */
-        handleSwipe();
-      }
-    }
-    /* reset values */
-    xDown = null;
-    yDown = null;
-  }
-
   useEffect(() => {
-    window.addEventListener("touchstart", handleTouchStart, false);
-    window.addEventListener("touchmove", handleTouchMove, false);
+    const triggerRequest = () => {
+      if (!hasRequestedPermission) {
+        requestPermission();
+        setHasRequestedPermission(true);
+        window.removeEventListener("touchstart", triggerRequest);
+        window.removeEventListener("touchmove", triggerRequest);
+      }
+    };
+
+    window.addEventListener("touchstart", triggerRequest);
+    window.addEventListener("touchmove", triggerRequest);
 
     return () => {
-      window.removeEventListener("touchstart", handleTouchStart, false);
-      window.removeEventListener("touchmove", handleTouchMove, false);
+      window.removeEventListener("touchstart", triggerRequest);
+      window.removeEventListener("touchmove", triggerRequest);
     };
-  }, [handleSwipe]);
+  }, [hasRequestedPermission, requestPermission]);
 
   useEffect(() => {
     if (beta !== null && gamma !== null && permission === "granted") {
@@ -91,25 +49,9 @@ export const DeviceTilt = ({
   return (
     <div>
       {permission === "default" || permission === "denied" ? (
-        <button
-          onClick={requestPermission}
-          style={{
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            background: "gray",
-            color: "white",
-            padding: "1em",
-            border: "none",
-            borderRadius: "5px",
-            zIndex: 999,
-          }}
-        >
-          Enable Device Orientation
-        </button>
+        <p style={{ color: "red" }}>{customMessage}</p>
       ) : (
-        <div>{/* Main content when permission is granted */}</div>
+        <div>{/* Render content for when permission is granted */}</div>
       )}
     </div>
   );
@@ -227,7 +169,7 @@ export const DeviceTilt = ({
 //   );
 // };
 
-const useDeviceOrientation = (onOrientationChange, setCustomMessage) => {
+function useDeviceOrientation(onOrientationChange, setCustomMessage) {
   const [orientation, setOrientation] = useState({
     alpha: null,
     beta: null,
@@ -242,8 +184,8 @@ const useDeviceOrientation = (onOrientationChange, setCustomMessage) => {
     if (!initialOrientation) {
       setInitialOrientation({ alpha, beta, gamma });
     } else {
-      beta -= initialOrientation.beta;
-      gamma -= initialOrientation.gamma;
+      beta = beta - initialOrientation.beta;
+      gamma = gamma - initialOrientation.gamma;
     }
 
     setOrientation({ alpha, beta, gamma });
@@ -259,9 +201,7 @@ const useDeviceOrientation = (onOrientationChange, setCustomMessage) => {
         if (response === "granted") {
           setPermission("granted");
           window.addEventListener("deviceorientation", handleOrientation, true);
-          setCustomMessage(
-            "in3D would like to request access to device orientation"
-          );
+          setCustomMessage(null);
         } else {
           setPermission("denied");
           setCustomMessage("Device Orientation Access Denied.");
@@ -273,7 +213,7 @@ const useDeviceOrientation = (onOrientationChange, setCustomMessage) => {
     } else {
       setPermission("granted");
       window.addEventListener("deviceorientation", handleOrientation, true);
-      setCustomMessage("in3D would like access to device orientation");
+      setCustomMessage(null);
     }
   };
 
@@ -284,4 +224,63 @@ const useDeviceOrientation = (onOrientationChange, setCustomMessage) => {
   }, []);
 
   return { orientation, permission, requestPermission };
-};
+}
+
+// const useDeviceOrientation = (onOrientationChange, setCustomMessage) => {
+//   const [orientation, setOrientation] = useState({
+//     alpha: null,
+//     beta: null,
+//     gamma: null,
+//   });
+//   const [initialOrientation, setInitialOrientation] = useState(null);
+//   const [permission, setPermission] = useState("default");
+
+//   const handleOrientation = (event) => {
+//     let { alpha, beta, gamma } = event;
+
+//     if (!initialOrientation) {
+//       setInitialOrientation({ alpha, beta, gamma });
+//     } else {
+//       beta -= initialOrientation.beta;
+//       gamma -= initialOrientation.gamma;
+//     }
+
+//     setOrientation({ alpha, beta, gamma });
+//     if (onOrientationChange) {
+//       onOrientationChange({ alpha, beta, gamma });
+//     }
+//   };
+
+//   const requestPermission = async () => {
+//     if (typeof DeviceOrientationEvent.requestPermission === "function") {
+//       try {
+//         const response = await DeviceOrientationEvent.requestPermission();
+//         if (response === "granted") {
+//           setPermission("granted");
+//           window.addEventListener("deviceorientation", handleOrientation, true);
+//           setCustomMessage(
+//             "in3D would like to request access to device orientation"
+//           );
+//         } else {
+//           setPermission("denied");
+//           setCustomMessage("Device Orientation Access Denied.");
+//         }
+//       } catch (error) {
+//         setPermission("denied");
+//         setCustomMessage("Device Orientation Access Denied.");
+//       }
+//     } else {
+//       setPermission("granted");
+//       window.addEventListener("deviceorientation", handleOrientation, true);
+//       setCustomMessage("in3D would like access to device orientation");
+//     }
+//   };
+
+//   useEffect(() => {
+//     return () => {
+//       window.removeEventListener("deviceorientation", handleOrientation, true);
+//     };
+//   }, []);
+
+//   return { orientation, permission, requestPermission };
+// };
