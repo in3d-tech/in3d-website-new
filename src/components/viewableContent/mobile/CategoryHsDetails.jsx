@@ -29,7 +29,7 @@ export const HomeScreenCategoryText = ({
       {
         scrollTrigger: {
           trigger: `.category-${idx}`, // Create a unique class or ID for each element
-          start: "top 45%",
+          start: "top 30%",
           end: "bottom center",
           onEnter: () => {
             setSelectedCategoryItemByIdx(idx);
