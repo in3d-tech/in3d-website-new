@@ -334,10 +334,10 @@ export function AstroModel({ url, astroRef, tilt }) {
   const isFullyRenderedRef = useRef(false);
 
   // Define rotation limits and sensitivity multipliers for both X and Y axes
-  const minRotationY = Math.PI - 0.4;
-  const maxRotationY = Math.PI - 0.3;
+  const minRotationY = Math.PI - 0.42;
+  const maxRotationY = Math.PI - 0.28;
   const minRotationX = 0.41;
-  const maxRotationX = 0.69;
+  const maxRotationX = 0.64;
 
   const ySensitivity = 0.0001; // Sensitivity for Y-axis
   const xSensitivity = 0.0001; // Sensitivity for X-axis
