@@ -251,7 +251,7 @@ body {
     )
     right;
   background-size: 200%;
-  transition: 0.35s ease-out;
+  transition: 0.5s ease-out;
   opacity: 0;
   height: 100%;
   /* background: rgba(255, 3, 3, 0.2); */

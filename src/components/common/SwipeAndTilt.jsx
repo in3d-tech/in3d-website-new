@@ -114,11 +114,11 @@ export const DeviceTilt = ({
         <>
           <button
             style={{
-              background: "red",
+              // background: "red",
               width: "100vw",
               height: "100%",
               position: "absolute",
-              opacity: 0.4,
+              opacity: 0,
               zIndex: 3,
             }}
             onClick={requestPermission}
