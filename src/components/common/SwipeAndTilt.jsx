@@ -12,7 +12,6 @@ export const DeviceTilt = ({
     orientation: { beta, gamma },
     permission,
     requestPermission,
-    setUprightBaseline,
   } = useDeviceOrientation(onTiltChange, setCustomMessage);
 
   useEffect(() => {
@@ -79,19 +78,6 @@ export const DeviceTilt = ({
           <button
             style={{
               // background: "red",
-              width: "50px",
-              height: "60px",
-              position: "absolute",
-              opacity: 1,
-              zIndex: 80,
-            }}
-            onClick={setUprightBaseline}
-          >
-            step
-          </button>
-          <button
-            style={{
-              // background: "red",
               width: "100vw",
               height: "100%",
               position: "absolute",
@@ -145,6 +131,80 @@ export const DeviceTilt = ({
     </div>
   );
 };
+
+function useDeviceOrientation(onOrientationChange, setCustomMessage) {
+  const [orientation, setOrientation] = useState({
+    alpha: null,
+    beta: null,
+    gamma: null,
+  });
+
+  // Add a state to store the calibrated orientation
+  const [verticalCalibration, setVerticalCalibration] = useState({
+    beta: 45,
+    gamma: 0,
+  });
+  const [permission, setPermission] = useState("default");
+
+  const handleOrientation = (event) => {
+    let { alpha, beta, gamma } = event;
+
+    // Subtract calibration values to set "upright" as base orientation
+    beta -= verticalCalibration.beta;
+    gamma -= verticalCalibration.gamma;
+
+    setOrientation({ alpha, beta, gamma });
+    if (onOrientationChange) {
+      onOrientationChange({ alpha, beta, gamma });
+    }
+  };
+
+  const requestPermission = async () => {
+    if (typeof DeviceOrientationEvent.requestPermission === "function") {
+      try {
+        const response = await DeviceOrientationEvent.requestPermission();
+        if (response === "granted") {
+          setPermission("granted");
+          window.addEventListener("deviceorientation", handleOrientation, true);
+          setCustomMessage(null);
+        } else {
+          setPermission("denied");
+          setCustomMessage("Device Orientation Access Denied.");
+        }
+      } catch (error) {
+        setPermission("denied");
+        setCustomMessage("Device Orientation Access Denied.");
+      }
+    } else {
+      setPermission("granted");
+      window.addEventListener("deviceorientation", handleOrientation, true);
+      setCustomMessage(null);
+    }
+  };
+
+  useEffect(() => {
+    // Optionally, set up a touch or other event to trigger calibration
+    const calibrateOrientation = () => {
+      // Captures the current orientation when the event fires, e.g., user holds phone upright
+      setVerticalCalibration({
+        beta: orientation.beta,
+        gamma: orientation.gamma,
+      });
+
+      // You may want to remove the event listener after the first calibration
+      window.removeEventListener("touchstart", calibrateOrientation);
+    };
+
+    window.addEventListener("touchstart", calibrateOrientation);
+
+    return () => {
+      window.removeEventListener("deviceorientation", handleOrientation, true);
+      window.removeEventListener("touchstart", calibrateOrientation);
+    };
+  }, [orientation]);
+
+  return { orientation, permission, requestPermission };
+}
 
 // function useDeviceOrientation(onOrientationChange, setCustomMessage) {
 //   const [orientation, setOrientation] = useState({
@@ -202,62 +262,3 @@ export const DeviceTilt = ({
 
 //   return { orientation, permission, requestPermission };
 // }
-
-function useDeviceOrientation(onOrientationChange, setCustomMessage) {
-  const [orientation, setOrientation] = useState({
-    alpha: null,
-    beta: null,
-    gamma: null,
-  });
-  const [baselineOrientation, setBaselineOrientation] = useState(null);
-  const [permission, setPermission] = useState("default");
-
-  const handleOrientation = (event) => {
-    let { alpha, beta, gamma } = event;
-
-    if (baselineOrientation) {
-      beta = beta - baselineOrientation.beta;
-      gamma = gamma - baselineOrientation.gamma;
-    }
-
-    setOrientation({ alpha, beta, gamma });
-    if (onOrientationChange) {
-      onOrientationChange({ alpha, beta, gamma });
-    }
-  };
-
-  const requestPermission = async () => {
-    if (typeof DeviceOrientationEvent.requestPermission === "function") {
-      try {
-        const response = await DeviceOrientationEvent.requestPermission();
-        if (response === "granted") {
-          setPermission("granted");
-          window.addEventListener("deviceorientation", handleOrientation, true);
-          setCustomMessage(null);
-        } else {
-          setPermission("denied");
-          setCustomMessage("Device Orientation Access Denied.");
-        }
-      } catch (error) {
-        setPermission("denied");
-        setCustomMessage("Device Orientation Access Denied.");
-      }
-    } else {
-      setPermission("granted");
-      window.addEventListener("deviceorientation", handleOrientation, true);
-      setCustomMessage(null);
-    }
-  };
-
-  const setUprightBaseline = () => {
-    setBaselineOrientation(orientation);
-  };
-
-  useEffect(() => {
-    return () => {
-      window.removeEventListener("deviceorientation", handleOrientation, true);
-    };
-  }, []);
-
-  return { orientation, permission, requestPermission, setUprightBaseline };
-}
