@@ -232,14 +232,25 @@ const Scene = ({
   const [tilt, setTilt] = useState({ tiltLR: 0, tiltFB: 0, dir: 0 });
   const [tempTiltValue, setTempTiltValue] = useState(null);
 
-  const sparklesColour = {
+  // const sparklesColour = {
+  //   "-1": "",
+  //   [INDUSTRY]: "rgb(13,168,136, 0.1)",
+  //   [MEDICINE]: "rgb(61,220,233, 0.1)",
+  //   [MICROSOFT]: "rgb(0,0,255, 0.1)",
+  //   [SECURITY]: "rgb(153,88,18, 0.1)",
+  //   [AI]: "rgb(61,217,233, 0.1)",
+  //   [MILITARY]: "rgb(80,123,63, 0.2)",
+  //   [CUSTOMIZATION]: "rgb(240,183,94, 0.2)",
+  // };
+
+  const bgColours = {
     "-1": "",
     [INDUSTRY]: "rgb(13,168,136, 0.1)",
-    [MEDICINE]: "rgb(61,220,233, 0.1)",
+    [MEDICINE]: "rgb(13,168,136, 0.1)",
     [MICROSOFT]: "rgb(0,0,255, 0.1)",
-    [SECURITY]: "rgb(153,88,18, 0.1)",
-    [AI]: "rgb(61,217,233, 0.1)",
-    [MILITARY]: "rgb(80,123,63, 0.2)",
+    [SECURITY]: "rgb(0,0,255, 0.1)",
+    [AI]: "rgb(0,0,255, 0.1)",
+    [MILITARY]: "rgb(240,183,94, 0.2)",
     [CUSTOMIZATION]: "rgb(240,183,94, 0.2)",
   };
 
@@ -273,7 +284,7 @@ const Scene = ({
       ) : null}
       <Canvas
         style={{
-          backgroundColor: sparklesColour[selectedCategoryItemByIdx],
+          backgroundColor: bgColours[selectedCategoryItemByIdx],
           transition: "backgroundColor: 5s ease-in-out",
         }}
       >
