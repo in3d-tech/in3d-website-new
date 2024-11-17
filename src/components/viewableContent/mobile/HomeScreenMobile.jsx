@@ -371,27 +371,14 @@ export function AstroModel({ url, astroRef, tilt }) {
         astroRef.current.rotation.x + tilt.tiltFB * xSensitivity;
 
       // Apply constraints for Y rotation
-      if (newRotationY <= maxRotationY && newRotationY >= minRotationY) {
-        astroRef.current.rotation.y = newRotationY;
-      }
+      // if (newRotationY <= maxRotationY && newRotationY >= minRotationY) {
+      astroRef.current.rotation.y = newRotationY;
+      // }
 
       // Apply constraints for X rotation
-      if (newRotationX <= maxRotationX && newRotationX >= minRotationX) {
-        astroRef.current.rotation.x = newRotationX;
-      }
-
-      // console.log(
-      //   "Rotation Y:",
-      //   astroRef.current.rotation.y,
-      //   "Tilt LR:",
-      //   tilt.tiltLR
-      // );
-      // console.log(
-      //   "Rotation X:",
-      //   astroRef.current.rotation.x,
-      //   "Tilt FB:",
-      //   tilt.tiltFB
-      // );
+      // if (newRotationX <= maxRotationX && newRotationX >= minRotationX) {
+      astroRef.current.rotation.x = newRotationX;
+      // }
     }
   });
 
