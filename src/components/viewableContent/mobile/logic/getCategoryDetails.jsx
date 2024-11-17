@@ -123,7 +123,7 @@ export const getCategoryData = ({ selectedCategory }) => {
         </span>
       ),
       text2:
-        "As partners, in3D is your perfect go to for any Microsoft MR products In3D and Microsoft's teams share a strong connection and a combined vison on the important roles of MR technology",
+        "As partners, in3D is your perfect go to for any Microsoft MR products. In3D and Microsoft's teams share a strong connection and a combined vison on the important roles of MR technology",
       url: "/assets/models/microsoft_model.glb",
     },
     4: {

@@ -214,7 +214,7 @@ export const HomeScreenCategoryText = ({
         selectedCategoryItemByIdx == idx ? "main-content" : null
       }`}
       style={{
-        height: "48vh",
+        height: "50vh",
         color: "white",
         fontFamily: "gotham",
         display: "flex",
@@ -267,6 +267,7 @@ export const HomeScreenCategoryText = ({
         setSelectedMenuActionMobile={setSelectedMenuActionMobile}
         idx={idx}
         setSelectedCategory={setSelectedCategory}
+        selectedCategoryItemByIdx={selectedCategoryItemByIdx}
       />
     </div>
   );
@@ -309,6 +310,7 @@ const LearnMoreBtn = ({
   setSelectedMenuActionMobile,
   idx,
   setSelectedCategory,
+  selectedCategoryItemByIdx,
 }) => {
   return (
     <div style={{ marginTop: "1em", marginLeft: "1em" }}>
@@ -329,6 +331,11 @@ const LearnMoreBtn = ({
           width="40"
           height="10"
           viewBox="0 0 46 16"
+          style={
+            selectedCategoryItemByIdx == idx
+              ? { transform: "scale(1.2)", opacity: 0.6 }
+              : {}
+          }
         >
           <path
             id="Path_10"

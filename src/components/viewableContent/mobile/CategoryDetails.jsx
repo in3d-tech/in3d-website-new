@@ -386,12 +386,13 @@ const getCategoryMediaUrls = ({ selectedCategory }) => {
       "https://in3dwebsite.blob.core.windows.net/video/Medical Holoportation - Ichilov (1) (1).mp4",
     ],
     [MICROSOFT]: [
-      "https://in3dwebsite.blob.core.windows.net/photos/microsoft-shake-cutout-min.png",
+      "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4",
+
+      // "https://in3dwebsite.blob.core.windows.net/photos/microsoft-shake-cutout-min.png",
       "https://in3dwebsite.blob.core.windows.net/video/Mesh Hololens - Remote Collaboration.mp4",
       "https://in3dwebsite.blob.core.windows.net/video/What can HoloLens 2 do_.mp4",
       "https://in3dwebsite.blob.core.windows.net/video/Medical Holoportation - Ichilov (1) (1).mp4",
       "https://in3dwebsite.blob.core.windows.net/video/Hololens 2 - Guides (2).mp4",
-      "https://in3dwebsite.blob.core.windows.net/video/Hololens 1 - Remote Assist (2).mp4",
     ],
     [SECURITY]: [
       "https://in3dwebsite.blob.core.windows.net/video/VR - Fire Department - Elevator Simulator (1).mp4",
