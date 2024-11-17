@@ -272,6 +272,24 @@ const Scene = ({
 
   return (
     <div className="canvas-container-mobile">
+      <div
+        style={{
+          color: "yellow",
+          position: "absolute",
+          right: "1em",
+          top: 0,
+          width: "200px",
+          height: "200px",
+          zIndex: 50,
+          border: "1px solid orange",
+        }}
+      >
+        {"tiltLR: " + tilt.tiltLR}
+        <br />
+        {"tiltFB: " + tilt.tiltFB}
+        <br />
+        {"DIR: " + tilt.dir}
+      </div>
       {!selectedCategory ? (
         <>
           <DeviceTilt
