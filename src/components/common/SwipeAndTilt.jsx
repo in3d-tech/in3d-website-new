@@ -57,24 +57,6 @@ export const DeviceTilt = ({
       )} */}
       {permission === "default" || permission === "denied" ? (
         <>
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: "2em",
-              border: "1px solid yellow",
-              height: "300px",
-              width: "200px",
-              zIndex: 50,
-              color: "red",
-            }}
-          >
-            {beta + "" + gamma}
-            <br />
-            {"x: " + position.x}
-            <br />
-            {"y: " + position.y}
-          </div>
           <button
             style={{
               // background: "red",
