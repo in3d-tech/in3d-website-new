@@ -207,15 +207,26 @@ export const HomeScreenCategoryText = ({
   //   clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
   //   background: "rgb(3, 255, 255, 0.3)",
   // };
-  const hsTextBgs = {
-    0: "https://in3dwebsite.blob.core.windows.net/photos/Industry_Togle-min.jpg",
-    1: "https://in3dwebsite.blob.core.windows.net/photos/Medical_Togle-min.jpg",
-    2: "https://in3dwebsite.blob.core.windows.net/photos/Microsoft_Tugle-min.jpg",
-    3: "https://in3dwebsite.blob.core.windows.net/photos/Security_Togle_Finish2-min.jpg",
-    4: "https://in3dwebsite.blob.core.windows.net/photos/Ai_Tugle_Finish-min.jpg",
-    5: "https://in3dwebsite.blob.core.windows.net/photos/Militery_Togle_Finish2-min.jpg",
-    6: "https://in3dwebsite.blob.core.windows.net/photos/Customize_Togle_Finish-min.jpg",
-  };
+
+  // const hsTextBgs = {
+  //   0: "https://in3dwebsite.blob.core.windows.net/photos/Industry_Togle-min.jpg",
+  //   1: "https://in3dwebsite.blob.core.windows.net/photos/Medical_Togle-min.jpg",
+  //   2: "https://in3dwebsite.blob.core.windows.net/photos/Microsoft_Tugle-min.jpg",
+  //   3: "https://in3dwebsite.blob.core.windows.net/photos/Security_Togle_Finish2-min.jpg",
+  //   4: "https://in3dwebsite.blob.core.windows.net/photos/Ai_Tugle_Finish-min.jpg",
+  //   5: "https://in3dwebsite.blob.core.windows.net/photos/Militery_Togle_Finish2-min.jpg",
+  //   6: "https://in3dwebsite.blob.core.windows.net/photos/Customize_Togle_Finish-min.jpg",
+  // };
+
+  // const hsTextBgs = {
+  //   0: "url(/assets/images/backgrounds/taasia/taasia_bg.jpg)",
+  //   1: "url(/assets/images/backgrounds/medicine/medicine_bg.jpg)",
+  //   2: "url(/assets/images/backgrounds/microsoft/microsoft_bg.jpg)",
+  //   3: "url(/assets/images/backgrounds/security/security.jpg)",
+  //   4: "url(/assets/images/backgrounds/ai/ai_bg.png)",
+  //   5: "url(/assets/images/backgrounds/military/military_bg.jpg)",
+  //   6: "url(/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png)",
+  // };
 
   return (
     <div
@@ -232,9 +243,8 @@ export const HomeScreenCategoryText = ({
         marginTop: "3em",
         borderTop: "1px solid rgb(255, 255, 255, 0.4)",
         justifyContent: "space-evenly",
-        // border: "2px solid red",
         backgroundImage:
-          selectedCategoryItemByIdx == idx ? `url(${hsTextBgs[idx]})` : "",
+          "url(/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png)",
       }}
     >
       <div
