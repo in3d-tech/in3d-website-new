@@ -123,7 +123,7 @@ function useDeviceOrientation(onOrientationChange, setCustomMessage) {
 
   // Add a state to store the calibrated orientation
   const [verticalCalibration, setVerticalCalibration] = useState({
-    beta: 57,
+    beta: 55,
     gamma: 0,
   });
   const [permission, setPermission] = useState("default");
