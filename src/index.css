@@ -251,9 +251,10 @@ body {
     )
     right;
   background-size: 200%;
-  transition: 2s ease-out;
+  transition: 10s ease-out;
   opacity: 0;
   height: 100%;
+
   /* background: rgba(255, 3, 3, 0.2); */
   /* box-shadow: 0px 0px 24px 18px rgba(217, 123, 18, 0.75);
   -webkit-box-shadow: 0px 0px 24px 18px rgba(217, 123, 18, 0.75);

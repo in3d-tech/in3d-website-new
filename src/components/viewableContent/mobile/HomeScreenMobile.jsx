@@ -21,6 +21,7 @@ const SECURITY = 3;
 const AI = 4;
 const MILITARY = 5;
 const CUSTOMIZATION = 6;
+const ABOUT_US = 7;
 
 const LazySelectedContent = lazy(() => import("./CategoryDetails"));
 
@@ -252,6 +253,7 @@ const Scene = ({
     [AI]: "rgb(0,0,255, 0.1)",
     [MILITARY]: "rgb(240,183,94, 0.2)",
     [CUSTOMIZATION]: "rgb(240,183,94, 0.2)",
+    [ABOUT_US]: "rgb(240,183,94, 0.2)",
   };
 
   const handleTiltChange = (tiltData) => {
