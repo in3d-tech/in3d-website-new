@@ -123,7 +123,13 @@ function HomeScreenMobile() {
         {startExpandedAnimation ? (
           <TitleWithAnimation isMobile={isMobile} />
         ) : null}
-
+        <div
+          style={{
+            width: "100%",
+            height: "50px",
+            marginTop: "68vh",
+          }}
+        ></div>
         <div
           className="home-categories-map-mobile"
           style={{ opacity: selectedCategory ? 0 : "" }}

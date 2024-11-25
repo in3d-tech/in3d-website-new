@@ -249,9 +249,9 @@ export const MenuAboutContact = ({
   const regularStyle = {
     width: "100%",
     borderTop: "1px solid rgb(255,255,255, 0.4)",
-    position: "absolute",
+    position: isFromHomeScreen ? "" : "absolute",
     bottom: isFromHomeScreen ? "1em" : "5em",
-    left: 0,
+    left: isFromHomeScreen ? "" : 0,
     height: "5em",
     display: "flex",
     justifyContent: "space-evenly",

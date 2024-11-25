@@ -166,6 +166,7 @@ export const HomeScreenCategoryText = ({
       ),
     },
     7: {
+      bgImage: 'url("/assets/images/overlay-images/about-4.png")',
       title: <span>About us</span>,
       text: (
         <>
@@ -238,23 +239,31 @@ export const HomeScreenCategoryText = ({
         fontFamily: "gotham",
         display: "flex",
         flexDirection: "column",
+        backgroundColor:
+          selectedCategoryItemByIdx == idx
+            ? idx == 7
+              ? "rgb(255,0,0,0.2)"
+              : "rgb(0,0,0,0.6)"
+            : "",
         padding: "4px",
         marginTop: "3em",
         borderTop: "1px solid rgb(255, 255, 255, 0.4)",
         justifyContent: "space-evenly",
-        background: selectedCategoryItemByIdx == idx ? "rgb(0,0,0,0.6)" : "",
+        // background: selectedCategoryItemByIdx == idx ? "rgb(0,0,0,0.6)" : "",
         // backgroundImage:
         //   "url(/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png)",
       }}
     >
-      {/* <div
+      <div
         className={selectedCategoryItemByIdx == idx ? "main-content" : ""}
         style={{
-          position: "absolute",
-          zIndex: -80,
+          position: "fixed",
+          top: 0,
+          zIndex: -2,
           height: "100vh",
           // width: "82%",
-          width: "100vw",
+          width: "100%",
+          // backgroundColor: "rgb(0,0,0,0.6)",
           backgroundImage:
             selectedCategoryItemByIdx == idx
               ? categoryDataByIndex[idx]?.bgImage ||
@@ -265,10 +274,10 @@ export const HomeScreenCategoryText = ({
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           // filter: idx == 6 ? "blur(40px)" : "blur(40px)",
-          filter: "blur(3px)",
-          opacity: 0.4,
+          // filter: "blur(3px)",
+          opacity: 0.2,
         }}
-      ></div> */}
+      ></div>
 
       <div
         className="scrolled-category-title"
