@@ -264,7 +264,7 @@ export const HomeScreenCategoryText = ({
           // top: 0,
           zIndex: -2,
           // height: "50vh",
-          height: "84%",
+          height: "42%",
           // width: "82%",
           width: "100%",
           // backgroundColor: "rgb(0,0,0,0.6)",
