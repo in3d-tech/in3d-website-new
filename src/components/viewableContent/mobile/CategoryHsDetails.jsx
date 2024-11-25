@@ -230,9 +230,8 @@ export const HomeScreenCategoryText = ({
 
   return (
     <div
-      className={`industry-test category-${idx} fader ${
-        selectedCategoryItemByIdx == idx ? "main-content" : null
-      }`}
+      className={`industry-test category-${idx} fader
+}`}
       style={{
         height: "50vh",
         color: "white",
@@ -243,24 +242,31 @@ export const HomeScreenCategoryText = ({
         marginTop: "3em",
         borderTop: "1px solid rgb(255, 255, 255, 0.4)",
         justifyContent: "space-evenly",
-        backgroundImage:
-          "url(/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png)",
+        background: selectedCategoryItemByIdx == idx ? "rgb(0,0,0,0.6)" : "",
+        // backgroundImage:
+        //   "url(/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png)",
       }}
     >
       <div
+        className={selectedCategoryItemByIdx == idx ? "main-content" : ""}
         style={{
           position: "absolute",
-          zIndex: -1,
-          height: "30vh",
-          width: "100%",
+          zIndex: -80,
+          height: "100vh",
+          // width: "82%",
+          width: "100vw",
           backgroundImage:
-            // categoryDataByIndex[idx]?.bgImage ||
-            categoryDataByIndex[4]?.bgImage ||
-            'url("/assets/images/backgrounds/taasia/Industry_Togle.jpg")',
+            selectedCategoryItemByIdx == idx
+              ? categoryDataByIndex[idx]?.bgImage ||
+                // categoryDataByIndex[4]?.bgImage ||
+                'url("/assets/images/backgrounds/taasia/Industry_Togle.jpg")'
+              : "",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
-          filter: idx == 6 ? "blur(40px)" : "blur(40px)",
+          // filter: idx == 6 ? "blur(40px)" : "blur(40px)",
+          filter: "blur(3px)",
+          opacity: 0.4,
         }}
       ></div>
 
@@ -269,7 +275,8 @@ export const HomeScreenCategoryText = ({
         style={{
           marginTop: "1em",
           marginLeft: "0.5em",
-          fontSize: selectedCategoryItemByIdx == idx ? "2.2em" : "2em",
+          fontSize: selectedCategoryItemByIdx == idx ? "2.3em" : "2em",
+          // fontSize: "2em",
         }}
       >
         {categoryDataByIndex[idx]?.title}
@@ -278,7 +285,8 @@ export const HomeScreenCategoryText = ({
         style={{
           textAlign: "left",
           padding: "1em",
-          fontSize: selectedCategoryItemByIdx == idx ? "1.1em" : "0.9em",
+          fontSize: selectedCategoryItemByIdx == idx ? "1.2em" : "0.9em",
+          // fontSize: "0.9em",
           lineHeight: "1.6em",
         }}
       >
