@@ -247,7 +247,7 @@ export const HomeScreenCategoryText = ({
         //   "url(/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png)",
       }}
     >
-      <div
+      {/* <div
         className={selectedCategoryItemByIdx == idx ? "main-content" : ""}
         style={{
           position: "absolute",
@@ -268,7 +268,7 @@ export const HomeScreenCategoryText = ({
           filter: "blur(3px)",
           opacity: 0.4,
         }}
-      ></div>
+      ></div> */}
 
       <div
         className="scrolled-category-title"
