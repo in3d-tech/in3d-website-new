@@ -266,7 +266,7 @@ export const HomeScreenCategoryText = ({
           // height: "50vh",
           height: "42%",
           // width: "82%",
-          width: "100%",
+          width: "100vw",
           // backgroundColor: "rgb(0,0,0,0.6)",
           backgroundImage:
             selectedCategoryItemByIdx == idx
