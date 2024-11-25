@@ -1644,6 +1644,7 @@ section {
 
 .home-categories-wrapper-mobile {
   max-width: 100%;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -1654,9 +1655,11 @@ section {
 .home-categories-map-mobile {
   /* margin-top: 68vh; */
   /* position: absolute; */
-  width: 100%;
+  /* width: 100%; */
   top: 0;
   z-index: 1;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .text-test {

@@ -29,7 +29,7 @@ export const HomeScreenCategoryText = ({
       {
         scrollTrigger: {
           trigger: `.category-${idx}`, // Create a unique class or ID for each element
-          start: "top 50%",
+          start: "top 45%",
           end: "bottom center",
           onEnter: () => {
             setSelectedCategoryItemByIdx(idx);
@@ -227,6 +227,7 @@ export const HomeScreenCategoryText = ({
     4: "url(/assets/images/backgrounds/ai/ai_bg.png)",
     5: "url(/assets/images/backgrounds/military/military_bg.jpg)",
     6: "url(/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png)",
+    7: "url(/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png)",
   };
 
   return (
@@ -239,6 +240,8 @@ export const HomeScreenCategoryText = ({
         fontFamily: "gotham",
         display: "flex",
         flexDirection: "column",
+        maxWidth: "100%",
+        overflowX: "hidden",
         // width: "100%",
         // backgroundColor:
         //   selectedCategoryItemByIdx == idx
@@ -266,7 +269,9 @@ export const HomeScreenCategoryText = ({
           // height: "50vh",
           height: "44%",
           // width: "82%",
-          width: "82vw",
+          width: "84vw",
+          // maxWidth: "100%",
+          overflowX: "hidden",
           // backgroundColor: "rgb(0,0,0,0.6)",
           backgroundImage:
             selectedCategoryItemByIdx == idx
