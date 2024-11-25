@@ -219,15 +219,15 @@ export const HomeScreenCategoryText = ({
   //   6: "https://in3dwebsite.blob.core.windows.net/photos/Customize_Togle_Finish-min.jpg",
   // };
 
-  // const hsTextBgs = {
-  //   0: "url(/assets/images/backgrounds/taasia/taasia_bg.jpg)",
-  //   1: "url(/assets/images/backgrounds/medicine/medicine_bg.jpg)",
-  //   2: "url(/assets/images/backgrounds/microsoft/microsoft_bg.jpg)",
-  //   3: "url(/assets/images/backgrounds/security/security.jpg)",
-  //   4: "url(/assets/images/backgrounds/ai/ai_bg.png)",
-  //   5: "url(/assets/images/backgrounds/military/military_bg.jpg)",
-  //   6: "url(/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png)",
-  // };
+  const hsTextBgs = {
+    0: "url(/assets/images/backgrounds/taasia/taasia_bg.jpg)",
+    1: "url(/assets/images/backgrounds/medicine/medicine_bg.jpg)",
+    2: "url(/assets/images/backgrounds/microsoft/microsoft_bg.jpg)",
+    3: "url(/assets/images/backgrounds/security/security.jpg)",
+    4: "url(/assets/images/backgrounds/ai/ai_bg.png)",
+    5: "url(/assets/images/backgrounds/military/military_bg.jpg)",
+    6: "url(/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png)",
+  };
 
   return (
     <div
@@ -239,12 +239,12 @@ export const HomeScreenCategoryText = ({
         fontFamily: "gotham",
         display: "flex",
         flexDirection: "column",
-        backgroundColor:
-          selectedCategoryItemByIdx == idx
-            ? idx == 7
-              ? "rgb(255,0,0,0.2)"
-              : "rgb(0,0,0,0.6)"
-            : "",
+        // backgroundColor:
+        //   selectedCategoryItemByIdx == idx
+        //     ? idx == 7
+        //       ? ""
+        //       : "rgb(0,0,0,0.6)"
+        //     : "",
         padding: "4px",
         marginTop: "3em",
         borderTop: "1px solid rgb(255, 255, 255, 0.4)",
@@ -257,25 +257,26 @@ export const HomeScreenCategoryText = ({
       <div
         className={selectedCategoryItemByIdx == idx ? "main-content" : ""}
         style={{
-          position: "fixed",
-          top: 0,
+          position: "absolute",
+          // top: 0,
           zIndex: -2,
-          height: "100vh",
+          // height: "50vh",
+          height: "40%",
           // width: "82%",
           width: "100%",
           // backgroundColor: "rgb(0,0,0,0.6)",
           backgroundImage:
             selectedCategoryItemByIdx == idx
-              ? categoryDataByIndex[idx]?.bgImage ||
-                // categoryDataByIndex[4]?.bgImage ||
-                'url("/assets/images/backgrounds/taasia/Industry_Togle.jpg")'
+              ? hsTextBgs[idx] ||
+                // categoryDataByIndex[idx]?.bgImage ||
+                ""
               : "",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           // filter: idx == 6 ? "blur(40px)" : "blur(40px)",
           // filter: "blur(3px)",
-          opacity: 0.2,
+          opacity: 0.9,
         }}
       ></div>
 

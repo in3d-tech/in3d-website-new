@@ -241,21 +241,26 @@ body {
   grid-row: 1;
   grid-column: 1;
   padding: 36px;
-  background: linear-gradient(
+  /* background: linear-gradient(
     to left,
     rgba(129, 212, 212, 0.26) 50%,
     rgba(194, 208, 212, 0.301) 50%
-  );
+  ); */
   /* background-size: 200%; */
   /* animation: moveBackground 10s ease-out forwards; */
   /* 
   animation: slideBackground 10s linear infinite; */
-  background-image: url("http://img15.deviantart.net/cafe/i/2012/085/2/8/orange_stripe_background_by_sonnywolfie-d4u0e93.png");
+  /* background-image: url("http://img15.deviantart.net/cafe/i/2012/085/2/8/orange_stripe_background_by_sonnywolfie-d4u0e93.png"); */
+  background: linear-gradient(
+    to left,
+    rgba(56, 98, 98, 0.36) 40%,
+    rgba(119, 39, 7, 0.401) 60%
+  );
   background-size: cover;
 
   /* background-size: 261px; */
 
-  animation: moveIt 14s linear infinite;
+  animation: moveIt 10s linear infinite;
   /* opacity: 0; */
   height: 100%;
 }
