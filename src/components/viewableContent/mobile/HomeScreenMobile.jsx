@@ -278,6 +278,17 @@ const Scene = ({
 
   // console.log("hello world");
 
+  const hsTextBgs = {
+    0: "url(/assets/images/backgrounds/taasia/taasia_bg.jpg)",
+    1: "url(/assets/images/backgrounds/medicine/medicine_bg.jpg)",
+    2: "url(/assets/images/backgrounds/microsoft/microsoft_bg.jpg)",
+    3: "url(/assets/images/backgrounds/security/security.jpg)",
+    4: "url(/assets/images/backgrounds/ai/ai_bg.png)",
+    5: "url(/assets/images/backgrounds/military/military_bg.jpg)",
+    6: "url(/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png)",
+    7: "url(/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png)",
+  };
+
   return (
     <div className="canvas-container-mobile">
       {/* <div
@@ -312,6 +323,9 @@ const Scene = ({
         style={{
           backgroundColor: bgColours[selectedCategoryItemByIdx],
           transition: "backgroundColor: 5s ease-in-out",
+          backgroundImage: selectedCategoryItemByIdx
+            ? hsTextBgs[selectedCategoryItemByIdx]
+            : "",
         }}
       >
         <ambientLight intensity={0.8} />

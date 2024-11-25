@@ -258,6 +258,7 @@ export const HomeScreenCategoryText = ({
         className={selectedCategoryItemByIdx == idx ? "main-content" : ""}
         style={{
           position: "absolute",
+          marginTop: "3em",
           // top: 0,
           zIndex: -2,
           // height: "50vh",
