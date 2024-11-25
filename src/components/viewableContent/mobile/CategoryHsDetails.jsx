@@ -259,12 +259,13 @@ export const HomeScreenCategoryText = ({
         style={{
           position: "absolute",
           marginTop: "3em",
+          borderRadius: "12px",
           // top: 0,
           zIndex: -2,
           // height: "50vh",
           height: "40%",
           // width: "82%",
-          width: "100%",
+          width: "81%",
           // backgroundColor: "rgb(0,0,0,0.6)",
           backgroundImage:
             selectedCategoryItemByIdx == idx
