@@ -239,13 +239,14 @@ export const HomeScreenCategoryText = ({
         fontFamily: "gotham",
         display: "flex",
         flexDirection: "column",
+        // width: "100%",
         // backgroundColor:
         //   selectedCategoryItemByIdx == idx
         //     ? idx == 7
         //       ? ""
         //       : "rgb(0,0,0,0.6)"
         //     : "",
-        padding: "4px",
+        // padding: "4px",
         marginTop: "3em",
         borderTop: "1px solid rgb(255, 255, 255, 0.4)",
         justifyContent: "space-evenly",
@@ -263,9 +264,9 @@ export const HomeScreenCategoryText = ({
           // top: 0,
           zIndex: -2,
           // height: "50vh",
-          height: "45%",
+          height: "84%",
           // width: "82%",
-          width: "78%",
+          width: "100%",
           // backgroundColor: "rgb(0,0,0,0.6)",
           backgroundImage:
             selectedCategoryItemByIdx == idx

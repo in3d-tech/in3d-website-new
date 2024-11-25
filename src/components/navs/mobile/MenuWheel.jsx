@@ -262,7 +262,9 @@ export const MenuAboutContact = ({
     // position: "absolute",
     // top: "200%",
     width: "100%",
-    borderTop: "1px solid rgb(255,255,255, 0.4)",
+    borderTop: isFromSelectedCategory
+      ? "1px solid rgb(0,0,0, 0.4)"
+      : "1px solid rgb(255,255,255, 0.4)",
     left: 0,
     height: "5em",
     display: "flex",
@@ -285,7 +287,7 @@ export const MenuAboutContact = ({
             }
           }}
           style={{
-            color: isFromSelectedCategory ? "white" : "white",
+            color: isFromSelectedCategory ? "black" : "white",
             fontFamily: "gotham",
           }}
         >
@@ -302,7 +304,7 @@ export const MenuAboutContact = ({
             }
           }}
           style={{
-            color: isFromSelectedCategory ? "white" : "white",
+            color: isFromSelectedCategory ? "black" : "white",
             fontFamily: "gotham",
           }}
         >
@@ -314,7 +316,7 @@ export const MenuAboutContact = ({
           <a href={linkedInUrl} target="_blank" rel="noopener noreferrer">
             <LinkedInIcon
               fontSize="large"
-              sx={{ color: isFromSelectedCategory ? "white" : "white" }}
+              sx={{ color: isFromSelectedCategory ? "black" : "white" }}
             />
           </a>
         }

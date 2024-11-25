@@ -1295,9 +1295,9 @@ section {
   opacity: 1;
   height: 100%;
   width: 100%;
-  /* background: url("/assets/images/backgrounds/toogle\ menu\ BG.jpg"); */
+  background: url("/assets/images/backgrounds/toogle\ menu\ BG.jpg");
   /* background: url("/assets/images/backgrounds/taasia/taasia_bg.jpg"); */
-  background-color: rgb(0, 0, 0, 0.8);
+  /* background-color: rgb(0, 0, 0, 0.8); */
 
   background-size: cover;
   background-repeat: no-repeat;
@@ -1654,13 +1654,13 @@ section {
 .home-categories-map-mobile {
   /* margin-top: 68vh; */
   /* position: absolute; */
-  width: 98%;
+  width: 100%;
   top: 0;
   z-index: 1;
 }
 
 .text-test {
-  z-index: 20000090909;
+  z-index: 29;
   font-family: "Yanone Kaffeesatz";
   font-size: 2em;
   /* border: 1px solid red; */

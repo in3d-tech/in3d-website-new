@@ -62,7 +62,7 @@ function SelectedCategory() {
       <div style={{ position: "fixed", top: "1em", left: "1em" }}>
         <ArrowBackIcon
           fontSize="large"
-          sx={{ color: "white" }}
+          sx={{ color: "black" }}
           onClick={() => setSelectedCategory(null)}
         />
       </div>
@@ -83,7 +83,7 @@ function SelectedCategory() {
             // lineHeight: "1.5em",
             // letterSpacing: "0.2em",
             fontFamily: "gotham",
-            color: "white",
+            color: "black",
             width: "70vw",
             alignSelf: "flex-end",
           }}
@@ -99,7 +99,7 @@ function SelectedCategory() {
             fontFamily: "gotham",
             textAlign: "left",
             lineHeight: "1.8em",
-            color: "rgb(255,255,255)",
+            color: "black",
             // letterSpacing: "1.1em",
           }}
           className="medicine-text-one-mobile"
@@ -132,7 +132,7 @@ function SelectedCategory() {
                   fontFamily: "gotham",
                   textAlign: "right",
                   lineHeight: "1.5em",
-                  color: "white",
+                  color: "black",
                 }}
                 className="medicine-text-two-mobile"
               >
@@ -166,7 +166,7 @@ function SelectedCategory() {
                 fontFamily: "gotham",
                 textAlign: "left",
                 lineHeight: "1.5em",
-                color: "white",
+                color: "black",
               }}
             >
               {data?.text3}
