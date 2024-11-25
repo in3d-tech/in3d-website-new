@@ -323,9 +323,9 @@ const Scene = ({
         style={{
           backgroundColor: bgColours[selectedCategoryItemByIdx],
           transition: "backgroundColor: 5s ease-in-out",
-          backgroundImage: selectedCategoryItemByIdx
-            ? hsTextBgs[selectedCategoryItemByIdx]
-            : "",
+          // backgroundImage: selectedCategoryItemByIdx
+          //   ? hsTextBgs[selectedCategoryItemByIdx]
+          //   : "",
         }}
       >
         <ambientLight intensity={0.8} />
