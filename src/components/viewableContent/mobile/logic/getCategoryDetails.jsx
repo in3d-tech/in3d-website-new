@@ -213,7 +213,9 @@ export const getCategoryData = ({ selectedCategory }) => {
         <div className="medicine-title-mobile">
           <div
             className="medicine-top-text-mobile"
-            style={{ fontSize: "0.82em" }}
+            style={{
+              fontSize: "0.82em",
+            }}
           >
             Customization
           </div>
@@ -224,7 +226,7 @@ export const getCategoryData = ({ selectedCategory }) => {
       // text: "As specialists we keep an amazing team of developers, 3D generalists, interface and graphics artists, and product designers just so we can provide our clients with the flexibility and abilities needed to deliver the best product.",
       text: (
         <>
-          <span style={{ color: "orange", fontSize: "1.1em" }}>
+          <span style={{ color: "#D4931D", fontSize: "1.1em" }}>
             We specialize in 3D and Extended Reality (EX)
           </span>
           , and as specialists we keep an amazing team of developers, 3D
@@ -237,7 +239,7 @@ export const getCategoryData = ({ selectedCategory }) => {
       text2: (
         <>
           With a constant curiosity and accumulate experience,{" "}
-          <span style={{ color: "orange", fontSize: "1.1em" }}>
+          <span style={{ color: "#D4931D", fontSize: "1.1em" }}>
             we have successfully developed software products on most of the
             existing hardware platforms
           </span>{" "}
@@ -252,7 +254,7 @@ export const getCategoryData = ({ selectedCategory }) => {
           different businesses, we provide assistance with needed authorizations
           and hardware modifications required by INFOSEC, worker's committees,
           legal, and collaborating with major company IT teams for{" "}
-          <span style={{ color: "orange", fontSize: "1.1em" }}>
+          <span style={{ color: "#D4931D", fontSize: "1.1em" }}>
             a better design and implementation of tailor-made solutions
           </span>{" "}
           that started as a vision of one diligent employee

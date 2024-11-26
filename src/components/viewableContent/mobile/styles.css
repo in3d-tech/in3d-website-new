@@ -12,7 +12,7 @@
   bottom: 0; /* Adjust this to match the border position */
   right: 0;
   height: 2px; /* Adjust to match the border height */
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(0, 0, 0);
   animation: borderGrowFive 0.8s ease-out forwards;
   animation-delay: 0.5s;
 }
@@ -27,7 +27,7 @@
   bottom: 0; /* Adjust this to match the border position */
   left: 0;
   height: 2px; /* Adjust to match the border height */
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(0, 0, 0);
   animation: borderGrowFive 0.8s ease-out forwards;
   animation-delay: 0.5s;
 }

@@ -240,7 +240,7 @@ body {
 .main-content {
   grid-row: 1;
   grid-column: 1;
-  padding: 36px;
+  /* padding: 36px; */
   /* background: linear-gradient(
     to left,
     rgba(129, 212, 212, 0.26) 50%,
@@ -260,7 +260,7 @@ body {
 
   /* background-size: 261px; */
 
-  animation: moveIt 10s linear infinite, fadeIn 0.4s ease-in-out forwards;
+  animation: moveIt 10s linear infinite, fadeInAlmost 0.4s ease-in-out forwards;
   /* animation: fadeIn 1s ease-in-out; */
   opacity: 0;
   height: 100%;
@@ -2921,6 +2921,12 @@ figure {
       opacity: 1;
     }
   }
+  @keyframes fadeInAlmost {
+    to {
+      opacity: 0.9;
+    }
+  }
+
   .rotate {
     display: inline-block; /* Make sure the letter is treated as a block element for transformation */
     animation: spin 2s infinite; /* Change 2s to any duration you prefer */

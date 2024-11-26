@@ -262,17 +262,17 @@ export const HomeScreenCategoryText = ({
         className={selectedCategoryItemByIdx == idx ? "main-content" : ""}
         style={{
           position: "absolute",
-          marginTop: "3em",
+          marginTop: "13%",
           borderRadius: "12px",
           // top: 0,
           zIndex: -2,
           // height: "50vh",
-          height: "44%",
-          left: "1.5%",
-          width: "82%",
+          height: "65%",
+          // left: "1.5%",
+          width: "100%",
           // width: "84vw",
           // maxWidth: "100%",
-          overflowX: "hidden",
+          overflowX: "unset",
           // backgroundColor: "rgb(0,0,0,0.6)",
           backgroundImage:
             selectedCategoryItemByIdx == idx
@@ -285,7 +285,6 @@ export const HomeScreenCategoryText = ({
           backgroundPosition: "center",
           // filter: idx == 6 ? "blur(40px)" : "blur(40px)",
           // filter: "blur(3px)",
-          // opacity: 0.9,
         }}
       ></div>
 

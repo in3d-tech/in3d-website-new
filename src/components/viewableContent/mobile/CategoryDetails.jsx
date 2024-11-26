@@ -84,7 +84,7 @@ function SelectedCategory() {
             // letterSpacing: "0.2em",
             fontFamily: "gotham",
             color: "black",
-            width: "70vw",
+            width: selectedCategory == CUSTOMIZATION ? "84vw" : "70vw",
             alignSelf: "flex-end",
           }}
         >
