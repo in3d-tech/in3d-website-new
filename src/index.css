@@ -253,15 +253,16 @@ body {
   /* background-image: url("http://img15.deviantart.net/cafe/i/2012/085/2/8/orange_stripe_background_by_sonnywolfie-d4u0e93.png"); */
   background: linear-gradient(
     to left,
-    rgba(56, 98, 98, 0.36) 40%,
-    rgba(119, 39, 7, 0.401) 60%
+    rgba(63, 77, 77, 0.36) 40%,
+    rgba(9, 6, 5, 0.401) 60%
   );
   background-size: cover;
 
   /* background-size: 261px; */
 
-  animation: moveIt 10s linear infinite;
-  /* opacity: 0; */
+  animation: moveIt 10s linear infinite, fadeIn 0.4s ease-in-out forwards;
+  /* animation: fadeIn 1s ease-in-out; */
+  opacity: 0;
   height: 100%;
 }
 
@@ -272,9 +273,11 @@ body {
 
 @keyframes moveIt {
   from {
+    /* opacity: 0; */
     background-position: bottom left;
   }
   to {
+    /* opacity: 1; */
     background-position: top right;
   }
 }

@@ -227,7 +227,7 @@ export const HomeScreenCategoryText = ({
     4: "url(/assets/images/backgrounds/ai/ai_bg.png)",
     5: "url(/assets/images/backgrounds/military/military_bg.jpg)",
     6: "url(/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png)",
-    7: "url(/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png)",
+    7: "",
   };
 
   return (
@@ -268,8 +268,9 @@ export const HomeScreenCategoryText = ({
           zIndex: -2,
           // height: "50vh",
           height: "44%",
-          // width: "82%",
-          width: "84vw",
+          left: "1.5%",
+          width: "82%",
+          // width: "84vw",
           // maxWidth: "100%",
           overflowX: "hidden",
           // backgroundColor: "rgb(0,0,0,0.6)",
@@ -284,7 +285,7 @@ export const HomeScreenCategoryText = ({
           backgroundPosition: "center",
           // filter: idx == 6 ? "blur(40px)" : "blur(40px)",
           // filter: "blur(3px)",
-          opacity: 0.9,
+          // opacity: 0.9,
         }}
       ></div>
 

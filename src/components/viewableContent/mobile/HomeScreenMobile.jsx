@@ -320,13 +320,14 @@ const Scene = ({
         </>
       ) : null}
       <Canvas
-        style={{
-          backgroundColor: bgColours[selectedCategoryItemByIdx],
-          transition: "backgroundColor: 5s ease-in-out",
-          // backgroundImage: selectedCategoryItemByIdx
-          //   ? hsTextBgs[selectedCategoryItemByIdx]
-          //   : "",
-        }}
+        style={
+          {
+            // backgroundColor: bgColours[selectedCat
+            // backgroundImage: selectedCategoryItemByIdx
+            //   ? hsTextBgs[selectedCategoryItemByIdx]
+            //   : "",
+          }
+        }
       >
         <ambientLight intensity={0.8} />
         <directionalLight intensity={3} />
