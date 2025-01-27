@@ -230,7 +230,7 @@ export const VideoPlayer = ({
         playsInline
         controls
         className={isMobile ? "video-player-mobile" : "video-player"}
-        style={{ height: "300px" }}
+        // style={{ height: "300px" }}
         ref={videoRef ? videoRef : vidRef}
         preload="metadata"
         muted
