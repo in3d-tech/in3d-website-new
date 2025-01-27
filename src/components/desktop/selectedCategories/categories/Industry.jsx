@@ -2,8 +2,8 @@ import "../selectedCategories.css";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { ContactBtn, Logo, VideoPlayer } from "../../../common/Logo";
 import { categoryObserver } from "../../../common/categoryObserver";
-import { Canvas } from "@react-three/fiber";
-import { ModelComponent } from "./ModelComponent";
+// import { Canvas } from "@react-three/fiber";
+// import { ModelComponent } from "./ModelComponent";
 
 export function Industry({ selectedCategory }) {
   const [displayVideos, setDisplayVideos] = useState(false);
@@ -550,35 +550,35 @@ const Bottom = ({
   </div>
 );
 
-const BottomModel = ({ modelRef }) => (
-  <div style={{ height: "70vh", display: "flex" }}>
-    <div
-      style={{
-        flex: 1,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Canvas
-        // style={{ border: "1px solid black", zIndex: 54433 }}
-        camera={{ position: [0, 0, 10], fov: 75 }}
-      >
-        <ambientLight intensity={1} />
-        <pointLight position={[10, 10, 10]} />
-        <directionalLight position={[0, 10, 0]} intensity={1} />
-        {/* <OrbitControls /> */}
-        {/* <Stars count={2/000} /> */}
-        {/* <Camera /> */}
-        <Suspense fallback={null}>
-          {/* <ModelComponent url={"/assets/models/engenir_model.glb"} /> */}
-          <ModelComponent
-            url={"/assets/models/engenir_model.glb"}
-            modelRef={modelRef}
-            position={[0, -3, -3]}
-          />
-        </Suspense>
-      </Canvas>
-    </div>
-  </div>
-);
+// const BottomModel = ({ modelRef }) => (
+//   <div style={{ height: "70vh", display: "flex" }}>
+//     <div
+//       style={{
+//         flex: 1,
+//         display: "flex",
+//         alignItems: "center",
+//         justifyContent: "center",
+//       }}
+//     >
+//       <Canvas
+//         // style={{ border: "1px solid black", zIndex: 54433 }}
+//         camera={{ position: [0, 0, 10], fov: 75 }}
+//       >
+//         <ambientLight intensity={1} />
+//         <pointLight position={[10, 10, 10]} />
+//         <directionalLight position={[0, 10, 0]} intensity={1} />
+//         {/* <OrbitControls /> */}
+//         {/* <Stars count={2/000} /> */}
+//         {/* <Camera /> */}
+//         <Suspense fallback={null}>
+//           {/* <ModelComponent url={"/assets/models/engenir_model.glb"} /> */}
+//           <ModelComponent
+//             url={"/assets/models/engenir_model.glb"}
+//             modelRef={modelRef}
+//             position={[0, -3, -3]}
+//           />
+//         </Suspense>
+//       </Canvas>
+//     </div>
+//   </div>
+// );

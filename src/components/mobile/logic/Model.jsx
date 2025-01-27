@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAppContext } from "../../../../context/appContext";
+import { useAppContext } from "../../../context/appContext";
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import {
@@ -10,8 +10,8 @@ import {
   AI,
   MILITARY,
   CUSTOMIZATION,
-} from "../../../common/modelData";
-import { useGLTFAnimations } from "../../../scene/ModelComponent";
+} from "../../common/modelData";
+import { useGLTFAnimations } from "../../scene/ModelComponent";
 
 const MAX_ROTATION_SPEED = 0.05; // Maximum rotation speed
 const DECAY_FACTOR = 0.95; // Decay factor for inertia
