@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 
 export const DeviceTilt = ({
   setDebug,
@@ -45,7 +45,7 @@ export const DeviceTilt = ({
     }
   }, [beta, gamma, permission, setDebug, setPosition]);
 
-  console.log({ position });
+  // console.log({ position });
 
   return (
     <div>

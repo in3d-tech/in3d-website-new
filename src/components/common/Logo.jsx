@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useAppContext } from "../../context/appContext";
 import { ContactUsText } from "./textData";
-import "../viewableContent/selectedCategories.css";
+import "../desktop/selectedCategories/selectedCategories.css";
 
 const INDUSTRY = 3;
 const MEDICINE = 4;

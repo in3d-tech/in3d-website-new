@@ -251,6 +251,7 @@ body {
   /* 
   animation: slideBackground 10s linear infinite; */
   /* background-image: url("http://img15.deviantart.net/cafe/i/2012/085/2/8/orange_stripe_background_by_sonnywolfie-d4u0e93.png"); */
+
   background: linear-gradient(
     to left,
     rgba(63, 77, 77, 0.36) 40%,
@@ -258,10 +259,7 @@ body {
   );
   background-size: cover;
 
-  /* background-size: 261px; */
-
   animation: moveIt 10s linear infinite, fadeInAlmost 0.4s ease-in-out forwards;
-  /* animation: fadeIn 1s ease-in-out; */
   opacity: 0;
   height: 100%;
 }
@@ -731,7 +729,7 @@ h2 {
   background: linear-gradient(145deg, #f0f0f0, #c0c0c0);
   border-radius: 2px;
   transition: all 400ms cubic-bezier(0.84, 0.06, 0.52, 1.8);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(0, 0, 0, 0.1); /* Add inset shadow */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(0, 0, 0, 0.1);
   transform-style: preserve-3d;
 }
 
@@ -824,24 +822,6 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* transition: 600ms cubic-bezier(0.62, 0.04, 0.3, 1.56); */
-  /* transition: all 600ms cubic-bezier(0.62, 0.04, 0.3, 1.56);
-  /* transition-delay: 200ms; */
-  /* ul {
-    margin: 0;
-    position: absolute;
-    top: 30%;
-    width: 90%;
-    li {
-      text-align: center;
-      list-style: none;
-      font-size: 24px;
-      color: #fff;
-      line-height: 2.2;
-      text-transform: uppercase;
-      letter-spacing: 1.7px;
-    }
-  } */
 }
 
 nav.show {
@@ -911,11 +891,6 @@ section {
 }
 
 .section-three {
-  /* background-color: steelblue; */
-  /* height: 100vh; */
-  /* opacity: 0.5; */
-  /* border: 2px solid yellow; */
-  /* height: 300vh; */
   height: 30vh;
   /* border: 2px solid red; */
 }
@@ -934,14 +909,12 @@ section {
 
 .section-three {
   /* background-color: crimson; */
-  /* opacity: 0.5; */
   /* border: 3px solid cyan; */
 }
 
 .section-four {
   /* background-color: lime; */
   /* background: url("/assets/images/another-med.jpg") no-repeat center; */
-  /* opacity: 0.5; */
 }
 
 .section-five {
@@ -954,8 +927,6 @@ section {
   background-repeat: no-repeat;
   background-size: cover;
   opacity: 1; */
-  /* position: fixeabsolud; */
-  /* z-index: 3333333334324; */
 }
 
 .section-six {
@@ -1263,7 +1234,7 @@ section {
 }
 
 .fade {
-  transition: opacity 1s ease-in-out; /* CSS transition duration matches JS */
+  transition: opacity 1s ease-in-out;
 }
 
 .blurred-bg::before {
@@ -2890,8 +2861,8 @@ figure {
     /* height: 500px; */
     display: flex;
     flex-direction: column;
-    justify-items: center; /* Center the titles horizontally */
-    align-items: center; /* Center the titles vertically */
+    justify-items: center;
+    align-items: center;
     border-radius: 5px;
     /* box-shadow: 1px -1px 26px 7px rgba(130, 49, 49, 0.75);
     -webkit-box-shadow: 1px -1px 26px 7px rgba(130, 49, 49, 0.75);
@@ -2923,13 +2894,13 @@ figure {
   }
   @keyframes fadeInAlmost {
     to {
-      opacity: 0.9;
+      opacity: 0.8;
     }
   }
 
   .rotate {
     display: inline-block; /* Make sure the letter is treated as a block element for transformation */
-    animation: spin 2s infinite; /* Change 2s to any duration you prefer */
+    animation: spin 2s infinite;
   }
 
   @keyframes spin {
@@ -2945,8 +2916,8 @@ figure {
   }
 
   .video-wrapper {
-    width: 80%; /* Adjust the width as needed */
-    height: 200px; /* Adjust the height as needed */
+    width: 80%;
+    height: 200px;
     margin: 10px;
     opacity: 0;
     animation: fadeIn 1s forwards;

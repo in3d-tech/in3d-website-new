@@ -2,11 +2,13 @@ import * as React from "react";
 import { useAppContext } from "../../context/appContext";
 
 function Cursor() {
-  const { isCursorHovering } = useAppContext();
+  const { isCursorHovering, isUserScrolling, setIsUserScrolling } =
+    useAppContext();
   const cursorDotOutline = React.useRef(null);
   const cursorDot = React.useRef(null);
   const requestRef = React.useRef();
   const previousTimeRef = React.useRef();
+  // const isScrolling = React.useRef(null);
 
   let [mousePosition, setMousePosition] = React.useState({ x: 0, y: 0 });
   const [width, setWidth] = React.useState(window.innerWidth);
@@ -15,7 +17,7 @@ function Cursor() {
   let cursorEnlarged = React.useState(false);
 
   const onMouseMove = (event) => {
-    const { pageX: x, pageY: y } = event;
+    const { clientX: x, clientY: y } = event;
     setMousePosition({ x, y });
     positionDot(event);
   };
@@ -45,8 +47,23 @@ function Cursor() {
     setHeight(window.innerHeight);
   };
 
+  const handleScroll = (event) => {
+    // const { clientX: x, clientY: y } = event;
+    // console.log({ x });
+    // console.log({ y });
+    // onMouseMove(event);
+    // console.log("Scroll Position:", { x: window.scrollX, y: window.scrollY });
+    setIsUserScrolling(true);
+  };
+
+  const handleScrollEnd = (event) => {
+    // onMouseMove(event);
+    setIsUserScrolling(false);
+  };
+
   React.useEffect(() => {
-    document.addEventListener("mousemove", onMouseMove);
+    // window.addEventListener("scroll", handleScroll);
+    +document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseenter", onMouseEnter);
     document.addEventListener("mouseleave", onMouseLeave);
     document.addEventListener("mousedown", onMouseDown);
@@ -57,6 +74,8 @@ function Cursor() {
     handleLinkHovers();
 
     return () => {
+      // window.removeEventListener("scroll", handleScrollEnd);
+
       document.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseenter", onMouseEnter);
       document.removeEventListener("mouseleave", onMouseLeave);
@@ -69,15 +88,14 @@ function Cursor() {
 
   let { x, y } = mousePosition;
   const winDimensions = { width, height };
-  // console.log("WINDOW DIMENSIONS: 00", { width, height });
   let endX = winDimensions.width / 2;
   let endY = winDimensions.height / 2;
 
   function positionDot(e) {
     cursorVisible.current = true;
     toggleCursorVisibility();
-    endX = e.pageX;
-    endY = e.pageY;
+    endX = e.clientX + window.scrollX;
+    endY = e.clientY + window.scrollY;
     cursorDot.current.style.top = endY - 7 + "px";
     cursorDot.current.style.left = endX - 7 + "px";
   }

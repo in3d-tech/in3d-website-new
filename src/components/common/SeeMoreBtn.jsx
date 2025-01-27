@@ -1,5 +1,5 @@
 import { useAppContext } from "../../context/appContext";
-import { getSparkleColour } from "../scene/ornaments/getSparkleColour";
+import { getSparkleColour } from "../desktop/homepage/scene/ornaments/getSparkleColour";
 // import { Industry } from "../viewableContent/categories/Industry";
 import Tilt from "react-parallax-tilt";
 import {
@@ -152,15 +152,6 @@ export const SeeMoreBtn = () => {
 
   return (
     <div
-      // style={{
-      //   width: "100vw",
-      //   position: "fixed",
-      //   zIndex: 3,
-      //   bottom: "2em",
-      //   display: "flex",
-      //   flexDirection: "column",
-      //   alignItems: "center",
-      // }}
       className="learn-more-btn-wrapper"
       style={{
         ...styles,

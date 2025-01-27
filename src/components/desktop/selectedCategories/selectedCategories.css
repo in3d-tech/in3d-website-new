@@ -1,0 +1,2092 @@
+@font-face {
+  font-family: Gotham;
+  src: url("../../../fonts/Swiss 721 Black.otf");
+}
+
+@font-face {
+  font-family: gotham-old;
+  src: url("../../../fonts/GothamLight.ttf");
+}
+
+@font-face {
+  font-family: swiss-medium;
+  src: url("../../../fonts/Swiss 721 Medium.otf");
+}
+
+@font-face {
+  font-family: gotham-bold;
+  src: url("../../../fonts/GothamBold.otf");
+}
+
+/* break here  */
+
+.large-header {
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  /* background: black; */
+  height: 200%;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center center;
+  /* z-index: 1; */
+}
+
+#large-header {
+  /* background: rgb(0, 0, 0, 0.8); */
+  /* background-image: url("https://www.marcoguglie.it/Codepen/AnimatedHeaderBg/demo-1/img/demo-1-bg.jpg"); */
+}
+
+.main-title {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  color: #f9f1e9;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.demo-1 .main-title {
+  text-transform: uppercase;
+  font-size: 4.2em;
+  letter-spacing: 0.1em;
+}
+
+.main-title .thin {
+  font-weight: 200;
+}
+
+/* break here  */
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 38px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-pagination-bullet {
+  border: 10px solid white;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+  color: #000;
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.swiper-pagination-bullet-active {
+  color: #fff;
+  background: #007aff;
+}
+
+.selected-category-content-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  /* overflow-y: scroll; */
+  height: 300vh;
+  /* background: rgb(0, 0, 0, 0.3); */
+  /* overflow-y: scroll; */
+}
+
+.selected-category-content-wrapper-customize {
+  display: flex;
+  flex-direction: column;
+  /* overflow-y: scroll; */
+  height: 300vh;
+  /* background: rgb(0, 0, 0, 0.3); */
+}
+
+.selected-category-content-wrapper-customize-bot {
+  display: flex;
+}
+
+.selected-content-first-divider {
+  flex: 1;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  opacity: 0;
+  overflow: hidden;
+  animation: fadeIn 1s linear forwards;
+  animation-delay: 0.6s;
+}
+
+.selected-content-first-divider-security {
+  flex: 1;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  overflow: hidden;
+}
+
+.security-txt-one-fade-in {
+  opacity: 0;
+
+  animation: fadeIn 1s linear forwards;
+  animation-delay: 1.5s;
+}
+
+.selected-content-first-divider-customize {
+  flex: 1;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  /* margin-top: 8em; */
+  opacity: 0;
+  animation: fadeIn 1s linear forwards;
+  animation-delay: 0.6s;
+}
+
+/* .selected-content-first-divider-customize-bot {
+  flex: 1;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  border: 1px solid green;
+  opacity: 0;
+
+  animation: fadeIn 1s linear forwards;
+  animation-delay: 0.8s;
+} */
+
+.sc-content-left-half {
+  width: 84%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6em;
+}
+
+/* .sc-right-half {
+  height: 80%;
+  width: 84%;
+  border-bottom: 4px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+.sc-right-half {
+  height: 80%;
+  width: 84%;
+  border-bottom: 4px solid transparent; /* Initially hidden */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* Required for pseudo-element positioning */
+  animation: slideInDown 1.2s ease-out forwards;
+  animation-delay: 0.7s;
+}
+
+.sc-right-half::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: black;
+  animation: borderGrowFive 1.2s ease-out forwards;
+  animation-delay: 0.4s;
+}
+
+.sc-content-left-half-customize {
+  flex: 1;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* margin-bottom: 6em; */
+}
+
+.sc-right-half-customize {
+  flex: 1;
+  height: 80%;
+  width: 84%;
+  /* border-bottom: 4px solid black; */
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.sc-image-overlay {
+  background-image: url("/assets/images/overlay-images/americanflag.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.sc-image-glass-bg {
+  padding: 0.8em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.21);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2.9px);
+  -webkit-backdrop-filter: blur(2.9px);
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  width: 70%;
+}
+
+.image-container {
+  position: relative;
+  width: 53%;
+  height: 60%;
+}
+
+.overlay-image {
+  position: absolute;
+  transform: translateX(0px);
+  object-fit: cover; /* Adjust the image size */
+  z-index: -1; /* Ensure this image is on the top layer */
+  clip-path: polygon(
+    0% 150%,
+    0% 45%,
+    30% -10%,
+    70% 0%
+  ); /* Adjust the clipping path */
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 0.72;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes borderGrowFive {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* .headline-animation {
+  animation: slideInDown 2.7s ease-out forwards;
+} */
+
+.headline-animation {
+  position: relative;
+  /* animation: slideInDown 2.7s ease-out forwards; */
+  display: inline-block;
+}
+
+.headline-animation::after {
+  content: "";
+  position: absolute;
+  bottom: -4px; /* Adjust this to match the border position */
+  left: 0;
+  right: 0;
+  height: 4px; /* Adjust to match the border height */
+  background-color: black;
+  animation: borderGrowFive 2s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
+.headline-animation-security {
+  position: relative;
+  /* animation: slideInDown 2.7s ease-out forwards; */
+  display: inline-block;
+}
+
+.headline-animation-security::after {
+  content: "";
+  position: absolute;
+  /* bottom: -4px; */
+  left: 0;
+  right: 0;
+  height: 4px; /* Adjust to match the border height */
+  background-color: black;
+  animation: borderGrowFive 1.8s ease-out forwards;
+  animation-delay: 0.4s;
+}
+
+.text-animation {
+  opacity: 0;
+  animation: slideInUp 2.4s ease-out forwards;
+  animation-delay: 1s;
+}
+
+.middle-image {
+  transition: transform 1s ease-in-out, filter 1.8s ease-in-out; /* Smooth transition for both transform and filter */
+  filter: grayscale(100%); /* Initial state is greyscale */
+  transform: translateY(40px);
+  height: 23em;
+}
+
+.middle-image.scrolled {
+  transform: translateY(0px); /* Move right 200px */
+  filter: grayscale(0%); /* Transition to color */
+}
+
+.overlay-color {
+  transition: filter 2s ease-in-out, transform 1s ease-in-out;
+  /* filter: grayscale(100%); */
+
+  transform: translateX(-200px);
+
+  /* transform: translateX(400px) scale(0.9); */
+}
+
+.overlay-color.scrolled {
+  /* filter: grayscale(0%); */
+  transform: translateX(-260px);
+}
+
+.overlay-color.scrolled.activation {
+  /* transform: translateX(-410px); */
+}
+
+.mid-text {
+  transition: transform 2s ease-in-out;
+  transform: translateY(50px);
+}
+
+.mid-text.scrolled {
+  transform: translateY(0px); /* Move right 200px */
+}
+
+.bottom-text {
+  transition: transform 2s ease-in-out, opacity 1.5s ease-in-out;
+  opacity: 0;
+  transform: translateY(90px);
+}
+
+.bottom-text.scrolled {
+  opacity: 1;
+  transform: translateY(0px); /* Move right 200px */
+}
+
+.bottom-image {
+  transition: filter 2s ease-in-out, transform 2s ease-in-out;
+  transform: translateY(40px);
+  filter: grayscale(100%);
+}
+
+.bottom-image.scrolled {
+  filter: grayscale(0%); /* Transition to color */
+  transform: translateY(0px);
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.video-player {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  position: relative;
+  /* border: 10px solid red; */
+}
+
+.video-container-mobile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+}
+
+.video-player-mobile {
+  width: 100%; /* You can adjust the size */
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* .video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.video-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  position: absolute;
+  top: 0;
+  left: 0;
+} */
+
+.sc-title-container {
+  font-size: 4em;
+  position: relative;
+  display: inline-block; /* Ensures the container wraps around the h1 */
+  width: 80%;
+  font-family: gotham-bold;
+}
+
+.sc-title-container h1 {
+  margin: 0;
+  padding: 15px;
+  position: relative;
+  z-index: 1; /* Ensure the text is above the border */
+}
+
+.sc-title-container::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 4px; /* Set the height you want for the border */
+  background: black;
+  animation: borderGrow 2.5s forwards;
+}
+
+.mirosoft-title-one {
+  position: relative;
+  display: inline-block; /* Ensures the container wraps around the h1 */
+  width: 80%;
+  font-family: gotham-bold;
+}
+
+.mirosoft-title-one::after {
+  content: "";
+  position: absolute;
+  bottom: 1em;
+  right: 0;
+  width: 0;
+  height: 4px; /* Set the height you want for the border */
+  background: black;
+  animation: borderGrow 2s forwards;
+  animation-delay: 0.3s;
+}
+
+.categories-contact-btn {
+  all: unset;
+
+  /* border: 1px solid rgb(0, 0, 0, 0.3);
+  border-radius: 12px;
+  box-shadow: 2px 0px 23px 2px rgba(0, 0, 0, 0.38);
+  -webkit-box-shadow: 2px 0px 23px 2px rgba(0, 0, 0, 0.38);
+  -moz-box-shadow: 2px 0px 23px 2px rgba(0, 0, 0, 0.38); */
+  /* From https://css.glass */
+  background: rgba(233, 203, 203, 0.59);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6.9px);
+  -webkit-backdrop-filter: blur(6.9px);
+  border: 1px solid rgba(0, 0, 0, 0.66);
+}
+
+.categories-contact-btn:hover {
+  /* cursor: pointer; */
+}
+
+@keyframes borderGrow {
+  0% {
+    border-width: 0;
+  }
+  100% {
+    border-width: 1px;
+  }
+}
+
+/* Apply the animation when the box is opening */
+.border-grow {
+  animation: borderGrow 3s forwards; /* adjust timing as needed */
+}
+
+.border-bottom-animation-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.border-bottom-animation-container::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 4px;
+  background: white;
+  animation: borderGrow 1.2s forwards;
+}
+
+.selected-contact-button {
+  text-align: center;
+  /* cursor: pointer; */
+  font-size: 5px;
+  /* letter-spacing: 4px; */
+  position: relative;
+  background-color: #750414;
+  border: none;
+  color: #fff;
+  padding: 3px;
+  /* width: 200px; */
+  /* width: 10em; */
+  text-align: center;
+  transition-duration: 0.4s;
+  overflow: hidden;
+  box-shadow: 0 5px 15px #193047;
+  border-radius: 12px;
+}
+
+.selected-contact-button:hover {
+  background: #fff;
+  box-shadow: 0px 2px 10px 5px #1abc9c;
+  color: #000;
+}
+
+.selected-contact-button:after {
+  content: "";
+  background: #1abc9c;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px !important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s;
+}
+
+.selected-contact-button:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s;
+}
+
+.selected-contact-button:focus {
+  outline: 0;
+}
+
+/* --------- industry --------- */
+
+.industry-bottom {
+  height: 16em;
+  width: 100%;
+}
+
+.large-image-industry {
+  position: relative;
+  width: 100%;
+  height: 70%;
+  /* height: auto; */
+  z-index: 0;
+  transition: transform 0.2s, z-index 0.2s, border-color 0.2s;
+  border: 5px solid transparent;
+  animation: fadeIn 3s ease-out forwards;
+}
+
+.small-image-industry {
+  position: absolute;
+  width: 80%;
+  height: auto;
+  z-index: 1;
+  transition: transform 0.2s, border-color 0.2s;
+  border: 5px solid transparent;
+}
+
+.top-left-industry {
+  top: 0;
+  left: 0;
+  transform: translate(-20%, -20%);
+}
+
+.top-right-industry {
+  top: 0;
+  right: 0;
+  transform: translate(20%, -20%);
+}
+
+.bottom-left-industry {
+  bottom: 0;
+  left: 0;
+  transform: translate(-20%, 20%);
+  height: 13em;
+}
+
+.bottom-right-industry {
+  transform: translate(-10%, 10%);
+  height: 13em;
+}
+
+.large-image-industry:hover {
+  transform: scale(1.1);
+  z-index: 10;
+  /* cursor: pointer; */
+  border: 1px solid rgb(0, 0, 0, 0.3);
+}
+
+.small-image-industry:hover {
+  transform: scale(1.3);
+  /* cursor: pointer; */
+  border: 1px solid rgb(0, 0, 0, 0.3);
+  z-index: 2;
+}
+
+.industry-headline {
+  font-size: 3.2em;
+  font-family: gotham-bold;
+  width: 80%;
+  text-align: center;
+}
+
+.industry-top-text {
+  font-size: 1.5em;
+  font-family: gotham;
+  opacity: 0.72;
+  width: 80%;
+  line-height: 1.8em;
+}
+
+.bottom-industry {
+  bottom: 0;
+  transform: translate(-20%, -20%);
+}
+
+/* ------------- MEDICINE ---------- */
+
+.overlay-image-med-top {
+  position: absolute;
+  object-fit: cover; /* Adjust the image size */
+  z-index: -1; /* Ensure this image is on the top layer */
+  clip-path: polygon(
+    20% 0%,
+    75% 0%,
+    140% 100%,
+    80% 100%
+  ); /* Adjust the clipping path */
+}
+
+.medicine-top-text {
+  font-size: 1.5em;
+  font-family: gotham;
+  opacity: 0.72;
+  width: 80%;
+  line-height: 1.8em;
+}
+
+/* .medicine-top-header-container {
+  font-size: 4em;
+  font-family: gotham-bold;
+  width: 100%;
+  text-align: center;
+  margin-top: 2em;
+} */
+
+.medicine-top-header-container {
+  font-size: 4em;
+  font-family: gotham-bold;
+  width: 100%;
+  text-align: center;
+  margin-top: 2em;
+}
+
+.medicine-top-header-container .med-titled {
+  display: inline-block;
+  position: relative;
+}
+
+/* .medicine-top-header-container .med-titled::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 4px;
+  background-color: black;
+  animation: borderGrow 2s ease-in-out;
+} */
+
+.medicine-top-border::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 0.6;
+  animation: borderGrow 2s forwards ease-in-out;
+}
+
+.medicine-top-header-container .med-titled::after {
+  width: 100%;
+}
+
+.med-mid-vid-wrapper {
+  margin-top: 18em;
+  height: 25em;
+}
+
+.medicine-bottom-text {
+  font-size: 1.4em;
+  margin-left: 2em;
+  font-family: gotham;
+  /* opacity: 0.72; */
+  opacity: 0;
+  animation: opacityMed 1s forwards;
+  animation-delay: 1s;
+  width: 70%;
+  line-height: 1.8em;
+  text-align: center;
+}
+
+.overlay-image-med-bot {
+  position: absolute;
+  object-fit: cover; /* Adjust the image size */
+  z-index: -1; /* Ensure this image is on the top layer */
+  clip-path: polygon(
+    0% 180%,
+    0% 80%,
+    70% -10%,
+    140% 0%
+  ); /* Adjust the clipping path */
+}
+
+@keyframes borderGrowMed {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+@keyframes opacityMed {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.72;
+  }
+}
+
+.medicine-top-border {
+  display: flex;
+  margin-top: 9em;
+  border-top: 4px solid rgba(0, 0, 0, 0.6);
+  width: 0;
+  animation: borderGrowMed 1.2s forwards ease-in-out;
+}
+
+.grow-border {
+  position: absolute;
+  width: 0; /* Start with width 0 */
+  border: 2px solid rgba(0, 0, 0, 0.6);
+  bottom: -90%;
+  right: 0;
+  animation: growRightToLeft 1.4s forwards ease-in-out;
+}
+
+@keyframes growRightToLeft {
+  from {
+    width: 0;
+  }
+  to {
+    width: 50%; /* Grow to 50% */
+  }
+}
+
+/* ----------- microsoft -----------  */
+
+.overlay-image-microsoft {
+  position: absolute;
+  transform: translateX(0px);
+  object-fit: cover; /* Adjust the image size */
+  z-index: -1; /* Ensure this image is on the top layer */
+}
+
+.overlay-color-microsoft {
+  height: 100%;
+  clip-path: polygon(
+    -15% 220%,
+    0% 35%,
+    40% -40%,
+    70% 0%
+  ); /* Adjust the clipping path */
+}
+
+.top-left-microsoft {
+  top: 0;
+  left: 0;
+  transform: translate(50%, -50%);
+}
+
+.bottom-left-microsoft {
+  bottom: 0;
+  left: 0;
+  transform: translate(50%, 50%);
+  height: 13em;
+}
+
+.microsoft-header-title {
+  animation: fadeInMoveUp 1.3s ease-in-out;
+  /* animation-delay: 0.5s; */
+  /* opacity: 0; */
+}
+
+.sc-right-half-microsoft {
+  height: 80%;
+  width: 84%;
+  border-bottom: 4px solid transparent; /* Initially hidden */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* Required for pseudo-element positioning */
+  animation: slideInDown 1.2s ease-out forwards;
+  animation-delay: 0.7s;
+}
+
+.sc-right-half-microsoft::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: black;
+  animation: borderGrowFive 1.2s ease-out forwards;
+  animation-delay: 0.4s;
+}
+
+.border-top-animation-microsoft {
+  position: relative;
+}
+
+.border-top-animation-microsoft::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 4px; /* Height of the border */
+  background: black;
+  animation: borderGrow 1.2s forwards;
+}
+
+.microsoft-text-bottom {
+  animation: fadeIn 2s ease-in-out;
+}
+
+.microsoft-top-vid-container {
+  margin-left: 22em;
+  margin-top: 14em;
+}
+
+.microsoft-bottom-vid-container-size {
+  height: 13em;
+}
+
+.micro-bot-vid-large {
+  height: 15em;
+  top: 6.5em;
+}
+
+/* ----------------- SECURITY -------------- */
+
+.large-image-security {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* height: auto; */
+  z-index: 1;
+  transition: transform 0.2s, z-index 0.2s, border-color 0.2s;
+  border: 5px solid transparent;
+}
+
+.security-vid-one-top {
+  height: 22em;
+  top: 3em;
+}
+
+.border-top-animation {
+  position: relative;
+}
+
+.border-top-animation::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 4px; /* Set the height you want for the border */
+  background: black;
+  animation: borderGrow 1.2s forwards;
+  /* animation-delay: 5s; */
+}
+
+.security-vid-one-bottom {
+  height: 18em;
+}
+
+.security-top-vid {
+  height: 14em;
+  top: 2em;
+}
+
+.small-image-security {
+  position: absolute;
+  width: 50%;
+  height: auto;
+  z-index: 0;
+  transition: transform 0.2s, border-color 0.2s;
+  border: 5px solid transparent;
+}
+
+.top-security {
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+
+.bottom-security {
+  bottom: 0;
+  left: 0;
+  transform: translate(-50%, 50%);
+}
+
+.large-image-security:hover {
+  transform: scale(1.1);
+  /* cursor: pointer; */
+  border: 1px solid rgb(0, 0, 0, 0.3);
+}
+
+.small-image-security:hover {
+  transform: scale(1.5);
+  /* cursor: pointer; */
+  border: 1px solid rgb(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.bottom-text-security {
+  transition: transform 1.5s ease-in-out, opacity 1.5s ease-in-out;
+  opacity: 0;
+  transform: translateY(120px);
+}
+
+.bottom-text-security.scrolled {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+.security-headline {
+  font-size: 5em;
+  font-family: gotham-bold;
+  width: 80%;
+}
+
+.security-font-one {
+  width: 70%;
+  font-family: gotham;
+  font-size: 1.5em;
+  line-height: 1.8em;
+  margin-top: 7em;
+}
+
+.security-font-two {
+  width: 50%;
+  font-family: gotham;
+  font-size: 1.4em;
+  line-height: 1.9em;
+  margin-top: 4em;
+}
+
+/* --------- military ----------- */
+
+.top-border-animation-container {
+  position: relative;
+  border-top: 4px solid transparent; /* Start with transparent border */
+  overflow: hidden; /* Ensure the animation stays within the bounds */
+}
+
+.top-border-animation-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 4px; /* Match the border height */
+  background: black;
+  animation: borderGrow 2s forwards;
+  animation-delay: 0.3s;
+}
+
+.top-left-military {
+  top: 0;
+  left: 0;
+  transform: translate(-20%, -20%);
+}
+
+.small-image-military {
+  position: absolute;
+  width: 80%;
+  height: auto;
+  z-index: 1;
+  transition: transform 0.2s, border-color 0.2s;
+  border: 5px solid transparent;
+}
+
+.small-image-military:hover {
+  transform: scale(1.2);
+  /* cursor: pointer; */
+  border: 1px solid rgb(0, 0, 0, 0.3);
+  z-index: 4;
+}
+
+/* ------- customize ------ */
+
+.customize-top-vid-size {
+  height: 17em;
+  width: 100%;
+}
+
+.customize-mid-vid-container-size {
+  height: 70%;
+}
+
+.mid-video-overlay-customize {
+  height: 80%;
+  width: 90%;
+  display: flex;
+  margin-top: 8em;
+  align-items: center;
+  justify-content: center;
+  animation: slideInDown 1.2s ease-out forwards;
+  animation-delay: 0.7s;
+}
+
+.mid-video-overlay-customize::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: black;
+  animation: borderGrowFive 1.2s ease-out forwards;
+  animation-delay: 0.4s;
+}
+
+.fade-in-sc-right-mid-vid {
+  opacity: 0;
+  animation: fadeInMoveUp 2s forwards ease-in-out;
+  animation-delay: 0.6s;
+}
+
+.fade-in-sc-shorter {
+  opacity: 0;
+  animation: fadeInMoveUp 1s forwards ease-in-out;
+  animation-delay: 0.5s;
+}
+
+.large-image-customize {
+  position: relative;
+  /* width: 100%;
+  height: 100%; */
+  /* height: auto; */
+  z-index: 0;
+  transition: transform 0.2s, z-index 0.2s, border-color 0.2s;
+  /* border: 5px solid transparent; */
+}
+
+.customize-overlay-one-container {
+  margin-left: 20em;
+}
+
+.customize-overlay-one-left-border {
+  position: relative;
+  padding-bottom: 4px; /* Reserve space for the border */
+}
+
+.customize-overlay-one-left-border::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 4px; /* Match the height of the border-bottom */
+  background: black;
+  animation: borderGrow 2s forwards;
+  animation-delay: 1s;
+}
+
+.small-image-customize {
+  position: absolute;
+  width: 50%;
+  height: auto;
+  z-index: 1;
+  transition: transform 0.2s, border-color 0.2s;
+  border: 5px solid transparent;
+}
+
+.top-customize {
+  top: -14em;
+  left: 6em;
+  transform: translate(10%, -10%);
+}
+
+.bottom-customize {
+  bottom: 0;
+  transform: translate(-10%, -10%);
+}
+
+.large-image-customize:hover {
+  transform: scale(1.1);
+  z-index: 10;
+  /* cursor: pointer; */
+  border: 1px solid rgb(0, 0, 0, 0.3);
+}
+
+.small-image-customize:hover {
+  transform: scale(1.5);
+  /* cursor: pointer; */
+  border: 1px solid rgb(0, 0, 0, 0.3);
+}
+
+.customize-category-middle {
+  display: flex;
+}
+
+.mid-customize-border-top {
+  position: relative;
+  padding: 4em;
+  border-top: 4px solid transparent; /* Ensure initial state */
+  overflow: hidden;
+}
+
+.mid-customize-border-top::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 4px;
+  background: black;
+  animation: borderTopGrowAnimation 1.2s forwards;
+}
+
+.mid-customize-text {
+  animation: fadeInMoveUp 1.2s forwards ease-in-out;
+  animation-delay: 0.4s;
+}
+
+@keyframes borderTopGrowAnimation {
+  to {
+    width: 100%;
+  }
+}
+
+.customize-text-one {
+  font-size: 1.5em;
+  font-family: gotham;
+  /* opacity: 0; */
+  width: 80%;
+  line-height: 1.8em;
+  animation: fadeInMoveUp 1.5s linear forwards;
+  animation-delay: 1s;
+}
+
+.customize-text-bottom {
+  margin-top: 3em;
+  margin-right: 4em;
+  font-size: 1.45em;
+  font-family: gotham;
+  opacity: 0.64;
+  width: 60%;
+  line-height: 1.6em;
+  text-align: right;
+  align-self: end;
+}
+
+.customize-text-bottom.scrolled {
+  animation: fadeInMoveUp 1s forwards ease-in-out;
+  animation-delay: 0.6s;
+}
+
+.overlay-color-customize {
+  transition: filter 2s ease-in-out, transform 2s ease-in-out;
+  filter: grayscale(100%);
+  transform: scale(1.4) translateX(-200px);
+  /* transform: translateX(-200px); */
+
+  /* transform: translateX(400px) scale(0.9); */
+}
+
+.overlay-color-customize.scrolled {
+  filter: grayscale(0%); /* Transition to color */
+  /* transform: translateX(-400px); */
+  transform: scale(1);
+}
+
+.overlay-color-customize.scrolled.activation {
+  /* transform: translateX(-800px); */
+}
+
+.border-div {
+  position: relative;
+  width: 60%;
+  margin: 0 auto; /* Center the div horizontally */
+  padding-top: 10px; /* Add some padding to make space for the border */
+}
+
+.border-div::after {
+  content: "";
+  position: absolute;
+  top: -1.5em;
+  left: 5%; /* Adjust this value to control the gap at the start */
+  width: 100%; /* This value should be 100% - 2 * left value */
+  border-top: 4px solid rgb(0, 0, 0, 0.8); /* Adjust the border style as needed */
+}
+/* --------- AI -------- */
+
+.ai-wrapper {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+
+.ai-title-container {
+  width: 40%;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.ai-text-one {
+  font-family: gotham;
+  color: rgb(0, 0, 0, 0.6);
+  font-size: 1.3em;
+  line-height: 1.8em;
+  z-index: 1;
+}
+
+.ai-title-container::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.8);
+  animation: borderGrowAi 1.2s forwards;
+}
+
+@keyframes borderGrowAi {
+  to {
+    width: 100%;
+  }
+}
+.ai-main-img {
+  position: absolute;
+  background: url("https://in3dwebsite.blob.core.windows.net/photos/ai-1-min.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  /* animation: fadeIn 0.4s ease-in-out; */
+  /* z-index: -1; */
+}
+
+.ai-eye-image {
+  width: 13em;
+  position: relative;
+  /* z-index: 5; */
+  top: 27.5%;
+  left: 59%;
+  /* animation: fadeIn 1.5s ease-in-out; */
+  transition: filter 0.5s ease-in-out; /* Smooth transition for filter property */
+}
+
+.ai-eye-image:hover {
+  filter: grayscale(100%);
+}
+
+/* ------------------- */
+
+.about-overlay {
+  pointer-events: none;
+  /* background-color: white; */
+  mix-blend-mode: difference;
+  /* border: 1px solid red; */
+  position: absolute;
+  width: 50vw;
+  height: 50vh;
+  left: 25em;
+  top: 10em;
+  z-index: 2;
+}
+
+@keyframes borderGrowHeight {
+  from {
+    height: 0;
+  }
+  to {
+    height: 100%;
+  }
+}
+
+.border-left-animation {
+  animation: fadeIn 2s ease-in-out;
+
+  position: relative;
+  margin-left: 8em;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding: 12px;
+}
+
+.border-left-animation::before {
+  opacity: 1;
+
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -3px; /* Adjust this to match the border position */
+  width: 3px; /* Width corresponding to the border size */
+  height: 0; /* Initial height */
+  background-color: black; /* Border color */
+  animation: borderGrowHeight 2s ease-out forwards;
+}
+
+.about-us-title-container {
+  position: absolute;
+  right: 0;
+  top: 15%;
+  width: 40%;
+  display: flex;
+  justify-content: flex-start;
+  /* position: relative; */
+}
+
+.about-us-title-container::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 3px;
+  background: black;
+  animation: borderGrowAboutUs 1.2s forwards;
+}
+
+.about-us-two-title {
+  /* position: absolute; */
+  width: 88%;
+  margin-top: 7em;
+  padding: 8px;
+  /* position: relative; */
+}
+
+.about-us-two-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 3px;
+  background: black;
+  animation: borderGrowAboutUs 1.2s forwards;
+}
+
+@keyframes borderGrowAboutUs {
+  to {
+    width: 100%;
+  }
+}
+
+.about-text-three {
+  font-size: 2em;
+  font-family: gotham;
+}
+
+.about-us-bottom-text {
+  text-align: right;
+  margin-right: 6em;
+  margin-bottom: 2em;
+}
+
+.about-us-text-bottom-container {
+  color: white;
+  font-size: 1.4em;
+  font-family: gotham;
+  margin-bottom: 4em;
+  width: 60%;
+  line-height: 2em;
+}
+
+.in3d-description-container {
+  color: white;
+  position: absolute;
+  right: 14%;
+  top: 80%;
+  font-size: 2.5em;
+  display: flex;
+  justify-content: flex-end;
+  width: 46%;
+  overflow: hidden;
+}
+
+.in3d-description-container::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: white;
+  animation: borderGrowIn3D 1.2s forwards;
+}
+
+@keyframes borderGrowIn3D {
+  to {
+    width: 100%;
+  }
+}
+
+.contact-us-header-font {
+  font-size: 2.5em;
+  /* border: 5px solid blue; */
+  font-family: gotham;
+  opacity: 0.9;
+  width: 80%;
+  line-height: 1.8em;
+}
+
+.contact-us-shadow {
+  box-shadow: -7px -4px 19px -3px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: -7px -4px 19px -3px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -7px -4px 19px -3px rgba(0, 0, 0, 0.75);
+}
+
+.contact-header {
+  font-size: 6em;
+  font-weight: 900;
+  font-family: gotham;
+}
+
+.contact-text-one {
+  width: 80%;
+  text-align: left;
+}
+/* 
+.contact-us-borders {
+  border-top: 4px solid black;
+  border-bottom: 4px solid black;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+} */
+
+.contact-us-borders {
+  position: relative;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 20px 0;
+}
+
+.contact-us-borders::before,
+.contact-us-borders::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 0;
+  height: 4px;
+  background: black;
+}
+
+.contact-us-borders::before {
+  top: 0;
+  animation: borderGrow 1s ease-out forwards;
+}
+
+.contact-us-borders::after {
+  bottom: 0;
+  animation: borderGrow 1s ease-out 0.5s forwards;
+}
+
+@keyframes borderGrow {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.no-opacity {
+  opacity: 0;
+}
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 9s ease-in;
+}
+
+.border-animation-container {
+  width: 88%;
+  margin-top: 7em;
+  padding: 8px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 3px solid transparent; /* Ensure initial state */
+}
+
+.border-animation-container::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 3px;
+  background: black;
+  animation: borderGrowAnimation 1.2s forwards;
+}
+
+@keyframes borderGrowAnimation {
+  to {
+    width: 100%;
+  }
+}
+
+.contant-us-text {
+  font-size: 1.5em;
+  font-family: gotham;
+  opacity: 0.9;
+  width: 80%;
+  line-height: 1.8em;
+}
+
+.contact-us-alignment {
+  display: flex;
+  align-items: center;
+}
+
+/* .contact-us-text-wrapper {
+  width: 50%;
+  display: flex;
+  justify-content: flex-start;
+} */
+
+.contact-us-text-wrapper {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInMoveUp 0.6s ease-out forwards;
+}
+
+.contact-us-line-0 {
+  animation-delay: 0.4s;
+}
+
+.contact-us-line-1 {
+  animation-delay: 0.7s;
+}
+
+.contact-us-line-2 {
+  animation-delay: 1s;
+}
+
+.contact-us-line-3 {
+  animation-delay: 1.3s;
+}
+
+.contact-us-line-4 {
+  animation-delay: 1.5s;
+}
+
+.in3d-contact-disclaimer {
+  width: 70%;
+}
+
+@keyframes fadeInMoveUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: scaleX(-1) translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(-1) translateX(300px);
+  }
+}
+
+.about-us-mid-one-image {
+  /* transform: scaleX(-1); */
+  width: 100%;
+  height: 100%;
+  /* border: 2px solid red; */
+}
+
+.about-us-mid-one-image.scrolled {
+  /* opacity: 0; */
+  border: 3px solid green;
+  /* filter: grayscale(100%); */
+  /* transform: translateX(-260px) /; */
+  /* animation: slideInRight 2.7s ease-out forwards; */
+}
+
+.border-right-animation-container {
+  position: relative;
+  overflow: hidden;
+  height: 12em;
+  margin-right: 3em;
+  transition: opacity 1s ease-in-out;
+  opacity: 1;
+}
+
+.border-right-animation-container::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 3px;
+  height: 0;
+  background: black;
+  animation: none;
+  animation: borderGrowRightAnimation 1.4s forwards;
+}
+
+@keyframes borderGrowRightAnimation {
+  to {
+    height: 100%;
+  }
+}
+
+/* Assuming you have a CSS file or a styled component */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-item {
+  opacity: 0;
+  animation: fadeIn 0.4s forwards;
+}
+
+.fade-item-1 {
+  animation-delay: 0s;
+}
+
+.fade-item-2 {
+  animation-delay: 0.1s;
+}
+
+.fade-item-3 {
+  animation-delay: 0.3s;
+}
+
+.fade-item-4 {
+  animation-delay: 0.5s;
+}
+
+.fade-item-5 {
+  animation-delay: 0.7s;
+}
+
+@media screen and (max-width: 1950px) {
+  .industry-headline {
+    font-size: 2.8em;
+  }
+}
+
+@media screen and (max-width: 1800px) {
+  .industry-bottom {
+    height: 15em;
+  }
+  .security-font-one {
+    font-size: 1.4em;
+    line-height: 1.6em;
+    margin-top: 9em;
+  }
+  .med-mid-vid-wrapper {
+    margin-top: 15em;
+    height: 23em;
+  }
+  .microsoft-top-vid-container {
+    margin-top: 12em;
+    margin-left: 21em;
+  }
+}
+
+@media screen and (max-width: 1750px) {
+  .industry-headline {
+    font-size: 2.2em;
+  }
+
+  .mid-industry-text-size {
+    font-size: 0.9em;
+  }
+  .contact-us-header-font {
+    font-size: 2em;
+  }
+  .sc-title-container {
+    font-size: 3.5em;
+  }
+
+  .image-top-container-microsoft {
+    right: 3em;
+  }
+  .security-headline {
+    font-size: 4em;
+    width: 80%;
+  }
+  .customize-text-bottom {
+    font-size: 1.4em;
+  }
+}
+
+@media screen and (max-width: 1675px) {
+  .about-text-three {
+    font-size: 1.7em;
+  }
+  .sc-title-container {
+    font-size: 3.2em;
+  }
+  .microsoft-top-vid-container {
+    margin-left: 20em;
+    margin-top: 10em;
+  }
+  .microsoft-bottom-vid-container-size {
+    height: 11em;
+  }
+  .customize-top-vid-size {
+    height: 16em;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1575px) {
+  .industry-headline {
+    font-size: 2em;
+  }
+
+  .bottom-left-industry {
+    height: 10em;
+  }
+
+  .sc-title-container {
+    font-size: 2.8em;
+    margin-top: 2em;
+  }
+  .middle-image {
+    height: 20em;
+  }
+
+  .industry-bottom {
+    height: 14em;
+  }
+
+  .industry-top-text {
+    font-size: 1.4em;
+    margin-top: 1em;
+    width: 80%;
+    line-height: 1.5em;
+  }
+
+  .industry-left-half-top {
+    margin-top: 2em;
+  }
+
+  .medicine-top-text {
+    font-size: 1.4em;
+
+    line-height: 1.6em;
+  }
+  .medicine-top-header-container {
+    font-size: 3.5em;
+
+    margin-top: 1.5em;
+  }
+  .medicine-bottom-text {
+    font-size: 1.3em;
+    margin-left: 2em;
+    line-height: 1.7em;
+    margin-top: 2.5em;
+  }
+  .micro-bot-vid-large {
+    top: 4.5em;
+  }
+  .security-vid-one-top {
+    height: 16em;
+    border: 1px solid green;
+  }
+
+  .security-vid-one-bottom {
+    height: 16em;
+  }
+  .security-top-vid {
+    height: 12em;
+    border: 1px solid red;
+  }
+
+  .security-headline {
+    font-size: 4em;
+    width: 80%;
+  }
+
+  .security-font-two {
+    font-size: 1.3em;
+    line-height: 1.6em;
+    margin-top: 5em;
+  }
+
+  .customize-mid-vid-container-size {
+    height: 84%;
+  }
+
+  .security-font-one {
+    font-size: 1.4em;
+    line-height: 1.6em;
+    margin-top: 7.5em;
+  }
+
+  .customize-text-one {
+    font-size: 1.4em;
+    line-height: 1.6em;
+  }
+
+  .customize-overlay-one-container {
+    margin-left: 15em;
+  }
+
+  .customize-text-bottom {
+    margin-top: 3em;
+    margin-right: 5.5em;
+    font-size: 1.3em;
+    line-height: 1.5em;
+    width: 80%;
+  }
+  .customize-overlay-bottom {
+    margin-top: 2em;
+  }
+  .ai-text-one {
+    font-size: 1.1em;
+    line-height: 1.5em;
+    margin-left: 1.5em;
+    margin-top: 2em;
+  }
+
+  .ai-eye-image {
+    top: 26%;
+    left: 56.5%;
+  }
+
+  .contact-header {
+    font-size: 4.2em;
+  }
+
+  .in3d-description-container {
+    right: 14%;
+    top: 77%;
+    font-size: 2.3em;
+  }
+
+  .about-text-three {
+    font-size: 1.5em;
+    font-family: gotham;
+  }
+
+  .about-us-text-bottom-container {
+    color: white;
+    font-size: 1.25em;
+    font-family: gotham;
+    margin-bottom: 4em;
+    width: 60%;
+    line-height: 1.3em;
+  }
+
+  .med-mid-vid-wrapper {
+    height: 20em;
+  }
+
+  .microsoft-top-vid-container {
+    margin-left: 19em;
+    margin-top: 9em;
+  }
+  .microsoft-bottom-vid-container-size {
+    height: 10em;
+  }
+  .micro-bot-vid-large {
+    height: 12em;
+    top: 3.5em;
+  }
+}
+
+@media screen and (max-width: 1350px) {
+  .mid-industry-text-size {
+    font-size: 0.76em;
+  }
+  .industry-headline {
+    font-size: 1.6em;
+  }
+  .in3d-contact-disclaimer {
+    width: 80%;
+  }
+  .middle-image {
+    height: 18em;
+  }
+
+  .industry-bottom {
+    height: 14em;
+    width: 90%;
+    right: 2em;
+  }
+  .medicine-top-text {
+    font-size: 1.2em;
+
+    line-height: 1.5em;
+  }
+  .medicine-top-header-container {
+    font-size: 3.5em;
+
+    margin-top: 1.2em;
+  }
+
+  .medicine-bottom-text {
+    font-size: 1.3em;
+    margin-left: 2em;
+    line-height: 1.6em;
+    margin-top: 3em;
+  }
+  .security-vid-one-top {
+    height: 13em;
+  }
+
+  .customize-text-one {
+    font-size: 1.3em;
+    line-height: 1.6em;
+  }
+
+  .security-vid-one-bottom {
+    height: 15em;
+  }
+  .contact-header {
+    font-size: 4em;
+  }
+  .in3d-description-container {
+    right: 14%;
+    top: 77%;
+    font-size: 2.1em;
+  }
+  .med-mid-vid-wrapper {
+    height: 17em;
+  }
+
+  .microsoft-top-vid-container {
+    margin-left: 17em;
+    margin-top: 7em;
+  }
+  .security-headline {
+    font-size: 3.6em;
+  }
+  .customize-top-vid-size {
+    height: 14em;
+  }
+
+  .customize-mid-vid-container-size {
+    height: 88%;
+  }
+}
+
+@media screen and (max-width: 1350px) and (max-height: 800px) {
+  .contact-us-header-font {
+    font-size: 1.6em;
+  }
+}
