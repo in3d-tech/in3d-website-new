@@ -1,8 +1,8 @@
 import "../selectedCategories.css";
-import { ContactBtn, Logo, VideoPlayer } from "../../../common/Logo";
-import { useRef, Suspense, useEffect } from "react";
-import { ModelComponent } from "./ModelComponent";
-import { Canvas } from "@react-three/fiber";
+import { Logo, VideoPlayer } from "../../../common/Logo";
+import { useRef, useEffect } from "react";
+// import { ModelComponent } from "./ModelComponent";
+// import { Canvas } from "@react-three/fiber";
 // import AnimatedBackground from "./AnimatedPointsBg";
 
 export function Medicine({ selectedCategory }) {
@@ -256,36 +256,36 @@ const Middle = ({
   );
 };
 
-const Bottom = ({ modelRef }) => (
-  <div style={{ height: "100vh", display: "flex" }}>
-    <div
-      style={{
-        flex: 1,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Canvas
-        // style={{ border: "1px solid black", zIndex: 54433 }}
-        camera={{ position: [0, 0, 10], fov: 75 }}
-      >
-        <ambientLight intensity={1} />
-        <pointLight position={[10, 10, 10]} />
-        <directionalLight position={[0, 10, 0]} intensity={1} />
-        {/* <OrbitControls /> */}
-        {/* <Stars count={2/000} /> */}
-        {/* <Camera /> */}
-        <Suspense fallback={null}>
-          {/* <ModelComponent url={"/assets/models/engenir_model.glb"} /> */}
-          <ModelComponent
-            url={"/assets/models/medical_model1 (1).glb"}
-            modelRef={modelRef}
-            dontRotate
-            position={[9, -5, -3]}
-          />
-        </Suspense>
-      </Canvas>
-    </div>
-  </div>
-);
+// const Bottom = ({ modelRef }) => (
+//   <div style={{ height: "100vh", display: "flex" }}>
+//     <div
+//       style={{
+//         flex: 1,
+//         display: "flex",
+//         alignItems: "center",
+//         justifyContent: "center",
+//       }}
+//     >
+//       <Canvas
+//         // style={{ border: "1px solid black", zIndex: 54433 }}
+//         camera={{ position: [0, 0, 10], fov: 75 }}
+//       >
+//         <ambientLight intensity={1} />
+//         <pointLight position={[10, 10, 10]} />
+//         <directionalLight position={[0, 10, 0]} intensity={1} />
+//         {/* <OrbitControls /> */}
+//         {/* <Stars count={2/000} /> */}
+//         {/* <Camera /> */}
+//         <Suspense fallback={null}>
+//           {/* <ModelComponent url={"/assets/models/engenir_model.glb"} /> */}
+//           <ModelComponent
+//             url={"/assets/models/medical_model1 (1).glb"}
+//             modelRef={modelRef}
+//             dontRotate
+//             position={[9, -5, -3]}
+//           />
+//         </Suspense>
+//       </Canvas>
+//     </div>
+//   </div>
+// );
