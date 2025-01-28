@@ -179,7 +179,7 @@ export const HomeScreenCategoryText = ({
     return (
       <div
         style={{
-          height: "25vh",
+          // height: "25vh",
           color: "white",
           fontFamily: "gotham",
           display: "flex",
@@ -191,6 +191,8 @@ export const HomeScreenCategoryText = ({
       >
         <MenuAboutContact isFromHomeScreen />
         {/* {categoryDataByIndex[idx].text} */}
+        <br />
+        <br />
       </div>
     );
   }
@@ -256,6 +258,7 @@ export const HomeScreenCategoryText = ({
         // backgroundSize: "cover",
         // backgroundRepeat: "no-repeat",
         // backgroundPosition: "center",
+        backgroundColor: `rgb(0,0,0,0.${idx + 1})`,
       }}
     >
       {/* <div
@@ -332,8 +335,8 @@ export const HomeScreenCategoryText = ({
           flexDirection: "column",
           justifyContent: "space-evenly",
           zIndex: 5,
-          backgroundColor:
-            selectedCategoryItemByIdx == idx ? "rgb(0,0,0,0.4)" : "",
+          // backgroundColor: `rgb(0,0,0,0.${idx + 1})`,
+          // selectedCategoryItemByIdx == idx ? "rgb(0,0,0,0.4)" : "",
         }}
       >
         <div

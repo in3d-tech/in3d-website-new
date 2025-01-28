@@ -21,6 +21,7 @@ export function SceneMobile({
   selectedCategory,
   setDebug,
   selectedCategoryItemByIdx,
+  categoryIdxRef,
 }) {
   const [slide, setSlide] = useState(0);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -108,6 +109,7 @@ export function SceneMobile({
             position={position}
             setPosition={setPosition}
             tilt={tilt}
+            categoryIdxRef={categoryIdxRef}
           />
         </Suspense>
       </Canvas>
@@ -115,7 +117,7 @@ export function SceneMobile({
   );
 }
 
-export function AstroModel({ url, astroRef, tilt }) {
+export function AstroModel({ url, astroRef, tilt, categoryIdxRef }) {
   const { isAstroModelDrawn, setIsAstroModelDrawn } = useAppContext();
   const { scene, animations } = useGLTF(url);
   const mixer = useGLTFAnimations(scene, animations);
@@ -123,6 +125,10 @@ export function AstroModel({ url, astroRef, tilt }) {
   const { active, progress, errors, total } = useProgress();
 
   const isFullyRenderedRef = useRef(false);
+
+  const [oscillationSpeed] = useState(1); // Oscillation speed factor
+  const [oscillationAmplitude] = useState(0.005); // Amplitude of oscillation (in scene units)
+  const oscillationPhaseRef = useRef(0); // Phase of the oscillation
 
   // Define rotation limits and sensitivity multipliers for both X and Y axes
   const minRotationY = Math.PI - 0.42;
@@ -169,6 +175,19 @@ export function AstroModel({ url, astroRef, tilt }) {
       // Apply constraints for X rotation
       if (newRotationX <= maxRotationX && newRotationX >= minRotationX) {
         astroRef.current.rotation.x = newRotationX;
+      }
+
+      if (categoryIdxRef.current == -1 || categoryIdxRef.current === 8) {
+      } else {
+        oscillationPhaseRef.current += oscillationSpeed * 0.01; // You can adjust the speed
+
+        // Update the y-position based on a sine wave
+        const newYPosition =
+          astroRef.current.position.y +
+          Math.sin(oscillationPhaseRef.current) * oscillationAmplitude;
+
+        // Apply the new y-position
+        astroRef.current.position.y = newYPosition;
       }
     }
   });
