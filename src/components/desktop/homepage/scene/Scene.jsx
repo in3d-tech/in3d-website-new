@@ -43,7 +43,7 @@ const hoveredTitleLight = {
   customization: "",
 };
 
-function Scene({ scrollToElementById }) {
+function HomepageContent({ scrollToElementById }) {
   const [visibleModels, setVisibleModels] = useState([]);
   const [visibleText, setVisibleText] = useState(false);
   const [shouldFadeIn, setShouldFadeIn] = useState(false);
@@ -342,7 +342,7 @@ function Scene({ scrollToElementById }) {
   );
 }
 
-export default Scene;
+export default HomepageContent;
 
 const Lights = ({
   scrollArea,

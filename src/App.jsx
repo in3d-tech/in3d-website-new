@@ -65,5 +65,3 @@ export default App;
 
 useGLTF.preload("/assets/models/astronaut_new5 (3).glb");
 useGLTF.preload("/assets/models/engenir_model.glb");
-// useGLTF.preload("/assets/models/medical_model1 (1).glb");
-// useGLTF.preload("/assets/models/costimize_model_v02.glb");

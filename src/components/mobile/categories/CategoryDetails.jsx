@@ -277,6 +277,7 @@ const Example = memo(({ media, selectedCategory }) => {
       indicators={true}
       autoPlay={false}
       index={0}
+      navButtonsAlwaysVisible
       indicatorContainerProps={{
         style: {
           height: "120px",

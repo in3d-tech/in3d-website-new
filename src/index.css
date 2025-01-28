@@ -238,8 +238,8 @@ body {
 }
 
 .main-content {
-  grid-row: 1;
-  grid-column: 1;
+  /* grid-row: 1;
+  grid-column: 1; */
   /* padding: 36px; */
   /* background: linear-gradient(
     to left,
@@ -251,16 +251,15 @@ body {
   /* 
   animation: slideBackground 10s linear infinite; */
   /* background-image: url("http://img15.deviantart.net/cafe/i/2012/085/2/8/orange_stripe_background_by_sonnywolfie-d4u0e93.png"); */
-
+  /* 
   background: linear-gradient(
     to left,
     rgba(63, 77, 77, 0.36) 40%,
     rgba(9, 6, 5, 0.401) 60%
-  );
-  background-size: cover;
-
+  ); */
+  /* background-size: cover;  */
   animation: moveIt 10s linear infinite, fadeInAlmost 0.4s ease-in-out forwards;
-  opacity: 0;
+  /* opacity: 0; */
   height: 100%;
 }
 
@@ -2894,7 +2893,7 @@ figure {
   }
   @keyframes fadeInAlmost {
     to {
-      opacity: 0.8;
+      opacity: 0.1;
     }
   }
 

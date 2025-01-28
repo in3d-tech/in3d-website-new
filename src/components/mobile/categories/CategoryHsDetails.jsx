@@ -3,23 +3,6 @@ import { gsap } from "gsap";
 // import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect } from "react";
 
-const IMAGE_URLS = {
-  Customization:
-    "https://in3dwebsite.blob.core.windows.net/photos/Customize_Togle_Finish-min.jpg",
-  "Artifical Intelligence":
-    "https://in3dwebsite.blob.core.windows.net/photos/Ai_Tugle_Finish-min.jpg",
-  Microsoft:
-    "https://in3dwebsite.blob.core.windows.net/photos/Microsoft_Tugle-min.jpg",
-  Military:
-    "https://in3dwebsite.blob.core.windows.net/photos/Militery_Togle_Finish2-min.jpg",
-  Security:
-    "https://in3dwebsite.blob.core.windows.net/photos/Security_Togle_Finish2-min.jpg",
-  Industry:
-    "https://in3dwebsite.blob.core.windows.net/photos/Industry_Togle-min.jpg",
-  Medicine:
-    "https://in3dwebsite.blob.core.windows.net/photos/Medical_Togle-min.jpg",
-};
-
 export const HomeScreenCategoryText = ({
   title,
   idx,
@@ -27,19 +10,8 @@ export const HomeScreenCategoryText = ({
   setSelectedCategory,
   setSelectedCategoryItemByIdx,
   selectedCategoryItemByIdx,
+  categoryIdxRef,
 }) => {
-  // gsap.to("body", {
-  //   backgroundColor: "#750414",
-  //   scrollTrigger: {
-  //     trigger: ".industry-test", // Your target element
-  //     start: "top center", // When the top of the element reaches the center of the viewport
-  //     end: "bottom center", // Until the bottom of the element reaches the center of the viewport
-  //     scrub: true, // Smooth transition
-  //     onEnter: () => console.log("ENNTERED INDUST?RY: ", idx),
-  //   },
-  // });
-  // style={{ color: "#750414" }}
-
   useEffect(() => {
     const trigger = gsap.to(
       {},
@@ -50,11 +22,16 @@ export const HomeScreenCategoryText = ({
           end: "bottom center",
           onEnter: () => {
             setSelectedCategoryItemByIdx(idx);
+            categoryIdxRef.current = idx;
           },
-          onEnterBack: () => setSelectedCategoryItemByIdx(idx),
+          onEnterBack: () => {
+            setSelectedCategoryItemByIdx(idx);
+            categoryIdxRef.current = idx;
+          },
           onLeaveBack: () => {
             if (idx === 0) {
               setSelectedCategoryItemByIdx(-1);
+              categoryIdxRef.current = -1;
             }
           },
         },
@@ -65,7 +42,7 @@ export const HomeScreenCategoryText = ({
       trigger.scrollTrigger.kill(); // Cleanup the ScrollTrigger on component unmount
       // tl.kill();
     };
-  }, [idx, setSelectedCategoryItemByIdx]);
+  }, []);
 
   const categoryDataByIndex = {
     0: {
@@ -268,7 +245,7 @@ export const HomeScreenCategoryText = ({
         //       : "rgb(0,0,0,0.6)"
         //     : "",
         // padding: "4px",
-        marginTop: "3em",
+        // marginTop: "3em",
         borderTop: "1px solid rgb(255, 255, 255, 0.4)",
         justifyContent: "space-evenly",
         // background: selectedCategoryItemByIdx == idx ? "rgb(0,0,0,0.6)" : "",
@@ -281,7 +258,7 @@ export const HomeScreenCategoryText = ({
         // backgroundPosition: "center",
       }}
     >
-      <div
+      {/* <div
         className="scrolled-category-title"
         style={{
           marginTop: "1em",
@@ -292,18 +269,22 @@ export const HomeScreenCategoryText = ({
         }}
       >
         {categoryDataByIndex[idx]?.title}
-      </div>
-      <img style={{ height: "400px", width: "400px" }} src={IMAGE_URLS[1]} />
+      </div> */}
+      {/* <img style={{ height: "400px", width: "400px" }} src={IMAGE_URLS[1]} /> */}
       <div
-        className={selectedCategoryItemByIdx == idx ? "main-content" : ""}
+        className={
+          selectedCategoryItemByIdx == -1 || selectedCategoryItemByIdx == 8
+            ? ""
+            : "main-content"
+        } //"main-content" //{selectedCategoryItemByIdx == idx ? "main-content" : ""}
         style={{
           position: "fixed",
           left: 0,
           top: 0,
           // marginTop: "13%",
-          borderRadius: "12px",
+          // borderRadius: "12px",
           // top: 0,
-          zIndex: -2,
+          // zIndex: -2,
           // height: "50vh",
           height: "100%",
           // left: "1.5%",
@@ -312,65 +293,80 @@ export const HomeScreenCategoryText = ({
           // maxWidth: "100%",
           overflowX: "unset",
           // backgroundColor: "rgb(0,0,0,0.6)",
+          backgroundImage: hsTextBgs[6],
 
-          backgroundImage:
-            selectedCategoryItemByIdx == idx ? hsTextBgs[idx] || "" : "",
+          // backgroundImage:
+          //   selectedCategoryItemByIdx == idx
+          //     ? hsTextBgs[idx] || ""
+          //     : selectedCategoryItemByIdx == -1 ||
+          //       selectedCategoryItemByIdx == 8
+          //     ? ""
+          //     : hsTextBgs[6],
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
+          opacity: 0,
 
           // filter: idx == 6 ? "blur(40px)" : "blur(40px)",
           // filter: "blur(3px)",
         }}
       ></div>
-      {selectedCategoryItemByIdx == idx ? (
+      {/* {selectedCategoryItemByIdx == idx ? ( */}
+      <div
+        style={{
+          // position: "fixed",
+          posiiotn: "absolute",
+          // top: "20%",
+          borderRadius: "12px",
+          height: "100%",
+          width: "100%",
+          left: 0,
+          // border: "1px solid red",
+          // background: "rgb(0,0,0,0.6)",
+          // backgroundImage: "/assets/images/backgrounds/security/security.jpg",
+          // // "url(https://in3dwebsite.blob.core.windows.net/photos/industry-large-min.jpg)",
+          // backgroundSize: "cover",
+          // backgroundRepeat: "no-repeat",
+          // backgroundPosition: "center",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-evenly",
+          zIndex: 5,
+          backgroundColor:
+            selectedCategoryItemByIdx == idx ? "rgb(0,0,0,0.4)" : "",
+        }}
+      >
         <div
+          className="scrolled-category-title"
           style={{
-            position: "fixed",
-            top: "20%",
-            borderRadius: "12px",
-            height: "60vh",
-            width: "100%",
-            left: 0,
-            // border: "1px solid red",
-            background: "rgb(0,0,0,0.6)",
-            // backgroundImage: "/assets/images/backgrounds/security/security.jpg",
-            // // "url(https://in3dwebsite.blob.core.windows.net/photos/industry-large-min.jpg)",
-            // backgroundSize: "cover",
-            // backgroundRepeat: "no-repeat",
-            // backgroundPosition: "center",
+            marginTop: "1em",
+            marginLeft: "0.5em",
+            fontSize: "2.3em", // selectedCategoryItemByIdx == idx ? "2.3em" : "2em",
+            // fontSize: "2em",
+            textAlign: "center",
           }}
         >
-          <div
-            className="scrolled-category-title"
-            style={{
-              marginTop: "1em",
-              marginLeft: "0.5em",
-              fontSize: selectedCategoryItemByIdx == idx ? "2.3em" : "2em",
-              // fontSize: "2em",
-            }}
-          >
-            {categoryDataByIndex[idx]?.title}
-          </div>
-          <span
-            style={{
-              textAlign: "left",
-              padding: "1em",
-              fontSize: selectedCategoryItemByIdx == idx ? "1.2em" : "0.9em",
-              // fontSize: "0.9em",
-              lineHeight: "1.6em",
-            }}
-          >
-            {categoryDataByIndex[idx]?.text}
-          </span>
-          <LearnMoreBtn
-            setSelectedMenuActionMobile={setSelectedMenuActionMobile}
-            idx={idx}
-            setSelectedCategory={setSelectedCategory}
-            selectedCategoryItemByIdx={selectedCategoryItemByIdx}
-          />
+          {categoryDataByIndex[idx]?.title}
         </div>
-      ) : null}
+        <span
+          style={{
+            textAlign: "left",
+            padding: "1em",
+            fontSize: "1.4em", // selectedCategoryItemByIdx == idx ? "1em" : "0.9em",
+            // fontSize: "0.9em",
+            lineHeight: "1.6em",
+          }}
+        >
+          {categoryDataByIndex[idx]?.text}
+        </span>
+        <LearnMoreBtn
+          setSelectedMenuActionMobile={setSelectedMenuActionMobile}
+          idx={idx}
+          setSelectedCategory={setSelectedCategory}
+          selectedCategoryItemByIdx={selectedCategoryItemByIdx}
+        />
+      </div>
+      {/* ) : null} */}
     </div>
   );
 };
@@ -415,7 +411,7 @@ const LearnMoreBtn = ({
   selectedCategoryItemByIdx,
 }) => {
   return (
-    <div style={{ marginTop: "1em", marginLeft: "1em" }}>
+    <div style={{ marginLeft: "1em" }}>
       <button
         // onClick={() => setSelectedMenuActionMobile(`fab-action-${idx + 1}`)}
         onClick={() => {

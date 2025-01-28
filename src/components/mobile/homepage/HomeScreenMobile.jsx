@@ -18,6 +18,9 @@ function HomeScreenMobile() {
   const [debug, setDebug] = useState("yessss");
   const [selectedCategoryItemByIdx, setSelectedCategoryItemByIdx] =
     useState(-1);
+
+  const categoryIdxRef = useRef(-1);
+
   const {
     selectedCategory,
     setSelectedCategory,
@@ -73,7 +76,6 @@ function HomeScreenMobile() {
           background: isMenuCentered ? "" : backgrounds[mobileBackground],
           zIndex: isMenuCentered ? 3 : 0,
           transition: "background 1s",
-          // border: "2px solid yellow",
         }}
       >
         {isMenuCentered ? (
@@ -134,6 +136,7 @@ function HomeScreenMobile() {
               setSelectedCategory={setSelectedCategory}
               selectedCategoryItemByIdx={selectedCategoryItemByIdx}
               setSelectedCategoryItemByIdx={setSelectedCategoryItemByIdx}
+              categoryIdxRef={categoryIdxRef}
             />
           ))}
         </div>
@@ -142,6 +145,7 @@ function HomeScreenMobile() {
           selectedCategory={selectedCategory}
           setDebug={setDebug}
           selectedCategoryItemByIdx={selectedCategoryItemByIdx}
+          categoryIdxRef={categoryIdxRef}
         />
       </div>
       )

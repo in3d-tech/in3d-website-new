@@ -4,7 +4,7 @@ import { useAppContext } from "../../context/appContext";
 import { ScrollProgressBar } from "./homepage/ScrollProgressBar";
 import { HamburgerMenu } from "./nav/HamburgerMenu";
 
-const LazyScene = lazy(() => import("./homepage/scene/Scene"));
+const LazyHomepageContent = lazy(() => import("./homepage/scene/Scene"));
 const LazySelectedContent = lazy(() =>
   import("./selectedCategories/SelectedCategoryPage")
 );
@@ -37,7 +37,7 @@ export function DesktopView() {
 
       <Suspense fallback={null}>
         <ScrollProgressBar />
-        <LazyScene scrollToElementById={scrollToElementById} />
+        <LazyHomepageContent scrollToElementById={scrollToElementById} />
       </Suspense>
     </>
   );
