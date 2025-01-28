@@ -187,6 +187,7 @@ export const HomeScreenCategoryText = ({
           padding: "4px",
           // marginTop: "3em",
           justifyContent: "center",
+          backgroundColor: "rgb(0,0,0,0.8)",
         }}
       >
         <MenuAboutContact isFromHomeScreen />
@@ -329,6 +330,7 @@ export const HomeScreenCategoryText = ({
             selectedCategoryItemByIdx == -1 || selectedCategoryItemByIdx == 8
               ? ""
               : "rgb(0,0,0,0.6)",
+          transition: "background 0.5s ease-in-out", // Adding transition for smooth fade
           // backgroundImage: "/assets/images/backgrounds/security/security.jpg",
           // // "url(https://in3dwebsite.blob.core.windows.net/photos/industry-large-min.jpg)",
           // backgroundSize: "cover",
