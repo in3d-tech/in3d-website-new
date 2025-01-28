@@ -275,11 +275,11 @@ export const HomeScreenCategoryText = ({
       </div> */}
       {/* <img style={{ height: "400px", width: "400px" }} src={IMAGE_URLS[1]} /> */}
       <div
-        className={
-          selectedCategoryItemByIdx == -1 || selectedCategoryItemByIdx == 8
-            ? ""
-            : "main-content"
-        } //"main-content" //{selectedCategoryItemByIdx == idx ? "main-content" : ""}
+        // className={
+        //   selectedCategoryItemByIdx == -1 || selectedCategoryItemByIdx == 8
+        //     ? ""
+        //     : "main-content"
+        // }
         style={{
           position: "fixed",
           left: 0,

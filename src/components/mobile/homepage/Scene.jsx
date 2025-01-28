@@ -143,6 +143,8 @@ export function AstroModel({ url, astroRef, tilt, categoryIdxRef }) {
     console.log(progress);
   }, [progress]);
 
+  const originalYPosition = -5;
+
   useFrame(() => {
     // Check if the object is visible in the scene and loaded
     if (astroRef.current && scene && !isFullyRenderedRef.current) {
@@ -178,6 +180,12 @@ export function AstroModel({ url, astroRef, tilt, categoryIdxRef }) {
       }
 
       if (categoryIdxRef.current == -1 || categoryIdxRef.current === 8) {
+        // Calculate the difference and smoothly transition back to the original position
+        const currentYPosition = astroRef.current.position.y;
+        const deltaY = originalYPosition - currentYPosition;
+        const lerpFactor = 0.02; // Adjust the speed of the return (smaller is slower, larger is faster)
+        // Apply the lerp to smoothly return to the original position
+        astroRef.current.position.y += deltaY * lerpFactor;
       } else {
         oscillationPhaseRef.current += oscillationSpeed * 0.01; // You can adjust the speed
 
@@ -190,6 +198,45 @@ export function AstroModel({ url, astroRef, tilt, categoryIdxRef }) {
         astroRef.current.position.y = newYPosition;
       }
     }
+    // if (astroRef.current) {
+    //   // Original y position of the astronaut model
+    //   const originalYPosition = -5;
+
+    //   if (categoryIdxRef.current === -1 || categoryIdxRef.current === 8) {
+    //     // Calculate the difference and smoothly transition back to the original position
+    //     const currentYPosition = astroRef.current.position.y;
+    //     const deltaY = originalYPosition - currentYPosition;
+    //     const lerpFactor = 0.02; // Adjust the speed of the return (smaller is slower, larger is faster)
+
+    //     // Apply the lerp to smoothly return to the original position
+    //     astroRef.current.position.y += deltaY * lerpFactor;
+    //   } else {
+    //     // Oscillate up and down when not in the specified categories
+    //     oscillationPhaseRef.current += oscillationSpeed * 0.01;
+
+    //     // Calculate oscillating position
+    //     const newYPosition =
+    //       originalYPosition +
+    //       Math.sin(oscillationPhaseRef.current) * oscillationAmplitude;
+
+    //     // Apply the new y-position
+    //     astroRef.current.position.y = newYPosition;
+    //   }
+
+    //   // Update Y and X rotation based on tilt values with constraints
+    //   const newRotationY =
+    //     astroRef.current.rotation.y + tilt.tiltLR * ySensitivity;
+    //   const newRotationX =
+    //     astroRef.current.rotation.x + tilt.tiltFB * xSensitivity;
+
+    //   if (newRotationY <= maxRotationY && newRotationY >= minRotationY) {
+    //     astroRef.current.rotation.y = newRotationY;
+    //   }
+
+    //   if (newRotationX <= maxRotationX && newRotationX >= minRotationX) {
+    //     astroRef.current.rotation.x = newRotationX;
+    //   }
+    // }
   });
 
   useEffect(() => {
