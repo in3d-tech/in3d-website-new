@@ -325,7 +325,10 @@ export const HomeScreenCategoryText = ({
           width: "100%",
           left: 0,
           // border: "1px solid red",
-          // background: "rgb(0,0,0,0.6)",
+          background:
+            selectedCategoryItemByIdx == -1 || selectedCategoryItemByIdx == 8
+              ? ""
+              : "rgb(0,0,0,0.6)",
           // backgroundImage: "/assets/images/backgrounds/security/security.jpg",
           // // "url(https://in3dwebsite.blob.core.windows.net/photos/industry-large-min.jpg)",
           // backgroundSize: "cover",
@@ -355,7 +358,7 @@ export const HomeScreenCategoryText = ({
           style={{
             textAlign: "left",
             padding: "1em",
-            fontSize: "1.4em", // selectedCategoryItemByIdx == idx ? "1em" : "0.9em",
+            fontSize: "1.2em", // selectedCategoryItemByIdx == idx ? "1em" : "0.9em",
             // fontSize: "0.9em",
             lineHeight: "1.6em",
           }}
