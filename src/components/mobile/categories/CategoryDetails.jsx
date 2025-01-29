@@ -41,7 +41,7 @@ import { MenuAboutContact } from "../nav/MenuWheel";
 function SelectedCategory() {
   const { setSelectedCategory, selectedCategory } = useAppContext();
   const data = getCategoryData({ selectedCategory });
-  const modelRef = useRef();
+  // const modelRef = useRef();
 
   // console.log({ selectedCategory });
 
@@ -54,8 +54,8 @@ function SelectedCategory() {
   }, []);
   // document.body.style.overflowY = "scroll";
 
-  const isAboutOrContact =
-    selectedCategory === "about" || selectedCategory === "contact";
+  // const isAboutOrContact =
+  //   selectedCategory === "about" || selectedCategory === "contact";
   return (
     <div className="tester fade-in" style={{ border: "1px solid black" }}>
       {/* <div className="tester" style={{ opacity: 0.5 }}> */}
@@ -262,16 +262,16 @@ const IndustryPage = ({ selectedCategory, thumbsSwiper, setThumbsSwiper }) => {
         }}
       >
         {selectedCategory ? (
-          <Example selectedCategory={selectedCategory} media={media} />
+          <MediaCarousel selectedCategory={selectedCategory} media={media} />
         ) : null}
       </div>
     </>
   );
 };
 
-const Example = memo(({ media, selectedCategory }) => {
+const MediaCarousel = memo(({ media, selectedCategory }) => {
   const vidRef = useRef();
-  console.log({ media });
+  // console.log({ media });
   return (
     <Carousel
       indicators={true}

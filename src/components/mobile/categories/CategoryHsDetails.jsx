@@ -1,7 +1,7 @@
 import { MenuAboutContact } from "../nav/MenuWheel";
 import { gsap } from "gsap";
 // import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export const HomeScreenCategoryText = ({
   title,
@@ -275,7 +275,10 @@ export const HomeScreenCategoryText = ({
         {categoryDataByIndex[idx]?.title}
       </div> */}
       {/* <img style={{ height: "400px", width: "400px" }} src={IMAGE_URLS[1]} /> */}
-      <div
+
+      {/* this is the very nice background effect under here  */}
+
+      {/* <div
         // className={
         //   selectedCategoryItemByIdx == -1 || selectedCategoryItemByIdx == 8
         //     ? ""
@@ -309,12 +312,13 @@ export const HomeScreenCategoryText = ({
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
-          opacity: 0,
+          opacity: 1,
+          zIndex: -1,
 
           // filter: idx == 6 ? "blur(40px)" : "blur(40px)",
           // filter: "blur(3px)",
         }}
-      ></div>
+      ></div> */}
       {/* {selectedCategoryItemByIdx == idx ? ( */}
       <div
         style={{
@@ -365,7 +369,12 @@ export const HomeScreenCategoryText = ({
             lineHeight: "1.6em",
           }}
         >
-          {categoryDataByIndex[idx]?.text}
+          {/* {categoryDataByIndex[idx]?.text} */}
+          <AnimatedText
+            text={categoryDataByIndex[idx].text}
+            categoryIdx={idx}
+            selectedCategoryItemByIdx={selectedCategoryItemByIdx}
+          />
         </span>
         <LearnMoreBtn
           setSelectedMenuActionMobile={setSelectedMenuActionMobile}
@@ -454,6 +463,161 @@ const LearnMoreBtn = ({
           ></path>
         </svg>
       </button>
+    </div>
+  );
+};
+
+// const AnimatedText = ({ text }) => {
+//   console.log({ text });
+//   if (typeof text !== "string") {
+//     return null;
+//   }
+//   const lettersArray = text.split("");
+
+//   // Generating initial random positions and correct positions for each letter
+//   const initialPositions = useMemo(() => {
+//     return lettersArray.map(() => ({
+//       x: Math.random() * 100,
+//       y: Math.random() * 100,
+//     }));
+//   });
+
+//   const correctPositions = lettersArray.map((_, index) => ({
+//     x: index * 20, // You might want to adjust these values to better fit your layout
+//     y: 0,
+//   }));
+
+//   const [letters, setLetters] = useState(
+//     lettersArray.map((char, index) => ({
+//       char,
+//       ...initialPositions[index],
+//     }))
+//   );
+
+//   const [scattered, setScattered] = useState(true);
+
+//   const handleAssemble = () => {
+//     console.log("ASSBELME");
+//     setLetters((letters) =>
+//       letters.map((letter, index) => ({
+//         ...letter,
+//         ...correctPositions[index],
+//       }))
+//     );
+//     setScattered(false);
+//   };
+
+//   const handleScatter = () => {
+//     console.log("SCATTER");
+//     setLetters((letters) =>
+//       letters.map((letter, index) => ({
+//         ...letter,
+//         ...initialPositions[index],
+//       }))
+//     );
+//     setScattered(true);
+//   };
+
+//   return (
+//     <div className="animated-text-container">
+//       {letters.map((letter, index) => (
+//         <span
+//           key={index}
+//           className="letter"
+//           style={{ transform: `translate(${letter.x}px, ${letter.y}px)` }}
+//         >
+//           {letter.char}
+//         </span>
+//       ))}
+//       <button
+//         style={{ position: "absolute", zIndex: 50050, left: "12em" }}
+//         onClick={handleAssemble}
+//       >
+//         Assemble Text
+//       </button>
+//       <button
+//         style={{ position: "absolute", zIndex: 50500 }}
+//         onClick={handleScatter}
+//       >
+//         Scatter Text
+//       </button>
+//     </div>
+//   );
+// };
+
+const AnimatedText = ({ text, categoryIdx, selectedCategoryItemByIdx }) => {
+  if (typeof text !== "string") {
+    return null;
+  }
+
+  useEffect(() => {
+    if (categoryIdx === selectedCategoryItemByIdx) {
+      handleAssemble();
+    } else {
+      handleScatter();
+    }
+  }, [selectedCategoryItemByIdx]);
+
+  // Split text into words
+  const wordsArray = text.split(" ");
+
+  const initialPositions = useMemo(() => {
+    return wordsArray.map(() => ({
+      x: Math.random() * 100 - 50, // Random x offset
+      y: Math.random() * 100 - 50, // Random y offset
+    }));
+  }, [wordsArray.length]);
+
+  const [words, setWords] = useState(
+    wordsArray.map((word, index) => ({
+      word,
+      ...initialPositions[index],
+    }))
+  );
+
+  const handleAssemble = () => {
+    setWords(wordsArray.map((word) => ({ word, x: 0, y: 0 })));
+  };
+
+  const handleScatter = () => {
+    setWords(
+      words.map((wordDetail, index) => ({
+        ...wordDetail,
+        ...initialPositions[index],
+      }))
+    );
+  };
+
+  return (
+    <div
+      className="animated-text-wrapper"
+      style={{ maxWidth: "100%", overflowWrap: "break-word" }}
+    >
+      <div
+        className="animated-text-container"
+        style={{ display: "flex", flexWrap: "wrap" }}
+      >
+        {words.map((wordDetail, index) => (
+          <span
+            key={index}
+            className="word"
+            style={{
+              display: "inline-block",
+              transform: `translate(${wordDetail.x}px, ${wordDetail.y}px)`,
+              transition: "transform 0.5s ease-out",
+              margin: "5px",
+            }}
+          >
+            {wordDetail.word}
+          </span>
+        ))}
+      </div>
+      <div style={{ marginTop: "1em" }}>
+        {/* <button onClick={handleAssemble}>Assemble Text</button>
+        <button onClick={handleScatter} style={{ marginLeft: "0.5em" }}>
+          Scatter Text
+        </button> */}
+      </div>
     </div>
   );
 };
