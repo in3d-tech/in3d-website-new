@@ -364,7 +364,7 @@ export const HomeScreenCategoryText = ({
           style={{
             textAlign: "left",
             padding: "1em",
-            fontSize: "1.2em", // selectedCategoryItemByIdx == idx ? "1em" : "0.9em",
+            fontSize: "1em", // selectedCategoryItemByIdx == idx ? "1em" : "0.9em",
             // fontSize: "0.9em",
             lineHeight: "1.6em",
           }}
