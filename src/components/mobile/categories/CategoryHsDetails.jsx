@@ -229,7 +229,7 @@ export const HomeScreenCategoryText = ({
 
   return (
     <div
-      className={`industry-test category-${idx} fader
+      className={`mobile-hs-category-wrapper category-${idx} fader
 }`}
       style={{
         // border: "2px solid yellow",

@@ -705,6 +705,12 @@ h2 {
   }
 }
 
+.mobile-hs-category-wrapper {
+  box-shadow: -1px 1px 21px 9px rgba(237, 130, 130, 0.75);
+  -webkit-box-shadow: -1px 1px 21px 9px rgba(237, 130, 130, 0.75);
+  -moz-box-shadow: -1px 1px 21px 9px rgba(237, 130, 130, 0.75);
+}
+
 .fade-out {
   animation: fadeOut 1s ease forwards;
 }
