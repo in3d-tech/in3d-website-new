@@ -262,20 +262,6 @@ export const HomeScreenCategoryText = ({
         backgroundColor: `rgb(0,0,0,0.${idx + 1})`,
       }}
     >
-      {/* <div
-        className="scrolled-category-title"
-        style={{
-          marginTop: "1em",
-          textAlign: "center",
-          // marginLeft: "30%",
-          fontSize: selectedCategoryItemByIdx == idx ? "2.6em" : "2em",
-          // fontSize: "2em",
-        }}
-      >
-        {categoryDataByIndex[idx]?.title}
-      </div> */}
-      {/* <img style={{ height: "400px", width: "400px" }} src={IMAGE_URLS[1]} /> */}
-
       {/* this is the very nice background effect under here  */}
 
       {/* <div
@@ -349,7 +335,9 @@ export const HomeScreenCategoryText = ({
         }}
       >
         <div
-          className="scrolled-category-title"
+          className={`scrolled-category-title ${
+            selectedCategoryItemByIdx == idx ? "fade-in-longer" : "fade-out"
+          } `}
           style={{
             marginTop: "1em",
             marginLeft: "0.5em",
@@ -369,12 +357,21 @@ export const HomeScreenCategoryText = ({
             lineHeight: "1.6em",
           }}
         >
+          {idx == 7 ? (
+            categoryDataByIndex[idx].text
+          ) : (
+            <AnimatedText
+              text={categoryDataByIndex[idx].text}
+              categoryIdx={idx}
+              selectedCategoryItemByIdx={selectedCategoryItemByIdx}
+            />
+          )}
           {/* {categoryDataByIndex[idx]?.text} */}
-          <AnimatedText
+          {/* <AnimatedText
             text={categoryDataByIndex[idx].text}
             categoryIdx={idx}
             selectedCategoryItemByIdx={selectedCategoryItemByIdx}
-          />
+          /> */}
         </span>
         <LearnMoreBtn
           setSelectedMenuActionMobile={setSelectedMenuActionMobile}
@@ -466,84 +463,6 @@ const LearnMoreBtn = ({
     </div>
   );
 };
-
-// const AnimatedText = ({ text }) => {
-//   console.log({ text });
-//   if (typeof text !== "string") {
-//     return null;
-//   }
-//   const lettersArray = text.split("");
-
-//   // Generating initial random positions and correct positions for each letter
-//   const initialPositions = useMemo(() => {
-//     return lettersArray.map(() => ({
-//       x: Math.random() * 100,
-//       y: Math.random() * 100,
-//     }));
-//   });
-
-//   const correctPositions = lettersArray.map((_, index) => ({
-//     x: index * 20, // You might want to adjust these values to better fit your layout
-//     y: 0,
-//   }));
-
-//   const [letters, setLetters] = useState(
-//     lettersArray.map((char, index) => ({
-//       char,
-//       ...initialPositions[index],
-//     }))
-//   );
-
-//   const [scattered, setScattered] = useState(true);
-
-//   const handleAssemble = () => {
-//     console.log("ASSBELME");
-//     setLetters((letters) =>
-//       letters.map((letter, index) => ({
-//         ...letter,
-//         ...correctPositions[index],
-//       }))
-//     );
-//     setScattered(false);
-//   };
-
-//   const handleScatter = () => {
-//     console.log("SCATTER");
-//     setLetters((letters) =>
-//       letters.map((letter, index) => ({
-//         ...letter,
-//         ...initialPositions[index],
-//       }))
-//     );
-//     setScattered(true);
-//   };
-
-//   return (
-//     <div className="animated-text-container">
-//       {letters.map((letter, index) => (
-//         <span
-//           key={index}
-//           className="letter"
-//           style={{ transform: `translate(${letter.x}px, ${letter.y}px)` }}
-//         >
-//           {letter.char}
-//         </span>
-//       ))}
-//       <button
-//         style={{ position: "absolute", zIndex: 50050, left: "12em" }}
-//         onClick={handleAssemble}
-//       >
-//         Assemble Text
-//       </button>
-//       <button
-//         style={{ position: "absolute", zIndex: 50500 }}
-//         onClick={handleScatter}
-//       >
-//         Scatter Text
-//       </button>
-//     </div>
-//   );
-// };
 
 const AnimatedText = ({ text, categoryIdx, selectedCategoryItemByIdx }) => {
   if (typeof text !== "string") {

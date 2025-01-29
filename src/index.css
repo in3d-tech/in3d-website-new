@@ -1067,6 +1067,7 @@ section {
 .scrolled-category-title {
   font-family: gotham;
   color: #d8f3f6;
+  opacity: 0;
 }
 
 .scrolled-category-text-one {
