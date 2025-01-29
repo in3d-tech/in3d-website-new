@@ -711,33 +711,11 @@ h2 {
   -moz-box-shadow: -1px 1px 21px 9px rgba(237, 130, 130, 0.75);
 }
 
-/* .letter-container {
-  position: relative;
-  width: 100px; 
-   Adjust width 
-  height: 20px;
-    Adjust height 
-}
-
 .letter {
-  position: absolute;
-  transition: transform 0.5s ease;
-} */
-
-/* .letter {
-  position: absolute;
-  transition: transform 0.5s ease;
-} */
-
-.letter {
-  transition: transform 0.5s ease, position 0.5s ease; /* transition for both transform and position */
+  transition: transform 0.5s ease, position 0.5s ease;
 }
 
 .animated-text-container {
-  /* display: inline-block; */
-  /* position: relative;
-  width: 100px;
-  height: 20px; */
   display: flex;
   flex-wrap: wrap;
 }
@@ -746,17 +724,8 @@ h2 {
   opacity: 0;
 }
 
-/* .letter {
-  display: inline-block;
-  transition: transform 0.5s ease;
-} */
-
 .fade-out {
   animation: fadeOut 1s ease forwards;
-}
-
-.fade-out-longer {
-  animation: fadeOut 2s ease forwards;
 }
 
 .fade-in {

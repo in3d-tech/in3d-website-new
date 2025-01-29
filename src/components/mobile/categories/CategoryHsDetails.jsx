@@ -593,7 +593,7 @@ const AnimatedText = ({ text, categoryIdx, selectedCategoryItemByIdx }) => {
       className={`animated-text-wrapper ${
         categoryIdx === selectedCategoryItemByIdx
           ? "fade-in-longer"
-          : "fade-out-longer"
+          : "fade-out"
       }`}
       style={{ maxWidth: "100%", overflowWrap: "break-word" }}
     >
