@@ -425,7 +425,12 @@ const LearnMoreBtn = ({
   selectedCategoryItemByIdx,
 }) => {
   return (
-    <div style={{ marginLeft: "1em" }}>
+    <div
+      className={`category-title-no-opacity ${
+        selectedCategoryItemByIdx == idx ? "fade-in" : "fade-out"
+      }`}
+      style={{ marginLeft: "1em" }}
+    >
       <button
         // onClick={() => setSelectedMenuActionMobile(`fab-action-${idx + 1}`)}
         onClick={() => {
