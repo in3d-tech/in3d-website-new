@@ -590,7 +590,11 @@ const AnimatedText = ({ text, categoryIdx, selectedCategoryItemByIdx }) => {
 
   return (
     <div
-      className="animated-text-wrapper"
+      className={`animated-text-wrapper ${
+        categoryIdx === selectedCategoryItemByIdx
+          ? "fade-in-longer"
+          : "fade-out-longer"
+      }`}
       style={{ maxWidth: "100%", overflowWrap: "break-word" }}
     >
       <div

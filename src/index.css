@@ -742,6 +742,10 @@ h2 {
   flex-wrap: wrap;
 }
 
+.animated-text-wrapper {
+  opacity: 0;
+}
+
 /* .letter {
   display: inline-block;
   transition: transform 0.5s ease;
@@ -751,8 +755,16 @@ h2 {
   animation: fadeOut 1s ease forwards;
 }
 
+.fade-out-longer {
+  animation: fadeOut 2s ease forwards;
+}
+
 .fade-in {
   animation: fadeIn 1s ease forwards;
+}
+
+.fade-in-longer {
+  animation: fadeIn 2s ease forwards;
 }
 
 .fader {
