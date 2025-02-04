@@ -3,6 +3,7 @@ import { gsap } from "gsap";
 // import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useMemo, useState } from "react";
 
+// const ABOUT_US = 7;
 export const HomeScreenCategoryText = ({
   title,
   idx,
@@ -163,14 +164,14 @@ export const HomeScreenCategoryText = ({
       bgImage: 'url("/assets/images/overlay-images/about-4.png")',
       title: <span>About us</span>,
       text: (
-        <>
+        <div>
           We are on a mission to evolve
           <br />
           <br />
           3D isn't only a technology, it’s a different way of thinking, with
           more perspective Our goal is to gather all senses into the virtual
           world and blur the boundaries between realities
-        </>
+        </div>
       ),
     },
   };
@@ -206,33 +207,32 @@ export const HomeScreenCategoryText = ({
   //   background: "rgb(3, 255, 255, 0.3)",
   // };
 
-  // const hsTextBgs = {
-  //   0: "https://in3dwebsite.blob.core.windows.net/photos/Industry_Togle-min.jpg",
-  //   1: "https://in3dwebsite.blob.core.windows.net/photos/Medical_Togle-min.jpg",
-  //   2: "https://in3dwebsite.blob.core.windows.net/photos/Microsoft_Tugle-min.jpg",
-  //   3: "https://in3dwebsite.blob.core.windows.net/photos/Security_Togle_Finish2-min.jpg",
-  //   4: "https://in3dwebsite.blob.core.windows.net/photos/Ai_Tugle_Finish-min.jpg",
-  //   5: "https://in3dwebsite.blob.core.windows.net/photos/Militery_Togle_Finish2-min.jpg",
-  //   6: "https://in3dwebsite.blob.core.windows.net/photos/Customize_Togle_Finish-min.jpg",
-  // };
-
   const hsTextBgs = {
-    0: "url(/assets/images/backgrounds/taasia/taasia_bg.jpg)",
-    1: "url(/assets/images/backgrounds/medicine/medicine_bg.jpg)",
-    2: "url(/assets/images/backgrounds/microsoft/microsoft_bg.jpg)",
-    3: "url(/assets/images/backgrounds/security/security.jpg)",
-    4: "url(/assets/images/backgrounds/ai/ai_bg.png)",
-    5: "url(/assets/images/backgrounds/military/military_bg.jpg)",
-    6: "url(/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png)",
-    7: "",
+    0: "https://in3dwebsite.blob.core.windows.net/photos/Industry_Togle-min.jpg",
+    1: "https://in3dwebsite.blob.core.windows.net/photos/Medical_Togle-min.jpg",
+    2: "https://in3dwebsite.blob.core.windows.net/photos/Microsoft_Tugle-min.jpg",
+    3: "https://in3dwebsite.blob.core.windows.net/photos/Security_Togle_Finish2-min.jpg",
+    4: "https://in3dwebsite.blob.core.windows.net/photos/Ai_Tugle_Finish-min.jpg",
+    5: "https://in3dwebsite.blob.core.windows.net/photos/Militery_Togle_Finish2-min.jpg",
+    6: "https://in3dwebsite.blob.core.windows.net/photos/Customize_Togle_Finish-min.jpg",
   };
+
+  // const hsTextBgs = {
+  //   0: "url(/assets/images/backgrounds/taasia/taasia_bg.jpg)",
+  //   1: "url(/assets/images/backgrounds/medicine/medicine_bg.jpg)",
+  //   2: "url(/assets/images/backgrounds/microsoft/microsoft_bg.jpg)",
+  //   3: "url(/assets/images/backgrounds/security/security.jpg)",
+  //   4: "url(/assets/images/backgrounds/ai/ai_bg.png)",
+  //   5: "url(/assets/images/backgrounds/military/military_bg.jpg)",
+  //   6: "url(/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png)",
+  //   7: "",
+  // };
 
   return (
     <div
       className={`mobile-hs-category-wrapper category-${idx} fader
 }`}
       style={{
-        // border: "2px solid yellow",
         height: "80vh",
         color: "white",
         fontFamily: "gotham",
@@ -240,26 +240,9 @@ export const HomeScreenCategoryText = ({
         flexDirection: "column",
         maxWidth: "100%",
         overflowX: "hidden",
-        // width: "100%",
-        // backgroundColor:
-        //   selectedCategoryItemByIdx == idx
-        //     ? idx == 7
-        //       ? ""
-        //       : "rgb(0,0,0,0.6)"
-        //     : "",
-        // padding: "4px",
-        // marginTop: "3em",
         borderTop: "1px solid rgb(255, 255, 255, 0.4)",
         justifyContent: "space-evenly",
-        // background: selectedCategoryItemByIdx == idx ? "rgb(0,0,0,0.6)" : "",
-        // backgroundImage:
-        //   //   "url(/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png)",
-        //   // backgroundImage: "/assets/images/backgrounds/security/security.jpg",
-        //   "url(https://in3dwebsite.blob.core.windows.net/photos/industry-large-min.jpg)",
-        // backgroundSize: "cover",
-        // backgroundRepeat: "no-repeat",
-        // backgroundPosition: "center",
-        backgroundColor: `rgb(0,0,0,0.${idx + 1})`,
+        backgroundColor: "rgb(0,0,0,0.1)", // `rgb(0,0,0,0.${idx + 1})`,
       }}
     >
       {/* this is the very nice background effect under here  */}
@@ -308,30 +291,21 @@ export const HomeScreenCategoryText = ({
       {/* {selectedCategoryItemByIdx == idx ? ( */}
       <div
         style={{
-          // position: "fixed",
           posiiotn: "absolute",
-          // top: "20%",
           borderRadius: "12px",
           height: "100%",
           width: "100%",
           left: 0,
-          // border: "1px solid red",
           background:
             selectedCategoryItemByIdx == -1 || selectedCategoryItemByIdx == 8
               ? ""
               : "rgb(0,0,0,0.6)",
-          transition: "background 0.5s ease-in-out", // Adding transition for smooth fade
-          // backgroundImage: "/assets/images/backgrounds/security/security.jpg",
-          // // "url(https://in3dwebsite.blob.core.windows.net/photos/industry-large-min.jpg)",
-          // backgroundSize: "cover",
-          // backgroundRepeat: "no-repeat",
-          // backgroundPosition: "center",
+          transition: "background 0.5s ease-in-out",
+
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-evenly",
           zIndex: 5,
-          // backgroundColor: `rgb(0,0,0,0.${idx + 1})`,
-          // selectedCategoryItemByIdx == idx ? "rgb(0,0,0,0.4)" : "",
         }}
       >
         <div
@@ -340,26 +314,52 @@ export const HomeScreenCategoryText = ({
           } `}
           style={{
             marginTop: "1em",
-            marginLeft: "0.5em",
-            fontSize: "2.3em", // selectedCategoryItemByIdx == idx ? "2.3em" : "2em",
-            // fontSize: "2em",
+
+            fontSize: "2.3em",
             textAlign: "center",
+            // border: "1px solid rgb(255,255,255,0.3)",
           }}
         >
-          {categoryDataByIndex[idx]?.title}
+          <div
+            style={{
+              backgroundImage: `url(${hsTextBgs[idx]})` || "",
+              // "url(/assets/images/backgrounds/taasia/Industry_Togle.jpg)",
+              // height: "200%",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "top",
+              backgroundSize: "cover",
+              height: "4em",
+              opacity: 0.8,
+            }}
+          >
+            {categoryDataByIndex[idx]?.title}
+          </div>
+          {/* <div
+            style={{
+              backgroundImage:
+                "url(/assets/images/backgrounds/taasia/Industry_Togle.jpg)",
+              height: "200%",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+            }}
+          >
+    
+          </div> */}
         </div>
         <span
           style={{
             textAlign: "left",
             padding: "1em",
-            fontSize: "1em", // selectedCategoryItemByIdx == idx ? "1em" : "0.9em",
-            // fontSize: "0.9em",
+            fontSize: "1em",
             lineHeight: "1.6em",
           }}
         >
           {idx == 7 ? (
+            // <div >
             categoryDataByIndex[idx].text
           ) : (
+            // </div>z
             <AnimatedText
               text={categoryDataByIndex[idx].text}
               categoryIdx={idx}

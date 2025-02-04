@@ -27,7 +27,7 @@ export const getCategoryData = ({ selectedCategory }) => {
           </span>
           <br />
           <br />
-          <span style={{ opacity: 0.8, color: "white" }}>
+          <span style={{ opacity: 0.8 }}>
             <span style={{ color: "#0DA888" }}>
               Industry is experiencing a quantum leap forward,
             </span>{" "}
@@ -76,11 +76,13 @@ export const getCategoryData = ({ selectedCategory }) => {
         <>
           The world of medicine is one of the most innovative sectors in the
           world. Using{" "}
-          <span style={{ color: "#63d09d", fontSize: "1.1em" }}>
+          <span style={{ color: "rgba(0, 0, 0, 0.8)", fontSize: "1.1em" }}>
             Extended Reality
           </span>{" "}
           (XR) we at in3D became pioneers in development of{" "}
-          <span style={{ color: "#63d09d", fontSize: "1.1em" }}>XR</span>{" "}
+          <span style={{ color: "rgba(0, 0, 0, 0.8)", fontSize: "1.1em" }}>
+            XR
+          </span>{" "}
           products for medical organizations, collaborating together to empower
           innovation and efficiency for clinics and hospitals
         </>
@@ -89,7 +91,7 @@ export const getCategoryData = ({ selectedCategory }) => {
       text2: (
         <>
           Our team is very conscious of our medical clients' needs, and{" "}
-          <span style={{ color: "#63d09d", fontSize: "1.1em" }}>
+          <span style={{ color: "rgba(0, 0, 0, 0.8)", fontSize: "1.1em" }}>
             together we can develop a new and exciting working environment
           </span>{" "}
           that upgrades working methods and quality of care
@@ -99,7 +101,7 @@ export const getCategoryData = ({ selectedCategory }) => {
         <>
           Combining the medical need for advanced technological tools with our
           experience and professional flexibility, we successfully developed{" "}
-          <span style={{ color: "#63d09d", fontSize: "1.1em" }}>
+          <span style={{ color: "rgba(0, 0, 0, 0.8)", fontSize: "1.1em" }}>
             VR, AR and MR
           </span>{" "}
           simulators which include haptic features and assist medical teams

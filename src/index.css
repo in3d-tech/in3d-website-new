@@ -18,8 +18,6 @@
   src: url("../src/fonts/GothamBold.otf");
 }
 
-/* custom cursor */
-
 :root {
   --color-cursor: 255, 255, 255;
   --cursor-outline-shade: 0.3;
@@ -38,12 +36,6 @@ body {
   cursor: none;
 }
 
-/* .swiper {
-  width: 100%;
-  height: 100%;
-} */
-
-/* 
 /* --------- cube -------- */
 
 @keyframes turn {
@@ -52,32 +44,6 @@ body {
   }
   to {
     transform: rotate3d(1, 1, 0, 360deg);
-  }
-}
-
-.about-us-main-page {
-  width: 80%;
-  margin-top: 2em;
-  background: rgb(0, 0, 0, 0.4);
-  border-radius: 12px;
-  text-align: left;
-  padding: 12px;
-  box-shadow: -1px 3px 28px 6px rgba(255, 255, 255, 0.2);
-  -webkit-box-shadow: -1px 3px 28px 6px rgba(255, 255, 255, 0.2);
-  -moz-box-shadow: -1px 3px 28px 6px rgba(255, 255, 255, 0.2);
-  /* animation: fadeIn 5s forwards; */
-}
-
-.about-us-main-page:hover {
-  animation: colour 2.5s ease-in-out;
-}
-
-@keyframes colour {
-  from {
-    /* background-color: #000103; */
-  }
-  to {
-    background-color: rgb(117, 4, 20, 0.4);
   }
 }
 
@@ -371,15 +337,6 @@ body {
   }
 }
 
-/* @keyframes moveAndRotateBack {
-  from {
-    transform: translateX(0) rotate(0deg);
-  }
-  to {
-    transform: translateX(-50px) rotate(-10deg);
-  }
-} */
-
 .animated-img {
   animation: moveAndRotate 1.8s ease-in-out forwards;
   /* animation-delay: 0.5s; */
@@ -539,24 +496,11 @@ h2 {
 .home-categories-wrapper {
   height: 100vh;
   width: 36%;
-  /* position: absolute;
-  right: 14%; */
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: flex-start;
-  /* 
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: auto;
-  align-items: center; */
-  /* margin-top: 6em; */
-  /* border: 1px solid orange; */
-  position: fixed;
-  top: 0;
-  right: 0;
-  /* bottom: 100%; */
   z-index: 1;
 }
 
@@ -673,6 +617,10 @@ h2 {
 .nav-open-list-item:hover {
   color: rgba(0, 0, 0, 1);
   /* cursor: pointer; */
+}
+
+.full-opacity {
+  opacity: 1;
 }
 
 .section {
@@ -830,15 +778,9 @@ nav {
   background: url("/assets/images/backgrounds/Astro_1_Background.webp")
     no-repeat;
   background-size: cover;
-
-  /* background: url("/assets/images/backgrounds/medicine/medicine_bg.jpg") cover
-    no-repeat center; */
   position: absolute;
-
   top: 0;
   left: 0;
-  /* height: 100%;
-  width: 0%; */
   z-index: 10;
   opacity: 0;
   display: flex;
@@ -850,8 +792,6 @@ nav.show {
   width: 100vw;
   height: 100vh;
   animation: fadeIn 0.6s ease-in-out forwards;
-
-  /* background: rgb(207, 210, 164, 0.5); */
 }
 
 .dark-blue {
@@ -2180,9 +2120,9 @@ section {
 }
 
 .fab-wrapper.centered {
-  top: 71%; /* Move to the vertical center of the screen */
-  right: 46%; /* Move to the horizontal center of the screen */
-  transform: translate(50%, -50%); /* Adjust for centering */
+  top: 71%;
+  right: 46%;
+  transform: translate(50%, -50%);
 }
 
 .grow {
@@ -2191,11 +2131,6 @@ section {
   animation-delay: 0.6;
   animation-duration: 1s; /* Control the speed of growth */
   position: absolute;
-  /* Make sure your element is absolutely positioned and set following properties to make it fill the screen */
-  /* top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0; */
 }
 
 @keyframes grow {
