@@ -310,7 +310,7 @@ const Middle = ({
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "flex-end",
-          border: "1px solid black",
+          // border: "1px solid black",
           // marginLeft: "2em",
         }}
       >
@@ -320,7 +320,6 @@ const Middle = ({
             width: "30%",
             height: "70%",
             marginRight: "10%",
-            border: "1px solid red",
           }}
           // style={{ border: "1px solid red", height: "100%" }}
           ref={middleImageRef}
@@ -343,7 +342,7 @@ const Middle = ({
               left: 0,
               right: 0,
               height: "10%", // Adjust the height of the fold
-              backgroundColor: "rgba(255, 255, 255, 0.8)", // Style as needed
+              backgroundColor: "rgba(255, 255, 255, 0.1)", // Style as needed
               zIndex: 3,
             }}
           />
