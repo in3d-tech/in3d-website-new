@@ -659,6 +659,12 @@ h2 {
   -moz-box-shadow: -1px 1px 21px 9px rgba(237, 130, 130, 0.75);
 }
 
+.mobile-hs-category-title-wrapper {
+  box-shadow: -1px 1px 12px 4px rgba(186, 92, 200, 0.75);
+  -webkit-box-shadow: -1px 1px 12px 4px rgba(186, 92, 200, 0.75);
+  -moz-box-shadow: -1px 1px 12px 4px rgba(186, 92, 200, 0.75);
+}
+
 .letter {
   transition: transform 0.5s ease, position 0.5s ease;
 }

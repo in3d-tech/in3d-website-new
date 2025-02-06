@@ -199,14 +199,6 @@ export const HomeScreenCategoryText = ({
     );
   }
 
-  // const contentInViewSlideStyles = {
-  //   gridRow: 1,
-  //   gridColumn: 1,
-  //   padding: "36px",
-  //   clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-  //   background: "rgb(3, 255, 255, 0.3)",
-  // };
-
   const hsTextBgs = {
     0: "https://in3dwebsite.blob.core.windows.net/photos/Industry_Togle-min.jpg",
     1: "https://in3dwebsite.blob.core.windows.net/photos/Medical_Togle-min.jpg",
@@ -216,17 +208,6 @@ export const HomeScreenCategoryText = ({
     5: "https://in3dwebsite.blob.core.windows.net/photos/Militery_Togle_Finish2-min.jpg",
     6: "https://in3dwebsite.blob.core.windows.net/photos/Customize_Togle_Finish-min.jpg",
   };
-
-  // const hsTextBgs = {
-  //   0: "url(/assets/images/backgrounds/taasia/taasia_bg.jpg)",
-  //   1: "url(/assets/images/backgrounds/medicine/medicine_bg.jpg)",
-  //   2: "url(/assets/images/backgrounds/microsoft/microsoft_bg.jpg)",
-  //   3: "url(/assets/images/backgrounds/security/security.jpg)",
-  //   4: "url(/assets/images/backgrounds/ai/ai_bg.png)",
-  //   5: "url(/assets/images/backgrounds/military/military_bg.jpg)",
-  //   6: "url(/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png)",
-  //   7: "",
-  // };
 
   return (
     <div
@@ -309,7 +290,7 @@ export const HomeScreenCategoryText = ({
         }}
       >
         <div
-          className={`scrolled-category-title ${
+          className={`scrolled-category-title mobile-hs-category-title-wrapper ${
             selectedCategoryItemByIdx == idx ? "fade-in-longer" : "fade-out"
           } `}
           style={{
@@ -318,6 +299,7 @@ export const HomeScreenCategoryText = ({
             fontSize: "2.3em",
             textAlign: "center",
             // border: "1px solid rgb(255,255,255,0.3)",
+            boxShadow: `-1px 1px 12px 4px rgba(247, 172, 247, 0.75)`,
           }}
         >
           <div
