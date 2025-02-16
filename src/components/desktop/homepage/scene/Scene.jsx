@@ -288,12 +288,12 @@ function HomepageContent({ scrollToElementById }) {
             size={2}
             color={getSparkleColour(scrollArea.currentSection)}
           />
-          {/* <Lights
+          <Lights
             scrollArea={scrollArea}
             titleOnMainPageHovered={titleOnMainPageHovered}
             hoveredTitleLight={hoveredTitleLight}
             customizeHasRendered={customizeHasRendered}
-          /> */}
+          />
           <Camera />
           {/* <Rig /> */}
 
