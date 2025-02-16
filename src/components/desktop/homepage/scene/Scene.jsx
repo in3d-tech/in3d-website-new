@@ -14,7 +14,7 @@ import {
   SecurityText,
 } from "../../../common/textData.jsx";
 import { gsap } from "gsap";
-import { Camera } from "./Camera.jsx";
+import { Camera, Lights } from "./Camera.jsx";
 import { BackgroundScroll } from "./BackgroundScroll";
 import { useAppContext } from "../../../../context/appContext.jsx";
 import { Sparkles } from "@react-three/drei";
@@ -27,6 +27,17 @@ import {
 } from "../../../common/cacheImages.js";
 
 const MappedModels = lazy(() => import("./MappedModels.jsx"));
+
+const hoveredTitleLight = {
+  industry: "",
+  medicine: "",
+  microsoft: "",
+  security: "",
+  artificalIntelligence: "",
+  military: "",
+  customization: "",
+};
+
 function HomepageContent({ scrollToElementById }) {
   const [visibleModels, setVisibleModels] = useState([]);
   const [visibleText, setVisibleText] = useState(false);
@@ -294,6 +305,7 @@ function HomepageContent({ scrollToElementById }) {
             hoveredTitleLight={hoveredTitleLight}
             customizeHasRendered={customizeHasRendered}
           />
+
           <Camera />
           {/* <Rig /> */}
 
