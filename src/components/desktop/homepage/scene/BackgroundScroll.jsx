@@ -26,7 +26,6 @@ export function BackgroundScroll({
   } = useAppContext();
 
   const [startExpandedAnimation, setStartExpandedAnimation] = useState(false);
-  const [showAboutUsHomepage, setShowAboutUsHomepage] = useState(false);
   const sectionIndustryRef = useRef(null);
 
   useEffect(() => {
@@ -43,44 +42,6 @@ export function BackgroundScroll({
     "military",
     "customize",
   ];
-
-  const Text = ({ selectedCategory = 6, isExpanded }) => {
-    // console.log({ selectedModel });
-
-    const letters = getLettersByModel(selectedCategory, isExpanded);
-
-    if (!letters) return null;
-    //       color: #af3737; medicine red?
-    const shadowColor = {
-      1: { color: "#af3737" },
-      2: { color: "#999" },
-      3: { color: "#999" },
-      4: { color: "#00A4EF" },
-      5: { color: "#2B5317" },
-      6: { color: "#999" },
-      7: { color: "#999" },
-    };
-
-    return (
-      <>
-        {/* <div className="overlay-test"></div> */}
-
-        <div
-          className="text-test"
-          style={isExpanded ? { marginTop: "2em" } : null}
-        >
-          {letters.map((letter, index) => (
-            <div className="wrapper-test" key={index}>
-              <div className="letter">{letter}</div>
-              <div className="shadow" style={shadowColor[selectedCategory]}>
-                {letter}
-              </div>
-            </div>
-          ))}
-        </div>
-      </>
-    );
-  };
 
   const scrollToElement = () => {
     if (sectionIndustryRef.current) {
@@ -246,27 +207,3 @@ export function BackgroundScroll({
     </>
   );
 }
-
-const getLettersByModel = (modelIdx = 1, isExpanded) => {
-  if (!modelIdx || typeof modelIdx !== "number" || modelIdx == 0) {
-    console.log("here", typeof modelIdx);
-    return;
-  }
-  //   console.log({ modelIdx });
-  const modelByIndex = {
-    0: "platform",
-    1: "MEDICINE",
-    2: "INDUSTRY",
-    3: "ARTIFICAL INTELLIGENCE",
-    4: "MICROSOFT",
-    5: "MILITARY",
-    6: "CUSTOMIZATION",
-    7: "SECURITY",
-  };
-
-  if (isExpanded) {
-    return "EXPANDED".split("");
-  }
-
-  return "IN3D-TECH".split("");
-};

@@ -1,12 +1,7 @@
 import { Suspense, lazy, useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { AstroModel } from "./ModelComponent.jsx";
-import {
-  ASTRO,
-  CUSTOMIZATION,
-  // INDUSTRY,
-  Model_Data,
-} from "../../../common/modelData.js";
+import { Model_Data } from "../../../common/modelData.js";
 
 import {
   IndustryText,
@@ -32,17 +27,6 @@ import {
 } from "../../../common/cacheImages.js";
 
 const MappedModels = lazy(() => import("./MappedModels.jsx"));
-
-const hoveredTitleLight = {
-  industry: "",
-  medicine: "",
-  microsoft: "",
-  security: "",
-  artificalIntelligence: "",
-  military: "",
-  customization: "",
-};
-
 function HomepageContent({ scrollToElementById }) {
   const [visibleModels, setVisibleModels] = useState([]);
   const [visibleText, setVisibleText] = useState(false);
@@ -52,7 +36,6 @@ function HomepageContent({ scrollToElementById }) {
   const [textAnimation, setTextAnimation] = useState(
     "category-title-no-opacity"
   );
-  // const [mousePosition, setMousePosition] = useState({ x: null, y: null });
 
   const {
     scrollArea,
@@ -305,13 +288,12 @@ function HomepageContent({ scrollToElementById }) {
             size={2}
             color={getSparkleColour(scrollArea.currentSection)}
           />
-          <Lights
+          {/* <Lights
             scrollArea={scrollArea}
             titleOnMainPageHovered={titleOnMainPageHovered}
             hoveredTitleLight={hoveredTitleLight}
             customizeHasRendered={customizeHasRendered}
-          />
-
+          /> */}
           <Camera />
           {/* <Rig /> */}
 
@@ -343,46 +325,3 @@ function HomepageContent({ scrollToElementById }) {
 }
 
 export default HomepageContent;
-
-const Lights = ({
-  scrollArea,
-  titleOnMainPageHovered,
-  hoveredTitleLight,
-  customizeHasRendered,
-}) => {
-  return (
-    <>
-      {
-        <ambientLight
-          intensity={
-            scrollArea?.currentSection == CUSTOMIZATION
-              ? 2
-              : scrollArea.currentSection == ASTRO
-              ? 0.2
-              : 1
-          }
-        />
-      }
-      {customizeHasRendered ? (
-        <>
-          <directionalLight
-            color={
-              titleOnMainPageHovered ? hoveredTitleLight : "rgb(200,255,255)"
-            }
-            intensity={5}
-            position={[-25, 50, 10]}
-            castShadow
-          />
-          <directionalLight
-            intensity={1}
-            position={[20, 0, -1]}
-            castShadow
-            color={
-              titleOnMainPageHovered ? hoveredTitleLight : "rgb(254,200,255)"
-            }
-          />
-        </>
-      ) : null}
-    </>
-  );
-};
