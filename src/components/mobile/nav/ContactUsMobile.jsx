@@ -60,7 +60,7 @@ export function ContactUsMobile({ test }) {
               justifyContent: "space-evenly",
               alignItems: "flex-start",
               height: "6em",
-              color: "white",
+              color: "black",
               fontSize: "2.5em",
             }}
           >
@@ -70,24 +70,24 @@ export function ContactUsMobile({ test }) {
                 alignItems: "center",
               }}
             >
-              <PhoneIcon fontSize="medium" sx={{ color: "white" }} />:
+              <PhoneIcon fontSize="medium" sx={{ color: "black" }} />:
               <a style={{ all: "unset" }} href="tel:+972526787276">
                 <span style={{ marginLeft: "5px" }}>+972-52-678-7276</span>
               </a>
             </div>
             <div style={{ marginTop: "1em" }}>
-              <PhoneIcon fontSize="medium" sx={{ color: "white" }} />:
+              <PhoneIcon fontSize="medium" sx={{ color: "black" }} />:
               <a style={{ all: "unset" }} href="tel:+13022194023">
                 {" "}
                 +1(302)-219-4023
               </a>
             </div>
             <div className="flex-center" style={{ marginTop: "1em" }}>
-              <EmailIcon sx={{ color: "white" }} fontSize="medium" />
+              <EmailIcon sx={{ color: "#90630A" }} fontSize="medium" />
               <div>: sales@in3d-tech.com</div>
             </div>
             <div style={{ marginTop: "1em" }}>
-              <WhatsAppIcon fontSize="medium" sx={{ color: "white" }} />:
+              <WhatsAppIcon fontSize="medium" sx={{ color: "green" }} />:
               {/* <a style={{ all: "unset" }} href="tel:+13022194023"> */}{" "}
               {/* +972-52-678-7276 */}
               <OpenWhatsapp />
@@ -98,7 +98,7 @@ export function ContactUsMobile({ test }) {
         <span
           style={{
             marginTop: "5em",
-            color: "white",
+            color: "black",
             fontSize: "2em",
             alignSelf: "center",
           }}

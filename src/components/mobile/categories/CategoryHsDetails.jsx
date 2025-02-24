@@ -45,6 +45,9 @@ export const HomeScreenCategoryText = ({
     };
   }, []);
 
+  // console.log({ selectedCategoryItemByIdx });
+  // console.log({ idx });
+
   const categoryDataByIndex = {
     0: {
       title: (
@@ -207,6 +210,7 @@ export const HomeScreenCategoryText = ({
     4: "https://in3dwebsite.blob.core.windows.net/photos/Ai_Tugle_Finish-min.jpg",
     5: "https://in3dwebsite.blob.core.windows.net/photos/Militery_Togle_Finish2-min.jpg",
     6: "https://in3dwebsite.blob.core.windows.net/photos/Customize_Togle_Finish-min.jpg",
+    7: "/assets/images/backgrounds/moving-bg.jpg",
   };
 
   return (

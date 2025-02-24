@@ -1,6 +1,10 @@
 import { ContactUsMobile } from "../nav/ContactUsMobile";
 import "../categories/styles.css";
 
+const COLOR_1 = "#7D1919";
+const COLOR_2 = "#19197D";
+const COLOR_3 = "#1C4921";
+
 export const getCategoryData = ({ selectedCategory }) => {
   if (selectedCategory !== 1) {
     // console.log(textContainer);
@@ -28,7 +32,7 @@ export const getCategoryData = ({ selectedCategory }) => {
           <br />
           <br />
           <span style={{ opacity: 0.8 }}>
-            <span style={{ color: "#0DA888" }}>
+            <span style={{ color: COLOR_1 }}>
               Industry is experiencing a quantum leap forward,
             </span>{" "}
             with seemingly endless tools that impact everything we know about
@@ -38,17 +42,17 @@ export const getCategoryData = ({ selectedCategory }) => {
       ),
       text2: (
         <>
-          "Together with our clients we map out the challenges they face and
+          Together with our clients we map out the challenges they face and
           develop{" "}
-          <span style={{ color: "#0DA888" }}>
+          <span style={{ color: COLOR_2 }}>
             tailor made solutions using XR and 3D technology
           </span>{" "}
-          that creates a whole new and improved visual interface platform"
+          that creates a whole new and improved visual interface platform
         </>
       ),
       text3: (
         <>
-          <span style={{ fontSize: "1.2em", color: "#0DA888" }}>
+          <span style={{ fontSize: "1.2em", color: COLOR_3 }}>
             3D XR isn't just an innovative experience.{" "}
           </span>
           <span style={{ opacity: 0.8 }}>
@@ -76,14 +80,12 @@ export const getCategoryData = ({ selectedCategory }) => {
         <>
           The world of medicine is one of the most innovative sectors in the
           world. Using{" "}
-          <span style={{ color: "rgba(0, 0, 0, 0.8)", fontSize: "1.1em" }}>
+          <span style={{ color: COLOR_1, fontSize: "1.1em" }}>
             Extended Reality
           </span>{" "}
           (XR) we at in3D became pioneers in development of{" "}
-          <span style={{ color: "rgba(0, 0, 0, 0.8)", fontSize: "1.1em" }}>
-            XR
-          </span>{" "}
-          products for medical organizations, collaborating together to empower
+          <span style={{ color: COLOR_1, fontSize: "1.1em" }}>XR</span> products
+          for medical organizations, collaborating together to empower
           innovation and efficiency for clinics and hospitals
         </>
       ),
@@ -91,7 +93,7 @@ export const getCategoryData = ({ selectedCategory }) => {
       text2: (
         <>
           Our team is very conscious of our medical clients' needs, and{" "}
-          <span style={{ color: "rgba(0, 0, 0, 0.8)", fontSize: "1.1em" }}>
+          <span style={{ color: "#19197D", fontSize: "1.1em" }}>
             together we can develop a new and exciting working environment
           </span>{" "}
           that upgrades working methods and quality of care
@@ -101,7 +103,7 @@ export const getCategoryData = ({ selectedCategory }) => {
         <>
           Combining the medical need for advanced technological tools with our
           experience and professional flexibility, we successfully developed{" "}
-          <span style={{ color: "rgba(0, 0, 0, 0.8)", fontSize: "1.1em" }}>
+          <span style={{ color: COLOR_3, fontSize: "1.1em" }}>
             VR, AR and MR
           </span>{" "}
           simulators which include haptic features and assist medical teams
@@ -119,7 +121,7 @@ export const getCategoryData = ({ selectedCategory }) => {
       bgImage:
         'url("/assets/images/backgrounds/microsoft/Microsoft_Tugle.jpg")',
       text: (
-        <span style={{ color: "#00A4EF", fontSize: "1.1em" }}>
+        <span style={{ color: "#0E3058", fontSize: "1.1em" }}>
           In3D is the official and the inclusive Mixed Reality (MR) partner of
           Microsoft Israel
         </span>
@@ -139,14 +141,14 @@ export const getCategoryData = ({ selectedCategory }) => {
       // text: "Thanks to years of collaboration with defense industries, we gained the needed experience, knowledge and tools to provide quick and out of the box solutions that are tailored to the industries unique requirements.",
       text: "In3D has strong relations with the security and defense sector and is an MOD (Ministry of Defense) official provider",
       text2: (
-        <span style={{ fontSize: "1.1em" }}>
+        <span style={{ fontSize: "1.1em", color: COLOR_1 }}>
           Working directly with many security bodies such as the fire and rescue
           department, Israel police, IDF and more
         </span>
       ),
       text3: (
         <>
-          <span style={{ fontSize: "1.1em" }}>
+          <span style={{ fontSize: "1.1em", color: "#19197D" }}>
             Part of our vision is to promote innovation, which is a big part of
             what Israel stands for.
           </span>{" "}
@@ -199,7 +201,7 @@ export const getCategoryData = ({ selectedCategory }) => {
       url: "/assets/models/military.glb",
       text2: (
         <>
-          <span style={{ color: "#467B3F", fontSize: "1.1em" }}>
+          <span style={{ color: COLOR_3, fontSize: "1.1em" }}>
             In3D is committed to ISO standards and all other needed security
             measures
           </span>{" "}
@@ -228,7 +230,7 @@ export const getCategoryData = ({ selectedCategory }) => {
       // text: "As specialists we keep an amazing team of developers, 3D generalists, interface and graphics artists, and product designers just so we can provide our clients with the flexibility and abilities needed to deliver the best product.",
       text: (
         <>
-          <span style={{ color: "#D4931D", fontSize: "1.1em" }}>
+          <span style={{ color: COLOR_1, fontSize: "1.1em" }}>
             We specialize in 3D and Extended Reality (EX)
           </span>
           , and as specialists we keep an amazing team of developers, 3D
@@ -241,7 +243,7 @@ export const getCategoryData = ({ selectedCategory }) => {
       text2: (
         <>
           With a constant curiosity and accumulate experience,{" "}
-          <span style={{ color: "#D4931D", fontSize: "1.1em" }}>
+          <span style={{ color: COLOR_2, fontSize: "1.1em" }}>
             we have successfully developed software products on most of the
             existing hardware platforms
           </span>{" "}
@@ -256,7 +258,7 @@ export const getCategoryData = ({ selectedCategory }) => {
           different businesses, we provide assistance with needed authorizations
           and hardware modifications required by INFOSEC, worker's committees,
           legal, and collaborating with major company IT teams for{" "}
-          <span style={{ color: "#D4931D", fontSize: "1.1em" }}>
+          <span style={{ color: COLOR_3, fontSize: "1.1em" }}>
             a better design and implementation of tailor-made solutions
           </span>{" "}
           that started as a vision of one diligent employee
@@ -281,7 +283,7 @@ export const getCategoryData = ({ selectedCategory }) => {
             style={{
               // color: "black",
               textAlign: "left",
-              color: "white",
+              color: "black",
               // backgroundImage:
               //   "url(https://in3dwebsite.blob.core.windows.net/photos/astronaut_P1_stronger-min.png)",
               // backgroundSize: "cover",
@@ -302,25 +304,25 @@ export const getCategoryData = ({ selectedCategory }) => {
           WE SPECIALIZE IN MIXED REALITY (XR)
           <br />
           But first and foremost, we are firm believers in it.
-          {/* <div>
+          <div>
             <img
               style={{
                 width: "100%",
                 transform: "scaleX(-1)",
-                position: "absolute",
+                // position: "absolute",
                 left: 0,
                 top: "-2em",
               }}
-              src="https://in3dwebsite.blob.core.windows.net/photos/about-2-min.png"
+              src="https://in3dwebsite.blob.core.windows.net/photos/about-4-min.png"
             />
-          </div> */}
+          </div>
         </div>
       ),
       text3: (
         <div style={{ fontSize: "1.1em" }}>
           in3D has ISO9001 quality standards and ISO27001 information secuity,
           and provides its services under the strictest standard definitions
-          <br /> and for well-known and large businesses and organizations.
+          working with well-known businesses and organizations.
           <br />
           <br />
           So please feel free to choose us for your next project

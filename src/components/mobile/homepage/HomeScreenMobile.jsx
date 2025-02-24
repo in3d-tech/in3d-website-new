@@ -102,19 +102,6 @@ function HomeScreenMobile() {
         {startExpandedAnimation ? (
           <TitleWithAnimation isMobile={isMobile} />
         ) : null}
-        {/* <div
-          style={{
-            position: "fixed",
-            bottom: "1em",
-            right: "34%",
-            zIndex: 2,
-            height: "auto",
-          }}
-        >
-          <CategoryTracker
-            selectedCategoryItemByIdx={selectedCategoryItemByIdx}
-          />
-        </div> */}
         <div
           style={{
             width: "100%",

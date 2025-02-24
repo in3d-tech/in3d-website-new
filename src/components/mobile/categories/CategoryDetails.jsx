@@ -71,8 +71,6 @@ function SelectedCategory() {
           width: "100%",
           display: "flex",
           flexDirection: "column",
-          // alignItems: "center",
-          // border: "1px solid yellow",
         }}
       >
         <div
@@ -80,8 +78,6 @@ function SelectedCategory() {
             fontSize: "3em",
             marginTop: selectedCategory == "about" ? "1em" : "1.5em",
             textAlign: "left",
-            // lineHeight: "1.5em",
-            // letterSpacing: "0.2em",
             fontFamily: "gotham",
             color: "black",
             width: selectedCategory == CUSTOMIZATION ? "84vw" : "70vw",
@@ -100,7 +96,6 @@ function SelectedCategory() {
             textAlign: "left",
             lineHeight: "1.8em",
             color: "black",
-            // letterSpacing: "1.1em",
           }}
           className="medicine-text-one-mobile"
         >
@@ -109,7 +104,6 @@ function SelectedCategory() {
         <div
           className="medicine-second-underline-mobile"
           style={{
-            // borderTop: "1px solid white",
             width: "70%",
             marginTop: "3em",
           }}
@@ -121,7 +115,6 @@ function SelectedCategory() {
               style={{
                 display: "flex",
                 justifyContent: "center",
-                // border: "1px solid green",
               }}
             >
               <div
@@ -143,19 +136,20 @@ function SelectedCategory() {
         )}
         <div
           style={{
-            // marginTop: "12em",
             display: "flex",
             alignItems: "center",
             flexDirection: "column",
-            // border: "1px solid black",
-            // justifyContent: "center",
           }}
         >
-          <IndustryPage
-            selectedCategory={selectedCategory}
-            // thumbsSwiper={thumbsSwiper}
-            // setThumbsSwiper={setThumbsSwiper}
-          />
+          {selectedCategory == AI ||
+          selectedCategory == "contact" ||
+          selectedCategory == ABOUT_US ? null : (
+            <MediaContent
+              selectedCategory={selectedCategory}
+              // thumbsSwiper={thumbsSwiper}
+              // setThumbsSwiper={setThumbsSwiper}
+            />
+          )}
           {data?.text3 && (
             <div
               style={{
@@ -174,7 +168,9 @@ function SelectedCategory() {
         </div>
 
         <div style={{ height: "50px" }}></div>
-        <MenuAboutContact isFromSelectedCategory />
+        {selectedCategory == "contact" ? null : (
+          <MenuAboutContact isFromSelectedCategory />
+        )}
       </div>
     </div>
   );
@@ -234,11 +230,11 @@ const content = {
     "url(https://in3dwebsite.blob.core.windows.net/photos/astronaut_P1_stronger-min.png)",
     "https://in3dwebsite.blob.core.windows.net/photos/about-2-min.png",
     "https://in3dwebsite.blob.core.windows.net/photos/about-3-min.png",
-    "https://in3dwebsite.blob.core.windows.net/photos/about-4-min.png)",
+    "https://in3dwebsite.blob.core.windows.net/photos/about-4-min.png",
   ],
 };
 
-const IndustryPage = ({ selectedCategory, thumbsSwiper, setThumbsSwiper }) => {
+const MediaContent = ({ selectedCategory, thumbsSwiper, setThumbsSwiper }) => {
   // if (selectedCategory == "contact") {
   //   return null;
   // }
