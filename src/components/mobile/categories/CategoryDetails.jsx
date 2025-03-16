@@ -21,12 +21,9 @@ import {
   ABOUT_US,
 } from "../../common/modelData";
 import { getCategoryData } from "../logic/getCategoryDetails";
-// import { Model } from "./logic/Model";
 import { VideoPlayer } from "../../common/Logo";
-
 // import "swiper/css/navigation";
 import { MenuAboutContact } from "../nav/MenuWheel";
-// import zIndex from "@mui/material/styles/zIndex";
 
 // const models = {
 //   [INDUSTRY]: "/assets/models/engenir_model.glb",

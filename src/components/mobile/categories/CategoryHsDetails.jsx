@@ -303,7 +303,7 @@ export const HomeScreenCategoryText = ({
             fontSize: "2.3em",
             textAlign: "center",
             // border: "1px solid rgb(255,255,255,0.3)",
-            boxShadow: `-1px 1px 12px 4px rgba(247, 172, 247, 0.75)`,
+            boxShadow: `-1px 1px 12px 4px rgba(247, 172, 247, 0.55)`,
           }}
         >
           <div
@@ -320,18 +320,6 @@ export const HomeScreenCategoryText = ({
           >
             {categoryDataByIndex[idx]?.title}
           </div>
-          {/* <div
-            style={{
-              backgroundImage:
-                "url(/assets/images/backgrounds/taasia/Industry_Togle.jpg)",
-              height: "200%",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center",
-              backgroundSize: "cover",
-            }}
-          >
-    
-          </div> */}
         </div>
         <span
           style={{
@@ -375,29 +363,7 @@ export const ContactUsText = ({ title = "Contact Us" }) => (
   <div
     className="contact-us-wrapper"
     style={{ position: "absolute", top: "800%", height: "60vh" }}
-  >
-    {/* <span className="contact-title">Contact us</span>
-    <div className="contact-details-wrapper">
-      <span>Feel free to contact us via:</span>
-      <span style={{ marginTop: "0.5em", fontSize: "1em" }}>
-        <span style={{ fontWeight: "bold" }}>Phone:</span>
-        <span>+972-54-218-5021 or +1(302)-219-4023</span>
-      </span>
-
-      <span>
-        <span style={{ fontWeight: "bold" }}>Email: </span>sales@in3d-tech.com
-      </span>
-      <span style={{ marginTop: "1em" }}>
-        We also invite you to meet us at 1 Shefa Tal street, Tel Aviv.
-      </span>
-      <span>
-        Or you can message us
-        <span style={{ fontSize: "1.2em", textDecoration: "underline" }}>
-          Here
-        </span>
-      </span>
-    </div> */}
-  </div>
+  ></div>
 );
 
 export const AboutUsText = ({ title }) => {

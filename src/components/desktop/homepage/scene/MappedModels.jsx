@@ -1,4 +1,4 @@
-import { useGLTF, useProgress } from "@react-three/drei";
+import { useGLTF } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { useAppContext } from "../../../../context/appContext";
@@ -60,8 +60,8 @@ function MappedModels({
   visibleModels,
   setVisibleModels,
   model,
-  allModelPositions,
-  testShadowsRef,
+  // allModelPositions,
+  // testShadowsRef,
 }) {
   // const [textAnimationPlayed, setTextAnimationPlayed] = useState(false);
 
@@ -80,7 +80,7 @@ function MappedModels({
 
   const { scene, animations } = useGLTF(model.url);
   const mixer = useGLTFAnimations(scene, animations);
-  const { active } = useProgress();
+  // const { active } = useProgress();
   const industryModel = 0;
 
   let scene2;
@@ -88,7 +88,7 @@ function MappedModels({
   let mixer2;
 
   const textTitleRef = useRef();
-  const modelTextRef = useRef(null);
+  // const modelTextRef = useRef(null);
   const isCustomizedRendered = useRef(false);
 
   if (true) {

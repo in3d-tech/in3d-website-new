@@ -145,6 +145,7 @@ export const HamburgerMenu = () => {
             <img
               className="in3d-fixed-logo"
               src="/assets/images/plain-logo.png"
+              alt="hamMenu"
             />
           </div>
           <div className="horizontal-nav-open-titles-container">

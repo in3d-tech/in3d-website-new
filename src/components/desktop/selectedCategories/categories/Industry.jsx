@@ -203,7 +203,7 @@ const ImageOverlay = ({ vid1, vid2 }) => {
         >
           <img
             src="https://in3dwebsite.blob.core.windows.net/photos/industry-hat-min.png" //"/assets/images/backgrounds/taasia/industry-hat.png"
-            alt="Top Left"
+            alt="workerHat"
             style={{ width: "55%", borderRadius: "12px" }}
           />
         </span>
@@ -334,6 +334,7 @@ const Middle = ({
               zIndex: 2,
               position: "relative",
             }}
+            alt="phoneFrame"
           />
           <div
             style={{

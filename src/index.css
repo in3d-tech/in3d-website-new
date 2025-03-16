@@ -1540,6 +1540,11 @@ section {
   color: white;
 }
 
+.cntct-mble {
+  background-color: #95c8de83;
+  color: black;
+}
+
 .contact-details-wrapper {
   display: flex;
   flex-direction: column;

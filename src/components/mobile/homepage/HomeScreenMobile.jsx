@@ -87,6 +87,7 @@ function HomeScreenMobile() {
               className="in3d-fixed-logo"
               style={{ width: "6em" }}
               src="/assets/images/in3d-logo-white.png"
+              alt="fixedLogo"
             />
           </div>
         ) : null}

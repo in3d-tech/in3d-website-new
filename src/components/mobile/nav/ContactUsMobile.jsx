@@ -118,6 +118,7 @@ export function ContactUsMobile({ test }) {
           <img
             className="contact-us-mobile-img"
             src="https://in3dwebsite.blob.core.windows.net/photos/astronaut6-min.png"
+            alt="contactUs"
           />
           {showTextBox && (
             <div
@@ -155,7 +156,7 @@ export function ContactUsMobile({ test }) {
                 />
                 <button
                   onClick={handleSendMessage}
-                  className="contact-us-send-text-btn"
+                  className="contact-us-send-text-btn cntct-mble"
                 >
                   Send
                 </button>

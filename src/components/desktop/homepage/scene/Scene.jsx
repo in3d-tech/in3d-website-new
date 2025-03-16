@@ -270,6 +270,7 @@ function HomepageContent({ scrollToElementById }) {
               style={{ height: "90px" }}
               className="logo"
               src="/assets/images/in3d-logo-white.png"
+              alt="sceneLogo"
             />
           </span>
         </div>

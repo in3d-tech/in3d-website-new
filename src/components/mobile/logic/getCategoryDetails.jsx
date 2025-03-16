@@ -313,6 +313,7 @@ export const getCategoryData = ({ selectedCategory }) => {
                 left: 0,
                 top: "-2em",
               }}
+              alt="about-us"
               src="https://in3dwebsite.blob.core.windows.net/photos/about-4-min.png"
             />
           </div>

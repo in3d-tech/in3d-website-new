@@ -116,7 +116,6 @@ export function AstroModel({
         // markers: true,
         onEnter: () => {
           // if (!visibleModels.length) setVisibleModels(true);
-          console.log("JUST ENTERED SECTION 2,    why again");
           const areaObj = { ...scrollArea };
           areaObj.currentSection = 2;
           areaObj.prevSection = 1;

@@ -80,6 +80,7 @@ export function Microsoft() {
           src="https://in3dwebsite.blob.core.windows.net/photos/handshake_newer.png"
           // src="https://in3dwebsite.blob.core.windows.net/photos/microsoft-shake-cutout-min.png"
           style={{ width: "100%" }}
+          alt="handshake"
         />
       </div>
       <Bottom

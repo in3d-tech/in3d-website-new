@@ -165,6 +165,7 @@ export function LoadingScreen({
                 height: height,
               }}
               src="/assets/images/plain-logo.png"
+              alt="logo-plain"
             />
           </div>
 

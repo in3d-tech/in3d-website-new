@@ -271,13 +271,7 @@ const Middle = ({
           ref={midOneImageRef}
           className="about-us-mid-one-image"
           src="https://in3dwebsite.blob.core.windows.net/photos/about-2-min.png"
-          style={
-            {
-              //   width: "100%",
-              //   height: "100%",
-              //   border: "4px solid red",
-            }
-          }
+          alt="boutMid"
         />
       </div>
     </div>

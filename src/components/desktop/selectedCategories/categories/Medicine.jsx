@@ -106,6 +106,7 @@ const Top = ({ topVideoRef }) => {
           style={{ height: "100%", width: "100%" }}
           // src="/assets/images/backgrounds/medicine/medical_overlay_1.jpg"
           src="https://in3dwebsite.blob.core.windows.net/photos/medical_overlay_1-min.jpg"
+          alt="medicalOverlay"
         />
       </div>
       <div className="selected-content-first-divider">
@@ -193,6 +194,7 @@ const Middle = ({
           style={{ height: "100%", width: "100%" }}
           // src="/assets/images/backgrounds/medicine/med-overlay-bot.jpg"
           src="https://in3dwebsite.blob.core.windows.net/photos/med-overlay-bot-min.jpg"
+          alt="medicalSkeletons"
         />
       </div>
       <div style={{ flex: 1 }}>

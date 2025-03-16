@@ -71,6 +71,7 @@ const Top = ({ setIsCursorHovering }) => {
                     <img
                       src="https://in3dwebsite.blob.core.windows.net/photos/telefon-min.png"
                       style={{ width: "1.4em" }}
+                      alt="contactUs"
                     />
                     <span style={{ marginLeft: "0.5em" }}>
                       +972-52-678-7276
@@ -90,6 +91,7 @@ const Top = ({ setIsCursorHovering }) => {
                     <img
                       src="https://in3dwebsite.blob.core.windows.net/photos/telefon-min.png"
                       style={{ width: "1.4em" }}
+                      alt="telephone"
                     />
                     <span style={{ marginLeft: "0.5em" }}></span>
                     +1(302)-219-4023
@@ -109,6 +111,7 @@ const Top = ({ setIsCursorHovering }) => {
                     <img
                       src="https://in3dwebsite.blob.core.windows.net/photos/mail-min.png"
                       style={{ width: "1.4em" }}
+                      alt="email"
                     />
                     <span style={{ marginLeft: "0.5em" }}></span>
                     sales@in3d-tech.com{" "}
