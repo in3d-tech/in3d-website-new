@@ -127,7 +127,7 @@ export function AstroModel({
           // areaObj.prevSection = 2;
           // setScrollArea(areaObj);
           // DIRECT GSAP MUTATION: Hide Astro when scrolling down to other models
-          if (astroRef.current) astroRef.current.visible = false;
+          // if (astroRef.current) astroRef.current.visible = false;
         },
         onLeaveBack: () => {
           const areaObj = { ...scrollArea };
