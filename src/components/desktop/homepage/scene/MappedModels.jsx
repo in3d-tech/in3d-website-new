@@ -144,7 +144,13 @@ function MappedModels({
         start: "top bottom",
         endTrigger: `.${model.section}`,
         end: "top top",
-        scrub: 1,
+        scrub: true,
+        snap: {
+          snapTo: [0, 1],
+          duration: { min: 0.2, max: 0.8 }, // How long the magnetic pull takes
+          delay: 0.1, // Wait 100ms after the user's scroll wheel stops
+          ease: "power1.inOut",
+        },
         // markers: true,
         preventOverlaps: isInstantScroll ? true : false,
         // fastScrollEnd: true, // 2500 is default,
@@ -216,7 +222,7 @@ function MappedModels({
       scrollTrigger: {
         trigger: `.${model.section}`,
         start: "top 50%",
-        scrub: 1,
+        scrub: true,
         // markers: true,
 
         onEnter: () => {

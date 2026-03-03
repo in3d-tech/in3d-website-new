@@ -75,7 +75,13 @@ export function AstroModel({
         start: "top top",
         endTrigger: ".section-two", //"#midSection2", //".section-two",
         end: "bottom bottom",
-        scrub: 1,
+        scrub: true,
+        snap: {
+          snapTo: [0, 1],
+          duration: { min: 0.2, max: 0.8 },
+          delay: 0.1,
+          ease: "power1.inOut",
+        },
         preventOverlaps: isInstantScroll ? true : false,
         // fastScrollEnd: false, // 2250,
         // markers: true,
@@ -110,7 +116,7 @@ export function AstroModel({
         endTrigger: ".section-two", //"#midSection2", //".section-two",
         end: "bottom bottom",
         // markers: true,
-        scrub: 1,
+        scrub: true,
         preventOverlaps: isInstantScroll ? true : false,
         // fastScrollEnd: false, // 2250,
         // markers: true,
@@ -173,7 +179,7 @@ export function AstroModel({
           start: "top bottom",
           // endTrigger: "#midSection2", //".section-two",
           // end: "bottom bottom",
-          scrub: 1,
+          scrub: true,
           onEnter: () => {
             // SHOW ASTRO AGAIN!
             if (astroRef.current) astroRef.current.visible = true;

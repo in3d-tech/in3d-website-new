@@ -10,6 +10,7 @@ import useCheckIsMobileScreen from "./components/common/useCheckIsMobile";
 import Cursor from "./components/common/cursor";
 import { DesktopView } from "./components/desktop/DesktopView";
 import { MobileView } from "./components/mobile/MobileView";
+import LenisProvider from "./LenisProvider";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -43,7 +44,13 @@ function App() {
       ) : null}
 
       {isMobileViewOnly ? null : <Cursor />}
-      {isMobileViewOnly ? <MobileView /> : <DesktopView />}
+      {isMobileViewOnly ? (
+        <MobileView />
+      ) : (
+        <LenisProvider>
+          <DesktopView />
+        </LenisProvider>
+      )}
     </>
   );
 }

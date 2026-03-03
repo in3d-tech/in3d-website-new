@@ -44,7 +44,7 @@ function HomepageContent({ scrollToElementById }) {
   const [fixed, setFixed] = useState(false);
   const [hovered, setHovered] = useState("");
   const [textAnimation, setTextAnimation] = useState(
-    "category-title-no-opacity"
+    "category-title-no-opacity",
   );
 
   const {
@@ -131,7 +131,7 @@ function HomepageContent({ scrollToElementById }) {
 
     document.documentElement.style.setProperty(
       "--color",
-      backgrounds[scrollArea.currentSection] || ""
+      backgrounds[scrollArea.currentSection] || "",
     );
 
     return () => {
@@ -148,7 +148,7 @@ function HomepageContent({ scrollToElementById }) {
         start: "top top",
         endTrigger: ".section-three",
         end: "bottom bottom",
-        scrub: 1,
+        scrub: true,
         // markers: true,
         onEnter: () => {
           setVisibleText(true);
