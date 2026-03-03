@@ -23,7 +23,7 @@ export function AstroModel({
   } = useAppContext();
 
   const { scene, animations } = useGLTF(url);
-  const mixer = useGLTFAnimations(scene, animations);
+  const mixer = useGLTFAnimations(scene, animations, astroRef);
   const { active } = useProgress();
 
   // gsap.set(".scene", { scale: 0.7 });
@@ -94,12 +94,12 @@ export function AstroModel({
       .to(
         astroRef.current.position,
         { x: -10, y: -20.2, z: 0 },
-        "simultaneously"
+        "simultaneously",
       )
       .to(
         astroRef.current.rotation,
         { x: 0.5, y: Math.PI + 0.3, z: -0 },
-        "simultaneously"
+        "simultaneously",
       );
 
     let sectionTwoTimeline = gsap.timeline({
@@ -122,16 +122,22 @@ export function AstroModel({
           setScrollArea(areaObj);
         },
         onLeave: () => {
-          const areaObj = { ...scrollArea };
+          // const areaObj = { ...scrollArea };
           // areaObj.currentSection = 3;
           // areaObj.prevSection = 2;
           // setScrollArea(areaObj);
+          // DIRECT GSAP MUTATION: Hide Astro when scrolling down to other models
+          if (astroRef.current) astroRef.current.visible = false;
         },
         onLeaveBack: () => {
           const areaObj = { ...scrollArea };
           areaObj.currentSection = 1;
           areaObj.prevSection = 2;
           setScrollArea(areaObj);
+        },
+        onEnterBack: () => {
+          // DIRECT GSAP MUTATION: Show Astro again when scrolling back up
+          if (astroRef.current) astroRef.current.visible = true;
         },
       },
     });
@@ -169,12 +175,16 @@ export function AstroModel({
           // end: "bottom bottom",
           scrub: 1,
           onEnter: () => {
+            // SHOW ASTRO AGAIN!
+            if (astroRef.current) astroRef.current.visible = true;
             const areaObj = { ...scrollArea };
             areaObj.currentSection = 10;
             areaObj.prevSection = 9;
             setScrollArea(areaObj);
           },
           onLeaveBack: () => {
+            // HIDE ASTRO AGAIN when scrolling back up to the other models
+            if (astroRef.current) astroRef.current.visible = false;
             const areaObj = { ...scrollArea };
             areaObj.currentSection = 9;
             areaObj.prevSection = 10;
@@ -187,18 +197,18 @@ export function AstroModel({
         .to(
           astroRef.current.position,
           { x: -10, y: -23.2, z: -9 },
-          "simultaneously"
+          "simultaneously",
         )
         .add(() => console.log("WELL THIS WAS ADDED"))
         .to(
           astroRef.current.rotation,
           { x: 0.5, y: Math.PI + 0.3, z: -0 },
-          "simultaneously"
+          "simultaneously",
         )
         .to(
           customizeRef.current.position,
           { x: 16, y: -2, z: 0 },
-          "simultaneously"
+          "simultaneously",
         )
         .to(customizeRef.current.rotation, { y: -2.9 }, "simultaneously");
       return () => {
@@ -234,55 +244,106 @@ export function AstroModel({
 
 // ANIMATE ALL
 
-export function useGLTFAnimations(scene, animations) {
-  const { invalidate } = useThree();
+// export function useGLTFAnimations(scene, animations) {
+//   const { invalidate } = useThree();
+//   const mixer = useMemo(() => new THREE.AnimationMixer(scene), [scene]);
+
+//   useEffect(() => {
+//     if (!mixer || !animations) return;
+
+//     animations.forEach((clip) => mixer.clipAction(clip).play());
+
+//     const handler = setInterval(() => invalidate(), 1000 / 60);
+//     return () => clearInterval(handler);
+//   }, [animations, mixer, invalidate]);
+
+//   useFrame((_state, delta) => mixer && mixer.update(delta));
+
+//   return mixer;
+// }
+
+export function useGLTFAnimations(scene, animations, modelRef) {
   const mixer = useMemo(() => new THREE.AnimationMixer(scene), [scene]);
 
   useEffect(() => {
     if (!mixer || !animations) return;
-
     animations.forEach((clip) => mixer.clipAction(clip).play());
 
-    const handler = setInterval(() => invalidate(), 1000 / 60);
-    return () => clearInterval(handler);
-  }, [animations, mixer, invalidate]);
+    return () => {
+      mixer.stopAllAction();
+    };
+  }, [animations, mixer]);
 
-  useFrame((_state, delta) => mixer && mixer.update(delta));
+  useFrame((_state, delta) => {
+    // Only update if there is no ref passed, OR if the model is visible
+    if (mixer && (!modelRef || modelRef.current?.visible)) {
+      mixer.update(delta);
+    }
+  });
 
   return mixer;
 }
 
-export function useGLTFAnimationsOnce(scene, animations) {
-  const { invalidate } = useThree();
+export function useGLTFAnimationsOnce(scene, animations, modelRef) {
   const mixer = useMemo(() => new THREE.AnimationMixer(scene), [scene]);
 
   useEffect(() => {
     if (!mixer || !animations) return;
 
-    const actions = animations.map((clip) => {
+    animations.forEach((clip) => {
       const action = mixer.clipAction(clip);
       action.setLoop(THREE.LoopOnce); // Set the animation to play only once
       action.clampWhenFinished = true; // Keep the last frame when finished
       action.play();
-      return action;
     });
 
-    const handler = setInterval(() => invalidate(), 1000 / 60);
-
-    mixer.addEventListener("finished", () => {
-      clearInterval(handler);
-    });
-
+    // Clean up animations if the component unmounts
     return () => {
-      clearInterval(handler);
-      mixer.removeEventListener("finished");
+      mixer.stopAllAction();
     };
-  }, [animations, mixer, invalidate]);
+  }, [animations, mixer]);
 
-  useFrame((_state, delta) => mixer && mixer.update(delta));
+  useFrame((_state, delta) => {
+    // Only update if there is no ref passed, OR if the model is visible
+    if (mixer && (!modelRef || modelRef.current?.visible)) {
+      mixer.update(delta);
+    }
+  });
 
   return mixer;
 }
+
+// export function useGLTFAnimationsOnce(scene, animations) {
+//   const { invalidate } = useThree();
+//   const mixer = useMemo(() => new THREE.AnimationMixer(scene), [scene]);
+
+//   useEffect(() => {
+//     if (!mixer || !animations) return;
+
+//     const actions = animations.map((clip) => {
+//       const action = mixer.clipAction(clip);
+//       action.setLoop(THREE.LoopOnce); // Set the animation to play only once
+//       action.clampWhenFinished = true; // Keep the last frame when finished
+//       action.play();
+//       return action;
+//     });
+
+//     const handler = setInterval(() => invalidate(), 1000 / 60);
+
+//     mixer.addEventListener("finished", () => {
+//       clearInterval(handler);
+//     });
+
+//     return () => {
+//       clearInterval(handler);
+//       mixer.removeEventListener("finished");
+//     };
+//   }, [animations, mixer, invalidate]);
+
+//   useFrame((_state, delta) => mixer && mixer.update(delta));
+
+//   return mixer;
+// }
 
 // ----------------------------------------------------------------
 // if (idx == 99) {

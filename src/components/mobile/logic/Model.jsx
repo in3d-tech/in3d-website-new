@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAppContext } from "../../../context/appContext";
+// import { useAppContext } from "../../../context/appContext";
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import {
@@ -17,7 +17,7 @@ const MAX_ROTATION_SPEED = 0.05; // Maximum rotation speed
 const DECAY_FACTOR = 0.95; // Decay factor for inertia
 
 export function Model({ url, modelRef, selectedCategory }) {
-  const { isAstroModelDrawn, setIsAstroModelDrawn } = useAppContext();
+  // const { isAstroModelDrawn, setIsAstroModelDrawn } = useAppContext();
 
   const { scene, animations } = useGLTF(url);
   const mixer = useGLTFAnimations(scene, animations);
@@ -82,7 +82,7 @@ export function Model({ url, modelRef, selectedCategory }) {
       let newRotationFactor = deltaX * 0.01;
       newRotationFactor = Math.min(
         MAX_ROTATION_SPEED,
-        Math.max(-MAX_ROTATION_SPEED, newRotationFactor)
+        Math.max(-MAX_ROTATION_SPEED, newRotationFactor),
       ); // Clamp the speed
 
       setRotationFactor(newRotationFactor); // Calculate the rotation factor based on pointer movement
@@ -117,7 +117,7 @@ export function Model({ url, modelRef, selectedCategory }) {
       let newRotationFactor = deltaX * 0.01;
       newRotationFactor = Math.min(
         MAX_ROTATION_SPEED,
-        Math.max(-MAX_ROTATION_SPEED, newRotationFactor)
+        Math.max(-MAX_ROTATION_SPEED, newRotationFactor),
       ); // Clamp the speed
 
       setRotationFactor(newRotationFactor); // Calculate the rotation factor based on touch movement

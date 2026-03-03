@@ -10,8 +10,6 @@ import useCheckIsMobileScreen from "./components/common/useCheckIsMobile";
 import Cursor from "./components/common/cursor";
 import { DesktopView } from "./components/desktop/DesktopView";
 import { MobileView } from "./components/mobile/MobileView";
-// import { useTranslation } from "react-i18next";
-// import { ChangeLanguage } from "./components/navs/ChangeLanguage";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,16 +21,10 @@ ScrollTrigger.defaults({
 extend({ PerspectiveCamera: THREE.PerspectiveCamera });
 
 function App() {
-  // const {
-  //   i18n: { changeLanguage, language },
-  // } = useTranslation();
-  // const [currentLanguage, setCurrentLanguage] = useState(language);
   const [isMobileViewOnly, setIsMobileViewOnly] = useState(null);
   const [showLoadingScreen, setShowloadingScreen] = useState(true);
 
   const isMobileDimensions = useCheckIsMobileScreen();
-
-  // document.body.style.cursor = "none";
 
   useEffect(() => {
     if (isMobileDimensions) {
@@ -52,11 +44,6 @@ function App() {
 
       {isMobileViewOnly ? null : <Cursor />}
       {isMobileViewOnly ? <MobileView /> : <DesktopView />}
-      {/* <ChangeLanguage
-        setCurrentLanguage={setCurrentLanguage}
-        changeLanguage={changeLanguage}
-        currentLanguage={currentLanguage}
-      /> */}
     </>
   );
 }

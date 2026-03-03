@@ -78,8 +78,15 @@ function MappedModels({
 
   // if (!isAstroModelDrawn) return null;
 
+  // Initialize models as hidden so they don't block the screen
+  useEffect(() => {
+    if (currentRef.current) {
+      currentRef.current.visible = false;
+    }
+  }, [currentRef]);
+
   const { scene, animations } = useGLTF(model.url);
-  const mixer = useGLTFAnimations(scene, animations);
+  const mixer = useGLTFAnimations(scene, animations, currentRef);
   // const { active } = useProgress();
   const industryModel = 0;
 
@@ -94,12 +101,12 @@ function MappedModels({
   if (true) {
     // console.log(model);
     const { scene: testScene, animations: testAnimations } = useGLTF(
-      headlines[idx].url
+      headlines[idx].url,
     );
     scene2 = testScene;
 
     animations2 = testAnimations;
-    mixer2 = useGLTFAnimationsOnce(scene2, animations2);
+    mixer2 = useGLTFAnimationsOnce(scene2, animations2, currentRef);
     scene2.traverse((child) => {
       if (child.isMesh) {
         // child.material = new THREE.MeshStandardMaterial({
@@ -141,15 +148,41 @@ function MappedModels({
         // markers: true,
         preventOverlaps: isInstantScroll ? true : false,
         // fastScrollEnd: true, // 2500 is default,
+        // onEnter: () => {
+        //   setVisibleModels([idx - 1, idx]);
+        //   const areaObj = { ...scrollArea };
+        //   areaObj.currentSection = model.onEnter.currentSection;
+        //   areaObj.prevSection = model.onEnter.prevSection;
+        //   setScrollArea(areaObj);
+        // },
+        // onLeaveBack: () => {
+        //   setVisibleModels(idx == industryModel ? [] : [idx, idx - 1]);
+        //   const areaObj = { ...scrollArea };
+        //   areaObj.currentSection = model.onLeave.currentSection;
+        //   areaObj.prevSection = model.onLeave.prevSection;
+        //   setScrollArea(areaObj);
+        // },
         onEnter: () => {
-          setVisibleModels([idx - 1, idx]);
+          // DIRECT MUTATION: Replaces setVisibleModels([idx - 1, idx])
+          // Instantly makes the current and previous model visible
+          if (currentRef.current) currentRef.current.visible = true;
+          if (prevRef.current) prevRef.current.visible = true;
+
           const areaObj = { ...scrollArea };
           areaObj.currentSection = model.onEnter.currentSection;
           areaObj.prevSection = model.onEnter.prevSection;
           setScrollArea(areaObj);
         },
         onLeaveBack: () => {
-          setVisibleModels(idx == industryModel ? [] : [idx, idx - 1]);
+          // DIRECT MUTATION: Replaces setVisibleModels(idx == industryModel ? [] : [idx, idx - 1])
+          // When scrolling back up, hide this model, but keep the previous one visible
+          if (idx === industryModel) {
+            if (currentRef.current) currentRef.current.visible = false;
+          } else {
+            if (currentRef.current) currentRef.current.visible = false;
+            if (prevRef.current) prevRef.current.visible = true;
+          }
+
           const areaObj = { ...scrollArea };
           areaObj.currentSection = model.onLeave.currentSection;
           areaObj.prevSection = model.onLeave.prevSection;
@@ -232,7 +265,7 @@ function MappedModels({
         dispose={null}
         scale={model.scale}
         position={model.position}
-        visible={visibleModels.includes(idx)}
+        // visible={visibleModels.includes(idx)}
         rotation={model.rotation}
       >
         {/* <Html position={[-0.6, 1.3, 0]} transform> //Medicine */}

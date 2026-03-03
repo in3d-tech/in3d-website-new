@@ -23,7 +23,6 @@ import {
   preloadImage,
   firstImagesToLoad,
   preloadVideos,
-  // secondImagesToLoad,
 } from "../../../common/cacheImages.js";
 
 const MappedModels = lazy(() => import("./MappedModels.jsx"));
