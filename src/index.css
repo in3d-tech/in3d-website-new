@@ -511,7 +511,8 @@ h2 {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: flex-start;
-  position: fixed;
+  /* position: fixed; */
+  position: absolute;
   top: 0;
   right: 0;
   z-index: 1;

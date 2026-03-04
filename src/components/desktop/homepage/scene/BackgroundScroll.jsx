@@ -129,7 +129,11 @@ export function BackgroundScroll({
           {categories.map((title, idx) => (
             // <Overlay index={idx} title={title} />
             // idx == 0 ? (
-            <div key={idx} className={textAnimation}>
+            <div
+              key={idx}
+              className={textAnimation}
+              // style={{ border: "2p solid orange", zIndex: 5000 }}
+            >
               <TextScrambleComponentHover
                 handleClick={() => scrollToElementById(idx + 1)}
                 text={

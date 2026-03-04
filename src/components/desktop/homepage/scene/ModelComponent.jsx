@@ -165,10 +165,32 @@ export function AstroModel({
       onEnter: () => {
         const areaObj = { ...scrollArea, currentSection: 2.5, prevSection: 2 };
         setScrollArea(areaObj);
+        setTextAnimation(true);
       },
       onLeaveBack: () => {
         const areaObj = { ...scrollArea, currentSection: 2, prevSection: 2.5 };
         setScrollArea(areaObj);
+      },
+    });
+
+    const textAnimationTrigger = ScrollTrigger.create({
+      trigger: ".section-three",
+      start: "top 5%", // 👈 Fires right at the end of the 2.5s scroll!
+      onEnter: () => {
+        // Apply the actual CSS class name, not 'true'!
+        setTextAnimation("category-title");
+      },
+      onLeaveBack: () => {
+        // Reset the text so it can fade in again next time
+        setTextAnimation("category-title-no-opacity");
+      },
+      onLeave: () => {
+        // Hide it when scrolling down to the Industry model
+        setTextAnimation("category-title-no-opacity");
+      },
+      onEnterBack: () => {
+        // Fade it back in when scrolling up from the Industry model
+        setTextAnimation("category-title");
       },
     });
 
@@ -178,6 +200,7 @@ export function AstroModel({
       timeline3.kill();
       uiTrigger2.kill();
       uiTrigger3.kill();
+      textAnimationTrigger.kill();
     };
   }, [astroRef]); // 👈 Remember, no isInstantScroll in the array!
 
