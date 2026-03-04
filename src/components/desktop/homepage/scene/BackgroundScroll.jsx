@@ -122,28 +122,26 @@ export function BackgroundScroll({
         ) : null}
       </section>
       <section className="section section-three">
-        {fixed ? (
-          <div
-            ref={titlesContainerRef}
-            className={`home-categories-wrapper ${hovered}`}
-          >
-            {categories.map((title, idx) => (
-              // <Overlay index={idx} title={title} />
-              // idx == 0 ? (
-              <div key={idx} className={textAnimation}>
-                <TextScrambleComponentHover
-                  handleClick={() => scrollToElementById(idx + 1)}
-                  text={
-                    title == "artificalIntelligence"
-                      ? "ARTIFICAL INTELLIGENCE"
-                      : title.toUpperCase()
-                  }
-                  setIsCursorHovering={setIsCursorHovering}
-                />
-              </div>
-            ))}
-          </div>
-        ) : null}
+        <div
+          ref={titlesContainerRef}
+          className={`home-categories-wrapper ${hovered}`}
+        >
+          {categories.map((title, idx) => (
+            // <Overlay index={idx} title={title} />
+            // idx == 0 ? (
+            <div key={idx} className={textAnimation}>
+              <TextScrambleComponentHover
+                handleClick={() => scrollToElementById(idx + 1)}
+                text={
+                  title == "artificalIntelligence"
+                    ? "ARTIFICAL INTELLIGENCE"
+                    : title.toUpperCase()
+                }
+                setIsCursorHovering={setIsCursorHovering}
+              />
+            </div>
+          ))}
+        </div>
       </section>
       <section
         id="sectionTwoHalf"

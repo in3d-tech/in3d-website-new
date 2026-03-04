@@ -3,7 +3,6 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { useAppContext } from "../../../../context/appContext";
 import { useGLTFAnimations, useGLTFAnimationsOnce } from "./ModelComponent";
-import { useFrame } from "@react-three/fiber";
 // import * as THREE from "three";
 // import { getSparkleColour } from "./ornaments/getSparkleColour";
 // ---------------------- All other models ----------------------------
@@ -116,28 +115,10 @@ function MappedModels({
     });
   }
 
-  useFrame(() => {
-    if (idx == 0 && !isCustomizedRendered.current) {
-      // Check if the object is visible in the scene and loaded - not working
-      // isCustomizedRendered.current = true;
-      // setCustomizeHasRendered(true);
-      // if (currentRef.current && scene) {
-      //   // Check if all objects in the scene have been rendered - not working
-      //   const fullyRendered = scene.children.every((child) => child.visible);
-      //   if (fullyRendered && active === false && scene) {
-      //     // Object is fully rendered
-      //     isCustomizedRendered.current = true;
-      //     setCustomizeHasRendered(true);
-      //     // setTimeout(() => setIsAstroModelDrawn(true), 1000);
-      //     console.log("industry object is fully rendered!");
-      //   }
-      // }
-    }
-  });
-
   useEffect(() => {
     let timeline = gsap.timeline({
-      defaults: { ease: "power1.out" },
+      // defaults: { ease: "power1.out" },
+      defaults: { ease: "none" },
 
       scrollTrigger: {
         trigger: `.${model.section}`,
@@ -145,29 +126,15 @@ function MappedModels({
         endTrigger: `.${model.section}`,
         end: "top top",
         scrub: true,
-        snap: {
-          snapTo: [0, 1],
-          duration: { min: 0.2, max: 0.8 }, // How long the magnetic pull takes
-          delay: 0.1, // Wait 100ms after the user's scroll wheel stops
-          ease: "power1.inOut",
-        },
+        // snap: {
+        //   snapTo: [0, 1],
+        //   duration: { min: 0.2, max: 0.8 }, // How long the magnetic pull takes
+        //   delay: 0.1, // Wait 100ms after the user's scroll wheel stops
+        //   ease: "power1.inOut",
+        // },
         // markers: true,
-        preventOverlaps: isInstantScroll ? true : false,
-        // fastScrollEnd: true, // 2500 is default,
-        // onEnter: () => {
-        //   setVisibleModels([idx - 1, idx]);
-        //   const areaObj = { ...scrollArea };
-        //   areaObj.currentSection = model.onEnter.currentSection;
-        //   areaObj.prevSection = model.onEnter.prevSection;
-        //   setScrollArea(areaObj);
-        // },
-        // onLeaveBack: () => {
-        //   setVisibleModels(idx == industryModel ? [] : [idx, idx - 1]);
-        //   const areaObj = { ...scrollArea };
-        //   areaObj.currentSection = model.onLeave.currentSection;
-        //   areaObj.prevSection = model.onLeave.prevSection;
-        //   setScrollArea(areaObj);
-        // },
+        // preventOverlaps: isInstantScroll ? true : false,
+
         onEnter: () => {
           // DIRECT MUTATION: Replaces setVisibleModels([idx - 1, idx])
           // Instantly makes the current and previous model visible
@@ -234,7 +201,7 @@ function MappedModels({
     return () => {
       timeline.kill();
     };
-  }, [currentRef, isInstantScroll]);
+  }, [currentRef]);
 
   function handleHalfwayPoint() {
     // console.log("Halfway point reached!");

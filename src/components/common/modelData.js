@@ -17,7 +17,7 @@ export const Model_Data = [
       currentSection: 3,
       prevSection: 2,
     },
-    onLeave: { currentSection: 2, prevSection: 3 },
+    onLeave: { currentSection: 2.5, prevSection: 3 },
     scale: [3, 3, 3],
     position: [13.5, -5, -0.2],
 
@@ -28,14 +28,14 @@ export const Model_Data = [
         ?.to(
           currentRef.current.position,
           { y: -3.75, x: 2.5, z: 1.5 },
-          "simultaneously"
+          "simultaneously",
         )
         .to(textRef.current.position, { y: 1.5 }, "simultaneously")
         .to(currentRef.current.rotation, { y: Math.PI + 0.3 }, "simultaneously")
         .to(
           prevRef.current.position,
           { x: -18, y: 0, z: -5 },
-          "simultaneously"
+          "simultaneously",
         ),
     textUrl: "/assets/models/fonts/industry-thin.glb",
     textPosition: [0, 4.5, 0],
@@ -65,7 +65,7 @@ export const Model_Data = [
         ?.to(
           currentRef.current.position,
           { x: 4.55, z: -1, y: -3 },
-          "simultaneously"
+          "simultaneously",
         )
         .to(textRef.current.position, { y: 3, z: -4 }, "simultaneously")
         .to(currentRef.current.rotation, { y: 0 }, "simultaneously")
@@ -100,12 +100,12 @@ export const Model_Data = [
         ?.to(
           currentRef.current.position,
           { y: -4, x: 1, z: -0.2 },
-          "simultaneously"
+          "simultaneously",
         )
         .to(
           textRef.current.position,
           { x: -0.7, y: 1, z: -2 },
-          "simultaneously"
+          "simultaneously",
         )
         .to(currentRef.current.rotation, { y: -0.9 }, "simultaneously")
         .to(prevRef.current.position, { y: -8, x: -12 }, "simultaneously")
@@ -134,7 +134,7 @@ export const Model_Data = [
         ?.to(
           currentRef.current.position,
           { y: -0.5, x: -1.3, z: 3.2 },
-          "simultaneously"
+          "simultaneously",
         )
         .to(textRef.current.position, { x: 0.5, y: -0.39 }, "simultaneously")
         .to(currentRef.current.rotation, { y: Math.PI + 1.3 }, "simultaneously")
@@ -164,14 +164,14 @@ export const Model_Data = [
         ?.to(
           currentRef.current.position,
           { y: -1.6, x: 0.5, z: 4.2 },
-          "simultaneously"
+          "simultaneously",
         )
         .to(textRef.current.position, { y: 1, z: -2 }, "simultaneously")
         .to(currentRef.current.rotation, { y: -3 }, "simultaneously")
         .to(
           prevRef.current.position,
           { x: -5, y: -0.5, z: 3.5 },
-          "simultaneously"
+          "simultaneously",
         )
         .to(prevRef.current.rotation, { y: Math.PI + 1 }, "simultaneously"),
     textUrl: "/assets/models/fonts/ai-thin.glb",
@@ -199,7 +199,7 @@ export const Model_Data = [
         ?.to(
           currentRef.current.position,
           { y: -1.2, x: -1.5, z: 2.8 },
-          "simultaneously"
+          "simultaneously",
         )
         .to(textRef.current.position, { y: 2 }, "simultaneously")
         .to(currentRef.current.rotation, { y: 1 }, "simultaneously")
@@ -230,7 +230,7 @@ export const Model_Data = [
         .to(
           currentRef.current.position,
           { y: -3, x: 1.5, z: 3 },
-          "simultaneously"
+          "simultaneously",
         )
         .to(textRef.current.position, { z: 0 }, "simultaneously")
 
@@ -238,7 +238,7 @@ export const Model_Data = [
         .to(
           prevRef.current.position,
           { x: -0.2, y: -1.7, z: 6 },
-          "simultaneously"
+          "simultaneously",
         )
         .to(prevRef.current.rotation, { y: -2.2 }, "simultaneously"),
     textUrl: "/assets/models/fonts/customization-thin.glb",

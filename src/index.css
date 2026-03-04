@@ -25,6 +25,10 @@
   --cursor-outline-size: 40px;
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -34,6 +38,8 @@ body {
   overflow-y: hidden;
   overflow-x: hidden;
   cursor: none;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 /* --------- cube -------- */
@@ -147,7 +153,9 @@ body {
   border-radius: 0 !important;
   opacity: 0;
   transform: translate(-50%, -50%);
-  transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out;
+  transition:
+    opacity 0.15s ease-in-out,
+    transform 0.15s ease-in-out;
 }
 
 #cursor-dot {
@@ -224,7 +232,9 @@ body {
     rgba(9, 6, 5, 0.401) 60%
   ); */
   /* background-size: cover;  */
-  animation: moveIt 10s linear infinite, fadeInAlmost 0.4s ease-in-out forwards;
+  animation:
+    moveIt 10s linear infinite,
+    fadeInAlmost 0.4s ease-in-out forwards;
   /* opacity: 0; */
   height: 100%;
 }
@@ -669,7 +679,9 @@ h2 {
 }
 
 .letter {
-  transition: transform 0.5s ease, position 0.5s ease;
+  transition:
+    transform 0.5s ease,
+    position 0.5s ease;
 }
 
 .animated-text-container {
@@ -708,7 +720,9 @@ h2 {
   background: linear-gradient(145deg, #f0f0f0, #c0c0c0);
   border-radius: 2px;
   transition: all 400ms cubic-bezier(0.84, 0.06, 0.52, 1.8);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 2px 5px rgba(0, 0, 0, 0.2),
+    inset 0 1px 2px rgba(0, 0, 0, 0.1);
   transform-style: preserve-3d;
 }
 
@@ -851,9 +865,9 @@ nav.show {
 
 section {
   width: 100%;
-  height: 800vh;
+  /* height: 800vh; */
+  height: 100vh;
   position: relative;
-  /* border: 1px solid black; */
 }
 
 .section-one {
@@ -862,7 +876,7 @@ section {
 }
 
 .section-three {
-  height: 30vh;
+  /* height: 30vh; */
   /* border: 2px solid red; */
 }
 
@@ -871,12 +885,13 @@ section {
   border: 1px solid pink;
 }
 
-.section-three-half {
-  /* background: black; */
-  opacity: 1;
-  height: 40vh;
-  /* border: 5px solid orange; */
-}
+/* .section-three-half { */
+/* background: black; */
+/* opacity: 1; */
+/* display: none; */
+/* height: 40vh; */
+/* border: 5px solid orange; */
+/* } */
 
 .section-three {
   /* background-color: crimson; */
@@ -1289,7 +1304,9 @@ section {
   width: 0;
   right: 0;
   position: absolute;
-  transition: width 0.7s ease-in-out, opacity 0.7s ease-in-out;
+  transition:
+    width 0.7s ease-in-out,
+    opacity 0.7s ease-in-out;
   border-right: 1px solid rgba(255, 255, 255, 1);
   z-index: 10;
   overflow-y: auto;
@@ -1531,7 +1548,9 @@ section {
   border-radius: 20px;
   opacity: 0.8;
   /* transition: background-color 1s ease-in-out; */
-  transition: background-color 1s ease-in-out, color 1s ease-in-out;
+  transition:
+    background-color 1s ease-in-out,
+    color 1s ease-in-out;
 }
 
 .contact-us-send-text-btn:hover {
@@ -1636,7 +1655,9 @@ section {
     .shadow {
       transform: scale(1, -1);
       color: #000103;
-      transition: ease-in 5s, ease-out 5s;
+      transition:
+        ease-in 5s,
+        ease-out 5s;
     }
     &:hover {
       .letter {
@@ -1670,7 +1691,9 @@ section {
     .shadow {
       transform: scale(1, -1);
       color: #999;
-      transition: ease-in 5s, ease-out 5s;
+      transition:
+        ease-in 5s,
+        ease-out 5s;
     }
     &:hover {
       .letter {
@@ -1988,7 +2011,9 @@ section {
   text-transform: lowercase;
   animation: transformCase 1.2s forwards;
   animation-delay: 0.75s;
-  transition: font-size 1s ease, color 1.3s ease forwards;
+  transition:
+    font-size 1s ease,
+    color 1.3s ease forwards;
   transition-delay: 1s;
 }
 
@@ -2130,7 +2155,9 @@ section {
   /* bottom: 30rem; */
   /* right: 40rem; */
   z-index: 30;
-  transition: top 0.75s, right 0.75s; /* Define transition for top and right properties */
+  transition:
+    top 0.75s,
+    right 0.75s; /* Define transition for top and right properties */
 }
 
 .fab-wrapper.centered {
@@ -2368,7 +2395,9 @@ h1 + hr {
   border-radius: 50%;
   opacity: 0;
   transform: translate(-50%, -50%);
-  transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out;
+  transition:
+    opacity 0.15s ease-in-out,
+    transform 0.15s ease-in-out;
 }
 
 #cursor-dot {

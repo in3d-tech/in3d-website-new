@@ -119,6 +119,7 @@ function HomepageContent({ scrollToElementById }) {
     const backgrounds = {
       1: 'url("/assets/images/backgrounds/Astro_1_Background.webp")',
       2: 'url("/assets/images/backgrounds/Astro_1_Background.webp")',
+      2.5: 'url("/assets/images/backgrounds/Astro_1_Background.webp")',
       3: 'url("/assets/images/backgrounds/taasia/taasia_bg.jpg")',
       4: 'url("/assets/images/backgrounds/medicine/medicine_bg.jpg")',
       5: 'url("/assets/images/backgrounds/microsoft/microsoft_bg.jpg")',
@@ -142,10 +143,12 @@ function HomepageContent({ scrollToElementById }) {
 
   useEffect(() => {
     let timeline = gsap.timeline({
-      defaults: { ease: "power1.out" },
+      // defaults: { ease: "power1.out" },
+      defaults: { ease: "none" },
       scrollTrigger: {
         trigger: ".section-three",
-        start: "top top",
+        // start: "top top",
+        start: "top 70%",
         endTrigger: ".section-three",
         end: "bottom bottom",
         scrub: true,
@@ -162,29 +165,29 @@ function HomepageContent({ scrollToElementById }) {
     });
   }, [textContainerRef]);
 
-  useEffect(() => {
-    const titlesContainer = titlesContainerRef.current;
+  // useEffect(() => {
+  //   const titlesContainer = titlesContainerRef.current;
 
-    let titlesTimeline = gsap.timeline({
-      defaults: { ease: "power1.out" },
-      scrollTrigger: {
-        trigger: ".section-three",
-        start: "top bottom",
-        endTrigger: ".section-four",
-        end: "top bottom",
-        scrub: 1,
-        // markers: true,
-        onEnter: () => {
-          setFixed(true);
-        },
-        onLeaveBack: () => {
-          setFixed(false);
-        },
-        onLeave: () => setFixed(false),
-        onEnterBack: () => setFixed(true),
-      },
-    });
-  }, [titlesContainerRef]);
+  //   let titlesTimeline = gsap.timeline({
+  //     defaults: { ease: "power1.out" },
+  //     scrollTrigger: {
+  //       trigger: ".section-three",
+  //       start: "top bottom",
+  //       endTrigger: ".section-four",
+  //       end: "top bottom",
+  //       scrub: 1,
+  //       // markers: true,
+  //       onEnter: () => {
+  //         setFixed(true);
+  //       },
+  //       onLeaveBack: () => {
+  //         setFixed(false);
+  //       },
+  //       onLeave: () => setFixed(false),
+  //       onEnterBack: () => setFixed(true),
+  //     },
+  //   });
+  // }, [titlesContainerRef]);
 
   useEffect(() => {
     if (visibleText) {
