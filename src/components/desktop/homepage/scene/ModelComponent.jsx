@@ -132,13 +132,13 @@ export function AstroModel({
         astroRef.current.position,
         // 👇 NEW: The "In-between" Position!
         // I've averaged out your start and end coordinates as a starting point.
-        { x: -5.5, y: -19.2, z: 4 },
+        { x: -8.5, y: -19.2, z: 2 },
         "simultaneously",
       )
       .to(
         astroRef.current.rotation,
         // 👇 NEW: The "In-between" Rotation!
-        { x: 0.25, y: Math.PI + 0.65, z: 0 },
+        { x: 0.25, y: Math.PI + 0.2, z: 0 },
         "simultaneously",
       );
 

@@ -223,7 +223,10 @@ function HomepageContent({ scrollToElementById, scrollToTop }) {
     );
   });
 
-  const indicatorColor = isUserScrolling ? "darkred" : "#00a8ff"; // Blue when enabled
+  const cursorIndicatorColor = isUserScrolling
+    ? "darkred"
+    : "rgb(255,255,255,0.6)"; // "#00a8ff"; // Blue when enabled
+  const listIndicatorColor = isUserScrolling ? "darkred" : "#00a8ff"; // Blue when enabled
 
   return (
     <div className="scene one" style={{}} ref={containerRef}>
@@ -251,7 +254,7 @@ function HomepageContent({ scrollToElementById, scrollToTop }) {
               alt="sceneLogo"
             />
           </span>
-          {scrollArea.currentSection >= 3 && (
+          {scrollArea.currentSection != 2.5 && (
             <div
               onClick={() => scrollToElementById(0)} // 0 + 2 = index 2 (section-three / Categories)
               onMouseOver={() => setIsCursorHovering(true)}
@@ -261,8 +264,7 @@ function HomepageContent({ scrollToElementById, scrollToTop }) {
                 maxHeight: "40px",
                 maxWidth: "30px",
                 // border: "2px solid yellow",
-                cursor: "pointer",
-                color: indicatorColor,
+                color: listIndicatorColor,
                 opacity: 0.7,
                 transition: "opacity 0.2s ease, transform 0.2s ease",
                 display: "flex",
@@ -323,7 +325,7 @@ function HomepageContent({ scrollToElementById, scrollToTop }) {
                   width: "30px",
                   height: "55px",
                   borderRadius: "25px", // 👈 Forces the rounded pill shape
-                  boxShadow: `inset 0 0 0 2px ${indicatorColor}`,
+                  boxShadow: `inset 0 0 0 2px ${cursorIndicatorColor}`,
                   opacity: 1,
                 }}
               >
@@ -337,7 +339,7 @@ function HomepageContent({ scrollToElementById, scrollToTop }) {
                     height: "8px",
                     marginLeft: "-4px", // Centers the 8px dot exactly
                     borderRadius: "50%", // 👈 Forces it to be a perfect circle
-                    backgroundColor: indicatorColor,
+                    backgroundColor: cursorIndicatorColor,
                   }}
                 ></div>
               </div>
