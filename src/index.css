@@ -2070,6 +2070,43 @@ section {
   }
 }
 
+/* Dynamic Scroll Indicator under Logo */
+.icon-scroll-dynamic {
+  width: 40px;
+  height: 70px;
+  /* Uses the CSS variable passed from React, defaults to white */
+  /* box-shadow: inset 0 0 0 2px var(--indicator-color, #fff); */
+  border-radius: 25px;
+  position: relative;
+  transition: box-shadow 0.3s ease; /* Smooth fade when changing colors */
+}
+
+/* .icon-scroll-dynamic:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: var(--indicator-color, #fff);
+  margin-left: -4px;
+  top: 8px;
+  border-radius: 4px;
+  animation: scroll 1.5s infinite;
+  transition: background 0.3s ease;
+} */
+
+.icon-scroll-dot {
+  position: absolute;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  top: 8px;
+  border-radius: 4px;
+  animation: scroll 1.5s infinite;
+  transition: background-color 0.3s ease; /* Smooth color transition */
+}
+
 .down-indicator-wrapper {
   margin-top: 1.5em;
   margin-left: 2em;
@@ -2475,7 +2512,7 @@ h1 + hr {
   margin-left: 0;
 
   position: absolute;
-  bottom: -20px;
+  /* bottom: -20px; */
   left: 0;
   z-index: -1;
   display: block;

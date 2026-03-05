@@ -12,7 +12,8 @@ const LazySelectedContent = lazy(
 );
 
 export function DesktopView() {
-  const { selectedCategory, setIsInstantScroll } = useAppContext();
+  const { selectedCategory, setIsInstantScroll, setIsUserScrolling } =
+    useAppContext();
 
   const lenis = useLenis();
 
@@ -36,31 +37,64 @@ export function DesktopView() {
     "eleven", // 10: Contact Us / Astro Returns
   ];
 
-  const goToSection = (direction) => {
+  const navigateToSectionIndex = (targetIdx) => {
     if (isAnimating.current || !lenis) return;
 
-    let nextIdx = currentSectionIdx.current + direction;
-    if (nextIdx < 0) nextIdx = 0;
-    if (nextIdx >= allSections.length) nextIdx = allSections.length - 1;
-    if (nextIdx === currentSectionIdx.current) return;
+    // Bounds checking
+    if (targetIdx < 0) targetIdx = 0;
+    if (targetIdx >= allSections.length) targetIdx = allSections.length - 1;
+    if (targetIdx === currentSectionIdx.current) return;
 
     isAnimating.current = true;
-    currentSectionIdx.current = nextIdx;
+    currentSectionIdx.current = targetIdx; // Keeps state perfectly in sync!
     setIsInstantScroll(true);
+    setIsUserScrolling(true);
 
-    lenis.scrollTo(`.section-${allSections[nextIdx]}`, {
+    lenis.scrollTo(`.section-${allSections[targetIdx]}`, {
       duration: 3.0,
-      lock: true, // 👇 1. THIS IS CRITICAL: Locks user input while scrolling
+      lock: true, // 👈 CRITICAL: Apply lock to ALL programmatic scrolls
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       onComplete: () => {
         setIsInstantScroll(false);
-        // 👇 2. Increased cooldown to 600ms to eat up leftover trackpad momentum
         setTimeout(() => {
           isAnimating.current = false;
-        }, 600);
+          setIsUserScrolling(false);
+        }, 600); // Keep your 600ms cooldown for consistency
       },
     });
   };
+
+  const goToSection = (direction) => {
+    navigateToSectionIndex(currentSectionIdx.current + direction);
+  };
+
+  // const goToSection = (direction) => {
+  //   if (isAnimating.current || !lenis) return;
+
+  //   let nextIdx = currentSectionIdx.current + direction;
+  //   if (nextIdx < 0) nextIdx = 0;
+  //   if (nextIdx >= allSections.length) nextIdx = allSections.length - 1;
+  //   if (nextIdx === currentSectionIdx.current) return;
+
+  //   isAnimating.current = true;
+  //   currentSectionIdx.current = nextIdx;
+  //   setIsInstantScroll(true);
+  //   setIsUserScrolling(true);
+
+  //   lenis.scrollTo(`.section-${allSections[nextIdx]}`, {
+  //     duration: 3.0,
+  //     lock: true, // 👇 1. THIS IS CRITICAL: Locks user input while scrolling
+  //     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  //     onComplete: () => {
+  //       setIsInstantScroll(false);
+  //       // 👇 2. Increased cooldown to 600ms to eat up leftover trackpad momentum
+  //       setTimeout(() => {
+  //         isAnimating.current = false;
+  //         setIsUserScrolling(false);
+  //       }, 600);
+  //     },
+  //   });
+  // };
 
   useEffect(() => {
     // 1. Intercept mouse wheel / trackpad
@@ -110,93 +144,14 @@ export function DesktopView() {
     };
   }, [lenis]);
 
-  // useEffect(() => {
-  //   // Intercept mouse wheel events
-  //   const handleWheel = (e) => {
-  //     // 👇 3. UNCONDITIONALLY prevent native scroll.
-  //     // We are completely highjacking the wheel!
-  //     e.preventDefault();
-
-  //     if (isAnimating.current) return;
-
-  //     // 👇 4. Sensitivity threshold (ignores tiny accidental micro-touches)
-  //     if (Math.abs(e.deltaY) < 15) return;
-
-  //     const direction = e.deltaY > 0 ? 1 : -1;
-  //     goToSection(direction);
-  //   };
-
-  //   // passive: false is required so we can call e.preventDefault()
-  //   window.addEventListener("wheel", handleWheel, { passive: false });
-
-  //   return () => {
-  //     window.removeEventListener("wheel", handleWheel);
-  //   };
-  // }, [lenis]); // Make sure this dependency array is just [lenis]
-
-  // 👇 Update your click navigation to match the new array indexing
   const scrollToElementById = (categoryIdx) => {
-    if (isAnimating.current || !lenis) return;
-
-    isAnimating.current = true;
-    // Category 0 ("Industry") needs to map to section "four" (index 3)
-    const targetIdx = categoryIdx + 2;
-    currentSectionIdx.current = targetIdx;
-    setIsInstantScroll(true);
-
-    lenis.scrollTo(`.section-${allSections[targetIdx]}`, {
-      duration: 3.0,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      onComplete: () => {
-        setIsInstantScroll(false);
-        setTimeout(() => {
-          isAnimating.current = false;
-        }, 100);
-      },
-    });
+    // Keep your existing math (categoryIdx + 2)
+    navigateToSectionIndex(categoryIdx + 2);
   };
 
-  // useEffect(() => {
-  //   // Intercept mouse wheel events
-  //   const handleWheel = (e) => {
-  //     // If we are already animating, prevent default scrolling behavior entirely
-  //     if (isAnimating.current) {
-  //       e.preventDefault();
-  //       return;
-  //     }
-
-  //     // Determine direction (1 for down, -1 for up)
-  //     const direction = e.deltaY > 0 ? 1 : -1;
-  //     goToSection(direction);
-  //   };
-
-  //   // Passive: false is required so we can call e.preventDefault()
-  //   window.addEventListener("wheel", handleWheel, { passive: false });
-
-  //   return () => {
-  //     window.removeEventListener("wheel", handleWheel);
-  //   };
-  // }, [lenis]);
-
-  // 2. FOR CLICKING: Handles your background text navigation
-  // const scrollToElementById = (idx) => {
-  //   if (isAnimating.current || !lenis) return;
-
-  //   isAnimating.current = true;
-  //   currentSectionIdx.current = idx; // Sync the tracker with the clicked index!
-  //   setIsInstantScroll(true);
-
-  //   lenis.scrollTo(`#section${sections[idx]}`, {
-  //     duration: 1.5,
-  //     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  //     onComplete: () => {
-  //       setIsInstantScroll(false);
-  //       setTimeout(() => {
-  //         isAnimating.current = false;
-  //       }, 100);
-  //     },
-  //   });
-  // };
+  const scrollToTop = () => {
+    navigateToSectionIndex(0); // 0 is the index for "section-one"
+  };
 
   return (
     <>
@@ -210,7 +165,10 @@ export function DesktopView() {
 
       <Suspense fallback={null}>
         <ScrollProgressBar />
-        <LazyHomepageContent scrollToElementById={scrollToElementById} />
+        <LazyHomepageContent
+          scrollToElementById={scrollToElementById}
+          scrollToTop={scrollToTop}
+        />
       </Suspense>
     </>
   );

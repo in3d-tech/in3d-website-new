@@ -2,8 +2,7 @@ import * as React from "react";
 import { useAppContext } from "../../context/appContext";
 
 function Cursor() {
-  const { isCursorHovering, isUserScrolling, setIsUserScrolling } =
-    useAppContext();
+  const { isCursorHovering } = useAppContext();
   const cursorDotOutline = React.useRef(null);
   const cursorDot = React.useRef(null);
   const requestRef = React.useRef();
@@ -45,20 +44,6 @@ function Cursor() {
   const onResize = () => {
     setWidth(window.innerWidth);
     setHeight(window.innerHeight);
-  };
-
-  const handleScroll = (event) => {
-    // const { clientX: x, clientY: y } = event;
-    // console.log({ x });
-    // console.log({ y });
-    // onMouseMove(event);
-    // console.log("Scroll Position:", { x: window.scrollX, y: window.scrollY });
-    setIsUserScrolling(true);
-  };
-
-  const handleScrollEnd = (event) => {
-    // onMouseMove(event);
-    setIsUserScrolling(false);
   };
 
   React.useEffect(() => {

@@ -131,7 +131,7 @@ export function BackgroundScroll({
             // idx == 0 ? (
             <div
               key={idx}
-              className={textAnimation}
+              className={`${textAnimation}`}
               // style={{ border: "2p solid orange", zIndex: 5000 }}
             >
               <TextScrambleComponentHover

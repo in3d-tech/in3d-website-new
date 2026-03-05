@@ -37,7 +37,7 @@ const hoveredTitleLight = {
   customization: "",
 };
 
-function HomepageContent({ scrollToElementById }) {
+function HomepageContent({ scrollToElementById, scrollToTop }) {
   const [visibleModels, setVisibleModels] = useState([]);
   const [visibleText, setVisibleText] = useState(false);
   const [shouldFadeIn, setShouldFadeIn] = useState(false);
@@ -58,6 +58,7 @@ function HomepageContent({ scrollToElementById }) {
     videosPreloaded,
     setVideosPreloaded,
     setIsCursorHovering,
+    isUserScrolling,
   } = useAppContext();
 
   const containerRef = useRef(null);
@@ -165,30 +166,6 @@ function HomepageContent({ scrollToElementById }) {
     });
   }, [textContainerRef]);
 
-  // useEffect(() => {
-  //   const titlesContainer = titlesContainerRef.current;
-
-  //   let titlesTimeline = gsap.timeline({
-  //     defaults: { ease: "power1.out" },
-  //     scrollTrigger: {
-  //       trigger: ".section-three",
-  //       start: "top bottom",
-  //       endTrigger: ".section-four",
-  //       end: "top bottom",
-  //       scrub: 1,
-  //       // markers: true,
-  //       onEnter: () => {
-  //         setFixed(true);
-  //       },
-  //       onLeaveBack: () => {
-  //         setFixed(false);
-  //       },
-  //       onLeave: () => setFixed(false),
-  //       onEnterBack: () => setFixed(true),
-  //     },
-  //   });
-  // }, [titlesContainerRef]);
-
   useEffect(() => {
     if (visibleText) {
       setShouldFadeIn(true);
@@ -246,11 +223,7 @@ function HomepageContent({ scrollToElementById }) {
     );
   });
 
-  function scrollToTop() {
-    window.scrollTo({
-      top: 0,
-    });
-  }
+  const indicatorColor = isUserScrolling ? "darkred" : "#00a8ff"; // Blue when enabled
 
   return (
     <div className="scene one" style={{}} ref={containerRef}>
@@ -261,6 +234,9 @@ function HomepageContent({ scrollToElementById }) {
             top: "2em",
             left: "3em",
             zIndex: 1,
+            display: "flex", // 👈 Added flexbox to stack logo and indicator
+            flexDirection: "column",
+            alignItems: "center",
           }}
           className="hover14 column"
           onClick={scrollToTop}
@@ -275,6 +251,98 @@ function HomepageContent({ scrollToElementById }) {
               alt="sceneLogo"
             />
           </span>
+          {scrollArea.currentSection >= 3 && (
+            <div
+              onClick={() => scrollToElementById(0)} // 0 + 2 = index 2 (section-three / Categories)
+              onMouseOver={() => setIsCursorHovering(true)}
+              onMouseOut={() => setIsCursorHovering(false)}
+              title="Back to Categories"
+              style={{
+                maxHeight: "40px",
+                maxWidth: "30px",
+                // border: "2px solid yellow",
+                cursor: "pointer",
+                color: indicatorColor,
+                opacity: 0.7,
+                transition: "opacity 0.2s ease, transform 0.2s ease",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                marginRight: "1.5em",
+              }}
+              // Adding a quick inline hover effect for polish
+              onMouseEnter={(e) => {
+                e.currentTarget.style.opacity = 1;
+                e.currentTarget.style.transform = "scale(1.1)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.opacity = 0.7;
+                e.currentTarget.style.transform = "scale(1)";
+              }}
+            >
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="8" y1="6" x2="21" y2="6"></line>
+                <line x1="8" y1="12" x2="21" y2="12"></line>
+                <line x1="8" y1="18" x2="21" y2="18"></line>
+                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+              </svg>
+            </div>
+          )}
+          {scrollArea.currentSection >= 2 && (
+            <div
+              className="fade-in-longer"
+              style={{
+                maxHeight: "60px",
+                maxWidth: "70px",
+                transform: "scale(0.6)",
+                display: "flex",
+                justifyContent: "center",
+                // marginTop: "1em",
+                // position: "absolute",
+                // top: 0,
+                // left: "5em",
+                // alignItems: "center",
+                // border: "1px solid orange",
+              }}
+            >
+              <div
+                style={{
+                  position: "relative",
+                  marginRight: "2em",
+                  width: "30px",
+                  height: "55px",
+                  borderRadius: "25px", // 👈 Forces the rounded pill shape
+                  boxShadow: `inset 0 0 0 2px ${indicatorColor}`,
+                  opacity: 1,
+                }}
+              >
+                <div
+                  className="icon-scroll-dot"
+                  style={{
+                    position: "absolute",
+                    left: "50%",
+                    top: "8px",
+                    width: "8px",
+                    height: "8px",
+                    marginLeft: "-4px", // Centers the 8px dot exactly
+                    borderRadius: "50%", // 👈 Forces it to be a perfect circle
+                    backgroundColor: indicatorColor,
+                  }}
+                ></div>
+              </div>
+            </div>
+          )}
         </div>
       ) : null}
 
