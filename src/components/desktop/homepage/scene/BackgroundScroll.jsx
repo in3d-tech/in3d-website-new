@@ -60,8 +60,8 @@ export function BackgroundScroll({
         <div
           style={{
             position: "absolute",
-            top: "20%",
-            left: "10%",
+            top: "5%",
+            left: "15%",
             display: "flex",
             flexDirection: "column",
           }}
@@ -70,7 +70,7 @@ export function BackgroundScroll({
 
           {startExpandedAnimation ? (
             <>
-              <div className="container">
+              <div className="header-container header-hero-section">
                 <span className="text-animate simply-header">
                   <TextScrambleComponent isHomePage={true} />
                   {/* SIMPLY */}
@@ -97,7 +97,7 @@ export function BackgroundScroll({
                   style={{
                     position: "relative",
                     marginRight: "3.5em",
-                    color: "rgb(255,255,255,0.5)",
+                    color: "rgb(255,255,255,0.3)",
                   }}
                 >
                   <div style={{ fontSize: "0.6em" }}>Scroll</div>

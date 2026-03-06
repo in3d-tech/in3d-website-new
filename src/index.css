@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Michroma&display=swap");
+
 @font-face {
   font-family: Gotham;
   src: url("../src/fonts/Swiss 721 Black.otf");
@@ -2128,7 +2130,7 @@ section {
 .icon-scroll {
   width: 40px;
   height: 70px;
-  box-shadow: inset 0 0 0 1px #fff;
+  box-shadow: inset 0 0 0 1px rgb(255, 255, 255, 0.3);
   border-radius: 25px;
 }
 
@@ -2136,7 +2138,7 @@ section {
   content: "";
   width: 8px;
   height: 8px;
-  background: #fff;
+  background: rgb(255, 255, 255, 0.3);
   margin-left: -4px;
   /* top: 8px; */
   border-radius: 4px;
@@ -2168,7 +2170,7 @@ section {
   /* bottom: 4rem; */
   top: 15.2em;
   right: 8.35em;
-  color: #fff;
+  color: rgb(255, 255, 255, 0.3);
   content: "╲╱";
   font-size: 1rem;
   height: 4rem;
@@ -2182,8 +2184,49 @@ section {
   }
 }
 
-.simply-header {
+/* .simply-header {
   font-size: 1.9em;
+} */
+
+.simply-header {
+  font-family: "Michroma", sans-serif;
+  letter-spacing: 0.5em; /* Breathing room is key for "modern" looks */
+  text-transform: uppercase;
+  font-weight: 300;
+  /* Add a subtle text-shadow to mimic a HUD glow */
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(0, 150, 255, 0.2);
+}
+
+.header-container {
+  position: relative;
+  padding: 20px 40px;
+  display: inline-block;
+}
+
+/* The Corner Brackets */
+.header-container::before,
+.header-container::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.header-container::before {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.header-container::after {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
 }
 
 .simply-header:hover {
@@ -2454,8 +2497,24 @@ section {
   text-decoration: none;
 }
 
-.dud {
+/* .dud {
   color: #757575;
+} */
+
+.dud {
+  color: #00f2ff; /* Cyber cyan */
+  font-family: "Courier New", monospace;
+  opacity: 0.7;
+  filter: blur(1px); /* Gives it a data-stream feel */
+}
+
+/* Only apply these to the Hero section */
+.header-hero-section .simply-header {
+  font-size: 2.5rem;
+  background: linear-gradient(180deg, #fff 0%, #888 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.3));
 }
 
 h1 + hr {
