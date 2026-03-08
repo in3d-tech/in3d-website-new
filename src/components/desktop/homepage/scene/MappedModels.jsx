@@ -125,7 +125,7 @@ function MappedModels({
         start: "top bottom",
         endTrigger: `.${model.section}`,
         end: "top top",
-        scrub: true,
+        scrub: 1.0,
         // snap: {
         //   snapTo: [0, 1],
         //   duration: { min: 0.2, max: 0.8 }, // How long the magnetic pull takes
@@ -189,7 +189,7 @@ function MappedModels({
       scrollTrigger: {
         trigger: `.${model.section}`,
         start: "top 50%",
-        scrub: true,
+        scrub: 1.0,
         // markers: true,
 
         onEnter: () => {

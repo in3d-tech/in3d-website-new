@@ -2568,7 +2568,7 @@ section {
   /* 2.5s duration, super smooth deceleration, keeps final state forwards */
   animation: cinematic-expand 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
   /* Optional: a tiny delay to let the page load before the effect fires */
-  animation-delay: 3.3s;
+  animation-delay: 2.5s;
 }
 /* .header-hero-section .simply-header {
   font-size: 2.5rem;

@@ -45,21 +45,39 @@ export function DesktopView() {
     if (targetIdx >= allSections.length) targetIdx = allSections.length - 1;
     if (targetIdx === currentSectionIdx.current) return;
 
-    isAnimating.current = true;
-    currentSectionIdx.current = targetIdx; // Keeps state perfectly in sync!
-    setIsInstantScroll(true);
-    setIsUserScrolling(true);
+    // --- TIMING VARIABLES ---
+    const scrollDurationSeconds = 1.5; // Tweak this to speed up the scroll
+    const cooldownMs = 200; // Tweak this to reduce trackpad delay
 
+    const totalLockoutTimeMs = scrollDurationSeconds * 1000 + cooldownMs;
+    const visualUnlockTimeMs = totalLockoutTimeMs * 0.6; // 60% of the total time
+
+    // 1. Lock everything down
+    isAnimating.current = true;
+    currentSectionIdx.current = targetIdx;
+    setIsInstantScroll(true);
+    setIsUserScrolling(true); // Turns the UI red
+
+    // 2. Release the VISUAL lock early (e.g., after ~2.1 seconds instead of 3.6s)
+    setTimeout(() => {
+      setIsUserScrolling(false); // Turns the UI back to blue early!
+    }, visualUnlockTimeMs);
+
+    // 3. Execute the actual scroll
     lenis.scrollTo(`.section-${allSections[targetIdx]}`, {
-      duration: 3.0,
-      lock: true, // 👈 CRITICAL: Apply lock to ALL programmatic scrolls
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      duration: scrollDurationSeconds,
+      lock: true,
+      // easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      easing: (t) =>
+        t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2,
       onComplete: () => {
         setIsInstantScroll(false);
+
+        // 4. Release the LOGICAL lock after the full duration + cooldown
         setTimeout(() => {
           isAnimating.current = false;
-          setIsUserScrolling(false);
-        }, 600); // Keep your 600ms cooldown for consistency
+          // Notice we removed setIsUserScrolling(false) from here!
+        }, cooldownMs);
       },
     });
   };
@@ -67,34 +85,6 @@ export function DesktopView() {
   const goToSection = (direction) => {
     navigateToSectionIndex(currentSectionIdx.current + direction);
   };
-
-  // const goToSection = (direction) => {
-  //   if (isAnimating.current || !lenis) return;
-
-  //   let nextIdx = currentSectionIdx.current + direction;
-  //   if (nextIdx < 0) nextIdx = 0;
-  //   if (nextIdx >= allSections.length) nextIdx = allSections.length - 1;
-  //   if (nextIdx === currentSectionIdx.current) return;
-
-  //   isAnimating.current = true;
-  //   currentSectionIdx.current = nextIdx;
-  //   setIsInstantScroll(true);
-  //   setIsUserScrolling(true);
-
-  //   lenis.scrollTo(`.section-${allSections[nextIdx]}`, {
-  //     duration: 3.0,
-  //     lock: true, // 👇 1. THIS IS CRITICAL: Locks user input while scrolling
-  //     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  //     onComplete: () => {
-  //       setIsInstantScroll(false);
-  //       // 👇 2. Increased cooldown to 600ms to eat up leftover trackpad momentum
-  //       setTimeout(() => {
-  //         isAnimating.current = false;
-  //         setIsUserScrolling(false);
-  //       }, 600);
-  //     },
-  //   });
-  // };
 
   useEffect(() => {
     // 1. Intercept mouse wheel / trackpad

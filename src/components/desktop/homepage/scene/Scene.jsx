@@ -75,6 +75,9 @@ function HomepageContent({ scrollToElementById, scrollToTop }) {
   const securityRef = useRef();
   const aiRef = useRef();
   const testShadowsRef = useRef();
+  const categoryBtnRef = useRef(null);
+  const scrollIconRef = useRef(null);
+  const wasSection7 = useRef(false);
   const textClass = shouldFadeIn ? "fade-in" : "fade-out";
 
   const categoriesObj = {
@@ -141,6 +144,108 @@ function HomepageContent({ scrollToElementById, scrollToTop }) {
       null;
     };
   }, [scrollArea]);
+
+  useEffect(() => {
+    if (!categoryBtnRef.current || !scrollIconRef.current) return;
+
+    // Check if we are currently in section 7
+    const isSection7 = scrollArea?.currentSection == 7;
+
+    // IMPORTANT: If we are already in the correct state (e.g., scrolling from section 3 to 4),
+    // do absolutely nothing and stop the bounce!
+    if (isSection7 === wasSection7.current) return;
+
+    const tl = gsap.timeline();
+
+    const catRestingOpacity = scrollArea?.currentSection != 2.5 ? 0.7 : 0;
+    const scrollRestingOpacity = scrollArea?.currentSection >= 2 ? 1 : 0;
+
+    if (isSection7) {
+      tl.add("moveStart")
+        .to(
+          categoryBtnRef.current,
+          { x: 100, y: -70, duration: 0.6, ease: "power2.inOut" },
+          "moveStart",
+        )
+        .to(
+          scrollIconRef.current,
+          { x: 150, y: -118, duration: 0.6, ease: "power2.inOut" },
+          "moveStart",
+        )
+        .to(
+          [categoryBtnRef.current, scrollIconRef.current],
+          {
+            opacity: 0.4,
+            rotation: 15,
+            duration: 0.3,
+            ease: "power1.inOut",
+          },
+          "moveStart",
+        )
+        .to(
+          categoryBtnRef.current,
+          {
+            opacity: catRestingOpacity,
+            rotation: 0,
+            duration: 0.3,
+            ease: "power1.inOut",
+          },
+          "moveStart+=0.3",
+        )
+        .to(
+          scrollIconRef.current,
+          {
+            opacity: scrollRestingOpacity,
+            rotation: 0,
+            duration: 0.3,
+            ease: "power1.inOut",
+          },
+          "moveStart+=0.3",
+        );
+    } else {
+      tl.add("moveBack")
+        .to(
+          [categoryBtnRef.current, scrollIconRef.current],
+          { x: 0, y: 0, duration: 0.6, ease: "power2.inOut" },
+          "moveBack",
+        )
+        .to(
+          [categoryBtnRef.current, scrollIconRef.current],
+          {
+            opacity: 0.4,
+            rotation: -15,
+            duration: 0.3,
+            ease: "power1.inOut",
+          },
+          "moveBack",
+        )
+        .to(
+          categoryBtnRef.current,
+          {
+            opacity: catRestingOpacity,
+            rotation: 0,
+            duration: 0.3,
+            ease: "power1.inOut",
+          },
+          "moveBack+=0.3",
+        )
+        .to(
+          scrollIconRef.current,
+          {
+            opacity: scrollRestingOpacity,
+            rotation: 0,
+            duration: 0.3,
+            ease: "power1.inOut",
+          },
+          "moveBack+=0.3",
+        );
+    }
+
+    // Update the tracker so it knows its current state for the next scroll!
+    wasSection7.current = isSection7;
+
+    return () => tl.kill();
+  }, [scrollArea?.currentSection]);
 
   useEffect(() => {
     let timeline = gsap.timeline({
@@ -223,11 +328,12 @@ function HomepageContent({ scrollToElementById, scrollToTop }) {
     );
   });
 
-  const cursorIndicatorColor = isUserScrolling
-    ? "darkred"
-    : "rgb(255,255,255,0.6)"; // "#00a8ff"; // Blue when enabled
-  const listIndicatorColor = isUserScrolling ? "darkred" : "#00a8ff"; // Blue when enabled
-
+  // const cursorIndicatorColor = isUserScrolling
+  //   ? "darkred"
+  //   : "rgb(255,255,255,0.6)"; // "#00a8ff"; // Blue when enabled
+  // const listIndicatorColor = isUserScrolling ? "darkred" : "#00a8ff"; // Blue when enabled
+  const cursorIndicatorColor = "rgb(255,255,255,0.6)";
+  const listIndicatorColor = "#00a8ff";
   return (
     <div className="scene one" style={{}} ref={containerRef}>
       {customizeHasRendered ? (
@@ -254,8 +360,8 @@ function HomepageContent({ scrollToElementById, scrollToTop }) {
               alt="sceneLogo"
             />
           </span>
-          {/* Notice we removed the {scrollArea.currentSection != 2.5 && ...} wrapper */}
           <div
+            ref={categoryBtnRef}
             onClick={() =>
               scrollArea.currentSection != 2.5 && scrollToElementById(0)
             }
@@ -278,24 +384,39 @@ function HomepageContent({ scrollToElementById, scrollToTop }) {
               marginRight: "1.5em",
 
               // 3. ADDED MAX-HEIGHT TO THE TRANSITION
-              transition:
-                "max-height 0.4s ease, opacity 0.4s ease, transform 0.2s ease",
+              transition: "max-height 0.4s ease",
             }}
+            // onMouseEnter={(e) => {
+            //   // Only apply hover scale/opacity if it's supposed to be visible
+            //   if (scrollArea.currentSection != 2.5) {
+            //     e.currentTarget.style.opacity = 1;
+            //     e.currentTarget.style.transform = "scale(1.1)";
+            //   }
+            // }}
+            // onMouseLeave={(e) => {
+            //   if (scrollArea.currentSection != 2.5) {
+            //     e.currentTarget.style.opacity = 0.7;
+            //     e.currentTarget.style.transform = "scale(1)";
+            //   }
+            // }}
             onMouseEnter={(e) => {
-              // Only apply hover scale/opacity if it's supposed to be visible
               if (scrollArea.currentSection != 2.5) {
                 e.currentTarget.style.opacity = 1;
-                e.currentTarget.style.transform = "scale(1.1)";
+                gsap.to(e.currentTarget, { scale: 1.1, duration: 0.2 }); // Swapped to GSAP for hover scale to avoid CSS transform conflicts
               }
             }}
             onMouseLeave={(e) => {
               if (scrollArea.currentSection != 2.5) {
                 e.currentTarget.style.opacity = 0.7;
-                e.currentTarget.style.transform = "scale(1)";
+                gsap.to(e.currentTarget, { scale: 1, duration: 0.2 });
               }
             }}
           >
             <svg
+              style={{
+                opacity: isUserScrolling ? 0.6 : 1,
+                transition: "opacity 0.3s ease",
+              }}
               width="28"
               height="28"
               viewBox="0 0 24 24"
@@ -315,6 +436,7 @@ function HomepageContent({ scrollToElementById, scrollToTop }) {
           </div>
 
           <div
+            ref={scrollIconRef}
             className="fade-in-longer"
             style={{
               // 1. CONDITIONAL VISIBILITY & SIZING
@@ -325,23 +447,27 @@ function HomepageContent({ scrollToElementById, scrollToTop }) {
 
               // 2. YOUR EXISTING STYLES
               maxWidth: "70px",
-              transform: "scale(0.6)",
+              // transform: "scale(0.6)",
               display: "flex",
               justifyContent: "center",
 
               // 3. SMOOTH TRANSITION
-              transition: "max-height 0.4s ease, opacity 0.4s ease",
+              transition: "max-height 0.4s ease",
             }}
           >
             <div
               style={{
                 position: "relative",
-                marginRight: "2em",
+                marginRight: "1.3em",
                 width: "30px",
                 height: "55px",
                 borderRadius: "25px",
                 boxShadow: `inset 0 0 0 2px ${cursorIndicatorColor}`,
-                opacity: 1,
+                // opacity: 1,
+                transform: "scale(0.6)",
+                opacity: isUserScrolling ? 0.6 : 1, // Drops to 0.2 while scrolling
+                transition: "opacity 0.3s ease", // Smooth fade in/out
+                // right: "100px",
               }}
               onMouseOver={() => setIsCursorHovering(true)}
               onMouseOut={() => setIsCursorHovering(false)}

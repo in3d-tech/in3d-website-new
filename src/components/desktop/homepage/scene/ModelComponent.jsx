@@ -1,7 +1,7 @@
 import { useGLTF, useProgress } from "@react-three/drei";
 import { useEffect, useMemo, useRef } from "react";
 import { gsap } from "gsap";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useAppContext } from "../../../../context/appContext";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -79,7 +79,7 @@ export function AstroModel({
     //     start: "top top",
     //     endTrigger: ".section-two",
     //     end: "top top", // 👈 Finishes EXACTLY when Section 2 locks into place!
-    //     scrub: true,
+    //     scrub: 1.0,
     //     onEnter: () => {
     //       // const areaObj = { ...scrollArea, currentSection: 1, prevSection: 0 };
     //       // setScrollArea(areaObj);
@@ -107,7 +107,7 @@ export function AstroModel({
     //     start: "top top",
     //     endTrigger: ".section-three",
     //     end: "top top", // 👈 Finishes EXACTLY when Section 3 locks into place!
-    //     scrub: true,
+    //     scrub: 1.0,
     //     onEnter: () => {
     //       // const areaObj = { ...scrollArea, currentSection: 2, prevSection: 1 };
     //       // setScrollArea(areaObj);
@@ -123,7 +123,7 @@ export function AstroModel({
         start: "top top",
         endTrigger: ".section-two",
         end: "top top", // 👈 Finishes EXACTLY when Section 2 locks into place!
-        scrub: true,
+        scrub: 1.0,
       },
     });
 
@@ -150,7 +150,7 @@ export function AstroModel({
         start: "top top",
         endTrigger: ".section-three",
         end: "top top", // 👈 Finishes EXACTLY when Section 3 locks into place!
-        scrub: true,
+        scrub: 1.0,
       },
     });
 
@@ -176,7 +176,7 @@ export function AstroModel({
         start: "top top",
         endTrigger: ".section-four",
         end: "top top", // 👈 Finishes EXACTLY when Industry locks into place!
-        scrub: true,
+        scrub: 1.0,
         onEnter: () => {
           // const areaObj = { ...scrollArea, currentSection: 3, prevSection: 2 };
           // setScrollArea(areaObj);
@@ -265,7 +265,7 @@ export function AstroModel({
           start: "top bottom",
           // endTrigger: "#midSection2", //".section-two",
           // end: "bottom bottom",
-          scrub: true,
+          scrub: 1.0,
           onEnter: () => {
             // SHOW ASTRO AGAIN!
             if (astroRef.current) astroRef.current.visible = true;
