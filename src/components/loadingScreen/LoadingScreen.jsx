@@ -37,7 +37,7 @@ export function LoadingScreen({
     // if (isMobileViewOnly && showLoading) {
     if (isAstroModelDrawn && isMobileViewOnly) {
       const fadeOutTimer = setTimeout(() =>
-        setFadeOut("flashing-fade-out", 1000)
+        setFadeOut("flashing-fade-out", 1000),
       );
       const loadingScreen = setTimeout(() => setShowloadingScreen(false), 1500);
       const showLoad = setTimeout(() => setShowLoading(false), 1500);
@@ -59,7 +59,7 @@ export function LoadingScreen({
         }, 100);
         const closeLoadingScreen = setTimeout(
           () => setShowloadingScreen(false),
-          1200
+          1200,
         );
         return () => {
           // clearTimeout(loadingText);
@@ -89,7 +89,7 @@ export function LoadingScreen({
     // Color switching interval
     const colorSwitchInterval = setInterval(() => {
       setSparklesColorIndex(
-        (prevIndex) => (prevIndex + 1) % sparklesColours.length
+        (prevIndex) => (prevIndex + 1) % sparklesColours.length,
       );
     }, 4000);
 
@@ -198,25 +198,6 @@ export function LoadingScreen({
             </div>
           </div>
         </div>
-
-        {/* {!showLoading ? (
-          <div
-            style={{
-              color: "rgb(255,255,255,0.9)",
-              width: "70%",
-              marginLeft: "2em",
-              fontFamily: "swiss-medium",
-              marginTop: "18em",
-              position: "absolute",
-              animation: "text-reveal 2s ease-in-out forwards",
-            }}
-          >
-            Our mobile view is currently under maintenance, but you can access
-            our website via desktop or tablet!
-          </div>
-        ) : (
-          <TextScrambleComponent colour={sparklesColours[sparklesColorIndex]} />
-        )} */}
       </div>
     </div>
   );

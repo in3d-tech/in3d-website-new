@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Michroma&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap");
 
 @font-face {
   font-family: Gotham;
@@ -557,6 +558,7 @@ h2 {
   top: 0;
   right: 0;
   z-index: 1;
+  /* opacity: 0; */
 }
 
 /* .home-categories-wrapper-fixed {
@@ -2495,6 +2497,44 @@ section {
   padding: 2px 12px 6px 19px;
   position: relative;
   text-decoration: none;
+}
+
+.flashing-div .abla {
+  font-family: "Rajdhani", sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 8px; /* Wider spacing feels more cinematic */
+
+  /* The Magic Glow: 'currentColor' automatically grabs the 
+    sparklesColours prop you pass in the JS, making the glow match!
+  */
+  text-shadow:
+    0 0 10px currentColor,
+    0 0 25px currentColor,
+    0 0 40px rgba(255, 255, 255, 0.1);
+
+  /* Smooth transition when your colorSwitchInterval triggers */
+  transition:
+    color 1s ease-in-out,
+    text-shadow 1s ease-in-out;
+}
+
+/* Ensure the static "Simply " text stays white but still gets a subtle glow */
+.flashing-div span.abla {
+  color: darkred;
+  opacity: 0.65;
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.6),
+    0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+/* Style the scrambling characters to look like technical glitch noise */
+.flashing-div .dud {
+  font-family: "Courier New", monospace;
+  opacity: 0.5;
+  font-weight: 400;
+  color: #ffffff;
+  text-shadow: none; /* Remove glow from glitch chars to add contrast */
 }
 
 /* .dud {

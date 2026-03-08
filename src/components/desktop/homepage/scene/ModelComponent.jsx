@@ -215,7 +215,7 @@ export function AstroModel({
       onEnter: () => {
         const areaObj = { ...scrollArea, currentSection: 2.5, prevSection: 2 };
         setScrollArea(areaObj);
-        setTextAnimation(true);
+        // setTextAnimation(true);
       },
       onLeaveBack: () => {
         const areaObj = { ...scrollArea, currentSection: 2, prevSection: 2.5 };

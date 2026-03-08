@@ -237,7 +237,7 @@ function HomepageContent({ scrollToElementById, scrollToTop }) {
             top: "2em",
             left: "3em",
             zIndex: 1,
-            display: "flex", // 👈 Added flexbox to stack logo and indicator
+            display: "flex",
             flexDirection: "column",
             alignItems: "center",
           }}
@@ -246,105 +246,121 @@ function HomepageContent({ scrollToElementById, scrollToTop }) {
         >
           <span className="two-dee-box">
             <img
-              onMouseOver={() => setIsCursorHovering(true)}
-              onMouseOut={() => setIsCursorHovering(false)}
+              // onMouseOver={() => setIsCursorHovering(true)}
+              // onMouseOut={() => setIsCursorHovering(false)}
               style={{ height: "90px" }}
               className="logo"
               src="/assets/images/in3d-logo-white.png"
               alt="sceneLogo"
             />
           </span>
-          {scrollArea.currentSection != 2.5 && (
-            <div
-              onClick={() => scrollToElementById(0)} // 0 + 2 = index 2 (section-three / Categories)
-              onMouseOver={() => setIsCursorHovering(true)}
-              onMouseOut={() => setIsCursorHovering(false)}
-              title="Back to Categories"
-              style={{
-                maxHeight: "40px",
-                maxWidth: "30px",
-                // border: "2px solid yellow",
-                color: listIndicatorColor,
-                opacity: 0.7,
-                transition: "opacity 0.2s ease, transform 0.2s ease",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                marginRight: "1.5em",
-              }}
-              // Adding a quick inline hover effect for polish
-              onMouseEnter={(e) => {
+          {/* Notice we removed the {scrollArea.currentSection != 2.5 && ...} wrapper */}
+          <div
+            onClick={() =>
+              scrollArea.currentSection != 2.5 && scrollToElementById(0)
+            }
+            onMouseOver={() => setIsCursorHovering(true)}
+            onMouseOut={() => setIsCursorHovering(false)}
+            title="Back to Categories"
+            style={{
+              // 1. CONDITIONAL VISIBILITY & SIZING
+              maxHeight: scrollArea.currentSection != 2.5 ? "40px" : "0px",
+              opacity: scrollArea.currentSection != 2.5 ? 0.7 : 0,
+              pointerEvents: scrollArea.currentSection != 2.5 ? "auto" : "none",
+              overflow: "hidden", // Crucial: hides the SVG during the shrink animation
+
+              // 2. YOUR EXISTING STYLES
+              maxWidth: "30px",
+              color: listIndicatorColor,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginRight: "1.5em",
+
+              // 3. ADDED MAX-HEIGHT TO THE TRANSITION
+              transition:
+                "max-height 0.4s ease, opacity 0.4s ease, transform 0.2s ease",
+            }}
+            onMouseEnter={(e) => {
+              // Only apply hover scale/opacity if it's supposed to be visible
+              if (scrollArea.currentSection != 2.5) {
                 e.currentTarget.style.opacity = 1;
                 e.currentTarget.style.transform = "scale(1.1)";
-              }}
-              onMouseLeave={(e) => {
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (scrollArea.currentSection != 2.5) {
                 e.currentTarget.style.opacity = 0.7;
                 e.currentTarget.style.transform = "scale(1)";
-              }}
+              }
+            }}
+          >
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
-              <svg
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <line x1="8" y1="6" x2="21" y2="6"></line>
-                <line x1="8" y1="12" x2="21" y2="12"></line>
-                <line x1="8" y1="18" x2="21" y2="18"></line>
-                <line x1="3" y1="6" x2="3.01" y2="6"></line>
-                <line x1="3" y1="12" x2="3.01" y2="12"></line>
-                <line x1="3" y1="18" x2="3.01" y2="18"></line>
-              </svg>
-            </div>
-          )}
-          {scrollArea.currentSection >= 2 && (
+              <line x1="8" y1="6" x2="21" y2="6"></line>
+              <line x1="8" y1="12" x2="21" y2="12"></line>
+              <line x1="8" y1="18" x2="21" y2="18"></line>
+              <line x1="3" y1="6" x2="3.01" y2="6"></line>
+              <line x1="3" y1="12" x2="3.01" y2="12"></line>
+              <line x1="3" y1="18" x2="3.01" y2="18"></line>
+            </svg>
+          </div>
+
+          <div
+            className="fade-in-longer"
+            style={{
+              // 1. CONDITIONAL VISIBILITY & SIZING
+              maxHeight: scrollArea.currentSection >= 2 ? "60px" : "0px",
+              opacity: scrollArea.currentSection >= 2 ? 1 : 0,
+              pointerEvents: scrollArea.currentSection >= 2 ? "auto" : "none",
+              overflow: "hidden",
+
+              // 2. YOUR EXISTING STYLES
+              maxWidth: "70px",
+              transform: "scale(0.6)",
+              display: "flex",
+              justifyContent: "center",
+
+              // 3. SMOOTH TRANSITION
+              transition: "max-height 0.4s ease, opacity 0.4s ease",
+            }}
+          >
             <div
-              className="fade-in-longer"
               style={{
-                maxHeight: "60px",
-                maxWidth: "70px",
-                transform: "scale(0.6)",
-                display: "flex",
-                justifyContent: "center",
-                // marginTop: "1em",
-                // position: "absolute",
-                // top: 0,
-                // left: "5em",
-                // alignItems: "center",
-                // border: "1px solid orange",
+                position: "relative",
+                marginRight: "2em",
+                width: "30px",
+                height: "55px",
+                borderRadius: "25px",
+                boxShadow: `inset 0 0 0 2px ${cursorIndicatorColor}`,
+                opacity: 1,
               }}
+              onMouseOver={() => setIsCursorHovering(true)}
+              onMouseOut={() => setIsCursorHovering(false)}
             >
               <div
+                className="icon-scroll-dot"
                 style={{
-                  position: "relative",
-                  marginRight: "2em",
-                  width: "30px",
-                  height: "55px",
-                  borderRadius: "25px", // 👈 Forces the rounded pill shape
-                  boxShadow: `inset 0 0 0 2px ${cursorIndicatorColor}`,
-                  opacity: 1,
+                  position: "absolute",
+                  left: "50%",
+                  top: "8px",
+                  width: "8px",
+                  height: "8px",
+                  marginLeft: "-4px",
+                  borderRadius: "50%",
+                  backgroundColor: cursorIndicatorColor,
                 }}
-              >
-                <div
-                  className="icon-scroll-dot"
-                  style={{
-                    position: "absolute",
-                    left: "50%",
-                    top: "8px",
-                    width: "8px",
-                    height: "8px",
-                    marginLeft: "-4px", // Centers the 8px dot exactly
-                    borderRadius: "50%", // 👈 Forces it to be a perfect circle
-                    backgroundColor: cursorIndicatorColor,
-                  }}
-                ></div>
-              </div>
+              ></div>
             </div>
-          )}
+          </div>
         </div>
       ) : null}
 
