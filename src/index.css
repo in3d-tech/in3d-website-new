@@ -2120,6 +2120,9 @@ section {
   position: absolute;
   height: 300px;
   width: 300px;
+  opacity: 0;
+  animation: fadeIn 4s forwards;
+  animation-delay: 3s;
 }
 
 .icon-scroll,
@@ -2523,6 +2526,9 @@ section {
 .flashing-div span.abla {
   color: darkred;
   opacity: 0.65;
+  font-family: "Rajdhani", sans-serif;
+  text-transform: uppercase;
+  margin: 0;
   text-shadow:
     0 0 10px rgba(255, 255, 255, 0.6),
     0 0 20px rgba(255, 255, 255, 0.3);
@@ -2555,6 +2561,39 @@ section {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.3));
+
+  /* --- NEW ADDITIONS --- */
+  /* Hide the text initially before the animation kicks in */
+  opacity: 0;
+  /* 2.5s duration, super smooth deceleration, keeps final state forwards */
+  animation: cinematic-expand 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  /* Optional: a tiny delay to let the page load before the effect fires */
+  animation-delay: 3.3s;
+}
+/* .header-hero-section .simply-header {
+  font-size: 2.5rem;
+  background: linear-gradient(180deg, #fff 0%, #888 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.3));
+} */
+
+@keyframes cinematic-expand {
+  0% {
+    letter-spacing: -0.1em; /* Crunched together */
+    opacity: 0; /* Invisible */
+    transform: scale(0.95); /* Slightly smaller */
+    filter: blur(4px); /* Out of focus */
+  }
+  30% {
+    opacity: 1; /* Fades in quickly */
+    filter: blur(0px); /* Snaps into focus */
+  }
+  100% {
+    letter-spacing: 0.5em; /* Your final wide spacing */
+    opacity: 1;
+    transform: scale(1); /* Full size */
+  }
 }
 
 h1 + hr {

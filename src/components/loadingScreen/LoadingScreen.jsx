@@ -158,17 +158,23 @@ export function LoadingScreen({
             alignItems: "center",
           }}
         >
+          {/* UPDATED LOGO CONTAINER START */}
           <div>
             <img
               className="flashing-img"
               style={{
                 height: height,
+                // THE DYNAMIC GLOW EFFECT
+                filter: `drop-shadow(0 0 15px) 
+                        drop-shadow(0 0 30px rgba(255, 255, 255, 0.1))`,
+                transition: "filter 1s ease-in-out", // Smooth transition when color switches
+                opacity: 0.5,
               }}
               src="/assets/images/plain-logo.png"
               alt="logo-plain"
             />
           </div>
-
+          {/* UPDATED LOGO CONTAINER END */}
           <div
             style={{
               display: "flex",
