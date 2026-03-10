@@ -326,9 +326,9 @@ const Bottom = ({
           </div>
         </div>
 
-        {/* <div className="ms-bot-metrics">
+        <div className="ms-bot-metrics">
           {[
-            { n: "1st", d: "MR Partner IL" },
+            // { n: "1st", d: "MR Partner IL" },
             { n: "5+", d: "Years together" },
             { n: "HoloLens", d: "Certified" },
           ].map(({ n, d }) => (
@@ -337,7 +337,7 @@ const Bottom = ({
               <span className="ms-bot-metric-d">{d}</span>
             </div>
           ))}
-        </div> */}
+        </div>
       </div>
 
       {/* ── RIGHT: 3-video cluster ── */}
