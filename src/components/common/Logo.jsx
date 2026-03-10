@@ -147,41 +147,13 @@ export const VideoPlayer = ({
         // Video can start playing, show initial frame here
       };
 
-      // const handleCanPlay = () => {
-      //   if (itemIndex === 0) {
-      //     console.log("ZHIP SZCBOOP");
-      //     // Ensure only the first video attempts to autoplay
-      //     videoElement.muted = true; // Ensure muted
-      //     const playPromise = videoElement.play();
-      //     if (playPromise !== undefined) {
-      //       playPromise
-      //         .then(() => {
-      //           // Autoplay started successfully
-      //           console.log("SHOUDL Be AUTOPLAYING");
-      //           console.log({ videoRef });
-      //           // videoElement.play();
-      //         })
-      //         .catch(() => {
-      //           // Autoplay failed, possibly due to restrictions
-      //           console.log("big CATCJ BREAk");
-      //           videoElement.muted = true;
-      //           videoElement.play();
-      //         });
-      //     } else {
-      //       console.log("we found outselves in the else condition!");
-      //     }
-      //   } else {
-      //     videoElement.pause();
-      //   }
-      // };
-
       videoElement.addEventListener("loadedmetadata", handleLoadedMetadata);
       videoElement.addEventListener("canplay", handleCanPlay);
 
       return () => {
         videoElement.removeEventListener(
           "loadedmetadata",
-          handleLoadedMetadata
+          handleLoadedMetadata,
         );
         videoElement.removeEventListener("canplay", handleCanPlay);
       };

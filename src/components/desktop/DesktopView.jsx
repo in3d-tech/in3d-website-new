@@ -17,12 +17,9 @@ export function DesktopView() {
 
   const lenis = useLenis();
 
-  // Track animation state to prevent overlapping scrolls
   const isAnimating = useRef(false);
-  // Track current section index (0 to 6 for your 7 sections)
   const currentSectionIdx = useRef(0);
 
-  // 👇 1. We now include the Astro sections at the beginning!
   const allSections = [
     "one", // 0: Astro Start
     "two", // 1: Astro "About Us"
@@ -40,7 +37,6 @@ export function DesktopView() {
   const navigateToSectionIndex = (targetIdx) => {
     if (isAnimating.current || !lenis) return;
 
-    // Bounds checking
     if (targetIdx < 0) targetIdx = 0;
     if (targetIdx >= allSections.length) targetIdx = allSections.length - 1;
     if (targetIdx === currentSectionIdx.current) return;
@@ -52,18 +48,15 @@ export function DesktopView() {
     const totalLockoutTimeMs = scrollDurationSeconds * 1000 + cooldownMs;
     const visualUnlockTimeMs = totalLockoutTimeMs * 0.6; // 60% of the total time
 
-    // 1. Lock everything down
     isAnimating.current = true;
     currentSectionIdx.current = targetIdx;
     setIsInstantScroll(true);
-    setIsUserScrolling(true); // Turns the UI red
+    setIsUserScrolling(true);
 
-    // 2. Release the VISUAL lock early (e.g., after ~2.1 seconds instead of 3.6s)
     setTimeout(() => {
-      setIsUserScrolling(false); // Turns the UI back to blue early!
+      setIsUserScrolling(false); // turns the UI back to blue (early)
     }, visualUnlockTimeMs);
 
-    // 3. Execute the actual scroll
     lenis.scrollTo(`.section-${allSections[targetIdx]}`, {
       duration: scrollDurationSeconds,
       lock: true,
@@ -76,7 +69,6 @@ export function DesktopView() {
         // 4. Release the LOGICAL lock after the full duration + cooldown
         setTimeout(() => {
           isAnimating.current = false;
-          // Notice we removed setIsUserScrolling(false) from here!
         }, cooldownMs);
       },
     });
@@ -87,38 +79,34 @@ export function DesktopView() {
   };
 
   useEffect(() => {
-    // 1. Intercept mouse wheel / trackpad
+    if (!lenis) return;
+    if (selectedCategory) {
+      lenis.stop();
+    } else {
+      lenis.start();
+    }
+  }, [selectedCategory, lenis]);
+
+  useEffect(() => {
     const handleWheel = (e) => {
-      // Completely stop the browser AND Lenis from seeing this event
       e.preventDefault();
       e.stopPropagation();
-
       if (isAnimating.current) return;
-
-      // Ignore purely horizontal trackpad swipes
       if (e.deltaY === 0) return;
-
-      // The moment they scroll even a tiny bit, we hijack it!
-      const direction = e.deltaY > 0 ? 1 : -1;
-      goToSection(direction);
+      goToSection(e.deltaY > 0 ? 1 : -1);
     };
 
-    // 2. Intercept Keyboard arrows (Up, Down, Spacebar)
     const handleKeyDown = (e) => {
       if (["ArrowDown", "ArrowUp", " ", "PageDown", "PageUp"].includes(e.key)) {
         e.preventDefault();
         e.stopPropagation();
-
         if (isAnimating.current) return;
-
-        const direction = ["ArrowDown", " ", "PageDown"].includes(e.key)
-          ? 1
-          : -1;
-        goToSection(direction);
+        goToSection(["ArrowDown", " ", "PageDown"].includes(e.key) ? 1 : -1);
       }
     };
 
-    // Use { capture: true } so our code gets the event BEFORE Lenis does!
+    if (selectedCategory) return;
+
     window.addEventListener("wheel", handleWheel, {
       passive: false,
       capture: true,
@@ -132,15 +120,14 @@ export function DesktopView() {
       window.removeEventListener("wheel", handleWheel, { capture: true });
       window.removeEventListener("keydown", handleKeyDown, { capture: true });
     };
-  }, [lenis]);
+  }, [lenis, selectedCategory]);
 
   const scrollToElementById = (categoryIdx) => {
-    // Keep your existing math (categoryIdx + 2)
     navigateToSectionIndex(categoryIdx + 2);
   };
 
   const scrollToTop = () => {
-    navigateToSectionIndex(0); // 0 is the index for "section-one"
+    navigateToSectionIndex(0); // 0 -> section-one
   };
 
   return (

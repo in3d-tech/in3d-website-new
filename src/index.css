@@ -1355,6 +1355,18 @@ section {
   z-index: 10;
   overflow-y: auto;
   overflow-x: hidden;
+  contain: layout style paint; /* tells the browser this subtree is isolated */
+  will-change: width, opacity;
+}
+
+.selected-category-wrapper::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,..."); /* SVG noise */
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .horizontal-nav-wrapper-open {
@@ -1483,7 +1495,7 @@ section {
     transform: scale(1.05);
   }
   50% {
-    opacity: 1;
+    opacity: 0.8;
   }
   100% {
     transform: scale(1);

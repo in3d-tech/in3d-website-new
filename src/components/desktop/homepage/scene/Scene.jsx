@@ -59,6 +59,7 @@ function HomepageContent({ scrollToElementById, scrollToTop }) {
     setVideosPreloaded,
     setIsCursorHovering,
     isUserScrolling,
+    selectedCategory,
   } = useAppContext();
 
   const containerRef = useRef(null);
@@ -144,7 +145,6 @@ function HomepageContent({ scrollToElementById, scrollToTop }) {
       null;
     };
   }, [scrollArea]);
-
   useEffect(() => {
     if (!categoryBtnRef.current || !scrollIconRef.current) return;
 
@@ -386,19 +386,6 @@ function HomepageContent({ scrollToElementById, scrollToTop }) {
               // 3. ADDED MAX-HEIGHT TO THE TRANSITION
               transition: "max-height 0.4s ease",
             }}
-            // onMouseEnter={(e) => {
-            //   // Only apply hover scale/opacity if it's supposed to be visible
-            //   if (scrollArea.currentSection != 2.5) {
-            //     e.currentTarget.style.opacity = 1;
-            //     e.currentTarget.style.transform = "scale(1.1)";
-            //   }
-            // }}
-            // onMouseLeave={(e) => {
-            //   if (scrollArea.currentSection != 2.5) {
-            //     e.currentTarget.style.opacity = 0.7;
-            //     e.currentTarget.style.transform = "scale(1)";
-            //   }
-            // }}
             onMouseEnter={(e) => {
               if (scrollArea.currentSection != 2.5) {
                 e.currentTarget.style.opacity = 1;
@@ -506,6 +493,7 @@ function HomepageContent({ scrollToElementById, scrollToTop }) {
           : null}
         <Canvas
           // shadows
+          frameloop={selectedCategory ? "never" : "always"}
           className={`canvas-container`}
         >
           <Sparkles
