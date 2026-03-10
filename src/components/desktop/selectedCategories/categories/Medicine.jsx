@@ -237,14 +237,14 @@ const Top = ({ topVideoRef }) => (
           className="med-stat-pill med-glass med-stat-pill--one"
           style={{ animationDelay: "0.7s" }}
         >
-          <span className="med-stat-n">98%</span>
+          {/* <span className="med-stat-n">98%</span> */}
           <span className="med-stat-l">Surgeon accuracy</span>
         </div>
         <div
           className="med-stat-pill med-glass med-stat-pill--two"
           style={{ animationDelay: "0.85s" }}
         >
-          <span className="med-stat-n">3×</span>
+          {/* <span className="med-stat-n">3×</span> */}
           <span className="med-stat-l">Faster onboarding</span>
         </div>
 

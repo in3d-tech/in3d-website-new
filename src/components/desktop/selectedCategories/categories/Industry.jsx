@@ -417,7 +417,7 @@ const Bottom = ({
         evaluate each solution through business perspectives such as ROI,
         workplace efficiency, and simplification of complex procedures.
       </p>
-      <div className="ind-bot-metrics">
+      {/* <div className="ind-bot-metrics">
         {[
           { n: "12+", d: "Industries" },
           { n: "50+", d: "Deployments" },
@@ -428,7 +428,7 @@ const Bottom = ({
             <span className="ind-bot-metric-d">{d}</span>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
 
     {/* Right: video stack */}
