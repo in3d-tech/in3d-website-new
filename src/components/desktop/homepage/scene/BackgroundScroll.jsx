@@ -83,15 +83,15 @@ export function BackgroundScroll({
               <div className="down-indicator-wrapper">
                 <div
                   className="icon-scroll"
-                  onClick={scrollToElement}
-                  onMouseOver={() => setIsCursorHovering(true)}
-                  onMouseOut={() => setIsCursorHovering(false)}
+                  // onClick={scrollToElement}
+                  // onMouseOver={() => setIsCursorHovering(true)}
+                  // onMouseOut={() => setIsCursorHovering(false)}
                 ></div>
                 <div
-                  onClick={scrollToElement}
+                  // onClick={scrollToElement}
                   className="down-indicator"
-                  onMouseOver={() => setIsCursorHovering(true)}
-                  onMouseOut={() => setIsCursorHovering(false)}
+                  // onMouseOver={() => setIsCursorHovering(true)}
+                  // onMouseOut={() => setIsCursorHovering(false)}
                 ></div>
                 <div
                   style={{
