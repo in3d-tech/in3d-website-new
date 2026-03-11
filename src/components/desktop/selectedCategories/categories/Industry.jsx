@@ -340,14 +340,14 @@ const Middle = ({
         {[
           { value: "40%", label: "Efficiency gain" },
           { value: "3×", label: "Faster training" },
-          { value: "99%", label: "Uptime SLA" },
+          // { value: "99%", label: "Uptime SLA" },
         ].map(({ value, label }, i) => (
           <div
             key={label}
             className="ind-stat-card ind-glass"
             style={{ animationDelay: `${i * 0.15 + 0.3}s` }}
           >
-            <span className="ind-stat-value">{value}</span>
+            {/* <span className="ind-stat-value">{value}</span> */}
             <span className="ind-stat-label">{label}</span>
           </div>
         ))}
@@ -356,11 +356,11 @@ const Middle = ({
       {/* Phone mockup */}
       <div className="ind-mid-phone-wrap" ref={middleImageRef}>
         <div className="ind-phone-glow" />
-        <img
+        {/* <img
           src="/assets/images/phone_frame_2.png"
           alt="Phone frame"
           className="ind-phone-frame"
-        />
+        /> */}
         <div className="ind-phone-screen">
           {displayVideos && (
             <VideoPlayer
