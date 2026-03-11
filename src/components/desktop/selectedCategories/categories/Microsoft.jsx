@@ -260,8 +260,8 @@ const Top = ({ topVid1Ref, topVid2Ref, handshakeRef }) => (
           className="ms-top-vid ms-top-vid--main ms-glass"
         >
           <span className="ms-vid-label">HoloLens 2 — Guides</span>
-          <div className="ms-img-corner ms-img-corner--tl" />
-          <div className="ms-img-corner ms-img-corner--br" />
+          {/* <div className="ms-img-corner ms-img-corner--tl" />
+          <div className="ms-img-corner ms-img-corner--br" /> */}
         </HoverVideoCard>
 
         <HoverVideoCard
@@ -353,8 +353,8 @@ const Bottom = ({
               <span className="ms-bot-vid-badge">Mesh Collaboration</span>
             </HoverVideoCard>
           )}
-          <div className="ms-img-corner ms-img-corner--tl" />
-          <div className="ms-img-corner ms-img-corner--br" />
+          {/* <div className="ms-img-corner ms-img-corner--tl" />
+          <div className="ms-img-corner ms-img-corner--br" /> */}
         </div>
 
         {/* Two smaller stacked cards */}

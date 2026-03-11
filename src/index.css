@@ -2135,6 +2135,7 @@ section {
   opacity: 0;
   animation: fadeIn 4s forwards;
   animation-delay: 3s;
+  filter: blur(1px);
 }
 
 .icon-scroll,

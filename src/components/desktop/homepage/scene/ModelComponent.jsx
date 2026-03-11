@@ -288,13 +288,13 @@ export function AstroModel({
       contactUsTimeline
         .to(
           astroRef.current.position,
-          { x: -10, y: -23.2, z: -9 },
+          { x: -10, y: -35, z: -6 },
           "simultaneously",
         )
         .add(() => console.log("WELL THIS WAS ADDED"))
         .to(
           astroRef.current.rotation,
-          { x: 0.5, y: Math.PI + 0.3, z: -0 },
+          { x: 0.5, y: Math.PI - 0.5, z: -0 },
           "simultaneously",
         )
         .to(
