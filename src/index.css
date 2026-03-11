@@ -2572,7 +2572,7 @@ section {
   font-size: 2.5rem;
   background: linear-gradient(180deg, #fff 0%, #888 100%);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  /* -webkit-text-fill-color: transparent; */
   filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.3));
 
   /* --- NEW ADDITIONS --- */
@@ -2730,6 +2730,191 @@ figure {
 
 .hover14:hover {
   /* cursor: pointer; */
+}
+
+/*
+ * Mobile Homescreen â€” Modern Enhancements
+ * Drop these into your existing CSS (or import separately).
+ * They layer on top of your current classes with higher specificity where needed.
+ */
+
+/* â”€â”€â”€ Smoother global transitions â”€â”€â”€ */
+
+.homescreen-mobile {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  will-change: background;
+}
+
+/* â”€â”€â”€ Category cards â€” glassmorphism + refined spacing â”€â”€â”€ */
+
+.mobile-hs-category-wrapper {
+  /* Use GPU-composited transform instead of repainting backgrounds */
+  will-change: transform, opacity;
+  transform: translateZ(0);
+
+  /* Subtle glass effect for depth */
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+/* â”€â”€â”€ Title header entrance â”€â”€â”€ */
+
+.text-animate.simply-header {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideUpFadeIn 0.8s ease-out forwards;
+}
+
+@keyframes slideUpFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* â”€â”€â”€ Refined fade transitions â”€â”€â”€ */
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 0.4s ease-out;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+  pointer-events: none;
+}
+
+.fade-in-longer {
+  opacity: 1;
+  transition: opacity 0.6s ease-out;
+}
+
+/* â”€â”€â”€ Category title image cards â”€â”€â”€ */
+
+.scrolled-category-title {
+  overflow: hidden;
+  border-radius: 8px;
+  transition:
+    box-shadow 0.4s ease,
+    transform 0.4s ease;
+}
+
+.scrolled-category-title.fade-in-longer {
+  transform: scale(1);
+}
+
+.scrolled-category-title.fade-out {
+  transform: scale(0.96);
+}
+
+/* â”€â”€â”€ CTA button refinements â”€â”€â”€ */
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: white;
+  font-family: "gotham", sans-serif;
+  font-size: 0.9em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 0.6em 0;
+  position: relative;
+}
+
+.hover-underline-animation {
+  position: relative;
+}
+
+.hover-underline-animation::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: white;
+  transition: width 0.3s ease;
+}
+
+.cta:active .hover-underline-animation::after {
+  width: 100%;
+}
+
+/* â”€â”€â”€ Canvas container â€” ensure it doesn't cause layout thrash â”€â”€â”€ */
+
+.canvas-container-mobile {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+  /* Promote to own compositing layer */
+  will-change: transform;
+  contain: strict;
+}
+
+.canvas-container-mobile canvas {
+  background-size: cover;
+  background-position: center;
+  transition: background-image 0.6s ease;
+}
+
+/* â”€â”€â”€ Animated text words â€” GPU compositing â”€â”€â”€ */
+
+.animated-text-wrapper .word {
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* â”€â”€â”€ Menu overlay smoothness â”€â”€â”€ */
+
+.mobile-menu-opened-bg {
+  transition:
+    background 0.6s ease,
+    opacity 0.4s ease;
+}
+
+/* â”€â”€â”€ Scroll snap for category sections (optional â€” modern feel) â”€â”€â”€ */
+
+.home-categories-map-mobile {
+  /* Uncomment for snap-scrolling between categories:
+  scroll-snap-type: y proximity;
+  */
+  transition: opacity 0.4s ease;
+}
+
+/*
+.mobile-hs-category-wrapper {
+  scroll-snap-align: start;
+}
+*/
+
+/* â”€â”€â”€ Reduce motion for users who prefer it â”€â”€â”€ */
+
+@media (prefers-reduced-motion: reduce) {
+  .text-animate.simply-header {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .animated-text-wrapper .word {
+    transition: none !important;
+    will-change: auto;
+  }
+
+  .scrolled-category-title {
+    transition: none;
+  }
 }
 
 /* -------------------------------
