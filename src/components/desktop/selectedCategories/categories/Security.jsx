@@ -218,8 +218,8 @@ const Top = ({ topVid1Ref, topVid2Ref, topVid3Ref }) => (
           className="sec-top-vid sec-top-vid--main sec-glass"
         >
           <span className="sec-vid-label">AR Treatment Simulator</span>
-          <div className="sec-img-corner sec-img-corner--tl" />
-          <div className="sec-img-corner sec-img-corner--br" />
+          {/* <div className="sec-img-corner sec-img-corner--tl" />
+          <div className="sec-img-corner sec-img-corner--br" /> */}
         </HoverVideoCard>
 
         {/* Top-left float */}
@@ -306,8 +306,8 @@ const Bottom = ({
           >
             <span className="sec-bot-vid-badge">Fire Dept. Simulator</span>
           </HoverVideoCard>
-          <div className="sec-img-corner sec-img-corner--tl" />
-          <div className="sec-img-corner sec-img-corner--br" />
+          {/* <div className="sec-img-corner sec-img-corner--tl" />
+          <div className="sec-img-corner sec-img-corner--br" /> */}
         </div>
 
         {/* Three smaller stacked / grid cards */}

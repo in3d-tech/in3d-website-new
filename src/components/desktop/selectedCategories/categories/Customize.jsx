@@ -346,10 +346,10 @@ const Middle = ({
             — smartphones, desktops, tablets, and all XR headsets including VR,
             AR, and Mixed Reality.
           </p>
-          <div className="cus-mid-sig">
+          {/* <div className="cus-mid-sig">
             <span className="cus-mid-sig-line" />
             <span>in3D R&D Team</span>
-          </div>
+          </div> */}
         </div>
 
         <ul className="cus-mid-list">
