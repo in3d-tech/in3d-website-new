@@ -40,7 +40,7 @@ body {
   /* background: black; */
   overflow-y: hidden;
   overflow-x: hidden;
-  cursor: none;
+  /* cursor: none; */
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
