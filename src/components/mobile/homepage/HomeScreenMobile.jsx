@@ -1,21 +1,29 @@
-import { Suspense, useEffect, useState, useRef, lazy } from "react";
+import {
+  Suspense,
+  useEffect,
+  useState,
+  useRef,
+  lazy,
+  useCallback,
+  memo,
+} from "react";
 import { useAppContext } from "../../../context/appContext";
 import { HomeScreenCategoryText } from "../categories/CategoryHsDetails";
 import { MenuAboutContact, MenuWheel } from "../nav/MenuWheel";
-import { TextScrambleComponent } from "../../common/shuffleTexts";
-// import { CategoryTracker } from "./CategoryTracker";
+// import { TextScrambleComponent } from "../../common/shuffleTexts";
 import { SceneMobile } from "./Scene";
+import { TextScrambleComponent } from "../../common/shuffleTextMobile";
 
-const LazySelectedContent = lazy(() => import("../categories/CategoryDetails"));
+// const LazySelectedContent = lazy(() => import("../categories/CategoryDetails"));
+const LazySelectedContent = lazy(
+  () => import("../categories/MobileCategoryPage"),
+);
 
 function HomeScreenMobile() {
   const [isMenuCentered, setIsMenuCentered] = useState(false);
-  // const [tilt, setTilt] = useState({ tiltLR: 0, tiltFB: 0, dir: 0 });
-  // const [slide, setSlide] = useState(0);
   const astroRef = useRef();
   const [startExpandedAnimation, setStartExpandedAnimation] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [debug, setDebug] = useState("yessss");
   const [selectedCategoryItemByIdx, setSelectedCategoryItemByIdx] =
     useState(-1);
 
@@ -31,30 +39,34 @@ function HomeScreenMobile() {
     setSelectedMenuActionMobile,
   } = useAppContext();
 
-  const handleMenuClick = (wasCategoryClicked) => {
-    if (!isMenuCentered) {
-      document.body.style.overflow = "hidden";
-    } else {
-      if (!selectedCategory) document.body.style.overflowY = "auto";
-    }
-    if (!wasCategoryClicked) {
-      setIsMenuCentered(!isMenuCentered);
-    }
-  };
+  const handleMenuClick = useCallback(
+    (wasCategoryClicked) => {
+      if (!isMenuCentered) {
+        document.body.style.overflow = "hidden";
+      } else {
+        if (!selectedCategory) document.body.style.overflowY = "auto";
+      }
+      if (!wasCategoryClicked) {
+        setIsMenuCentered((prev) => !prev);
+      }
+    },
+    [isMenuCentered, selectedCategory],
+  );
 
+  // Mark as mobile after initial paint — no artificial 5s delay
   useEffect(() => {
-    if (!isMobile) setTimeout(() => setIsMobile(true), 5000);
+    const raf = requestAnimationFrame(() => setIsMobile(true));
+    return () => cancelAnimationFrame(raf);
   }, []);
 
   useEffect(() => {
-    if (!isAstroModelDrawn) return;
-    if (!startExpandedAnimation) {
-      setTimeout(() => {
-        setCustomizeHasRendered(true);
-        setStartExpandedAnimation(true);
-      }, 200);
-    }
-  }, [isAstroModelDrawn]);
+    if (!isAstroModelDrawn || startExpandedAnimation) return;
+    const id = setTimeout(() => {
+      setCustomizeHasRendered(true);
+      setStartExpandedAnimation(true);
+    }, 200);
+    return () => clearTimeout(id);
+  }, [isAstroModelDrawn, startExpandedAnimation, setCustomizeHasRendered]);
 
   return (
     <>
@@ -66,6 +78,8 @@ function HomeScreenMobile() {
         setSelectedCategory={setSelectedCategory}
         selectedCategory={selectedCategory}
       />
+
+      {/* Menu overlay */}
       <div
         className={
           isMenuCentered
@@ -78,41 +92,42 @@ function HomeScreenMobile() {
           transition: "background 1s",
         }}
       >
-        {isMenuCentered ? (
-          <div
-            className="h-nav-in3d-icon"
-            style={{ animationDelay: "0.6s", left: "37%" }}
-          >
-            <img
-              className="in3d-fixed-logo"
-              style={{ width: "6em" }}
-              src="/assets/images/in3d-logo-white.png"
-              alt="fixedLogo"
+        {isMenuCentered && (
+          <>
+            <div
+              className="h-nav-in3d-icon"
+              style={{ animationDelay: "0.6s", left: "37%" }}
+            >
+              <img
+                className="in3d-fixed-logo"
+                style={{ width: "6em" }}
+                src="/assets/images/in3d-logo-white.png"
+                alt="fixedLogo"
+              />
+            </div>
+            <MenuAboutContact
+              isMenuCentered={isMenuCentered}
+              handleMenuClick={handleMenuClick}
             />
-          </div>
-        ) : null}
-        {isMenuCentered ? (
-          <MenuAboutContact
-            isMenuCentered={isMenuCentered}
-            handleMenuClick={handleMenuClick}
-          />
-        ) : null}
+          </>
+        )}
       </div>
-      (
+
+      {/* Main scrollable content — removed stray parentheses */}
       <div className="home-categories-wrapper-mobile">
-        {startExpandedAnimation ? (
-          <TitleWithAnimation isMobile={isMobile} />
-        ) : null}
+        {startExpandedAnimation && <TitleWithAnimation isMobile={isMobile} />}
+
         <div
           style={{
             width: "100%",
             height: "50px",
             marginTop: "68vh",
           }}
-        ></div>
+        />
+
         <div
           className="home-categories-map-mobile"
-          style={{ opacity: selectedCategory ? 0 : "" }}
+          style={{ opacity: selectedCategory ? 0 : undefined }}
         >
           {categories.map((category, idx) => (
             <HomeScreenCategoryText
@@ -128,15 +143,15 @@ function HomeScreenMobile() {
             />
           ))}
         </div>
+
         <SceneMobile
           astroRef={astroRef}
           selectedCategory={selectedCategory}
-          setDebug={setDebug}
           selectedCategoryItemByIdx={selectedCategoryItemByIdx}
           categoryIdxRef={categoryIdxRef}
         />
       </div>
-      )
+
       <Suspense fallback={null}>
         {selectedCategory ? <LazySelectedContent /> : null}
       </Suspense>
@@ -146,13 +161,15 @@ function HomeScreenMobile() {
 
 export default HomeScreenMobile;
 
+/* ─── Static data ─── */
+
 const backgrounds = {
   1: 'url("/assets/images/backgrounds/Astro_1_Background.webp")',
   2: 'url("https://in3dwebsite.blob.core.windows.net/photos/Medical_Togle-min.jpg")',
-  3: 'url("/assets/images/backgrounds//medicine/medicine_bg.jpg")',
+  3: 'url("/assets/images/backgrounds/medicine/medicine_bg.jpg")',
   4: 'url("/assets/images/backgrounds/microsoft/microsoft_bg.jpg")',
   5: 'url("/assets/images/backgrounds/security/security.jpg")',
-  6: 'url("https://in3dwebsite.blob.core.windows.net/photos/Ai_Tugle_Finish-min.jpg',
+  6: 'url("https://in3dwebsite.blob.core.windows.net/photos/Ai_Tugle_Finish-min.jpg")',
   7: 'url("/assets/images/backgrounds/military/military_bg.jpg")',
   8: 'url("https://in3dwebsite.blob.core.windows.net/photos/Customize_Togle_Finish-min.jpg")',
   9: 'url("/assets/images/backgrounds/Astro_1_Background.webp")',
@@ -170,40 +187,37 @@ const categories = [
   "ABOUTCONTACT",
 ];
 
-const TitleWithAnimation = ({ isMobile }) => {
-  return (
+/* ─── Title component ─── */
+
+const TitleWithAnimation = memo(({ isMobile }) => (
+  <div
+    style={{
+      top: 0,
+      left: "1em",
+      height: "10em",
+      zIndex: 1,
+      position: "absolute",
+      width: "50%",
+    }}
+  >
     <div
       style={{
-        top: "0em",
-        left: "1em",
-        height: "10em",
-        zIndex: 1,
-        position: "absolute",
-        width: "50%",
-        // border: "2px solid yellow",
+        fontSize: "1.8em",
+        marginTop: "1em",
+        animationDelay: "2.5s",
       }}
-      // className="container"
+      className="text-animate simply-header"
     >
-      <div
-        style={{
-          fontSize: "1.8em",
-          marginTop: "1em",
-          animationDelay: "2.5s",
-        }}
-        className="text-animate simply-header"
-      >
-        SIMPLY
-      </div>
-      <div
-        style={{
-          textAlign: "center",
-          // fontSize: "1em",
-          animationDelay: "2.5s",
-        }}
-        className="text-animate simply-header"
-      >
-        <TextScrambleComponent isHomepage isMobile={isMobile} />
-      </div>
+      SIMPLY
     </div>
-  );
-};
+    <div
+      style={{
+        textAlign: "center",
+        animationDelay: "2.5s",
+      }}
+      className="text-animate simply-header"
+    >
+      <TextScrambleComponent isHomepage isMobile={isMobile} />
+    </div>
+  </div>
+));
