@@ -148,7 +148,7 @@ function HomeScreenMobile() {
           astroRef={astroRef}
           selectedCategory={selectedCategory}
           selectedCategoryItemByIdx={selectedCategoryItemByIdx}
-          categoryIdxRef={categoryIdxRef}
+          // categoryIdxRef={categoryIdxRef}
         />
       </div>
 
