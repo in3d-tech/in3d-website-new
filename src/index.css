@@ -711,15 +711,30 @@ h2 {
 }
 
 .mobile-hs-category-wrapper {
-  box-shadow: -1px 1px 21px 9px rgba(237, 130, 130, 0.75);
-  -webkit-box-shadow: -1px 1px 21px 9px rgba(237, 130, 130, 0.75);
-  -moz-box-shadow: -1px 1px 21px 9px rgba(237, 130, 130, 0.75);
+  position: relative;
+  height: 70vh;
+  color: white;
+  font-family: "gotham", sans-serif;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  overflow: hidden;
+  margin: 0 12px 20px 12px;
+  border-radius: 16px;
+
+  /* Subtle outer glow using the per-card accent color */
+  box-shadow:
+    0 0 20px 2px var(--accent-glow, rgba(200, 140, 255, 0.15)),
+    inset 0 0 30px rgba(0, 0, 0, 0.2);
+
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
 .mobile-hs-category-title-wrapper {
-  box-shadow: -1px 1px 12px 4px rgba(186, 92, 200, 0.75);
-  -webkit-box-shadow: -1px 1px 12px 4px rgba(186, 92, 200, 0.75);
-  -moz-box-shadow: -1px 1px 12px 4px rgba(186, 92, 200, 0.75);
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
 }
 
 .letter {
@@ -893,7 +908,7 @@ nav.show {
   }
 }
 
-.homescreen-mobile {
+/* .homescreen-mobile {
   width: 100%;
   height: 100vh;
   position: fixed;
@@ -903,7 +918,7 @@ nav.show {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-}
+} */
 
 /* main scolling component sections */
 
@@ -1565,6 +1580,121 @@ section {
   margin-bottom: 20%;
   justify-items: center;
   width: 100%;
+}
+
+.mobile-category-glass-inner {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5em;
+  padding: 2em 1.5em;
+
+  /* Glass effect — the 3D scene shows through */
+  background: rgba(10, 10, 20, 0.2);
+  backdrop-filter: blur(14px) saturate(1.3);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+
+  overflow: hidden;
+}
+
+.mobile-category-bg-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: opacity 0.8s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.mobile-category-accent-line {
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent, rgba(200, 140, 255, 0.5)),
+    transparent
+  );
+  border-radius: 1px;
+}
+
+.mobile-category-title {
+  position: relative;
+  z-index: 1;
+  font-size: 2em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: center;
+  text-shadow:
+    0 0 20px var(--accent-glow, rgba(200, 140, 255, 0.3)),
+    0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.mobile-category-title span {
+  color: var(--accent, rgba(200, 160, 255, 0.9));
+}
+
+.mobile-category-description {
+  position: relative;
+  z-index: 1;
+  font-size: 0.95em;
+  line-height: 1.7;
+  text-align: left;
+  padding: 0 0.25em;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.mobile-category-cta-wrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  padding-top: 0.5em;
+}
+
+.mobile-category-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: white;
+  font-family: "gotham", sans-serif;
+  font-size: 0.85em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.mobile-category-cta-btn:active {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--accent, rgba(200, 160, 255, 0.4));
+  box-shadow: 0 0 12px var(--accent-glow, rgba(200, 140, 255, 0.2));
+  transform: scale(0.97);
+}
+
+.mobile-category-cta-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.mobile-category-cta-btn:active svg {
+  transform: translateX(3px);
 }
 
 .canvas-container-mobile {
@@ -2740,26 +2870,19 @@ figure {
 
 /* â”€â”€â”€ Smoother global transitions â”€â”€â”€ */
 
+/* .homescreen-mobile {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  will-change: background;
+} */
+
 .homescreen-mobile {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   will-change: background;
 }
-
-/* â”€â”€â”€ Category cards â€” glassmorphism + refined spacing â”€â”€â”€ */
-
-.mobile-hs-category-wrapper {
-  /* Use GPU-composited transform instead of repainting backgrounds */
-  will-change: transform, opacity;
-  transform: translateZ(0);
-
-  /* Subtle glass effect for depth */
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-}
-
-/* â”€â”€â”€ Title header entrance â”€â”€â”€ */
 
 .text-animate.simply-header {
   opacity: 0;
