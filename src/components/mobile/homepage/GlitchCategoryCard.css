@@ -503,7 +503,7 @@
 
 .glitch-cards-carousel__arrow {
   font-size: 28px;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.8);
   user-select: none;
   transition: opacity 0.3s ease;
   line-height: 1;
@@ -571,6 +571,21 @@
     transform: translateX(6px);
     opacity: 1;
   }
+}
+
+.glitch-cards-carousel--controlled {
+  /* Disable native touch-driven scroll â€” JS handles it */
+  touch-action: pan-y;
+  /* Remove snap so JS has full control of position */
+  scroll-snap-type: none;
+  /* Prevent iOS rubber-band / momentum overshoot */
+  -webkit-overflow-scrolling: auto;
+  overscroll-behavior-x: none;
+}
+
+.glitch-cards-carousel--controlled .glitch-card {
+  /* Remove snap alignment â€” JS positions cards now */
+  scroll-snap-align: unset;
 }
 
 /* ─── Hover state (touch devices get :active instead) ─── */

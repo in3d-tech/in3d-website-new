@@ -67,6 +67,11 @@ const CATEGORIES = [
 /* Full list: welcome card + categories */
 const ALL_CARDS = [WELCOME_CARD, ...CATEGORIES];
 
+/* ─── Minimum swipe distance (px) to register as intentional ─── */
+const SWIPE_THRESHOLD = 30;
+/* ─── Cooldown between card transitions (ms) ─── */
+const TRANSITION_COOLDOWN = 400;
+
 /* ─── Single card ─── */
 const GlitchCategoryCard = memo(
   ({
@@ -190,88 +195,157 @@ export const GlitchCategoryCards = memo(
   }) => {
     const scrollRef = useRef(null);
     const [activeIdx, setActiveIdx] = useState(0);
-    const snapTimeout = useRef(null);
+
+    // ── Controlled swipe state ──
+    const touchStartX = useRef(0);
+    const touchStartY = useRef(0);
+    const isTransitioning = useRef(false);
+    const activeIdxRef = useRef(0); // mirror of activeIdx for touch handler
+
+    // Keep ref in sync with state
+    useEffect(() => {
+      activeIdxRef.current = activeIdx;
+    }, [activeIdx]);
 
     /**
-     * Detect which card is centered.
-     * Returns the carousel index (0 = welcome, 1-7 = categories).
-     * We convert to model index before calling onActiveIndexChange:
-     *   carousel 0 (welcome) → model -1 (astro)
-     *   carousel 1 (industry) → model 0
-     *   carousel 2 (medicine) → model 1
-     *   etc.
+     * Scroll to a specific card index (smooth animated).
+     * This is the single source of truth for card navigation.
      */
-    const detectActiveCard = useCallback(() => {
+    const scrollToCard = useCallback((idx) => {
       const container = scrollRef.current;
       if (!container) return;
-
-      const containerRect = container.getBoundingClientRect();
-      const containerCenter = containerRect.left + containerRect.width / 2;
-
-      let bestIdx = 0;
-      let bestDist = Infinity;
-
       const cards = container.querySelectorAll(".glitch-card");
-      cards.forEach((card, idx) => {
-        const rect = card.getBoundingClientRect();
-        const cardCenter = rect.left + rect.width / 2;
-        const dist = Math.abs(cardCenter - containerCenter);
-        if (dist < bestDist) {
-          bestDist = dist;
-          bestIdx = idx;
-        }
+      if (!cards[idx]) return;
+
+      cards[idx].scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
       });
+    }, []);
 
-      setActiveIdx((prev) => {
-        if (prev !== bestIdx) {
-          // Convert carousel index to model index
-          const modelIdx = bestIdx === 0 ? -1 : bestIdx - 1;
-          setTimeout(() => onActiveIndexChange?.(modelIdx), 0);
-          return bestIdx;
+    /**
+     * Navigate to a card and update active state.
+     * Enforces cooldown to prevent rapid-fire transitions.
+     */
+    const goToCard = useCallback(
+      (idx) => {
+        const clamped = Math.max(0, Math.min(idx, ALL_CARDS.length - 1));
+        if (clamped === activeIdxRef.current) return;
+        if (isTransitioning.current) return;
+
+        isTransitioning.current = true;
+
+        setActiveIdx(clamped);
+        activeIdxRef.current = clamped;
+
+        // Notify parent: convert carousel index to model index
+        const modelIdx = clamped === 0 ? -1 : clamped - 1;
+        onActiveIndexChange?.(modelIdx);
+
+        scrollToCard(clamped);
+
+        // Cooldown — prevents queued swipes from firing
+        setTimeout(() => {
+          isTransitioning.current = false;
+        }, TRANSITION_COOLDOWN);
+      },
+      [onActiveIndexChange, scrollToCard],
+    );
+
+    // ── Touch handlers: one-card-at-a-time swipe ──
+    const handleTouchStart = useCallback((e) => {
+      touchStartX.current = e.touches[0].clientX;
+      touchStartY.current = e.touches[0].clientY;
+    }, []);
+
+    const handleTouchMove = useCallback((e) => {
+      // Prevent native horizontal scroll so momentum doesn't skip cards
+      // Allow vertical scroll through (if delta Y > delta X, don't prevent)
+      const dx = Math.abs(e.touches[0].clientX - touchStartX.current);
+      const dy = Math.abs(e.touches[0].clientY - touchStartY.current);
+
+      if (dx > dy) {
+        e.preventDefault();
+      }
+    }, []);
+
+    const handleTouchEnd = useCallback(
+      (e) => {
+        const endX = e.changedTouches[0].clientX;
+        const deltaX = touchStartX.current - endX;
+
+        // Only act if swipe exceeds threshold
+        if (Math.abs(deltaX) < SWIPE_THRESHOLD) return;
+
+        if (deltaX > 0) {
+          // Swiped left → next card
+          goToCard(activeIdxRef.current + 1);
+        } else {
+          // Swiped right → previous card
+          goToCard(activeIdxRef.current - 1);
         }
-        return prev;
-      });
-    }, [onActiveIndexChange]);
+      },
+      [goToCard],
+    );
 
-    const handleScroll = useCallback(() => {
-      if (snapTimeout.current) clearTimeout(snapTimeout.current);
-      snapTimeout.current = setTimeout(detectActiveCard, 60);
-    }, [detectActiveCard]);
-
+    // ── Attach touch listeners (non-passive so we can preventDefault) ──
     useEffect(() => {
       const el = scrollRef.current;
       if (!el) return;
-      el.addEventListener("scroll", handleScroll, { passive: true });
-      const initialTimer = setTimeout(detectActiveCard, 100);
+
+      el.addEventListener("touchstart", handleTouchStart, { passive: true });
+      el.addEventListener("touchmove", handleTouchMove, { passive: false });
+      el.addEventListener("touchend", handleTouchEnd, { passive: true });
+
       return () => {
-        el.removeEventListener("scroll", handleScroll);
-        if (snapTimeout.current) clearTimeout(snapTimeout.current);
-        clearTimeout(initialTimer);
+        el.removeEventListener("touchstart", handleTouchStart);
+        el.removeEventListener("touchmove", handleTouchMove);
+        el.removeEventListener("touchend", handleTouchEnd);
       };
-    }, [handleScroll, detectActiveCard]);
+    }, [handleTouchStart, handleTouchMove, handleTouchEnd]);
+
+    // ── Mouse wheel / trackpad: one card per discrete scroll ──
+    useEffect(() => {
+      const el = scrollRef.current;
+      if (!el) return;
+
+      const handleWheel = (e) => {
+        // Only intercept horizontal-dominant scrolls
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+          e.preventDefault();
+          if (Math.abs(e.deltaX) < 10) return; // ignore tiny trackpad noise
+
+          if (e.deltaX > 0) {
+            goToCard(activeIdxRef.current + 1);
+          } else {
+            goToCard(activeIdxRef.current - 1);
+          }
+        }
+      };
+
+      el.addEventListener("wheel", handleWheel, { passive: false });
+      return () => el.removeEventListener("wheel", handleWheel);
+    }, [goToCard]);
 
     // Notify parent of initial state: welcome card = astro model
     useEffect(() => {
       onActiveIndexChange?.(-1);
     }, []);
 
-    const scrollToCard = useCallback((idx) => {
-      const container = scrollRef.current;
-      if (!container) return;
-      const cards = container.querySelectorAll(".glitch-card");
-      if (cards[idx]) {
-        cards[idx].scrollIntoView({
-          behavior: "smooth",
-          block: "nearest",
-          inline: "center",
-        });
-      }
-    }, []);
+    // Scroll to card 0 (welcome) on mount
+    useEffect(() => {
+      const timer = setTimeout(() => scrollToCard(0), 100);
+      return () => clearTimeout(timer);
+    }, [scrollToCard]);
 
     return (
       <div className="glitch-cards-carousel-wrapper">
         {/* Horizontal scroll container */}
-        <div ref={scrollRef} className="glitch-cards-carousel">
+        <div
+          ref={scrollRef}
+          className="glitch-cards-carousel glitch-cards-carousel--controlled"
+        >
           <div className="glitch-cards-carousel__spacer" />
 
           {ALL_CARDS.map((category, idx) => (
@@ -296,6 +370,7 @@ export const GlitchCategoryCards = memo(
             className={`glitch-cards-carousel__arrow glitch-cards-carousel__arrow--left ${
               activeIdx === 0 ? "glitch-cards-carousel__arrow--hidden" : ""
             }`}
+            onClick={() => goToCard(activeIdx - 1)}
           >
             ‹
           </span>
@@ -307,7 +382,7 @@ export const GlitchCategoryCards = memo(
                 className={`glitch-cards-carousel__dot ${
                   idx === activeIdx ? "glitch-cards-carousel__dot--active" : ""
                 } ${idx === 0 ? "glitch-cards-carousel__dot--home" : ""}`}
-                onClick={() => scrollToCard(idx)}
+                onClick={() => goToCard(idx)}
                 aria-label={
                   idx === 0 ? "Go to home" : `Go to ${ALL_CARDS[idx].title}`
                 }
@@ -321,6 +396,7 @@ export const GlitchCategoryCards = memo(
                 ? "glitch-cards-carousel__arrow--hidden"
                 : ""
             }`}
+            onClick={() => goToCard(activeIdx + 1)}
           >
             ›
           </span>
