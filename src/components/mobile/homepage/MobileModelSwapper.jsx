@@ -44,7 +44,7 @@ const CATEGORY_MODEL_TRANSFORMS = {
 const DEFAULT_TRANSFORM = { position: [0, -4, -2], scale: 2.0, rotationY: 0 };
 
 const TRANSITION_DURATION = 0.4;
-const IDLE_ROTATE_SPEED = 0.15;
+const IDLE_ROTATE_SPEED = 0; // 0.15;
 
 /**
  * MobileModelSwapper

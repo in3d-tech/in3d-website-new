@@ -574,15 +574,20 @@
 }
 
 .glitch-cards-carousel--controlled {
+  /* Disable native touch-driven scroll â€” JS handles it */
   touch-action: pan-y;
+  /* Remove snap so JS has full control of position */
   scroll-snap-type: none;
+  /* Prevent iOS rubber-band / momentum overshoot */
   -webkit-overflow-scrolling: auto;
   overscroll-behavior-x: none;
 }
 
 .glitch-cards-carousel--controlled .glitch-card {
+  /* Remove snap alignment â€” JS positions cards now */
   scroll-snap-align: unset;
 }
+
 /* ─── Hover state (touch devices get :active instead) ─── */
 
 @media (hover: hover) {
