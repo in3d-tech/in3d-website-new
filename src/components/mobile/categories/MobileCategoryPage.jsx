@@ -271,12 +271,16 @@ function MobileCategoryPage() {
   const text3Ref = useRef(null);
   const [videosReady, setVideosReady] = useState(false);
 
+  console.log("so least we in here");
+
   // Resolve category data
   const categoryKey =
     selectedCategory === "contact"
       ? null
       : CATEGORY_KEY_MAP[selectedCategory - 2];
-  const data = categoryKey ? CATEGORY_CONTENT[categoryKey] : null;
+  console.log({ categoryKey });
+  // const data = categoryKey ? CATEGORY_CONTENT[categoryKey] : null;
+  const data = CATEGORY_CONTENT[3];
 
   // Lock body scroll
   useEffect(() => {
@@ -372,8 +376,11 @@ function MobileCategoryPage() {
 
     return () => cancelAnimationFrame(raf);
   }, [data]);
-
+  console.log("in 1");
+  console.log({ data });
   if (!data) return null;
+
+  console.log("hello world!");
 
   return (
     <div className="mob-cat-page fade-in">

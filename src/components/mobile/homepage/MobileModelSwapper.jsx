@@ -16,14 +16,29 @@ const CATEGORY_MODEL_URLS = [
   "/assets/models/costimize_model_v02.glb", // 6: Customization
 ];
 
+// const CATEGORY_MODEL_TRANSFORMS = {
+//   0: { position: [0, -3.75, 1.5], scale: 2.5, rotationY: Math.PI + 0.3 },
+//   1: { position: [0, -3, -1], scale: 2.5, rotationY: 0 },
+//   2: { position: [0, -4, -0.2], scale: 2.5, rotationY: -0.9 },
+//   3: { position: [0, -0.5, 3.2], scale: 2.5, rotationY: Math.PI + 1.3 },
+//   4: { position: [0, -1.6, 4.2], scale: 1.0, rotationY: -3 },
+//   5: { position: [0, -1.2, 2.8], scale: 1.8, rotationY: 1 },
+//   6: { position: [0, -3, 3], scale: 2.5, rotationY: -2.2 },
+// };
+
 const CATEGORY_MODEL_TRANSFORMS = {
-  0: { position: [0, -3.75, 1.5], scale: 2.5, rotationY: Math.PI + 0.3 },
-  1: { position: [0, -3, -1], scale: 2.5, rotationY: 0 },
-  2: { position: [0, -4, -0.2], scale: 2.5, rotationY: -0.9 },
-  3: { position: [0, -0.5, 3.2], scale: 2.5, rotationY: Math.PI + 1.3 },
+  0: { position: [0, -1.5, -1], scale: 1.5, rotationY: 0 },
+  1: { position: [3.5, -2, -3], scale: 2, rotationY: 0 },
+  2: { position: [0, -2, -3], scale: 2, rotationY: 0 },
+  3: {
+    position: [0, -0.2, 0],
+    scale: 2,
+    rotationY: Math.PI,
+    rotationX: 0.1,
+  },
   4: { position: [0, -1.6, 4.2], scale: 1.0, rotationY: -3 },
-  5: { position: [0, -1.2, 2.8], scale: 1.8, rotationY: 1 },
-  6: { position: [0, -3, 3], scale: 2.5, rotationY: -2.2 },
+  5: { position: [-0.2, -1, 0], scale: 1.8, rotationY: 1 },
+  6: { position: [0, -2, 0], scale: 2, rotationY: -2.2 },
 };
 
 const DEFAULT_TRANSFORM = { position: [0, -4, -2], scale: 2.0, rotationY: 0 };
@@ -195,7 +210,11 @@ function CategoryModel({ url, categoryIdx }) {
       object={scene}
       dispose={null}
       position={transform.position}
-      rotation={[0, transform.rotationY, 0]}
+      rotation={[
+        transform.rotationX ? transform.rotationX : 0,
+        transform.rotationY,
+        0,
+      ]}
       scale={transform.scale}
     />
   );
