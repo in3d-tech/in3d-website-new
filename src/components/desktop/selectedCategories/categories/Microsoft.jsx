@@ -750,8 +750,9 @@ const css = `
   position: relative;
   z-index: 1;
   display: flex;
-  align-items: center;
+  align-items: center; 
   width: 100%;
+  height: 100%;
   padding: 0 5%;
   gap: 5%;
 }

@@ -731,6 +731,7 @@ const css = `
   position: relative; z-index: 1;
   display: flex; align-items: center;
   width: 100%; padding: 0 5%; gap: 6%;
+  height: 100%;
 }
 
 /* LEFT */
