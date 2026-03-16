@@ -96,6 +96,108 @@ function MappedModels({
   const textTitleRef = useRef();
   // const modelTextRef = useRef(null);
   const isCustomizedRendered = useRef(false);
+  const isHovered = useRef(false);
+  const hoverTween = useRef(null);
+  const restingPos = useRef(null);
+  const restingRot = useRef(null);
+
+  // The hover target — right side of the scene
+  const MILITARY_HOVER_POS = { x: 5, y: -1.2, z: 2.8 };
+  const MILITARY_HOVER_ROT = { y: 2.5 };
+
+  const handlePointerOver = () => {
+    // Only allow hover interaction when this model is the "current" one on screen
+    if (idx !== 5) return;
+    if (scrollArea.currentSection !== 8) return;
+    if (isHovered.current) return;
+    if (!currentRef.current) return;
+
+    isHovered.current = true;
+
+    // Snapshot the current GSAP-driven position/rotation as our "home"
+    restingPos.current = {
+      x: currentRef.current.position.x,
+      y: currentRef.current.position.y,
+      z: currentRef.current.position.z,
+    };
+    restingRot.current = {
+      x: currentRef.current.rotation.x,
+      y: currentRef.current.rotation.y,
+      z: currentRef.current.rotation.z,
+    };
+
+    // Kill any in-progress hover tween
+    if (hoverTween.current) hoverTween.current.kill();
+
+    hoverTween.current = gsap
+      .timeline()
+      .to(
+        currentRef.current.position,
+        {
+          x: MILITARY_HOVER_POS.x,
+          y: MILITARY_HOVER_POS.y,
+          z: MILITARY_HOVER_POS.z,
+          duration: 1.8,
+          ease: "power2.inOut",
+        },
+        "go",
+      )
+      .to(
+        currentRef.current.rotation,
+        {
+          y: MILITARY_HOVER_ROT.y,
+          duration: 1.8,
+          ease: "power2.inOut",
+        },
+        "go",
+      );
+  };
+
+  const handlePointerOut = () => {
+    if (idx !== 5) return;
+    if (!isHovered.current) return;
+    if (!restingPos.current) return;
+
+    isHovered.current = false;
+
+    if (hoverTween.current) hoverTween.current.kill();
+
+    hoverTween.current = gsap
+      .timeline()
+      .to(
+        currentRef.current.position,
+        {
+          x: restingPos.current.x,
+          y: restingPos.current.y,
+          z: restingPos.current.z,
+          duration: 1.8,
+          ease: "power2.inOut",
+        },
+        "back",
+      )
+      .to(
+        currentRef.current.rotation,
+        {
+          x: restingRot.current.x,
+          y: restingRot.current.y,
+          z: restingRot.current.z,
+          duration: 1.8,
+          ease: "power2.inOut",
+        },
+        "back",
+      );
+  };
+
+  // Clean up on unmount or if user scrolls away while hovered
+  useEffect(() => {
+    if (idx !== 5) return;
+    // If user scrolls away from section 8 while hovered, snap back
+    if (scrollArea.currentSection !== 8 && isHovered.current) {
+      isHovered.current = false;
+      if (hoverTween.current) hoverTween.current.kill();
+      // The scroll GSAP timeline will take over position naturally
+    }
+  }, [scrollArea.currentSection]);
 
   if (true) {
     // console.log(model);
@@ -210,26 +312,15 @@ function MappedModels({
   return (
     <group key={`test${idx}`}>
       <group>
-        {/* <spotLight
-          position={[0, 8, 9]}
-          intensity={4}
-          castShadow
-          shadow-mapSize-width={1024}
-          shadow-mapSize-height={1024}
-          shadow-camera-near={0.5}
-          shadow-camera-far={20}
-        /> */}
         <primitive
-          ref={textTitleRef} //{testShadowsRef}
+          ref={textTitleRef}
           object={scene2}
           dispose={null}
           scale={headlines[idx].scale}
           visible={scrollArea.currentSection === idx + 3 ? true : false}
-          position={model.textPosition} //{headlines[idx].position}
-          rotation={model.textRotation} //{headlines[idx].rotation}
-          // color="black"
-          // castShadow
-        ></primitive>
+          position={model.textPosition}
+          rotation={model.textRotation}
+        />
       </group>
 
       <primitive
@@ -238,27 +329,63 @@ function MappedModels({
         dispose={null}
         scale={model.scale}
         position={model.position}
-        // visible={visibleModels.includes(idx)}
         rotation={model.rotation}
-      >
-        {/* <Html position={[-0.6, 1.3, 0]} transform> //Medicine */}
-        {/* {idx == 3 ? (
-          <Html
-            position={[-12, 6, 30]}
-            rotation={[0.01, Math.PI - 1.2, 0]}
-            transform
-          >
-            <div
-              className="annotation"
-              // style={{ color: "white", fontSize: "1px" }}
-            >
-              Apple Vision Pro
-            </div>
-          </Html>
-        ) : null} */}
-      </primitive>
+        onPointerOver={handlePointerOver}
+        onPointerOut={handlePointerOut}
+      />
     </group>
   );
+
+  // return (
+  //   <group key={`test${idx}`}>
+  //     <group>
+  //       {/* <spotLight
+  //         position={[0, 8, 9]}
+  //         intensity={4}
+  //         castShadow
+  //         shadow-mapSize-width={1024}
+  //         shadow-mapSize-height={1024}
+  //         shadow-camera-near={0.5}
+  //         shadow-camera-far={20}
+  //       /> */}
+  //       <primitive
+  //         ref={textTitleRef} //{testShadowsRef}
+  //         object={scene2}
+  //         dispose={null}
+  //         scale={headlines[idx].scale}
+  //         visible={scrollArea.currentSection === idx + 3 ? true : false}
+  //         position={model.textPosition}
+  //         rotation={model.textRotation}
+  //       ></primitive>
+  //     </group>
+
+  //     <primitive
+  //       ref={currentRef}
+  //       object={scene}
+  //       dispose={null}
+  //       scale={model.scale}
+  //       position={model.position}
+  //       // visible={visibleModels.includes(idx)}
+  //       rotation={model.rotation}
+  //     >
+  //       {/* <Html position={[-0.6, 1.3, 0]} transform> //Medicine */}
+  //       {/* {idx == 3 ? (
+  //         <Html
+  //           position={[-12, 6, 30]}
+  //           rotation={[0.01, Math.PI - 1.2, 0]}
+  //           transform
+  //         >
+  //           <div
+  //             className="annotation"
+  //             // style={{ color: "white", fontSize: "1px" }}
+  //           >
+  //             Apple Vision Pro
+  //           </div>
+  //         </Html>
+  //       ) : null} */}
+  //     </primitive>
+  //   </group>
+  // );
 }
 
 export default MappedModels;

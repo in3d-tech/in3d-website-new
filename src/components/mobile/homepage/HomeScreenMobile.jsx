@@ -8,13 +8,11 @@ import {
   memo,
 } from "react";
 import { useAppContext } from "../../../context/appContext";
-import { HomeScreenCategoryText } from "../categories/CategoryHsDetails";
 import { MenuAboutContact, MenuWheel } from "../nav/MenuWheel";
-// import { TextScrambleComponent } from "../../common/shuffleTexts";
 import { SceneMobile } from "./Scene";
 import { TextScrambleComponent } from "../../common/shuffleTextMobile";
+import { GlitchCategoryCards } from "./GlitchCategoryCard"; // ← NEW
 
-// const LazySelectedContent = lazy(() => import("../categories/CategoryDetails"));
 const LazySelectedContent = lazy(
   () => import("../categories/MobileCategoryPage"),
 );
@@ -53,7 +51,6 @@ function HomeScreenMobile() {
     [isMenuCentered, selectedCategory],
   );
 
-  // Mark as mobile after initial paint — no artificial 5s delay
   useEffect(() => {
     const raf = requestAnimationFrame(() => setIsMobile(true));
     return () => cancelAnimationFrame(raf);
@@ -70,6 +67,13 @@ function HomeScreenMobile() {
 
   return (
     <>
+      {/* ─── 3D scene: now position:fixed behind everything ─── */}
+      <SceneMobile
+        astroRef={astroRef}
+        selectedCategory={selectedCategory}
+        selectedCategoryItemByIdx={selectedCategoryItemByIdx}
+      />
+
       <MenuWheel
         setSelectedMenuActionMobile={setSelectedMenuActionMobile}
         handleMenuClick={handleMenuClick}
@@ -113,8 +117,14 @@ function HomeScreenMobile() {
         )}
       </div>
 
-      {/* Main scrollable content — removed stray parentheses */}
-      <div className="home-categories-wrapper-mobile">
+      {/* Main scrollable content — sits ABOVE the fixed canvas */}
+      <div
+        className="home-categories-wrapper-mobile"
+        style={{
+          position: "relative",
+          zIndex: 1 /* ensures cards layer above the fixed canvas */,
+        }}
+      >
         {startExpandedAnimation && <TitleWithAnimation isMobile={isMobile} />}
 
         <div
@@ -125,29 +135,15 @@ function HomeScreenMobile() {
           }}
         />
 
-        <div
-          className="home-categories-map-mobile"
-          style={{ opacity: selectedCategory ? 0 : undefined }}
-        >
-          {categories.map((category, idx) => (
-            <HomeScreenCategoryText
-              selectedCategory={selectedCategory}
-              key={idx}
-              idx={idx}
-              selectedMenuActionMobile={selectedMenuActionMobile}
-              setSelectedMenuActionMobile={setSelectedMenuActionMobile}
-              setSelectedCategory={setSelectedCategory}
-              selectedCategoryItemByIdx={selectedCategoryItemByIdx}
-              setSelectedCategoryItemByIdx={setSelectedCategoryItemByIdx}
-              categoryIdxRef={categoryIdxRef}
-            />
-          ))}
-        </div>
-
-        <SceneMobile
-          astroRef={astroRef}
+        {/* ─── Glitch category cards ─── */}
+        <GlitchCategoryCards
           selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          selectedMenuActionMobile={selectedMenuActionMobile}
+          setSelectedMenuActionMobile={setSelectedMenuActionMobile}
           selectedCategoryItemByIdx={selectedCategoryItemByIdx}
+          setSelectedCategoryItemByIdx={setSelectedCategoryItemByIdx}
+          categoryIdxRef={categoryIdxRef}
         />
       </div>
 
@@ -173,18 +169,6 @@ const backgrounds = {
   8: 'url("https://in3dwebsite.blob.core.windows.net/photos/Customize_Togle_Finish-min.jpg")',
   9: 'url("/assets/images/backgrounds/Astro_1_Background.webp")',
 };
-
-const categories = [
-  "INDUSTRY",
-  "MEDICINE",
-  "MICROSOFT",
-  "SECURITY",
-  "ARTIFICAL INTELLIGENCE",
-  "MILITARY",
-  "CUSTOMIZATION",
-  "About",
-  "ABOUTCONTACT",
-];
 
 /* ─── Title component ─── */
 
