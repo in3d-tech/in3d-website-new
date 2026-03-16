@@ -67,10 +67,10 @@ const CATEGORIES = [
 /* Full list: welcome card + categories */
 const ALL_CARDS = [WELCOME_CARD, ...CATEGORIES];
 
-/* ─── Minimum swipe distance (px) to register as intentional ─── */
+/* ─── Swipe / transition tuning ─── */
 const SWIPE_THRESHOLD = 30;
-/* ─── Cooldown between card transitions (ms) ─── */
-const TRANSITION_COOLDOWN = 400;
+const TRANSITION_COOLDOWN = 350;
+const SETTLE_DELAY = 150;
 
 /* ─── Single card ─── */
 const GlitchCategoryCard = memo(
@@ -92,19 +92,10 @@ const GlitchCategoryCard = memo(
     }, [idx]);
 
     const handleClick = useCallback(() => {
-      // Welcome card is not clickable into a category page
       if (category.isWelcome) return;
-
-      if (setSelectedCategory) {
-        setSelectedCategory(category.title);
-      }
-      if (setSelectedCategoryItemByIdx) {
-        // Category cards are offset by 1 because of the welcome card
-        setSelectedCategoryItemByIdx(idx - 1);
-      }
-      if (categoryIdxRef) {
-        categoryIdxRef.current = idx - 1;
-      }
+      if (setSelectedCategory) setSelectedCategory(category.title);
+      if (setSelectedCategoryItemByIdx) setSelectedCategoryItemByIdx(idx - 1);
+      if (categoryIdxRef) categoryIdxRef.current = idx - 1;
     }, [
       idx,
       category,
@@ -126,29 +117,19 @@ const GlitchCategoryCard = memo(
         }}
         onClick={handleClick}
       >
-        {/* Background image layer */}
         <div
           className="glitch-card__bg"
           style={{ backgroundImage: `url("${category.bg}")` }}
         />
-
-        {/* Scanline sweep */}
         <div className="glitch-card__scanline" />
-
-        {/* Left accent bar */}
         <div className="glitch-card__accent-bar" />
-
-        {/* Data index top-right */}
         <div className="glitch-card__data-index">
           {category.isWelcome ? "HOME //" : `${category.idx} //`}
         </div>
-
-        {/* Content */}
         <div className="glitch-card__content">
           {!category.isWelcome && (
             <div className="glitch-card__idx">// {category.idx}</div>
           )}
-
           <div className="glitch-card__title">
             {category.isWelcome ? (
               <span className="glitch-card__welcome-title">
@@ -167,9 +148,7 @@ const GlitchCategoryCard = memo(
               </span>
             )}
           </div>
-
           <div className="glitch-card__tagline">{category.tagline}</div>
-
           {category.isWelcome && (
             <div className="glitch-card__swipe-hint">Swipe to explore ›</div>
           )}
@@ -180,6 +159,40 @@ const GlitchCategoryCard = memo(
 );
 
 GlitchCategoryCard.displayName = "GlitchCategoryCard";
+
+/* ═══════════════════════════════════════════════════
+   Helpers
+   ═══════════════════════════════════════════════════ */
+
+/** Compute the scrollLeft that centers card[idx] in the container */
+function getCardScrollTarget(container, idx) {
+  const cards = container.querySelectorAll(".glitch-card");
+  if (!cards[idx]) return null;
+  const card = cards[idx];
+  return card.offsetLeft - (container.offsetWidth - card.offsetWidth) / 2;
+}
+
+/** Find which card is visually closest to the container center */
+function findNearestCardIdx(container) {
+  const containerRect = container.getBoundingClientRect();
+  const center = containerRect.left + containerRect.width / 2;
+  const cards = container.querySelectorAll(".glitch-card");
+
+  let bestIdx = 0;
+  let bestDist = Infinity;
+
+  cards.forEach((card, idx) => {
+    const rect = card.getBoundingClientRect();
+    const cardCenter = rect.left + rect.width / 2;
+    const dist = Math.abs(cardCenter - center);
+    if (dist < bestDist) {
+      bestDist = dist;
+      bestIdx = idx;
+    }
+  });
+
+  return bestIdx;
+}
 
 /* ─── Horizontal carousel wrapper ─── */
 export const GlitchCategoryCards = memo(
@@ -196,75 +209,178 @@ export const GlitchCategoryCards = memo(
     const scrollRef = useRef(null);
     const [activeIdx, setActiveIdx] = useState(0);
 
-    // ── Controlled swipe state ──
     const touchStartX = useRef(0);
     const touchStartY = useRef(0);
     const isTransitioning = useRef(false);
-    const activeIdxRef = useRef(0); // mirror of activeIdx for touch handler
+    const activeIdxRef = useRef(0);
+    const animFrameRef = useRef(null);
+    const settleTimerRef = useRef(null);
 
-    // Keep ref in sync with state
     useEffect(() => {
       activeIdxRef.current = activeIdx;
     }, [activeIdx]);
 
-    /**
-     * Scroll to a specific card index (smooth animated).
-     * This is the single source of truth for card navigation.
-     */
-    const scrollToCard = useCallback((idx) => {
+    /* ──────────────────────────────────────────────
+       Custom rAF scroll animation — fully owned by us,
+       so it can't be interrupted by native scroll.
+       ────────────────────────────────────────────── */
+    const animateScrollTo = useCallback((targetLeft, duration = 300) => {
       const container = scrollRef.current;
       if (!container) return;
-      const cards = container.querySelectorAll(".glitch-card");
-      if (!cards[idx]) return;
 
-      cards[idx].scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "center",
-      });
+      if (animFrameRef.current) {
+        cancelAnimationFrame(animFrameRef.current);
+        animFrameRef.current = null;
+      }
+
+      const start = container.scrollLeft;
+      const delta = targetLeft - start;
+
+      if (Math.abs(delta) < 1) return;
+
+      const startTime = performance.now();
+
+      const step = (now) => {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        // ease-out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
+
+        container.scrollLeft = start + delta * eased;
+
+        if (progress < 1) {
+          animFrameRef.current = requestAnimationFrame(step);
+        } else {
+          animFrameRef.current = null;
+          container.scrollLeft = targetLeft;
+        }
+      };
+
+      animFrameRef.current = requestAnimationFrame(step);
     }, []);
 
-    /**
-     * Navigate to a card and update active state.
-     * Enforces cooldown to prevent rapid-fire transitions.
-     */
+    /* ──────────────────────────────────────────────
+       goToCard — single source of truth for navigation.
+       `force` lets settle re-snap even if idx matches.
+       ────────────────────────────────────────────── */
     const goToCard = useCallback(
-      (idx) => {
+      (idx, { animate = true, force = false } = {}) => {
         const clamped = Math.max(0, Math.min(idx, ALL_CARDS.length - 1));
-        if (clamped === activeIdxRef.current) return;
-        if (isTransitioning.current) return;
+        const container = scrollRef.current;
+        if (!container) return;
+
+        if (
+          !force &&
+          clamped === activeIdxRef.current &&
+          !isTransitioning.current
+        )
+          return;
+        if (isTransitioning.current && !force) return;
 
         isTransitioning.current = true;
 
         setActiveIdx(clamped);
         activeIdxRef.current = clamped;
 
-        // Notify parent: convert carousel index to model index
         const modelIdx = clamped === 0 ? -1 : clamped - 1;
         onActiveIndexChange?.(modelIdx);
 
-        scrollToCard(clamped);
+        const target = getCardScrollTarget(container, clamped);
+        if (target !== null) {
+          if (animate) {
+            animateScrollTo(target, 300);
+          } else {
+            if (animFrameRef.current) {
+              cancelAnimationFrame(animFrameRef.current);
+              animFrameRef.current = null;
+            }
+            container.scrollLeft = target;
+          }
+        }
 
-        // Cooldown — prevents queued swipes from firing
         setTimeout(() => {
           isTransitioning.current = false;
         }, TRANSITION_COOLDOWN);
       },
-      [onActiveIndexChange, scrollToCard],
+      [onActiveIndexChange, animateScrollTo],
     );
 
-    // ── Touch handlers: one-card-at-a-time swipe ──
+    /* ──────────────────────────────────────────────
+       Settle — safety net that fires after scroll stops.
+       If the container ended up between two cards, this
+       snaps to the nearest one.
+       ────────────────────────────────────────────── */
+    const scheduleSettle = useCallback(() => {
+      if (settleTimerRef.current) clearTimeout(settleTimerRef.current);
+
+      settleTimerRef.current = setTimeout(() => {
+        const container = scrollRef.current;
+        if (!container || isTransitioning.current) return;
+
+        const nearestIdx = findNearestCardIdx(container);
+        const expectedTarget = getCardScrollTarget(container, nearestIdx);
+        if (expectedTarget === null) return;
+
+        const drift = Math.abs(container.scrollLeft - expectedTarget);
+
+        if (drift > 5) {
+          // Misaligned — snap to nearest card
+          goToCard(nearestIdx, { animate: true, force: true });
+        } else if (nearestIdx !== activeIdxRef.current) {
+          // Aligned but state is stale — sync
+          setActiveIdx(nearestIdx);
+          activeIdxRef.current = nearestIdx;
+          const modelIdx = nearestIdx === 0 ? -1 : nearestIdx - 1;
+          onActiveIndexChange?.(modelIdx);
+        }
+      }, SETTLE_DELAY);
+    }, [goToCard, onActiveIndexChange]);
+
+    /* ──────────────────────────────────────────────
+       Listen to native scroll for settle detection.
+       Only fires settle when our own animation isn't
+       running (to avoid fighting ourselves).
+       ────────────────────────────────────────────── */
+    useEffect(() => {
+      const el = scrollRef.current;
+      if (!el) return;
+
+      const onScroll = () => {
+        if (animFrameRef.current) return;
+        scheduleSettle();
+      };
+
+      el.addEventListener("scroll", onScroll, { passive: true });
+      return () => {
+        el.removeEventListener("scroll", onScroll);
+        if (settleTimerRef.current) clearTimeout(settleTimerRef.current);
+      };
+    }, [scheduleSettle]);
+
+    /* ──────────────────────────────────────────────
+       Touch handlers
+       ────────────────────────────────────────────── */
     const handleTouchStart = useCallback((e) => {
+      // If animation is running, snap it to completion instantly
+      if (animFrameRef.current) {
+        cancelAnimationFrame(animFrameRef.current);
+        animFrameRef.current = null;
+
+        const container = scrollRef.current;
+        if (container) {
+          const target = getCardScrollTarget(container, activeIdxRef.current);
+          if (target !== null) container.scrollLeft = target;
+        }
+        isTransitioning.current = false;
+      }
+
       touchStartX.current = e.touches[0].clientX;
       touchStartY.current = e.touches[0].clientY;
     }, []);
 
     const handleTouchMove = useCallback((e) => {
-      // Prevent native horizontal scroll so momentum doesn't skip cards
-      // Allow vertical scroll through (if delta Y > delta X, don't prevent)
       const dx = Math.abs(e.touches[0].clientX - touchStartX.current);
       const dy = Math.abs(e.touches[0].clientY - touchStartY.current);
-
       if (dx > dy) {
         e.preventDefault();
       }
@@ -275,21 +391,20 @@ export const GlitchCategoryCards = memo(
         const endX = e.changedTouches[0].clientX;
         const deltaX = touchStartX.current - endX;
 
-        // Only act if swipe exceeds threshold
-        if (Math.abs(deltaX) < SWIPE_THRESHOLD) return;
+        if (Math.abs(deltaX) < SWIPE_THRESHOLD) {
+          scheduleSettle();
+          return;
+        }
 
         if (deltaX > 0) {
-          // Swiped left → next card
           goToCard(activeIdxRef.current + 1);
         } else {
-          // Swiped right → previous card
           goToCard(activeIdxRef.current - 1);
         }
       },
-      [goToCard],
+      [goToCard, scheduleSettle],
     );
 
-    // ── Attach touch listeners (non-passive so we can preventDefault) ──
     useEffect(() => {
       const el = scrollRef.current;
       if (!el) return;
@@ -305,16 +420,15 @@ export const GlitchCategoryCards = memo(
       };
     }, [handleTouchStart, handleTouchMove, handleTouchEnd]);
 
-    // ── Mouse wheel / trackpad: one card per discrete scroll ──
+    // ── Mouse wheel / trackpad ──
     useEffect(() => {
       const el = scrollRef.current;
       if (!el) return;
 
       const handleWheel = (e) => {
-        // Only intercept horizontal-dominant scrolls
         if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
           e.preventDefault();
-          if (Math.abs(e.deltaX) < 10) return; // ignore tiny trackpad noise
+          if (Math.abs(e.deltaX) < 10) return;
 
           if (e.deltaX > 0) {
             goToCard(activeIdxRef.current + 1);
@@ -328,20 +442,26 @@ export const GlitchCategoryCards = memo(
       return () => el.removeEventListener("wheel", handleWheel);
     }, [goToCard]);
 
-    // Notify parent of initial state: welcome card = astro model
+    // ── Initial state ──
     useEffect(() => {
       onActiveIndexChange?.(-1);
     }, []);
 
-    // Scroll to card 0 (welcome) on mount
     useEffect(() => {
-      const timer = setTimeout(() => scrollToCard(0), 100);
+      const timer = setTimeout(() => goToCard(0, { animate: false }), 100);
       return () => clearTimeout(timer);
-    }, [scrollToCard]);
+    }, [goToCard]);
+
+    // ── Cleanup ──
+    useEffect(() => {
+      return () => {
+        if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+        if (settleTimerRef.current) clearTimeout(settleTimerRef.current);
+      };
+    }, []);
 
     return (
       <div className="glitch-cards-carousel-wrapper">
-        {/* Horizontal scroll container */}
         <div
           ref={scrollRef}
           className="glitch-cards-carousel glitch-cards-carousel--controlled"
@@ -364,7 +484,6 @@ export const GlitchCategoryCards = memo(
           <div className="glitch-cards-carousel__spacer" />
         </div>
 
-        {/* Dot indicators + arrows */}
         <div className="glitch-cards-carousel__hint">
           <span
             className={`glitch-cards-carousel__arrow glitch-cards-carousel__arrow--left ${
