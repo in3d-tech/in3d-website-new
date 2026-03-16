@@ -1,59 +1,43 @@
-import { useGLTF, useProgress, Sparkles } from "@react-three/drei";
+import { useGLTF, Sparkles } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Suspense, useEffect, useMemo, useState, useRef } from "react";
+import { Suspense, useEffect, useMemo, useRef } from "react";
 import { useAppContext } from "../../../context/appContext";
 import { Camera } from "../../desktop/homepage/scene/Camera";
-import { useDeviceTilt } from "./useDeviceTilt"; // ← the new hook
+import { useDeviceTilt } from "./useDeviceTilt";
+import { MobileModelSwapper } from "./MobileModelSwapper";
 import * as THREE from "three";
 
-const INDUSTRY = 0;
-const MEDICINE = 1;
-const MICROSOFT = 2;
-const SECURITY = 3;
-const AI = 4;
-const MILITARY = 5;
-const CUSTOMIZATION = 6;
-const ABOUT_US = 7;
-
-const hsTextBgs = {
-  0: "url(/assets/images/backgrounds/taasia/taasia_bg.jpg)",
-  1: "url(/assets/images/backgrounds/medicine/medicine_bg.jpg)",
-  2: "url(/assets/images/backgrounds/microsoft/microsoft_bg.jpg)",
-  3: "url(/assets/images/backgrounds/security/security.jpg)",
-  4: "url(/assets/images/backgrounds/ai/ai_bg.png)",
-  5: "url(/assets/images/backgrounds/military/military_bg.jpg)",
-  6: "url(/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png)",
-  7: "url(/assets/images/backgrounds/customize/Costumize_Smoke_Background_V01.png)",
-};
-
-/* ─── Base rotation of the astronaut primitive ─── */
+/* ─── Constants ─── */
 const BASE_ROT_X = 0.54;
 const BASE_ROT_Y = Math.PI - 0.35;
-
-/* ─── Tilt config ─── */
 const TILT_LERP_SPEED = 4;
-
-/* ─── Scroll-driven recession config ─── */
-const SCROLL_Z_MIN = -0.5;
 const SCROLL_Z_MAX = 0;
-const SCROLL_SCALE_MIN = 1;
-const SCROLL_SCALE_MAX = 1;
 const SCROLL_Y_OFFSET = 0.2;
 const MAX_RECESSION = 0.4;
+const ORIGINAL_Y = -5;
+const ORIGINAL_Z = -0.5;
+
+const SPARKLE_COLORS = {
+  [-1]: "pink",
+  0: "#1D9E75",
+  1: "#D4537E",
+  2: "#378ADD",
+  3: "#E24B4A",
+  4: "#7F77DD",
+  5: "#888780",
+  6: "#BA7517",
+};
 
 export function SceneMobile({
   astroRef,
   selectedCategory,
   selectedCategoryItemByIdx,
-  categoryIdxRef,
+  activeCategoryIdx,
 }) {
   const scrollProgress = useRef(0);
   const canvasContainerRef = useRef(null);
-
-  // ── Use the robust tilt hook ──
   const { tiltTarget, requestTilt, tiltStatus } = useDeviceTilt();
 
-  /* ── Track scroll progress ── */
   useEffect(() => {
     const handleScroll = () => {
       const scrollThreshold = window.innerHeight * 0.6;
@@ -67,32 +51,28 @@ export function SceneMobile({
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const canvasBgImage =
-    selectedCategoryItemByIdx >= 0
-      ? hsTextBgs[selectedCategoryItemByIdx] || ""
-      : "";
+  const showAstro = activeCategoryIdx < 0;
 
-  // Derive container opacity + z-index from scroll progress (no re-renders)
   useEffect(() => {
     let raf;
-    let prevZ = 2;
     const update = () => {
       if (canvasContainerRef.current) {
-        const p = scrollProgress.current;
-        const opacity = 1 - p * 0.7;
-        canvasContainerRef.current.style.opacity = opacity;
-
-        const newZ = p < 0.05 ? 2 : 0;
-        if (newZ !== prevZ) {
-          canvasContainerRef.current.style.zIndex = newZ;
-          prevZ = newZ;
+        if (activeCategoryIdx >= 0) {
+          canvasContainerRef.current.style.opacity = "1";
+          canvasContainerRef.current.style.zIndex = "1";
+        } else {
+          const p = scrollProgress.current;
+          canvasContainerRef.current.style.opacity = String(1 - p * 0.7);
+          canvasContainerRef.current.style.zIndex = p < 0.05 ? "2" : "0";
         }
       }
       raf = requestAnimationFrame(update);
     };
     raf = requestAnimationFrame(update);
     return () => cancelAnimationFrame(raf);
-  }, []);
+  }, [activeCategoryIdx]);
+
+  const sparkleColor = SPARKLE_COLORS[activeCategoryIdx] || "pink";
 
   return (
     <div
@@ -104,7 +84,7 @@ export function SceneMobile({
         left: 0,
         width: "100%",
         height: "100vh",
-        zIndex: 2,
+        zIndex: 1,
         pointerEvents: "none",
       }}
     >
@@ -115,23 +95,25 @@ export function SceneMobile({
           powerPreference: "high-performance",
           alpha: true,
         }}
-        style={{ backgroundImage: canvasBgImage, pointerEvents: "auto" }}
+        style={{ pointerEvents: "auto" }}
       >
         <ambientLight intensity={0.8} />
         <directionalLight intensity={3} />
         <Camera />
-        <Sparkles count={200} scale={10} size={2} color="pink" />
+        <Sparkles count={200} scale={10} size={2} color={sparkleColor} />
+
         <Suspense fallback={null}>
           <AstroModel
             url="/assets/models/astronaut_new5 (3).glb"
             astroRef={astroRef}
             tiltTarget={tiltTarget}
             scrollProgress={scrollProgress}
+            visible={showAstro}
           />
+          <MobileModelSwapper activeCategoryIdx={activeCategoryIdx} />
         </Suspense>
       </Canvas>
 
-      {/* ── Tilt permission prompt (iOS only, shown when denied or idle) ── */}
       {(tiltStatus === "denied" || tiltStatus === "idle") && (
         <button
           onClick={requestTilt}
@@ -163,56 +145,80 @@ export function SceneMobile({
   );
 }
 
-/* ─── Astronaut model ─── */
-
-const ORIGINAL_Y = -5;
-const ORIGINAL_Z = -0.5;
-
-export function AstroModel({ url, astroRef, tiltTarget, scrollProgress }) {
+/* ─── Astronaut model ───
+ *
+ * KEY FIX: Removed `useProgress` from this component.
+ * `useProgress` is a shared global hook from drei — when CategoryModel
+ * mounts and loads a new GLTF, useProgress updates its state, which
+ * triggers a re-render in every component using it. If that re-render
+ * happens during React's render phase of CategoryModel, React throws
+ * "Cannot update a component while rendering a different component".
+ *
+ * Instead, we detect readiness by checking scene.children visibility
+ * directly in useFrame, with no dependency on useProgress.
+ */
+export function AstroModel({
+  url,
+  astroRef,
+  tiltTarget,
+  scrollProgress,
+  visible = true,
+}) {
   const { isAstroModelDrawn, setIsAstroModelDrawn } = useAppContext();
   const { scene, animations } = useGLTF(url);
   const mixer = useGLTFAnimations(scene, animations);
-  const { active } = useProgress();
 
   const isFullyRenderedRef = useRef(false);
   const currentOffset = useRef({ x: 0, y: 0 });
+  const visibilityScale = useRef(1);
+  const frameCount = useRef(0);
 
   useFrame((_, delta) => {
     if (!astroRef.current) return;
     const ref = astroRef.current;
 
-    // ── Model-ready detection ──
-    if (!isFullyRenderedRef.current && scene && !active) {
-      const fullyRendered = scene.children.every((child) => child.visible);
-      if (fullyRendered && !isAstroModelDrawn) {
-        isFullyRenderedRef.current = true;
-        setTimeout(() => setIsAstroModelDrawn(true), 1000);
+    // Model-ready detection — wait a few frames for GPU upload, then check
+    // No useProgress dependency!
+    if (!isFullyRenderedRef.current && scene) {
+      frameCount.current++;
+      // Give it ~30 frames (~0.5s at 60fps) for the GPU to upload buffers
+      if (frameCount.current > 30) {
+        const fullyRendered = scene.children.every((child) => child.visible);
+        if (fullyRendered && !isAstroModelDrawn) {
+          isFullyRenderedRef.current = true;
+          // Defer the setState to be safe
+          setTimeout(() => setIsAstroModelDrawn(true), 100);
+        }
       }
     }
 
-    // ── Smooth tilt ──
-    const target = tiltTarget.current;
-    const lerpFactor = 1 - Math.exp(-TILT_LERP_SPEED * delta);
+    // Smooth visibility transition
+    const targetVis = visible ? 1 : 0;
+    const lerpSpeed = 1 - Math.exp(-6 * delta);
+    visibilityScale.current +=
+      (targetVis - visibilityScale.current) * lerpSpeed;
 
-    currentOffset.current.x +=
-      (target.x - currentOffset.current.x) * lerpFactor;
-    currentOffset.current.y +=
-      (target.y - currentOffset.current.y) * lerpFactor;
+    const vis = visibilityScale.current;
+    ref.scale.setScalar(Math.max(vis, 0.001));
+
+    if (vis < 0.01) return;
+
+    // Smooth tilt
+    const target = tiltTarget.current;
+    const tiltLerp = 1 - Math.exp(-TILT_LERP_SPEED * delta);
+
+    currentOffset.current.x += (target.x - currentOffset.current.x) * tiltLerp;
+    currentOffset.current.y += (target.y - currentOffset.current.y) * tiltLerp;
 
     ref.rotation.x = BASE_ROT_X + currentOffset.current.x;
     ref.rotation.y = BASE_ROT_Y + currentOffset.current.y;
 
-    // ── Scroll-driven recession ──
+    // Scroll-driven recession
     const pRaw = scrollProgress.current;
     const p = Math.min(pRaw, MAX_RECESSION) / MAX_RECESSION;
 
-    const z = THREE.MathUtils.lerp(ORIGINAL_Z, SCROLL_Z_MAX, p);
-    ref.position.z = z;
-
+    ref.position.z = THREE.MathUtils.lerp(ORIGINAL_Z, SCROLL_Z_MAX, p);
     ref.position.y = ORIGINAL_Y + p * SCROLL_Y_OFFSET;
-
-    const s = THREE.MathUtils.lerp(SCROLL_SCALE_MIN, SCROLL_SCALE_MAX, p);
-    ref.scale.setScalar(s);
   });
 
   return (

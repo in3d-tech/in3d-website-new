@@ -294,6 +294,285 @@
   transform: translateX(0);
 }
 
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   HORIZONTAL CAROUSEL
+   Import alongside your existing GlitchCategoryCard.css
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
+/* â”€â”€â”€ Carousel wrapper â”€â”€â”€ */
+.glitch-cards-carousel-wrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: env(safe-area-inset-bottom, 12px);
+}
+
+/* â”€â”€â”€ Horizontal scroll container â”€â”€â”€ */
+.glitch-cards-carousel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  gap: 16px;
+  padding: 12px 0;
+  min-height: 200px;
+}
+
+.glitch-cards-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+/* Spacers so first/last card can center */
+.glitch-cards-carousel__spacer {
+  flex: 0 0 calc(50vw - 140px);
+  min-width: calc(50vw - 140px);
+  height: 1px;
+}
+
+/* â”€â”€â”€ Card overrides for horizontal layout â”€â”€â”€ */
+.glitch-cards-carousel .glitch-card {
+  flex: 0 0 280px !important;
+  width: 280px !important;
+  min-width: 280px !important;
+  height: 180px !important;
+  min-height: 180px !important;
+  scroll-snap-align: center;
+
+  transform: scale(0.88);
+  opacity: 0.5;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.35s ease;
+
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  margin: 0 !important;
+}
+
+.glitch-cards-carousel .glitch-card--active {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.glitch-cards-carousel .glitch-card__bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.4;
+}
+
+.glitch-cards-carousel .glitch-card--active .glitch-card__bg {
+  opacity: 0.6;
+}
+
+.glitch-cards-carousel .glitch-card__content {
+  position: relative;
+  z-index: 2;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+}
+
+.glitch-cards-carousel .glitch-card__title {
+  font-size: 1.1em;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+
+.glitch-cards-carousel .glitch-card__tagline {
+  font-size: 0.75em;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 4px;
+}
+
+.glitch-cards-carousel .glitch-card__idx {
+  font-size: 0.65em;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 8px;
+  font-family: monospace;
+}
+
+.glitch-cards-carousel .glitch-card__data-index {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 0.6em;
+  color: rgba(255, 255, 255, 0.3);
+  font-family: monospace;
+  z-index: 2;
+}
+
+.glitch-cards-carousel .glitch-card__accent-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--card-accent, #fff);
+  z-index: 2;
+}
+
+.glitch-cards-carousel .glitch-card__scanline {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   WELCOME / HOME CARD
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
+.glitch-cards-carousel .glitch-card--welcome {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.glitch-cards-carousel .glitch-card--welcome .glitch-card__accent-bar {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.1)
+  );
+  width: 2px;
+}
+
+.glitch-cards-carousel .glitch-card--welcome .glitch-card__content {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* Logo inside welcome card */
+.glitch-card__welcome-logo {
+  height: 40px;
+  width: auto;
+  opacity: 0.9;
+  filter: brightness(1.1);
+}
+
+.glitch-card--welcome .glitch-card__tagline {
+  text-align: center;
+  font-size: 0.8em;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 6px;
+}
+
+/* "Swipe to explore" hint text */
+.glitch-card__swipe-hint {
+  font-size: 0.65em;
+  color: rgba(255, 255, 255, 0.35);
+  margin-top: 14px;
+  letter-spacing: 0.08em;
+  animation: swipeTextPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes swipeTextPulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   NAVIGATION â€” arrows + dots
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
+.glitch-cards-carousel__hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 8px 0 16px;
+}
+
+.glitch-cards-carousel__arrow {
+  font-size: 28px;
+  color: rgba(255, 255, 255, 0.5);
+  user-select: none;
+  transition: opacity 0.3s ease;
+  line-height: 1;
+  width: 24px;
+  text-align: center;
+}
+
+.glitch-cards-carousel__arrow--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.glitch-cards-carousel__dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.glitch-cards-carousel__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Home dot â€” slightly different shape to distinguish it */
+.glitch-cards-carousel__dot--home {
+  border-radius: 3px;
+  width: 10px;
+  height: 10px;
+}
+
+.glitch-cards-carousel__dot--active {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 0.9);
+  transform: scale(1.3);
+  animation: dotPulse 2s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0);
+  }
+}
+
+.glitch-cards-carousel__arrow--right {
+  animation: swipeHint 2s ease-in-out 1s 3;
+}
+
+@keyframes swipeHint {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateX(6px);
+    opacity: 1;
+  }
+}
+
 /* ─── Hover state (touch devices get :active instead) ─── */
 
 @media (hover: hover) {

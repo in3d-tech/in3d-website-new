@@ -11,7 +11,7 @@ import { useAppContext } from "../../../context/appContext";
 import { MenuAboutContact, MenuWheel } from "../nav/MenuWheel";
 import { SceneMobile } from "./Scene";
 import { TextScrambleComponent } from "../../common/shuffleTextMobile";
-import { GlitchCategoryCards } from "./GlitchCategoryCard"; // ← NEW
+import { GlitchCategoryCards } from "./GlitchCategoryCard";
 
 const LazySelectedContent = lazy(
   () => import("../categories/MobileCategoryPage"),
@@ -26,6 +26,12 @@ function HomeScreenMobile() {
     useState(-1);
 
   const categoryIdxRef = useRef(-1);
+
+  /**
+   * Starts at -1 (welcome/astro card is first in carousel).
+   * Carousel reports: -1 = welcome card (astro), 0-6 = category models.
+   */
+  const [activeCategoryIdx, setActiveCategoryIdx] = useState(-1);
 
   const {
     selectedCategory,
@@ -65,13 +71,28 @@ function HomeScreenMobile() {
     return () => clearTimeout(id);
   }, [isAstroModelDrawn, startExpandedAnimation, setCustomizeHasRendered]);
 
+  /* Lock body scroll — single-viewport layout */
+  useEffect(() => {
+    if (!selectedCategory) {
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selectedCategory]);
+
+  const handleActiveIndexChange = useCallback((idx) => {
+    setActiveCategoryIdx(idx);
+  }, []);
+
   return (
     <>
-      {/* ─── 3D scene: now position:fixed behind everything ─── */}
+      {/* ─── 3D scene: fixed, fills viewport ─── */}
       <SceneMobile
         astroRef={astroRef}
         selectedCategory={selectedCategory}
         selectedCategoryItemByIdx={selectedCategoryItemByIdx}
+        activeCategoryIdx={activeCategoryIdx}
       />
 
       <MenuWheel
@@ -117,25 +138,36 @@ function HomeScreenMobile() {
         )}
       </div>
 
-      {/* Main scrollable content — sits ABOVE the fixed canvas */}
-      <div
-        className="home-categories-wrapper-mobile"
-        style={{
-          position: "relative",
-          zIndex: 1 /* ensures cards layer above the fixed canvas */,
-        }}
-      >
-        {startExpandedAnimation && <TitleWithAnimation isMobile={isMobile} />}
-
+      {/* ─── Title ─── */}
+      {startExpandedAnimation && (
         <div
           style={{
-            width: "100%",
-            height: "50px",
-            marginTop: "68vh",
+            position: "fixed",
+            top: 0,
+            left: "1em",
+            height: "10em",
+            zIndex: 3,
+            width: "50%",
+            pointerEvents: "none",
           }}
-        />
+        >
+          <TitleWithAnimation isMobile={isMobile} />
+        </div>
+      )}
 
-        {/* ─── Glitch category cards ─── */}
+      {/* ─── Horizontal card carousel — fixed at bottom ─── */}
+      <div
+        style={{
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          width: "100%",
+          zIndex: 5,
+          pointerEvents: selectedCategory ? "none" : "auto",
+          opacity: selectedCategory ? 0 : 1,
+          transition: "opacity 0.3s ease",
+        }}
+      >
         <GlitchCategoryCards
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
@@ -144,6 +176,7 @@ function HomeScreenMobile() {
           selectedCategoryItemByIdx={selectedCategoryItemByIdx}
           setSelectedCategoryItemByIdx={setSelectedCategoryItemByIdx}
           categoryIdxRef={categoryIdxRef}
+          onActiveIndexChange={handleActiveIndexChange}
         />
       </div>
 
@@ -173,16 +206,7 @@ const backgrounds = {
 /* ─── Title component ─── */
 
 const TitleWithAnimation = memo(({ isMobile }) => (
-  <div
-    style={{
-      top: 0,
-      left: "1em",
-      height: "10em",
-      zIndex: 1,
-      position: "absolute",
-      width: "50%",
-    }}
-  >
+  <>
     <div
       style={{
         fontSize: "1.8em",
@@ -202,5 +226,5 @@ const TitleWithAnimation = memo(({ isMobile }) => (
     >
       <TextScrambleComponent isHomepage isMobile={isMobile} />
     </div>
-  </div>
+  </>
 ));
