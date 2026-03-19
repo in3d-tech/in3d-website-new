@@ -194,7 +194,7 @@
 // const backgrounds = {
 //   1: 'url("/assets/images/backgrounds/Astro_1_Background.webp")',
 //   2: 'url("https://in3dwebsite.blob.core.windows.net/photos/Medical_Togle-min.jpg")',
-//   3: 'url("/assets/images/backgrounds/medicine/medicine_bg.jpg")',
+//   3: 'url("/assets/images//medicine/medicine_bg.jpg")',
 //   4: 'url("/assets/images/backgrounds/microsoft/microsoft_bg.jpg")',
 //   5: 'url("/assets/images/backgrounds/security/security.jpg")',
 //   6: 'url("https://in3dwebsite.blob.core.windows.net/photos/Ai_Tugle_Finish-min.jpg")',
@@ -244,6 +244,7 @@ import { SceneMobile } from "./Scene";
 import { TextScrambleComponent } from "../../common/shuffleTextMobile";
 // ← Replaced GlitchCategoryCards with VerticalCategoryScroll
 import { VerticalCategoryScroll } from "./VerticalCategoryScroll";
+import { BackgroundLayer } from "./BackgroundLayer";
 
 const LazySelectedContent = lazy(
   () => import("../categories/MobileCategoryPage"),
@@ -332,17 +333,14 @@ function HomeScreenMobile() {
       />
 
       {/* Menu overlay */}
+      <BackgroundLayer activeModelIdx={activeCategoryIdx} />
       <div
         className={
           isMenuCentered
             ? "homescreen-mobile mobile-menu-opened-bg"
             : "homescreen-mobile"
         }
-        style={{
-          background: isMenuCentered ? "" : backgrounds[mobileBackground],
-          zIndex: isMenuCentered ? 3 : 0,
-          transition: "background 1s",
-        }}
+        style={{ zIndex: isMenuCentered ? 3 : 0, transition: "background 1s" }}
       >
         {isMenuCentered && (
           <>
