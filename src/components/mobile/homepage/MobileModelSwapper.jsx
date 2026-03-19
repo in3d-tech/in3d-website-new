@@ -38,7 +38,7 @@ const CATEGORY_MODEL_TRANSFORMS = {
   }, // security
   4: { position: [0, -1.4, 3.5], scale: 1.0, rotationY: -2.5 }, // ai
   5: { position: [-0.2, -1, 0], scale: 1.8, rotationY: 1 }, // military
-  6: { position: [0, -2, 0], scale: 2, rotationY: -2.2 }, // custom
+  6: { position: [0.1, -2, -1], scale: 2, rotationY: -0.4 }, // custom
 };
 
 const DEFAULT_TRANSFORM = { position: [0, -4, -2], scale: 2.0, rotationY: 0 };
