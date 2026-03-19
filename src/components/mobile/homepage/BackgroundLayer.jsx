@@ -4,8 +4,8 @@ import { memo } from "react";
 const CATEGORY_BACKGROUNDS = {
   0: "/assets/images/backgrounds/Astro_1_Background.webp", // Industry (reuses astro bg)
   1: "https://in3dwebsite.blob.core.windows.net/photos/Medical_Togle-min.jpg",
-  2: "/assets/images/backgrounds/medicine/medicine_bg.jpg",
-  3: "/assets/images/backgrounds/microsoft/microsoft_bg.jpg",
+  2: "/assets/images/backgrounds/security/security.jpg",
+  3: "/assets/images/backgrounds/security/security.jpg",
   4: "/assets/images/backgrounds/security/security.jpg",
   5: "/assets/images/backgrounds/military/military_bg.jpg",
   6: "/assets/images/backgrounds/security/security.jpg",

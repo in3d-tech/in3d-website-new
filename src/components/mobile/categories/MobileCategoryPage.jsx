@@ -144,7 +144,7 @@ const CATEGORY_CONTENT = {
   [AI]: {
     title: "Artificial Intelligence",
     subtitle: "AI-Powered Environments",
-    accent: "#2d1b69",
+    accent: "#e6e6e6",
     tags: ["AI", "ML", "Automation"],
     heroImage: null,
     stats: [

@@ -5,6 +5,7 @@ import { useAppContext } from "../../../context/appContext";
 import { Camera } from "../../desktop/homepage/scene/Camera";
 import { useDeviceTilt } from "./useDeviceTilt";
 import { MobileModelSwapper } from "./MobileModelSwapper";
+import { Environment } from "@react-three/drei";
 import * as THREE from "three";
 
 /* ─── Constants ─── */
@@ -89,16 +90,34 @@ export function SceneMobile({
       }}
     >
       <Canvas
-        dpr={[1, 1.5]}
+        dpr={[1.5, 2]} // bump the ceiling to 2
         gl={{
-          antialias: false,
+          antialias: true, // enable — the perf cost is small on modern GPUs
           powerPreference: "high-performance",
           alpha: true,
+          toneMapping: THREE.ACESFilmicToneMapping, // better color/contrast
+          toneMappingExposure: 1.2,
         }}
         style={{ pointerEvents: "auto" }}
       >
-        <ambientLight intensity={0.8} />
-        <directionalLight intensity={3} />
+        <ambientLight intensity={0.3} />
+
+        {/* Main key light — position it so it creates highlights */}
+        <directionalLight
+          intensity={2}
+          position={[3, 5, 4]}
+          castShadow={false}
+        />
+
+        {/* Rim/back light — separates model from background */}
+        <directionalLight
+          intensity={1}
+          position={[-3, 3, -4]}
+          color="#8888ff"
+        />
+        <Environment preset="city" environmentIntensity={0.3} />
+        {/* Fill from below to soften harsh shadows */}
+        <directionalLight intensity={0.6} position={[0, -3, 2]} />
         <Camera />
         <Sparkles count={200} scale={10} size={2} color={sparkleColor} />
 

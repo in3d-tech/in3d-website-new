@@ -57,7 +57,7 @@ const CATEGORIES = [
   {
     title: "ARTIFICIAL INTELLIGENCE",
     tagline: "Beyond the neural frontier",
-    accent: "#7F77DD",
+    accent: "#16e3d2",
     idx: "005",
     bg: "https://in3dwebsite.blob.core.windows.net/photos/Ai_Tugle_Finish-min.jpg",
     modelIdx: 4,
