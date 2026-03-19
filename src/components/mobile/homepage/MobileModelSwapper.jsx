@@ -52,7 +52,7 @@ const IDLE_ROTATE_SPEED = 0; // 0.15;
  * All state transitions are done via useEffect (never inside useFrame)
  * to avoid the "Cannot update component while rendering" error.
  */
-export function MobileModelSwapper({ activeCategoryIdx }) {
+export function MobileModelSwapper({ activeCategoryIdx, tiltTarget }) {
   // `displayIdx` is what's actually mounted in the scene right now
   const [displayIdx, setDisplayIdx] = useState(-1);
   const phase = useRef("idle");
@@ -162,19 +162,26 @@ export function MobileModelSwapper({ activeCategoryIdx }) {
 
   return (
     <group ref={groupRef} scale={0.001}>
-      <CategoryModel key={displayIdx} url={url} categoryIdx={displayIdx} />
+      <CategoryModel
+        key={displayIdx}
+        url={url}
+        categoryIdx={displayIdx}
+        tiltTarget={tiltTarget}
+      />
     </group>
   );
 }
 
-/**
- * CategoryModel — loads a single GLTF, plays animations, disposes on unmount.
- * No callbacks, no setState — purely self-contained.
- */
-function CategoryModel({ url, categoryIdx }) {
+// Add these constants at the top of the file (after imports),
+// matching the values in Scene.jsx:
+const CAT_TILT_LERP_SPEED = 4;
+
+// ─── CategoryModel — updated to accept tiltTarget ───
+function CategoryModel({ url, categoryIdx, tiltTarget }) {
   const { scene, animations } = useGLTF(url);
   const modelRef = useRef();
   const mixer = useMemo(() => new THREE.AnimationMixer(scene), [scene]);
+  const currentOffset = useRef({ x: 0, y: 0 }); // ← add this
 
   const transform = getTransform(categoryIdx);
 
@@ -186,6 +193,23 @@ function CategoryModel({ url, categoryIdx }) {
 
   useFrame((_, delta) => {
     mixer?.update(delta);
+
+    // ── Tilt logic (mirrors AstroModel) ──
+    if (modelRef.current && tiltTarget?.current) {
+      const target = tiltTarget.current;
+      const lerpSpeed = 1 - Math.exp(-CAT_TILT_LERP_SPEED * delta);
+
+      currentOffset.current.x +=
+        (target.x - currentOffset.current.x) * lerpSpeed;
+      currentOffset.current.y +=
+        (target.y - currentOffset.current.y) * lerpSpeed;
+
+      // Apply tilt on top of the base rotation from transform
+      modelRef.current.rotation.x =
+        (transform.rotationX ?? 0) + currentOffset.current.x;
+      modelRef.current.rotation.y =
+        transform.rotationY + currentOffset.current.y;
+    }
   });
 
   useEffect(() => {
@@ -210,11 +234,7 @@ function CategoryModel({ url, categoryIdx }) {
       object={scene}
       dispose={null}
       position={transform.position}
-      rotation={[
-        transform.rotationX ? transform.rotationX : 0,
-        transform.rotationY,
-        0,
-      ]}
+      rotation={[transform.rotationX ?? 0, transform.rotationY, 0]}
       scale={transform.scale}
     />
   );

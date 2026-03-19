@@ -110,7 +110,10 @@ export function SceneMobile({
             scrollProgress={scrollProgress}
             visible={showAstro}
           />
-          <MobileModelSwapper activeCategoryIdx={activeCategoryIdx} />
+          <MobileModelSwapper
+            activeCategoryIdx={activeCategoryIdx}
+            tiltTarget={tiltTarget}
+          />
         </Suspense>
       </Canvas>
 

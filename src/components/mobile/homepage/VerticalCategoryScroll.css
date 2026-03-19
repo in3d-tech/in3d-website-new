@@ -1,0 +1,414 @@
+/* ═══════════════════════════════════════════════
+   VERTICAL CATEGORY SCROLL — HUD / Cyberpunk Minimal
+   ═══════════════════════════════════════════════ */
+
+@import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&display=swap");
+
+/* ─── Container: full-height snap scroll ─── */
+.vcs-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100dvh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+  z-index: 4;
+  /* Transparent so 3D canvas shows through */
+  background: transparent;
+  pointer-events: auto;
+}
+
+/* Hide scrollbar but keep scroll */
+.vcs-container::-webkit-scrollbar {
+  display: none;
+}
+.vcs-container {
+  scrollbar-width: none;
+}
+
+/* ─── Each section: full viewport height ─── */
+.vcs-section {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 0 1.25rem 5.5rem 1.25rem;
+  box-sizing: border-box;
+  /* Transparent — 3D canvas visible behind */
+  background: transparent;
+  pointer-events: none; /* Let scroll pass through empty areas */
+}
+
+/* ─── Left edge marker ─── */
+.vcs-section__edge-marker {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding-left: 0.35rem;
+  pointer-events: none;
+}
+
+.vcs-section__edge-line {
+  width: 1px;
+  height: 4rem;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--section-accent, #fff),
+    transparent
+  );
+  opacity: 0.4;
+}
+
+.vcs-section__edge-index {
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.55rem;
+  color: var(--section-accent, #fff);
+  opacity: 0.5;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  letter-spacing: 0.08em;
+}
+
+/* ═══════════════════════════════
+   WELCOME SECTION
+   ═══════════════════════════════ */
+
+.vcs-welcome {
+  position: absolute;
+  bottom: 5.5rem;
+  left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+  pointer-events: auto;
+}
+
+.vcs-welcome--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.vcs-welcome__logo-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.vcs-welcome__logo {
+  height: 2rem;
+  object-fit: contain;
+}
+
+.vcs-welcome__tagline {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.vcs-welcome__hint {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.12em;
+  animation: pulse-hint 2.5s ease-in-out infinite;
+}
+
+.vcs-welcome__hint-arrow {
+  font-size: 1rem;
+  animation: bounce-down 1.5s ease-in-out infinite;
+}
+
+@keyframes bounce-down {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+@keyframes pulse-hint {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+/* ═══════════════════════════════
+   CATEGORY PANEL
+   ═══════════════════════════════ */
+
+.vcs-panel {
+  position: relative;
+  width: min(88vw, 22rem);
+  padding: 1.25rem 1.25rem 1.5rem;
+  box-sizing: border-box;
+  pointer-events: auto;
+  cursor: pointer;
+
+  /* Frosted glass HUD */
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 2px solid var(--section-accent, #fff);
+  border-radius: 0 4px 4px 0;
+
+  /* Appear animation */
+  opacity: 0;
+  transform: translateX(2rem);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease,
+    border-color 0.3s ease;
+}
+
+.vcs-panel--visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.vcs-panel:active {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+}
+
+/* Title */
+.vcs-panel__title {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: clamp(1.6rem, 6vw, 2.2rem);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0 0 0.75rem;
+  line-height: 1;
+  position: relative;
+}
+
+/* Glitch effect on title */
+.vcs-panel--visible .vcs-panel__title::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  top: 0;
+  color: var(--section-accent, #fff);
+  clip-path: inset(30% 0 50% 0);
+  animation: title-glitch 6s steps(1) infinite;
+  opacity: 0.6;
+}
+
+@keyframes title-glitch {
+  0%,
+  88%,
+  100% {
+    clip-path: inset(100% 0 0 0);
+    transform: translateX(0);
+  }
+  89% {
+    clip-path: inset(20% 0 60% 0);
+    transform: translateX(-3px);
+  }
+  90% {
+    clip-path: inset(50% 0 30% 0);
+    transform: translateX(3px);
+  }
+  91% {
+    clip-path: inset(10% 0 70% 0);
+    transform: translateX(-2px);
+  }
+  92% {
+    clip-path: inset(100% 0 0 0);
+    transform: translateX(0);
+  }
+}
+
+/* Accent rule */
+.vcs-panel__rule {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    var(--section-accent, #fff),
+    transparent
+  );
+  margin-bottom: 0.75rem;
+  opacity: 0.5;
+}
+
+/* CTA button */
+.vcs-panel__cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  background: transparent;
+  border: 1px solid var(--section-accent, #fff);
+  color: var(--section-accent, #fff);
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+  border-radius: 2px;
+}
+
+.vcs-panel__cta:active {
+  background: var(--section-accent, #fff);
+  color: #000;
+}
+
+.vcs-panel__cta-arrow {
+  font-size: 0.9rem;
+  transition: transform 0.2s ease;
+}
+
+.vcs-panel__cta:active .vcs-panel__cta-arrow {
+  transform: translateX(3px);
+}
+
+/* Corner decorations */
+.vcs-panel__corner {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  opacity: 0.5;
+}
+
+.vcs-panel__corner--tl {
+  top: -1px;
+  left: -1px;
+  border-top: 1.5px solid var(--section-accent, #fff);
+  border-left: 1.5px solid var(--section-accent, #fff);
+}
+
+.vcs-panel__corner--br {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 1.5px solid var(--section-accent, #fff);
+  border-right: 1.5px solid var(--section-accent, #fff);
+}
+
+/* ═══════════════════════════════
+   SIDEBAR NAV DOTS
+   ═══════════════════════════════ */
+
+.vcs-nav {
+  position: fixed;
+  right: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  pointer-events: auto;
+}
+
+.vcs-nav__track {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: -1;
+}
+
+.vcs-nav__progress {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.35);
+  transition: height 0.4s ease;
+  min-height: 0;
+}
+
+.vcs-nav__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease,
+    width 0.3s ease,
+    border-radius 0.3s ease;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.vcs-nav__dot--active {
+  background: var(--dot-accent, #fff);
+  transform: scale(1.4);
+  width: 6px;
+  border-radius: 3px;
+}
+
+.vcs-nav__dot--home {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px; /* Square for home */
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.vcs-nav__dot--home.vcs-nav__dot--active {
+  background: #fff;
+  transform: scale(1.2);
+}
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  .vcs-panel,
+  .vcs-welcome,
+  .vcs-panel__title::after {
+    animation: none;
+    transition: opacity 0.2s ease;
+  }
+  .vcs-welcome__hint,
+  .vcs-welcome__hint-arrow,
+  .vcs-panel__status-dot {
+    animation: none;
+  }
+}
