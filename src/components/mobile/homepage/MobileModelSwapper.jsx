@@ -27,18 +27,18 @@ const CATEGORY_MODEL_URLS = [
 // };
 
 const CATEGORY_MODEL_TRANSFORMS = {
-  0: { position: [0, -1.5, -1], scale: 1.5, rotationY: 0 },
-  1: { position: [3.5, -2, -3], scale: 2, rotationY: 0 },
-  2: { position: [0, -2, -3], scale: 2, rotationY: 0 },
+  0: { position: [0, -1.5, -1], scale: 1.5, rotationY: 0 }, //ind
+  1: { position: [3.5, -1.8, -3], scale: 2, rotationY: 0 }, // med
+  2: { position: [0, -2, -3], scale: 2, rotationY: 0 }, // microso
   3: {
-    position: [0, -0.2, 0],
+    position: [-0.1, -0.2, 0.5],
     scale: 2,
     rotationY: Math.PI,
     rotationX: 0.1,
-  },
-  4: { position: [0, -1.6, 4.2], scale: 1.0, rotationY: -3 },
-  5: { position: [-0.2, -1, 0], scale: 1.8, rotationY: 1 },
-  6: { position: [0, -2, 0], scale: 2, rotationY: -2.2 },
+  }, // security
+  4: { position: [0, -1.4, 3.5], scale: 1.0, rotationY: -2.5 }, // ai
+  5: { position: [-0.2, -1, 0], scale: 1.8, rotationY: 1 }, // military
+  6: { position: [0, -2, 0], scale: 2, rotationY: -2.2 }, // custom
 };
 
 const DEFAULT_TRANSFORM = { position: [0, -4, -2], scale: 2.0, rotationY: 0 };
