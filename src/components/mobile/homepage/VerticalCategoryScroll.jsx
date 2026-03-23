@@ -106,7 +106,8 @@ const CategorySection = memo(
       if (category.isWelcome) return;
       if (setSelectedCategory) setSelectedCategory(category.title);
       if (setSelectedCategoryItemByIdx)
-        setSelectedCategoryItemByIdx(category.modelIdx);
+        console.log("check this out!!", category.modelIdx);
+      setSelectedCategoryItemByIdx(category.modelIdx + 3);
       if (categoryIdxRef) categoryIdxRef.current = category.modelIdx;
     }, [
       category,

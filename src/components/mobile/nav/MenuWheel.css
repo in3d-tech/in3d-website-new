@@ -1,0 +1,276 @@
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   MENU â€” Cinematic HUD Overlay
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
+@import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&display=swap");
+
+/* â”€â”€â”€ Toggle button (hamburger) â”€â”€â”€ */
+.mw-toggle {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.25rem;
+  z-index: 32;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.mw-toggle:active {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.mw-toggle__bar {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  background: #fff;
+  border-radius: 1px;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.25s ease,
+    width 0.3s ease;
+  transform-origin: center;
+}
+
+.mw-toggle--open .mw-toggle__bar--1 {
+  transform: translateY(6.5px) rotate(45deg);
+}
+.mw-toggle--open .mw-toggle__bar--2 {
+  opacity: 0;
+  width: 0;
+}
+.mw-toggle--open .mw-toggle__bar--3 {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+.mw-toggle--category {
+  border-color: rgba(117, 4, 20, 0.5);
+}
+.mw-toggle--category .mw-toggle__bar {
+  background: #ff4466;
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   OVERLAY â€” covers entire viewport edge-to-edge
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+.mw-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 31;
+
+  /* Layout: push content to bottom half */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+
+  /* Solid dark background â€” no transparency gaps */
+  background: rgba(0, 0, 0, 0.93);
+  backdrop-filter: blur(24px) saturate(110%);
+  -webkit-backdrop-filter: blur(24px) saturate(110%);
+
+  /* Hidden by default */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.35s ease,
+    visibility 0.35s ease;
+}
+
+.mw-overlay--open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   INNER CONTENT WRAPPER
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+.mw-inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 1.75rem 2.5rem;
+  box-sizing: border-box;
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   CATEGORY LIST
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+.mw-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+
+.mw-nav__item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  text-align: left;
+  width: 100%;
+
+  /* Slide stagger â€” starts offset, slides in when visible */
+  transform: translateX(-0.75rem);
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1) var(--item-delay, 0s),
+    background 0.15s ease;
+}
+
+.mw-nav__item--visible {
+  transform: translateX(0);
+}
+
+.mw-nav__item:active {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Index number */
+.mw-nav__idx {
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.6rem;
+  color: var(--item-accent, #fff);
+  letter-spacing: 0.1em;
+  opacity: 0.55;
+  min-width: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* Accent line */
+.mw-nav__line {
+  width: 1.5rem;
+  height: 1px;
+  background: var(--item-accent, #fff);
+  opacity: 0.2;
+  flex-shrink: 0;
+  transition:
+    width 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.mw-nav__item:active .mw-nav__line {
+  width: 2.5rem;
+  opacity: 0.5;
+}
+
+/* Label */
+.mw-nav__label {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: clamp(1.5rem, 6vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1.1;
+  transition: color 0.15s ease;
+}
+
+.mw-nav__item:active .mw-nav__label {
+  color: var(--item-accent, #fff);
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   FOOTER
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+.mw-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-top: 1.25rem;
+  margin-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+
+  transform: translateY(0.4rem);
+  transition: transform 0.4s ease 0.5s;
+}
+
+.mw-footer--visible {
+  transform: translateY(0);
+}
+
+.mw-footer__link {
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem 0;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.15s ease;
+  text-decoration: none;
+}
+
+.mw-footer__link:active {
+  color: #fff;
+}
+
+.mw-footer__link--icon {
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.mw-footer__link--icon:active {
+  color: #fff;
+}
+
+.mw-footer__sep {
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.12);
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   REDUCED MOTION
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+@media (prefers-reduced-motion: reduce) {
+  .mw-toggle__bar {
+    transition: none;
+  }
+  .mw-overlay {
+    transition: opacity 0.15s ease;
+  }
+  .mw-nav__item {
+    transition: none;
+    transform: none;
+  }
+  .mw-nav__item--visible {
+    transform: none;
+  }
+  .mw-footer {
+    transition: none;
+    transform: none;
+  }
+}

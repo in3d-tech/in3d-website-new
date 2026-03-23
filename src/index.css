@@ -856,7 +856,7 @@ h2 {
   }
 }
 
-nav {
+/* nav {
   background: url("/assets/images/backgrounds/Astro_1_Background.webp")
     no-repeat;
   background-size: cover;
@@ -871,6 +871,26 @@ nav {
 }
 
 nav.show {
+  width: 100vw;
+  height: 100vh;
+  animation: fadeIn 0.6s ease-in-out forwards;
+} */
+
+#nav {
+  background: url("/assets/images/backgrounds/Astro_1_Background.webp")
+    no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#nav.show {
   width: 100vw;
   height: 100vh;
   animation: fadeIn 0.6s ease-in-out forwards;

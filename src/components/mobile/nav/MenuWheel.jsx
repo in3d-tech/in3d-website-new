@@ -1,4 +1,5 @@
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import { memo, useCallback } from "react";
 import {
   INDUSTRY,
   MEDICINE,
@@ -9,6 +10,18 @@ import {
   CUSTOMIZATION,
 } from "../../common/modelData";
 import { useAppContext } from "../../../context/appContext";
+import "./MenuWheel.css";
+
+const MENU_CATEGORIES = [
+  { key: INDUSTRY, label: "Industry", accent: "#1D9E75", idx: "01" },
+  { key: MEDICINE, label: "Medicine", accent: "#D4537E", idx: "02" },
+  { key: MICROSOFT, label: "Microsoft", accent: "#378ADD", idx: "03" },
+  { key: SECURITY, label: "Security", accent: "#E24B4A", idx: "04" },
+  { key: AI, label: "A.I.", accent: "#16e3d2", idx: "05" },
+  { key: MILITARY, label: "Military", accent: "#888780", idx: "06" },
+  { key: CUSTOMIZATION, label: "Customize", accent: "#BA7517", idx: "07" },
+];
+
 export function MenuWheel({
   selectedMenuActionMobile,
   setSelectedMenuActionMobile,
@@ -19,223 +32,132 @@ export function MenuWheel({
 }) {
   const { menuOpenMobile, setMenuOpenMobile } = useAppContext();
 
-  const handleCategorySelect = (category) => {
-    if (!isMenuCentered) {
-      setSelectedMenuActionMobile(null);
-    }
-    setMenuOpenMobile(false);
+  const handleToggle = useCallback(() => {
+    if (!isMenuCentered) setSelectedMenuActionMobile(null);
     handleMenuClick();
-    setSelectedCategory(category);
-  };
+    setMenuOpenMobile(!menuOpenMobile);
+  }, [
+    isMenuCentered,
+    menuOpenMobile,
+    handleMenuClick,
+    setMenuOpenMobile,
+    setSelectedMenuActionMobile,
+  ]);
+
+  const handleCategorySelect = useCallback(
+    (category) => {
+      if (!isMenuCentered) setSelectedMenuActionMobile(null);
+      setMenuOpenMobile(false);
+      handleMenuClick();
+      setSelectedCategory(category);
+    },
+    [
+      isMenuCentered,
+      handleMenuClick,
+      setMenuOpenMobile,
+      setSelectedCategory,
+      setSelectedMenuActionMobile,
+    ],
+  );
 
   return (
-    <div className={isMenuCentered ? "fab-wrapper centered" : "fab-wrapper"}>
-      <input
-        id="fabCheckbox"
-        type="checkbox"
-        className={`fab-checkbox ${menuOpenMobile ? "checked" : ""}`}
-        onClick={() => {
-          if (!isMenuCentered) setSelectedMenuActionMobile(null);
-          handleMenuClick();
-          setMenuOpenMobile(!menuOpenMobile);
-        }}
-      />
-      <label className="fab" htmlFor="fabCheckbox">
-        <div
-          className={isMenuCentered ? "icon-1 a" : "icon-1"}
-          style={selectedCategory ? { background: "#750414" } : null}
-        ></div>
-        <div
-          className={isMenuCentered ? "icon-2 c" : "icon-2"}
-          style={selectedCategory ? { background: "#750414" } : null}
-        ></div>
-        <div
-          className={isMenuCentered ? "icon-3 b" : "icon-3"}
-          style={selectedCategory ? { background: "#750414" } : null}
-        ></div>
-        <div className="clear"></div>
-      </label>
-      <div className="fab-wheel">
-        <a
-          className={`fab-action fab-action-1  ${
-            selectedMenuActionMobile &&
-            selectedMenuActionMobile !== "fab-action-1"
-              ? "fade-out"
-              : ""
-          } ${selectedMenuActionMobile == "fab-action-1" ? "grow" : ""}`}
-        >
-          <button
-            onClick={() => {
-              setSelectedMenuActionMobile(`fab-action-1`);
-              handleCategorySelect(INDUSTRY);
-            }}
-            className="fas"
+    <>
+      {/* Hamburger */}
+      <button
+        className={`mw-toggle ${isMenuCentered ? "mw-toggle--open" : ""} ${
+          selectedCategory ? "mw-toggle--category" : ""
+        }`}
+        onClick={handleToggle}
+        aria-label={isMenuCentered ? "Close menu" : "Open menu"}
+      >
+        <span className="mw-toggle__bar mw-toggle__bar--1" />
+        <span className="mw-toggle__bar mw-toggle__bar--2" />
+        <span className="mw-toggle__bar mw-toggle__bar--3" />
+      </button>
+
+      {/* Full-screen overlay */}
+      <div className={`mw-overlay ${isMenuCentered ? "mw-overlay--open" : ""}`}>
+        <div className="mw-inner">
+          {/* Category list */}
+          <nav className="mw-nav">
+            {MENU_CATEGORIES.map((cat, i) => (
+              <button
+                key={cat.key}
+                className={`mw-nav__item ${isMenuCentered ? "mw-nav__item--visible" : ""}`}
+                style={{
+                  "--item-accent": cat.accent,
+                  "--item-delay": `${0.06 + i * 0.04}s`,
+                }}
+                onClick={() => handleCategorySelect(cat.key)}
+              >
+                <span className="mw-nav__idx">{cat.idx}</span>
+                <span className="mw-nav__line" />
+                <span className="mw-nav__label">{cat.label}</span>
+              </button>
+            ))}
+          </nav>
+
+          {/* Footer */}
+          <div
+            className={`mw-footer ${isMenuCentered ? "mw-footer--visible" : ""}`}
           >
-            {selectedMenuActionMobile == "fab-action-1" ? (
-              ""
-            ) : (
-              <>
-                <span>I</span>
-                ndustry
-              </>
-            )}
-          </button>
-        </a>
-        <a
-          className={`fab-action fab-action-2  ${
-            selectedMenuActionMobile &&
-            selectedMenuActionMobile !== "fab-action-2"
-              ? "fade-out"
-              : ""
-          } ${selectedMenuActionMobile == "fab-action-2" ? "grow" : ""}`}
-        >
-          <button
-            onClick={() => {
-              setSelectedMenuActionMobile(`fab-action-2`);
-              handleCategorySelect(MEDICINE);
-            }}
-            className="fas"
-          >
-            {selectedMenuActionMobile == "fab-action-2" ? (
-              ""
-            ) : (
-              <>
-                <span>M</span>
-                edicine
-              </>
-            )}
-          </button>
-        </a>
-        <a
-          className={`fab-action fab-action-3  ${
-            selectedMenuActionMobile &&
-            selectedMenuActionMobile !== "fab-action-3"
-              ? "fade-out"
-              : ""
-          } ${selectedMenuActionMobile == "fab-action-3" ? "grow" : ""}`}
-        >
-          <button
-            onClick={() => {
-              setSelectedMenuActionMobile(`fab-action-3`);
-              handleCategorySelect(MICROSOFT);
-            }}
-            className="fas"
-          >
-            {selectedMenuActionMobile == "fab-action-3" ? (
-              ""
-            ) : (
-              <>
-                <span>M</span>
-                icrosoft
-              </>
-            )}
-          </button>
-        </a>
-        <a
-          className={`fab-action fab-action-4  ${
-            selectedMenuActionMobile &&
-            selectedMenuActionMobile !== "fab-action-4"
-              ? "fade-out"
-              : ""
-          } ${selectedMenuActionMobile == "fab-action-4" ? "grow" : ""}`}
-        >
-          <button
-            onClick={() => {
-              setSelectedMenuActionMobile(`fab-action-4`);
-              handleCategorySelect(SECURITY);
-            }}
-            className="fas"
-          >
-            {selectedMenuActionMobile == "fab-action-4" ? (
-              ""
-            ) : (
-              <>
-                <span>S</span>
-                ecurity
-              </>
-            )}
-          </button>
-        </a>
-        <a
-          className={`fab-action fab-action-5  ${
-            selectedMenuActionMobile &&
-            selectedMenuActionMobile !== "fab-action-5"
-              ? "fade-out"
-              : ""
-          } ${selectedMenuActionMobile == "fab-action-5" ? "grow" : ""}`}
-        >
-          <button
-            onClick={() => {
-              setSelectedMenuActionMobile(`fab-action-5`);
-              handleCategorySelect(AI);
-            }}
-            className="fas"
-          >
-            {selectedMenuActionMobile == "fab-action-5" ? (
-              ""
-            ) : (
-              <>
-                <span>A.</span>
-                I.
-              </>
-            )}
-          </button>
-        </a>
-        <a
-          className={`fab-action fab-action-6  ${
-            selectedMenuActionMobile &&
-            selectedMenuActionMobile !== "fab-action-6"
-              ? "fade-out"
-              : ""
-          } ${selectedMenuActionMobile == "fab-action-6" ? "grow" : ""}`}
-        >
-          <button
-            onClick={() => {
-              setSelectedMenuActionMobile(`fab-action-6`);
-              handleCategorySelect(MILITARY);
-            }}
-            className="fas"
-          >
-            {selectedMenuActionMobile == "fab-action-6" ? (
-              ""
-            ) : (
-              <>
-                <span>M</span>
-                ilitary
-              </>
-            )}
-          </button>
-        </a>
-        <a
-          className={`fab-action fab-action-7  ${
-            selectedMenuActionMobile &&
-            selectedMenuActionMobile !== "fab-action-7"
-              ? "fade-out"
-              : ""
-          } ${selectedMenuActionMobile == "fab-action-7" ? "grow" : ""}`}
-        >
-          <button
-            onClick={() => {
-              setSelectedMenuActionMobile(`fab-action-7`);
-              handleCategorySelect(CUSTOMIZATION);
-            }}
-            className="fas"
-          >
-            {selectedMenuActionMobile == "fab-action-7" ? (
-              ""
-            ) : (
-              <>
-                <span>C</span>
-                ustomize
-              </>
-            )}
-          </button>
-        </a>
+            <FooterLinks
+              isMenuCentered={isMenuCentered}
+              handleMenuClick={handleMenuClick}
+            />
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
+/* ─── Footer links ─── */
+const FooterLinks = memo(({ isMenuCentered, handleMenuClick }) => {
+  const { setSelectedCategory, menuOpenMobile, setMenuOpenMobile } =
+    useAppContext();
+
+  const handleLink = useCallback(
+    (value) => {
+      setSelectedCategory(value);
+      if (isMenuCentered) {
+        handleMenuClick();
+        setMenuOpenMobile(!menuOpenMobile);
+      }
+    },
+    [
+      isMenuCentered,
+      handleMenuClick,
+      menuOpenMobile,
+      setMenuOpenMobile,
+      setSelectedCategory,
+    ],
+  );
+
+  return (
+    <>
+      <button className="mw-footer__link" onClick={() => handleLink("10")}>
+        About
+      </button>
+      <span className="mw-footer__sep">/</span>
+      <button className="mw-footer__link" onClick={() => handleLink("contact")}>
+        Contact
+      </button>
+      <span className="mw-footer__sep">/</span>
+      <a
+        className="mw-footer__link mw-footer__link--icon"
+        href="https://www.linkedin.com/company/in3d-tech.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="LinkedIn"
+      >
+        <LinkedInIcon sx={{ fontSize: 20, color: "inherit" }} />
+      </a>
+    </>
+  );
+});
+
+/* ─── Backward-compatible MenuAboutContact export ─── */
 export const MenuAboutContact = ({
   isFromHomeScreen,
   isMenuCentered,
@@ -246,9 +168,11 @@ export const MenuAboutContact = ({
     useAppContext();
   const linkedInUrl = "https://www.linkedin.com/company/in3d-tech.com";
 
-  const regularStyle = {
+  const style = {
     width: "100%",
-    borderTop: "1px solid rgb(255,255,255, 0.4)",
+    borderTop: isFromSelectedCategory
+      ? "1px solid rgba(0,0,0,0.15)"
+      : "1px solid rgba(255,255,255,0.15)",
     position: isFromHomeScreen ? "" : "absolute",
     bottom: isFromHomeScreen ? "1em" : "5em",
     left: isFromHomeScreen ? "" : 0,
@@ -258,25 +182,8 @@ export const MenuAboutContact = ({
     alignItems: "center",
   };
 
-  const selectedCategoryStyle = {
-    // position: "absolute",
-    // top: "200%",
-    width: "100%",
-    borderTop: isFromSelectedCategory
-      ? "1px solid rgb(0,0,0, 0.4)"
-      : "1px solid rgb(255,255,255, 0.4)",
-    left: 0,
-    height: "5em",
-    display: "flex",
-    justifyContent: "space-evenly",
-    alignItems: "center",
-    // border: "5px solid blue",
-  };
-
-  // console.log({ isFromSelectedCategory });
-
   return (
-    <div style={isFromSelectedCategory ? selectedCategoryStyle : regularStyle}>
+    <div style={style}>
       <div className="animate-reveal">
         <span
           onClick={() => {
@@ -312,14 +219,12 @@ export const MenuAboutContact = ({
         </span>
       </div>
       <div className="linkdn-icon animate-reveal">
-        {
-          <a href={linkedInUrl} target="_blank" rel="noopener noreferrer">
-            <LinkedInIcon
-              fontSize="large"
-              sx={{ color: isFromSelectedCategory ? "black" : "white" }}
-            />
-          </a>
-        }
+        <a href={linkedInUrl} target="_blank" rel="noopener noreferrer">
+          <LinkedInIcon
+            fontSize="large"
+            sx={{ color: isFromSelectedCategory ? "black" : "white" }}
+          />
+        </a>
       </div>
     </div>
   );
