@@ -7,7 +7,6 @@ const WELCOME_CARD = {
   tagline: "Simply Revolutionary",
   accent: "#ffffff",
   idx: "000",
-  bg: "/assets/images/backgrounds/Astro_1_Background.webp",
   isWelcome: true,
   modelIdx: -1,
 };
@@ -20,8 +19,7 @@ const CATEGORIES = [
     accent: "#1D9E75",
     idx: "001",
     modelIdx: 0,
-    description:
-      "Transform manufacturing workflows with photorealistic 3D asset pipelines built for scale.",
+    description: "",
   },
   {
     title: "MEDICINE",
@@ -38,7 +36,7 @@ const CATEGORIES = [
     idx: "003",
     modelIdx: 2,
     description:
-      "Native 3D content pipelines embedded across the Microsoft ecosystem, from Teams to Azure.",
+      "3D pipelines embedded across the Microsoft ecosystem, from Teams to Azure.",
   },
   {
     title: "SECURITY",
@@ -46,8 +44,7 @@ const CATEGORIES = [
     accent: "#E24B4A",
     idx: "004",
     modelIdx: 3,
-    description:
-      "Physical and digital threat visualization for defense and response operations.",
+    description: "",
   },
   {
     title: "ARTIFICIAL INTELLIGENCE",
@@ -72,7 +69,8 @@ const CATEGORIES = [
     accent: "#BA7517",
     idx: "007",
     modelIdx: 6,
-    description: "",
+    description:
+      "3D pipelines engineered to your exact workflow — from concept to deployment.",
   },
 ];
 
@@ -85,7 +83,6 @@ const CategorySection = memo(
     isActive,
     sectionRef,
     onEnter,
-    selectedCategory,
     setSelectedCategory,
     setSelectedCategoryItemByIdx,
     categoryIdxRef,
@@ -97,9 +94,7 @@ const CategorySection = memo(
       if (!el) return;
       const observer = new IntersectionObserver(
         ([entry]) => {
-          if (entry.isIntersecting) {
-            onEnter(category.modelIdx);
-          }
+          if (entry.isIntersecting) onEnter(category.modelIdx);
         },
         { threshold: 0.5 },
       );
@@ -107,7 +102,7 @@ const CategorySection = memo(
       return () => observer.disconnect();
     }, [category.modelIdx, onEnter]);
 
-    const handleEnter = useCallback(() => {
+    const handleExplore = useCallback(() => {
       if (category.isWelcome) return;
       if (setSelectedCategory) setSelectedCategory(category.title);
       if (setSelectedCategoryItemByIdx)
@@ -121,107 +116,102 @@ const CategorySection = memo(
     ]);
 
     return (
-      <div
+      <section
         ref={(el) => {
           localRef.current = el;
           if (typeof sectionRef === "function") sectionRef(el);
-          else if (sectionRef) sectionRef.current = el;
         }}
-        className={`vcs-section ${isActive ? "vcs-section--active" : ""} ${
-          category.isWelcome ? "vcs-section--welcome" : ""
-        }`}
-        style={{ "--section-accent": category.accent }}
+        className={`vcs-section ${isActive ? "vcs-section--active" : ""}`}
+        style={{ "--accent": category.accent }}
       >
-        {/* Full-screen touch target — this is the key fix.
-            The entire section is the scroll surface. Content is
-            positioned inside but doesn't block scrolling. */}
+        {/* FULL-WIDTH gradient that rises from the bottom.
+            This covers the entire width so there are ZERO dead zones.
+            The 3D model is visible above this gradient. */}
+        <div className="vcs-section__fog" />
 
-        {category.isWelcome ? (
-          <WelcomeContent isActive={isActive} />
-        ) : (
-          <CategoryContent
-            category={category}
-            isActive={isActive}
-            onEnter={handleEnter}
-          />
-        )}
-
-        {/* Section index — decorative */}
-        <div className="vcs-section__idx-badge">
-          <span className="vcs-section__idx-num">{category.idx}</span>
+        {/* Content — positioned over the fog */}
+        <div className="vcs-section__content">
+          {category.isWelcome ? (
+            <WelcomeContent isActive={isActive} />
+          ) : (
+            <CategoryContent
+              category={category}
+              isActive={isActive}
+              onExplore={handleExplore}
+            />
+          )}
         </div>
-      </div>
+
+        {/* Bottom accent edge */}
+        <div className="vcs-section__edge" />
+      </section>
     );
   },
 );
 
-/* ─── Welcome section content ─── */
+/* ─── Welcome ─── */
 const WelcomeContent = memo(({ isActive }) => (
   <div className={`vcs-welcome ${isActive ? "vcs-welcome--visible" : ""}`}>
-    <div className="vcs-welcome__logo-wrap">
-      <img
-        src="/assets/images/in3d-logo-white.png"
-        alt="in3D"
-        className="vcs-welcome__logo"
-      />
-    </div>
-    <div className="vcs-welcome__hint">
-      <div className="vcs-welcome__hint-line" />
-      <span className="vcs-welcome__hint-text">Scroll to explore</span>
-      <div className="vcs-welcome__hint-chevrons">
-        <span className="vcs-welcome__chevron">‹</span>
-        <span className="vcs-welcome__chevron">‹</span>
-        <span className="vcs-welcome__chevron">‹</span>
+    <img
+      src="/assets/images/in3d-logo-white.png"
+      alt="in3D"
+      className="vcs-welcome__logo"
+    />
+    <div className="vcs-welcome__cue">
+      <div className="vcs-welcome__cue-line" />
+      <span className="vcs-welcome__cue-text">Scroll to explore</span>
+      <div className="vcs-welcome__cue-arrows">
+        <span>›</span>
+        <span>›</span>
+        <span>›</span>
       </div>
     </div>
   </div>
 ));
 
-/* ─── Category section content ─── */
-const CategoryContent = memo(({ category, isActive, onEnter }) => (
-  <div className={`vcs-card ${isActive ? "vcs-card--visible" : ""}`}>
-    {/* Scan-line accent at top */}
-    <div className="vcs-card__scanline" />
-
-    {/* Index + tagline row */}
-    {/* <div className="vcs-card__meta">
-      <span className="vcs-card__meta-idx">{category.idx}</span>
-      <span className="vcs-card__meta-sep">//</span>
-      <span className="vcs-card__meta-tag">{category.tagline}</span>
-    </div> */}
+/* ─── Category panel ─── */
+const CategoryContent = memo(({ category, isActive, onExplore }) => (
+  <div className={`vcs-cat ${isActive ? "vcs-cat--visible" : ""}`}>
+    {/* Number + line */}
+    <div className="vcs-cat__eyebrow">
+      <span className="vcs-cat__num">{category.idx}</span>
+      <div className="vcs-cat__line" />
+      <span className="vcs-cat__tagline-text">{category.tagline}</span>
+    </div>
 
     {/* Title */}
-    <h2 className="vcs-card__title">{category.title}</h2>
+    <h2 className="vcs-cat__title">{category.title}</h2>
 
     {/* Description */}
-    <p className="vcs-card__desc">{category.description}</p>
+    {category.description && (
+      <p className="vcs-cat__desc">{category.description}</p>
+    )}
 
     {/* CTA */}
-    <button className="vcs-card__cta" onClick={onEnter}>
-      <span className="vcs-card__cta-label">EXPLORE</span>
-      <span className="vcs-card__cta-icon">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-          <path
-            d="M4 9h10M10 5l4 4-4 4"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </span>
+    <button className="vcs-cat__cta" onClick={onExplore}>
+      <span className="vcs-cat__cta-text">EXPLORE</span>
+      <svg
+        className="vcs-cat__cta-arrow"
+        width="20"
+        height="20"
+        viewBox="0 0 20 20"
+        fill="none"
+      >
+        <path
+          d="M4 10h12M12 6l4 4-4 4"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
     </button>
-
-    {/* Corner brackets */}
-    <div className="vcs-card__bracket vcs-card__bracket--tl" />
-    <div className="vcs-card__bracket vcs-card__bracket--br" />
   </div>
 ));
 
-/* ─── Nav rail (replaces dots) ─── */
+/* ─── Nav rail ─── */
 const NavRail = memo(({ activeModelIdx, onDotClick }) => {
   const activeDotIdx = activeModelIdx + 1;
-
   return (
     <nav className="vcs-rail" aria-label="Section navigation">
       <div className="vcs-rail__track" />
@@ -250,7 +240,7 @@ const NavRail = memo(({ activeModelIdx, onDotClick }) => {
   );
 });
 
-/* ─── Main exported component ─── */
+/* ─── Main ─── */
 export const VerticalCategoryScroll = memo(
   ({
     selectedCategory,
@@ -269,29 +259,21 @@ export const VerticalCategoryScroll = memo(
     const [hasScrolled, setHasScrolled] = useState(false);
     const tiltRequested = useRef(false);
 
-    // Throttle gate: prevent model swaps faster than the 3D crossfade.
-    // This matches TRANSITION_DURATION in MobileModelSwapper (0.5s).
     const MODEL_SETTLE_MS = 550;
     const lastModelChangeTime = useRef(0);
     const pendingModelIdx = useRef(null);
     const settleTimer = useRef(null);
 
-    // Detect first scroll to hide the indicator
     useEffect(() => {
       const el = containerRef.current;
       if (!el) return;
       const onScroll = () => {
-        if (el.scrollTop > 30) {
-          setHasScrolled(true);
-        }
+        if (el.scrollTop > 30) setHasScrolled(true);
       };
       el.addEventListener("scroll", onScroll, { passive: true });
       return () => el.removeEventListener("scroll", onScroll);
     }, []);
 
-    // Request device orientation on the very first touch anywhere
-    // in the scroll container. This covers iOS's requirement that
-    // the permission prompt is triggered by a user gesture.
     useEffect(() => {
       const el = containerRef.current;
       if (!el || !requestTilt) return;
@@ -308,18 +290,13 @@ export const VerticalCategoryScroll = memo(
       return () => el.removeEventListener("touchstart", onFirstTouch);
     }, [requestTilt]);
 
-    // Clean up settle timer
-    useEffect(() => {
-      return () => {
+    useEffect(
+      () => () => {
         if (settleTimer.current) clearTimeout(settleTimer.current);
-      };
-    }, []);
+      },
+      [],
+    );
 
-    /**
-     * Throttled section change: if a model swap is already in flight,
-     * queue the latest index and apply it once the transition settles.
-     * This prevents rapid-fire swaps that desync card ↔ model.
-     */
     const applyModelChange = useCallback(
       (modelIdx) => {
         setActiveModelIdx(modelIdx);
@@ -332,22 +309,15 @@ export const VerticalCategoryScroll = memo(
 
     const handleEnterSection = useCallback(
       (modelIdx) => {
-        const now = Date.now();
-        const elapsed = now - lastModelChangeTime.current;
-
+        const elapsed = Date.now() - lastModelChangeTime.current;
         if (elapsed >= MODEL_SETTLE_MS) {
-          // Enough time has passed — swap immediately
           applyModelChange(modelIdx);
         } else {
-          // Transition still in flight — queue this index
           pendingModelIdx.current = modelIdx;
-
-          // Clear any existing timer, schedule for when settle completes
           if (settleTimer.current) clearTimeout(settleTimer.current);
           settleTimer.current = setTimeout(() => {
-            if (pendingModelIdx.current !== null) {
+            if (pendingModelIdx.current !== null)
               applyModelChange(pendingModelIdx.current);
-            }
           }, MODEL_SETTLE_MS - elapsed);
         }
       },
@@ -356,19 +326,15 @@ export const VerticalCategoryScroll = memo(
 
     const scrollToSection = useCallback((dotIdx) => {
       const el = sectionRefs.current[dotIdx];
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     }, []);
 
-    // Notify parent of initial state
     useEffect(() => {
       onActiveIndexChange?.(-1);
     }, []);
 
     return (
       <>
-        {/* Vertical snap-scroll container — FULL SCREEN touch target */}
         <div
           ref={containerRef}
           className="vcs-container"
@@ -385,7 +351,6 @@ export const VerticalCategoryScroll = memo(
               isActive={section.modelIdx === activeModelIdx}
               sectionRef={(el) => (sectionRefs.current[idx] = el)}
               onEnter={handleEnterSection}
-              selectedCategory={selectedCategory}
               setSelectedCategory={setSelectedCategory}
               setSelectedCategoryItemByIdx={setSelectedCategoryItemByIdx}
               categoryIdxRef={categoryIdxRef}
@@ -393,7 +358,6 @@ export const VerticalCategoryScroll = memo(
           ))}
         </div>
 
-        {/* Sidebar nav rail */}
         {!selectedCategory && (
           <NavRail
             activeModelIdx={activeModelIdx}
@@ -401,7 +365,6 @@ export const VerticalCategoryScroll = memo(
           />
         )}
 
-        {/* Bottom scroll indicator — fades after first scroll */}
         {!selectedCategory && (
           <div
             className={`vcs-scroll-indicator ${hasScrolled ? "vcs-scroll-indicator--hidden" : ""}`}
