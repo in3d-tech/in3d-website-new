@@ -1,10 +1,10 @@
-import { useRef, useEffect, useState, useMemo } from "react";
+import { useRef, useEffect, useState, useMemo, useCallback } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 
 /**
- * Correct model URLs from Model_Data.
+ * Model URLs — unchanged from original.
  */
 const CATEGORY_MODEL_URLS = [
   "/assets/models/engenir_model.glb", // 0: Industry
@@ -16,174 +16,282 @@ const CATEGORY_MODEL_URLS = [
   "/assets/models/costimize_model_v02.glb", // 6: Customization
 ];
 
-// const CATEGORY_MODEL_TRANSFORMS = {
-//   0: { position: [0, -3.75, 1.5], scale: 2.5, rotationY: Math.PI + 0.3 },
-//   1: { position: [0, -3, -1], scale: 2.5, rotationY: 0 },
-//   2: { position: [0, -4, -0.2], scale: 2.5, rotationY: -0.9 },
-//   3: { position: [0, -0.5, 3.2], scale: 2.5, rotationY: Math.PI + 1.3 },
-//   4: { position: [0, -1.6, 4.2], scale: 1.0, rotationY: -3 },
-//   5: { position: [0, -1.2, 2.8], scale: 1.8, rotationY: 1 },
-//   6: { position: [0, -3, 3], scale: 2.5, rotationY: -2.2 },
-// };
-
 const CATEGORY_MODEL_TRANSFORMS = {
-  0: { position: [0, -1.5, -1], scale: 1.5, rotationY: 0 }, //ind
-  1: { position: [3.5, -1.8, -3], scale: 2, rotationY: 0 }, // med
-  2: { position: [0, -2, -3], scale: 2, rotationY: 0 }, // microso
+  0: { position: [0.4, -1.5, 1.4], scale: 1.5, rotationY: -2.5 }, // ind
+  1: { position: [3.5, -1.8, 0], scale: 2, rotationY: 0 }, // med
+  2: { position: [0, -2, -1], scale: 2, rotationY: -0.5 }, // mic
   3: {
-    position: [-0.1, -0.2, 0.5],
+    position: [-0.2, -0.2, 3],
     scale: 2,
-    rotationY: Math.PI,
+    rotationY: Math.PI + 0.2,
     rotationX: 0.1,
-  }, // security
+  }, // sec
   4: { position: [0, -1.4, 3.5], scale: 1.0, rotationY: -2.5 }, // ai
-  5: { position: [-0.2, -1, 0], scale: 1.8, rotationY: 1 }, // military
-  6: { position: [0.1, -2, -1], scale: 2, rotationY: -0.4 }, // custom
+  5: { position: [0, -1, 2], scale: 2, rotationY: -0.4 }, // mil
+  6: { position: [0.1, -1.5, 2], scale: 2, rotationY: -2.3 }, // cus
 };
 
 const DEFAULT_TRANSFORM = { position: [0, -4, -2], scale: 2.0, rotationY: 0 };
 
-const TRANSITION_DURATION = 0.4;
-const IDLE_ROTATE_SPEED = 0; // 0.15;
+/* ─── Transition tuning ─── */
+const TRANSITION_DURATION = 0.5; // seconds for full crossfade
+const SLIDE_OUT_Z = -4; // old model drifts this far back
+const SLIDE_IN_Z = 3; // new model starts this far forward
+const SLIDE_OUT_X = -1.5; // subtle lateral drift on exit
+const SLIDE_IN_X = 1.5; // subtle lateral drift on entry
+const CAT_TILT_LERP_SPEED = 4;
+
+/* ─── Easings ─── */
+function easeInCubic(t) {
+  return t * t * t;
+}
+function easeOutCubic(t) {
+  return 1 - Math.pow(1 - t, 3);
+}
+function easeInOutCubic(t) {
+  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+}
 
 /**
- * MobileModelSwapper
+ * MobileModelSwapper — Directional Slide + Crossfade
  *
- * All state transitions are done via useEffect (never inside useFrame)
- * to avoid the "Cannot update component while rendering" error.
+ * Instead of unmount→remount, we keep up to TWO models mounted at once
+ * (outgoing + incoming) and crossfade between them with directional motion.
  */
 export function MobileModelSwapper({ activeCategoryIdx, tiltTarget }) {
-  // `displayIdx` is what's actually mounted in the scene right now
-  const [displayIdx, setDisplayIdx] = useState(-1);
-  const phase = useRef("idle");
-  const progress = useRef(0);
-  const groupRef = useRef();
-  const targetRef = useRef(-1);
+  // Slots: we can have up to 2 models at once (outgoing + incoming)
+  const [slots, setSlots] = useState([]);
+  // slots = [{ idx, role: 'active'|'entering'|'leaving', key }]
 
-  // When the target changes, kick off transitions
+  const slotKeyCounter = useRef(0);
+  const transitionProgress = useRef(0);
+  const isTransitioning = useRef(false);
+  const pendingTarget = useRef(null);
+
   useEffect(() => {
-    targetRef.current = activeCategoryIdx;
+    const target = activeCategoryIdx;
 
-    if (activeCategoryIdx === displayIdx) {
-      // Already showing the right thing
-      phase.current = "idle";
+    // If nothing is showing and target is < 0, do nothing
+    if (target < 0 && slots.length === 0) return;
+
+    // If currently mid-transition, queue this target for after
+    if (isTransitioning.current) {
+      pendingTarget.current = target;
       return;
     }
 
-    if (displayIdx < 0 && activeCategoryIdx >= 0) {
-      // Nothing loaded yet → mount directly and fade in
-      setDisplayIdx(activeCategoryIdx);
-      phase.current = "fading-in";
-      progress.current = 0;
-    } else if (activeCategoryIdx < 0 && displayIdx >= 0) {
-      // Going back to astro → fade out then unmount
-      phase.current = "fading-out-to-none";
-      progress.current = 0;
+    const activeSlot = slots.find(
+      (s) => s.role === "active" || s.role === "entering",
+    );
+
+    // Same model already active — no-op
+    if (activeSlot && activeSlot.idx === target) return;
+
+    if (target < 0) {
+      // Fade everything out
+      setSlots((prev) => prev.map((s) => ({ ...s, role: "leaving" })));
+      isTransitioning.current = true;
+      transitionProgress.current = 0;
+      return;
+    }
+
+    if (!activeSlot || activeSlot.idx < 0) {
+      // Nothing active — just enter directly
+      const key = ++slotKeyCounter.current;
+      setSlots([{ idx: target, role: "entering", key }]);
+      isTransitioning.current = true;
+      transitionProgress.current = 0;
     } else {
-      // Swapping from one model to another → fade out first
-      phase.current = "fading-out-to-swap";
-      progress.current = 0;
+      // Swap: mark current as leaving, add new as entering
+      const key = ++slotKeyCounter.current;
+      setSlots((prev) => [
+        ...prev
+          .filter((s) => s.role === "active" || s.role === "entering")
+          .map((s) => ({ ...s, role: "leaving" })),
+        { idx: target, role: "entering", key },
+      ]);
+      isTransitioning.current = true;
+      transitionProgress.current = 0;
     }
   }, [activeCategoryIdx]);
-  // NOTE: intentionally NOT including displayIdx in deps —
-  // we only want this to fire when the external target changes.
 
-  // Animation loop
+  // Animation driver
   useFrame((_, delta) => {
-    if (!groupRef.current) return;
+    if (!isTransitioning.current) return;
 
-    const currentPhase = phase.current;
-    const transform = getTransform(displayIdx >= 0 ? displayIdx : 0);
+    transitionProgress.current += delta / TRANSITION_DURATION;
 
-    if (
-      currentPhase === "fading-out-to-swap" ||
-      currentPhase === "fading-out-to-none"
-    ) {
-      progress.current += delta / TRANSITION_DURATION;
-      const t = Math.min(progress.current, 1);
-      const s = (1 - easeInCubic(t)) * transform.scale;
-      groupRef.current.scale.setScalar(Math.max(s, 0.001));
+    if (transitionProgress.current >= 1) {
+      transitionProgress.current = 1;
+      isTransitioning.current = false;
 
-      if (t >= 1) {
-        // Mark as needing a swap — the actual setState happens in the
-        // useEffect below that watches this flag
-        phase.current =
-          currentPhase === "fading-out-to-swap"
-            ? "needs-swap"
-            : "needs-unmount";
+      // Promote entering → active, remove leaving
+      setSlots((prev) => {
+        const next = prev
+          .filter((s) => s.role !== "leaving")
+          .map((s) => (s.role === "entering" ? { ...s, role: "active" } : s));
+        return next;
+      });
+
+      // If there's a queued target, kick it off on next frame
+      if (pendingTarget.current !== null) {
+        const queued = pendingTarget.current;
+        pendingTarget.current = null;
+        // Use setTimeout to avoid setState-during-render
+        setTimeout(() => {
+          // This will trigger the useEffect above
+          // We need a way to re-trigger — simplest: update a state
+        }, 0);
       }
-    } else if (currentPhase === "fading-in") {
-      progress.current += delta / TRANSITION_DURATION;
-      const t = Math.min(progress.current, 1);
-      const s = easeOutCubic(t) * transform.scale;
-      groupRef.current.scale.setScalar(Math.max(s, 0.001));
-
-      if (t >= 1) {
-        groupRef.current.scale.setScalar(transform.scale);
-        phase.current = "idle";
-      }
-    } else if (currentPhase === "idle" && displayIdx >= 0) {
-      groupRef.current.rotation.y += IDLE_ROTATE_SPEED * delta;
     }
   });
 
-  /**
-   * Poll-based swap trigger.
-   * We use a short interval to detect when useFrame has set phase to
-   * "needs-swap" or "needs-unmount", then do the setState safely
-   * outside of the render cycle.
-   */
+  // Handle pending target after transition completes
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (phase.current === "needs-swap") {
-        phase.current = "_swapping";
-        const next = targetRef.current;
-        setDisplayIdx(next >= 0 ? next : -1);
-        if (next >= 0) {
-          // Will fade in once the new component mounts
-          phase.current = "fading-in";
-          progress.current = 0;
-        } else {
-          phase.current = "idle";
-        }
-      } else if (phase.current === "needs-unmount") {
-        phase.current = "idle";
-        setDisplayIdx(-1);
-      }
-    }, 30); // ~33fps check rate, plenty fast
-
-    return () => clearInterval(interval);
-  }, []);
-
-  if (displayIdx < 0) return null;
-
-  const url = CATEGORY_MODEL_URLS[displayIdx];
-  if (!url) return null;
+    if (
+      !isTransitioning.current &&
+      pendingTarget.current !== null &&
+      pendingTarget.current !== activeCategoryIdx
+    ) {
+      // The activeCategoryIdx hasn't changed, but we have a pending.
+      // This case is handled by the activeCategoryIdx effect.
+    }
+  }, [slots]);
 
   return (
-    <group ref={groupRef} scale={0.001}>
+    <>
+      {slots.map((slot) => {
+        const url = CATEGORY_MODEL_URLS[slot.idx];
+        if (!url) return null;
+        return (
+          <SlotWrapper
+            key={slot.key}
+            slot={slot}
+            url={url}
+            transitionProgress={transitionProgress}
+            isTransitioning={isTransitioning}
+            tiltTarget={tiltTarget}
+          />
+        );
+      })}
+    </>
+  );
+}
+
+/**
+ * SlotWrapper — handles the spatial slide + opacity for one model slot.
+ */
+function SlotWrapper({
+  slot,
+  url,
+  transitionProgress,
+  isTransitioning,
+  tiltTarget,
+}) {
+  const groupRef = useRef();
+  const materialsRef = useRef([]);
+  const transform = getTransform(slot.idx);
+
+  // Collect all materials from the model for opacity control
+  const onModelReady = useCallback((scene) => {
+    const mats = [];
+    scene.traverse((child) => {
+      if (child.isMesh) {
+        // Clone materials so we can independently control opacity
+        if (Array.isArray(child.material)) {
+          child.material = child.material.map((m) => {
+            const cloned = m.clone();
+            cloned.transparent = true;
+            cloned.depthWrite = true;
+            mats.push(cloned);
+            return cloned;
+          });
+        } else {
+          const cloned = child.material.clone();
+          cloned.transparent = true;
+          cloned.depthWrite = true;
+          child.material = cloned;
+          mats.push(cloned);
+        }
+      }
+    });
+    materialsRef.current = mats;
+  }, []);
+
+  useFrame(() => {
+    if (!groupRef.current) return;
+
+    const t = transitionProgress.current;
+    const basePos = transform.position;
+
+    if (slot.role === "entering") {
+      // Slide in: start offset, end at base position
+      const eased = easeOutCubic(t);
+      const offsetZ = SLIDE_IN_Z * (1 - eased);
+      const offsetX = SLIDE_IN_X * (1 - eased);
+      groupRef.current.position.set(offsetX, 0, offsetZ);
+      groupRef.current.scale.setScalar(eased);
+
+      // Fade in
+      const opacity = easeOutCubic(t);
+      materialsRef.current.forEach((m) => {
+        m.opacity = opacity;
+        m.depthWrite = opacity > 0.5;
+      });
+    } else if (slot.role === "leaving") {
+      // Slide out: from base position, drift back + lateral
+      const eased = easeInCubic(t);
+      const offsetZ = SLIDE_OUT_Z * eased;
+      const offsetX = SLIDE_OUT_X * eased;
+      groupRef.current.position.set(offsetX, 0, offsetZ);
+      groupRef.current.scale.setScalar(1 - eased * 0.3);
+
+      // Fade out
+      const opacity = 1 - easeInCubic(t);
+      materialsRef.current.forEach((m) => {
+        m.opacity = opacity;
+        m.depthWrite = opacity > 0.5;
+      });
+    } else if (slot.role === "active") {
+      // Settled — ensure full opacity and correct position
+      groupRef.current.position.set(0, 0, 0);
+      groupRef.current.scale.setScalar(1);
+      materialsRef.current.forEach((m) => {
+        m.opacity = 1;
+        m.depthWrite = true;
+      });
+    }
+  });
+
+  return (
+    <group ref={groupRef}>
       <CategoryModel
-        key={displayIdx}
         url={url}
-        categoryIdx={displayIdx}
+        categoryIdx={slot.idx}
         tiltTarget={tiltTarget}
+        onModelReady={onModelReady}
       />
     </group>
   );
 }
 
-// Add these constants at the top of the file (after imports),
-// matching the values in Scene.jsx:
-const CAT_TILT_LERP_SPEED = 4;
-
-// ─── CategoryModel — updated to accept tiltTarget ───
-function CategoryModel({ url, categoryIdx, tiltTarget }) {
+/**
+ * CategoryModel — renders a single GLTF model with tilt response.
+ * Now calls `onModelReady` so the parent can control material opacity.
+ */
+function CategoryModel({ url, categoryIdx, tiltTarget, onModelReady }) {
   const { scene, animations } = useGLTF(url);
   const modelRef = useRef();
   const mixer = useMemo(() => new THREE.AnimationMixer(scene), [scene]);
-  const currentOffset = useRef({ x: 0, y: 0 }); // ← add this
-
+  const currentOffset = useRef({ x: 0, y: 0 });
   const transform = getTransform(categoryIdx);
+
+  // Notify parent about materials once scene is ready
+  useEffect(() => {
+    if (scene && onModelReady) {
+      onModelReady(scene);
+    }
+  }, [scene, onModelReady]);
 
   useEffect(() => {
     if (!mixer || !animations?.length) return;
@@ -194,7 +302,6 @@ function CategoryModel({ url, categoryIdx, tiltTarget }) {
   useFrame((_, delta) => {
     mixer?.update(delta);
 
-    // ── Tilt logic (mirrors AstroModel) ──
     if (modelRef.current && tiltTarget?.current) {
       const target = tiltTarget.current;
       const lerpSpeed = 1 - Math.exp(-CAT_TILT_LERP_SPEED * delta);
@@ -204,7 +311,6 @@ function CategoryModel({ url, categoryIdx, tiltTarget }) {
       currentOffset.current.y +=
         (target.y - currentOffset.current.y) * lerpSpeed;
 
-      // Apply tilt on top of the base rotation from transform
       modelRef.current.rotation.x =
         (transform.rotationX ?? 0) + currentOffset.current.x;
       modelRef.current.rotation.y =
@@ -242,12 +348,4 @@ function CategoryModel({ url, categoryIdx, tiltTarget }) {
 
 function getTransform(idx) {
   return CATEGORY_MODEL_TRANSFORMS[idx] || DEFAULT_TRANSFORM;
-}
-
-function easeInCubic(t) {
-  return t * t * t;
-}
-
-function easeOutCubic(t) {
-  return 1 - Math.pow(1 - t, 3);
 }

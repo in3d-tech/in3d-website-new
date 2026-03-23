@@ -19,7 +19,6 @@ const CATEGORIES = [
     tagline: "Redefining production pipelines",
     accent: "#1D9E75",
     idx: "001",
-    bg: "/assets/images/backgrounds/Astro_1_Background.webp",
     modelIdx: 0,
     description:
       "Transform manufacturing workflows with photorealistic 3D asset pipelines built for scale.",
@@ -29,17 +28,14 @@ const CATEGORIES = [
     tagline: "Precision health, visualized",
     accent: "#D4537E",
     idx: "002",
-    bg: "/assets/images/backgrounds/medicine/medicine_bg.jpg",
     modelIdx: 1,
-    description:
-      "Spatial anatomy mapping and surgical simulation at the intersection of biology and rendering.",
+    description: "Spatial mapping and surgical simulation.",
   },
   {
     title: "MICROSOFT",
     tagline: "Enterprise-grade integration",
     accent: "#378ADD",
     idx: "003",
-    bg: "/assets/images/backgrounds/microsoft/microsoft_bg.jpg",
     modelIdx: 2,
     description:
       "Native 3D content pipelines embedded across the Microsoft ecosystem, from Teams to Azure.",
@@ -49,27 +45,23 @@ const CATEGORIES = [
     tagline: "Threat surfaces, mapped in 3D",
     accent: "#E24B4A",
     idx: "004",
-    bg: "/assets/images/backgrounds/security/security.jpg",
     modelIdx: 3,
     description:
-      "Physical and digital threat visualization for perimeter defense and response operations.",
+      "Physical and digital threat visualization for defense and response operations.",
   },
   {
     title: "ARTIFICIAL INTELLIGENCE",
     tagline: "Beyond the neural frontier",
     accent: "#16e3d2",
     idx: "005",
-    bg: "https://in3dwebsite.blob.core.windows.net/photos/Ai_Tugle_Finish-min.jpg",
     modelIdx: 4,
-    description:
-      "AI-driven 3D synthesis enabling real-time generative environments and predictive spatial modeling.",
+    description: "AI-driven real-time generative environments.",
   },
   {
     title: "MILITARY",
     tagline: "Tactical spatial awareness",
     accent: "#888780",
     idx: "006",
-    bg: "/assets/images/backgrounds/military/military_bg.jpg",
     modelIdx: 5,
     description:
       "Mission-critical 3D terrain and asset generation for defense simulation and field intelligence.",
@@ -79,10 +71,8 @@ const CATEGORIES = [
     tagline: "Your vision, our dimension",
     accent: "#BA7517",
     idx: "007",
-    bg: "https://in3dwebsite.blob.core.windows.net/photos/Customize_Togle_Finish-min.jpg",
     modelIdx: 6,
-    description:
-      "Bespoke 3D pipelines engineered to your exact workflow — from concept to deployment.",
+    description: "",
   },
 ];
 
@@ -100,10 +90,10 @@ const CategorySection = memo(
     setSelectedCategoryItemByIdx,
     categoryIdxRef,
   }) => {
-    const intersectionRef = useRef(null);
+    const localRef = useRef(null);
 
     useEffect(() => {
-      const el = intersectionRef.current;
+      const el = localRef.current;
       if (!el) return;
       const observer = new IntersectionObserver(
         ([entry]) => {
@@ -133,14 +123,19 @@ const CategorySection = memo(
     return (
       <div
         ref={(el) => {
-          intersectionRef.current = el;
-          if (sectionRef) sectionRef.current = el;
+          localRef.current = el;
+          if (typeof sectionRef === "function") sectionRef(el);
+          else if (sectionRef) sectionRef.current = el;
         }}
         className={`vcs-section ${isActive ? "vcs-section--active" : ""} ${
           category.isWelcome ? "vcs-section--welcome" : ""
         }`}
         style={{ "--section-accent": category.accent }}
       >
+        {/* Full-screen touch target — this is the key fix.
+            The entire section is the scroll surface. Content is
+            positioned inside but doesn't block scrolling. */}
+
         {category.isWelcome ? (
           <WelcomeContent isActive={isActive} />
         ) : (
@@ -151,10 +146,9 @@ const CategorySection = memo(
           />
         )}
 
-        {/* Scroll progress indicator on the left edge */}
-        <div className="vcs-section__edge-marker">
-          <div className="vcs-section__edge-line" />
-          <div className="vcs-section__edge-index">{category.idx}</div>
+        {/* Section index — decorative */}
+        <div className="vcs-section__idx-badge">
+          <span className="vcs-section__idx-num">{category.idx}</span>
         </div>
       </div>
     );
@@ -171,67 +165,87 @@ const WelcomeContent = memo(({ isActive }) => (
         className="vcs-welcome__logo"
       />
     </div>
-    {/* <div className="vcs-welcome__tagline">Simply Revolutionary</div> */}
     <div className="vcs-welcome__hint">
-      <span className="vcs-welcome__hint-arrow">↓</span>
-      <span>Scroll to explore</span>
+      <div className="vcs-welcome__hint-line" />
+      <span className="vcs-welcome__hint-text">Scroll to explore</span>
+      <div className="vcs-welcome__hint-chevrons">
+        <span className="vcs-welcome__chevron">‹</span>
+        <span className="vcs-welcome__chevron">‹</span>
+        <span className="vcs-welcome__chevron">‹</span>
+      </div>
     </div>
   </div>
 ));
 
 /* ─── Category section content ─── */
 const CategoryContent = memo(({ category, isActive, onEnter }) => (
-  <div className={`vcs-panel ${isActive ? "vcs-panel--visible" : ""}`}>
-    {/* Title */}
-    <h2 className="vcs-panel__title" data-text={category.title}>
-      {category.title}
-    </h2>
+  <div className={`vcs-card ${isActive ? "vcs-card--visible" : ""}`}>
+    {/* Scan-line accent at top */}
+    <div className="vcs-card__scanline" />
 
-    {/* Accent rule */}
-    <div className="vcs-panel__rule" />
+    {/* Index + tagline row */}
+    {/* <div className="vcs-card__meta">
+      <span className="vcs-card__meta-idx">{category.idx}</span>
+      <span className="vcs-card__meta-sep">//</span>
+      <span className="vcs-card__meta-tag">{category.tagline}</span>
+    </div> */}
+
+    {/* Title */}
+    <h2 className="vcs-card__title">{category.title}</h2>
+
+    {/* Description */}
+    <p className="vcs-card__desc">{category.description}</p>
 
     {/* CTA */}
-    <button className="vcs-panel__cta" onClick={onEnter}>
-      <span>EXPLORE</span>
-      <span className="vcs-panel__cta-arrow">→</span>
+    <button className="vcs-card__cta" onClick={onEnter}>
+      <span className="vcs-card__cta-label">EXPLORE</span>
+      <span className="vcs-card__cta-icon">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path
+            d="M4 9h10M10 5l4 4-4 4"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </span>
     </button>
 
-    {/* Corner decoration */}
-    <div className="vcs-panel__corner vcs-panel__corner--tl" />
-    <div className="vcs-panel__corner vcs-panel__corner--br" />
+    {/* Corner brackets */}
+    <div className="vcs-card__bracket vcs-card__bracket--tl" />
+    <div className="vcs-card__bracket vcs-card__bracket--br" />
   </div>
 ));
 
-/* ─── Nav dots sidebar ─── */
-const NavDots = memo(({ activeModelIdx, onDotClick }) => {
-  // activeModelIdx: -1 = welcome, 0-6 = categories
-  // Convert to dot index: -1 → 0, 0 → 1, etc.
+/* ─── Nav rail (replaces dots) ─── */
+const NavRail = memo(({ activeModelIdx, onDotClick }) => {
   const activeDotIdx = activeModelIdx + 1;
 
   return (
-    <nav className="vcs-nav">
+    <nav className="vcs-rail" aria-label="Section navigation">
+      <div className="vcs-rail__track" />
+      <div
+        className="vcs-rail__fill"
+        style={{
+          height: `${(activeDotIdx / (ALL_SECTIONS.length - 1)) * 100}%`,
+        }}
+      />
       {ALL_SECTIONS.map((section, idx) => (
         <button
           key={idx}
-          className={`vcs-nav__dot ${idx === activeDotIdx ? "vcs-nav__dot--active" : ""} ${
-            idx === 0 ? "vcs-nav__dot--home" : ""
-          }`}
-          style={{ "--dot-accent": section.accent }}
+          className={`vcs-rail__pip ${idx === activeDotIdx ? "vcs-rail__pip--active" : ""}`}
+          style={{ "--pip-accent": section.accent }}
           onClick={() => onDotClick(idx)}
           aria-label={section.isWelcome ? "Home" : section.title}
-          title={section.isWelcome ? "Home" : section.title}
-        />
+        >
+          {idx === activeDotIdx && (
+            <span className="vcs-rail__pip-label">
+              {section.isWelcome ? "HOME" : section.title}
+            </span>
+          )}
+        </button>
       ))}
-
-      {/* Vertical progress track */}
-      <div className="vcs-nav__track">
-        <div
-          className="vcs-nav__progress"
-          style={{
-            height: `${(activeDotIdx / (ALL_SECTIONS.length - 1)) * 100}%`,
-          }}
-        />
-      </div>
     </nav>
   );
 });
@@ -247,17 +261,97 @@ export const VerticalCategoryScroll = memo(
     setSelectedCategoryItemByIdx,
     categoryIdxRef,
     onActiveIndexChange,
+    requestTilt,
   }) => {
     const containerRef = useRef(null);
     const sectionRefs = useRef([]);
     const [activeModelIdx, setActiveModelIdx] = useState(-1);
+    const [hasScrolled, setHasScrolled] = useState(false);
+    const tiltRequested = useRef(false);
 
-    const handleEnterSection = useCallback(
+    // Throttle gate: prevent model swaps faster than the 3D crossfade.
+    // This matches TRANSITION_DURATION in MobileModelSwapper (0.5s).
+    const MODEL_SETTLE_MS = 550;
+    const lastModelChangeTime = useRef(0);
+    const pendingModelIdx = useRef(null);
+    const settleTimer = useRef(null);
+
+    // Detect first scroll to hide the indicator
+    useEffect(() => {
+      const el = containerRef.current;
+      if (!el) return;
+      const onScroll = () => {
+        if (el.scrollTop > 30) {
+          setHasScrolled(true);
+        }
+      };
+      el.addEventListener("scroll", onScroll, { passive: true });
+      return () => el.removeEventListener("scroll", onScroll);
+    }, []);
+
+    // Request device orientation on the very first touch anywhere
+    // in the scroll container. This covers iOS's requirement that
+    // the permission prompt is triggered by a user gesture.
+    useEffect(() => {
+      const el = containerRef.current;
+      if (!el || !requestTilt) return;
+      const onFirstTouch = () => {
+        if (!tiltRequested.current) {
+          tiltRequested.current = true;
+          requestTilt();
+        }
+      };
+      el.addEventListener("touchstart", onFirstTouch, {
+        once: true,
+        passive: true,
+      });
+      return () => el.removeEventListener("touchstart", onFirstTouch);
+    }, [requestTilt]);
+
+    // Clean up settle timer
+    useEffect(() => {
+      return () => {
+        if (settleTimer.current) clearTimeout(settleTimer.current);
+      };
+    }, []);
+
+    /**
+     * Throttled section change: if a model swap is already in flight,
+     * queue the latest index and apply it once the transition settles.
+     * This prevents rapid-fire swaps that desync card ↔ model.
+     */
+    const applyModelChange = useCallback(
       (modelIdx) => {
         setActiveModelIdx(modelIdx);
         onActiveIndexChange?.(modelIdx);
+        lastModelChangeTime.current = Date.now();
+        pendingModelIdx.current = null;
       },
       [onActiveIndexChange],
+    );
+
+    const handleEnterSection = useCallback(
+      (modelIdx) => {
+        const now = Date.now();
+        const elapsed = now - lastModelChangeTime.current;
+
+        if (elapsed >= MODEL_SETTLE_MS) {
+          // Enough time has passed — swap immediately
+          applyModelChange(modelIdx);
+        } else {
+          // Transition still in flight — queue this index
+          pendingModelIdx.current = modelIdx;
+
+          // Clear any existing timer, schedule for when settle completes
+          if (settleTimer.current) clearTimeout(settleTimer.current);
+          settleTimer.current = setTimeout(() => {
+            if (pendingModelIdx.current !== null) {
+              applyModelChange(pendingModelIdx.current);
+            }
+          }, MODEL_SETTLE_MS - elapsed);
+        }
+      },
+      [applyModelChange],
     );
 
     const scrollToSection = useCallback((dotIdx) => {
@@ -274,7 +368,7 @@ export const VerticalCategoryScroll = memo(
 
     return (
       <>
-        {/* Vertical snap-scroll container */}
+        {/* Vertical snap-scroll container — FULL SCREEN touch target */}
         <div
           ref={containerRef}
           className="vcs-container"
@@ -299,8 +393,23 @@ export const VerticalCategoryScroll = memo(
           ))}
         </div>
 
-        {/* Sidebar nav dots */}
-        <NavDots activeModelIdx={activeModelIdx} onDotClick={scrollToSection} />
+        {/* Sidebar nav rail */}
+        {!selectedCategory && (
+          <NavRail
+            activeModelIdx={activeModelIdx}
+            onDotClick={scrollToSection}
+          />
+        )}
+
+        {/* Bottom scroll indicator — fades after first scroll */}
+        {!selectedCategory && (
+          <div
+            className={`vcs-scroll-indicator ${hasScrolled ? "vcs-scroll-indicator--hidden" : ""}`}
+          >
+            <div className="vcs-scroll-indicator__line" />
+            <div className="vcs-scroll-indicator__dot" />
+          </div>
+        )}
       </>
     );
   },

@@ -34,10 +34,16 @@ export function SceneMobile({
   selectedCategory,
   selectedCategoryItemByIdx,
   activeCategoryIdx,
+  onTiltReady,
 }) {
   const scrollProgress = useRef(0);
   const canvasContainerRef = useRef(null);
   const { tiltTarget, requestTilt, tiltStatus } = useDeviceTilt();
+
+  // Expose tilt controls to parent on mount
+  useEffect(() => {
+    onTiltReady?.({ requestTilt, tiltStatus });
+  }, [requestTilt, tiltStatus, onTiltReady]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -98,7 +104,7 @@ export function SceneMobile({
           toneMapping: THREE.ACESFilmicToneMapping, // better color/contrast
           toneMappingExposure: 1.2,
         }}
-        style={{ pointerEvents: "auto" }}
+        style={{ pointerEvents: "none" }}
       >
         <ambientLight intensity={0.3} />
 
@@ -135,34 +141,6 @@ export function SceneMobile({
           />
         </Suspense>
       </Canvas>
-
-      {(tiltStatus === "denied" || tiltStatus === "idle") && (
-        <button
-          onClick={requestTilt}
-          style={{
-            position: "absolute",
-            bottom: 24,
-            left: "50%",
-            transform: "translateX(-50%)",
-            pointerEvents: "auto",
-            background: "rgba(255,255,255,0.12)",
-            backdropFilter: "blur(10px)",
-            WebkitBackdropFilter: "blur(10px)",
-            border: "1px solid rgba(255,255,255,0.2)",
-            borderRadius: 20,
-            color: "#fff",
-            padding: "8px 18px",
-            fontSize: 13,
-            fontWeight: 500,
-            cursor: "pointer",
-            zIndex: 10,
-            opacity: 0.85,
-            transition: "opacity 0.3s",
-          }}
-        >
-          Tap to enable tilt
-        </button>
-      )}
     </div>
   );
 }

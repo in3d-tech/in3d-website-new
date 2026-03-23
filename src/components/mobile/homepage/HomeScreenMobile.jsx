@@ -28,6 +28,7 @@ function HomeScreenMobile() {
     useState(-1);
 
   const categoryIdxRef = useRef(-1);
+  const requestTiltRef = useRef(null);
 
   const [activeCategoryIdx, setActiveCategoryIdx] = useState(-1);
 
@@ -40,6 +41,14 @@ function HomeScreenMobile() {
     selectedMenuActionMobile,
     setSelectedMenuActionMobile,
   } = useAppContext();
+
+  const handleTiltReady = useCallback(({ requestTilt }) => {
+    requestTiltRef.current = requestTilt;
+  }, []);
+
+  const handleRequestTilt = useCallback(() => {
+    requestTiltRef.current?.();
+  }, []);
 
   const handleMenuClick = useCallback(
     (wasCategoryClicked) => {
@@ -90,6 +99,7 @@ function HomeScreenMobile() {
         selectedCategory={selectedCategory}
         selectedCategoryItemByIdx={selectedCategoryItemByIdx}
         activeCategoryIdx={activeCategoryIdx}
+        onTiltReady={handleTiltReady}
       />
 
       <MenuWheel
@@ -159,6 +169,7 @@ function HomeScreenMobile() {
         setSelectedCategoryItemByIdx={setSelectedCategoryItemByIdx}
         categoryIdxRef={categoryIdxRef}
         onActiveIndexChange={handleActiveIndexChange}
+        requestTilt={handleRequestTilt}
       />
 
       <Suspense fallback={null}>
