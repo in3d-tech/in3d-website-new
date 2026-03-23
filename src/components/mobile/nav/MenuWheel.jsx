@@ -75,6 +75,25 @@ export function MenuWheel({
         <span className="mw-toggle__bar mw-toggle__bar--3" />
       </button>
 
+      {isMenuCentered ? (
+        <div
+          className="h-nav-in3d-icon"
+          style={{
+            animationDelay: "0.3s",
+            left: "5%",
+            zIndex: 40,
+            // opacity: 0.6,
+          }}
+        >
+          <img
+            className="in3d-fixed-logo"
+            style={{ width: "3em", opacity: 0.7 }}
+            src="/assets/images/in3d-logo-white.png"
+            alt="in3d-logo"
+          />
+        </div>
+      ) : null}
+
       {/* Full-screen overlay */}
       <div className={`mw-overlay ${isMenuCentered ? "mw-overlay--open" : ""}`}>
         <div className="mw-inner">
