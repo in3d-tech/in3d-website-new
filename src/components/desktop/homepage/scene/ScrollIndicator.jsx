@@ -31,8 +31,8 @@ const styles = `
 /* Capsule track */
 .scroll-indicator-track {
   position: relative;
-  width: 36px;
-  height: 64px;
+  width: 26px;
+  height: 48px;
   border-radius: 18px;
   border: 1.5px solid rgba(255, 255, 255, 0.25);
   overflow: hidden;
@@ -180,7 +180,7 @@ const styles = `
 
 /* Text label */
 .scroll-indicator-label {
-  margin-top: 10px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
