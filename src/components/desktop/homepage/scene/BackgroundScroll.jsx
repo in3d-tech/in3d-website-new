@@ -8,6 +8,7 @@ import {
 } from "../../../common/shuffleTexts";
 // import { ContactBtn } from "../common/Logo";
 import { AboutUsText } from "./AboutUsHomepageText";
+import ScrollIndicator from "./ScrollIndicator";
 
 export function BackgroundScroll({
   section1MenuRef,
@@ -80,7 +81,8 @@ export function BackgroundScroll({
                   </span>
                 </span>
               </div>
-              <div className="down-indicator-wrapper">
+              <ScrollIndicator />
+              {/* <div className="down-indicator-wrapper">
                 <div
                   className="icon-scroll"
                   // onClick={scrollToElement}
@@ -103,7 +105,7 @@ export function BackgroundScroll({
                   <div style={{ fontSize: "0.6em" }}>Scroll</div>
                   <div style={{ fontSize: "0.6em" }}>down</div>
                 </div>
-              </div>
+              </div> */}
             </>
           ) : null}
         </div>
