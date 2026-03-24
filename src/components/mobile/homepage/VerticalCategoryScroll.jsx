@@ -181,7 +181,7 @@ const CategoryContent = memo(({ category, isActive, onExplore }) => (
     </div>
 
     {/* Title */}
-    <h2 className="vcs-cat__title">{category.title}</h2>
+    {/* <h2 className="vcs-cat__title">{category.title}</h2> */}
 
     {/* Description */}
     {category.description && (
