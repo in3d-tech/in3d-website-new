@@ -87,7 +87,7 @@ const styles = `
     transform: scale(1);
   }
   60% {
-    top: 46px;
+    top: 36px;
     opacity: 0.4;
     transform: scale(0.6);
   }
@@ -146,7 +146,7 @@ const styles = `
   }
   60% {
     height: 0;
-    top: 46px;
+    top: 26px;
     opacity: 0;
   }
   100% {
