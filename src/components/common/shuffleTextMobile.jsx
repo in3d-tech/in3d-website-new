@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useCallback, memo } from "react";
 
 const VOWELS = "aeiouAEIOU";
 
-class TextScramble {
+export class TextScramble {
   constructor(el, speed = 1) {
     this.el = el;
     this.speed = speed;
@@ -55,6 +55,9 @@ class TextScramble {
       }
     }
 
+    // Convert newlines to HTML line breaks
+    output = output.replace(/\n/g, "<br/>");
+
     this.el.innerHTML = output;
 
     if (complete === this.queue.length) {
@@ -71,11 +74,10 @@ class TextScramble {
 }
 
 export const TextScrambleComponent = memo(
-  ({ colour, isHomePage, isMobile }) => {
+  ({ colour, isHomePage, isMobile, forcedText }) => {
     const textRef = useRef(null);
     const fxRef = useRef(null);
 
-    // Stable phrases array — avoids recreating on each render
     const phrasesRef = useRef(
       isHomePage
         ? ["SIMPLY EXPAND"]
@@ -90,6 +92,7 @@ export const TextScrambleComponent = memo(
           ],
     );
 
+    // Existing init effect — runs once on mount
     useEffect(() => {
       if (!textRef.current) return;
 
@@ -123,6 +126,11 @@ export const TextScrambleComponent = memo(
       };
     }, [isHomePage, isMobile]);
 
+    useEffect(() => {
+      if (forcedText == null || !fxRef.current) return;
+      fxRef.current.setText(forcedText);
+    }, [forcedText]);
+
     return (
       <div>
         <div
@@ -134,6 +142,71 @@ export const TextScrambleComponent = memo(
     );
   },
 );
+
+// export const TextScrambleComponent = memo(
+//   ({ colour, isHomePage, isMobile }) => {
+//     const textRef = useRef(null);
+//     const fxRef = useRef(null);
+
+//     // Stable phrases array — avoids recreating on each render
+//     const phrasesRef = useRef(
+//       isHomePage
+//         ? ["SIMPLY EXPAND"]
+//         : [
+//             isMobile ? "Expand" : "Pioneer",
+//             "Develop",
+//             "Advance",
+//             "Expand",
+//             "Craft",
+//             "Build",
+//             "Design",
+//           ],
+//     );
+
+//     useEffect(() => {
+//       if (!textRef.current) return;
+
+//       const fx = new TextScramble(textRef.current);
+//       fxRef.current = fx;
+//       const phrases = phrasesRef.current;
+//       let counter = 0;
+//       let timeoutId;
+//       let intervalId;
+
+//       const next = () => {
+//         fx.setText(phrases[counter]).then(() => {
+//           if (!isMobile && !isHomePage) {
+//             timeoutId = setTimeout(next, 100);
+//           }
+//         });
+//         counter = (counter + 1) % phrases.length;
+//       };
+
+//       if (isHomePage) {
+//         intervalId = setInterval(next, 1000);
+//         timeoutId = setTimeout(() => clearInterval(intervalId), 3200);
+//       } else {
+//         next();
+//       }
+
+//       return () => {
+//         fx.destroy();
+//         clearTimeout(timeoutId);
+//         clearInterval(intervalId);
+//       };
+//     }, [isHomePage, isMobile]);
+
+//     return (
+//       <div>
+//         <div
+//           className={isHomePage ? "" : "abla"}
+//           style={{ color: isHomePage ? "white" : colour }}
+//           ref={textRef}
+//         />
+//       </div>
+//     );
+//   },
+// );
 
 export const TextScrambleComponentHover = memo(
   ({ text, handleClick, setIsCursorHovering }) => {

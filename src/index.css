@@ -2804,6 +2804,26 @@ section {
   }
 }
 
+.vcs-title-scramble {
+  color: #ffffff;
+  font-size: 1.8em;
+  line-height: 1.15;
+  text-align: center;
+  white-space: pre-line;
+  font-family: "Rajdhani", sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  opacity: 0;
+  animation: cinematic-expand 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation-delay: 2.5s;
+  transition: font-size 0.4s ease;
+}
+
+.vcs-title-scramble--compact {
+  font-size: 1.35em;
+}
+
 h1 + hr {
   margin: 0 auto 2em;
 }

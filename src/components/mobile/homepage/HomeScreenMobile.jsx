@@ -14,10 +14,13 @@ import { TextScrambleComponent } from "../../common/shuffleTextMobile";
 // ← Replaced GlitchCategoryCards with VerticalCategoryScroll
 import { VerticalCategoryScroll } from "./VerticalCategoryScroll";
 import { BackgroundLayer } from "./BackgroundLayer";
+import { TextScramble } from "../../common/shuffleTextMobile";
 
 const LazySelectedContent = lazy(
   () => import("../categories/MobileCategoryPage"),
 );
+
+// Add this mapping near the top of the file or import CATEGORIES
 
 function HomeScreenMobile() {
   const [isMenuCentered, setIsMenuCentered] = useState(false);
@@ -113,7 +116,7 @@ function HomeScreenMobile() {
 
       {/* Menu overlay */}
       <BackgroundLayer activeModelIdx={activeCategoryIdx} />
-      <div
+      {/* <div
         className={
           isMenuCentered
             ? "homescreen-mobile mobile-menu-opened-bg"
@@ -140,7 +143,7 @@ function HomeScreenMobile() {
             />
           </>
         )}
-      </div>
+      </div> */}
 
       {/* ─── Title ─── */}
       {startExpandedAnimation && (
@@ -155,7 +158,10 @@ function HomeScreenMobile() {
             pointerEvents: "none",
           }}
         >
-          <TitleWithAnimation isMobile={isMobile} />
+          <TitleWithAnimation
+            isMobile={isMobile}
+            activeCategoryIdx={activeCategoryIdx}
+          />
         </div>
       )}
 
@@ -197,26 +203,105 @@ const backgrounds = {
 
 /* ─── Title component ─── */
 
-const TitleWithAnimation = memo(({ isMobile }) => (
-  <>
+const CATEGORY_TITLES = [
+  "INDUSTRY",
+  "MEDICINE",
+  "MICROSOFT",
+  "SECURITY",
+  "ARTIFICIAL\nINTELLIGENCE",
+  "MILITARY",
+  "CUSTOMIZATION",
+];
+
+const TitleWithAnimation = memo(({ isMobile, activeCategoryIdx }) => {
+  const containerRef = useRef(null);
+  const fxRef = useRef(null);
+  const hasInitRef = useRef(false);
+  const prevIdxRef = useRef(-1);
+  const [isCompact, setIsCompact] = useState(false);
+
+  // Replace BOTH the "Create the scramble instance once" and
+  // "Initial SIMPLY EXPAND animation" useEffects with this single one:
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const fx = new TextScramble(containerRef.current);
+    fxRef.current = fx;
+
+    // Initial "SIMPLY EXPAND" animation
+    let intervalId;
+    let timeoutId;
+    let counter = 0;
+    const phrases = ["SIMPLY\nEXPAND"];
+
+    const next = () => {
+      fx.setText(phrases[counter]);
+      counter = (counter + 1) % phrases.length;
+    };
+
+    intervalId = setInterval(next, 1000);
+    timeoutId = setTimeout(() => clearInterval(intervalId), 3200);
+
+    return () => {
+      fx.destroy();
+      clearTimeout(timeoutId);
+      clearInterval(intervalId);
+    };
+  }, []);
+
+  // When active category changes, scramble to new title
+  useEffect(() => {
+    if (!fxRef.current) return;
+    if (activeCategoryIdx === prevIdxRef.current) return;
+    prevIdxRef.current = activeCategoryIdx;
+
+    if (activeCategoryIdx < 0) {
+      setIsCompact(false);
+      fxRef.current.setText("SIMPLY\nEXPAND");
+    } else {
+      const title = CATEGORY_TITLES[activeCategoryIdx] ?? "";
+      // Compact mode for category titles (they're longer)
+      setIsCompact(true);
+      fxRef.current.setText(title);
+    }
+  }, [activeCategoryIdx]);
+
+  return (
     <div
+      ref={containerRef}
+      className={`text-animate simply-header ${isCompact ? "vcs-title-scramble--compact" : ""}`}
       style={{
-        fontSize: "1.8em",
+        whiteSpace: "pre-line",
+        animationDelay: "2.5s",
+        fontSize: isCompact ? "1.35em" : "1.8em",
         marginTop: "1em",
-        animationDelay: "2.5s",
-      }}
-      className="text-animate simply-header"
-    >
-      SIMPLY
-    </div>
-    <div
-      style={{
         textAlign: "center",
-        animationDelay: "2.5s",
+        transition: "font-size 0.4s ease",
       }}
-      className="text-animate simply-header"
-    >
-      <TextScrambleComponent isHomepage isMobile={isMobile} />
-    </div>
-  </>
-));
+    />
+  );
+});
+
+// const TitleWithAnimation = memo(({ isMobile }) => (
+//   <>
+//     <div
+//       style={{
+//         fontSize: "1.8em",
+//         marginTop: "1em",
+//         animationDelay: "2.5s",
+//       }}
+//       className="text-animate simply-header"
+//     >
+//       SIMPLY
+//     </div>
+//     <div
+//       style={{
+//         textAlign: "center",
+//         animationDelay: "2.5s",
+//       }}
+//       className="text-animate simply-header"
+//     >
+//       <TextScrambleComponent isHomepage isMobile={isMobile} />
+//     </div>
+//   </>
+// ));
