@@ -145,22 +145,124 @@ function HomepageContent({ scrollToElementById, scrollToTop }) {
       null;
     };
   }, [scrollArea]);
+
+  // useEffect(() => {
+  //   if (!categoryBtnRef.current || !scrollIconRef.current) return;
+
+  //   // Check if we are currently in section 7
+  //   const isSection7 = scrollArea?.currentSection == 7;
+
+  //   // IMPORTANT: If we are already in the correct state (e.g., scrolling from section 3 to 4),
+  //   // do absolutely nothing and stop the bounce!
+  //   if (isSection7 === wasSection7.current) return;
+
+  //   const tl = gsap.timeline();
+
+  //   const catRestingOpacity = scrollArea?.currentSection != 2.5 ? 0.7 : 0;
+  //   const scrollRestingOpacity = scrollArea?.currentSection >= 2 ? 1 : 0;
+
+  //   if (isSection7) {
+  //     tl.add("moveStart")
+  //       .to(
+  //         categoryBtnRef.current,
+  //         { x: 100, y: -70, duration: 0.6, ease: "power2.inOut" },
+  //         "moveStart",
+  //       )
+  //       .to(
+  //         scrollIconRef.current,
+  //         { x: 150, y: -118, duration: 0.6, ease: "power2.inOut" },
+  //         "moveStart",
+  //       )
+  //       .to(
+  //         [categoryBtnRef.current, scrollIconRef.current],
+  //         {
+  //           opacity: 0.4,
+  //           rotation: 15,
+  //           duration: 0.3,
+  //           ease: "power1.inOut",
+  //         },
+  //         "moveStart",
+  //       )
+  //       .to(
+  //         categoryBtnRef.current,
+  //         {
+  //           opacity: catRestingOpacity,
+  //           rotation: 0,
+  //           duration: 0.3,
+  //           ease: "power1.inOut",
+  //         },
+  //         "moveStart+=0.3",
+  //       )
+  //       .to(
+  //         scrollIconRef.current,
+  //         {
+  //           opacity: scrollRestingOpacity,
+  //           rotation: 0,
+  //           duration: 0.3,
+  //           ease: "power1.inOut",
+  //         },
+  //         "moveStart+=0.3",
+  //       );
+  //   } else {
+  //     tl.add("moveBack")
+  //       .to(
+  //         [categoryBtnRef.current, scrollIconRef.current],
+  //         { x: 0, y: 0, duration: 0.6, ease: "power2.inOut" },
+  //         "moveBack",
+  //       )
+  //       .to(
+  //         [categoryBtnRef.current, scrollIconRef.current],
+  //         {
+  //           opacity: 0.4,
+  //           rotation: -15,
+  //           duration: 0.3,
+  //           ease: "power1.inOut",
+  //         },
+  //         "moveBack",
+  //       )
+  //       .to(
+  //         categoryBtnRef.current,
+  //         {
+  //           opacity: catRestingOpacity,
+  //           rotation: 0,
+  //           duration: 0.3,
+  //           ease: "power1.inOut",
+  //         },
+  //         "moveBack+=0.3",
+  //       )
+  //       .to(
+  //         scrollIconRef.current,
+  //         {
+  //           opacity: scrollRestingOpacity,
+  //           rotation: 0,
+  //           duration: 0.3,
+  //           ease: "power1.inOut",
+  //         },
+  //         "moveBack+=0.3",
+  //       );
+  //   }
+
+  //   // Update the tracker so it knows its current state for the next scroll!
+  //   wasSection7.current = isSection7;
+
+  //   return () => tl.kill();
+  // }, [scrollArea?.currentSection]);
+
   useEffect(() => {
     if (!categoryBtnRef.current || !scrollIconRef.current) return;
 
-    // Check if we are currently in section 7
     const isSection7 = scrollArea?.currentSection == 7;
 
-    // IMPORTANT: If we are already in the correct state (e.g., scrolling from section 3 to 4),
-    // do absolutely nothing and stop the bounce!
-    if (isSection7 === wasSection7.current) return;
-
-    const tl = gsap.timeline();
+    // Always kill any running tweens on these elements first
+    gsap.killTweensOf(categoryBtnRef.current);
+    gsap.killTweensOf(scrollIconRef.current);
 
     const catRestingOpacity = scrollArea?.currentSection != 2.5 ? 0.7 : 0;
     const scrollRestingOpacity = scrollArea?.currentSection >= 2 ? 1 : 0;
 
-    if (isSection7) {
+    if (isSection7 && !wasSection7.current) {
+      // Entering section 7 — animate to offset position
+      const tl = gsap.timeline();
       tl.add("moveStart")
         .to(
           categoryBtnRef.current,
@@ -174,77 +276,57 @@ function HomepageContent({ scrollToElementById, scrollToTop }) {
         )
         .to(
           [categoryBtnRef.current, scrollIconRef.current],
-          {
-            opacity: 0.4,
-            rotation: 15,
-            duration: 0.3,
-            ease: "power1.inOut",
-          },
+          { opacity: 0.4, rotation: 15, duration: 0.3, ease: "power1.inOut" },
           "moveStart",
         )
         .to(
           categoryBtnRef.current,
-          {
-            opacity: catRestingOpacity,
-            rotation: 0,
-            duration: 0.3,
-            ease: "power1.inOut",
-          },
+          { opacity: catRestingOpacity, rotation: 0, duration: 0.3 },
           "moveStart+=0.3",
         )
         .to(
           scrollIconRef.current,
-          {
-            opacity: scrollRestingOpacity,
-            rotation: 0,
-            duration: 0.3,
-            ease: "power1.inOut",
-          },
+          { opacity: scrollRestingOpacity, rotation: 0, duration: 0.3 },
           "moveStart+=0.3",
         );
-    } else {
+    } else if (!isSection7 && wasSection7.current) {
+      // Leaving section 7 — animate back
+      const tl = gsap.timeline();
       tl.add("moveBack")
         .to(
           [categoryBtnRef.current, scrollIconRef.current],
-          { x: 0, y: 0, duration: 0.6, ease: "power2.inOut" },
-          "moveBack",
-        )
-        .to(
-          [categoryBtnRef.current, scrollIconRef.current],
-          {
-            opacity: 0.4,
-            rotation: -15,
-            duration: 0.3,
-            ease: "power1.inOut",
-          },
+          { x: 0, y: 0, rotation: 0, duration: 0.6, ease: "power2.inOut" },
           "moveBack",
         )
         .to(
           categoryBtnRef.current,
-          {
-            opacity: catRestingOpacity,
-            rotation: 0,
-            duration: 0.3,
-            ease: "power1.inOut",
-          },
+          { opacity: catRestingOpacity, duration: 0.3 },
           "moveBack+=0.3",
         )
         .to(
           scrollIconRef.current,
-          {
-            opacity: scrollRestingOpacity,
-            rotation: 0,
-            duration: 0.3,
-            ease: "power1.inOut",
-          },
+          { opacity: scrollRestingOpacity, duration: 0.3 },
           "moveBack+=0.3",
         );
+    } else if (!isSection7) {
+      // Not section 7 and wasn't section 7 — ensure clean state
+      gsap.set(categoryBtnRef.current, {
+        x: 0,
+        y: 0,
+        rotation: 0,
+        scale: 1,
+        opacity: catRestingOpacity,
+      });
+      gsap.set(scrollIconRef.current, {
+        x: 0,
+        y: 0,
+        rotation: 0,
+        scale: 1,
+        opacity: scrollRestingOpacity,
+      });
     }
 
-    // Update the tracker so it knows its current state for the next scroll!
     wasSection7.current = isSection7;
-
-    return () => tl.kill();
   }, [scrollArea?.currentSection]);
 
   useEffect(() => {
@@ -386,16 +468,34 @@ function HomepageContent({ scrollToElementById, scrollToTop }) {
               // 3. ADDED MAX-HEIGHT TO THE TRANSITION
               transition: "max-height 0.4s ease",
             }}
+            // onMouseEnter={(e) => {
+            //   if (scrollArea.currentSection != 2.5) {
+            //     e.currentTarget.style.opacity = 1;
+            //     gsap.to(e.currentTarget, { scale: 1.1, duration: 0.2 }); // Swapped to GSAP for hover scale to avoid CSS transform conflicts
+            //   }
+            // }}
+            // onMouseLeave={(e) => {
+            //   if (scrollArea.currentSection != 2.5) {
+            //     e.currentTarget.style.opacity = 0.7;
+            //     gsap.to(e.currentTarget, { scale: 1, duration: 0.2 });
+            //   }
+            // }}
             onMouseEnter={(e) => {
               if (scrollArea.currentSection != 2.5) {
-                e.currentTarget.style.opacity = 1;
-                gsap.to(e.currentTarget, { scale: 1.1, duration: 0.2 }); // Swapped to GSAP for hover scale to avoid CSS transform conflicts
+                gsap.to(e.currentTarget, {
+                  opacity: 1,
+                  scale: 1.1,
+                  duration: 0.2,
+                });
               }
             }}
             onMouseLeave={(e) => {
               if (scrollArea.currentSection != 2.5) {
-                e.currentTarget.style.opacity = 0.7;
-                gsap.to(e.currentTarget, { scale: 1, duration: 0.2 });
+                gsap.to(e.currentTarget, {
+                  opacity: 0.7,
+                  scale: 1,
+                  duration: 0.2,
+                });
               }
             }}
           >
