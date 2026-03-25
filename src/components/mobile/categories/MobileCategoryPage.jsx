@@ -245,7 +245,6 @@ const CATEGORY_CONTENT = {
   },
 };
 
-// Map numeric selectedCategory to content keys
 const CATEGORY_KEY_MAP = {
   1: INDUSTRY,
   2: MEDICINE,
@@ -271,21 +270,11 @@ function MobileCategoryPage() {
   const text3Ref = useRef(null);
   const [videosReady, setVideosReady] = useState(false);
 
-  console.log("so least we in here");
-
-  // Resolve category data
-  const categoryKey =
-    selectedCategory === "contact"
-      ? null
-      : CATEGORY_KEY_MAP[selectedCategory - 2];
-  // const data = categoryKey ? CATEGORY_CONTENT[categoryKey] : null;
-  console.log({ selectedCategory });
   const data =
     CATEGORY_CONTENT[
       typeof Number(selectedCategory) == "number" ? selectedCategory : 3
     ];
 
-  // Lock body scroll
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -293,13 +282,12 @@ function MobileCategoryPage() {
     };
   }, []);
 
-  // Delay video mount for smoother entry
   useEffect(() => {
     const t = setTimeout(() => setVideosReady(true), 800);
     return () => clearTimeout(t);
   }, []);
 
-  // GSAP scroll-driven animations
+  // GSAP — play-once animations, no scrub
   useEffect(() => {
     if (!data || !scrollRef.current) return;
 
@@ -307,67 +295,61 @@ function MobileCategoryPage() {
 
     const raf = requestAnimationFrame(() => {
       const ctx = gsap.context(() => {
-        // Stats cards stagger
         if (statsRef.current) {
           gsap.fromTo(
             statsRef.current.querySelectorAll(".mob-stat-card"),
-            { y: 30, opacity: 0, scale: 0.94 },
+            { y: 16, opacity: 0 },
             {
               y: 0,
               opacity: 1,
-              scale: 1,
-              stagger: 0.08,
+              stagger: 0.05,
+              duration: 0.4,
               ease: "power3.out",
               scrollTrigger: {
                 trigger: statsRef.current,
                 scroller,
-                start: "top 90%",
-                end: "top 60%",
-                scrub: 1,
+                start: "top 95%",
+                toggleActions: "play none none none",
               },
             },
           );
         }
 
-        // Text sections reveal — clip-path wipe matching desktop
         [text1Ref, text2Ref, text3Ref].forEach((ref) => {
           if (!ref.current) return;
           gsap.fromTo(
             ref.current,
-            { y: 40, opacity: 0, clipPath: "inset(0 0 20% 0)" },
+            { y: 18, opacity: 0 },
             {
               y: 0,
               opacity: 1,
-              clipPath: "inset(0 0 0% 0)",
+              duration: 0.5,
               ease: "power2.out",
               scrollTrigger: {
                 trigger: ref.current,
                 scroller,
-                start: "top 88%",
-                end: "top 50%",
-                scrub: 1.2,
+                start: "top 95%",
+                toggleActions: "play none none none",
               },
             },
           );
         });
 
-        // Video cards — blur + rise matching desktop bottom section
         if (videosRef.current) {
           gsap.fromTo(
             videosRef.current.querySelectorAll(".mob-video-card"),
-            { y: 50, opacity: 0, filter: "blur(3px)" },
+            { y: 20, opacity: 0 },
             {
               y: 0,
               opacity: 1,
-              filter: "blur(0px)",
-              stagger: 0.12,
+              stagger: 0.08,
+              duration: 0.45,
               ease: "power2.out",
               scrollTrigger: {
                 trigger: videosRef.current,
                 scroller,
-                start: "top 88%",
-                end: "top 45%",
-                scrub: 1,
+                start: "top 95%",
+                toggleActions: "play none none none",
               },
             },
           );
@@ -379,6 +361,7 @@ function MobileCategoryPage() {
 
     return () => cancelAnimationFrame(raf);
   }, [data]);
+
   if (!data) return null;
 
   return (
@@ -394,7 +377,7 @@ function MobileCategoryPage() {
 
       {/* ── Scrollable content ── */}
       <div className="mob-cat-scroll" ref={scrollRef}>
-        {/* ── HERO SECTION ── */}
+        {/* ── HERO ── */}
         <section className="mob-hero" ref={heroRef}>
           {data.heroImage && (
             <div className="mob-hero-bg">
@@ -410,17 +393,13 @@ function MobileCategoryPage() {
                 : `linear-gradient(135deg, ${data.accent} 0%, #0d0d0d 100%)`,
             }}
           />
-
           <div className="mob-hero-content">
             <div className="mob-hero-eyebrow">
               <span className="mob-eyebrow-line" />
               <span>{data.subtitle}</span>
             </div>
-
             <h1 className="mob-hero-title">{data.title}</h1>
-
             <div className="mob-hero-divider" />
-
             <div className="mob-hero-tags">
               {data.tags.map((tag, i) => (
                 <span
@@ -435,66 +414,64 @@ function MobileCategoryPage() {
           </div>
         </section>
 
-        {/* ── STATS ROW ── */}
-        <section
-          className="mob-stats-section"
-          ref={statsRef}
-          style={{ height: "auto" }}
-        >
-          {data.stats.map(({ value, label }) => (
-            <div key={label} className="mob-stat-card mob-glass">
-              {/* <span className="mob-stat-value">{value}</span> */}
-              <span className="mob-stat-label">{label}</span>
-            </div>
-          ))}
-        </section>
-
-        {/* ── TEXT BLOCK 1 ── */}
-        <section className="mob-text-section" ref={text1Ref}>
-          <p className="mob-text-body mob-text-lead">{data.text1}</p>
-        </section>
-
-        {/* ── VIDEO GALLERY ── */}
-        {data.videos.length > 0 && (
-          <section className="mob-videos-section" ref={videosRef}>
-            {data.videos.map((video, i) => (
-              <MobileVideoCard
-                key={i}
-                video={video}
-                ready={videosReady}
-                index={i}
-              />
+        {/* ── BODY — compact, no gaps ── */}
+        <div className="mob-body-flow">
+          {/* Stats — small pills, NO mob-glass class */}
+          <section className="mob-stats-section" ref={statsRef}>
+            {data.stats.map(({ value, label }) => (
+              <div key={label} className="mob-stat-card">
+                <span className="mob-stat-label">{label}</span>
+              </div>
             ))}
           </section>
-        )}
 
-        {/* ── TEXT BLOCK 2 (quote style) ── */}
-        {data.text2 && (
-          <section className="mob-text-section mob-text-alt" ref={text2Ref}>
-            <div className="mob-quote-mark">"</div>
-            <p className="mob-text-body">{data.text2}</p>
-            <div className="mob-text-sig">
-              <span className="mob-sig-line" />
-              <span>in3D Team</span>
-            </div>
+          {/* Text 1 */}
+          <section className="mob-text-section" ref={text1Ref}>
+            <p className="mob-text-body mob-text-lead">{data.text1}</p>
           </section>
-        )}
 
-        {/* ── TEXT BLOCK 3 ── */}
-        {data.text3 && (
-          <section className="mob-text-section" ref={text3Ref}>
-            <p className="mob-text-body">{data.text3}</p>
-          </section>
-        )}
-
-        {/* ── FOOTER / CONTACT ── */}
-        <div className="mob-cat-footer">
-          {selectedCategory !== "contact" && (
-            <MenuAboutContact isFromSelectedCategory />
+          {/* Videos */}
+          {data.videos.length > 0 && (
+            <section className="mob-videos-section" ref={videosRef}>
+              {data.videos.map((video, i) => (
+                <MobileVideoCard
+                  key={i}
+                  video={video}
+                  ready={videosReady}
+                  index={i}
+                />
+              ))}
+            </section>
           )}
-        </div>
 
-        <div style={{ height: 60 }} />
+          {/* Text 2 — quote */}
+          {data.text2 && (
+            <section className="mob-text-section mob-text-alt" ref={text2Ref}>
+              <div className="mob-quote-mark">"</div>
+              <p className="mob-text-body">{data.text2}</p>
+              <div className="mob-text-sig">
+                <span className="mob-sig-line" />
+                <span>in3D Team</span>
+              </div>
+            </section>
+          )}
+
+          {/* Text 3 */}
+          {data.text3 && (
+            <section className="mob-text-section" ref={text3Ref}>
+              <p className="mob-text-body">{data.text3}</p>
+            </section>
+          )}
+
+          {/* Footer — always last */}
+          <div className="mob-cat-footer">
+            {selectedCategory !== "contact" && (
+              <MenuAboutContact isFromSelectedCategory />
+            )}
+          </div>
+
+          <div style={{ height: 32 }} />
+        </div>
       </div>
     </div>
   );
@@ -503,7 +480,7 @@ function MobileCategoryPage() {
 export default MobileCategoryPage;
 
 // ─────────────────────────────────────────────────────────────────────────────
-// MobileVideoCard — tap to play, with label overlay
+// MobileVideoCard
 // ─────────────────────────────────────────────────────────────────────────────
 const MobileVideoCard = memo(({ video, ready, index }) => {
   const vidRef = useRef(null);
@@ -524,7 +501,7 @@ const MobileVideoCard = memo(({ video, ready, index }) => {
 
   return (
     <div
-      className={`mob-video-card mob-glass ${playing ? "mob-video-playing" : ""}`}
+      className={`mob-video-card ${playing ? "mob-video-playing" : ""}`}
       onClick={handleTap}
     >
       {ready ? (
@@ -532,8 +509,6 @@ const MobileVideoCard = memo(({ video, ready, index }) => {
       ) : (
         <div className="mob-video-placeholder" />
       )}
-
-      {/* Tap hint overlay */}
       <div
         className={`mob-video-overlay ${playing ? "mob-overlay-hidden" : ""}`}
       >
@@ -541,8 +516,6 @@ const MobileVideoCard = memo(({ video, ready, index }) => {
           <polygon points="5,3 19,12 5,21" />
         </svg>
       </div>
-
-      {/* Label */}
       <div className="mob-video-label">{video.label}</div>
     </div>
   );

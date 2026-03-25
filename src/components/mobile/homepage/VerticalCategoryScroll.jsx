@@ -77,41 +77,39 @@ const CATEGORIES = [
 const ALL_SECTIONS = [WELCOME_CARD, ...CATEGORIES];
 
 /* ─── Single scroll section (fog only, no content inside) ─── */
-const CategorySection = memo(
-  ({ category, isActive, sectionRef, onEnter }) => {
-    const localRef = useRef(null);
+const CategorySection = memo(({ category, isActive, sectionRef, onEnter }) => {
+  const localRef = useRef(null);
 
-    useEffect(() => {
-      const el = localRef.current;
-      if (!el) return;
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) onEnter(category.modelIdx);
-        },
-        { threshold: 0.5 },
-      );
-      observer.observe(el);
-      return () => observer.disconnect();
-    }, [category.modelIdx, onEnter]);
-
-    return (
-      <section
-        ref={(el) => {
-          localRef.current = el;
-          if (typeof sectionRef === "function") sectionRef(el);
-        }}
-        className={`vcs-section ${isActive ? "vcs-section--active" : ""}`}
-        style={{ "--accent": category.accent }}
-      >
-        {/* Fog gradient — still scrolls with each section */}
-        <div className="vcs-section__fog" />
-
-        {/* Bottom accent edge */}
-        <div className="vcs-section__edge" />
-      </section>
+  useEffect(() => {
+    const el = localRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) onEnter(category.modelIdx);
+      },
+      { threshold: 0.5 },
     );
-  },
-);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [category.modelIdx, onEnter]);
+
+  return (
+    <section
+      ref={(el) => {
+        localRef.current = el;
+        if (typeof sectionRef === "function") sectionRef(el);
+      }}
+      className={`vcs-section ${isActive ? "vcs-section--active" : ""}`}
+      style={{ "--accent": category.accent }}
+    >
+      {/* Fog gradient — still scrolls with each section */}
+      <div className="vcs-section__fog" />
+
+      {/* Bottom accent edge */}
+      <div className="vcs-section__edge" />
+    </section>
+  );
+});
 
 /* ─── Fixed bottom overlay: crossfades between sections ─── */
 const FixedContentOverlay = memo(
@@ -126,7 +124,7 @@ const FixedContentOverlay = memo(
 
     const handleExplore = useCallback(() => {
       if (activeSection.isWelcome) return;
-      if (setSelectedCategory) setSelectedCategory(activeSection.title);
+      if (setSelectedCategory) setSelectedCategory(activeSection.modelIdx + 3);
       if (setSelectedCategoryItemByIdx)
         setSelectedCategoryItemByIdx(activeSection.modelIdx + 3);
       if (categoryIdxRef) categoryIdxRef.current = activeSection.modelIdx;
