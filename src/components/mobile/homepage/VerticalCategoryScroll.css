@@ -1,17 +1,16 @@
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   VERTICAL CATEGORY SCROLL â€” v3: Full-width Fog Panels
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ═══════════════════════════════════════════════
+   VERTICAL CATEGORY SCROLL — v4: Fixed Content Overlay
+   ═══════════════════════════════════════════════
    ARCHITECTURE:
-   â€¢ Each section is 100dvh, 100% width â€” the ENTIRE viewport scrolls
-   â€¢ A gradient "fog" rises from the bottom ~45% of each section
-   â€¢ Content sits inside the fog zone â€” text is always legible
-   â€¢ The top ~55% is transparent â€” 3D model shows through
-   â€¢ No floating cards, no dead zones, no scroll gaps
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   • Each section is 100dvh, 100% width — scrolls with fog
+   • Content (text + button) is in a FIXED overlay at viewport bottom
+   • Content crossfades when active section changes
+   • Fog panels scroll normally — content stays put
+   ═══════════════════════════════════════════════ */
 
 @import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&display=swap");
 
-/* â”€â”€â”€ Scroll container â”€â”€â”€ */
+/* ─── Scroll container ─── */
 .vcs-container {
   position: fixed;
   inset: 0;
@@ -34,9 +33,9 @@
   scrollbar-width: none;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   SECTION
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════════════════════════
+   SECTION (fog only, no content)
+   ═══════════════════════════════════════ */
 .vcs-section {
   position: relative;
   width: 100%;
@@ -49,10 +48,9 @@
   justify-content: flex-end;
   box-sizing: border-box;
   pointer-events: auto;
-  /* No padding here â€” fog + content handle spacing */
 }
 
-/* â”€â”€â”€ Fog: full-width gradient from transparent â†’ dark â”€â”€â”€ */
+/* ─── Fog: full-width gradient from transparent → dark ─── */
 .vcs-section__fog {
   position: absolute;
   bottom: 0;
@@ -69,19 +67,10 @@
     rgba(0, 0, 0, 0.7) 75%,
     rgba(0, 0, 0, 0.82) 100%
   );
-  /* Subtle accent tint at the very bottom */
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
 
-/* â”€â”€â”€ Content: sits above fog, bottom-aligned â”€â”€â”€ */
-.vcs-section__content {
-  position: relative;
-  z-index: 1;
-  padding: 0 1.5rem 2.5rem;
-  pointer-events: none; /* pass scroll through; buttons override */
-}
-
-/* â”€â”€â”€ Bottom accent edge â”€â”€â”€ */
+/* ─── Bottom accent edge ─── */
 .vcs-section__edge {
   position: absolute;
   bottom: 0;
@@ -100,9 +89,42 @@
   width: 4rem;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ═══════════════════════════════════════
+   FIXED CONTENT OVERLAY
+   Stays at viewport bottom, crossfades
+   ═══════════════════════════════════════ */
+.vcs-fixed-overlay {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 5; /* above vcs-container (z:4) */
+  padding: 0 1.5rem 2.5rem;
+  pointer-events: none; /* let scroll pass through */
+  /* Height roughly matches where content used to sit */
+  height: auto;
+}
+
+/* Each layer is stacked absolutely, only the active one is visible */
+.vcs-fixed-overlay__layer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 1.5rem 2.5rem;
+  opacity: 0;
+  transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.vcs-fixed-overlay__layer--active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ═══════════════════════════════════════
    WELCOME
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   ═══════════════════════════════════════ */
 .vcs-welcome {
   display: flex;
   flex-direction: column;
@@ -176,18 +198,18 @@
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ═══════════════════════════════════════
    CATEGORY PANEL
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   ═══════════════════════════════════════ */
 .vcs-cat {
   display: flex;
   flex-direction: column;
   gap: 0;
   opacity: 0;
-  transform: translateY(1.2rem);
+  transform: translateY(0.6rem);
   transition:
-    opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .vcs-cat--visible {
@@ -195,7 +217,7 @@
   transform: translateY(0);
 }
 
-/* Eyebrow: 001 â”€â”€ tagline */
+/* Eyebrow: 001 ── tagline */
 .vcs-cat__eyebrow {
   display: flex;
   align-items: center;
@@ -227,7 +249,7 @@
   text-transform: uppercase;
 }
 
-/* Title â€” large, clean, commanding */
+/* Title — large, clean, commanding */
 .vcs-cat__title {
   font-family: "Barlow Condensed", sans-serif;
   font-size: clamp(2rem, 8vw, 3rem);
@@ -237,7 +259,6 @@
   color: #fff;
   margin: 0 0 0.4rem;
   line-height: 0.95;
-  /* Subtle text shadow for depth over fog */
   text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
 }
 
@@ -268,10 +289,12 @@
   text-transform: uppercase;
   cursor: pointer;
   border-radius: 2px;
-  pointer-events: auto; /* Override parent's none */
+  pointer-events: auto;
   -webkit-tap-highlight-color: transparent;
   transition:
     background 0.2s ease,
+    border-color 0.4s ease,
+    color 0.4s ease,
     transform 0.15s ease;
   align-self: flex-start;
 }
@@ -292,9 +315,9 @@
   transform: translateX(3px);
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ═══════════════════════════════════════
    SCROLL INDICATOR (bottom center)
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   ═══════════════════════════════════════ */
 .vcs-scroll-indicator {
   position: fixed;
   bottom: 0.8rem;
@@ -343,9 +366,9 @@
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ═══════════════════════════════════════
    NAV RAIL
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   ═══════════════════════════════════════ */
 .vcs-rail {
   position: fixed;
   right: 0.6rem;
@@ -432,9 +455,9 @@
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ═══════════════════════════════════════
    REDUCED MOTION
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   ═══════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {
   .vcs-cat,
   .vcs-welcome {
@@ -444,6 +467,9 @@
   .vcs-cat--visible,
   .vcs-welcome--visible {
     transform: none;
+  }
+  .vcs-fixed-overlay__layer {
+    transition: opacity 0.15s ease;
   }
   .vcs-welcome__cue-arrows span,
   .vcs-rail__pip-label,

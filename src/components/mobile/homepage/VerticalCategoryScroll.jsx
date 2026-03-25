@@ -76,17 +76,9 @@ const CATEGORIES = [
 
 const ALL_SECTIONS = [WELCOME_CARD, ...CATEGORIES];
 
-/* ─── Single scroll section ─── */
+/* ─── Single scroll section (fog only, no content inside) ─── */
 const CategorySection = memo(
-  ({
-    category,
-    isActive,
-    sectionRef,
-    onEnter,
-    setSelectedCategory,
-    setSelectedCategoryItemByIdx,
-    categoryIdxRef,
-  }) => {
+  ({ category, isActive, sectionRef, onEnter }) => {
     const localRef = useRef(null);
 
     useEffect(() => {
@@ -102,20 +94,6 @@ const CategorySection = memo(
       return () => observer.disconnect();
     }, [category.modelIdx, onEnter]);
 
-    const handleExplore = useCallback(() => {
-      if (category.isWelcome) return;
-      if (setSelectedCategory) setSelectedCategory(category.title);
-      if (setSelectedCategoryItemByIdx)
-        console.log("check this out!!", category.modelIdx);
-      setSelectedCategoryItemByIdx(category.modelIdx + 3);
-      if (categoryIdxRef) categoryIdxRef.current = category.modelIdx;
-    }, [
-      category,
-      setSelectedCategory,
-      setSelectedCategoryItemByIdx,
-      categoryIdxRef,
-    ]);
-
     return (
       <section
         ref={(el) => {
@@ -125,27 +103,67 @@ const CategorySection = memo(
         className={`vcs-section ${isActive ? "vcs-section--active" : ""}`}
         style={{ "--accent": category.accent }}
       >
-        {/* FULL-WIDTH gradient that rises from the bottom.
-            This covers the entire width so there are ZERO dead zones.
-            The 3D model is visible above this gradient. */}
+        {/* Fog gradient — still scrolls with each section */}
         <div className="vcs-section__fog" />
-
-        {/* Content — positioned over the fog */}
-        <div className="vcs-section__content">
-          {category.isWelcome ? (
-            <WelcomeContent isActive={isActive} />
-          ) : (
-            <CategoryContent
-              category={category}
-              isActive={isActive}
-              onExplore={handleExplore}
-            />
-          )}
-        </div>
 
         {/* Bottom accent edge */}
         <div className="vcs-section__edge" />
       </section>
+    );
+  },
+);
+
+/* ─── Fixed bottom overlay: crossfades between sections ─── */
+const FixedContentOverlay = memo(
+  ({
+    activeModelIdx,
+    setSelectedCategory,
+    setSelectedCategoryItemByIdx,
+    categoryIdxRef,
+  }) => {
+    const activeSection =
+      ALL_SECTIONS.find((s) => s.modelIdx === activeModelIdx) || WELCOME_CARD;
+
+    const handleExplore = useCallback(() => {
+      if (activeSection.isWelcome) return;
+      if (setSelectedCategory) setSelectedCategory(activeSection.title);
+      if (setSelectedCategoryItemByIdx)
+        setSelectedCategoryItemByIdx(activeSection.modelIdx + 3);
+      if (categoryIdxRef) categoryIdxRef.current = activeSection.modelIdx;
+    }, [
+      activeSection,
+      setSelectedCategory,
+      setSelectedCategoryItemByIdx,
+      categoryIdxRef,
+    ]);
+
+    return (
+      <div
+        className="vcs-fixed-overlay"
+        style={{ "--accent": activeSection.accent }}
+      >
+        {/* Render ALL sections stacked, only the active one is visible */}
+        {ALL_SECTIONS.map((section) => {
+          const isActive = section.modelIdx === activeModelIdx;
+          return (
+            <div
+              key={section.idx}
+              className={`vcs-fixed-overlay__layer ${isActive ? "vcs-fixed-overlay__layer--active" : ""}`}
+              style={{ "--accent": section.accent }}
+            >
+              {section.isWelcome ? (
+                <WelcomeContent isActive={isActive} />
+              ) : (
+                <CategoryContent
+                  category={section}
+                  isActive={isActive}
+                  onExplore={handleExplore}
+                />
+              )}
+            </div>
+          );
+        })}
+      </div>
     );
   },
 );
@@ -179,9 +197,6 @@ const CategoryContent = memo(({ category, isActive, onExplore }) => (
       <div className="vcs-cat__line" />
       <span className="vcs-cat__tagline-text">{category.tagline}</span>
     </div>
-
-    {/* Title */}
-    {/* <h2 className="vcs-cat__title">{category.title}</h2> */}
 
     {/* Description */}
     {category.description && (
@@ -336,6 +351,7 @@ export const VerticalCategoryScroll = memo(
 
     return (
       <>
+        {/* Scrollable fog panels (no text content inside) */}
         <div
           ref={containerRef}
           className="vcs-container"
@@ -352,12 +368,19 @@ export const VerticalCategoryScroll = memo(
               isActive={section.modelIdx === activeModelIdx}
               sectionRef={(el) => (sectionRefs.current[idx] = el)}
               onEnter={handleEnterSection}
-              setSelectedCategory={setSelectedCategory}
-              setSelectedCategoryItemByIdx={setSelectedCategoryItemByIdx}
-              categoryIdxRef={categoryIdxRef}
             />
           ))}
         </div>
+
+        {/* Fixed content overlay — stays at bottom, crossfades */}
+        {!selectedCategory && (
+          <FixedContentOverlay
+            activeModelIdx={activeModelIdx}
+            setSelectedCategory={setSelectedCategory}
+            setSelectedCategoryItemByIdx={setSelectedCategoryItemByIdx}
+            categoryIdxRef={categoryIdxRef}
+          />
+        )}
 
         {!selectedCategory && (
           <NavRail
