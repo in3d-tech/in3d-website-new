@@ -42,6 +42,7 @@ export function BackgroundScroll({
     "artificalIntelligence",
     "military",
     "customize",
+    "contact us",
   ];
 
   const scrollToElement = () => {
