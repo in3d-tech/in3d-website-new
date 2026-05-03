@@ -425,7 +425,7 @@ export const CustomizationText = ({ textClass, scrollArea, categoriesObj }) => (
 export const ContactUsText = ({ test, isFromSelectedCategory }) => {
   const [showTextBox, setShowTextBox] = useState(false);
   const [showSentStatus, setShowSentStatus] = useState(null);
-  const [textAreaInput, setTextAreaInput] = useState("");
+  // const [textAreaInput, setTextAreaInput] = useState("");
   const [animateItems, setAnimateItems] = useState([
     false,
     false,
@@ -458,7 +458,7 @@ export const ContactUsText = ({ test, isFromSelectedCategory }) => {
     };
   }, [animateItems]);
 
-  useEffect(() => emailjs.init("HorlaM2iMYpuvqSef"), []); // replace with your real public key from EmailJS
+  useEffect(() => emailjs.init("HorIaM2iMYpuvqSef"), []); // replace with your real public key from EmailJS
 
   const toggleTextBox = () => {
     setShowTextBox(!showTextBox);
@@ -468,7 +468,7 @@ export const ContactUsText = ({ test, isFromSelectedCategory }) => {
     setTimeout(() => {
       setShowTextBox(false);
       setShowSentStatus(true);
-      setTextAreaInput("");
+      // setTextAreaInput("");
     }, 200);
 
     setTimeout(() => setShowSentStatus(null), 3000);
@@ -488,7 +488,7 @@ export const ContactUsText = ({ test, isFromSelectedCategory }) => {
         (result) => {
           setShowTextBox(false);
           setShowSentStatus(true);
-          setTextAreaInput("");
+          // setTextAreaInput("");
           setTimeout(() => setShowSentStatus(null), 3000);
         },
         (error) => {
@@ -644,18 +644,18 @@ export const ContactUsText = ({ test, isFromSelectedCategory }) => {
               <textarea
                 name="message"
                 placeholder="Tell us about your project..."
-                onKeyDown={(e) => {
-                  e.stopPropagation();
-                  e.nativeEvent.stopImmediatePropagation();
-                }}
+                // onKeyDown={(e) => {
+                //   e.stopPropagation();
+                //   e.nativeEvent.stopImmediatePropagation();
+                // }}
                 maxLength={300}
                 className="cu-textarea"
-                onChange={(e) => {
-                  let v = e.target.value;
-                  if (v.length > 0) v = v.charAt(0).toUpperCase() + v.slice(1);
-                  setTextAreaInput(v);
-                }}
-                value={textAreaInput}
+                // onChange={(e) => {
+                //   let v = e.target.value;
+                //   if (v.length > 0) v = v.charAt(0).toUpperCase() + v.slice(1);
+                //   setTextAreaInput(v);
+                // }}
+                // value={textAreaInput}
               />
               <button
                 // onClick={handleSendMessage}
