@@ -57,6 +57,15 @@
   overflow: hidden;
 }
 
+.mob-cat-page .mob-hero {
+  height: 80vh;
+}
+
+.mob-cat-page section:not(.mob-hero) {
+  height: auto;
+  min-height: 30vh;
+}
+
 .mob-cat-page.fade-in {
   animation: mobFadeUp 0.45s ease forwards;
 }
@@ -271,6 +280,7 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 6px;
   box-shadow: none;
+  height: 10%;
 }
 
 .mob-stat-value {
@@ -298,6 +308,8 @@
   padding: 0.8rem 5%;
   width: 100%;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
 }
 
 .mob-text-body {
