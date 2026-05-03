@@ -82,30 +82,6 @@ export function BackgroundScroll({
                 </span>
               </div>
               <ScrollIndicator />
-              {/* <div className="down-indicator-wrapper">
-                <div
-                  className="icon-scroll"
-                  // onClick={scrollToElement}
-                  // onMouseOver={() => setIsCursorHovering(true)}
-                  // onMouseOut={() => setIsCursorHovering(false)}
-                ></div>
-                <div
-                  // onClick={scrollToElement}
-                  className="down-indicator"
-                  // onMouseOver={() => setIsCursorHovering(true)}
-                  // onMouseOut={() => setIsCursorHovering(false)}
-                ></div>
-                <div
-                  style={{
-                    position: "relative",
-                    marginRight: "3.5em",
-                    color: "rgb(255,255,255,0.3)",
-                  }}
-                >
-                  <div style={{ fontSize: "0.6em" }}>Scroll</div>
-                  <div style={{ fontSize: "0.6em" }}>down</div>
-                </div>
-              </div> */}
             </>
           ) : null}
         </div>

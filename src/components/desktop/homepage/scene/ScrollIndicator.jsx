@@ -12,7 +12,7 @@ import React from "react";
 
 const styles = `
 .scroll-indicator-wrapper {
-  margin-top: 4.5em;
+  margin-top: 6.5em;
   margin-left: 2em;
   display: flex;
   flex-direction: column;
