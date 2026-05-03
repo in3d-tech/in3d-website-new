@@ -97,6 +97,9 @@ export function DesktopView() {
     };
 
     const handleKeyDown = (e) => {
+      const tag = document.activeElement?.tagName;
+      if (tag === "TEXTAREA" || tag === "INPUT") return;
+
       if (["ArrowDown", "ArrowUp", " ", "PageDown", "PageUp"].includes(e.key)) {
         e.preventDefault();
         e.stopPropagation();
@@ -104,6 +107,15 @@ export function DesktopView() {
         goToSection(["ArrowDown", " ", "PageDown"].includes(e.key) ? 1 : -1);
       }
     };
+
+    // const handleKeyDown = (e) => {
+    //   if (["ArrowDown", "ArrowUp", " ", "PageDown", "PageUp"].includes(e.key)) {
+    //     e.preventDefault();
+    //     e.stopPropagation();
+    //     if (isAnimating.current) return;
+    //     goToSection(["ArrowDown", " ", "PageDown"].includes(e.key) ? 1 : -1);
+    //   }
+    // };
 
     if (selectedCategory) return;
 
