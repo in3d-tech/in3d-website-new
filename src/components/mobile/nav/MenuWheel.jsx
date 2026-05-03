@@ -192,7 +192,7 @@ export const MenuAboutContact = ({
     borderTop: isFromSelectedCategory
       ? "1px solid rgba(0,0,0,0.15)"
       : "1px solid rgba(255,255,255,0.15)",
-    position: isFromHomeScreen ? "" : "absolute",
+    position: isFromHomeScreen ? "" : "",
     bottom: isFromHomeScreen ? "1em" : "5em",
     left: isFromHomeScreen ? "" : 0,
     height: "5em",

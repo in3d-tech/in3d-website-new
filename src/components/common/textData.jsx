@@ -671,8 +671,8 @@ export const ContactUsText = ({ test, isFromSelectedCategory }) => {
 
           {showSentStatus && (
             <div className="cu-status">
-              <span className="cu-status-dot" /> Message transmitted. We'll be
-              in touch.
+              <span className="cu-status-dot" /> Message sent. We'll be in
+              touch.
             </div>
           )}
         </div>

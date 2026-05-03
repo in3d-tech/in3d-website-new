@@ -28,7 +28,7 @@ const CATEGORY_MODEL_TRANSFORMS = {
   }, // sec
   4: { position: [0, -1.4, 3.5], scale: 1.0, rotationY: -2.5 }, // ai
   5: { position: [0, -1, 2], scale: 2, rotationY: -0.4 }, // mil
-  6: { position: [0.1, -1.5, 2], scale: 2, rotationY: -2.3 }, // cus
+  6: { position: [0.1, -1.5, 1.2], scale: 2, rotationY: -0.8 }, // cus
 };
 
 const DEFAULT_TRANSFORM = { position: [0, -4, -2], scale: 2.0, rotationY: 0 };
