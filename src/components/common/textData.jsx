@@ -458,7 +458,7 @@ export const ContactUsText = ({ test, isFromSelectedCategory }) => {
     };
   }, [animateItems]);
 
-  useEffect(() => emailjs.init("HorIaM2iMYpuvqSef"), []); // replace with your real public key from EmailJS
+  useEffect(() => emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_ID), []); // "HorIaM2iMYpuvqSef" replace with your real public key from EmailJS
 
   const toggleTextBox = () => {
     setShowTextBox(!showTextBox);
@@ -479,8 +479,8 @@ export const ContactUsText = ({ test, isFromSelectedCategory }) => {
 
     emailjs
       .sendForm(
-        "service_tv1wlgo", // "YOUR_SERVICE_ID", // from EmailJS dashboard
-        "template_evr30vn", //"YOUR_TEMPLATE_ID", // from EmailJS dashboard
+        import.meta.env.VITE_EMAILJS_SERVICE_ID, //"service_tv1wlgo", // "YOUR_SERVICE_ID", // from EmailJS dashboard
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID, //"template_evr30vn", //"YOUR_TEMPLATE_ID", // from EmailJS dashboard
         form.current,
         // "HorlaM2iMYpuvqSef", //"YOUR_PUBLIC_KEY", // from EmailJS dashboard
       )

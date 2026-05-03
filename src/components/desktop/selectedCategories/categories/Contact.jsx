@@ -258,10 +258,10 @@ const ContactForm = ({ setShowForm, setMessageSent, setIsCursorHovering }) => {
     e.preventDefault();
     emailjs
       .sendForm(
-        "service_tv1wlgo",
-        "template_evr30vn",
+        import.meta.env.VITE_EMAILJS_SERVICE_ID, // "service_tv1wlgo",
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID, // "template_evr30vn",
         form.current,
-        "HorIaM2iMYpuvqSef",
+        import.meta.env.VITE_EMAILJS_PUBLIC_ID, // "HorIaM2iMYpuvqSef",
       )
       .then(
         (result) => {
