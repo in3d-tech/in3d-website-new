@@ -97,9 +97,9 @@ export function SceneMobile({
       }}
     >
       <Canvas
-        dpr={[1.5, 2]} // bump the ceiling to 2
+        dpr={[1, 1.5]}
         gl={{
-          antialias: true, // enable — the perf cost is small on modern GPUs
+          antialias: false, // enable — the perf cost is small on modern GPUs
           powerPreference: "high-performance",
           alpha: true,
           toneMapping: THREE.ACESFilmicToneMapping, // better color/contrast
@@ -229,25 +229,13 @@ export function AstroModel({
 /* ─── Animation mixer hook ─── */
 
 function useGLTFAnimations(scene, animations) {
-  const { invalidate } = useThree();
   const mixer = useMemo(() => new THREE.AnimationMixer(scene), [scene]);
 
   useEffect(() => {
     if (!mixer || !animations) return;
     animations.forEach((clip) => mixer.clipAction(clip).play());
-
-    let running = true;
-    const tick = () => {
-      if (!running) return;
-      invalidate();
-      requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-
-    return () => {
-      running = false;
-    };
-  }, [animations, mixer, invalidate]);
+    return () => mixer.stopAllAction();
+  }, [animations, mixer]);
 
   useFrame((_, delta) => mixer?.update(delta));
   return mixer;

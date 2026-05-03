@@ -10,8 +10,6 @@ import {
 import { useAppContext } from "../../../context/appContext";
 import { MenuWheel } from "../nav/MenuWheel";
 import { SceneMobile } from "./Scene";
-// import { TextScrambleComponent } from "../../common/shuffleTextMobile";
-// ← Replaced GlitchCategoryCards with VerticalCategoryScroll
 import { VerticalCategoryScroll } from "./VerticalCategoryScroll";
 import { BackgroundLayer } from "./BackgroundLayer";
 import { TextScramble } from "../../common/shuffleTextMobile";
