@@ -74,6 +74,14 @@ export function MobileModelSwapper({ activeCategoryIdx, tiltTarget }) {
     // If nothing is showing and target is < 0, do nothing
     if (target < 0 && slots.length === 0) return;
 
+    // Add this: treat unknown indices same as -1 (fade out)
+    if (target >= 0 && !CATEGORY_MODEL_URLS[target]) {
+      setSlots((prev) => prev.map((s) => ({ ...s, role: "leaving" })));
+      isTransitioning.current = true;
+      transitionProgress.current = 0;
+      return;
+    }
+
     // If currently mid-transition, queue this target for after
     if (isTransitioning.current) {
       pendingTarget.current = target;

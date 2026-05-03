@@ -72,6 +72,15 @@ const CATEGORIES = [
     description:
       "3D pipelines engineered to your exact workflow — from concept to deployment.",
   },
+  {
+    title: "CONTACT US",
+    tagline: "Let's build something together",
+    accent: "#ffffff",
+    idx: "08",
+    modelIdx: 7,
+    description: "Get in touch with our team to discuss your project.",
+    isContact: true, // flag for special behavior
+  },
 ];
 
 const ALL_SECTIONS = [WELCOME_CARD, ...CATEGORIES];
@@ -124,6 +133,12 @@ const FixedContentOverlay = memo(
 
     const handleExplore = useCallback(() => {
       if (activeSection.isWelcome) return;
+      if (activeSection.isContact) {
+        // Navigate to contact page — adapt to your routing
+        // e.g. navigate('/contact') or setSelectedCategory('contact')
+        window.location.href = "/contact"; // simplest approach
+        return;
+      }
       if (setSelectedCategory) setSelectedCategory(activeSection.modelIdx + 3);
       if (setSelectedCategoryItemByIdx)
         setSelectedCategoryItemByIdx(activeSection.modelIdx + 3);
@@ -203,7 +218,10 @@ const CategoryContent = memo(({ category, isActive, onExplore }) => (
 
     {/* CTA */}
     <button className="vcs-cat__cta" onClick={onExplore}>
-      <span className="vcs-cat__cta-text">EXPLORE</span>
+      <span className="vcs-cat__cta-text">
+        {" "}
+        {category.isContact ? "GET IN TOUCH" : "EXPLORE"}
+      </span>
       <svg
         className="vcs-cat__cta-arrow"
         width="20"

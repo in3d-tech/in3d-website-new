@@ -27,6 +27,7 @@ const SPARKLE_COLORS = {
   4: "#7F77DD",
   5: "#888780",
   6: "#BA7517",
+  7: "pink",
 };
 
 export function SceneMobile({
@@ -145,18 +146,8 @@ export function SceneMobile({
   );
 }
 
-/* ─── Astronaut model ───
- *
- * KEY FIX: Removed `useProgress` from this component.
- * `useProgress` is a shared global hook from drei — when CategoryModel
- * mounts and loads a new GLTF, useProgress updates its state, which
- * triggers a re-render in every component using it. If that re-render
- * happens during React's render phase of CategoryModel, React throws
- * "Cannot update a component while rendering a different component".
- *
- * Instead, we detect readiness by checking scene.children visibility
- * directly in useFrame, with no dependency on useProgress.
- */
+// ─── Astronaut model ───
+
 export function AstroModel({
   url,
   astroRef,

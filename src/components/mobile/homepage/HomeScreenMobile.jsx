@@ -8,9 +8,9 @@ import {
   memo,
 } from "react";
 import { useAppContext } from "../../../context/appContext";
-import { MenuAboutContact, MenuWheel } from "../nav/MenuWheel";
+import { MenuWheel } from "../nav/MenuWheel";
 import { SceneMobile } from "./Scene";
-import { TextScrambleComponent } from "../../common/shuffleTextMobile";
+// import { TextScrambleComponent } from "../../common/shuffleTextMobile";
 // ← Replaced GlitchCategoryCards with VerticalCategoryScroll
 import { VerticalCategoryScroll } from "./VerticalCategoryScroll";
 import { BackgroundLayer } from "./BackgroundLayer";
@@ -105,6 +105,37 @@ function HomeScreenMobile() {
         onTiltReady={handleTiltReady}
       />
 
+      {/* Contact-section astro image — fades in over the 3D scene */}
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100vh",
+          zIndex: 2,
+          pointerEvents: "none",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          opacity: activeCategoryIdx === 7 ? 1 : 0,
+          transition: "opacity 0.6s ease",
+        }}
+      >
+        <img
+          src="https://in3dwebsite.blob.core.windows.net/photos/astronaut6-min.png"
+          alt=""
+          style={{
+            maxHeight: "70vh",
+            maxWidth: "80vw",
+            objectFit: "contain",
+            opacity: 0.45,
+            filter: "drop-shadow(0 0 40px rgba(255,255,255,0.15))",
+            animation: "astro-contact-float 4s ease-in-out infinite",
+          }}
+        />
+      </div>
+
       <MenuWheel
         setSelectedMenuActionMobile={setSelectedMenuActionMobile}
         handleMenuClick={handleMenuClick}
@@ -116,34 +147,6 @@ function HomeScreenMobile() {
 
       {/* Menu overlay */}
       <BackgroundLayer activeModelIdx={activeCategoryIdx} />
-      {/* <div
-        className={
-          isMenuCentered
-            ? "homescreen-mobile mobile-menu-opened-bg"
-            : "homescreen-mobile"
-        }
-        style={{ zIndex: isMenuCentered ? 3 : 0, transition: "background 1s" }}
-      >
-        {isMenuCentered && (
-          <>
-            <div
-              className="h-nav-in3d-icon"
-              style={{ animationDelay: "0.6s", left: "37%" }}
-            >
-              <img
-                className="in3d-fixed-logo"
-                style={{ width: "6em" }}
-                src="/assets/images/in3d-logo-white.png"
-                alt="fixedLogo"
-              />
-            </div>
-            <MenuAboutContact
-              isMenuCentered={isMenuCentered}
-              handleMenuClick={handleMenuClick}
-            />
-          </>
-        )}
-      </div> */}
 
       {/* ─── Title ─── */}
       {startExpandedAnimation && (
@@ -211,6 +214,7 @@ const CATEGORY_TITLES = [
   "ARTIFICIAL\nINTELLIGENCE",
   "MILITARY",
   "CUSTOMIZATION",
+  "CONTACT US",
 ];
 
 const TitleWithAnimation = memo(({ isMobile, activeCategoryIdx }) => {
@@ -281,27 +285,3 @@ const TitleWithAnimation = memo(({ isMobile, activeCategoryIdx }) => {
     />
   );
 });
-
-// const TitleWithAnimation = memo(({ isMobile }) => (
-//   <>
-//     <div
-//       style={{
-//         fontSize: "1.8em",
-//         marginTop: "1em",
-//         animationDelay: "2.5s",
-//       }}
-//       className="text-animate simply-header"
-//     >
-//       SIMPLY
-//     </div>
-//     <div
-//       style={{
-//         textAlign: "center",
-//         animationDelay: "2.5s",
-//       }}
-//       className="text-animate simply-header"
-//     >
-//       <TextScrambleComponent isHomepage isMobile={isMobile} />
-//     </div>
-//   </>
-// ));
