@@ -97,9 +97,9 @@ export function SceneMobile({
       }}
     >
       <Canvas
-        dpr={[1, 1.5]}
+        dpr={[1.25, 1.75]}
         gl={{
-          antialias: false, // enable — the perf cost is small on modern GPUs
+          antialias: true, // enable — the perf cost is small on modern GPUs
           powerPreference: "high-performance",
           alpha: true,
           toneMapping: THREE.ACESFilmicToneMapping, // better color/contrast
