@@ -134,9 +134,7 @@ const FixedContentOverlay = memo(
     const handleExplore = useCallback(() => {
       if (activeSection.isWelcome) return;
       if (activeSection.isContact) {
-        // Navigate to contact page — adapt to your routing
-        // e.g. navigate('/contact') or setSelectedCategory('contact')
-        window.location.href = "/contact"; // simplest approach
+        setSelectedCategory("contact");
         return;
       }
       if (setSelectedCategory) setSelectedCategory(activeSection.modelIdx + 3);
