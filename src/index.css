@@ -620,6 +620,10 @@ h2 {
   animation-delay: 1.2s;
 }
 
+.home-categories-wrapper .category-title:nth-child(8) {
+  animation-delay: 1.4s;
+}
+
 .main-content-divider {
   display: flex;
   height: 100%;

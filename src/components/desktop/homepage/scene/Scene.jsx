@@ -17,7 +17,7 @@ import { gsap } from "gsap";
 import { Camera, Lights } from "./Camera.jsx";
 import { BackgroundScroll } from "./BackgroundScroll";
 import { useAppContext } from "../../../../context/appContext.jsx";
-import { Sparkles } from "@react-three/drei";
+import { Sparkles, Preload } from "@react-three/drei";
 import { getSparkleColour } from "./ornaments/getSparkleColour.js";
 import {
   preloadImage,
@@ -145,108 +145,6 @@ function HomepageContent({ scrollToElementById, scrollToTop }) {
       null;
     };
   }, [scrollArea]);
-
-  // useEffect(() => {
-  //   if (!categoryBtnRef.current || !scrollIconRef.current) return;
-
-  //   // Check if we are currently in section 7
-  //   const isSection7 = scrollArea?.currentSection == 7;
-
-  //   // IMPORTANT: If we are already in the correct state (e.g., scrolling from section 3 to 4),
-  //   // do absolutely nothing and stop the bounce!
-  //   if (isSection7 === wasSection7.current) return;
-
-  //   const tl = gsap.timeline();
-
-  //   const catRestingOpacity = scrollArea?.currentSection != 2.5 ? 0.7 : 0;
-  //   const scrollRestingOpacity = scrollArea?.currentSection >= 2 ? 1 : 0;
-
-  //   if (isSection7) {
-  //     tl.add("moveStart")
-  //       .to(
-  //         categoryBtnRef.current,
-  //         { x: 100, y: -70, duration: 0.6, ease: "power2.inOut" },
-  //         "moveStart",
-  //       )
-  //       .to(
-  //         scrollIconRef.current,
-  //         { x: 150, y: -118, duration: 0.6, ease: "power2.inOut" },
-  //         "moveStart",
-  //       )
-  //       .to(
-  //         [categoryBtnRef.current, scrollIconRef.current],
-  //         {
-  //           opacity: 0.4,
-  //           rotation: 15,
-  //           duration: 0.3,
-  //           ease: "power1.inOut",
-  //         },
-  //         "moveStart",
-  //       )
-  //       .to(
-  //         categoryBtnRef.current,
-  //         {
-  //           opacity: catRestingOpacity,
-  //           rotation: 0,
-  //           duration: 0.3,
-  //           ease: "power1.inOut",
-  //         },
-  //         "moveStart+=0.3",
-  //       )
-  //       .to(
-  //         scrollIconRef.current,
-  //         {
-  //           opacity: scrollRestingOpacity,
-  //           rotation: 0,
-  //           duration: 0.3,
-  //           ease: "power1.inOut",
-  //         },
-  //         "moveStart+=0.3",
-  //       );
-  //   } else {
-  //     tl.add("moveBack")
-  //       .to(
-  //         [categoryBtnRef.current, scrollIconRef.current],
-  //         { x: 0, y: 0, duration: 0.6, ease: "power2.inOut" },
-  //         "moveBack",
-  //       )
-  //       .to(
-  //         [categoryBtnRef.current, scrollIconRef.current],
-  //         {
-  //           opacity: 0.4,
-  //           rotation: -15,
-  //           duration: 0.3,
-  //           ease: "power1.inOut",
-  //         },
-  //         "moveBack",
-  //       )
-  //       .to(
-  //         categoryBtnRef.current,
-  //         {
-  //           opacity: catRestingOpacity,
-  //           rotation: 0,
-  //           duration: 0.3,
-  //           ease: "power1.inOut",
-  //         },
-  //         "moveBack+=0.3",
-  //       )
-  //       .to(
-  //         scrollIconRef.current,
-  //         {
-  //           opacity: scrollRestingOpacity,
-  //           rotation: 0,
-  //           duration: 0.3,
-  //           ease: "power1.inOut",
-  //         },
-  //         "moveBack+=0.3",
-  //       );
-  //   }
-
-  //   // Update the tracker so it knows its current state for the next scroll!
-  //   wasSection7.current = isSection7;
-
-  //   return () => tl.kill();
-  // }, [scrollArea?.currentSection]);
 
   useEffect(() => {
     if (!categoryBtnRef.current || !scrollIconRef.current) return;
@@ -623,6 +521,7 @@ function HomepageContent({ scrollToElementById, scrollToTop }) {
             />
 
             {models}
+            <Preload all />
           </Suspense>
         </Canvas>
       </div>

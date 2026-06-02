@@ -335,57 +335,6 @@ function MappedModels({
       />
     </group>
   );
-
-  // return (
-  //   <group key={`test${idx}`}>
-  //     <group>
-  //       {/* <spotLight
-  //         position={[0, 8, 9]}
-  //         intensity={4}
-  //         castShadow
-  //         shadow-mapSize-width={1024}
-  //         shadow-mapSize-height={1024}
-  //         shadow-camera-near={0.5}
-  //         shadow-camera-far={20}
-  //       /> */}
-  //       <primitive
-  //         ref={textTitleRef} //{testShadowsRef}
-  //         object={scene2}
-  //         dispose={null}
-  //         scale={headlines[idx].scale}
-  //         visible={scrollArea.currentSection === idx + 3 ? true : false}
-  //         position={model.textPosition}
-  //         rotation={model.textRotation}
-  //       ></primitive>
-  //     </group>
-
-  //     <primitive
-  //       ref={currentRef}
-  //       object={scene}
-  //       dispose={null}
-  //       scale={model.scale}
-  //       position={model.position}
-  //       // visible={visibleModels.includes(idx)}
-  //       rotation={model.rotation}
-  //     >
-  //       {/* <Html position={[-0.6, 1.3, 0]} transform> //Medicine */}
-  //       {/* {idx == 3 ? (
-  //         <Html
-  //           position={[-12, 6, 30]}
-  //           rotation={[0.01, Math.PI - 1.2, 0]}
-  //           transform
-  //         >
-  //           <div
-  //             className="annotation"
-  //             // style={{ color: "white", fontSize: "1px" }}
-  //           >
-  //             Apple Vision Pro
-  //           </div>
-  //         </Html>
-  //       ) : null} */}
-  //     </primitive>
-  //   </group>
-  // );
 }
 
 export default MappedModels;
