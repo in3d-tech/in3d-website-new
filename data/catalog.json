@@ -1,0 +1,23 @@
+[
+  {
+    "id": "videos_eggs_mp4",
+    "file_name": "eggs.mp4",
+    "type": "video",
+    "description": "1. **Medium**: This is neither VR, AR, nor WebXR—this content appears to be a tutorial or food preparation video shared on a social media platform such as TikTok, focusing on boiled egg techniques rather than extended reality applications.\n\n2. **Motions, Spatial Interactions, or Gestures**:  \n   - The video shows the interaction with eggs and cooking utensils. Initially, eggs are boiled with specific instructions (e.g., using salt water and vinegar), followed by their removal and cooling in ice water. The person demonstrates cutting eggs in half, revealing various consistency levels of yolks corresponding to varying boil durations. \n\n3. **Industry Vertical**: Food and culinary content creation, specifically tutorial videos for educational purposes or culinary marketing.\n\n4. **Summary**: This video showcases accessible culinary techniques through simple boiling procedures, providing clear visual steps and timing effects on boiled egg textures. The technical complexity lies in the precision and presentation of time-based outcomes, emphasizing cooking consistency and quality. Though not targeting XR solutions, it delivers well-organized and visually appealing instructional content with basic tools.\n\n5. **Keywords**:  \n   - Boiled egg tutorial  \n   - Culinary video content  \n   - Cooking consistency  \n   - Egg texture demonstration  \n   - Food preparation techniques",
+    "permanent_url": "https://ingestmedia.blob.core.windows.net/videos/eggs.mp4"
+  },
+  {
+    "id": "images_break-2_jpg",
+    "file_name": "break-2.jpg",
+    "type": "image",
+    "description": "1. **Description:**\n   - **Visual Layout:** The central focus is a red frying pan containing a fried egg, placed on a light wooden surface. The background appears slightly blurred, dominated by a green grassy texture.\n   - **3D Assets:** The egg and frying pan exhibit realistic textures and details, such as the shine on the egg yolk and the matte finish of the pan. The wood grain texture of the cutting board also adds a natural contrast.\n   - **Lighting Style:** The lighting is soft, natural, and daylight-inspired with minimal shadows. There is a slight sheen on the frying pan and egg yolk, suggesting ambient lighting or an outdoor scene.\n   - **Interface Components:** No user interface components are visible in this rendering or screenshot.\n\n2. **Likely Target Device:** This type of 3D work could likely be implemented for mobile AR or a VR headset like Meta Quest, as it seems focused on realism and simplicity, suitable for cooking tutorials or simulation environments.\n\n3. **Search-Friendly Keywords:**\n   - 3D food rendering\n   - AR fried egg simulation\n   - Virtual cooking tutorial\n   - Realistic kitchen assets\n   - Interactive food modeling",
+    "permanent_url": "https://ingestmedia.blob.core.windows.net/images/break-2.jpg"
+  },
+  {
+    "id": "images_break-one_jpeg",
+    "file_name": "break-one.jpeg",
+    "type": "image",
+    "description": "1. **Description of the rendering:**\n   - **Visual Layout:** The rendering features a buffet-style food counter set in an interior environment. Various food items are arranged in bowls and trays, with a focus on salads, fruits, and garnishes, neatly displayed on a grey countertop. The background includes wooden paneling and a television screen.\n   - **3D Assets:** Food items such as vegetables, salads, fruits, and garnishes are hyper-realistic and detailed. The counter features stainless steel and glass components with reflections that enhance realism. Additional assets might include utensils like serving tongs and baskets.\n   - **Lighting Style:** The lighting is evenly distributed, creating a bright and inviting look. Soft, diffused lighting highlights the food while avoiding harsh shadows. Ambient lighting complements the scene, giving the impression of an indoor setting.\n   - **Interface Components:** If applicable to AR/VR, interface elements could include tooltips for food items, nutritional information pop-ups, or selection buttons allowing user interaction with the virtual buffet.\n\n2. **Likely Target Device:**  \n   This scene could be optimized for **Meta Quest**, **Apple Vision Pro**, or **Mobile AR** applications for real-time immersive experiences like virtual dining, training, or promotional material for restaurants.\n\n3. **Keywords:**  \n   - Virtual buffet scene  \n   - Restaurant 3D rendering  \n   - Interactive food display  \n   - Hyper-realistic environment  \n   - AR/VR dining experience",
+    "permanent_url": "https://ingestmedia.blob.core.windows.net/images/break-one.jpeg"
+  }
+]
