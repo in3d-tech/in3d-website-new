@@ -425,16 +425,19 @@ export const CustomizationText = ({ textClass, scrollArea, categoriesObj }) => (
 export const ContactUsText = ({ test, isFromSelectedCategory }) => {
   const [showTextBox, setShowTextBox] = useState(false);
   const [showSentStatus, setShowSentStatus] = useState(null);
-  // const [textAreaInput, setTextAreaInput] = useState("");
   const [animateItems, setAnimateItems] = useState([
     false,
     false,
     false,
     false,
   ]);
+  const [formError, setFormError] = useState(null);
   const { setIsCursorHovering } = useAppContext();
   const form = useRef();
 
+  const VITE_FORMSPREE_ENDPOINT_URL = "https://formspree.io/f/mwvjyloq";
+
+  // Animation effect stays exactly the same
   useEffect(() => {
     let timeoutIds = [];
     if (animateItems) {
@@ -450,57 +453,93 @@ export const ContactUsText = ({ test, isFromSelectedCategory }) => {
             },
             (index + 1) * 1000,
           ),
-        ); // Delay each item by 1s
+        );
       });
     }
     return () => {
       timeoutIds.forEach(clearTimeout);
     };
-  }, [animateItems]);
-
-  useEffect(() => emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_ID), []); // "HorIaM2iMYpuvqSef" replace with your real public key from EmailJS
+  }, []); // Note: Empty array or proper logic to prevent infinite re-runs
 
   const toggleTextBox = () => {
     setShowTextBox(!showTextBox);
   };
 
-  const handleSendMessage = (e) => {
-    setTimeout(() => {
-      setShowTextBox(false);
-      setShowSentStatus(true);
-      // setTextAreaInput("");
-    }, 200);
+  // Formspree Handler
+  // const sendEmail = (e) => {
+  //   e.preventDefault();
 
-    setTimeout(() => setShowSentStatus(null), 3000);
-  };
+  //   // Collect form data matching Formspree requirements
+  //   const formData = new FormData(e.target);
 
+  //   // fetch(import.meta.env.VITE_FORMSPREE_ENDPOINT_URL, {
+  //   fetch(VITE_FORMSPREE_ENDPOINT_URL, {
+  //     method: "POST",
+  //     body: formData,
+  //     headers: {
+  //       Accept: "application/json",
+  //     },
+  //   })
+  //     .then((response) => {
+  //       if (response.ok) {
+  //         setShowTextBox(false);
+  //         setShowSentStatus(true);
+  //         form.current?.reset(); // Safely clear the form fields
+  //         setTimeout(() => setShowSentStatus(null), 3000);
+  //       } else {
+  //         response.json().then((data) => {
+  //           console.error("Formspree Error:", data);
+  //         });
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error("Form submission failed:", error);
+  //     });
+  // };
   const sendEmail = (e) => {
     e.preventDefault();
 
-    emailjs
-      .sendForm(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID, //"service_tv1wlgo", // "YOUR_SERVICE_ID", // from EmailJS dashboard
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID, //"template_evr30vn", //"YOUR_TEMPLATE_ID", // from EmailJS dashboard
-        form.current,
-        // "HorlaM2iMYpuvqSef", //"YOUR_PUBLIC_KEY", // from EmailJS dashboard
-      )
-      .then(
-        (result) => {
+    const formData = new FormData(e.target);
+    const email = (formData.get("email") || "").trim();
+    const phone = (formData.get("phone") || "").trim();
+
+    // Require at least one way to reach the user
+    if (!email && !phone) {
+      setFormError(
+        "Please leave an email or phone number so we can reach you.",
+      );
+      return;
+    }
+    setFormError(null);
+
+    fetch(VITE_FORMSPREE_ENDPOINT_URL, {
+      method: "POST",
+      body: formData,
+      headers: {
+        Accept: "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
           setShowTextBox(false);
           setShowSentStatus(true);
-          // setTextAreaInput("");
+          form.current?.reset();
           setTimeout(() => setShowSentStatus(null), 3000);
-        },
-        (error) => {
-          console.error("Email failed:", error.text);
-          // optionally show an error state to the user
-        },
-      );
+        } else {
+          response.json().then((data) => {
+            console.error("Formspree Error:", data);
+          });
+        }
+      })
+      .catch((error) => {
+        console.error("Form submission failed:", error);
+      });
   };
 
   if (isFromSelectedCategory) {
     return (
       <div>
+        {/* Contact info divs remain exactly the same */}
         <div
           style={{
             display: "flex",
@@ -509,9 +548,7 @@ export const ContactUsText = ({ test, isFromSelectedCategory }) => {
           }}
         >
           <div
-            className={`fade-item fade-item-1 ${
-              animateItems[0] ? "active" : ""
-            }`}
+            className={`fade-item fade-item-1 ${animateItems[0] ? "active" : ""}`}
           >
             <span>
               <PhoneIcon fontSize="medium" />
@@ -519,9 +556,7 @@ export const ContactUsText = ({ test, isFromSelectedCategory }) => {
             : +972-52-678-7276
           </div>
           <div
-            className={`fade-item fade-item-2 ${
-              animateItems[1] ? "active" : ""
-            }`}
+            className={`fade-item fade-item-2 ${animateItems[1] ? "active" : ""}`}
           >
             <PhoneIcon fontSize="medium" />: +1(302)-219-4023
           </div>
@@ -535,9 +570,7 @@ export const ContactUsText = ({ test, isFromSelectedCategory }) => {
           }}
         >
           <div
-            className={`fade-item fade-item-3 ${
-              animateItems[2] ? "active" : ""
-            }`}
+            className={`fade-item fade-item-3 ${animateItems[2] ? "active" : ""}`}
             style={{
               display: "flex",
               marginTop: "0.6em",
@@ -549,12 +582,7 @@ export const ContactUsText = ({ test, isFromSelectedCategory }) => {
             </div>
             <div>: sales@in3d-tech.com</div>
           </div>
-          <div
-            // className={`fade-item fade-item-4 ${
-            //   animateItems[3] ? "active" : ""
-            // }`}
-            style={{ opacity: 0 }}
-          >
+          <div style={{ opacity: 0 }}>
             <PhoneIcon fontSize="medium" />: +1(302)-219-4023
           </div>
         </div>
@@ -565,16 +593,59 @@ export const ContactUsText = ({ test, isFromSelectedCategory }) => {
         >
           Or send us a message:{" "}
         </div>
-        <div
+
+        {/* CRITICAL CHANGE: Wrapped this in a form element so it can submit to Formspree too */}
+        <form
+          ref={form}
+          onSubmit={sendEmail}
+          className={`fade-item fade-item-5 ${animateItems[3] ? "active" : ""}`}
           style={{
             display: "flex",
-            justifyContent: "center",
-            height: "10em",
+            flexDirection: "column",
+            alignItems: "center",
+            height: "12em",
           }}
-          className={`fade-item fade-item-5 ${animateItems[3] ? "active" : ""}`}
         >
-          <textarea style={{ width: "90%" }} />
-        </div>
+          <div style={{ display: "flex", gap: "0.5em", width: "90%" }}>
+            <input
+              type="email"
+              name="email"
+              placeholder="Your email"
+              style={{ flex: 1 }}
+            />
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Your phone"
+              style={{ flex: 1 }}
+            />
+          </div>
+          <textarea
+            name="message"
+            style={{ width: "90%", height: "55%", marginTop: "0.5em" }}
+            placeholder="Tell us about your project..."
+          />
+          {formError && (
+            <div
+              style={{
+                color: "#ff8a8a",
+                fontSize: "0.8em",
+                marginTop: "0.3em",
+              }}
+            >
+              {formError}
+            </div>
+          )}
+          <button type="submit" style={{ marginTop: "0.5em" }}>
+            Send
+          </button>
+        </form>
+
+        {showSentStatus && (
+          <div style={{ textAlign: "center", marginTop: "1em" }}>
+            Message sent successfully!
+          </div>
+        )}
       </div>
     );
   }
@@ -584,14 +655,13 @@ export const ContactUsText = ({ test, isFromSelectedCategory }) => {
       <style>{contactCss}</style>
       {!test ? null : (
         <div className="cu-wrapper">
-          {/* Eyebrow */}
+          {/* Eyebrow and Headline HTML stays exactly the same... */}
           <div className="cu-eyebrow">
             <span className="cu-eyebrow-line" />
             <span>Get In Touch</span>
             <span className="cu-eyebrow-dot" />
           </div>
 
-          {/* Oversized stacked headline */}
           <h2 className="cu-headline">
             <span className="cu-hl-word">Let's</span>
             <span className="cu-hl-word cu-hl-outline">Build</span>
@@ -641,24 +711,41 @@ export const ContactUsText = ({ test, isFromSelectedCategory }) => {
           {/* Expandable form */}
           {showTextBox && (
             <form ref={form} onSubmit={sendEmail} className="cu-form">
+              <input
+                type="hidden"
+                name="in3D-contact-form"
+                value="Website Inquiry - Contact Form"
+              />
+
+              <div className="cu-contact-row">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Your email"
+                  className="cu-input"
+                  onMouseOver={() => setIsCursorHovering(true)}
+                  onMouseOut={() => setIsCursorHovering(false)}
+                />
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Your phone"
+                  className="cu-input"
+                  onMouseOver={() => setIsCursorHovering(true)}
+                  onMouseOut={() => setIsCursorHovering(false)}
+                />
+              </div>
+
               <textarea
                 name="message"
                 placeholder="Tell us about your project..."
-                // onKeyDown={(e) => {
-                //   e.stopPropagation();
-                //   e.nativeEvent.stopImmediatePropagation();
-                // }}
                 maxLength={300}
                 className="cu-textarea"
-                // onChange={(e) => {
-                //   let v = e.target.value;
-                //   if (v.length > 0) v = v.charAt(0).toUpperCase() + v.slice(1);
-                //   setTextAreaInput(v);
-                // }}
-                // value={textAreaInput}
               />
+
+              {formError && <div className="cu-form-error">{formError}</div>}
+
               <button
-                // onClick={handleSendMessage}
                 type="submit"
                 className="cu-submit"
                 onMouseOver={() => setIsCursorHovering(true)}
@@ -680,6 +767,267 @@ export const ContactUsText = ({ test, isFromSelectedCategory }) => {
     </>
   );
 };
+
+// export const ContactUsText = ({ test, isFromSelectedCategory }) => {
+//   const [showTextBox, setShowTextBox] = useState(false);
+//   const [showSentStatus, setShowSentStatus] = useState(null);
+//   // const [textAreaInput, setTextAreaInput] = useState("");
+//   const [animateItems, setAnimateItems] = useState([
+//     false,
+//     false,
+//     false,
+//     false,
+//   ]);
+//   const { setIsCursorHovering } = useAppContext();
+//   const form = useRef();
+
+//   const VITE_FORMSPREE_ENDPOINT_URL = "https://formspree.io/f/mnjybgpa";
+
+//   useEffect(() => {
+//     let timeoutIds = [];
+//     if (animateItems) {
+//       animateItems.forEach((_, index) => {
+//         timeoutIds.push(
+//           setTimeout(
+//             () => {
+//               setAnimateItems((prev) => {
+//                 const newItems = [...prev];
+//                 newItems[index] = true;
+//                 return newItems;
+//               });
+//             },
+//             (index + 1) * 1000,
+//           ),
+//         ); // Delay each item by 1s
+//       });
+//     }
+//     return () => {
+//       timeoutIds.forEach(clearTimeout);
+//     };
+//   }, [animateItems]);
+
+//   useEffect(() => emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_ID), []); // "HorIaM2iMYpuvqSef" replace with your real public key from EmailJS
+
+//   const toggleTextBox = () => {
+//     setShowTextBox(!showTextBox);
+//   };
+
+//   const handleSendMessage = (e) => {
+//     setTimeout(() => {
+//       setShowTextBox(false);
+//       setShowSentStatus(true);
+//       // setTextAreaInput("");
+//     }, 200);
+
+//     setTimeout(() => setShowSentStatus(null), 3000);
+//   };
+
+//   const sendEmail = (e) => {
+//     e.preventDefault();
+
+//     emailjs
+//       .sendForm(
+//         import.meta.env.VITE_EMAILJS_SERVICE_ID, //"service_tv1wlgo", // "YOUR_SERVICE_ID", // from EmailJS dashboard
+//         import.meta.env.VITE_EMAILJS_TEMPLATE_ID, //"template_evr30vn", //"YOUR_TEMPLATE_ID", // from EmailJS dashboard
+//         form.current,
+//         // "HorlaM2iMYpuvqSef", //"YOUR_PUBLIC_KEY", // from EmailJS dashboard
+//       )
+//       .then(
+//         (result) => {
+//           setShowTextBox(false);
+//           setShowSentStatus(true);
+//           // setTextAreaInput("");
+//           setTimeout(() => setShowSentStatus(null), 3000);
+//         },
+//         (error) => {
+//           console.error("Email failed:", error.text);
+//           // optionally show an error state to the user
+//         },
+//       );
+//   };
+
+//   if (isFromSelectedCategory) {
+//     return (
+//       <div>
+//         <div
+//           style={{
+//             display: "flex",
+//             justifyContent: "space-evenly",
+//             fontFamily: "gotham",
+//           }}
+//         >
+//           <div
+//             className={`fade-item fade-item-1 ${
+//               animateItems[0] ? "active" : ""
+//             }`}
+//           >
+//             <span>
+//               <PhoneIcon fontSize="medium" />
+//             </span>
+//             : +972-52-678-7276
+//           </div>
+//           <div
+//             className={`fade-item fade-item-2 ${
+//               animateItems[1] ? "active" : ""
+//             }`}
+//           >
+//             <PhoneIcon fontSize="medium" />: +1(302)-219-4023
+//           </div>
+//         </div>
+//         <div
+//           className="flex-center"
+//           style={{
+//             display: "flex",
+//             alignItems: "center",
+//             justifyContent: "space-evenly",
+//           }}
+//         >
+//           <div
+//             className={`fade-item fade-item-3 ${
+//               animateItems[2] ? "active" : ""
+//             }`}
+//             style={{
+//               display: "flex",
+//               marginTop: "0.6em",
+//               fontFamily: "gotham",
+//             }}
+//           >
+//             <div>
+//               <EmailIcon />
+//             </div>
+//             <div>: sales@in3d-tech.com</div>
+//           </div>
+//           <div
+//             // className={`fade-item fade-item-4 ${
+//             //   animateItems[3] ? "active" : ""
+//             // }`}
+//             style={{ opacity: 0 }}
+//           >
+//             <PhoneIcon fontSize="medium" />: +1(302)-219-4023
+//           </div>
+//         </div>
+
+//         <div
+//           style={{ textAlign: "center", fontFamily: "gotham" }}
+//           className={`fade-item fade-item-4 ${animateItems[3] ? "active" : ""}`}
+//         >
+//           Or send us a message:{" "}
+//         </div>
+//         <div
+//           style={{
+//             display: "flex",
+//             justifyContent: "center",
+//             height: "10em",
+//           }}
+//           className={`fade-item fade-item-5 ${animateItems[3] ? "active" : ""}`}
+//         >
+//           <textarea style={{ width: "90%" }} />
+//         </div>
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <>
+//       <style>{contactCss}</style>
+//       {!test ? null : (
+//         <div className="cu-wrapper">
+//           {/* Eyebrow */}
+//           <div className="cu-eyebrow">
+//             <span className="cu-eyebrow-line" />
+//             <span>Get In Touch</span>
+//             <span className="cu-eyebrow-dot" />
+//           </div>
+
+//           {/* Oversized stacked headline */}
+//           <h2 className="cu-headline">
+//             <span className="cu-hl-word">Let's</span>
+//             <span className="cu-hl-word cu-hl-outline">Build</span>
+//             <span className="cu-hl-word">Together</span>
+//           </h2>
+
+//           <div className="cu-rule" />
+
+//           {/* Contact channels grid */}
+//           <div className="cu-channels">
+//             <div className="cu-channel">
+//               <p className="cu-channel-label">Israel</p>
+//               <p className="cu-channel-value">
+//                 <PhoneIcon fontSize="small" /> +972-52-678-7276
+//               </p>
+//             </div>
+//             <div className="cu-channel-divider" />
+//             <div className="cu-channel">
+//               <p className="cu-channel-label">United States</p>
+//               <p className="cu-channel-value">
+//                 <PhoneIcon fontSize="small" /> +1(302)-219-4023
+//               </p>
+//             </div>
+//             <div className="cu-channel-divider" />
+//             <div className="cu-channel">
+//               <p className="cu-channel-label">Email</p>
+//               <p className="cu-channel-value">
+//                 <EmailIcon fontSize="small" /> sales@in3d-tech.com
+//               </p>
+//             </div>
+//           </div>
+
+//           {/* Message CTA */}
+//           <div className="cu-message-cta">
+//             <button
+//               onClick={toggleTextBox}
+//               className="cu-send-btn"
+//               onMouseOver={() => setIsCursorHovering(true)}
+//               onMouseOut={() => setIsCursorHovering(false)}
+//             >
+//               <span className="cu-send-btn-dot" />
+//               <span>{showTextBox ? "Close" : "Send us a message"}</span>
+//               <span className="cu-send-btn-arrow">→</span>
+//             </button>
+//           </div>
+
+//           {/* Expandable form */}
+//           {showTextBox && (
+//             <form ref={form} onSubmit={sendEmail} className="cu-form">
+//               <textarea
+//                 name="message"
+//                 placeholder="Tell us about your project..."
+//                 // onKeyDown={(e) => {
+//                 //   e.stopPropagation();
+//                 //   e.nativeEvent.stopImmediatePropagation();
+//                 // }}
+//                 maxLength={300}
+//                 className="cu-textarea"
+//                 // onChange={(e) => {
+//                 //   let v = e.target.value;
+//                 //   if (v.length > 0) v = v.charAt(0).toUpperCase() + v.slice(1);
+//                 //   setTextAreaInput(v);
+//                 // }}
+//                 // value={textAreaInput}
+//               />
+//               <button
+//                 // onClick={handleSendMessage}
+//                 type="submit"
+//                 className="cu-submit"
+//                 onMouseOver={() => setIsCursorHovering(true)}
+//                 onMouseOut={() => setIsCursorHovering(false)}
+//               >
+//                 Send →
+//               </button>
+//             </form>
+//           )}
+
+//           {showSentStatus && (
+//             <div className="cu-status">
+//               <span className="cu-status-dot" /> Message sent. We'll be in
+//               touch.
+//             </div>
+//           )}
+//         </div>
+//       )}
+//     </>
+//   );
+// };
 
 const contactCss = `
 @keyframes cuSliceUp {
@@ -899,274 +1247,38 @@ const contactCss = `
   box-shadow: 0 0 12px #6ad5db;
   animation: cuBlink 1.5s infinite;
 }
+.cu-contact-row {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+.cu-input {
+  flex: 1;
+  min-width: 140px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-left: 2px solid #c9a84c;
+  border-radius: 4px;
+  padding: 0.8rem 1rem;
+  color: #fff;
+  font-family: 'gotham-old', sans-serif;
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+.cu-input:focus {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(201,168,76,0.5);
+  border-left-color: #c9a84c;
+}
+.cu-input::placeholder {
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.04em;
+}
+.cu-form-error {
+  font-size: 0.78rem;
+  color: #ff8a8a;
+  font-family: 'swiss-medium', sans-serif;
+  letter-spacing: 0.04em;
+}
 `;
-
-// export const ContactUsText = ({ test, isFromSelectedCategory }) => {
-//   const [showTextBox, setShowTextBox] = useState(false);
-//   const [showSentStatus, setShowSentStatus] = useState(null);
-//   const [textAreaInput, setTextAreaInput] = useState("");
-//   const [animateItems, setAnimateItems] = useState([
-//     false,
-//     false,
-//     false,
-//     false,
-//   ]);
-
-//   const { setIsCursorHovering } = useAppContext();
-
-//   useEffect(() => {
-//     let timeoutIds = [];
-//     if (animateItems) {
-//       animateItems.forEach((_, index) => {
-//         timeoutIds.push(
-//           setTimeout(() => {
-//             setAnimateItems((prev) => {
-//               const newItems = [...prev];
-//               newItems[index] = true;
-//               return newItems;
-//             });
-//           }, (index + 1) * 1000)
-//         ); // Delay each item by 1s
-//       });
-//     }
-//     return () => {
-//       timeoutIds.forEach(clearTimeout);
-//     };
-//   }, [animateItems]);
-
-//   useEffect(() => emailjs.init("YOUR-PUBLIC-KEY-HERE"), []);
-
-//   const toggleTextBox = () => {
-//     setShowTextBox(!showTextBox);
-//   };
-
-//   const handleSendMessage = (e) => {
-//     setTimeout(() => {
-//       setShowTextBox(false);
-//       setShowSentStatus(true);
-//       setTextAreaInput("");
-//     }, 200);
-
-//     setTimeout(() => setShowSentStatus(null), 3000);
-//   };
-
-//   const form = useRef();
-
-//   const sendEmail = (e) => {
-//     e.preventDefault(); // prevents the page from reloading when you hit “Send”
-
-//     emailjs
-//       .sendForm(
-//         "service_tv1wlgo",
-//         "template_evr30vn",
-//         form.current,
-//         "HorIaM2iMYpuvqSef"
-//       )
-//       .then(
-//         (result) => {
-//           // show the user a success message
-//         },
-//         (error) => {
-//           // show the user an error
-//         }
-//       );
-//   };
-
-//   if (isFromSelectedCategory) {
-//     return (
-//       <div>
-//         <div
-//           style={{
-//             display: "flex",
-//             justifyContent: "space-evenly",
-//             fontFamily: "gotham",
-//           }}
-//         >
-//           <div
-//             className={`fade-item fade-item-1 ${
-//               animateItems[0] ? "active" : ""
-//             }`}
-//           >
-//             <span>
-//               <PhoneIcon fontSize="medium" />
-//             </span>
-//             : +972-52-678-7276
-//           </div>
-//           <div
-//             className={`fade-item fade-item-2 ${
-//               animateItems[1] ? "active" : ""
-//             }`}
-//           >
-//             <PhoneIcon fontSize="medium" />: +1(302)-219-4023
-//           </div>
-//         </div>
-//         <div
-//           className="flex-center"
-//           style={{
-//             display: "flex",
-//             alignItems: "center",
-//             justifyContent: "space-evenly",
-//           }}
-//         >
-//           <div
-//             className={`fade-item fade-item-3 ${
-//               animateItems[2] ? "active" : ""
-//             }`}
-//             style={{
-//               display: "flex",
-//               marginTop: "0.6em",
-//               fontFamily: "gotham",
-//             }}
-//           >
-//             <div>
-//               <EmailIcon />
-//             </div>
-//             <div>: sales@in3d-tech.com</div>
-//           </div>
-//           <div
-//             // className={`fade-item fade-item-4 ${
-//             //   animateItems[3] ? "active" : ""
-//             // }`}
-//             style={{ opacity: 0 }}
-//           >
-//             <PhoneIcon fontSize="medium" />: +1(302)-219-4023
-//           </div>
-//         </div>
-
-//         <div
-//           style={{ textAlign: "center", fontFamily: "gotham" }}
-//           className={`fade-item fade-item-4 ${animateItems[3] ? "active" : ""}`}
-//         >
-//           Or send us a message:{" "}
-//         </div>
-//         <div
-//           style={{
-//             display: "flex",
-//             justifyContent: "center",
-//             height: "10em",
-//           }}
-//           className={`fade-item fade-item-5 ${animateItems[3] ? "active" : ""}`}
-//         >
-//           <textarea style={{ width: "90%" }} />
-//         </div>
-//       </div>
-//     );
-//   }
-
-//   return (
-//     <>
-//       {!test ? null : (
-//         <div className="contact-us-wrapper">
-//           <div className="contact-details-wrapper">
-//             <span>Feel free to contact us via:</span>
-
-//             <div>
-//               <div
-//                 style={{
-//                   marginTop: "0.5em",
-//                   display: "flex",
-//                   flexDirection: "column",
-//                   justifyContent: "space-evenly",
-//                   alignItems: "flex-start",
-//                   height: "6em",
-//                 }}
-//               >
-//                 <div>
-//                   <span>
-//                     <PhoneIcon fontSize="small" />
-//                   </span>
-//                   : +972-52-678-7276
-//                 </div>
-//                 <div>
-//                   <PhoneIcon fontSize="small" />: +1(302)-219-4023
-//                 </div>
-//                 <div className="flex-center">
-//                   <div
-//                     style={{
-//                       display: "flex",
-//                     }}
-//                   >
-//                     <EmailIcon />
-//                   </div>
-//                   <div>: sales@in3d-tech.com</div>
-//                 </div>
-//               </div>
-//             </div>
-//             <span style={{ marginTop: "0.6em" }}>
-//               Or you can send us a message{" "}
-//               <button
-//                 onClick={toggleTextBox}
-//                 className="contact-us-here-btn"
-//                 style={{
-//                   textDecoration: "underline",
-//                   fontWeight: "600",
-//                 }}
-//                 onMouseOver={() => setIsCursorHovering(true)}
-//                 onMouseOut={() => setIsCursorHovering(false)}
-//               >
-//                 here
-//               </button>
-//               {showTextBox && (
-//                 <div
-//                   style={{
-//                     marginTop: "1em",
-//                     display: "flex",
-//                   }}
-//                 >
-//                   <form
-//                     ref={form}
-//                     onSubmit={sendEmail}
-//                     style={{
-//                       width: "100%",
-//                       display: "flex",
-//                       flexDirection: "column",
-//                       alignItems: "center",
-//                     }}
-//                   >
-//                     <textarea
-//                       name="message"
-//                       placeholder="Type your message here..."
-//                       type="text"
-//                       maxLength={300}
-//                       className="contact-us-text-area"
-//                       onChange={(e) => {
-//                         let inputValue = e.target.value;
-//                         if (inputValue.length > 0) {
-//                           inputValue =
-//                             inputValue.charAt(0).toUpperCase() +
-//                             inputValue.slice(1);
-//                         }
-//                         setTextAreaInput(inputValue);
-//                       }}
-//                       value={textAreaInput}
-//                     />
-//                     <button
-//                       onClick={handleSendMessage}
-//                       className="contact-us-send-text-btn"
-//                       onMouseOver={() => setIsCursorHovering(true)}
-//                       onMouseOut={() => setIsCursorHovering(false)}
-//                     >
-//                       Send
-//                     </button>
-//                   </form>
-//                 </div>
-//               )}
-//               {showSentStatus ? (
-//                 <div
-//                   style={{
-//                     marginTop: "4em",
-//                     animation: "fadeIn 0.8s ease-in-out",
-//                     fontSize: "0.8em",
-//                     color: "#6ad5db",
-//                   }}
-//                 >
-//                   Sent! Thank you for reaching out!
-//                 </div>
-//               ) : null}
-//             </span>
-//           </div>
-//         </div>
-//       )}
-//     </>
-//   );
-// };
