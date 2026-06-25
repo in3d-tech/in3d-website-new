@@ -1,4 +1,4 @@
-import emailjs from "@emailjs/browser";
+// import emailjs from "@emailjs/browser";
 import { gsap } from "gsap";
 import { useEffect, useRef, useState } from "react";
 import Tilt from "react-parallax-tilt";
@@ -251,31 +251,45 @@ const ContactDetails = ({ messageSent, setShowForm, setIsCursorHovering }) => {
 
 const ContactForm = ({ setShowForm, setMessageSent, setIsCursorHovering }) => {
   const form = useRef();
+  const [formError, setFormError] = useState(null);
 
-  useEffect(() => emailjs.init("YOUR-PUBLIC-KEY-HERE"), []);
+  const FORMSPREE_URL = "https://formspree.io/f/mwvjyloq";
 
   const sendEmail = (e) => {
     e.preventDefault();
-    emailjs
-      .sendForm(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID, // "service_tv1wlgo",
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID, // "template_evr30vn",
-        form.current,
-        import.meta.env.VITE_EMAILJS_PUBLIC_ID, // "HorIaM2iMYpuvqSef",
-      )
-      .then(
-        (result) => {
-          console.log("Message sent successfully:", result.text);
+
+    const formData = new FormData(e.target);
+    const email = (formData.get("email") || "").trim();
+    const phone = (formData.get("phone") || "").trim();
+
+    if (!email && !phone) {
+      setFormError(
+        "Please leave an email or phone number so we can reach you.",
+      );
+      return;
+    }
+    setFormError(null);
+
+    fetch(FORMSPREE_URL, {
+      method: "POST",
+      body: formData,
+      headers: { Accept: "application/json" },
+    })
+      .then((response) => {
+        if (response.ok) {
           setMessageSent(true);
           setTimeout(() => setShowForm(false), 200);
-        },
-        (error) => console.log("error sending message:", error),
-      );
+        } else {
+          response
+            .json()
+            .then((data) => console.error("Formspree error:", data));
+        }
+      })
+      .catch((error) => console.error("Form submission failed:", error));
   };
 
   return (
     <div className="con-form-wrap">
-      {/* Close button */}
       <button
         className="con-form-close"
         onClick={() => setShowForm(false)}
@@ -295,11 +309,29 @@ const ContactForm = ({ setShowForm, setMessageSent, setIsCursorHovering }) => {
       <p className="con-form-label">Your message</p>
 
       <form ref={form} onSubmit={sendEmail} className="con-form">
+        <div className="con-contact-inputs-row">
+          <input
+            type="email"
+            name="email"
+            placeholder="Your email"
+            className="con-input"
+          />
+          <input
+            type="tel"
+            name="phone"
+            placeholder="Your phone"
+            className="con-input"
+          />
+        </div>
+
         <textarea
           name="message"
           placeholder="Type your message here…"
           className="con-textarea"
         />
+
+        {formError && <div className="con-form-error">{formError}</div>}
+
         <button
           type="submit"
           className="con-submit-btn"
@@ -313,6 +345,71 @@ const ContactForm = ({ setShowForm, setMessageSent, setIsCursorHovering }) => {
     </div>
   );
 };
+
+// const ContactForm = ({ setShowForm, setMessageSent, setIsCursorHovering }) => {
+//   const form = useRef();
+
+//   useEffect(() => emailjs.init("YOUR-PUBLIC-KEY-HERE"), []);
+
+//   const sendEmail = (e) => {
+//     e.preventDefault();
+//     emailjs
+//       .sendForm(
+//         import.meta.env.VITE_EMAILJS_SERVICE_ID, // "service_tv1wlgo",
+//         import.meta.env.VITE_EMAILJS_TEMPLATE_ID, // "template_evr30vn",
+//         form.current,
+//         import.meta.env.VITE_EMAILJS_PUBLIC_ID, // "HorIaM2iMYpuvqSef",
+//       )
+//       .then(
+//         (result) => {
+//           console.log("Message sent successfully:", result.text);
+//           setMessageSent(true);
+//           setTimeout(() => setShowForm(false), 200);
+//         },
+//         (error) => console.log("error sending message:", error),
+//       );
+//   };
+
+//   return (
+//     <div className="con-form-wrap">
+//       {/* Close button */}
+//       <button
+//         className="con-form-close"
+//         onClick={() => setShowForm(false)}
+//         onMouseOver={() => setIsCursorHovering(true)}
+//         onMouseOut={() => setIsCursorHovering(false)}
+//       >
+//         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+//           <path
+//             d="M1 1l12 12M13 1L1 13"
+//             stroke="currentColor"
+//             strokeWidth="1.8"
+//             strokeLinecap="round"
+//           />
+//         </svg>
+//       </button>
+
+//       <p className="con-form-label">Your message</p>
+
+//       <form ref={form} onSubmit={sendEmail} className="con-form">
+//         <textarea
+//           name="message"
+//           placeholder="Type your message here…"
+//           className="con-textarea"
+//         />
+//         <button
+//           type="submit"
+//           className="con-submit-btn"
+//           onMouseOver={() => setIsCursorHovering(true)}
+//           onMouseOut={() => setIsCursorHovering(false)}
+//         >
+//           <span>Send</span>
+//           <span className="con-btn-arrow">→</span>
+//         </button>
+//       </form>
+//     </div>
+//   );
+// };
 
 // ─────────────────────────────────────────────────────────────────────────────
 // SCOPED CSS
@@ -405,6 +502,34 @@ const css = `
   gap: 1.5rem;
   position: relative;
   z-index: 1;
+}
+
+.con-contact-inputs-row {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+.con-input {
+  flex: 1;
+  min-width: 130px;
+  font-size: 0.9rem;
+  font-family: 'gotham-old', sans-serif;
+  padding: 0.8rem 1.2rem;
+  border-radius: 10px;
+  border: 1px solid rgba(201,168,76,0.3);
+  background: rgba(255,255,255,0.35);
+  outline: none;
+  color: #0d0d0d;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+.con-input:focus { border-color: #c9a84c; }
+.con-input::placeholder { color: rgba(0,0,0,0.3); }
+.con-form-error {
+  font-size: 0.76rem;
+  color: #b94040;
+  font-family: 'swiss-medium', sans-serif;
+  letter-spacing: 0.04em;
 }
 
 .con-eyebrow {
